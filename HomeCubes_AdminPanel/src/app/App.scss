@@ -1,0 +1,167 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* === Plugin styles === */
+
+
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+@import "../assets/styles/variables";
+@import "~compass-mixins/lib/compass";
+@import "~compass-mixins/lib/animate";
+@import "~bootstrap/scss/bootstrap";
+@import "../assets/styles/fonts";
+@import "../assets/styles/functions";
+
+/* === Icon fonts === */
+@import "~@mdi/font/scss/materialdesignicons";
+
+
+/* === Template mixins === */
+@import "../assets/styles/mixins/animation";
+@import "../assets/styles/mixins/badges";
+@import "../assets/styles/mixins/buttons";
+@import "../assets/styles/mixins/misc";
+@import "../assets/styles/mixins/color-functions";
+@import "../assets/styles/mixins/cards";
+@import "../assets/styles/mixins/blockqoute";
+
+
+/* === Core Styles === */
+@import "../assets/styles/typography";
+@import "../assets/styles/reset";
+@import "../assets/styles/responsive";
+@import "../assets/styles/misc";
+@import "../assets/styles/utilities";
+@import "../assets/styles/demo";
+@import "../assets/styles/spinner";
+@import "../assets/styles/dashboard";
+
+/* === Components === */
+
+@import "../assets/styles/components/checkbox-radio";
+@import "../assets/styles/components/forms";
+@import "../assets/styles/components/icons";
+@import "../assets/styles/components/tables";
+@import "../assets/styles/components/buttons";
+@import "../assets/styles/components/breadcrumbs";
+@import "../assets/styles/components/badges";
+@import "../assets/styles/components/cards";
+@import "../assets/styles/components/preview";
+@import "../assets/styles/components/lists";
+@import "../assets/styles/components/todo-list";
+@import "../assets/styles/components/dropdowns";
+@import "../assets/styles/components/loaders/loaders";
+
+@import "../assets/styles/components/landing-screens/auth";
+
+/* === Plugin Overrides === */
+@import "../assets/styles/components/plugin-overrides/slick-carousel";
+@import "../assets/styles/components/plugin-overrides/jquery-jvectormap";
+
+/* === Layout === */
+@import "../assets/styles/navbar";
+@import "../assets/styles/sidebar";
+@import "../assets/styles/footer";
+@import "../assets/styles/layout";
+
+
+.stretch-card_cms {
+    .card {
+        min-height: 125px;
+        max-height: 125px;
+    }
+}
+
+.stretch-card {
+    .row {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
+.steps_to_follow {
+    .upload {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h3 {
+            color: #000;
+            font-size: 16px;
+            margin-top: 15px;
+
+            p {
+                font-size: 13px;
+                color: #222;
+                margin-top: 10px;
+            }
+        }
+    }
+
+    h2 {
+        font-size: 25px;
+        color: #000;
+    }
+
+    .title_close {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        button {
+            background: #f00;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            position: absolute
+        }
+    }
+}
+
+.ReactModal__Content.ReactModal__Content--after-open {
+    max-width: 300px;
+    min-width: 300px;
+}
+
+.ck.ck-editor__main {
+    background: #121212 !important
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+    color: #121212 !important
+}
+
+.ck.ck-editor__main>.ck-editor__editable {
+    color: black !important;
+    border-color: var(--ck-color-base-border);
+}
+
+.accept_reject_img_div {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width:1280px) {
+    .boxes {
+        h3 {
+            font-size: 20px;
+        }
+    }
+}
+
+.sidebar .sidebar-brand-wrapper .sidebar-brand img {
+    height: auto !important;
+}
