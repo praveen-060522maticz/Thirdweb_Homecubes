@@ -2,7 +2,7 @@
 // import ERC1155 from '../../src/Abi/erc1155.json'
 // import TRADE from '../../src/Abi/market.json'
 // import profile from '../../assets/images/avatar.png'
-var EnvName = 'local';
+var EnvName = 'demossl';
 var key = {};
 key.ONEDAYINSECONDS = 0
 key.env = EnvName
@@ -77,7 +77,7 @@ else if (EnvName === "demossl") {
     // key.profile         =    profile
     // key.TradeContract   =   '0xD370f5D497cc4b2344a9936f24E47284693d96D5'.toLowerCase() // bnb
     // key.TradeContract = '0x19D4c0f9155C6517580f850D4D097AF0448a1B39'.toLowerCase() //sepolia old one
-    key.TradeContract = '0x274C7D841002A74c3E4EABEcDB504e3af3f1f05A'.toLowerCase() //sepolia old one
+    key.TradeContract = '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase() //sepolia old one
     // key.TradeContract = '0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3'.toLowerCase() //sepolia
     key.ERC721 = '0x575cd9E4099A38B536673F557063f9A546870d11'.toLowerCase() // sepolia
     // key.ERC721          =   '0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf'.toLowerCase() //bnb

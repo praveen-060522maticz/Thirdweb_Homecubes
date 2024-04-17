@@ -50,7 +50,7 @@ export const connectWallet = async (type, changechainid, switched) => {
       console.log("acocococococo", accountDetails);
       let CONTRACT = await new web3p.eth.Contract(TradeAbi, Config.TradeContract);
 
-      accountDetails.USDTaddress = CONTRACT.methods["staticToken"] ? await CONTRACT.methods?.staticToken()?.call() : Config.STATIC_TOKEN
+      accountDetails.USDTaddress = CONTRACT.methods?.["staticToken"] ? await CONTRACT.methods?.staticToken()?.call() : Config.STATIC_TOKEN
       console.log("acocococococo", accountDetails);
       return accountDetails;
     }
