@@ -167,9 +167,9 @@
     var(--gradinet_left),
     var(--gradinet_right)
   );
-  padding: 8px 10px;
+  padding: 12px 30px;
   border-radius: 5px;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.5px !important;
   font-size: 12px;
   color: #fff;
   font-weight: 500;
@@ -178,7 +178,32 @@
   position: relative;
   white-space: nowrap;
   overflow: hidden;
+  max-height: 45px;
+  min-width: 100px;
+  margin-right: 10px;
+}
+.header_newGradientBtn {
+  border: none !important;
+  outline: none !important;
+  background-image: linear-gradient(
+    to right,
+    var(--gradinet_left),
+    var(--gradinet_right)
+  ) !important;
+  padding: 12px 30px !important;
+  border-radius: 5px !important;
+  letter-spacing: 1.5px !important;
+  font-size: 12px !important;
+  color: #fff !important;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
   max-height: 45px !important;
+  min-width: 100px !important;
+  margin-right: 10px !important;
 }
 
 .header_gradientBtn:hover {
@@ -242,6 +267,29 @@
   padding: 8px 13px !important;
   position: relative;
   top: 5px;
+}
+.header__thirdParty button{
+  margin-right: 10px !important;
+}
+.header_aftConnect{
+  margin-right: 10px !important;
+  padding: 7px !important;
+  width: 135px !important;
+  min-width: 135px !important;
+  max-width: 135px !important;
+  border-radius: 12px !important;
+  gap: 9px !important;
+}
+.header_aftConnect div:nth-child(1) img{
+  height: 25px !important;
+  width: 25px !important;
+  border-radius: 9px !important;
+}
+.header_aftConnect div:nth-child(2) span:nth-child(1){
+  font-size: var(--font_twelve);
+}
+.header_aftConnect div:nth-child(2) span:nth-child(2){
+  font-size: var(--lower_fontsize);
 }
 /* end of header css */
 
@@ -622,6 +670,7 @@
 
 .stack_submitbtn.header_gradientBtn {
   padding: 10px 40px;
+  margin: 0 !important;
 }
 
 .stack_cnctwallet {
@@ -4074,8 +4123,8 @@ body.modal-open .container {
 
 .user_hvr_btn {
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   padding:0px;
   display: flex;
   align-items: center;
@@ -4096,7 +4145,7 @@ body.modal-open .container {
 
 
 .user_hvr_btn .fa-user {
-  font-size: 15px;
+  font-size: var(--font_thirteen);
 }
 
 .user_hidden_cnt {
@@ -4419,6 +4468,26 @@ body.modal-open .container {
     min-height: fit-content;
     max-height: fit-content;
     height: fit-content;
+  }
+  .header_aftConnect{
+    margin-right: 10px !important;
+    padding: 5px !important;
+    width: 110px !important;
+    min-width: 110px !important;
+    max-width: 110px !important;
+    border-radius: 10px !important;
+    gap: 6px !important;
+  }
+  .header_aftConnect div:nth-child(1) img{
+    height: 20px !important;
+    width: 20px !important;
+    border-radius: 7px !important;
+  }
+  .header_aftConnect div:nth-child(2) span:nth-child(1){
+    font-size: var(--lower_fontsize);
+  }
+  .header_aftConnect div:nth-child(2) span:nth-child(2){
+    font-size: var(--small_fontsize);
   }
 }
 
@@ -4745,6 +4814,10 @@ body.modal-open .container {
     height: 50px;
     width: 40px;
   }
+  .header_newGradientBtn{
+    padding: 10px !important;
+  }
+
 }
 
 
@@ -4865,9 +4938,9 @@ body.modal-open .container {
   .user_hvr_btn .fa-user {
     font-size: 13px !important;
   }
-  .custom_user_token_detail .user_hvr_btn {
+  /* .custom_user_token_detail .user_hvr_btn {
     top: 5px;
-  }
+  } */
   .mbl_view_user_hvr {
     display: block;
   }

@@ -287,7 +287,7 @@ dispatch({
       <Container fluid className="whole_header">
         <Container className="custom_container">
           <Row className="header_row">
-            <Col lg={2} md={3} sm={4} xs={5} xl={2} xxl={2}>
+            <Col lg={2} md={3} sm={4} xs={4} xl={2} xxl={2} className="d-flex justify-content-start align-items-center">
               <NavLink to="/">
                 <img
                   className="img-fluid mainLogo"
@@ -408,8 +408,8 @@ dispatch({
               lg={3}
               md={6}
               sm={4}
-              xs={4}
-              className="d-flex justify-content-end"
+              xs={8}
+              className="d-flex justify-content-end align-items-center"
             >
               {wallet && wallet?.accountAddress && <div className="position-relative custom_user_token_detail mbl_view_user_hvr me-2">
                 {/* <span className="user_hvr_btn primary_blueBtn ms-2">
@@ -466,10 +466,12 @@ dispatch({
                   <hr className="mt-2 mb-0" />
                 </div>
               </div>}
+
+              <div className="header__thirdParty">
               <ConnectButton
                 connectButton={{
                   label: "Connect",
-                  className: "header_gradientBtn",
+                  className: "header_newGradientBtn",
                 }}
                 client={client}
                 wallets={[createWallet("io.metamask")]}
@@ -478,34 +480,22 @@ dispatch({
                   factoryAddress: "0x204e6475FB6611171EB7fa323dAb82da42bC72B8",
                   gasless: true,
                 }}
-                // detailsButton={{
-                  //   render() {
-                    //     return <button
-                      //       className="header_gradientBtn"
-                      //       // onClick={() => walletDisconnect()}
-                    //     >
-              //       <i class="fa-solid fa-right-from-bracket me-2"></i>
-                      //       Disconnect
-                      //       <Lottie
-                        //         animationData={wallety}
-                        //         className="header_walletLottie"
-                        //         loop={true}
-                      //       />
-                    //     </button>
-                  //   }
-              // }}
+                detailsButton={{
+                  className: "header_aftConnect"
+                }}
               />
+              </div>
               {/* <Lottie animationData={wallety} className="header_simmer" loop={true}/> */}
 
               {wallet && wallet?.accountAddress ? (
                 <div className="burger_head">
                   {/* <div className="wallet_only active header_link" onClick={() => walletDisconnect()} >Disconnect</div> */}
-                  <button
+                  {/* <button
                     className="wallet_only disconnect_ic me-2"
                     onClick={() => walletDisconnect()}
                   >
                     <i class="fa-solid fa-right-from-bracket"></i>
-                  </button>
+                  </button> */}
                   {/* <img
                     onClick={() => handleShowWallet()}
                     className="header_wallet wallet_only"
@@ -519,11 +509,11 @@ dispatch({
                 </div>
               ) : (
                 <div className="burger_head">
-                  <img
+                  {/* <img
                     onClick={() => handleShowWallet()}
                     className="header_wallet wallet_only"
                     src={require("../assets/images/wallet.svg").default}
-                  />
+                  /> */}
                   <img
                     className="header_burger"
                     onClick={handleShow}
