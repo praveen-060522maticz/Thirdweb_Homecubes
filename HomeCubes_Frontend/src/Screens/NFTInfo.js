@@ -36,6 +36,8 @@ import useContractProviderHook from "../actions/contractProviderHook";
 import { toast } from "react-toastify";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { FacebookShareButton, TwitterShareButton, TelegramShareButton, WhatsappShareButton } from 'react-share';
+import useThirdWeb from "../actions/useThirdWeb";
+import TransferToken from "../Modals/TransferToken";
 
 
 function NFTInfo() {
@@ -80,6 +82,7 @@ function NFTInfo() {
   const [Text, setText] = useState("");
   const [bidArr, setBitArr] = useState([]);
   const [graph, setGraph] = useState(false);
+const [showTransfer, setShowTransfer] = useState(false)
 
   var datas1 = {
     series: [
@@ -169,6 +172,8 @@ function NFTInfo() {
       myowner: {},
     },
   });
+
+  const getThirdweb = useThirdWeb()
 
   const filterData =
     accordionTab == "" ? activities :
@@ -402,7 +407,10 @@ function NFTInfo() {
   const cancelBidBySeller = async (address) => {
     const id = toast.loading('Canceling order... Do not refresh!');
 
-    let cont = await ContractCall.BidNFt_Contract(0, "cancelBidBySeller", Tokens_Detail.NFTId, Tokens_Detail.ContractAddress)
+    // let cont = await ContractCall.BidNFt_Contract(0, "cancelBidBySeller", Tokens_Detail.NFTId, Tokens_Detail.ContractAddress)
+let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, "2500000000000000000")
+
+
     if (cont) {
       var FormValue = {
         TokenBidderAddress: address,
@@ -440,6 +448,17 @@ function NFTInfo() {
   }
 
   const navigate = useNavigate()
+
+  const transferNft = async () => {
+    try {
+      setCanReload(false)
+      const Resp = await getThirdweb.useContractCall("TransferToken", 0, 0, Tokens_Detail.NFTId, payload?.parentAddress, Tokens_Detail.ContractAddress, "2500000000000000000")
+      setCanReload(true)
+    } catch (e) {
+      console.log('Erro on transferNft---->', e);
+    }
+  }
+
 
   return (
     <>
@@ -826,9 +845,12 @@ function NFTInfo() {
                         </TwitterShareButton>
 
                         <img
+onClick={() => setShowTransfer(true)}
                           className="nftInfo_socials"
                           src={require("../assets/images/whiteinsta.svg").default}
                         />
+
+
                         <img
                           className="nftInfo_socials"
                           src={require("../assets/images/whitediscard.svg").default}
@@ -944,7 +966,7 @@ function NFTInfo() {
                         ) > Date.now() && (
                             <Countdown
                               date={Tokens["All"]?.owner?.EndClockTime}
-                              onComplete={()=>toast.warn("Auction ended...")}
+                              onComplete={() => toast.warn("Auction ended...")}
                             // autoStart={true}
                             // renderer={renderer}
                             />
@@ -1690,6 +1712,25 @@ function NFTInfo() {
           }}
         />
       }
+
+{showTransfer &&
+        <TransferToken
+          show={showTransfer}
+          handleClose={() => setShowTransfer(false)}
+          item={{
+            NFTId: Tokens_Detail.NFTId,
+            NFTName: Tokens_Detail.NFTName,
+            ContractAddress: Tokens_Detail.ContractAddress,
+            ContractType: Tokens_Detail.ContractType,
+            Royalty: Tokens_Detail.NFTRoyalty,
+            NFTCreator: Tokens_Detail.NFTCreator,
+            CollectionNetwork: Tokens_Detail.CollectionNetwork,
+            Category: Tokens_Detail.Category,
+            status: Tokens_Detail?.status,
+            chainType: Tokens_Detail?.ChainId
+          }}
+          Tokens_Detail={Tokens_Detail}
+        />}
 
       <Calendar show={showCalendar}
         setDate={(value) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Col, Container, Row, Offcanvas } from "react-bootstrap";
 import wallety from "../assets/lotties/wallet.json";
 import Lottie from "lottie-react";
@@ -32,7 +32,7 @@ function Header() {
 
   const handleCloseWallet = () => setShowWallet(false);
   const handleShowWallet = () => setShowWallet(true);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [once, setOnce] = useState(false);
 
   const wallet = useSelector((state) => state.LoginReducer.AccountDetails);
   const { payload, token } = useSelector((state) => state.LoginReducer.User);
@@ -76,13 +76,26 @@ function Header() {
     // initialConnectWallet(localStorage.walletConnectType, true);
     if (walletDetails) {
       console.log('Inawaawawawawawaw---->',);
-      getThirdweb.disconnectWallet();
+      walletDisconnect()
       // document.getElementById("ConnectWalletBtn").click();
       // initialConnectWallet("smartWallet")
       navigate("/");
     }
   };
 
+const isInitialRender = useRef(true);
+
+  useEffect(() => {
+    let localWallet = localStorage.getItem("thirdweb:active-wallet-id")
+    if (localWallet && walletDetails && !isWalletConnected) initialConnectWallet("smartWallet");
+    else {
+      if (!isInitialRender.current) {
+        walletDisconnect(true)
+      }
+    }
+    console.log('isInitialRender.current---->', isInitialRender.current, localWallet, walletDetails);
+    isInitialRender.current = false;
+  }, [localStorage.getItem("thirdweb:active-wallet-id"), walletDetails])
 
 
   const initialConnectWallet = async (type, homePage) => {
@@ -171,7 +184,7 @@ function Header() {
 
   };
 
-  const walletDisconnect = async () => {
+  const walletDisconnect = async (val) => {
     // localStorage.removeItem("accountInfo")
     // localStorage.removeItem("walletConnectType")
     localStorage.clear();
@@ -186,15 +199,21 @@ function Header() {
         },
       },
     });
+dispatch({
+      type: "walletConnect",
+      walletSection: {
+        walletConnected: false
+      },
+    });
     navigate("/");
-    toast.success("Wallet disconnected...");
+    val && toast.success("Wallet disconnected...");
     // window.location.reload();
     document.cookie = "token" + "=" + "" + ";" + ";path=/";
     GetNftCookieToken();
     GetUserCookieToken();
   };
 
-  if (!!walletDetails && !isWalletConnected) initialConnectWallet("smartWallet");
+  
   // if (isEmpty(walletDetails)) walletDisconnect();
 
   const getInitialSeviceFee = async () => {
@@ -459,26 +478,22 @@ function Header() {
                   factoryAddress: "0x204e6475FB6611171EB7fa323dAb82da42bC72B8",
                   gasless: true,
                 }}
-                detailsModal={{
-                  showTestnetFaucet: true,
-                  hideDisconnect: true
-                }}
-                detailsButton={{
-                  render() {
-                    return <button
-                      className="header_gradientBtn"
-                      onClick={() => walletDisconnect()}
-                    >
-                      <i class="fa-solid fa-right-from-bracket me-2"></i>
-                      Disconnect
-                      <Lottie
-                        animationData={wallety}
-                        className="header_walletLottie"
-                        loop={true}
-                      />
-                    </button>
-                  }
-                }}
+                // detailsButton={{
+                  //   render() {
+                    //     return <button
+                      //       className="header_gradientBtn"
+                      //       // onClick={() => walletDisconnect()}
+                    //     >
+              //       <i class="fa-solid fa-right-from-bracket me-2"></i>
+                      //       Disconnect
+                      //       <Lottie
+                        //         animationData={wallety}
+                        //         className="header_walletLottie"
+                        //         loop={true}
+                      //       />
+                    //     </button>
+                  //   }
+              // }}
               />
               {/* <Lottie animationData={wallety} className="header_simmer" loop={true}/> */}
 

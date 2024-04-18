@@ -35,6 +35,34 @@ key.RELAYER_URL = "https://api.defender.openzeppelin.com/actions/ca840de3-fa75-4
 
 
 if (EnvName === "demo") {
+key.KEY = 'MNBVCZX1234)(*'
+    key.FRONT_URL = 'https://homecube.maticz.in/'
+    key.BACK_URL = 'https://api-homecubes.maticz.in/v1/front'
+    key.ADMIN_URL = 'https://api-homecubes.maticz.in/v1/admin'
+    key.IMG_URL = 'https://api-homecubes.maticz.in'
+    key.DEADADDRESS = '0x000000000000000000000000000000000000dEaD'.toLowerCase()
+    // key.profile         =    profile
+    // key.TradeContract   =   '0xD370f5D497cc4b2344a9936f24E47284693d96D5'.toLowerCase() // bnb
+    // key.TradeContract = '0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3'.toLowerCase() //sepolia
+    // key.TradeContract = '0x19D4c0f9155C6517580f850D4D097AF0448a1B39'.toLowerCase() //sepolia old
+    // key.TradeContract = '0xA40F308Ad28b520f1cd0a9A58e3b551F73602246'.toLowerCase() //sepolia
+    key.TradeContract = '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase() //sepolia
+    key.ERC721 = '0x575cd9E4099A38B536673F557063f9A546870d11'.toLowerCase() // sepolia
+    // key.ERC721          =   '0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf'.toLowerCase() //bnb
+    key.ERC1155 = '0x4958A36d8d71abd35D5434EF78023B3284D93e63'.toLowerCase()
+    key.erc20Address = '0xEb4fFed6B324b5FdC4d72AD3dA75bf1Fb2bB004A'.toLowerCase()
+    // key.RPC_URL         =   "https://data-seed-prebsc-1-s1.binance.org:8545/"
+    // key.RPC_URL         =   "https://api.avax-test.network/ext/bc/C/rpc"
+    key.chain_Id_List = [97, 11155111]
+    key.BNBCHAIN = 97
+    key.ETHCHAIN = 11155111
+    key.RPC_URL = "https://ethereum-sepolia.publicnode.com"
+    key.CHAIN_ID = 11155111
+    key.COIN_NAME = "BNB"
+    key.Block_URL = {
+        ETH: "https://testnet.snowtrace.io/",
+        BNB: "https://testnet.bscscan.com/"
+    }
 }
 else if (EnvName === "stage") {
 }

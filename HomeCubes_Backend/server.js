@@ -13,7 +13,8 @@ import cron from './config/cron.js'
 import Web3 from 'web3'
 import web3Util from 'web3-utils'
 const ABI = require("./ABI/ERC721.json");
-const StakeAbi = require("./ABI/StakeAbi.json")
+const StakeAbi = require("./ABI/StakeAbi.json");
+import CryptoJS from 'crypto-js'
 
 const web3 = new Web3(
     // config.SOCKET_RPC

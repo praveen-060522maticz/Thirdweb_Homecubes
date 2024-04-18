@@ -103,7 +103,7 @@ export default function useThirdWeb() {
         try {
             var gasprice = parseInt(await web3.eth.getGasPrice());
             var gas_estimate = await getGasEstimate(contract);
-            let aggresiveGas = gasprice + (gasprice * 20 / 100)
+            let aggresiveGas = gasprice + (gasprice * 15 / 100)
             let totalGasAmount = ((parseInt(aggresiveGas) * parseInt(gas_estimate)) / 1e18) * BNBUSDT;
             let totalValue = (parseInt(value) / 1e18) * BNBUSDT
             let totalAmount = totalGasAmount + totalValue
@@ -114,6 +114,22 @@ export default function useThirdWeb() {
             return false
         }
 
+    }
+
+    const trasferGasFees = async (amount) => {
+        try {
+            var id = toast.loading("Paying gas...")
+            let Contract = createContract({ address: config.TradeContract, abi: TradeAbi })
+            const prePareForCall = await prepareContract(Contract, "transferStaticToken", 0, accountAddress, amount);
+            const receipt = await WriteContract(prePareForCall);
+            console.log('receiptreceipt---->', receipt);
+            toast.update(id, { isLoading: false, type: "success", autoClose: 1000, render: "Success" })
+            if (receipt) return true
+        } catch (e) {
+            console.log('Error on trasferGasFees---->', e);
+            toast.update(id, { isLoading: false, type: "success", autoClose: 1000, render: "Success" })
+            return false
+        }
     }
 
     const signTypedDataInThirdweb = async (data) => {
@@ -146,7 +162,7 @@ export default function useThirdWeb() {
                     address:
                         method == "setApprovalForAll" ?
                             params[0] :
-                            method == "approve" ?
+                            method == "approve"  ?
                                 data :
                                 data == "stake" ?
                                     network[Network]?.stakeContract :
@@ -162,8 +178,6 @@ export default function useThirdWeb() {
             const prePareForgas = await prepareContract(ConnectContract, method, 0, ...params);
             console.log('prePare---->', prePareForgas);
             if (!prePareForgas) return false
-
-
 
             var gas = await getGasPriceObjInThirdweb(prePareForgas, 0);
             if (!gas?.gas_estimate) return false
@@ -181,6 +195,11 @@ export default function useThirdWeb() {
 
             const receipt = await WriteContract(prePareForCall);
             if (!receipt) return false
+
+            if(method == 'approve' || method == "setApprovalForAll"){
+                console.log('method---->',method);
+                const trans = await trasferGasFees(web3.utils.toWei(String(gas.totalAmount)))
+            }
             console.log('receipt---->', receipt);
 
             if (method == "lazyMinting") {
@@ -296,6 +315,8 @@ export default function useThirdWeb() {
             return false
         }
     }
+
+
     return {
         getSmartAccount,
         disconnectWallet,

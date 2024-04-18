@@ -2291,8 +2291,8 @@ export const stackFunction = async (req, res) => {
     if (action == "onWithdraw") {
       const setData = await stakeSchema.findOneAndUpdate({ NFTId, walletAddress, withdraw: false }, { withdraw: true });
       const getData = await Tokens.findOneAndUpdate({ NFTId }, { isStaked: false });
-      const changeToken = await TokenOwners.findOneAndUpdate({ NFTId, PutOnSaleType: "staked" }, { PutOnSaleType: "NotForSale" })
-
+      const changeToken = await TokenOwners.findOneAndUpdate({ NFTId, PutOnSaleType: "staked", "NFTBalance": "1" }, { $set: { PutOnSaleType: "NotForSale" } }, { new: true })
+      console.log('changeToken---->', changeToken);
       return res.json({
         success: "success",
         msg: "Token withdrawed"
