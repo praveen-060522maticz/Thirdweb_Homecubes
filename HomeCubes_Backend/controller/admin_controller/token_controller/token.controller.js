@@ -118,8 +118,8 @@ export const editcms = async (req, res) => {
 
     }
 
-    if(action == "edit"){
-      
+    if (action == "edit") {
+
     }
 
     if (files == undefined) {
@@ -156,6 +156,7 @@ export const editcms = async (req, res) => {
       ]) : null
 
       var resp = await Cms.findOneAndUpdate({ "key": req.body.key }, { $set: { "content": req.body.content, "link": req.body.link, "img": cmsimage, title: req.body.title } }, { new: true });
+
       console.log('resp---->', resp);
       if (resp) {
         console.log("resp after cms", resp)

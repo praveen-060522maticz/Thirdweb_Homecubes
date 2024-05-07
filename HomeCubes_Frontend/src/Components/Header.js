@@ -9,7 +9,7 @@ import { GetNftCookieToken } from "../actions/axioss/nft.axios";
 import { GetUserCookieToken, userRegister } from "../actions/axioss/user.axios";
 import { connectWallet, getServiceFees } from "../hooks/useWallet";
 import { toast } from "react-toastify";
-import { address_showing, isEmpty } from "../actions/common";
+import { address_showing, isEmpty, sleep } from "../actions/common";
 import { Currency, TOKENPRICE, USDPRICE } from "../actions/axioss/cms.axios";
 import config from "../config/config";
 import CopyToClipboard from "react-copy-to-clipboard";
@@ -83,7 +83,7 @@ function Header() {
     }
   };
 
-const isInitialRender = useRef(true);
+  const isInitialRender = useRef(true);
 
   useEffect(() => {
     let localWallet = localStorage.getItem("thirdweb:active-wallet-id")
@@ -105,11 +105,16 @@ const isInitialRender = useRef(true);
     });
     console.log("ennanadkkuthu", type);
     // if(!localStorage.getItem("accountInfo")){
+   sleep(2000)
     var accountDetails = await connectWallet(type, walletDetails.address);
-    console.log("accountDetails", accountDetails);
 
     if (!isEmpty(accountDetails)) {
       if (accountDetails?.accountAddress) {
+        const getAddress = await getThirdweb.getAdminAccountOfSmartWallet();
+        console.log('getAddress---->',getAddress);
+        accountDetails.parentAddress = getAddress[0]?.toString()?.toLowerCase();
+        console.log("accountDetails", accountDetails);
+
         var NewMethod = {
           Type: "InitialConnect",
           WalletAddress: accountDetails?.accountAddress,
@@ -138,7 +143,6 @@ const isInitialRender = useRef(true);
           document.cookie = "token" + "=" + Resp?.token + ";" + ";path=/";
           GetNftCookieToken();
           GetUserCookieToken();
-
           toast.update(id, {
             render: Resp.msg,
             type: Resp.success,
@@ -199,7 +203,7 @@ const isInitialRender = useRef(true);
         },
       },
     });
-dispatch({
+    dispatch({
       type: "walletConnect",
       walletSection: {
         walletConnected: false
@@ -213,7 +217,7 @@ dispatch({
     GetUserCookieToken();
   };
 
-  
+
   // if (isEmpty(walletDetails)) walletDisconnect();
 
   const getInitialSeviceFee = async () => {
@@ -468,22 +472,22 @@ dispatch({
               </div>}
 
               <div className="header__thirdParty">
-              <ConnectButton
-                connectButton={{
-                  label: "Connect",
-                  className: "header_newGradientBtn",
-                }}
-                client={client}
-                wallets={[createWallet("io.metamask")]}
-                accountAbstraction={{
-                  chain: sepolia,
-                  factoryAddress: "0x204e6475FB6611171EB7fa323dAb82da42bC72B8",
-                  gasless: true,
-                }}
-                detailsButton={{
-                  className: "header_aftConnect"
-                }}
-              />
+                <ConnectButton
+                  connectButton={{
+                    label: "Connect",
+                    className: "header_newGradientBtn",
+                  }}
+                  client={client}
+                  wallets={[createWallet("io.metamask"),createWallet("walletConnect"),createWallet("com.coinbase.wallet")]}
+                  accountAbstraction={{
+                    chain: sepolia,
+                    factoryAddress: "0x204e6475FB6611171EB7fa323dAb82da42bC72B8",
+                    gasless: true,
+                  }}
+                  detailsButton={{
+                    className: "header_aftConnect"
+                  }}
+                />
               </div>
               {/* <Lottie animationData={wallety} className="header_simmer" loop={true}/> */}
 

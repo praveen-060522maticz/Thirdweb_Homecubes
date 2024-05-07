@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function   ImgAudVideo({
+export default function ImgAudVideo({
   file,
   type,
   classname,
@@ -11,44 +11,44 @@ export default function   ImgAudVideo({
 }) {
   useEffect(() => {
     const preventContextMenu = (event) => {
-        event.preventDefault();
+      event.preventDefault();
     };
 
     const images = document.querySelectorAll('img');
 
     images.forEach((image) => {
-        image.addEventListener('contextmenu', preventContextMenu);
+      image.addEventListener('contextmenu', preventContextMenu);
     });
 
     return () => {
-        images.forEach((image) => {
-            image.removeEventListener('contextmenu', preventContextMenu);
-        });
+      images.forEach((image) => {
+        image.removeEventListener('contextmenu', preventContextMenu);
+      });
     };
-}, []);
+  }, []);
   // console.log("fileeeeeee",file,type)
-  var [Check,setCheck] = useState(false)
-  const Audioaction =()=>{
+  var [Check, setCheck] = useState(false)
+  const Audioaction = () => {
     var aud = document.getElementById("nftaudio");
-    if(Check==false){
+    if (Check == false) {
       aud.play();
       setCheck(!Check)
     }
-    else{
+    else {
       aud.pause();
       setCheck(!Check)
     }
   }
   return file ? (
-    type === "image" ?   (
+    type === "image" ? (
       <img
         src={file}
         alt="img"
         className={classname}
         // onContextMenu="return false;"
-        onError={event => {
-          event.target.src = origFile
-        }}
+        // onError={event => {
+        //   event.target.src = origFile
+        // }}
       />
     ) : type === "video" ? (
       <video

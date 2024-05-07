@@ -30,7 +30,7 @@ export default function GalleryList(props) {
 
     const getGalleryData = async () => {
         try {
-            var resp = await collectionFunctions({ action: "get", projectId: state?.record?._id });
+            var resp = await collectionFunctions({ action: "getAllCol", projectId: state?.record?._id });
             console.log("respradawdesp", resp);
             setProjects(resp.data ?? [])
         } catch (error) {

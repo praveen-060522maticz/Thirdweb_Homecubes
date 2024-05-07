@@ -28,6 +28,8 @@ import Iframe from 'react-iframe'
 import LazyLoad from 'react-lazyload'
 import LazyLoader from "../Components/LazyLoader";
 import LottieAnimation from "../Components/LottieAnimar";
+import { BiLogoTelegram, BiLogoDiscordAlt, BiLogoFacebook, BiLogoGmail, BiLogoYoutube, BiLogoLinkedin, BiLogoInstagram, BiLogoMediumSquare  } from "react-icons/bi";
+import { FaXTwitter } from "react-icons/fa6";
 
 function Home() {
   useEffect(() => {
@@ -210,7 +212,7 @@ function Home() {
                   </Row>
 
                   <Row className="pi_higherTop align-items-center">
-                    <Col lg={6} md={6} sm={6} xs={12}>
+                    <Col lg={6} md={6} xs={12}>
                       <Typewriter
                         options={{
                           strings: ["We Are Getting Regulated"],
@@ -240,7 +242,6 @@ function Home() {
                     <Col
                       lg={6}
                       md={6}
-                      sm={6}
                       xs={12}
                       className="d-flex justify-content-center"
                     >
@@ -251,7 +252,7 @@ function Home() {
                       /> */}
                       {CMS["CountDown to Our Next Launch"]?.img && <div className="anim_div">
 
-                        <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["CountDown to Our Next Launch"]?.img}`} />
+                        <LottieAnimation className='stepper_lottie' url={`${config.IMG_URL}/cmsimg/${CMS["CountDown to Our Next Launch"]?.img}`} />
                       </div>}
                       {/* <img
                             className="img-fluid"
@@ -544,11 +545,11 @@ function Home() {
                     </Col>
                   </Row> */}
 
-                  <Link
+                  {/* <Link
                     to="https://linktr.ee/homecubes"
                     className="home__linktreeNav"
                     target="_blank"
-                  >
+                  > */}
                     <Row className="justify-content-center pi_higherTop">
                       <Col lg={8} className="home_mailer">
                         <Row className="justify-content-center">
@@ -557,13 +558,9 @@ function Home() {
                             md={8}
                             sm={10}
                             xs={11}
-                            className="my-5 d-flex justify-content-center align-items-center gap-3"
+                            className="my-5 d-flex flex-column justify-content-center align-items-center gap-3"
                           >
-                            <img
-                              src={require("../assets/images/linktree.png")}
-                              className="img-fluid home__linktreeImg"
-                            />
-                            <h3
+                             <h3
                               className="home_titled text-center"
                               data-aos="fade-up"
                               data-aos-offset="100"
@@ -571,11 +568,26 @@ function Home() {
                             >
                               Join Our Link Tree
                             </h3>
+
+                            <div className="home__channelLinkHolder d-flex justify-content-center align-items-center gap-2 gap-sm-3">
+                              <a href="https://t.me/HomeCubes_io" target="__blank" className="home__channelBtn rounded-5" ><BiLogoTelegram  /></a>
+                              <a href="https://twitter.com/HomeCubes" target="__blank" className="home__channelBtn rounded-5" ><FaXTwitter /></a>
+                              <a href="https://discord.com/invite/GkFKbn57" target="__blank" className="home__channelBtn rounded-5" ><BiLogoDiscordAlt /></a>
+                              <a href="https://medium.com/@HomeCubes" target="__blank" className="home__channelBtn rounded-5" ><BiLogoMediumSquare /></a>
+                              <a href="https://www.facebook.com/people/homecubesio/100090571700233/" target="__blank" className="home__channelBtn rounded-5" ><BiLogoFacebook /></a>
+                               <a href="https://www.facebook.com/people/homecubesio/100090571700233/" target="__blank" className="home__channelBtn rounded-5" ><BiLogoInstagram /></a>
+                              {/* <button className="home__channelBtn rounded-5" data-aos="fade-left"
+                              data-aos-offset="100"
+                              data-aos-duration="500"><BiLogoGmail /></button> */}
+                              <a href="https://www.youtube.com/@homecubes6047" target="__blank" className="home__channelBtn rounded-5"
+                              ><BiLogoYoutube /></a>
+                              <a href="https://www.linkedin.com/company/homecubes/" target="__blank" className="home__channelBtn rounded-5" ><BiLogoLinkedin /></a>
+                            </div>
                           </Col>
                         </Row>
                       </Col>
                     </Row>
-                  </Link>
+                  {/* </Link> */}
                 </Col>
               </Row>
             </Col>

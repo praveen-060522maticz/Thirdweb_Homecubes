@@ -39,5 +39,8 @@
     "@babel/preset-env": "^7.12.10",
     "@babel/register": "^7.18.9",
     "nodemon": "^2.0.20"
+  },
+  "nodemonConfig": {
+    "ignore": ["public"]
   }
 }

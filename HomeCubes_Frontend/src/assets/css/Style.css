@@ -2274,6 +2274,10 @@ input.mint_countInput::-webkit-inner-spin-button{
   padding: 8px 20px;
 }
 
+.minting__propertyImg{
+  min-height: 220px;
+}
+
 .mint_mintBtn {
   border: none;
   outline: none;
@@ -4161,6 +4165,16 @@ body.modal-open .container {
   width: 290px;
   color: var(--white);
   display: none;
+  animation: blurer 1s ease-out;
+  transition: 1s;
+}
+@keyframes blurer {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
 }
 
 .user_hvr_btn:hover + .user_hidden_cnt,
@@ -4256,6 +4270,23 @@ body.modal-open .container {
     top: 24px;
     height: 32px;
   }
+}
+.home__channelBtn{
+  border: none;
+  outline: none;
+  background-color: var(--gradinet_right);
+  color: var(--black);
+  padding: 8px;
+}
+.home__channelBtn svg{
+  height: 27px;
+  width: 27px;
+}
+.home__channelBtn:hover{
+  background-color: var(--gradinet_left);
+}
+.home__channelBtn:hover svg{
+  fill: var(--white);
 }
 
 /* end of end extra css */
@@ -4817,6 +4848,13 @@ body.modal-open .container {
   .header_newGradientBtn{
     padding: 10px !important;
   }
+  .home__channelBtn svg{
+    height: 20px;
+    width: 20px;
+  }
+  .home__channelBtn{
+    padding: 3px 5px;
+  }
 
 }
 
@@ -4959,7 +4997,7 @@ body.modal-open .container {
     display: block;
   }
   .user_hidden_cnt {
-    top: 47px;
+    top: 40px;
   }
 }
 @media (min-width: 992px) and (max-width: 1199px) {

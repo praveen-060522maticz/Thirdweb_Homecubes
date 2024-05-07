@@ -209,7 +209,7 @@ function Minting() {
         firstNft?.Hash,
         firstNft?.ContractAddress,);
       const getUSDT = ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(7);
-        console.log('GAGAGAGAGAG---->',        "lazyMinting",
+      console.log('GAGAGAGAGAG---->', "lazyMinting",
         0,
         mintCount,
         initialMint.MetaData,
@@ -224,7 +224,7 @@ function Minting() {
         firstNft?.ContractAddress,
         web3.utils.toWei(value.toString()),
         "2500000000000000000"
-);
+      );
       // var hash = await ContractCall.lazyminting_721_1155(
       //   mintCount,
       //   721,
@@ -264,7 +264,7 @@ function Minting() {
 
       // console.log('ssssssssss---->',getThirdweb.useContractCall("lazyMinting",));
 
-console.log('hashawdawdawdaw--->',hash);
+      console.log('hashawdawdawdaw--->', hash);
       if (hash) {
 
         const changedToken = await Promise.all(initialMint.data.map((val, i) => {
@@ -526,7 +526,7 @@ console.log('hashawdawdawdaw--->',hash);
                         <Row>
                           <Col lg={8}>
                             <p className="mint_scrollTitle">
-                              How to buy from Marketplace ?
+                            {cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title}
                             </p>
                             <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} />
 
@@ -537,7 +537,7 @@ console.log('hashawdawdawdaw--->',hash);
                         <Row>
                           <Col lg={8}>
                             <p className="mint_scrollTitle">
-                              How to Mint out NFT ?
+                            {cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title}
                             </p>
                             <ReadMore descText={cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.content} />
                           </Col>
@@ -702,46 +702,28 @@ console.log('hashawdawdawdaw--->',hash);
                       }}
                     />
                   </div>
-                  <h3 className="minting_detail mint_secondaryTitle mt-4">
-                    Property Description
-                  </h3>
-                  <div className="row">
+
+                  <div className="row mt-4">
+                    <div className="col-xl-4 col-12 col-sm-4 col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
+                      <img src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} className="img-fluid rounded-3 minting__propertyImg" />
+                    </div>
                     <div className="col-xl-8 col-12 col-sm-8 col-md-8 col-lg-8 mb-3 mb-lg-0">
-                      <p className="mp_detailbrief mt-4">
+                      <h3 className="mint_scrollTitle inter_font">
+                        Property Description
+                      </h3>
+                      <p className="mp_detailbrief mt-3">
                         {project?.projectDescription}
                       </p>
                     </div>
-                    <div className="col-xl-4 col-12 col-sm-4 col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
-                      <div className="property-des-img">
-
-                        <img src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} className="img-fluid" />
-
-                        {/* <ImgAudVideo
-                          file={tokenDetails?.NFTOrginalImage === undefined || null ? "" : tokenDetails?.NFTOrginalImage.split(':')[0] == 'https' ? tokenDetails?.NFTOrginalImage : `${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`}
-                          type={
-                            tokenDetails.CompressedFile
-                              ? tokenDetails.CompressedFile?.includes(".webp") || tokenDetails.CompressedFile?.includes(".png")
-                                ? "image"
-                                : tokenDetails.CompressedFile.includes(".webm")
-                                  ? "video"
-                                  : "audio"
-                              : tokenDetails.CompressedFile
-                          }
-                          thumb={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Compressed/${tokenDetails.CompressedThumbFile}`}
-                          from="info"
-                          origFile={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails.OriginalFile}`}
-                          classname={"img-fluid"}
-                        /> */}
-                      </div>
-                    </div>
                   </div>
+                  
                   <Col xs={12}>
                     <Row className="mt-4">
                       <Col lg={6} md={6} xs={12}>
                         <Row>
                           <Col lg={8} md={12} xs={12}>
                             <p className="mint_scrollTitle">
-                              How to buy from Marketplace ?
+                            {cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title}
                             </p>
                             <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} />
 
@@ -752,7 +734,7 @@ console.log('hashawdawdawdaw--->',hash);
                         <Row>
                           <Col lg={8} md={12} xs={12}>
                             <p className="mint_scrollTitle">
-                              How to Mint out NFT ?
+                            {cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title}
                             </p>
                             <ReadMore descText={cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.content} />
                           </Col>
@@ -760,7 +742,7 @@ console.log('hashawdawdawdaw--->',hash);
                       </Col>
                       <Row className="pi_higherTop">
                         <Col lg={4}>
-                          <h1 className="mint_gradValue new">{project?.propertyValue ?? "1M"}$</h1>
+                          <h1 className="mint_gradValue new">{project?.propertyValue?.toUpperCase?.() ?? "1M"}$</h1>
                         </Col>
                         <Col lg={8}>
                           <h3 className="minting_detail">Property Value</h3>

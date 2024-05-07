@@ -14,6 +14,7 @@ import { Button, Form } from "react-bootstrap";
 import Exportexcel from '../../components/tableButtonComp/Excelexport';
 import Exportcsv from '../../components/tableButtonComp/Exportcsv';
 import Exportpdf from '../../components/tableButtonComp/Exportpdf';
+import CopyToClipboard from 'react-copy-to-clipboard';
 // import {TokenDetail} from '';
 
 export default function ActivityReport(props) {
@@ -110,6 +111,31 @@ export default function ActivityReport(props) {
             text: "NFTId",
             className: "NFT",
             align: "left"
+        },
+        {
+            // key: "NFTId",
+            text: "Hash",
+            className: "NFT",
+            align: "left",
+            cell: rec =>
+                <div>
+                    {address_showing(rec?.HashValue)+" "}
+                </div>
+        },
+        {
+            // key: "NFTId",
+            text: "Copy Hash",
+            className: "NFT",
+            align: "left",
+            cell: rec =>
+                <div>
+                    <CopyToClipboard
+                        onCopy={() => toast.success("Hash copied successfully")}
+                        text={`${rec?.HashValue}`}
+                    >
+                        <i class="fa-regular fa-copy"></i>
+                    </CopyToClipboard>
+                </div>
         },
 
     ]

@@ -7,9 +7,10 @@ import { useSelector } from 'react-redux';
 import { BuyAccept } from '../actions/axioss/nft.axios';
 import { useNavigate } from 'react-router-dom';
 import { isEmpty } from '../actions/common';
+import useContractProviderHook from '../actions/contractProviderHook';
 
 function TransferToken({ show, handleClose, item, Tokens_Detail }) {
-console.log('TokenTedetailsss---->', item, Tokens_Detail);
+  console.log('TokenTedetailsss---->', item, Tokens_Detail);
 
   const [Address, SetAddress] = useState('')
   const [disablestate, setdisablestate] = useState(false)
@@ -19,6 +20,8 @@ console.log('TokenTedetailsss---->', item, Tokens_Detail);
 
 
   const getThirdweb = useThirdWeb();
+  const ContractCall = useContractProviderHook();
+
 
   const { accountAddress, web3 } = useSelector(state => state.LoginReducer.AccountDetails);
   const { payload, isAdmin } = useSelector((state) => state.LoginReducer.User);
@@ -27,10 +30,57 @@ console.log('TokenTedetailsss---->', item, Tokens_Detail);
   const FormSubmit = async () => {
 
     if (isEmpty(Address)) return toast.error("Address can't be empty...")
+    SetBtn('process')
+    const checkApprove = await ContractCall.GetApproveStatus(
+      "single",
+      item?.ContractAddress
+    )
+    console.log("checkApprovecheckApprove", checkApprove);
+
+    if (!checkApprove) {
+      const aprroveId = toast.loading("Approve in process... Do not refresh!");
+
+      // const cont = await ContractCall.SetApproveStatus(
+      //   FormValue.ContractType.includes('721') ? "Single" : "Multiple",
+      //   FormValue.ContractAddress
+      // );
+      const cont = await getThirdweb.useContractCall(
+        "setApprovalForAll",
+        0,
+        0,
+        item.ContractAddress, true
+      );
+
+      if (!cont) {
+        toast.update(id, {
+          render: "Transaction Failed",
+          type: "error",
+          isLoading: false,
+          autoClose: 1000, closeButton: true, closeOnClick: true
+        });
+        SetBtn("try");
+
+        return toast.update(aprroveId, {
+          render: "Approved Failed",
+          type: "error",
+          isLoading: false,
+          autoClose: 1000, closeButton: true, closeOnClick: true
+        });
+      } else {
+
+        toast.update(aprroveId, {
+          render: "Approved Success",
+          type: "success",
+          isLoading: false,
+          autoClose: 1000, closeButton: true, closeOnClick: true
+        });
+      }
+
+    }
 
     setdisablestate(true)
-    const id = toast.loading('Transferring Your Price')
-    SetBtn('process')
+    const id = toast.loading('Transferring Your Token')
+    
     // console.log("to transfer", item.ContractAddress, item.ContractType, Quantity, Address, owner.NFTId)
     // let cont = await ContractCall.Trsanfer(item.ContractAddress, item.ContractType, Quantity, Address, owner.NFTId)
     const cont = await getThirdweb.useContractCall("TransferToken", 0, 0, Tokens_Detail.NFTId, payload?.parentAddress, Tokens_Detail.ContractAddress, "2500000000000000000")
@@ -73,6 +123,7 @@ console.log('TokenTedetailsss---->', item, Tokens_Detail);
       }
 
     } else {
+      SetBtn('try')
       toast.update(id, { render: 'Transaction Failed', type: 'error', isLoading: false, autoClose: 1000 })
     }
   }
@@ -143,14 +194,14 @@ console.log('TokenTedetailsss---->', item, Tokens_Detail);
               disabled={Btn == 'error' || Btn === "process" || Btn === "done" ? true : false}
               onClick={Btn == 'start' || Btn === "try" ? FormSubmit : null}
             >
-              {Btn == 'start' && 'Start'
+              {Btn == 'start' && 'Transfer'
                 || Btn == 'try' && 'Try-Again'
                 || Btn == 'error' && 'Error'
                 || Btn == 'done' && 'Done'
                 || Btn == 'process' && 'In-Progress'
               }
             </button>
-            <button className='additional_btn modal_additionalBtn mt-3'>Cancel</button>
+            <button className='additional_btn modal_additionalBtn mt-3' onClick={() => handleClose()}>Cancel</button>
 
           </div>
         </Modal.Body>

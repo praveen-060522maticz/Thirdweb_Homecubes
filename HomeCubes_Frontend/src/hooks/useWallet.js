@@ -38,8 +38,10 @@ export const connectWallet = async (type, changechainid, switched) => {
     console.log("get Web3", web3Obj)
     try {
       var web3p = new Web3(Config.RPC_URL)
-      const accounts = await web3Obj.eth.getAccounts();
-      accountDetails.parentAddress = accounts[0]?.toString()?.toLowerCase();
+      // console.log('web3ssssp---->',web3p);
+      // const accounts = await web3Obj.eth.getAccounts();
+      // console.log('accountsaaaa---->',accounts);
+      // accountDetails.parentAddress = accounts[0]?.toString()?.toLowerCase();
       // since integrated smart wallet in changechainid - smartaccount address provided
       accountDetails.accountAddress = changechainid?.toLowerCase();
       accountDetails.coinBalance = await web3Obj.eth.getBalance(accountDetails.accountAddress) / 1e18;
@@ -50,13 +52,13 @@ export const connectWallet = async (type, changechainid, switched) => {
       console.log("acocococococo", accountDetails);
       let CONTRACT = await new web3p.eth.Contract(TradeAbi, Config.TradeContract);
 
-      accountDetails.USDTaddress = CONTRACT.methods?.["staticToken"] ? await CONTRACT.methods?.staticToken()?.call() : Config.STATIC_TOKEN
+      accountDetails.USDTaddress = CONTRACT.methods?.["staticToken"] ? await CONTRACT.methods?.staticToken?.()?.call() : Config.STATIC_TOKEN
       console.log("acocococococo", accountDetails);
       return accountDetails;
     }
     catch (e) {
       console.log("find ee", e)
-      // return accountDetails;
+      return accountDetails;
     }
   }
   else {
@@ -66,7 +68,8 @@ export const connectWallet = async (type, changechainid, switched) => {
 
 export const smartWalletConnect = async (type, address) => {
   try {
-    var web3 = new Web3(window.ethereum);
+    var web3 = new Web3(window.ethereum ?? Config?.RPC_URL);
+    console.log('window.ethereum---->',window.ethereum);
     localStorage.setItem("accountInfo", address)
     localStorage.setItem('walletConnectType', type)
     return web3;

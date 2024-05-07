@@ -15,6 +15,8 @@ const user  =   Schema({
     initialBuy      :   {   type : Boolean , default : false},
     CustomUrl       :   {   type : String , default : ''}, //username
     KycStatus       :   {   type : String , default : 'false'},
+    Name         :   {   type : String , default : ''},
+    SurName         :   {   type : String , default : ''},
     Address         :   {   type : String , default : ''},
     mobileNumber    :   {   type : String , default : ''},
     Nationality     :   {   type : String , default : ''},

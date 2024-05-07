@@ -30,7 +30,7 @@ export default function ProjectList(props) {
     }, [])
 
     const getPrijects = async () => {
-        const resp = await newsAndFeedFunc({ action: "get", projectId: state?.record?._id });
+        const resp = await newsAndFeedFunc({ action: "getFront", projectId: state?.record?._id });
         setProjects(resp?.data ?? [])
     }
 
@@ -79,19 +79,11 @@ export default function ProjectList(props) {
                 </div>
         },
         {
-            text: "Hide/Show",
+            text: "Delete",
             // sortable: true,
             cell: record =>
-                <div onClick={() => onDelete(record)} >
+                <button className='btn mb-2 allbtn' type='button' onClick={() => onDelete(record)} >Delete</button>
 
-                    <img
-                        className="img-xs rounded-circle"
-                        src={!record.deleted ?
-                            require("../../assets/images/eye.svg") :
-                            require("../../assets/images/eye-crossed.png")}
-                        alt="profile"
-                    />
-                </div>
 
         },
 
@@ -99,7 +91,7 @@ export default function ProjectList(props) {
 
     const onDelete = async (rec) => {
         const resp = await newsAndFeedFunc({ action: "delete", deleted: !rec?.deleted, _id: rec._id });
-        toast.success(!rec.deleted ? "hide successfully" : "Showed successfully")
+        toast.success(!rec.deleted ? "Deleted successfully" : "Showed successfully")
         setTimeout(() => {
             getPrijects()
         }, 1000)

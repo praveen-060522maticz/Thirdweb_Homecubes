@@ -14,7 +14,7 @@ function DataCard(props) {
 
   const stake = stakeDetais?.[0]
   if (stake) {
-    var poolDetail = getDaysOfDesiredMonth(stake?.poolId == 1 ? 3 : stake?.poolId == 1 ? 6 : 12);
+    var poolDetail = getDaysOfDesiredMonth();
     console.log("poolDetail", poolDetail, poolDetail.newStartDate, poolDetail.dateFormat, stake.startDate, stake.endDate);
     var getStakedDate = calculateStakingDaysPassed(poolDetail.newStartDate, poolDetail.dateFormat, stake.startDate, stake.endDate)
   }

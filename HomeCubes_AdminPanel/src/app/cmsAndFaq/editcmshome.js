@@ -31,7 +31,7 @@ export function Editcmshome() {
     page: "",
     File: null,
     url: null,
-    key: ""
+    key:""
   }
 
   const [formData, setFormData] = useState(initData)
@@ -117,9 +117,9 @@ export function Editcmshome() {
         page: formData.page,
         File: formData?.File ?? "",
         content: ckcontent,
-        key: formData?.key
+        key:formData?.key
       }
-      console.log("datacms", datacms);
+      console.log("datacms",datacms);
       var resp = await editCmsCall(datacms);
 
       if (resp?.status) {
@@ -192,7 +192,7 @@ export function Editcmshome() {
                   <label htmlFor="exampleInputName1">title</label>
 
                   {/* {formData?.title && */}
-                  <input type="text" className="form-control" id="title" placeholder="title" value={formData?.title} onChange={(e) => handlechange(e)} />
+                  <input type="text" className="form-control" id="title"  placeholder="title" value={formData?.title} onChange={(e) => handlechange(e)} />
 
                   {/* } */}
                 </Form.Group>
@@ -260,13 +260,13 @@ export function Editcmshome() {
                   <br /> */}
                   {/* <input type="file" id="File" onChange={(e) => handlechange(e)} /> */}
                   <div>
-                    <div class="upload-btn-wrapper">
-                      <button class="btn">Choose file</button>
-                      <input
-                        type="file" id="File" onChange={(e) => handlechange(e)}
+                  <div class="upload-btn-wrapper">
+                    <button class="btn">Choose file</button>
+                    <input
+                      type="file" id="File" onChange={(e) => handlechange(e)}
 
-                      />
-                    </div>
+                    />
+                  </div>
                   </div>
                   {console.log("awefaw", formData)}
                   {/* {formData && formData?.url && <img src={formData.url} style={{ height: 100, width: 100 }} />} */}

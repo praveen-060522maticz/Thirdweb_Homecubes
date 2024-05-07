@@ -144,6 +144,9 @@ export const Decryptdata = ((data, key) => {
 
 })
 
+export const imgFormats = ['jpeg', 'jpg', 'png', 'gif', 'svg', 'webp'];
+
+
 export const videoFileFormats = [
   'mp4',
   'avi',

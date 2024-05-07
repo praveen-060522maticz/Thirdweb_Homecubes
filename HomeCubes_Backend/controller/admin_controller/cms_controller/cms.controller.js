@@ -399,7 +399,7 @@ export const newsAndFeed = async (req, res) => {
 
     if (action == "add") {
 
-      const checkTitle = await newsFeedSchema.find({ feedTitle });
+      const checkTitle = await newsFeedSchema.find({ feedTitle, deleted: false });
 
       if (checkTitle.length != 0) return res.json({
         success: "error",
@@ -420,7 +420,7 @@ export const newsAndFeed = async (req, res) => {
     }
 
     if (action == "edit") {
-      const setData = await newsFeedSchema.findOneAndUpdate({ projectId }, req.query, { new: true });
+      const setData = await newsFeedSchema.findOneAndUpdate({ _id: ObjectId(_id) }, { $set: { feedTitle, feedDescription } }, { new: true });
       if (setData) return res.json(Encryptdata({
         success: "success",
         data: setData,

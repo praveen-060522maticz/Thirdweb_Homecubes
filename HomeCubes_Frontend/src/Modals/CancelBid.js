@@ -64,8 +64,8 @@ function CancelBid({ show, handleClose, owner, bidder, item }) {
           activity: 'Cancel',
           Category: item.Category,
           EmailId: payload.EmailId,
-          click: `${config.FRONT_URL}/info/${item.CollectionNetwork}/${item.ContractAddress}/${owner.NFTOwner}/${owner.NFTId}`
-
+          click: `${config.FRONT_URL}/info/${item.CollectionNetwork}/${item.ContractAddress}/${owner.NFTOwner}/${owner.NFTId}`,
+          HashValue:cont.HashValue,
         }
         setCanReload(false)
         console.log('gsfgsfg', FormValue, bidder)

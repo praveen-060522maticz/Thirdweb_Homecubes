@@ -135,12 +135,13 @@ function AcceptBid({
    const TokenApproveCall = async () => {
       SetTokenBtn("process");
       const id = toast.loading("Approve Processing...Do not refresh!");
-      const cont = await ContractCall.SetApproveStatus(
-         item.ContractType == 721 || item.ContractType == "721"
-            ? "Single"
-            : "Multiple",
-         item.ContractAddress
-      );
+      const cont = await getThirdweb.useContractCall(
+         "setApprovalForAll",
+         0,
+         0,
+         item.ContractAddress, true
+       );
+
       toast.update(id, {
          render: cont ? "Approved Successfully" : "Approved Failed",
          type: cont ? "success" : "error",

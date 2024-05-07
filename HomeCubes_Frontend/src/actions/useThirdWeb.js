@@ -1,8 +1,8 @@
 import React from "react";
-import { useActiveAccount, useConnectedWallets, useDisconnect } from "thirdweb/react";
+import { useActiveAccount, useActiveWallet, useActiveWalletChain, useActiveWalletConnectionStatus, useConnectedWallets, useDisconnect, useSetActiveWallet, useSwitchActiveWalletChain } from "thirdweb/react";
 import { client } from "../App";
 import { estimateGas, getContract, hexToNumber, prepareContractCall, readContract, resolveMethod, sendAndConfirmTransaction, toWei } from "thirdweb";
-import { sepolia } from "thirdweb/chains";
+import { defineChain, sepolia } from "thirdweb/chains";
 import { useSelector } from "react-redux";
 import { network } from "../config/network";
 import config from "../config/config";
@@ -13,7 +13,7 @@ import ERC721 from '../Abi/erc721.json'
 import ERC1155 from '../Abi/erc1155.json'
 import { toast } from "react-toastify";
 import { hexToNumberString } from "web3-utils";
-import { sleep } from "./common";
+import { getErrorForToast, sleep } from "./common";
 
 let spareAmount = "25000000000000000000"
 
@@ -23,6 +23,8 @@ export default function useThirdWeb() {
     const smartAccount = useActiveAccount();
     const { disconnect } = useDisconnect();
     const connectedWallets = useConnectedWallets();
+
+    // useSetActiveWallet()
 
 
     const { Network } = useSelector(
@@ -48,6 +50,16 @@ export default function useThirdWeb() {
         });
     }
 
+    const getAdminAccountOfSmartWallet = async () => {
+        try {
+            console.log('getSmartAccount().address---->',getSmartAccount().address);
+            const contract = createContract({ address: getSmartAccount().address })
+            return await ReadContract(contract,"getAllAdmins",[])
+        } catch (e) {
+            console.log('Error getAdminAccountOfSM---->', e);
+        }
+    }
+
     const ReadContract = async (contract, method, ...params) => {
         try {
             return await readContract({
@@ -60,8 +72,33 @@ export default function useThirdWeb() {
         }
     }
 
+    const valuuu = async () => {
+        try {
+            console.log('getSmartAccount().address---->', getSmartAccount().address);
+            const contract = getContract({
+                client,
+                chain: defineChain(11155111),
+                address: getSmartAccount().address
+            });
+            console.log('contracaaaaaaaat---->', contract?.account);
+            const valllll = await readContract({
+                contract,
+                method: resolveMethod("getAllAdmins"),
+                params: []
+            });
+
+
+            console.log('Vallllllll---->', valllll);
+        } catch (error) {
+            console.log('Errrr---->', error);
+        }
+
+    }
+
+
     const WriteContract = async (tx) => {
         try {
+            console.log('smartAccountsmartAccount---->', smartAccount, tx);
             return await sendAndConfirmTransaction({
                 transaction: tx,
                 account: smartAccount,
@@ -94,7 +131,8 @@ export default function useThirdWeb() {
                 from: smartAccount.address
             })
         } catch (e) {
-            console.log('Error on getGasEstimate---->', e);
+            console.log('Error on getGasEstimate---->', e.toString());
+            toast.error(getErrorForToast(e.toString()) || "Error on transaction")
             return false
         }
     }
@@ -151,18 +189,29 @@ export default function useThirdWeb() {
         }
     }
 
+    const checkBalance = async (token, amount) => {
+        try {
+            let TokenContract = createContract({ address: token, abi: DETH })
+            let balance = await ReadContract(TokenContract, "balanceOf", accountAddress);
+            console.log('balancebalance---->', balance);
+            return parseFloat(balance) > parseFloat(amount)
+        } catch (e) {
+            console.log('Erorr on checkbalance---->', e);
+        }
+    }
+
     const useContractCall = async (method, value, data, ...params) => {
         try {
             console.log('method, value, data, ...params---->', method, value, data, ...params);
-            const getApproveStatus = await validateApproveforUSDT(spareAmount, data == "stake")
+            const getApproveStatus = await validateApproveforUSDT(spareAmount, data == "stake") // validation for allowance.
             if (!getApproveStatus) return false;
 
-            var ConnectContract = createContract(
+            var ConnectContract = createContract( // create contract instance using address and abi.
                 {
                     address:
                         method == "setApprovalForAll" ?
                             params[0] :
-                            method == "approve"  ?
+                            method == "approve" ?
                                 data :
                                 data == "stake" ?
                                     network[Network]?.stakeContract :
@@ -175,29 +224,36 @@ export default function useThirdWeb() {
             );
             console.log('ConnectContract---->', ConnectContract);
 
-            const prePareForgas = await prepareContract(ConnectContract, method, 0, ...params);
+            const prePareForgas = await prepareContract(ConnectContract, method, 0, ...params); // preparing contract for gas estimation
             console.log('prePare---->', prePareForgas);
             if (!prePareForgas) return false
 
-            var gas = await getGasPriceObjInThirdweb(prePareForgas, 0);
+            var gas = await getGasPriceObjInThirdweb(prePareForgas, value); // getting gas price and all the price.
+
             if (!gas?.gas_estimate) return false
             if (method != 'approve' && method != "setApprovalForAll") {
                 console.log('gasgasgas---->', gas);
-                if (method == "bidNFT" || method == "editBid") params[params.length - 2] = web3.utils.toWei(String(gas.totalGasAmount));
-                params[params.length - 1] = web3.utils.toWei(String(gas.totalAmount));
+                if (method == "bidNFT" || method == "editBid") params[params.length - 2] = web3.utils.toWei(String(gas.totalGasAmount)); // gas price for transaction
+                params[params.length - 1] = web3.utils.toWei(String(gas.totalAmount)); // gas price + value for all the transaction
+            }
+
+            let validateBal = await checkBalance(USDTaddress, gas.totalAmount) // Checking if the address have enough amount to do the transaction.
+            if (!validateBal) {
+                toast.error("Insufficient amount for transaction") // returns error if false.
+                return false
             }
 
             let additionalParams = method == "setApprovalForAll" ?
                 [data == "stake" ? network[Network]?.stakeContract : config.TradeContract, true] : params;
             console.log('...params aftere get gas---->', ...params, additionalParams);
 
-            const prePareForCall = await prepareContract(ConnectContract, method, 0, ...additionalParams);
+            const prePareForCall = await prepareContract(ConnectContract, method, 0, ...additionalParams); // prepare contract for final transaction
 
-            const receipt = await WriteContract(prePareForCall);
+            const receipt = await WriteContract(prePareForCall); // Write transaction in block
             if (!receipt) return false
 
-            if(method == 'approve' || method == "setApprovalForAll"){
-                console.log('method---->',method);
+            if (method == 'approve' || method == "setApprovalForAll") { // getting gas amount for other contract intraction.
+                console.log('method---->', method);
                 const trans = await trasferGasFees(web3.utils.toWei(String(gas.totalAmount)))
             }
             console.log('receipt---->', receipt);
@@ -297,7 +353,7 @@ export default function useThirdWeb() {
             let allowance = await ReadContract(TokenContract, "allowance", accountAddress, stake ? network[Network]?.stakeContract : config.TradeContract);
             console.log('allowance---->', allowance, amount);
 
-            if (parseInt(allowance) < (parseFloat(amount) ?? 0) || allowance == 0) {
+            if (parseInt(allowance) < (parseFloat(amount) ?? 0) || allowance == 0) {  //This condition triggers, if the address doesn't have enough allowance.
                 var id = toast.loading("Approve token...");
                 var contractobj = await prepareContract(TokenContract, "approve", 0, stake ? network[Network]?.stakeContract : config.TradeContract, "1000000000000000000000000000000000000000000000000")
                 var contract_Method_Hash = await WriteContract(contractobj)
@@ -307,8 +363,11 @@ export default function useThirdWeb() {
                 }
                 else return false
             }
-            else if (allowance >= (parseFloat(amount ?? 0))) return true;
-            else return false;
+            else if (allowance >= (parseFloat(amount ?? 0))) return true; // if the address have enough approve and allowance it returns true
+            else {                                                        // if the address doesn't have enough allowance.
+                toast.error("Insufficient amount for transaction");
+                return false;
+            }
         } catch (e) {
             console.log('validateApproveforUSDT---->', e);
             if (id) toast.update(id, { type: "error", isLoading: false, closeButton: true, render: "Approved Failed", autoClose: 1000 });
@@ -327,6 +386,9 @@ export default function useThirdWeb() {
         prepareContract,
         getGasEstimate,
         signTypedDataInThirdweb,
-        getAllowance
+        getAllowance,
+        checkBalance,
+        getAdminAccountOfSmartWallet,
+        valuuu
     };
 }

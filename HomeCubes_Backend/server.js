@@ -210,3 +210,48 @@ app.listen(config.PORT, async () => {
 }).on('error', (e) => {
     console.log('Error happened: ', e.message)
 })
+
+
+
+const myslot = async () => {
+    // Set the start time to 9:00 AM
+    let startTime = new Date();
+    startTime.setHours(9, 0, 0, 0);
+
+    let end = new Date().setHours(18, 0, 0, 0, 0)
+
+    // Create an array to store end times
+    let endTimes = [];
+
+    // Loop to calculate multiple end times
+    for (let i = 0; i < 18; i++) { // Assuming you want to calculate end times for 5 slots
+      // Calculate the end time by adding 20 minutes to the start time
+      let endTime = new Date(startTime.getTime() + (i * 20 * 60000));
+
+      // Push the end time to the array
+      endTimes.push(endTime);
+      
+    }
+
+
+
+    // do {
+    //     if (endTimes.length == 0) {
+    //         console.log('startTime---->',startTime,new Date(new Date(startTime).setMinutes(new Date(startTime).getMinutes() + 40)));
+    //         endTimes.push([startTime, new Date(new Date(startTime).setMinutes(new Date(startTime).getMinutes() + 40))])
+    //     } else {
+    //         var last = endTimes[endTimes.length - 1];
+    //         console.log('last[1]---->',last[1]);
+    //         endTimes.push([last[1], new Date(new Date().setMinutes(new Date(last[1]).getMinutes() + 40))])
+    //     }
+    //     console.log('endTimes---->',endTimes,endTimes.length);
+
+    // } while (endTimes.length > 1 || endTimes[endTimes.length - 1][1] > end);
+
+    console.log("End times:", endTimes);
+
+    return endTimes;
+}
+
+// Call the function
+myslot();

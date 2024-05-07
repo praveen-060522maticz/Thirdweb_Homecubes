@@ -183,7 +183,7 @@ function ProjectInfo() {
               <Row className="pi_higherTop">
                 <Col lg={4} md={6} sm={12} xs={12} className="mb-3">
                   <img
-                    className="img-fluid"
+                    className="img-fluid rounded-3"
                     src={`${config.IMG_URL}/projects/ProjectThumbnail/${projectDetail?.ProjectThumbnail}`}
                   />
                 </Col>

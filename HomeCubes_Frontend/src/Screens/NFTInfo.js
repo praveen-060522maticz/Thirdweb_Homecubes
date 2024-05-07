@@ -82,7 +82,7 @@ function NFTInfo() {
   const [Text, setText] = useState("");
   const [bidArr, setBitArr] = useState([]);
   const [graph, setGraph] = useState(false);
-const [showTransfer, setShowTransfer] = useState(false)
+  const [showTransfer, setShowTransfer] = useState(false)
 
   var datas1 = {
     series: [
@@ -408,7 +408,7 @@ const [showTransfer, setShowTransfer] = useState(false)
     const id = toast.loading('Canceling order... Do not refresh!');
 
     // let cont = await ContractCall.BidNFt_Contract(0, "cancelBidBySeller", Tokens_Detail.NFTId, Tokens_Detail.ContractAddress)
-let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, "2500000000000000000")
+    let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, "2500000000000000000")
 
 
     if (cont) {
@@ -483,31 +483,9 @@ let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_D
                 <Col lg={4} md={12} sm={12} xs={12}>
 
                   <div className="nftInfo_topLeft">
-                    {!isEmpty(InfoDetail) ? (
-                      InfoDetail?.CompressedFile?.includes(".mp3") ?
-                        <ImgAudVideo
-                          file={InfoDetail?.CompressedFile.split(':')[0] == 'https' ? InfoDetail?.CompressedFile : `${config.IMG_URL}/nft/${InfoDetail?.NFTCreator}/Compressed/NFT/${InfoDetail?.CompressedFile}`}
-                          origFile={InfoDetail?.NFTOrginalImage.split(':')[0] == 'https' ? InfoDetail?.NFTOrginalImage : `${config.IMG_URL}/nft/${InfoDetail?.NFTCreator}/Original/NFT/${InfoDetail?.NFTOrginalImage}`}
-                          thumb={`${config.IMG_URL}/nft/${InfoDetail.NFTCreator}/Compressed/NFT_THUMB/${InfoDetail?.CompressedThumbFile}`}
-                          type={
-                            InfoDetail?.CompressedFile
-                              ? InfoDetail?.CompressedFile?.includes(".webp") || InfoDetail?.CompressedFile?.includes(".png")
-                                ? "image"
-                                : InfoDetail?.CompressedFile.includes(".webm")
-                                  ? "video"
-                                  : "audio"
-                              : InfoDetail?.CompressedFile
-                          }
-                          classname={"img-fluid nftInfo_img"}
-                        />
-                        :
-                        <iframe style={{
-                          background: 'url(' + InfoDetail?.Image + ')', backgroundRepeat: "no-repeat",
-                          backgroundSize: "100% 100%", maxHeight: 288, minHeight: 288, minWidth: "100%", maxWidth: "100%", borderRadius: 15
-                        }} height="288" width="288" title="Iframe Example" id="myiFrame"></iframe>
-                    ) : (
+                    {!isEmpty(Tokens_Detail) &&
                       <ImgAudVideo
-                        file={Tokens_Detail?.NFTOrginalImage === undefined || null ? "" : Tokens_Detail?.NFTOrginalImage.split(':')[0] == 'https' ? Tokens_Detail?.NFTOrginalImage : `${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Original/${Tokens_Detail?.NFTOrginalImage}`}
+                        file={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Original/${Tokens_Detail?.NFTOrginalImage}`}
                         type={
                           Tokens_Detail.CompressedFile
                             ? Tokens_Detail.CompressedFile?.includes(".webp") || Tokens_Detail.CompressedFile?.includes(".png")
@@ -524,7 +502,7 @@ let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_D
                       />
 
 
-                    )}
+                    }
                     {/* <img
                       className="img-fluid nftInfo_img"
                       src={nftData?.nftImg}
@@ -554,13 +532,21 @@ let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_D
                               new Date(
                                 Tokens[TabName]?.myowner.EndClockTime
                               ).getTime() < Date.now()) ? (
-                            <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3" onClick={() => {
-                              if (getVal != "") return toast.error(getVal);
-                              if (Tokens[TabName]?.highbid) return toast.warning("Please accept or cancel Bid")
-                              SetSendDet(Tokens[TabName]?.myowner); setText("Put on Sale"); handleShowListItem()
-                            }}>
-                              List Item
-                            </button>
+                            <>
+                              <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3" onClick={() => {
+                                if (getVal != "") return toast.error(getVal);
+                                if (Tokens[TabName]?.highbid) return toast.warning("Please accept or cancel Bid")
+                                SetSendDet(Tokens[TabName]?.myowner); setText("Put on Sale"); handleShowListItem()
+                              }}>
+                                List Item
+                              </button>
+                              <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3"
+                                onClick={() => {
+                                  setShowTransfer(true)
+                                }}>
+                                Transfer Token
+                              </button>
+                            </>
                           ) : (
                             Tokens[TabName]?.myowner?.PutOnSaleType ==
                               "TimedAuction" &&
@@ -589,9 +575,10 @@ let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_D
                           ) : (
                             Tokens[TabName]?.myBid?.WalletAddress ==
                             accountAddress && (
-                              <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowCancelBid(true); }}>
-                                Cancel Bid
-                              </button>
+                              // <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowCancelBid(true); }}>
+                              //   Cancel Bid
+                              // </button>
+                              <></>
                             )
                           ))
                         )
@@ -845,7 +832,6 @@ let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_D
                         </TwitterShareButton>
 
                         <img
-onClick={() => setShowTransfer(true)}
                           className="nftInfo_socials"
                           src={require("../assets/images/whiteinsta.svg").default}
                         />
@@ -1013,9 +999,19 @@ onClick={() => setShowTransfer(true)}
                             new Date(
                               Tokens[TabName]?.myowner.EndClockTime
                             ).getTime() < Date.now()) ? (
-                          <button className="nftinfo_gradeientBtn mob_listitem_btn  mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.myowner); setText("Put on Sale"); handleShowListItem() }}>
-                            List Item
-                          </button>
+
+                          <>
+                            <button className="nftinfo_gradeientBtn mob_listitem_btn  mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.myowner); setText("Put on Sale"); handleShowListItem() }}>
+                              List Item
+                            </button>
+                            <button className="nftinfo_gradeientBtn mob_listitem_btn  mt-3"
+                              onClick={() => {
+                                setShowTransfer(true)
+                              }}>
+                              Transfer Token
+                            </button>
+                          </>
+
                         ) : (
                           Tokens[TabName]?.myowner?.PutOnSaleType ==
                             "TimedAuction" &&
@@ -1072,32 +1068,32 @@ onClick={() => setShowTransfer(true)}
                         accountAddress &&
                         (Tokens[TabName]?.owner?.PutOnSaleType ==
                           "TimedAuction" &&
-                          new Date(Tokens[TabName].owner.EndClockTime)?.getTime() < Date.now() ? (
-                          <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" >
-                            Auction Ended
-                          </button>
-                        ) : Tokens[TabName]?.highbid?.WalletAddress !=
-                          accountAddress &&
-                          Tokens[TabName]?.owner?.WalletAddress ==
-                          accountAddress ? (
-                          <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); handleShowListItem() }}>
-                            Accept
-                          </button>
-                        ) : Tokens[TabName]?.myBid?.WalletAddress ==
-                          accountAddress ? (
-                          <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowBid(true) }}>
-                            Edit Bid
-                          </button>
-                        ) : ((new Date(Tokens["All"]?.owner?.EndClockTime) > Date.now() &&
-                          new Date(Tokens["All"]?.owner?.ClockTime) > Date.now()) ?
-                          <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3">
-                            Not Started Yet
-                          </button>
-                          :
-                          <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowBid(true) }}>
-                            Bid Now
-                          </button>
-                        ))
+                          (new Date(Tokens[TabName].owner.EndClockTime)?.getTime() < Date.now() ? (
+                            <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" >
+                              Auction Ended
+                            </button>
+                          ) : Tokens[TabName]?.highbid?.WalletAddress !=
+                            accountAddress &&
+                            Tokens[TabName]?.owner?.WalletAddress ==
+                            accountAddress ? (
+                            <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); handleShowListItem() }}>
+                              Accept
+                            </button>
+                          ) : Tokens[TabName]?.myBid?.WalletAddress ==
+                            accountAddress ? (
+                            <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowBid(true) }}>
+                              Edit Bid
+                            </button>
+                          ) : ((new Date(Tokens["All"]?.owner?.EndClockTime) > Date.now() &&
+                            new Date(Tokens["All"]?.owner?.ClockTime) > Date.now()) ?
+                            <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3">
+                              Not Started Yet
+                            </button>
+                            :
+                            <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowBid(true) }}>
+                              Bid Now
+                            </button>
+                          )))
                       )
                     )
                   }
@@ -1713,7 +1709,7 @@ onClick={() => setShowTransfer(true)}
         />
       }
 
-{showTransfer &&
+      {showTransfer &&
         <TransferToken
           show={showTransfer}
           handleClose={() => setShowTransfer(false)}

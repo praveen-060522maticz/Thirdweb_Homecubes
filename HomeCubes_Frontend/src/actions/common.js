@@ -351,10 +351,14 @@ export const imgFormats = ['jpeg', 'jpg', 'png', 'gif', 'svg', 'webp'];
 
 export const UaeTimeLineNow = () => new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Dubai' }))
 
-export const getDaysOfDesiredMonth = (month) => {
-
+export const getDaysOfDesiredMonth = () => {
+  var month;
   // Get the current date
   var currentDate = new Date();
+  let currentMonth = new Date().getMonth() + 1
+  if(currentMonth >= 1 && currentMonth <= 3) month = 3;
+  if(currentMonth >= 4 && currentMonth <= 6) month = 6;
+  if(currentMonth >= 7 && currentMonth <= 12) month = 12;
 
   // Set the target date to March 1 of the current year
   var targetDate = new Date(currentDate.getFullYear(), month, 1); // Note: Months are 0-indexed, so March is represented by 2
@@ -365,8 +369,7 @@ export const getDaysOfDesiredMonth = (month) => {
 
   console.log("Days until", daysDifference);
 
-  var newStartDate = new Date(currentDate.getFullYear(), month - 3, 1); // Note: Months are 0-indexed, so March is represented by 2
-
+  var newStartDate = new Date(currentDate.getFullYear(), month - 3, 1).toISOString(); // Note: Months are 0-indexed, so March is represented by 2
 
   // days difference from now and previous day of 1
   return {
@@ -413,3 +416,5 @@ export const LSgetItem = (key) => {
 }
 
 export const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+export const getErrorForToast = str => str?.split?.('\n')?.[0];

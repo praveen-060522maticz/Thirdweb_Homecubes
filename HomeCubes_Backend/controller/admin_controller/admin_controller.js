@@ -424,6 +424,7 @@ export const createProject = async (req, res) => {
         NFTRoyalty,
         unlockAt: duration,
         NFTPrice,
+        propertyValue,
         ProjectThumbnail: ThumbImage ? ThumbImage : ProjectThumbnail,
         imgfile: nftImage ? nftImage : imgfile
       })
@@ -654,6 +655,16 @@ export const collectionFunctions = async (req, res) => {
 
     if (action == "get") {
       const getGallery = await Gallery.find({ deleted:false }).sort({ createdAt: - 1 })
+      return res.json({
+        success: getGallery.length != 0 ? "success" : "error",
+        data: getGallery,
+        msg: getGallery.length != 0 ? "success" : "error"
+      })
+    }
+
+
+    if (action == "getAllCol") {
+      const getGallery = await Gallery.find({ deleted: false, projectId }).sort({ createdAt: - 1 })
       return res.json({
         success: getGallery.length != 0 ? "success" : "error",
         data: getGallery,

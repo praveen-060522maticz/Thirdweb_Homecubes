@@ -28,7 +28,9 @@ export const UserRegister = async (req, res) => {
     Nationality,
     mobileNumber,
     Address,
-    parentAddress
+    parentAddress,
+    Name,
+    SurName
   } = req.body;
   if (req.files) {
     var profile = req?.files?.Profile
@@ -292,7 +294,9 @@ export const UserRegister = async (req, res) => {
           mobileNumber,
           Address,
           KycStatus: "submit",
-          EmailId
+          EmailId,
+          Name,
+          SurName
         }
       },
       save: { new: true },

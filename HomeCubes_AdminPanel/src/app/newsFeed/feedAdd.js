@@ -68,6 +68,7 @@ export function AddProject() {
         sendData.projectId = formData._id
         sendData.feedTitle = formData.feedTitle
         sendData.feedDescription = formData.feedDescription
+        sendData.deleted = false
         sendData._id = formData._id
         console.log("sendData", sendData);
         

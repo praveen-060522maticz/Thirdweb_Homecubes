@@ -1805,7 +1805,7 @@ export const getGallery = async (req, res) => {
   const { action, projectId } = req.query
   try {
     if (action == "getOneProjects") {
-      const getData = await gallery.find({ projectId });
+      const getData = await gallery.find({ projectId, deleted: false });
       console.log('getDatagetData', getData);
       return res.json(Encryptdata({
         success: getData.length != 0 ? "success" : "error",

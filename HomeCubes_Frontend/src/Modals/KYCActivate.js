@@ -143,6 +143,8 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
     if (!Profile?.mobileNumber) error.mobileNumber = "Enter mobile number";
     if (!Profile?.Nationality) error.Nationality = "Enter Nationality";
     if (!Profile?.kycFile) error.kycFile = "Select kyc file";
+    if (!Profile?.Name) error.kycFile = "Enter Name";
+    if (!Profile?.SurName) error.kycFile = "Enter Sure Name";
 
     return error
   }
@@ -221,6 +223,20 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
 
 
             <Row className='mt-1'>
+              <Col lg={6} xs={12} className='mb-3'>
+                <div className='mt-3'>
+                  <p className='modal_summaryLabel'>Name</p>
+                  <input type="text" className='modal_singleinput mt-3' id="Name" disabled={Profile?.KycStatus == "complete"} value={Profile?.Name} onChange={handleChange} placeholder='Parsa' />
+                  <p style={{ color: "red", fontSize: 12 }}>{Error?.Name}</p>
+                </div>
+              </Col>
+              <Col lg={6} xs={12} className='mb-3'>
+                <div className='mt-3'>
+                  <p className='modal_summaryLabel'>Sure Name</p>
+                  <input type="text" className='modal_singleinput mt-3' id="SurName" disabled={Profile?.KycStatus == "complete"} value={Profile?.SurName} onChange={handleChange} placeholder='Parsa' />
+                  <p style={{ color: "red", fontSize: 12 }}>{Error?.SurName}</p>
+                </div>
+              </Col>
               <Col lg={6} xs={12} className='mb-3'>
                 <div className='mt-3'>
                   <p className='modal_summaryLabel'>Email Address</p>
