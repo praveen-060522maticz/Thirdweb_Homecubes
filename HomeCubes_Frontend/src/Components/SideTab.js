@@ -33,7 +33,7 @@ function SideTab() {
                 <NavLink className="sidetab_link" to='/staking'>
                     <div className='singleTab'>
                         <img className='sidetab_logo' src={require('../assets/images/staking.svg').default} />
-                        <p className='sidetab_laebl'> Claim<br />Income</p>
+                        <p className='sidetab_laebl text-center'> Claim<br />Income</p>
                     </div>
                 </NavLink>
                 {/* <div className='d-flex justify-content-center'>

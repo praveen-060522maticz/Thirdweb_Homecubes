@@ -2139,7 +2139,7 @@ input.mint_countInput::-webkit-inner-spin-button{
   filter: drop-shadow(0 0 0.35rem rgb(97, 97, 97));
 }
 .mint_gradValue.new {
-  font-size: 55px;
+  font-size: var(--font_sixty);
 }
 
 .bottomnav_colswiper.swiper.collection_swiper .swiper-button-prev {

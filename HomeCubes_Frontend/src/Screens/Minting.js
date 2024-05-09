@@ -740,7 +740,7 @@ function Minting() {
                           </Col>
                         </Row>
                       </Col>
-                      <Row className="pi_higherTop">
+                      <Row className="pi_higherTop align-items-center">
                         <Col lg={4}>
                           <h1 className="mint_gradValue new">{project?.propertyValue?.toUpperCase?.() ?? "1M"}$</h1>
                         </Col>
