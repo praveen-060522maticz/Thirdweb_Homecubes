@@ -151,19 +151,6 @@
         "type": "event"
     },
     {
-        "inputs": [],
-        "name": "Joyfun721",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [
             {
                 "internalType": "uint96",
@@ -177,6 +164,34 @@
             }
         ],
         "name": "SetRoyalty",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "toAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_conAddr",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "usdtAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "TransferToken",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -238,6 +253,11 @@
                 "internalType": "bool",
                 "name": "status",
                 "type": "bool"
+            },
+            {
+                "internalType": "uint256",
+                "name": "withoutGasAmt",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -296,6 +316,16 @@
                 "internalType": "address",
                 "name": "_conAddr",
                 "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "parentAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "usdtAmount",
+                "type": "uint256"
             }
         ],
         "name": "acceptBId",
@@ -355,11 +385,26 @@
                 "internalType": "address",
                 "name": "collectionAddress",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "totalValue",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "gasAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "usdtAmount",
+                "type": "uint256"
             }
         ],
         "name": "bidNFT",
         "outputs": [],
-        "stateMutability": "payable",
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -399,6 +444,11 @@
                 "internalType": "address",
                 "name": "collectionAddress",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "usdtAmount",
+                "type": "uint256"
             }
         ],
         "name": "cancelBid",
@@ -435,6 +485,11 @@
                 "internalType": "address",
                 "name": "collectionAddress",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "usdtAmount",
+                "type": "uint256"
             }
         ],
         "name": "cancelBidBySeller",
@@ -447,6 +502,11 @@
             {
                 "internalType": "uint256",
                 "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "usdtAmount",
                 "type": "uint256"
             }
         ],
@@ -482,24 +542,6 @@
             }
         ],
         "name": "changeExeAddress",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "value",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "tokenId",
-                "type": "uint256"
-            }
-        ],
-        "name": "changePrice",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -565,6 +607,11 @@
                 "internalType": "address",
                 "name": "royaltyReceiver",
                 "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
             }
         ],
         "stateMutability": "view",
@@ -586,6 +633,11 @@
                 "internalType": "uint256",
                 "name": "_nftPrice",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
             }
         ],
         "name": "createCollection",
@@ -624,11 +676,26 @@
                 "internalType": "address",
                 "name": "collectionAddress",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "totalValue",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "gasAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "usdtAmount",
+                "type": "uint256"
             }
         ],
         "name": "editBid",
         "outputs": [],
-        "stateMutability": "payable",
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -646,6 +713,19 @@
                 "internalType": "address",
                 "name": "",
                 "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getAdminProfitUSDT",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -774,37 +854,19 @@
                 "internalType": "address",
                 "name": "_collectionAddr",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "totalValue",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "usdtAmount",
+                "type": "uint256"
             }
         ],
         "name": "lazyMinting",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "string",
-                "name": "ipfsmetadata",
-                "type": "string"
-            },
-            {
-                "internalType": "uint256[]",
-                "name": "datas",
-                "type": "uint256[]"
-            },
-            {
-                "internalType": "string",
-                "name": "status",
-                "type": "string"
-            },
-            {
-                "internalType": "address",
-                "name": "collectionAddress",
-                "type": "address"
-            }
-        ],
-        "name": "minting",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -840,6 +902,11 @@
                 "internalType": "string",
                 "name": "_status",
                 "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "usdtAmount",
+                "type": "uint256"
             }
         ],
         "name": "orderPlace",
@@ -954,6 +1021,21 @@
                 "internalType": "address",
                 "name": "_conAddr",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "totalValue",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "parentAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "usdtAmount",
+                "type": "uint256"
             }
         ],
         "name": "saleToken",
@@ -982,6 +1064,21 @@
                 "internalType": "address",
                 "name": "_conAddr",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "totalValue",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "parentAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "usdtAmount",
+                "type": "uint256"
             }
         ],
         "name": "saleWithToken",
@@ -1023,6 +1120,19 @@
     {
         "inputs": [
             {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            }
+        ],
+        "name": "setStaticToken",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "bytes",
                 "name": "sig",
                 "type": "bytes"
@@ -1050,6 +1160,19 @@
         "type": "function"
     },
     {
+        "inputs": [],
+        "name": "staticToken",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "internalType": "address",
@@ -1058,6 +1181,24 @@
             }
         ],
         "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "transferStaticToken",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -1126,5 +1267,16 @@
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "withdrawAdminGasProfit",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "stateMutability": "payable",
+        "type": "receive"
     }
 ]

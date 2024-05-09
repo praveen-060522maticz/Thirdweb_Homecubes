@@ -65,7 +65,7 @@ let project = new Schema({
         type: String,
         default: "",
     },
-    fundReceiverAddress:{
+    feeCollector:{
         type: String,
         default: "",
     },

@@ -92,6 +92,8 @@ export function AddProject() {
             errors.projectTitle = "Project Title can't be empty";
         if (!formData?.royaltyReceiver)
             errors.royaltyReceiver = "Royalty Receiver can't be empty";
+        if (!formData?.feeCollector)
+            errors.feeCollector = "Fee Collector address can't be empty";
         if (!formData?.symbol) errors.symbol = "Symbol can't be empty";
         if (!formData?.propertyValue) errors.propertyValue = "Property Value can't be empty";
         // if (!formData?.fundReceiverAddress) errors.fundReceiverAddress = "Fund Receiver Address can't be empty";
@@ -135,7 +137,8 @@ export function AddProject() {
         setLoading(true)
         if (path == "projectEdit" && state &&
             (((formData?.mintPrice != state?.mintPrice) || (formData?.maxNFTs != state?.maxNFTs)) ||
-                (formData?.royaltyReceiver != state?.royaltyReceiver) || (formData?.baseUri != state?.baseUri))
+                (formData?.royaltyReceiver != state?.royaltyReceiver) || (formData?.baseUri != state?.baseUri) ||
+                (formData?.feeCollector != state?.feeCollector))
         ) {
             if ((formData?.mintPrice != state?.mintPrice) || (formData?.maxNFTs != state?.maxNFTs)) {
                 formData.NFTPrice = parseFloat(
@@ -151,7 +154,7 @@ export function AddProject() {
                 formData.randomname = signCall.password;
             }
 
-            const chengeFun = await contract.changeReceiver([formData?.contractAddress, formData?.royaltyReceiver], web3.utils.toWei(formData?.NFTPrice), formData?.baseUri != state?.baseUri ? formData?.baseUri : "");
+            const chengeFun = await contract.changeReceiver([formData?.contractAddress, formData?.royaltyReceiver, formData?.feeCollector], web3.utils.toWei(formData?.NFTPrice), formData?.baseUri != state?.baseUri ? formData?.baseUri : "");
             console.log("signCall", chengeFun);
             if (chengeFun?.status) formData.changeReceiver = true;
             else {
@@ -165,7 +168,7 @@ export function AddProject() {
             ).toFixed(6);
             formData.changePrice = false;
 
-            const create = await contract.createCollection([formData?.royaltyReceiver, [formData?.projectTitle, formData?.symbol, formData?.baseUri], web3.utils.toWei(String(formData?.NFTPrice))]);
+            const create = await contract.createCollection([formData?.royaltyReceiver, [formData?.projectTitle, formData?.symbol, formData?.baseUri], web3.utils.toWei(String(formData?.NFTPrice)),formData?.feeCollector ]);
             console.log("jhyyfegsiufs", create);
             if (!create.status) return (
                 toast.error("Error on contract."),
@@ -367,6 +370,21 @@ export function AddProject() {
                                     <p style={{ color: "red" }}>{Errors?.royaltyReceiver}</p>
                                 </Form.Group>
                                 <Form.Group>
+                                    <label htmlFor="exampleInputName1">
+                                        Mint fee collector Address
+                                    </label>
+                                    <Form.Control
+                                        type="text"
+                                        className="form-control"
+                                        id="feeCollector"
+                                        disabled={path == "projectView"}
+                                        value={formData.feeCollector}
+                                        placeholder="Receiver Address"
+                                        onChange={(e) => handleChange(e)}
+                                    />
+                                    <p style={{ color: "red" }}>{Errors?.feeCollector}</p>
+                                </Form.Group>
+                                <Form.Group>
                                     <label htmlFor="exampleInputName1">Time to Launch</label>
 
                                     <DateTimePicker
@@ -422,20 +440,20 @@ export function AddProject() {
                                         placeholder="NFT image"
                                         onChange={(e) => handleChange(e)}
                                     /> */}
-<div>
-                  <div class="upload-btn-wrapper">
-                    <button class="btn">Choose file</button>
-                    <input
-                      type="file"
-                      disabled={path == "projectView"}
-                      className="form-control"
-                      id="imgfile"
-                      accept='image/*'
-                      placeholder="NFT image"
-                      onChange={(e) => handleChange(e)}
-                    />
-                  </div>
-                </div>
+                                    <div>
+                                        <div class="upload-btn-wrapper">
+                                            <button class="btn">Choose file</button>
+                                            <input
+                                                type="file"
+                                                disabled={path == "projectView"}
+                                                className="form-control"
+                                                id="imgfile"
+                                                accept='image/*'
+                                                placeholder="NFT image"
+                                                onChange={(e) => handleChange(e)}
+                                            />
+                                        </div>
+                                    </div>
 
                                     <p style={{ color: "red" }}>{Errors?.imgfile}</p>
                                     {formData && formData?.imgfile ? (
@@ -467,19 +485,19 @@ export function AddProject() {
                                         //     onChange={(e) => handleChange(e)}
                                         // />
                                         <div>
-                                        <div class="upload-btn-wrapper">
-                                          <button class="btn">Choose file</button>
-                                          <input
-                                            type="file"
-                                            disabled={path == "projectView"}
-                                            className="form-control"
-                                            id="ProjectThumbnail"
-                                            accept='image/*'
-                                            placeholder="Project Thumbnail"
-                                            onChange={(e) => handleChange(e)}
-                                          />
+                                            <div class="upload-btn-wrapper">
+                                                <button class="btn">Choose file</button>
+                                                <input
+                                                    type="file"
+                                                    disabled={path == "projectView"}
+                                                    className="form-control"
+                                                    id="ProjectThumbnail"
+                                                    accept='image/*'
+                                                    placeholder="Project Thumbnail"
+                                                    onChange={(e) => handleChange(e)}
+                                                />
+                                            </div>
                                         </div>
-                                      </div>
                                     )}
 
                                     <p style={{ color: "red" }}>{Errors?.ProjectThumbnail}</p>

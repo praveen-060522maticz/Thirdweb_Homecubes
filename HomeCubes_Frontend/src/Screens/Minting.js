@@ -666,7 +666,7 @@ function Minting() {
 
                     <div className="mint_gameProgress d-flex justify-content-center align-items-center flex-column flex-sm-row  mt-4 gap-3">
                       <p className="mint_countValue">Number of NFTs</p>
-                      <input type="number" className="mint_countInput" value={mintCount} onChange={(e) => { if (e.target.value > 0) setMintcount(e.target.value); }} />
+                      <input type="number" className="mint_countInput" value={mintCount} onChange={(e) => { setMintcount(e.target.value); }} />
                       <p className="mint_countValue">{(mintCount * parseFloat(project?.NFTPrice)).toFixed(7)} BNB = {project?.NFTPrice && ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(4)} $</p>
                     </div>
                     <div className="mint_dualBtns mt-4">

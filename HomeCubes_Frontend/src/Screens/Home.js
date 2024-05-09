@@ -572,10 +572,10 @@ function Home() {
                             <div className="home__channelLinkHolder d-flex justify-content-center align-items-center gap-2 gap-sm-3">
                               <a href="https://t.me/HomeCubes_io" target="__blank" className="home__channelBtn rounded-5" ><BiLogoTelegram  /></a>
                               <a href="https://twitter.com/HomeCubes" target="__blank" className="home__channelBtn rounded-5" ><FaXTwitter /></a>
-                              <a href="https://discord.com/invite/GkFKbn57" target="__blank" className="home__channelBtn rounded-5" ><BiLogoDiscordAlt /></a>
+                              <a href="https://discord.gg/y6mrj5E3" target="__blank" className="home__channelBtn rounded-5" ><BiLogoDiscordAlt /></a>
                               <a href="https://medium.com/@HomeCubes" target="__blank" className="home__channelBtn rounded-5" ><BiLogoMediumSquare /></a>
                               <a href="https://www.facebook.com/people/homecubesio/100090571700233/" target="__blank" className="home__channelBtn rounded-5" ><BiLogoFacebook /></a>
-                               <a href="https://www.facebook.com/people/homecubesio/100090571700233/" target="__blank" className="home__channelBtn rounded-5" ><BiLogoInstagram /></a>
+                               <a href="https://www.instagram.com/homecubes.io?igsh=MzRlODBiNWFlZA==" target="__blank" className="home__channelBtn rounded-5" ><BiLogoInstagram /></a>
                               {/* <button className="home__channelBtn rounded-5" data-aos="fade-left"
                               data-aos-offset="100"
                               data-aos-duration="500"><BiLogoGmail /></button> */}

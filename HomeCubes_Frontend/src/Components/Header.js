@@ -478,7 +478,7 @@ function Header() {
                     className: "header_newGradientBtn",
                   }}
                   client={client}
-                  wallets={[createWallet("io.metamask"),createWallet("walletConnect"),createWallet("com.coinbase.wallet")]}
+                  wallets={[createWallet("io.metamask"),createWallet("com.coinbase.wallet")]}
                   accountAbstraction={{
                     chain: sepolia,
                     factoryAddress: "0x204e6475FB6611171EB7fa323dAb82da42bC72B8",

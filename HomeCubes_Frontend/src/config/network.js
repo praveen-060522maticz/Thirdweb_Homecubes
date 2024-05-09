@@ -95,7 +95,29 @@ if (config.env == "production") {
             chainName: "ETH"
 
         },
+        // 11155111: {  // Avalanche_Testnet 
+        //     chain: "BNB", //sepolia
+        //     rpcUrl: "https://eth-sepolia.g.alchemy.com/v2/demo",
+        //     networkVersion: '43113',
+        //     chainId: '11155111',
+        //     currencySymbol: "ETH",
+        //     tokenSymbol: "CAKE",
+        //     siteUrl: "https://testnet.snowtrace.io",
+        //     tokenAddress: "0xEb4fFed6B324b5FdC4d72AD3dA75bf1Fb2bB004A".toLowerCase(),
+        //     deadaddress: '0x000000000000000000000000000000000000dEaD'.toLowerCase(),
+        //     tradeContract: '0x274C7D841002A74c3E4EABEcDB504e3af3f1f05A'.toLowerCase(),
+        //     // tradeContract: '0x19D4c0f9155C6517580f850D4D097AF0448a1B39'.toLowerCase(), // sepolia old
+        //     // tradeContract: '0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3'.toLowerCase(),
+        //     singleContract: '0x575cd9E4099A38B536673F557063f9A546870d11'.toLowerCase(),
+        //     multipleContract: '0x4958A36d8d71abd35D5434EF78023B3284D93e63'.toLowerCase(),
+        //     adminAddrsss: "0x025c1667471685c323808647299e5dbf9d6adcc9".toLowerCase(),
+        //     chainName: "FUJI",
+        //     // stakeContract : "0x6fc5B10eAc3adeE4513d27341a30C73005d37F55".toLowerCase(),// sepolia old
+        //     stakeContract : "0xfA5F554A995cfE5aaEdEf31fE6a11c77b8576614".toLowerCase()
+        // }
+
         11155111: {  // Avalanche_Testnet 
+
             chain: "BNB", //sepolia
             rpcUrl: "https://eth-sepolia.g.alchemy.com/v2/demo",
             networkVersion: '43113',
@@ -105,7 +127,7 @@ if (config.env == "production") {
             siteUrl: "https://testnet.snowtrace.io",
             tokenAddress: "0xEb4fFed6B324b5FdC4d72AD3dA75bf1Fb2bB004A".toLowerCase(),
             deadaddress: '0x000000000000000000000000000000000000dEaD'.toLowerCase(),
-            tradeContract: '0x274C7D841002A74c3E4EABEcDB504e3af3f1f05A'.toLowerCase(),
+            tradeContract: '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase(),
             // tradeContract: '0x19D4c0f9155C6517580f850D4D097AF0448a1B39'.toLowerCase(), // sepolia old
             // tradeContract: '0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3'.toLowerCase(),
             singleContract: '0x575cd9E4099A38B536673F557063f9A546870d11'.toLowerCase(),
@@ -113,9 +135,8 @@ if (config.env == "production") {
             adminAddrsss: "0x025c1667471685c323808647299e5dbf9d6adcc9".toLowerCase(),
             chainName: "FUJI",
             // stakeContract : "0x6fc5B10eAc3adeE4513d27341a30C73005d37F55".toLowerCase(),// sepolia old
-            stakeContract : "0xfA5F554A995cfE5aaEdEf31fE6a11c77b8576614".toLowerCase()
+            stakeContract : "0x0e409bf120da9b6BBB8c777CEef5a20C57a60750".toLowerCase()
         }
-
     }
 }
 

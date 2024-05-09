@@ -170,7 +170,8 @@ export const createProject = async (req, res) => {
     contractAddress,
     imgfile,
     propertyValue,
-    // fundReceiverAddress,
+    fundReceiverAddress,
+    feeCollector,
     creatoraddress,
     color,
     size
@@ -236,7 +237,7 @@ export const createProject = async (req, res) => {
           NFTPrice,
           contractAddress,
           imgfile: imgname,
-          // fundReceiverAddress,
+          feeCollector,
           propertyValue
         }).save();
 
@@ -425,6 +426,7 @@ export const createProject = async (req, res) => {
         unlockAt: duration,
         NFTPrice,
         propertyValue,
+        feeCollector,
         ProjectThumbnail: ThumbImage ? ThumbImage : ProjectThumbnail,
         imgfile: nftImage ? nftImage : imgfile
       })

@@ -7,7 +7,7 @@ let Back_Url = "";
 let decimalValues = 1000000000000000000;
 var FRONT_URL = "";
 var ImG = "";
-var EnvName = "demo";
+var EnvName = "production";
 var networkTransUrl = ''
 
 var Front_market_Url = ''
@@ -113,7 +113,8 @@ if (EnvName === "production") {
   // var singleAddress = "0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf"; // bnb
   // var tradeAddress = "0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3"; // seplia
   // var tradeAddress = "0x19D4c0f9155C6517580f850D4D097AF0448a1B39"; // seplia old
-  var tradeAddress = "0x274C7D841002A74c3E4EABEcDB504e3af3f1f05A".toLowerCase(); // seplia
+  // var tradeAddress = "0x274C7D841002A74c3E4EABEcDB504e3af3f1f05A".toLowerCase(); // seplia
+  var tradeAddress = "0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac".toLowerCase();
   var singleAddress = "0x575cd9E4099A38B536673F557063f9A546870d11"; // seplia
   var multipeAddress = "0x0b6369b506e811df30ab7c0ce0ae00b8690b76be";
   var networkVersion = "0x61"
