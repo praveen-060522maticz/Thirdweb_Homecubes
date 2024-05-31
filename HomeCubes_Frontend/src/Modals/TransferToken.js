@@ -25,6 +25,7 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
 
   const { accountAddress, web3 } = useSelector(state => state.LoginReducer.AccountDetails);
   const { payload, isAdmin } = useSelector((state) => state.LoginReducer.User);
+  const {  gasFee } = useSelector((state) => state.LoginReducer.User);
 
 
   const FormSubmit = async () => {
@@ -79,11 +80,11 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
     }
 
     setdisablestate(true)
-    const id = toast.loading('Transferring Your Token')
+    var id = toast.loading('Transferring Your Token')
     
     // console.log("to transfer", item.ContractAddress, item.ContractType, Quantity, Address, owner.NFTId)
     // let cont = await ContractCall.Trsanfer(item.ContractAddress, item.ContractType, Quantity, Address, owner.NFTId)
-    const cont = await getThirdweb.useContractCall("TransferToken", 0, 0, Tokens_Detail.NFTId, payload?.parentAddress, Tokens_Detail.ContractAddress, "2500000000000000000")
+    const cont = await getThirdweb.useContractCall("TransferToken", 0, 0, Tokens_Detail.NFTId,Address , Tokens_Detail.ContractAddress,gasFee?.collectAddress, "2500000000000000000")
 
     console.log("transfer hash ", cont?.HashValue, cont)
     if (cont) {

@@ -39,6 +39,7 @@ const LottieAnimation = ({ url, className }) => {
                             height={300}
                             width={300}
                             className={className}
+                            
                         />
                     ) : (
                         <div>Loading Lottie animation...</div>

@@ -176,3 +176,44 @@ export const editcms = async (req, res) => {
 
 
 }
+
+export const AddToken = async (req, res) => {
+  console.log("add tokn", req.body);
+  if (req.body.action == "add") {
+    //db.getCollection('currencies').find({"CurrencyDetails.label": "Gow"},{ "CurrencyDetails.$": 1})   ----> this works too
+    var token = await Currency.find({ CurrencyDetails: { $elemMatch: { label: req.body.name } } }, { "CurrencyDetails.$": 1 })
+    // var token  = await Currency.find({ChinId : req.body.ChainId})
+    console.log("returne token", token)
+    if (token && token.length > 0) {
+      console.log("token dat", token)
+      return res.status(200).json({ "status": false, "msg": "Token Already Exists" })
+    } else {
+      var data = {
+        "label": req.body.name,
+        "value": req.body.name,
+        "address": req.body.address,
+        "decimal": req.body.decimal,
+        "deleted": false
+      }
+
+
+      var resp = await Currency.findOneAndUpdate({ ChainId: `${req.body.ChainId}` }, { $push: { CurrencyDetails: data } }, { new: true })
+      if (resp) {
+        console.log("data respone", resp)
+        res.status(200).json({ "status": true, "msg": "Token Added Successfully!" })
+
+      }
+      else res.status(200).json({ "status": false, "msg": "Token Inclusion Failed" })
+
+    }
+  } else {
+    var resp = await deleteToken(req.body);
+    if (resp)
+      res.status(200).json({ "status": true, "msg": "Token visibility changed!" })
+    else
+      res.status(200).json({ "status": false, "msg": "Token deletion Failed !" })
+
+  }
+
+
+}

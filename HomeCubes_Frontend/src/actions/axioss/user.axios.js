@@ -272,3 +272,18 @@ export const createProject = async (data) => {
     catch (err) { console.log("err".err) }
 
 }
+
+export const getFessFunc = async (data) => {
+    const encData = EncryptData(data)
+    try {
+        var resp = await axiosFunc({
+
+            'method': 'POST',
+            'url': `${config.ADMIN_URL}/gasManagerFunc`,
+            data:{ data: encData }
+        })
+        console.log("tokonwer resp", resp.data)
+        return resp.data;
+    }
+    catch (err) { console.log("err in gettok owner", err) }
+}

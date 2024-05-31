@@ -26,6 +26,9 @@ routers.route("/newsAndFeed").post(cmsCtrl.newsAndFeed);
 routers.route("/createNft").post(adminctrl.createNft);
 routers.route("/getTokenCount").get(adminctrl.getTokenCount);
 routers.route('/getaboutuser').get(cmsCtrl.getaboutuser)
+
+routers.route('/addtoken').post(tokenCtrl.AddToken);
+
 //contactus
 routers.route('/addcontactus').post(cmsCtrl.addcontactus)
 routers.route('/blogCategories').get(adminctrl.blogCategories)
@@ -37,6 +40,6 @@ routers.route("/addwhitelists").post( adminctrl.Addwhitelists);
 routers.route("/truefalseaddress").post( adminctrl.truefalseaddress);
 routers.route("/createAdmin").post(verifyToken,adminctrl.createAdmin);
 routers.route("/getReportsFunc").post(verifyToken,adminctrl.getReportsFunc);
-
+routers.route("/gasManagerFunc").post(adminctrl.gasManagerFunc);
 
 export default routers

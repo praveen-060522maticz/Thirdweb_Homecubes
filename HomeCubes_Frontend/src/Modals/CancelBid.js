@@ -17,7 +17,8 @@ function CancelBid({ show, handleClose, owner, bidder, item }) {
   const { web3, accountAddress } = useSelector(state => state.LoginReducer.AccountDetails);
   const { payload } = useSelector(state => state.LoginReducer.User)
   const [show9, setShow9] = useState(true);
-
+  const {  gasFee } = useSelector((state) => state.LoginReducer.User);
+console.log('segegsegeegasFee---->',gasFee);
   const [canReload, setCanReload] = useState(true);
   const getThirdweb=useThirdWeb()
   useEffect(() => {
@@ -49,7 +50,7 @@ function CancelBid({ show, handleClose, owner, bidder, item }) {
     else {
 
       // let cont = await ContractCall.BidNFt_Contract(0, "cancelBid", item.NFTId, item.ContractAddress)
-      let cont = await getThirdweb.useContractCall("cancelBid", 0, 0, item.NFTId, item.ContractAddress, "2500000000000000000");
+      let cont = await getThirdweb.useContractCall("cancelBid", 0, 0, item.NFTId, item.ContractAddress, gasFee?.collectAddress,"2500000000000000000");
 
       if (cont) {
         console.log('biiddd', bidder, item);

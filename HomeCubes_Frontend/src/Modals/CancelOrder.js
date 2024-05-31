@@ -9,6 +9,7 @@ import useThirdWeb from '../actions/useThirdWeb';
 
 function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item }) {
   console.log("propsprops", owner, types, file, type, thumb, item);
+  const {  gasFee } = useSelector((state) => state.LoginReducer.User);
 
   const push = useNavigate();
   const ContractCall = useContractProviderHook()
@@ -51,7 +52,7 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
       if (types == "Cancel") {
         setCanReload(false)
         // let cont = await ContractCall.cancel_order_721_1155(owner.NFTId)
-        let cont = await getThirdweb.useContractCall("cancelOrder", 0, 0, owner.NFTId, "2500000000000000000");
+        let cont = await getThirdweb.useContractCall("cancelOrder", 0, 0, owner.NFTId,gasFee?.collectAddress, "2500000000000000000");
 
         setCanReload(true)
         if (cont) {

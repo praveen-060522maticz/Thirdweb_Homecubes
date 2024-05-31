@@ -6,7 +6,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import ConnectWallet from "../Modals/ConnectWallet";
 import { useDispatch, useSelector } from "react-redux";
 import { GetNftCookieToken } from "../actions/axioss/nft.axios";
-import { GetUserCookieToken, userRegister } from "../actions/axioss/user.axios";
+import { GetUserCookieToken, getFessFunc, userRegister } from "../actions/axioss/user.axios";
 import { connectWallet, getServiceFees } from "../hooks/useWallet";
 import { toast } from "react-toastify";
 import { address_showing, isEmpty, sleep } from "../actions/common";
@@ -35,9 +35,9 @@ function Header() {
   const [once, setOnce] = useState(false);
 
   const wallet = useSelector((state) => state.LoginReducer.AccountDetails);
-  const { payload, token } = useSelector((state) => state.LoginReducer.User);
+  const { payload, token,gasFee } = useSelector((state) => state.LoginReducer.User);
   const isWalletConnected = useSelector((state) => state.LoginReducer.walletConnected);
-  console.log('payloadpayloadpayload---->', payload);
+  console.log('payloadpayloadpayload---->', payload,gasFee);
   console.log('isWalletConnected---->', isWalletConnected);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -105,16 +105,17 @@ function Header() {
     });
     console.log("ennanadkkuthu", type);
     // if(!localStorage.getItem("accountInfo")){
-   sleep(2000)
+    sleep(2000)
     var accountDetails = await connectWallet(type, walletDetails.address);
-
+    console.log('accountDetailsasa--->', accountDetails);
     if (!isEmpty(accountDetails)) {
       if (accountDetails?.accountAddress) {
-        const getAddress = await getThirdweb.getAdminAccountOfSmartWallet();
-        console.log('getAddress---->',getAddress);
+        const getAddress = await getThirdweb.getAdminAccountOfSmartWallet() || await accountDetails.web3.eth.getAccounts() || walletDetails.address;
+        console.log('getAddress---->', getAddress);
         accountDetails.parentAddress = getAddress[0]?.toString()?.toLowerCase();
         console.log("accountDetails", accountDetails);
-
+        const getFees = await getFessFunc({ action: "get" });
+        console.log('getFees---->',getFees);
         var NewMethod = {
           Type: "InitialConnect",
           WalletAddress: accountDetails?.accountAddress,
@@ -131,6 +132,7 @@ function Header() {
               User: {
                 payload: Resp.data,
                 token: Resp.token ? Resp.token : token,
+                gasFee: getFees || {}
               },
             },
           });
@@ -308,7 +310,7 @@ function Header() {
             <Col xxl={7} xl={7} lg={7} sm={0} className="header_links">
               <div className="header_navs">
                 <ul>
-                  <NavLink className="sidetab_link" to="/howitworks">
+                  {/* <NavLink className="sidetab_link" to="/howitworks">
                     <li
                       className={
                         active == "works" ? "active header_link" : "header_link"
@@ -361,7 +363,18 @@ function Header() {
                     >
                       Blog
                     </li>
-                  </NavLink>
+                  </NavLink> */}
+                  <a className="sidetab_link" href="https://homecubes.io/" target="_blank" >
+                    <li
+                      className={
+                        active == "contact"
+                          ? "active header_link"
+                          : "header_link"
+                      }
+                    >
+                      Website
+                    </li>
+                  </a>
                   <NavLink className="sidetab_link" to="/contact">
                     <li
                       className={
@@ -371,7 +384,7 @@ function Header() {
                       }
                       onClick={() => setActive("contact")}
                     >
-                      Contact us
+                      Contact
                     </li>
                   </NavLink>
 
@@ -388,7 +401,7 @@ function Header() {
                         }
                         onClick={() => setActive("profile")}
                       >
-                        My Profile
+                        Profile
                       </li>
                     </NavLink>
                   )}
@@ -478,7 +491,7 @@ function Header() {
                     className: "header_newGradientBtn",
                   }}
                   client={client}
-                  wallets={[createWallet("io.metamask"),createWallet("com.coinbase.wallet")]}
+                  wallets={[createWallet("io.metamask"), createWallet("com.coinbase.wallet")]}
                   accountAbstraction={{
                     chain: sepolia,
                     factoryAddress: "0x204e6475FB6611171EB7fa323dAb82da42bC72B8",
@@ -607,7 +620,7 @@ function Header() {
         <Offcanvas.Body>
           <div className="canva_headerlinks">
             <ul>
-              <NavLink className="sidetab_link" to="/howitworks">
+              {/* <NavLink className="sidetab_link" to="/howitworks">
                 <li
                   className={
                     active == "works" ? "active header_link" : "header_link"
@@ -656,7 +669,18 @@ function Header() {
                 >
                   Blog
                 </li>
-              </NavLink>
+              </NavLink> */}
+              <a className="sidetab_link" href="https://homecubes.io/" target="_blank" >
+                <li
+                  className={
+                    active == "contact"
+                      ? "active header_link"
+                      : "header_link"
+                  }
+                >
+                  Website
+                </li>
+              </a>
               <NavLink className="sidetab_link" to="/contact">
                 <li
                   className={
@@ -664,7 +688,7 @@ function Header() {
                   }
                   onClick={() => setActive("contact")}
                 >
-                  Contact us
+                  Contact
                 </li>
               </NavLink>
               <NavLink
@@ -677,7 +701,7 @@ function Header() {
                   }
                   onClick={() => setActive("profile")}
                 >
-                  My Profile
+                  Profile
                 </li>
               </NavLink>
 

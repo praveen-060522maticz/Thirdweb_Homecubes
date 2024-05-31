@@ -88,6 +88,7 @@ class Sidebar extends Component {
               <div>
                 <ul className="nav flex-column sub-menu">
                   {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/projectList') ? 'nav-link active' : 'nav-link'} to="/projectList"><Trans>Project List</Trans></Link></li>}
+                  {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/gasManager') ? 'nav-link active' : 'nav-link'} to="/gasManager"><Trans>Gas fee manager</Trans></Link></li>}
                   {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/KycList') ? 'nav-link active' : 'nav-link'} to="/KycList"><Trans>KYC List</Trans></Link></li>}
                   {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/feedList') ? 'nav-link active' : 'nav-link'} to="/feedList"><Trans>News and Feed list</Trans></Link></li>}
                   {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/faqList') ? 'nav-link active' : 'nav-link'} to="/faqList"><Trans>Faq list</Trans></Link></li>}
@@ -104,6 +105,8 @@ class Sidebar extends Component {
                   {adminList.includes(LSgetItem("adminType") ?? "") && <li className="nav-item"> <Link className={this.isPathActive('/stackProjects') ? 'nav-link active' : 'nav-link'} to="/stackProjects"><Trans>Stake Projects</Trans></Link></li>}
                   {adminList.includes(LSgetItem("adminType") ?? "") && <li className="nav-item"> <Link className={this.isPathActive('/rewardProjects') ? 'nav-link active' : 'nav-link'} to="/rewardProjects"><Trans>Reward Projects</Trans></Link></li>}
                   {adminList.includes(LSgetItem("adminType") ?? "") && <li className="nav-item"> <Link className={this.isPathActive('/projectRewards') ? 'nav-link active' : 'nav-link'} to="/projectRewards"><Trans>Reward History</Trans></Link></li>}
+                  {/* {adminList.includes(LSgetItem("currencylist") ?? "") && <li className="nav-item"> <Link className={this.isPathActive('/currencylist') ? 'nav-link active' : 'nav-link'} to="/currencylist"><Trans>Currency list</Trans></Link></li>} */}
+                  {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/currencylist') ? 'nav-link active' : 'nav-link'} to="/currencylist"><Trans>Currency list</Trans></Link></li>}
                   {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/whitelists') ? 'nav-link active' : 'nav-link'} to="/whitelists"><Trans>Whitelist Users</Trans></Link></li>}
                   {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/adminList') ? 'nav-link active' : 'nav-link'} to="/adminList"><Trans>Admin role List</Trans></Link></li>}
                   

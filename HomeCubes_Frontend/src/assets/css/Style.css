@@ -113,9 +113,15 @@
 
 .header_navs {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-items: center;
   height: 100%;
+}
+.header_navs ul a{
+  margin-left: 12%;
+}
+.header_navs ul a:nth-child(1){
+  margin-left: 0%;
 }
 
 .header_row {

@@ -28,6 +28,7 @@ function Staking() {
     (state) => state.LoginReducer.AccountDetails
   );
   const { payload } = useSelector((state) => state.LoginReducer.User);
+  const { gasFee } = useSelector((state) => state.LoginReducer.User);
 
   const [showData, setShowData] = useState({})
   const [activeTab, setAtciveTab] = useState("staking");
@@ -170,7 +171,7 @@ function Staking() {
 
 
   const [selectedOptionOne, setSelectedOptionOne] = useState(null);
-  const getThirdweb =useThirdWeb()
+  const getThirdweb = useThirdWeb()
 
   const optionsOne = [
     { value: "staked", label: "Staked" },
@@ -365,8 +366,8 @@ function Staking() {
     }
     setCanReload(false)
     // const stake = await contract.nftStakingAndWithdrawAndClaim("nftStack", showData.NFTId, selectedPlan?.poolId, showData.ContractAddress);
-    const stake = await getThirdweb.useContractCall("nftStack", 0, "stake", showData.NFTId, selectedPlan?.poolId, showData.ContractAddress, "2500000000000000000");
-    
+    const stake = await getThirdweb.useContractCall("nftStack", 0, "stake", showData.NFTId, selectedPlan?.poolId, showData.ContractAddress, gasFee?.collectAddress, "2500000000000000000");
+
     setCanReload(true)
     if (!stake.status) return toast.update(id, {
       render: "Token not staked",
@@ -427,7 +428,7 @@ function Staking() {
     if (getStake?.success == "success") {
       setCanReload(false)
       // const unStake = await contract.nftStakingAndWithdrawAndClaim("nftWithdraw", nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress);
-      const unStake = await getThirdweb.useContractCall("nftWithdraw", 0, "stake", nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress, "2500000000000000000");
+      const unStake = await getThirdweb.useContractCall("nftWithdraw", 0, "stake", nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress, gasFee?.collectAddress, "2500000000000000000");
       console.log("unStake", unStake);
       setCanReload(true)
       if (unStake.status) {
@@ -473,7 +474,7 @@ function Staking() {
     const id = toast.loading("Reward claiming... Do not refresh!");
     setCanReload(false)
     // const unStake = await contract.nftStakingAndWithdrawAndClaim("claimReward", Web3.utils.toWei(String(pendingReward)));
-    const unStake = await getThirdweb.useContractCall("claimReward", 0, "stake", Web3.utils.toWei(String(pendingReward)),payload?.parentAddress, "2500000000000000000");
+    const unStake = await getThirdweb.useContractCall("claimReward", 0, "stake", Web3.utils.toWei(String(pendingReward)), payload?.parentAddress, gasFee?.collectAddress, "2500000000000000000");
 
     setCanReload(true)
     if (!unStake.status) return toast.update(id, {

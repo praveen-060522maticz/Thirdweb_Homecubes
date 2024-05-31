@@ -7,7 +7,7 @@ let Back_Url = "";
 let decimalValues = 1000000000000000000;
 var FRONT_URL = "";
 var ImG = "";
-var EnvName = "production";
+var EnvName = "demo";
 var networkTransUrl = ''
 
 var Front_market_Url = ''
@@ -40,6 +40,7 @@ if (EnvName === "local") {
   var Back_Url_Token = "http://localhost:3030/v1";
   var COIN_NAME = "BNB"
   networkTransUrl = "https://sepolia.etherscan.io/tx/"
+  var stakeAddress = "0x0e409bf120da9b6BBB8c777CEef5a20C57a60750"
 }
 
 if (EnvName === "stage") {
@@ -70,6 +71,8 @@ if (EnvName === "stage") {
   var Back_Url_Token = "https://api-homecubes.maticz.in/v1";
   var COIN_NAME = "BNB"
   networkTransUrl = "https://sepolia.etherscan.io/tx/"
+  var stakeAddress = "0x0e409bf120da9b6BBB8c777CEef5a20C57a60750"
+
 }
 
 if (EnvName === "demo") {
@@ -102,6 +105,8 @@ if (EnvName === "demo") {
   var Back_Url_Token = "https://backend-homecubes.maticz.in/v1";
   networkTransUrl = "https://sepolia.etherscan.io/tx/"
   var COIN_NAME = "BNB"
+  var stakeAddress = "0x0e409bf120da9b6BBB8c777CEef5a20C57a60750"
+
 }
 
 if (EnvName === "production") {
@@ -133,6 +138,7 @@ if (EnvName === "production") {
   var Back_Url_Token = "https://api.homecubes.io/v1";
   networkTransUrl = "https://sepolia.etherscan.io/tx/"
   var COIN_NAME = "BNB"
+  var stakeAddress = "0x0e409bf120da9b6BBB8c777CEef5a20C57a60750"
 }
 
 key = {
@@ -164,8 +170,8 @@ key = {
   networkVersion: networkVersion,
   KEY: 'MNBVCZX1234)(*',
   NumDigitOnly: /[^0-9\.]/g,
-  COIN_NAME: COIN_NAME
-
+  COIN_NAME: COIN_NAME,
+  stakeAddress:stakeAddress
 };
 
 export default key;

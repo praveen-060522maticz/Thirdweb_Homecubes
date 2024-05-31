@@ -32,7 +32,42 @@ export default function useThirdWeb() {
     );
     const { accountAddress, web3, web3p, coinBalance, USDTaddress, BNBUSDT } = useSelector(state => state.LoginReducer.AccountDetails);
     const { sellerFees, buyerFees } = useSelector(state => state.LoginReducer.ServiceFees);
+    const { payload, token, gasFee } = useSelector((state) => state.LoginReducer.User);
+console.log('FFAFAFAADADADDD---->',gasFee);
 
+    const getGasFeePer = (key) => {
+        try {
+            console.log('afhsoifhsoifhsoef---->',key,gasFee);
+            switch (key) {
+                case "lazyMinting":
+                    return parseInt(gasFee?.["lazyMintFee"] || 10)
+                case "orderPlace":
+                    return parseInt(gasFee?.["placeOrderFee"]|| 10)
+                case "cancelOrder":
+                    return parseInt(gasFee?.["cancelOrderFee"]|| 10)
+                case "saleToken":
+                    return parseInt(gasFee?.["saleFee"]|| 10)
+                case "saleWithToken":
+                    return parseInt(gasFee?.["saleFee"]|| 10)
+                case "bidNFT":
+                    return parseInt(gasFee?.["bidFee"]|| 10)
+                case "editBid":
+                    return parseInt(gasFee?.["editBidFee"]|| 10)
+                case "cancelBid":
+                    return parseInt(gasFee?.["cancelBidFee"]|| 10)
+                case "cancelBidBySeller":
+                    return parseInt(gasFee?.["cancelBid"]|| 10)
+                case "acceptBId":
+                    return parseInt(gasFee?.["acceptBidFee"]|| 10)
+                default:
+                    return parseInt(gasFee?.["lazyMintFee"]|| 10);
+            }
+        } catch (e) {
+            console.log('Erro n getGasFeePer---->', e);
+            return 1;
+        }
+
+    }
     const getSmartAccount = () => {
         return smartAccount;
     }
@@ -52,9 +87,9 @@ export default function useThirdWeb() {
 
     const getAdminAccountOfSmartWallet = async () => {
         try {
-            console.log('getSmartAccount().address---->',getSmartAccount().address);
+            console.log('getSmartAccount().address---->', getSmartAccount().address);
             const contract = createContract({ address: getSmartAccount().address })
-            return await ReadContract(contract,"getAllAdmins",[])
+            return await ReadContract(contract, "getAllAdmins", [])
         } catch (e) {
             console.log('Error getAdminAccountOfSM---->', e);
         }
@@ -69,6 +104,7 @@ export default function useThirdWeb() {
             });
         } catch (e) {
             console.log('Error on ReadContract---->', e);
+            return false;
         }
     }
 
@@ -125,7 +161,7 @@ export default function useThirdWeb() {
 
     const getGasEstimate = async (tx) => {
         try {
-            console.log('txtxtx---->', tx);
+            console.log('txtxtx---->', tx,smartAccount);
             return await estimateGas({
                 transaction: tx,
                 from: smartAccount.address
@@ -137,12 +173,19 @@ export default function useThirdWeb() {
         }
     }
 
-    const getGasPriceObjInThirdweb = async (contract, value) => {
+    const getGasPriceObjInThirdweb = async (contract, value, method) => {
         try {
             var gasprice = parseInt(await web3.eth.getGasPrice());
+            console.log("gasprice",gasprice);
             var gas_estimate = await getGasEstimate(contract);
-            let aggresiveGas = gasprice + (gasprice * 15 / 100)
-            let totalGasAmount = ((parseInt(aggresiveGas) * parseInt(gas_estimate)) / 1e18) * BNBUSDT;
+            console.log("gas_estimate",gas_estimate);
+            let aggresiveGas = gasprice + (gasprice * 50 / 100);
+            console.log("aggresiveGas",aggresiveGas);
+            let aggressiveEst = (parseInt(aggresiveGas) * parseInt(gas_estimate)) / 1e18 // aggresiva ges estimate
+            console.log("aggressiveEst",aggressiveEst,getGasFeePer(method),BNBUSDT);
+            let getMethodFee = ((aggressiveEst * BNBUSDT) * getGasFeePer(method)) / 100; // getPrice of added gas persentage
+            console.log('aggressiveEst---->',aggresiveGas,aggressiveEst,getMethodFee);
+            let totalGasAmount = (aggressiveEst  * BNBUSDT) + getMethodFee // adding percentage to the gas fee
             let totalValue = (parseInt(value) / 1e18) * BNBUSDT
             let totalAmount = totalGasAmount + totalValue
             console.log('--afawdfawfawfawfawfw-->', { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggresiveGas });
@@ -228,12 +271,13 @@ export default function useThirdWeb() {
             console.log('prePare---->', prePareForgas);
             if (!prePareForgas) return false
 
-            var gas = await getGasPriceObjInThirdweb(prePareForgas, value); // getting gas price and all the price.
+            var gas = await getGasPriceObjInThirdweb(prePareForgas, value, method); // getting gas price and all the price.
 
             if (!gas?.gas_estimate) return false
             if (method != 'approve' && method != "setApprovalForAll") {
                 console.log('gasgasgas---->', gas);
-                if (method == "bidNFT" || method == "editBid") params[params.length - 2] = web3.utils.toWei(String(gas.totalGasAmount)); // gas price for transaction
+                if (method == "bidNFT" || method == "editBid") params[params.length - 3] = web3.utils.toWei(String(gas.totalGasAmount)); // gas price for transaction
+                params[params.length - 2] = gasFee?.collectAddress || config.TradeContract;
                 params[params.length - 1] = web3.utils.toWei(String(gas.totalAmount)); // gas price + value for all the transaction
             }
 

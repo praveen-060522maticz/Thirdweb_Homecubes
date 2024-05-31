@@ -221,13 +221,14 @@ export const hideShowCat = async (data) => {
 export const addTokenCall = async (data) => {
     console.log("token data", data)
     try {
+        const encData = EncryptData(data)
         var resp = await axios({
             "method": "POST",
             "url": `${config.AdminAPI}/addtoken`,
             "headers": {
                 "Authorization": localStorage.getItem("token")
             },
-            "data": data,
+            "data": { data: encData },
         })
 
         return resp.data

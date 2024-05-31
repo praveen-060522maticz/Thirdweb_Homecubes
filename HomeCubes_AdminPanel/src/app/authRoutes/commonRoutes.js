@@ -574,6 +574,11 @@ const Routes = [
         component: lazy(() => import('../Reports/RoyaltyReport.js')),
         name: '/admin'
     },
+    {
+        path: "/gasManager",
+        component: lazy(() => import('../gas/gasManagerList.js')),
+        name: '/admin'
+    },
 ]
 
 

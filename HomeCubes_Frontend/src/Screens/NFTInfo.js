@@ -46,6 +46,7 @@ function NFTInfo() {
 
   const location = useLocation();
   console.log(location, JSON.parse(location.state.nftInfo), "weioiwhe");
+  const { gasFee } = useSelector((state) => state.LoginReducer.User);
 
   const nftData = JSON.parse(location?.state?.nftInfo);
   const { state } = useLocation();
@@ -406,9 +407,9 @@ function NFTInfo() {
 
   const cancelBidBySeller = async (address) => {
     const id = toast.loading('Canceling order... Do not refresh!');
-
+    console.log('AFFAFAFAAFFAF---->',gasFee);
     // let cont = await ContractCall.BidNFt_Contract(0, "cancelBidBySeller", Tokens_Detail.NFTId, Tokens_Detail.ContractAddress)
-    let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, "2500000000000000000")
+    let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, gasFee?.collectAddress, "2500000000000000000")
 
 
     if (cont) {
@@ -452,7 +453,7 @@ function NFTInfo() {
   const transferNft = async () => {
     try {
       setCanReload(false)
-      const Resp = await getThirdweb.useContractCall("TransferToken", 0, 0, Tokens_Detail.NFTId, payload?.parentAddress, Tokens_Detail.ContractAddress, "2500000000000000000")
+      const Resp = await getThirdweb.useContractCall("TransferToken", 0, 0, Tokens_Detail.NFTId, payload?.parentAddress, Tokens_Detail.ContractAddress, gasFee?.collectAddress, "2500000000000000000")
       setCanReload(true)
     } catch (e) {
       console.log('Erro on transferNft---->', e);

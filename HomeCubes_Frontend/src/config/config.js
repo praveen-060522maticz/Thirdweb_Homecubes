@@ -2,7 +2,7 @@
 // import ERC1155 from '../../src/Abi/erc1155.json'
 // import TRADE from '../../src/Abi/market.json'
 // import profile from '../../assets/images/avatar.png'
-var EnvName = 'production';
+var EnvName = 'demossl';
 var key = {};
 key.ONEDAYINSECONDS = 0
 key.env = EnvName
@@ -33,7 +33,7 @@ key.RELAYER_ADDRESS = "0xA40F308Ad28b520f1cd0a9A58e3b551F73602246"
 key.FORWARDER_ADDRESS = "0x84732a7d2bC9336ECB59e651DCCcF9B42B6bc0d3"
 key.RELAYER_URL = "https://api.defender.openzeppelin.com/actions/ca840de3-fa75-4118-bbee-9b51da6fc43e/runs/webhook/6b8630f5-37d9-4a4c-b68f-d102e14e71a4/3M79HzfiKyX7zMjHivtAHR"
 
-const ip = "200.140.70.46"
+const ip = "200.140.70.76"
 
 if (EnvName === "demo") {
     key.KEY = 'MNBVCZX1234)(*'
@@ -99,7 +99,7 @@ else if (EnvName === "production") {
 }
 else if (EnvName === "demossl") {
     key.KEY = 'MNBVCZX1234)(*'
-    key.FRONT_URL = 'https://homecube-build-testing.pages.dev/'
+    key.FRONT_URL = 'https://home-cubes-frontend-2.pages.dev//'
     key.BACK_URL = 'https://backend-homecubes.maticz.in/v1/front'
     key.ADMIN_URL = 'https://backend-homecubes.maticz.in/v1/admin'
     key.IMG_URL = 'https://backend-homecubes.maticz.in'

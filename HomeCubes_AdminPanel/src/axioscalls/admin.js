@@ -420,3 +420,23 @@ export const getReportsFunc = async (payload) => {
         console.log("err", err)
     }
 }
+
+export const getGasFees = async (payload) => {
+    let data = { "data": EncryptData(payload) }
+    try {
+        const resp = await axiosFunc({
+            'method': 'POST',
+            'url': `${config.AdminAPI}/gasManagerFunc`,
+            'data': data,
+            "headers": {
+                "Authorization": localStorage.getItem("token")
+            },
+        })
+        console.log("returned response", resp)
+
+        return resp
+    }
+    catch (err) {
+        console.log("err", err)
+    }
+}

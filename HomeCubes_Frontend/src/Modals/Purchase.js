@@ -217,18 +217,6 @@ function Purchase({ show, handleClose, owner, item  }) {
           navigate(`/profile/${payload.CustomUrl}`, {
             state: { Tab: "owned" },
           });
-          if (payload?.initialBuy == false) {
-            var newPayload = payload
-            newPayload.initialBuy = true
-            dispatch({
-              type: 'Register_Section',
-              Register_Section: {
-                User: {
-                  payload: newPayload
-                }
-              }
-            })
-          }
         } else {
           toast.update(id, {
             render: "Transaction Failed",

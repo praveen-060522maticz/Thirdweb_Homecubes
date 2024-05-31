@@ -348,7 +348,7 @@ export const getAddress = async () => {
     );
     return network.address
   } catch (e) {
-    console.log('Error getAddress---->', getAddress);
+    console.log('Error getAddress---->', e);
   }
 }
 

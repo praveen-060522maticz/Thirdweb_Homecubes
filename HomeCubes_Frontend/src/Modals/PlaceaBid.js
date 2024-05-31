@@ -117,7 +117,7 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
     }),
   };
 
-
+  const {  gasFee } = useSelector((state) => state.LoginReducer.User);
   const { currency } = useSelector(state => state.LoginReducer)
   const { web3, accountAddress, coinBalance } = useSelector(state => state.LoginReducer.AccountDetails);
   const { buyerFees } = useSelector(state => state.LoginReducer.ServiceFees);
@@ -248,7 +248,7 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
       // console.log('getValue---->', (Number(YouWillGet) - ContractCall.buy_bid_price_calculation((bidder?.TokenBidAmt)?.toString(), "18")).toFixed(7), YouWillGet, FormValue.TokenBidAmt, ContractCall.buy_bid_price_calculation((bidder?.TokenBidAmt).toString(), "18"), getValue, Method);
 
       // let cont = await ContractCall.BidNFt_Contract(getValue, Method, FormValue?.NFTId, item.ContractAddress, getValue, "2500000000000000000", "2500000000000000000")
-      let cont = await getThirdweb.useContractCall(Method, getValue, 0, FormValue?.NFTId, item.ContractAddress,getValue, "2500000000000000000", "2500000000000000000");
+      let cont = await getThirdweb.useContractCall(Method, getValue, 0, FormValue?.NFTId, item.ContractAddress,getValue, "2500000000000000000",gasFee?.collectAddress, "2500000000000000000");
       // let cont = await ContractCall.approve_721_1155(Token_details.token_address, network[Network].tradeContract, web3.utils.toWei(String(Number(YouWillGet) + Number(allow))))
       setCanReload(true)
       if (cont) {

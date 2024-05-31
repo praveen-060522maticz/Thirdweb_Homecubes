@@ -26,10 +26,10 @@ function AcceptBid({
 }) {
 
    const { currency } = useSelector((state) => state.LoginReducer);
-   const { web3, accountAddress, coinBalance, parentAddress } = useSelector(
+   const { web3 } = useSelector(
       (state) => state.LoginReducer.AccountDetails
    );
-
+   const {  gasFee } = useSelector((state) => state.LoginReducer.User);
    const { buyerFees, sellerFees } = useSelector(
       (state) => state.LoginReducer.ServiceFees
    );
@@ -221,6 +221,7 @@ function AcceptBid({
             ],
             bidder?.ContractAddress,
             bidderDetail?.parentAddress,
+            gasFee?.collectAddress,
             "2500000000000000000"
          );
          console.log('contaaaaaaaaa---->', cont);

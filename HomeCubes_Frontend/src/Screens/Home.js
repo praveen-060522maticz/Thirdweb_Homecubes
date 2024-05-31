@@ -28,7 +28,7 @@ import Iframe from 'react-iframe'
 import LazyLoad from 'react-lazyload'
 import LazyLoader from "../Components/LazyLoader";
 import LottieAnimation from "../Components/LottieAnimar";
-import { BiLogoTelegram, BiLogoDiscordAlt, BiLogoFacebook, BiLogoGmail, BiLogoYoutube, BiLogoLinkedin, BiLogoInstagram, BiLogoMediumSquare  } from "react-icons/bi";
+import { BiLogoTelegram, BiLogoDiscordAlt, BiLogoFacebook, BiLogoGmail, BiLogoYoutube, BiLogoLinkedin, BiLogoInstagram, BiLogoMediumSquare } from "react-icons/bi";
 import { FaXTwitter } from "react-icons/fa6";
 
 function Home() {
@@ -148,7 +148,9 @@ function Home() {
                               src={`${config.IMG_URL}/cmsimg/${CMS["Revolution your Home Ownership"]?.img}`}
                             /> */}
                       {CMS["Revolution your Home Ownership"]?.img &&
-                        <div className="anim_div">
+                        <div className="anim_div" data-aos="fade-up"
+                          data-aos-offset="100"
+                          data-aos-duration="800">
 
                           <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["Revolution your Home Ownership"]?.img}`} className="banner_lottie" />
                         </div>}
@@ -163,10 +165,13 @@ function Home() {
                             src={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`}
                           /> */}
                       {CMS["About Home Cubes"]?.img &&
-                        <div className="anim_div">
+                        <div className="anim_div" data-aos="fade-left"
+                          data-aos-offset="100"
+                          data-aos-duration="800">
 
 
-                          <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="cloud_cubics" />
+                          <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="cloud_cubics"
+                          />
                         </div>}
                     </div>
 
@@ -182,10 +187,13 @@ function Home() {
                             className="img-fluid"
                             src={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`}
                           /> */}
-                      {CMS["About Home Cubes"]?.img && <div className="anim_div">
+                      {CMS["About Home Cubes"]?.img &&
+                        <div className="anim_div" data-aos="fade-up"
+                          data-aos-offset="100"
+                          data-aos-duration="800">
 
-                        <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid" />
-                      </div>}
+                          <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid" />
+                        </div>}
                       {/* <img className="img-fluid" src={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} /> */}
                     </Col>
                     <Col lg={6} md={6} sm={12} xs={12}></Col>
@@ -193,7 +201,9 @@ function Home() {
                       <div
                         className="cloud_hideCont"
                       >
-                        <h3 className="home_titled mt-3">
+                        <h3 className="home_titled mt-3" data-aos="fade-up"
+                          data-aos-offset="100"
+                          data-aos-duration="800">
                           {CMS["About Home Cubes"]?.title}
                         </h3>
                         <p
@@ -550,43 +560,43 @@ function Home() {
                     className="home__linktreeNav"
                     target="_blank"
                   > */}
-                    <Row className="justify-content-center pi_higherTop">
-                      <Col lg={8} className="home_mailer">
-                        <Row className="justify-content-center">
-                          <Col
-                            lg={8}
-                            md={8}
-                            sm={10}
-                            xs={11}
-                            className="my-5 d-flex flex-column justify-content-center align-items-center gap-3"
+                  <Row className="justify-content-center pi_higherTop">
+                    <Col lg={8} className="home_mailer">
+                      <Row className="justify-content-center">
+                        <Col
+                          lg={8}
+                          md={8}
+                          sm={10}
+                          xs={11}
+                          className="my-5 d-flex flex-column justify-content-center align-items-center gap-3"
+                        >
+                          <h3
+                            className="home_titled text-center"
+                            data-aos="fade-up"
+                            data-aos-offset="100"
+                            data-aos-duration="500"
                           >
-                             <h3
-                              className="home_titled text-center"
-                              data-aos="fade-up"
-                              data-aos-offset="100"
-                              data-aos-duration="500"
-                            >
-                              Join Our Link Tree
-                            </h3>
+                            Join Our Link Tree
+                          </h3>
 
-                            <div className="home__channelLinkHolder d-flex justify-content-center align-items-center gap-2 gap-sm-3">
-                              <a href="https://t.me/HomeCubes_io" target="__blank" className="home__channelBtn rounded-5" ><BiLogoTelegram  /></a>
-                              <a href="https://twitter.com/HomeCubes" target="__blank" className="home__channelBtn rounded-5" ><FaXTwitter /></a>
-                              <a href="https://discord.gg/y6mrj5E3" target="__blank" className="home__channelBtn rounded-5" ><BiLogoDiscordAlt /></a>
-                              <a href="https://medium.com/@HomeCubes" target="__blank" className="home__channelBtn rounded-5" ><BiLogoMediumSquare /></a>
-                              <a href="https://www.facebook.com/people/homecubesio/100090571700233/" target="__blank" className="home__channelBtn rounded-5" ><BiLogoFacebook /></a>
-                               <a href="https://www.instagram.com/homecubes.io?igsh=MzRlODBiNWFlZA==" target="__blank" className="home__channelBtn rounded-5" ><BiLogoInstagram /></a>
-                              {/* <button className="home__channelBtn rounded-5" data-aos="fade-left"
+                          <div className="home__channelLinkHolder d-flex justify-content-center align-items-center gap-2 gap-sm-3">
+                            <a href="https://t.me/HomeCubes_io" target="__blank" className="home__channelBtn rounded-5" ><BiLogoTelegram /></a>
+                            <a href="https://twitter.com/HomeCubes" target="__blank" className="home__channelBtn rounded-5" ><FaXTwitter /></a>
+                            <a href="https://discord.gg/y6mrj5E3" target="__blank" className="home__channelBtn rounded-5" ><BiLogoDiscordAlt /></a>
+                            <a href="https://medium.com/@HomeCubes" target="__blank" className="home__channelBtn rounded-5" ><BiLogoMediumSquare /></a>
+                            <a href="https://www.facebook.com/people/homecubesio/100090571700233/" target="__blank" className="home__channelBtn rounded-5" ><BiLogoFacebook /></a>
+                            <a href="https://www.instagram.com/homecubes.io?igsh=MzRlODBiNWFlZA==" target="__blank" className="home__channelBtn rounded-5" ><BiLogoInstagram /></a>
+                            {/* <button className="home__channelBtn rounded-5" data-aos="fade-left"
                               data-aos-offset="100"
                               data-aos-duration="500"><BiLogoGmail /></button> */}
-                              <a href="https://www.youtube.com/@homecubes6047" target="__blank" className="home__channelBtn rounded-5"
-                              ><BiLogoYoutube /></a>
-                              <a href="https://www.linkedin.com/company/homecubes/" target="__blank" className="home__channelBtn rounded-5" ><BiLogoLinkedin /></a>
-                            </div>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
+                            <a href="https://www.youtube.com/@homecubes6047" target="__blank" className="home__channelBtn rounded-5"
+                            ><BiLogoYoutube /></a>
+                            <a href="https://www.linkedin.com/company/homecubes/" target="__blank" className="home__channelBtn rounded-5" ><BiLogoLinkedin /></a>
+                          </div>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
                   {/* </Link> */}
                 </Col>
               </Row>

@@ -28,7 +28,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
   const [Once, setOnce] = useState(true)
 
   const { currency } = useSelector((state) => state.LoginReducer);
-  const { payload } = useSelector((state) => state.LoginReducer.User);
+  const { payload,gasFee } = useSelector((state) => state.LoginReducer.User);
   const { web3, accountAddress } = useSelector((state) => state.LoginReducer.AccountDetails);
 
   useEffect(() => {
@@ -383,7 +383,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
         //   "data"
         // );
         // console.log("cont", cont)
-
+        console.log('gasgasFeeee---->', gasFee);
         const cont = await getThirdweb.useContractCall(
           "orderPlace",
           0,
@@ -394,6 +394,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
           accountAddress,
           Number(FormValue.ContractType),
           "data",
+          gasFee?.collectAddress,
           "2500000000000000000"
         )
         console.log('Cont---->', cont);

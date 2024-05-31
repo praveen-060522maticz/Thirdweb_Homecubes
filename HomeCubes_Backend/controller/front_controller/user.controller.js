@@ -125,6 +125,18 @@ export const UserRegister = async (req, res) => {
       });
       console.log("dataaa", FIndAlreadyExits);
       if (FIndAlreadyExits.success === "success") {
+        console.log('FIndAlreadyExits?.msg?.parentAddress---->',FIndAlreadyExits?.msg?.parentAddress);
+        if ((FIndAlreadyExits?.msg?.parentAddress == FIndAlreadyExits?.msg?.WalletAddress) || FIndAlreadyExits?.msg?.parentAddress == "") {
+          const finVal = {
+            DBName: userSchema,
+            FinData: { WalletAddress: WalletAddress },
+            Updata: { $set: { parentAddress } },
+            save: { new: true },
+          };
+          console.log('finValfinValfinVal---->',finVal);
+          const Finddata = await MongooseHelper.FindOneAndUpdate(finVal);
+        }
+
         const token = JWT_SIGN(FIndAlreadyExits?.msg?._id);
         res.json({
           success: "success",
@@ -147,7 +159,7 @@ export const UserRegister = async (req, res) => {
           res.json({
             success: "success",
             data: savedata.msg,
-            token:token,
+            token: token,
             msg: `connected successfully`
           });
         } else {
@@ -311,7 +323,7 @@ export const UserRegister = async (req, res) => {
           : "updation failed",
     });
   }
-  
+
 };
 
 export const coverimagevalidations = async (req, res) => {

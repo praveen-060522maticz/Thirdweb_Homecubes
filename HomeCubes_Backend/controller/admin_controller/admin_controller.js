@@ -25,6 +25,7 @@ import StakingSchema from '../../models/front_models/stake.schema'
 import RewardSchema from '../../models/admin_models/reward.schema'
 import whiteListSchema from "../../models/admin_models/whiteList.schema";
 import ActivitySchema from "../../models/front_models/activity.schema"
+import GasManager from "../../models/admin_models/gasManager.schema";
 
 const reader = require('xlsx')
 
@@ -412,23 +413,26 @@ export const createProject = async (req, res) => {
 
       // console.log("createDate", createDate);
       const saveNewData = await projectSchema.findOneAndUpdate({ _id }, {
-        projectTitle,
-        projectDescription,
-        maxNFTs,
-        mintPrice,
-        symbol,
-        baseUri,
-        royaltyReceiver,
-        duration,
-        aboutProject,
-        aboutDescription,
-        NFTRoyalty,
-        unlockAt: duration,
-        NFTPrice,
-        propertyValue,
-        feeCollector,
-        ProjectThumbnail: ThumbImage ? ThumbImage : ProjectThumbnail,
-        imgfile: nftImage ? nftImage : imgfile
+        $set: {
+          projectTitle,
+          projectDescription,
+          maxNFTs,
+          mintPrice,
+          symbol,
+          baseUri,
+          royaltyReceiver,
+          duration,
+          aboutProject,
+          aboutDescription,
+          NFTRoyalty,
+          unlockAt: duration,
+          NFTPrice,
+          propertyValue,
+          feeCollector,
+          ProjectThumbnail: ThumbImage ? ThumbImage : ProjectThumbnail,
+          imgfile: nftImage ? nftImage : imgfile
+        }
+
       })
 
 
@@ -656,7 +660,7 @@ export const collectionFunctions = async (req, res) => {
     }
 
     if (action == "get") {
-      const getGallery = await Gallery.find({ deleted:false }).sort({ createdAt: - 1 })
+      const getGallery = await Gallery.find({ deleted: false }).sort({ createdAt: - 1 })
       return res.json({
         success: getGallery.length != 0 ? "success" : "error",
         data: getGallery,
@@ -1856,5 +1860,35 @@ export const getReportsFunc = async (req, res) => {
     }
   } catch (e) {
     console.log("err om getReportFunc", e);
+  }
+}
+
+export const gasManagerFunc = async (req, res) => {
+  try {
+    const { action, } = req.body;
+    if (action == "get") {
+      const resp = await GasManager.findOne({});
+      return res.json({
+        success: resp ? "success" : "error",
+        data: resp,
+        msg: resp ? "Gas fee fetched" : "No gas Fetched"
+      })
+    }
+
+    if (action == "edit") {
+      const resp = await GasManager.findOneAndUpdate({},req.body);
+      return res.json({
+        success: resp ? "success" : "error",
+        data: resp,
+        msg: resp ? "Updated successfully" : "not updated"
+      })
+    }
+
+    if (action == "add") {
+      const resp = await new GasManager(req.body).save();
+      return res.send(resp)
+    }
+  } catch (e) {
+    console.log('Errorn gasManagerFunc---->', e);
   }
 }

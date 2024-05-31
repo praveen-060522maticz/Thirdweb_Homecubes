@@ -25,6 +25,8 @@ function CheckOut({ show, handleClose, item, owner, file }) {
    const { buyerFees, sellerFees } = useSelector(
       (state) => state.LoginReducer.ServiceFees
    );
+   const {  gasFee } = useSelector((state) => state.LoginReducer.User);
+
    console.log("getServiceFees", buyerFees, sellerFees);
    const ContractCall = useContractProviderHook();
    const dispatch = useDispatch()
@@ -251,9 +253,11 @@ function CheckOut({ show, handleClose, item, owner, file }) {
             item.ContractAddress,
             web3p.utils.toWei(YouWillGet.toString()),
             buyerDetails?.parentAddress,
+            gasFee?.collectAddress,
             "2500000000000000000"
          ]
          if (owner.CoinName != "BNB") Arr.splice(3, 0, owner.CoinName)
+         console.log('ArrArrArrArrArr---->',Arr);
          let cont = await getThirdweb.useContractCall(...Arr)
          setCanReload(true)
          console.log("contcont", cont);
@@ -295,18 +299,6 @@ function CheckOut({ show, handleClose, item, owner, file }) {
                navigate(`/profile/${payload.CustomUrl}`, {
                   state: { Tab: "owned" },
                });
-               if (payload?.initialBuy == false) {
-                  var newPayload = payload
-                  newPayload.initialBuy = true
-                  dispatch({
-                     type: 'Register_Section',
-                     Register_Section: {
-                        User: {
-                           payload: newPayload
-                        }
-                     }
-                  })
-               }
             } else {
                toast.update(id, {
                   render: "Transaction Failed",

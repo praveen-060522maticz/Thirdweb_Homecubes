@@ -186,6 +186,11 @@
                 "type": "address"
             },
             {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
+            },
+            {
                 "internalType": "uint256",
                 "name": "usdtAmount",
                 "type": "uint256"
@@ -323,6 +328,11 @@
                 "type": "address"
             },
             {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
+            },
+            {
                 "internalType": "uint256",
                 "name": "usdtAmount",
                 "type": "uint256"
@@ -397,6 +407,11 @@
                 "type": "uint256"
             },
             {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
+            },
+            {
                 "internalType": "uint256",
                 "name": "usdtAmount",
                 "type": "uint256"
@@ -446,6 +461,11 @@
                 "type": "address"
             },
             {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
+            },
+            {
                 "internalType": "uint256",
                 "name": "usdtAmount",
                 "type": "uint256"
@@ -487,6 +507,11 @@
                 "type": "address"
             },
             {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
+            },
+            {
                 "internalType": "uint256",
                 "name": "usdtAmount",
                 "type": "uint256"
@@ -503,6 +528,11 @@
                 "internalType": "uint256",
                 "name": "tokenId",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
             },
             {
                 "internalType": "uint256",
@@ -688,6 +718,11 @@
                 "type": "uint256"
             },
             {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
+            },
+            {
                 "internalType": "uint256",
                 "name": "usdtAmount",
                 "type": "uint256"
@@ -861,6 +896,11 @@
                 "type": "uint256"
             },
             {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
+            },
+            {
                 "internalType": "uint256",
                 "name": "usdtAmount",
                 "type": "uint256"
@@ -902,6 +942,11 @@
                 "internalType": "string",
                 "name": "_status",
                 "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
             },
             {
                 "internalType": "uint256",
@@ -1033,6 +1078,11 @@
                 "type": "address"
             },
             {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
+            },
+            {
                 "internalType": "uint256",
                 "name": "usdtAmount",
                 "type": "uint256"
@@ -1073,6 +1123,11 @@
             {
                 "internalType": "address",
                 "name": "parentAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "feeCollector",
                 "type": "address"
             },
             {
@@ -1122,6 +1177,11 @@
             {
                 "internalType": "address",
                 "name": "token",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "stakeAdd",
                 "type": "address"
             }
         ],
@@ -1196,6 +1256,11 @@
                 "internalType": "uint256",
                 "name": "amount",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
             }
         ],
         "name": "transferStaticToken",

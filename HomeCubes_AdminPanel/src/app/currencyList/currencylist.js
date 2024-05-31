@@ -66,7 +66,7 @@ export default function CategoryList(props) {
       align: "left",
       // sortable: true,
       cell: record =>
-        <div><button className='btn allbtn' onClick={() => {}}>{(record.deleted == 1) ? "SHOW" : "HIDE"}</button></div>
+        <div><button className='btn allbtn' onClick={() => { }}>{(record.deleted == 1) ? "SHOW" : "HIDE"}</button></div>
 
     },
 
@@ -84,6 +84,24 @@ export default function CategoryList(props) {
 
   const onchange = (e) => {
     // e.preventDefault()
+  }
+
+  useEffect(()=>{
+    getTokenList();
+  },[])
+
+
+  const getTokenList = async()=>{
+    var resp = await tokenFunctions.getCurrencyList();
+    if(resp?.success){
+      console.log(":",resp?.msg,config);
+      let eth=resp?.msg.filter((item)=> item.ChainId == String(config?.ETHCHAIN))
+      let bnb=resp?.msg.filter((item)=> item.ChainId == String(config?.BNBCHAIN))
+      console.log(":::",eth,bnb)
+      // setTokenList(resp?.msg[0]?.CurrencyDetails)
+      setethTokenList(eth[0]?.CurrencyDetails)
+      setbnbTokenList(bnb[0]?.CurrencyDetails)
+    }
   }
 
 
@@ -104,40 +122,19 @@ export default function CategoryList(props) {
             <div className="card">
               <div className="card-body">
                 <h4 className="card-title">CURRENCY LIST</h4>
-                <Select
-                  styles={customStyles}
-                  options={options} value={{ value: chainid ? chainid : "Please Select Network", label: chainid ? chainid : "Please Select Network" }} onChange={(e) => { onchange(e.value) }}
-                //  menuIsOpen={true}
-                />
-                {!chainid ? "" : chainid && chainid == "BNB" ?
-                  <>
-                    <Link to={{ pathname: `/addtoken`, state: { chain: chainid } }}>
-                      <button className='btn mb-3 mt-3 allbtn' type='button'>Add Token</button>
-                    </Link>
-                    <div className="table-responsive">
-                      <ReactDatatable
+                <><Link to={{ pathname: `/addtoken`, state: { chain: chainid } }}>
+                  <button className='btn mb-3 mt-3 allbtn' type='button'>Add Token</button>
+                </Link>
+                  <div className="table-responsive">
+                    <ReactDatatable
 
-                        records={bnbtokenList}
-                        columns={columns}
-                      />
-                    </div>
-                  </>
-                  :
-                  <><Link to={{ pathname: `/addtoken`, state: { chain: chainid } }}>
-                    <button className='btn mb-3 mt-3 allbtn' type='button'>Add Token</button>
-                  </Link>
-                    <div className="table-responsive">
-                      <ReactDatatable
-
-                        records={ethtokenList}
-                        columns={columns}
-                      />
-                    </div>
-                  </>
+                      records={ethtokenList}
+                      columns={columns}
+                    />
+                  </div>
+                </>
 
 
-
-                }
                 {/* <Link to="/addtoken">
                 <button className='btn mb-3 allbtn' type='button'>Add Token</button>
                 </Link>

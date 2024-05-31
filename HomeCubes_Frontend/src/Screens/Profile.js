@@ -11,7 +11,7 @@ import KYCActivate from '../Modals/KYCActivate'
 import NFTCards from '../Components/NFTCards'
 import DataCard from '../Components/DataCard'
 import { useParams } from 'react-router-dom'
-import { Token_MyList_Func, userRegister } from '../actions/axioss/user.axios'
+import { Token_MyList_Func, getFessFunc, userRegister } from '../actions/axioss/user.axios'
 import { address_showing, isEmpty } from '../actions/common'
 import { useDispatch, useSelector } from 'react-redux'
 import config from '../config/config'
@@ -27,6 +27,7 @@ function Profile() {
   const { web3, web3p, accountAddress, coinBalance, BNBUSDT } = useSelector(
     (state) => state.LoginReducer.AccountDetails
   );
+  const { payload, token,gasFee } = useSelector((state) => state.LoginReducer.User);
 
   const [selectedOption, setSelectedOption] = useState(null);
   const [showKYC, setShowKYC] = useState(false)
@@ -191,11 +192,14 @@ function Profile() {
     var profileInfo = await userRegister(SendDATA)
     if (profileInfo?.success == 'success' && profileInfo?.data?.WalletAddress) {
       setUserProfile(profileInfo.data)
+      const getFees = await getFessFunc({ action: "get" });
       dispatch({
         type: "Register_Section",
         Register_Section: {
           User: {
-            payload: profileInfo.data
+            payload: profileInfo.data,
+            token: token,
+            gasFee: getFees || {}
           },
         },
       });

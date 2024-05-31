@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal, Row, Col } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { connectWallet } from '../hooks/useWallet';
-import { GetUserCookieToken, userRegister } from '../actions/axioss/user.axios';
+import { GetUserCookieToken, getFessFunc, userRegister } from '../actions/axioss/user.axios';
 import { isEmpty } from '../actions/common';
 import { GetNftCookieToken } from '../actions/axioss/nft.axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,7 +31,7 @@ function ConnectWallet({ show, handleCloseWallet }) {
             WalletAddress: accountDetails?.accountAddress,
             WalletType: type,
           };
-
+          const getFees = await getFessFunc({ action: "get" });
           let Resp = await userRegister(NewMethod);
           console.log("errr on userRegister", Resp);
           if (Resp?.success == 'success') {
@@ -40,7 +40,8 @@ function ConnectWallet({ show, handleCloseWallet }) {
               Register_Section: {
                 User: {
                   payload: Resp.data,
-                  token: Resp.token ? Resp.token : token
+                  token: Resp.token ? Resp.token : token,
+                  gasFee: getFees || {}
                 }
               }
             })

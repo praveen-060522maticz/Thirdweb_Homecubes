@@ -4,6 +4,7 @@ import Web3 from "web3";
 import randomInteger from 'random-int';
 import TradeAbi from '../ABI/trade.json';
 import config from '../lib/config';
+import TokenAbi from '../ABI/TokenAbi.json';
 
 
 export default function useContractHook() {
@@ -87,7 +88,7 @@ export default function useContractHook() {
                     })
 
             const receipt = await get_receipt(contract_Method_Hash.transactionHash ? contract_Method_Hash.transactionHash : contract_Method_Hash);
-            console.log("receiptafawdawdawd",receipt);
+            console.log("receiptafawdawdawd", receipt);
             // const receipt = await get_receipt(contract_Method_Hash?.transactionHash ? contract_Method_Hash?.transactionHash : contract_Method_Hash);
             var need_data = {
                 status: receipt.status,
@@ -211,12 +212,108 @@ export default function useContractHook() {
 
     }
 
+    const getTokenName = async (data) => {
+        try {
+            const tokenContract = await contrat_connection(TokenAbi, data);
+            console.log('tokenContract---->', tokenContract, "ajjwkjawkh", data);
+            const getname = await tokenContract.methods.name().call()
+            const getdeci = await tokenContract.methods.decimals().call()
+            console.log('tokenContract---->', tokenContract, getname);
+            return { name: getname, decimal: getdeci }
+        } catch (e) {
+            console.log('Error on gettoken---->', e);
+            return false
+        }
+    }
+
+    const setGasToken = async (...data) => {
+        try {
+
+            const ConnectContract = await contrat_connection(TradeAbi, config.tradeAddress)
+            console.log("ConnectContract", ConnectContract);
+
+            var contractobj = await
+                ConnectContract
+                    .methods
+                    .setStaticToken(...data)
+            console.log("contractobj", contractobj);
+            var gasprice = await web3.eth.getGasPrice();
+            var gas_estimate = await contractobj.estimateGas({ from: UserAccountAddr })
+            console.log("dfsfgsdfg", gas_estimate, gasprice);
+            var contract_Method_Hash = await
+                ConnectContract
+                    .methods
+                    .setStaticToken(...data)
+                    .send({
+                        from: UserAccountAddr,
+                        gasLimit: parseInt(gas_estimate),
+                        gasPrice: gasprice,
+                    })
+                    .on('transactionHash', (transactionHash) => {
+                        return transactionHash
+                    })
+
+            const receipt = await get_receipt(contract_Method_Hash.transactionHash ? contract_Method_Hash.transactionHash : contract_Method_Hash);
+            // const receipt = await get_receipt(contract_Method_Hash?.transactionHash ? contract_Method_Hash?.transactionHash : contract_Method_Hash);
+            var need_data = {
+                status: receipt.status,
+                HashValue: receipt.transactionHash,
+            }
+            return need_data
+        } catch (error) {
+            console.log("err on changeReceiver", error);
+        }
+    }
+
+    const AddTokenType = async (...data) => {
+        try {
+
+            const ConnectContract = await contrat_connection(TradeAbi, config.tradeAddress)
+            console.log("ConnectContract", ConnectContract);
+
+            var contractobj = await
+                ConnectContract
+                    .methods
+                    .addTokenType(...data)
+            console.log("contractobj", contractobj);
+            var gasprice = await web3.eth.getGasPrice();
+            var gas_estimate = await contractobj.estimateGas({ from: UserAccountAddr })
+            console.log("dfsfgsdfg", gas_estimate, gasprice);
+            var contract_Method_Hash = await
+                ConnectContract
+                    .methods
+                    .addTokenType(...data)
+                    .send({
+                        from: UserAccountAddr,
+                        gasLimit: parseInt(gas_estimate),
+                        gasPrice: gasprice,
+                    })
+                    .on('transactionHash', (transactionHash) => {
+                        return transactionHash
+                    })
+
+            const receipt = await get_receipt(contract_Method_Hash.transactionHash ? contract_Method_Hash.transactionHash : contract_Method_Hash);
+            // const receipt = await get_receipt(contract_Method_Hash?.transactionHash ? contract_Method_Hash?.transactionHash : contract_Method_Hash);
+            var need_data = {
+                status: receipt.status,
+                HashValue: receipt.transactionHash,
+            }
+            return need_data
+        } catch (error) {
+            console.log("err on changeReceiver", error);
+        }
+    }
+
+
 
     return {
         _signcall,
         createCollection,
         changeReceiver,
-        adminlazyminting_721_1155
+        adminlazyminting_721_1155,
+        setGasToken,
+        getTokenName,
+        AddTokenType
     }
 
 }

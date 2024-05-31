@@ -51,9 +51,9 @@ function Minting() {
   const wallet = useSelector(
     (state) => state.LoginReducer.AccountDetails
   );
-
+  const { payload, token, gasFee } = useSelector((state) => state.LoginReducer.User);
   const { accountAddress, web3, web3p, coinBalance, BNBUSDT, USDTaddress } = useSelector(state => state.LoginReducer.AccountDetails);
-  console.log('BNBUSDT---->', BNBUSDT);
+  console.log('BNBUSDTgasFee---->',gasFee, BNBUSDT);
   const completed = 10000;
   const [inprogress, setInprogress] = useState(576);
   const [isAvailable, setIsAvailable] = useState(0);
@@ -259,6 +259,7 @@ function Minting() {
         firstNft?.Hash,
         firstNft?.ContractAddress,
         web3.utils.toWei(value.toString()),
+        gasFee?.collectAddress,
         "2500000000000000000"
       )
 
@@ -526,7 +527,7 @@ function Minting() {
                         <Row>
                           <Col lg={8}>
                             <p className="mint_scrollTitle">
-                            {cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title}
+                              {cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title}
                             </p>
                             <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} />
 
@@ -537,7 +538,7 @@ function Minting() {
                         <Row>
                           <Col lg={8}>
                             <p className="mint_scrollTitle">
-                            {cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title}
+                              {cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title}
                             </p>
                             <ReadMore descText={cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.content} />
                           </Col>
@@ -666,7 +667,10 @@ function Minting() {
 
                     <div className="mint_gameProgress d-flex justify-content-center align-items-center flex-column flex-sm-row  mt-4 gap-3">
                       <p className="mint_countValue">Number of NFTs</p>
-                      <input type="number" className="mint_countInput" value={mintCount} onChange={(e) => { setMintcount(e.target.value); }} />
+                      <input type="number" className="mint_countInput" value={mintCount}
+                        onChange={(e) => {
+                          setMintcount(e.target.value);
+                        }} />
                       <p className="mint_countValue">{(mintCount * parseFloat(project?.NFTPrice)).toFixed(7)} BNB = {project?.NFTPrice && ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(4)} $</p>
                     </div>
                     <div className="mint_dualBtns mt-4">
@@ -716,14 +720,14 @@ function Minting() {
                       </p>
                     </div>
                   </div>
-                  
+
                   <Col xs={12}>
                     <Row className="mt-4">
                       <Col lg={6} md={6} xs={12}>
                         <Row>
                           <Col lg={8} md={12} xs={12}>
                             <p className="mint_scrollTitle">
-                            {cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title}
+                              {cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title}
                             </p>
                             <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} />
 
@@ -734,7 +738,7 @@ function Minting() {
                         <Row>
                           <Col lg={8} md={12} xs={12}>
                             <p className="mint_scrollTitle">
-                            {cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title}
+                              {cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title}
                             </p>
                             <ReadMore descText={cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.content} />
                           </Col>
