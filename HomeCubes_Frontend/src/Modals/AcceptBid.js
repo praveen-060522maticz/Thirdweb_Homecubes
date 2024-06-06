@@ -135,7 +135,14 @@ function AcceptBid({
    const TokenApproveCall = async () => {
       SetTokenBtn("process");
       const id = toast.loading("Approve Processing...Do not refresh!");
-      const cont = await getThirdweb.useContractCall(
+      // const cont = await getThirdweb.useContractCall(
+      //    "setApprovalForAll",
+      //    0,
+      //    0,
+      //    item.ContractAddress, true
+      //  );
+
+       const cont = await ContractCall.gasLessTransaction(
          "setApprovalForAll",
          0,
          0,
@@ -207,7 +214,26 @@ function AcceptBid({
          //    bidder?.ContractAddress
          // );
 
-         let cont = await getThirdweb.useContractCall(
+         // let cont = await getThirdweb.useContractCall(
+         //    "acceptBId",
+         //    0,
+         //    0,
+         //    "Coin",
+         //    bidder?.TokenBidderAddress,
+         //    [
+         //       item.NFTId,
+         //       web3.utils.toWei(String(bidder?.TokenBidAmt * TokenQuantity)),
+         //       TokenQuantity,
+         //       721,
+         //    ],
+         //    bidder?.ContractAddress,
+         //    bidderDetail?.parentAddress,
+         //    gasFee?.collectAddress,
+         //    "2500000000000000000"
+         // );
+
+         let TStamp = Date.now();
+         let cont = await ContractCall.gasLessTransaction(
             "acceptBId",
             0,
             0,
@@ -217,13 +243,14 @@ function AcceptBid({
                item.NFTId,
                web3.utils.toWei(String(bidder?.TokenBidAmt * TokenQuantity)),
                TokenQuantity,
-               721,
+               bidder?.ContractType,
             ],
             bidder?.ContractAddress,
-            bidderDetail?.parentAddress,
+            TStamp,
             gasFee?.collectAddress,
             "2500000000000000000"
          );
+         
          console.log('contaaaaaaaaa---->', cont);
          if (cont) {
             var FormValue = {

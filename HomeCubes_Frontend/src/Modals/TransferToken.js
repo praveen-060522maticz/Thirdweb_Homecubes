@@ -25,7 +25,7 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
 
   const { accountAddress, web3 } = useSelector(state => state.LoginReducer.AccountDetails);
   const { payload, isAdmin } = useSelector((state) => state.LoginReducer.User);
-  const {  gasFee } = useSelector((state) => state.LoginReducer.User);
+  const { gasFee } = useSelector((state) => state.LoginReducer.User);
 
 
   const FormSubmit = async () => {
@@ -45,7 +45,14 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
       //   FormValue.ContractType.includes('721') ? "Single" : "Multiple",
       //   FormValue.ContractAddress
       // );
-      const cont = await getThirdweb.useContractCall(
+      // const cont = await getThirdweb.useContractCall(
+      //   "setApprovalForAll",
+      //   0,
+      //   0,
+      //   item.ContractAddress, true
+      // );
+
+      const cont = await ContractCall.gasLessTransaction(
         "setApprovalForAll",
         0,
         0,
@@ -81,10 +88,11 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
 
     setdisablestate(true)
     var id = toast.loading('Transferring Your Token')
-    
+    const TStamp = Date.now()
     // console.log("to transfer", item.ContractAddress, item.ContractType, Quantity, Address, owner.NFTId)
     // let cont = await ContractCall.Trsanfer(item.ContractAddress, item.ContractType, Quantity, Address, owner.NFTId)
-    const cont = await getThirdweb.useContractCall("TransferToken", 0, 0, Tokens_Detail.NFTId,Address , Tokens_Detail.ContractAddress,gasFee?.collectAddress, "2500000000000000000")
+    // const cont = await getThirdweb.useContractCall("TransferToken", 0, 0, Tokens_Detail.NFTId,Address , Tokens_Detail.ContractAddress,gasFee?.collectAddress, "2500000000000000000")
+    const cont = await ContractCall.gasLessTransaction("TransferToken", 0, 0, Tokens_Detail.NFTId, Address, Tokens_Detail.ContractAddress, gasFee?.collectAddress, TStamp, "2500000000000000000")
 
     console.log("transfer hash ", cont?.HashValue, cont)
     if (cont) {
@@ -111,7 +119,20 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
       setCanReload(false)
       let Resp = await BuyAccept({ newOwner: newOwner, item: item });
       setCanReload(true)
-      if (Resp.success == 'success') {
+      if (cont?.status == "pending") {
+        toast.update(id, {
+          render:
+            <div>
+              <p className="mb-0">bid placement pending...</p>
+              <p className="mb-0">Please check after some time!</p>
+            </div>,
+          type: 'warning', isLoading: false, autoClose: 1500, closeButton: true, closeOnClick: true
+        })
+        setTimeout(() => {
+          push("/marketplace");
+        }, 1000)
+
+      } else if (Resp.success == 'success') {
         toast.update(id, { render: "Trasferring Your token Successfully", type: "success", isLoading: false, autoClose: 1000 })
         SetBtn('done')
         push(`/profile/${payload.CustomUrl}`, {

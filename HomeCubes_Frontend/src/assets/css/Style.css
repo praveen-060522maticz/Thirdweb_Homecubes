@@ -173,7 +173,7 @@
     var(--gradinet_left),
     var(--gradinet_right)
   );
-  padding: 12px 30px;
+  padding: 7px 10px;
   border-radius: 5px;
   letter-spacing: 1.5px !important;
   font-size: 12px;
@@ -182,10 +182,11 @@
   display: flex;
   align-items: center;
   position: relative;
+  top: 2px;
   white-space: nowrap;
   overflow: hidden;
-  max-height: 45px;
-  min-width: 100px;
+  max-height: 40px;
+  min-width: 80px;
   margin-right: 10px;
 }
 .header_newGradientBtn {

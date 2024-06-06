@@ -35,27 +35,27 @@ function Header() {
   const [once, setOnce] = useState(false);
 
   const wallet = useSelector((state) => state.LoginReducer.AccountDetails);
-  const { payload, token,gasFee } = useSelector((state) => state.LoginReducer.User);
+  const { payload, token, gasFee } = useSelector((state) => state.LoginReducer.User);
   const isWalletConnected = useSelector((state) => state.LoginReducer.walletConnected);
-  console.log('payloadpayloadpayload---->', payload,gasFee);
+  console.log('payloadpayloadpayload---->', payload, gasFee);
   console.log('isWalletConnected---->', isWalletConnected);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [reconnect, setReconnect] = useState(true);
 
-  const getThirdweb = useThirdWeb();
-  console.log('smartAccount---->',);
+  // const getThirdweb = useThirdWeb();
+  // console.log('smartAccount---->',);
 
-  const walletDetails = getThirdweb.getSmartAccount();
-  console.log('walletDetails---->', walletDetails);
+  // const walletDetails = getThirdweb.getSmartAccount();
+  // console.log('walletDetails---->', walletDetails);
   useEffect(() => {
     if (
       localStorage.getItem("walletConnectType") &&
       wallet?.accountAddress == "" &&
       reconnect
     ) {
-      // initialConnectWallet(localStorage.getItem("walletConnectType"));
+      initialConnectWallet(localStorage.getItem("walletConnectType"));
 
       setReconnect(false);
     }
@@ -73,29 +73,29 @@ function Header() {
   }, []);
 
   const handleAccountChange = (...args) => {
-    // initialConnectWallet(localStorage.walletConnectType, true);
-    if (walletDetails) {
-      console.log('Inawaawawawawawaw---->',);
-      walletDisconnect()
-      // document.getElementById("ConnectWalletBtn").click();
-      // initialConnectWallet("smartWallet")
-      navigate("/");
-    }
+    initialConnectWallet(localStorage.walletConnectType, true);
+    // if (walletDetails) {
+    //   console.log('Inawaawawawawawaw---->',);
+    //   walletDisconnect()
+    //   // document.getElementById("ConnectWalletBtn").click();
+    //   // initialConnectWallet("smartWallet")
+    //   navigate("/");
+    // }
   };
 
-  const isInitialRender = useRef(true);
+  // const isInitialRender = useRef(true);
 
-  useEffect(() => {
-    let localWallet = localStorage.getItem("thirdweb:active-wallet-id")
-    if (localWallet && walletDetails && !isWalletConnected) initialConnectWallet("smartWallet");
-    else {
-      if (!isInitialRender.current) {
-        walletDisconnect(true)
-      }
-    }
-    console.log('isInitialRender.current---->', isInitialRender.current, localWallet, walletDetails);
-    isInitialRender.current = false;
-  }, [localStorage.getItem("thirdweb:active-wallet-id"), walletDetails])
+  // useEffect(() => {
+  //   let localWallet = localStorage.getItem("thirdweb:active-wallet-id")
+  //   if (localWallet && walletDetails && !isWalletConnected) initialConnectWallet("smartWallet");
+  //   else {
+  //     if (!isInitialRender.current) {
+  //       walletDisconnect(true)
+  //     }
+  //   }
+  //   console.log('isInitialRender.current---->', isInitialRender.current, localWallet, walletDetails);
+  //   isInitialRender.current = false;
+  // }, [localStorage.getItem("thirdweb:active-wallet-id"), walletDetails])
 
 
   const initialConnectWallet = async (type, homePage) => {
@@ -106,20 +106,20 @@ function Header() {
     console.log("ennanadkkuthu", type);
     // if(!localStorage.getItem("accountInfo")){
     sleep(2000)
-    var accountDetails = await connectWallet(type, walletDetails.address);
+    var accountDetails = await connectWallet(type);
     console.log('accountDetailsasa--->', accountDetails);
     if (!isEmpty(accountDetails)) {
       if (accountDetails?.accountAddress) {
-        const getAddress = await getThirdweb.getAdminAccountOfSmartWallet() || await accountDetails.web3.eth.getAccounts() || walletDetails.address;
+        const getAddress = ""
         console.log('getAddress---->', getAddress);
         accountDetails.parentAddress = getAddress[0]?.toString()?.toLowerCase();
         console.log("accountDetails", accountDetails);
         const getFees = await getFessFunc({ action: "get" });
-        console.log('getFees---->',getFees);
+        console.log('getFees---->', getFees);
         var NewMethod = {
           Type: "InitialConnect",
           WalletAddress: accountDetails?.accountAddress,
-          parentAddress: accountDetails?.parentAddress,
+          parentAddress: accountDetails?.accountAddress,
           WalletType: type,
         };
 
@@ -190,11 +190,11 @@ function Header() {
 
   };
 
-  const walletDisconnect = async (val) => {
+  const walletDisconnect = async () => {
     // localStorage.removeItem("accountInfo")
     // localStorage.removeItem("walletConnectType")
     localStorage.clear();
-    getThirdweb.disconnectWallet();
+    // getThirdweb.disconnectWallet();
     dispatch({
       type: "Account_Section",
       Account_Section: {
@@ -212,7 +212,7 @@ function Header() {
       },
     });
     navigate("/");
-    val && toast.success("Wallet disconnected...");
+    toast.success("Wallet disconnected...");
     // window.location.reload();
     document.cookie = "token" + "=" + "" + ";" + ";path=/";
     GetNftCookieToken();
@@ -485,34 +485,48 @@ function Header() {
               </div>}
 
               <div className="header__thirdParty">
-                <ConnectButton
-                  connectButton={{
-                    label: "Connect",
-                    className: "header_newGradientBtn",
-                  }}
-                  client={client}
-                  wallets={[createWallet("io.metamask"), createWallet("com.coinbase.wallet")]}
-                  accountAbstraction={{
-                    chain: sepolia,
-                    factoryAddress: "0x204e6475FB6611171EB7fa323dAb82da42bC72B8",
-                    gasless: true,
-                  }}
-                  detailsButton={{
-                    className: "header_aftConnect"
-                  }}
-                />
+              {wallet && wallet?.accountAddress ? (
+                <button
+                  className="header_gradientBtn"
+                  onClick={() => walletDisconnect()}
+                >
+                  <i class="fa-solid fa-right-from-bracket me-2"></i>
+                  Disconnect
+                  <Lottie
+                    animationData={wallety}
+                    className="header_walletLottie"
+                    loop={true}
+                  />
+                </button>
+              ) : (
+                <button
+                  className="header_gradientBtn"
+                  onClick={() => handleShowWallet()}
+                >
+                  <img
+                    className="header_wallet"
+                    src={require("../assets/images/wallet.svg").default}
+                  />
+                  Connect-Wallet
+                  <Lottie
+                    animationData={wallety}
+                    className="header_walletLottie"
+                    loop={true}
+                  />
+                </button>
+              )}
               </div>
               {/* <Lottie animationData={wallety} className="header_simmer" loop={true}/> */}
 
               {wallet && wallet?.accountAddress ? (
                 <div className="burger_head">
                   {/* <div className="wallet_only active header_link" onClick={() => walletDisconnect()} >Disconnect</div> */}
-                  {/* <button
+                  <button
                     className="wallet_only disconnect_ic me-2"
                     onClick={() => walletDisconnect()}
                   >
                     <i class="fa-solid fa-right-from-bracket"></i>
-                  </button> */}
+                  </button>
                   {/* <img
                     onClick={() => handleShowWallet()}
                     className="header_wallet wallet_only"
@@ -526,11 +540,11 @@ function Header() {
                 </div>
               ) : (
                 <div className="burger_head">
-                  {/* <img
+                  <img
                     onClick={() => handleShowWallet()}
                     className="header_wallet wallet_only"
                     src={require("../assets/images/wallet.svg").default}
-                  /> */}
+                  />
                   <img
                     className="header_burger"
                     onClick={handleShow}

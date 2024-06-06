@@ -17,7 +17,7 @@ import GalleryCard from "../Components/GalleryCard";
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
 import DataCard from "../Components/DataCard";
 import Typewriter from "typewriter-effect";
-import { Buymint, getCurrentProject, getGallery, getGalleryTokens, onInitialMint } from "../actions/axioss/nft.axios";
+import { Buymint, getCurrentProject, getGallery, getGalleryTokens, onInitialMint, setPendingTransaction } from "../actions/axioss/nft.axios";
 import { useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import useContractProviderHook from "../actions/contractProviderHook";
@@ -190,7 +190,7 @@ function Minting() {
     if (initialMint.status) {
 
       const firstNft = initialMint.data[0]
-
+      let TStamp = Date.now();
       var value = parseFloat(mintCount * project?.NFTPrice).toFixed(8)
       console.log("valll", value, firstNft?.NFTRoyalty, firstNft?.NFTPrice, firstNft);
       console.log("valuevalue",
@@ -209,6 +209,7 @@ function Minting() {
         firstNft?.Hash,
         firstNft?.ContractAddress,);
       const getUSDT = ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(7);
+     
       console.log('GAGAGAGAGAG---->', "lazyMinting",
         0,
         mintCount,
@@ -225,26 +226,8 @@ function Minting() {
         web3.utils.toWei(value.toString()),
         "2500000000000000000"
       );
-      // var hash = await ContractCall.lazyminting_721_1155(
-      //   mintCount,
-      //   721,
-      //   "BNB",
-      //   web3.utils.toWei(value.toString()),
-      //   initialMint.MetaData,
-      //   [
-      //     mintCount,
-      //     web3?.utils.toWei(firstNft?.NFTRoyalty),
-      //     firstNft.Nonce,
-      //     web3.utils.toWei(firstNft?.NFTPrice.toString()),
-      //     web3?.utils.toWei(String(getUSDT))
-      //   ],
-      //   [firstNft?.Randomname, "Coin"],
-      //   firstNft?.Hash,
-      //   firstNft?.ContractAddress
-      // )
-      // console.log("hash", hash);
-
-      var hash = await getThirdweb.useContractCall(
+      
+      var hash = await ContractCall.gasLessTransaction(
         "lazyMinting",
         0,
         mintCount,
@@ -253,15 +236,37 @@ function Minting() {
           mintCount,
           web3?.utils.toWei(firstNft?.NFTRoyalty),
           firstNft.Nonce,
-          web3.utils.toWei(firstNft?.NFTPrice.toString())
+          web3.utils.toWei(firstNft?.NFTPrice.toString()),
+          web3?.utils.toWei(String(getUSDT))
         ],
         [firstNft?.Randomname, "Coin"],
         firstNft?.Hash,
+        TStamp,
         firstNft?.ContractAddress,
         web3.utils.toWei(value.toString()),
         gasFee?.collectAddress,
         "2500000000000000000"
       )
+      console.log("hash", hash);
+
+      // var hash = await getThirdweb.useContractCall(
+      //   "lazyMinting",
+      //   0,
+      //   mintCount,
+      //   initialMint.MetaData,
+      //   [
+      //     mintCount,
+      //     web3?.utils.toWei(firstNft?.NFTRoyalty),
+      //     firstNft.Nonce,
+      //     web3.utils.toWei(firstNft?.NFTPrice.toString())
+      //   ],
+      //   [firstNft?.Randomname, "Coin"],
+      //   firstNft?.Hash,
+      //   firstNft?.ContractAddress,
+      //   web3.utils.toWei(value.toString()),
+      //   gasFee?.collectAddress,
+      //   "2500000000000000000"
+      // )
 
       // console.log('ssssssssss---->',getThirdweb.useContractCall("lazyMinting",));
 
@@ -288,9 +293,28 @@ function Minting() {
 
         }
         console.log("update", update);
-        let Resp = await Buymint(update)
+        let pendingObj = {
+          From: accountAddress,
+          method: "lazyMinting",
+          params: [update],
+          TimeStamp: TStamp
+        }
+        
+        let Resp = hash?.status == 'pending' ? await setPendingTransaction(pendingObj) : await Buymint(update)
         console.log("Resppppppsppsps dta", Resp);
-        if (Resp.status) {
+        if (hash?.status == 'pending') {
+          toast.update(id, {
+            render:
+              <div>
+                <p className="mb-0">Token purchase pending...</p>
+                <p className="mb-0">Please check after some time!</p>
+              </div>,
+            type: 'warning', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true
+          })
+          setTimeout(() => {
+            navigate("/minting")
+          }, 1000)
+        }else if (Resp.status) {
           toast.update(id, { render: 'Token Purchased Successfully', type: 'success', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
           setTimeout(() => {
             navigate("/minting")

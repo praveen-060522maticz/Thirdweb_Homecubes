@@ -89,6 +89,7 @@ class Sidebar extends Component {
                 <ul className="nav flex-column sub-menu">
                   {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/projectList') ? 'nav-link active' : 'nav-link'} to="/projectList"><Trans>Project List</Trans></Link></li>}
                   {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/gasManager') ? 'nav-link active' : 'nav-link'} to="/gasManager"><Trans>Gas fee manager</Trans></Link></li>}
+                  {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/gasTokens') ? 'nav-link active' : 'nav-link'} to="/gasTokens"><Trans>Gas Tokens withdraw</Trans></Link></li>}
                   {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/KycList') ? 'nav-link active' : 'nav-link'} to="/KycList"><Trans>KYC List</Trans></Link></li>}
                   {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/feedList') ? 'nav-link active' : 'nav-link'} to="/feedList"><Trans>News and Feed list</Trans></Link></li>}
                   {LSgetItem("adminType") == adminList[0] && <li className="nav-item"> <Link className={this.isPathActive('/faqList') ? 'nav-link active' : 'nav-link'} to="/faqList"><Trans>Faq list</Trans></Link></li>}

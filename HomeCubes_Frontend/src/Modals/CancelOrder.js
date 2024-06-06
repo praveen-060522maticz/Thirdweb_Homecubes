@@ -3,13 +3,13 @@ import { Modal } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import useContractProviderHook from '../actions/contractProviderHook';
-import { CreateOrder } from '../actions/axioss/nft.axios';
+import { CreateOrder, setPendingTransaction } from '../actions/axioss/nft.axios';
 import { useSelector } from 'react-redux';
 import useThirdWeb from '../actions/useThirdWeb';
 
 function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item }) {
   console.log("propsprops", owner, types, file, type, thumb, item);
-  const {  gasFee } = useSelector((state) => state.LoginReducer.User);
+  const { gasFee } = useSelector((state) => state.LoginReducer.User);
 
   const push = useNavigate();
   const ContractCall = useContractProviderHook()
@@ -51,12 +51,14 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
     else {
       if (types == "Cancel") {
         setCanReload(false)
+        let TStamp = Date.now();
         // let cont = await ContractCall.cancel_order_721_1155(owner.NFTId)
-        let cont = await getThirdweb.useContractCall("cancelOrder", 0, 0, owner.NFTId,gasFee?.collectAddress, "2500000000000000000");
+        // let cont = await getThirdweb.useContractCall("cancelOrder", 0, 0, owner.NFTId,gasFee?.collectAddress, "2500000000000000000");
+        let cont = await ContractCall.gasLessTransaction("cancelOrder", 0, 0, owner.NFTId, TStamp, gasFee?.collectAddress, "2500000000000000000");
 
         setCanReload(true)
         if (cont) {
-          await Back_end(id, cont.HashValue)
+          await Back_end(id, cont.HashValue, TStamp, cont?.status)
         }
         else {
           toast.update(id, { render: 'Transaction Failed', type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
@@ -72,7 +74,7 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
 
 
   console.log("cancelorderitems", item)
-  const Back_end = async (id, HashValue) => {
+  const Back_end = async (id, HashValue, TStamp, status) => {
 
     owner.NFTCreator = item?.NFTCreator
     owner.HashValue = HashValue
@@ -89,20 +91,40 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
     owner.ContractAddress = item.ContractAddress
     owner.CollectionNetwork = item.CollectionNetwork
 
-    console.log("dataincancelorger", owner)
-    setCanReload(false)
-    let Resp = await CreateOrder(owner)
-    setCanReload(true)
-    if (Resp.success == 'success') {
-      toast.update(id, { render: "Cancelled Your Order Successfully", type: "success", isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
-      SetBtn('done')
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000)
-    }
-    else {
-      toast.update(id, { render: 'Transaction Failed', type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
-      SetBtn('try')
+    if (status == "pending") {
+      let pendingObj = {
+        From: accountAddress,
+        method: "cancelOrder",
+        params: [owner],
+        TimeStamp: TStamp
+      }
+      const pending = await setPendingTransaction(pendingObj);
+      toast.update(id, {
+        render:
+          <div>
+            <p className="mb-0">Cancel order pending...</p>
+            <p className="mb-0">Please check after some time!</p>
+          </div>,
+        type: 'warning', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true
+      })
+      push("/marketplace");
+    } else {
+
+      console.log("dataincancelorger", owner)
+      setCanReload(false)
+      let Resp = await CreateOrder(owner)
+      setCanReload(true)
+      if (Resp.success == 'success') {
+        toast.update(id, { render: "Cancelled Your Order Successfully", type: "success", isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
+        SetBtn('done')
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000)
+      }
+      else {
+        toast.update(id, { render: 'Transaction Failed', type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
+        SetBtn('try')
+      }
     }
   }
   return (

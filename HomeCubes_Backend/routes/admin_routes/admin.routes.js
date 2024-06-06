@@ -41,5 +41,6 @@ routers.route("/truefalseaddress").post( adminctrl.truefalseaddress);
 routers.route("/createAdmin").post(verifyToken,adminctrl.createAdmin);
 routers.route("/getReportsFunc").post(verifyToken,adminctrl.getReportsFunc);
 routers.route("/gasManagerFunc").post(adminctrl.gasManagerFunc);
+routers.route("/gasTokensFunctions").post(adminctrl.gasTokensFunctions);
 
 export default routers

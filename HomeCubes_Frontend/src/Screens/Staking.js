@@ -13,7 +13,7 @@ import BreadPath from "../Components/BreadPath";
 import RewardsModal from "../Modals/RewardsModal";
 import { Token_MyList_Func, createProject } from "../actions/axioss/user.axios";
 import { useSelector } from 'react-redux'
-import { stackFunction } from "../actions/axioss/nft.axios";
+import { setPendingTransaction, stackFunction } from "../actions/axioss/nft.axios";
 import StakeModal from "../Modals/StakeModal";
 import { toast } from 'react-toastify'
 import { calculateStakingDaysPassed, getDaysOfDesiredMonth, isEmpty } from "../actions/common";
@@ -21,6 +21,7 @@ import useContractProviderHook from "../actions/contractProviderHook";
 import { network } from "../config/network";
 import Web3 from "web3";
 import useThirdWeb from "../actions/useThirdWeb";
+import { useNavigate } from "react-router-dom";
 
 function Staking() {
 
@@ -54,7 +55,8 @@ function Staking() {
 
   const [dataCard, setDataCard] = useState([]);
   console.log("showData", showData, nftCounts);
-  const [wallet, setWallet] = useState(false)
+  const [wallet, setWallet] = useState(false);
+  const push = useNavigate();
 
   const [options, setOptions] = useState([
     { label: "Season 1", value: "Season 1", },
@@ -338,7 +340,8 @@ function Staking() {
       const apId = toast.loading("Need to approve")
       setCanReload(false)
       // const setAppove = await contract.setApproveForStack(showData.ContractAddress);
-      const setAppove = await getThirdweb.useContractCall("setApprovalForAll", 0, "stake", showData.ContractAddress, true);
+      // const setAppove = await getThirdweb.useContractCall("setApprovalForAll", 0, "stake", showData.ContractAddress, true);
+      const setAppove = await contract.gasLessTransaction("setApprovalForAll", 0, "stake", showData.ContractAddress, true);
 
       setCanReload(true)
 
@@ -365,8 +368,10 @@ function Staking() {
       })
     }
     setCanReload(false)
+    const TStamp = Date.now()
     // const stake = await contract.nftStakingAndWithdrawAndClaim("nftStack", showData.NFTId, selectedPlan?.poolId, showData.ContractAddress);
-    const stake = await getThirdweb.useContractCall("nftStack", 0, "stake", showData.NFTId, selectedPlan?.poolId, showData.ContractAddress, gasFee?.collectAddress, "2500000000000000000");
+    // const stake = await getThirdweb.useContractCall("nftStack", 0, "stake", showData.NFTId, selectedPlan?.poolId, showData.ContractAddress, gasFee?.collectAddress, "2500000000000000000");
+    const stake = await contract.gasLessTransaction("nftStack", 0, "stake", showData.NFTId, selectedPlan?.poolId, showData.ContractAddress,TStamp, gasFee?.collectAddress, "2500000000000000000");
 
     setCanReload(true)
     if (!stake.status) return toast.update(id, {
@@ -389,8 +394,27 @@ function Staking() {
     }
     console.log("sendData", sendData);
     setCanReload(false)
-    const Resp = await stackFunction(sendData);
+    let pendingObj = {
+      From: accountAddress,
+      method: "nftStack",
+      params: [sendData],
+      TimeStamp: TStamp
+    }
+    const Resp = stake.status == "pending" ? await setPendingTransaction(pendingObj) : await stackFunction(sendData);
     setCanReload(true)
+    
+    if (stake?.status == "pending") {
+      toast.update(id, {
+        render:
+          <div>
+            <p className="mb-0">Staking is pending...</p>
+            <p className="mb-0">Please check after some time!</p>
+          </div>,
+        type: 'warning', isLoading: false, autoClose: 1500, closeButton: true, closeOnClick: true
+      });
+      return push("/")
+    }
+
     console.log("RespResp", Resp);
     toast.update(id, {
       render: "Staked Successfully",
@@ -427,15 +451,35 @@ function Staking() {
     console.log("getStake", getStake, params);
     if (getStake?.success == "success") {
       setCanReload(false)
+      const TStamp = Date.now()
       // const unStake = await contract.nftStakingAndWithdrawAndClaim("nftWithdraw", nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress);
-      const unStake = await getThirdweb.useContractCall("nftWithdraw", 0, "stake", nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress, gasFee?.collectAddress, "2500000000000000000");
+      // const unStake = await getThirdweb.useContractCall("nftWithdraw", 0, "stake", nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress, gasFee?.collectAddress, "2500000000000000000");
+      const unStake = await contract.gasLessTransaction("nftWithdraw", 0, "stake", nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress,TStamp, gasFee?.collectAddress, "2500000000000000000");
       console.log("unStake", unStake);
       setCanReload(true)
       if (unStake.status) {
         setCanReload(false)
-        const Resp = await stackFunction({ action: "onWithdraw", walletAddress: accountAddress, NFTId: nftObj.NFTId });
+        let pendingObj = {
+          From: accountAddress,
+          method: "nftWithdraw",
+          params: [{ action: "onWithdraw", walletAddress: accountAddress, NFTId: nftObj.NFTId }],
+          TimeStamp: TStamp
+        }
+        const Resp = unStake.status == "pending" ? await setPendingTransaction(pendingObj) : await stackFunction({ action: "onWithdraw", walletAddress: accountAddress, NFTId: nftObj.NFTId });
+
         setCanReload(true)
-        if (Resp?.success == "success") {
+        if (unStake.status == "pending") {
+          toast.update(id, {
+            render:
+              <div>
+                <p className="mb-0">unStaking is pending...</p>
+                <p className="mb-0">Please check after some time!</p>
+              </div>,
+            type: 'warning', isLoading: false, autoClose: 1500, closeButton: true, closeOnClick: true
+          });
+          return push("/")
+        }
+        else if (Resp?.success == "success") {
           setTimeout(() => {
             window.location.reload()
           }, 1000)
@@ -473,8 +517,10 @@ function Staking() {
     if (isEmpty(pendingReward)) return toast.error("Don't have a reward")
     const id = toast.loading("Reward claiming... Do not refresh!");
     setCanReload(false)
+    const TStamp = Date.now()
     // const unStake = await contract.nftStakingAndWithdrawAndClaim("claimReward", Web3.utils.toWei(String(pendingReward)));
-    const unStake = await getThirdweb.useContractCall("claimReward", 0, "stake", Web3.utils.toWei(String(pendingReward)), payload?.parentAddress, gasFee?.collectAddress, "2500000000000000000");
+    // const unStake = await getThirdweb.useContractCall("claimReward", 0, "stake", Web3.utils.toWei(String(pendingReward)), payload?.parentAddress, gasFee?.collectAddress, "2500000000000000000");
+    const unStake = await contract.gasLessTransaction("claimReward", 0, "stake", Web3.utils.toWei(String(pendingReward)), TStamp, gasFee?.collectAddress, "2500000000000000000");
 
     setCanReload(true)
     if (!unStake.status) return toast.update(id, {
@@ -484,7 +530,13 @@ function Staking() {
       autoClose: 1000,
     });
     setCanReload(false)
-    const Resp = await stackFunction({ action: "onClaimReward", walletAddress: accountAddress, projectId: rewardOption?.projectId, Season: rewardOption?.Season, Hash: unStake?.HashValue });
+    let pendingObj = {
+      From: accountAddress,
+      method: "claimReward",
+      params: [{ action: "onClaimReward", walletAddress: accountAddress, projectId: rewardOption?.projectId, Season: rewardOption?.Season, Hash: unStake?.HashValue }],
+      TimeStamp: TStamp
+    }
+    const Resp = unStake.status == "pending" ? await setPendingTransaction(pendingObj) : await stackFunction({ action: "onClaimReward", walletAddress: accountAddress, projectId: rewardOption?.projectId, Season: rewardOption?.Season, Hash: unStake?.HashValue });
     setCanReload(true)
     if (Resp?.success == "success") toast.update(id, {
       render: "Reward claimed",

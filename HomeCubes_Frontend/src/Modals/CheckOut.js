@@ -145,18 +145,27 @@ function CheckOut({ show, handleClose, item, owner, file }) {
          );
          console.log("token_address", token_address, config.TradeContract, YouWillGet);
          setCanReload(false)
-         // let cont = await ContractCall.approve_721_1155(
+         // let cont = await ContractCall.approve_721_1155( //normal
          //    token_address,
          //    network[Network].tradeContract,
          //    web3p.utils.toWei(YouWillGet.toString())
          // );
-         let cont = await getThirdweb.useContractCall(
+
+         // let cont = await getThirdweb.useContractCall( //thirdweb
+         //    "approve",
+         //    0,
+         //    token_address,
+         //    network[Network].tradeContract,
+         //    web3p.utils.toWei((YouWillGet + 2).toString()),
+         // )
+
+         let cont = await ContractCall.gasLessTransaction( // openzepline
             "approve",
             0,
             token_address,
             network[Network].tradeContract,
             web3p.utils.toWei((YouWillGet + 2).toString()),
-         )
+         ) 
          setCanReload(true)
          console.log("cont", cont);
          if (cont) {
@@ -238,11 +247,12 @@ function CheckOut({ show, handleClose, item, owner, file }) {
          //    item.ContractAddress,
          //    "2500000000000000000"
          // );
+         let TStamp = Date.now();
 
          var Arr = [
             owner.CoinName == "BNB" ? "saleToken" : "saleWithToken",
             owner.CoinName == "BNB" ? web3p.utils.toWei(YouWillGet.toString()) : 0,
-            owner.CoinName !== "BNB" ? 7 : 1,
+            owner.CoinName !== "BNB" ? 6 : 0,
             owner.NFTOwner,
             [
                owner.NFTId,
@@ -251,14 +261,14 @@ function CheckOut({ show, handleClose, item, owner, file }) {
                item.ContractType
             ],
             item.ContractAddress,
-            web3p.utils.toWei(YouWillGet.toString()),
-            buyerDetails?.parentAddress,
+            TStamp,
             gasFee?.collectAddress,
             "2500000000000000000"
          ]
          if (owner.CoinName != "BNB") Arr.splice(3, 0, owner.CoinName)
          console.log('ArrArrArrArrArr---->',Arr);
-         let cont = await getThirdweb.useContractCall(...Arr)
+         // let cont = await getThirdweb.useContractCall(...Arr)
+         let cont = await ContractCall.gasLessTransaction(...Arr)
          setCanReload(true)
          console.log("contcont", cont);
          if (cont) {

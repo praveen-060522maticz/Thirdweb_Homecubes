@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useLocation, useHistory } from "react-router-dom";
 import { addCategoryCall } from "../../axioscalls/token.js";
 import { isEmpty } from "../../lib/common.js";
-import { createProject, getGasFees, getTokenCount } from "../../axioscalls/admin.js";
+import { createProject, gasTokensFunctions, getGasFees, getTokenCount } from "../../axioscalls/admin.js";
 import config from "../../lib/config.js";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -36,7 +36,7 @@ export function AddProject() {
     const [loading, setLoading] = useState(false);
     const [feeToken, setFeeToken] = useState("")
     const [tokenName, setTokenName] = useState("")
-
+    const [contractObj, setContractobj] = useState({})
     const contract = useContractHook()
 
     console.log("formData", formData);
@@ -70,7 +70,7 @@ export function AddProject() {
         if (!formData?.stakeFee)
             errors.stakeFee = "Stake Fee can't be empty";
         if (!formData?.withdrawtFee)
-            errors.withdrawtFee = "Withdrawt Fee can't be empty";
+            errors.withdrawtFee = "Withdraw Fee can't be empty";
         if (!formData?.bidFee) errors.bidFee = "Bid Fee can't be empty";
         if (!formData?.cancelBidFee) errors.cancelBidFee = "Cancel Bid Fee can't be empty";
         // if (!formData?.fundReceiverAddress) errors.fundReceiverAddress = "Fund Receiver Address can't be empty";
@@ -86,10 +86,12 @@ export function AddProject() {
         if (!isEmpty(valid)) return setError(valid);
 
         if (formData?.gasToken != feeToken) {
-            if(tokenName == "") return toast.error("Please enter valid gas token address")
-            const Res = await contract.setGasToken(feeToken,config.stakeAddress);
+            if (tokenName == "") return toast.error("Please enter valid gas token address")
+            const Res = await contract.setGasToken(feeToken);
             if (!Res?.status) {
                 return (toast.error("Error on contract"))
+            } else {
+                const saveToken = await gasTokensFunctions({ ...contractObj, action: "add",contractAddress:feeToken });
             }
         }
 
@@ -104,7 +106,7 @@ export function AddProject() {
 
     useEffect(() => {
         getGasFeesData()
-    }, [UserAccountAddr ])
+    }, [UserAccountAddr])
 
     const getGasFeesData = async () => {
         const resp = await getGasFees({ action: "get" });
@@ -116,7 +118,7 @@ export function AddProject() {
     const getTokenName = async (data) => {
         const getName = await contract.getTokenName(data);
         console.log('getNamegetName---->', getName, data);
-        if (getName?.name) setTokenName(getName.name);
+        if (getName) { setTokenName(getName.name); setContractobj(getName) }
         else setTokenName("")
     }
     console.log('tokenName---->', tokenName);

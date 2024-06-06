@@ -48,9 +48,10 @@ console.log('segegsegeegasFee---->',gasFee);
       SetBtn('error')
     }
     else {
-
+      const TStamp = Date.now()
       // let cont = await ContractCall.BidNFt_Contract(0, "cancelBid", item.NFTId, item.ContractAddress)
-      let cont = await getThirdweb.useContractCall("cancelBid", 0, 0, item.NFTId, item.ContractAddress, gasFee?.collectAddress,"2500000000000000000");
+      // let cont = await getThirdweb.useContractCall("cancelBid", 0, 0, item.NFTId, item.ContractAddress, gasFee?.collectAddress,"2500000000000000000");
+      let cont = await ContractCall.gasLessTransaction("cancelBid", 0, 0, item.NFTId, item.ContractAddress,TStamp, gasFee?.collectAddress,"2500000000000000000");
 
       if (cont) {
         console.log('biiddd', bidder, item);

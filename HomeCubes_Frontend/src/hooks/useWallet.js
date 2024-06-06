@@ -39,11 +39,11 @@ export const connectWallet = async (type, changechainid, switched) => {
     try {
       var web3p = new Web3(Config.RPC_URL)
       // console.log('web3ssssp---->',web3p);
-      // const accounts = await web3Obj.eth.getAccounts();
-      // console.log('accountsaaaa---->',accounts);
-      // accountDetails.parentAddress = accounts[0]?.toString()?.toLowerCase();
+      const accounts = await web3Obj.eth.getAccounts();
+      console.log('accountsaaaa---->',accounts);
+      accountDetails.accountAddress = accounts[0]?.toString()?.toLowerCase();
       // since integrated smart wallet in changechainid - smartaccount address provided
-      accountDetails.accountAddress = changechainid?.toLowerCase();
+      // accountDetails.accountAddress = changechainid?.toLowerCase();
       accountDetails.coinBalance = await web3Obj.eth.getBalance(accountDetails.accountAddress) / 1e18;
       accountDetails.web3p = web3p;
       accountDetails.web3 = web3Obj;

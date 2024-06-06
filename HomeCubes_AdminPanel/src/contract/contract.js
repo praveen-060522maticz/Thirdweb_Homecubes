@@ -64,7 +64,7 @@ export default function useContractHook() {
         console.log("dadawdawd", ...data);
         try {
             const ConnectContract = await contrat_connection(TradeAbi, config.tradeAddress)
-            console.log("ConnectContract", ConnectContract);
+            console.log("ConnectContract", ConnectContract, UserAccountAddr, config.tradeAddress);
 
             var contractobj = await
                 ConnectContract
@@ -218,15 +218,16 @@ export default function useContractHook() {
             console.log('tokenContract---->', tokenContract, "ajjwkjawkh", data);
             const getname = await tokenContract.methods.name().call()
             const getdeci = await tokenContract.methods.decimals().call()
+            const getSymbol = await tokenContract.methods.symbol().call()
             console.log('tokenContract---->', tokenContract, getname);
-            return { name: getname, decimal: getdeci }
+            return { name: getname, decimal: getdeci, symbol: getSymbol }
         } catch (e) {
             console.log('Error on gettoken---->', e);
             return false
         }
     }
 
-    const setGasToken = async (...data) => {
+    const setGasToken = async (data) => {
         try {
 
             const ConnectContract = await contrat_connection(TradeAbi, config.tradeAddress)
@@ -235,7 +236,7 @@ export default function useContractHook() {
             var contractobj = await
                 ConnectContract
                     .methods
-                    .setStaticToken(...data)
+                    .setStaticToken(data)
             console.log("contractobj", contractobj);
             var gasprice = await web3.eth.getGasPrice();
             var gas_estimate = await contractobj.estimateGas({ from: UserAccountAddr })
@@ -243,7 +244,7 @@ export default function useContractHook() {
             var contract_Method_Hash = await
                 ConnectContract
                     .methods
-                    .setStaticToken(...data)
+                    .setStaticToken(data)
                     .send({
                         from: UserAccountAddr,
                         gasLimit: parseInt(gas_estimate),
@@ -262,6 +263,9 @@ export default function useContractHook() {
             return need_data
         } catch (error) {
             console.log("err on changeReceiver", error);
+            return  {
+                status: false
+            }
         }
     }
 
@@ -304,7 +308,60 @@ export default function useContractHook() {
         }
     }
 
+    const getContractBalance = async (data) => {
+        try {
+            const tokenContract = await contrat_connection(TokenAbi, data);
+            console.log('tokenContract---->', tokenContract, data);
+            const resp = await tokenContract.methods.balanceOf(config.tradeAddress).call();
+            console.log('respadad balance---->', resp);
+            return resp
+        } catch (e) {
+            console.log('Erro on getContractBalance---->', e);
+            return false
+        }
 
+    }
+
+    const withDrawProfit = async (data) => {
+        try {
+            const ConnectContract = await contrat_connection(TradeAbi, config.tradeAddress);
+
+            var contractobj = await
+                ConnectContract
+                    .methods
+                    .withdrawAdminGasProfit(...data)
+            console.log("contractobj", contractobj);
+            var gasprice = await web3.eth.getGasPrice();
+            var gas_estimate = await contractobj.estimateGas({ from: UserAccountAddr })
+            console.log("dfsfgsdfg", gas_estimate, gasprice);
+            var contract_Method_Hash = await
+                ConnectContract
+                    .methods
+                    .withdrawAdminGasProfit(...data)
+                    .send({
+                        from: UserAccountAddr,
+                        gasLimit: parseInt(gas_estimate),
+                        gasPrice: gasprice,
+                    })
+                    .on('transactionHash', (transactionHash) => {
+                        return transactionHash
+                    })
+
+            const receipt = await get_receipt(contract_Method_Hash.transactionHash ? contract_Method_Hash.transactionHash : contract_Method_Hash);
+            console.log("receiptafawdawdawd", receipt);
+            // const receipt = await get_receipt(contract_Method_Hash?.transactionHash ? contract_Method_Hash?.transactionHash : contract_Method_Hash);
+            var need_data = {
+                status: receipt.status,
+                HashValue: receipt.transactionHash
+            }
+            return need_data
+        } catch (e) {
+            console.log('Erro on withDrawProfit---->', e);
+            return {
+                status: false
+            }
+        }
+    }
 
     return {
         _signcall,
@@ -313,7 +370,9 @@ export default function useContractHook() {
         adminlazyminting_721_1155,
         setGasToken,
         getTokenName,
-        AddTokenType
+        AddTokenType,
+        getContractBalance,
+        withDrawProfit
     }
 
 }

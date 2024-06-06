@@ -9,7 +9,7 @@ import config from '../config/config';
 import useContractProviderHook from '../actions/contractProviderHook';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify'
-import { CreateOrder } from '../actions/axioss/nft.axios';
+import { CreateOrder, setPendingTransaction } from '../actions/axioss/nft.axios';
 import { isEmpty } from '../actions/common';
 import Calendar from './Calendar';
 import useThirdWeb from '../actions/useThirdWeb';
@@ -340,7 +340,15 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
           //   FormValue.ContractType.includes('721') ? "Single" : "Multiple",
           //   FormValue.ContractAddress
           // );
-          const cont = await getThirdweb.useContractCall(
+          
+          // const cont = await getThirdweb.useContractCall(
+          //   "setApprovalForAll",
+          //   0,
+          //   0,
+          //   FormValue.ContractAddress, true
+          // );
+
+          const cont = await ContractCall.gasLessTransaction(
             "setApprovalForAll",
             0,
             0,
@@ -384,7 +392,23 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
         // );
         // console.log("cont", cont)
         console.log('gasgasFeeee---->', gasFee);
-        const cont = await getThirdweb.useContractCall(
+        
+        // const cont = await getThirdweb.useContractCall(
+        //   "orderPlace",
+        //   0,
+        //   0,
+        //   owner.NFTId,
+        //   web3.utils.toWei(FormValue.NFTPrice?.toString()),
+        //   FormValue.ContractAddress,
+        //   accountAddress,
+        //   Number(FormValue.ContractType),
+        //   "data",
+        //   gasFee?.collectAddress,
+        //   "2500000000000000000"
+        // )
+        let TStamp = Date.now();
+
+        const cont = await ContractCall.gasLessTransaction(
           "orderPlace",
           0,
           0,
@@ -394,14 +418,16 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
           accountAddress,
           Number(FormValue.ContractType),
           "data",
+          TStamp,
           gasFee?.collectAddress,
           "2500000000000000000"
         )
+
         console.log('Cont---->', cont);
         if (cont) {
           let _data = FormValue;
           _data.NFTOwner = payload.WalletAddress;
-          _data.HashValue = cont.HashValue;
+          _data.HashValue = cont?.HashValue;
           _data.NFTId = owner.NFTId;
           _data.activity = "PutOnSale";
           _data.NFTBalance = owner?.NFTBalance
@@ -409,6 +435,26 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
           console.log("_datattatataa", _data);
           _data.EmailId = payload?.EmailId
           BackCall(id, _data);
+
+          let pendingObj = {
+            From: accountAddress,
+            method: "orderPlace",
+            params: [_data],
+            TimeStamp: TStamp
+          }
+          if (cont?.status == "pending") {
+            const pending = await setPendingTransaction(pendingObj);
+            toast.update(id, {
+              render:
+                <div>
+                  <p className="mb-0">Token List pending...</p>
+                  <p className="mb-0">Please check after some time!</p>
+                </div>,
+              type: 'warning', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true
+            })
+            push("/marketplace");
+          } else await BackCall(id, _data);
+          
         } else {
           console.log("json fil")
           toast.update(id, {

@@ -579,6 +579,11 @@ const Routes = [
         component: lazy(() => import('../gas/gasManagerList.js')),
         name: '/admin'
     },
+    {
+        path: "/gasTokens",
+        component: lazy(() => import('../gas/gasTokenWithdraw.js')),
+        name: '/admin'
+    },
 ]
 
 

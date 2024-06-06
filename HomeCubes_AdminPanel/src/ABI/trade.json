@@ -85,6 +85,31 @@
         "anonymous": false,
         "inputs": [
             {
+                "indexed": false,
+                "internalType": "string",
+                "name": "method",
+                "type": "string"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "TimeStamp",
+                "type": "uint256"
+            }
+        ],
+        "name": "EventEmitMethod",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
                 "indexed": true,
                 "internalType": "address",
                 "name": "from",
@@ -151,6 +176,32 @@
         "type": "event"
     },
     {
+        "inputs": [],
+        "name": "Joyfun721",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "RelayerAdderss",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "internalType": "uint96",
@@ -189,6 +240,11 @@
                 "internalType": "address",
                 "name": "feeCollector",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "timeStamp",
+                "type": "uint256"
             },
             {
                 "internalType": "uint256",
@@ -323,9 +379,9 @@
                 "type": "address"
             },
             {
-                "internalType": "address",
-                "name": "parentAddress",
-                "type": "address"
+                "internalType": "uint256",
+                "name": "timeStamp",
+                "type": "uint256"
             },
             {
                 "internalType": "address",
@@ -398,12 +454,7 @@
             },
             {
                 "internalType": "uint256",
-                "name": "totalValue",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "gasAmount",
+                "name": "timeStamp",
                 "type": "uint256"
             },
             {
@@ -413,13 +464,18 @@
             },
             {
                 "internalType": "uint256",
+                "name": "gasAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
                 "name": "usdtAmount",
                 "type": "uint256"
             }
         ],
         "name": "bidNFT",
         "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "payable",
         "type": "function"
     },
     {
@@ -459,6 +515,11 @@
                 "internalType": "address",
                 "name": "collectionAddress",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "timeStamp",
+                "type": "uint256"
             },
             {
                 "internalType": "address",
@@ -507,6 +568,11 @@
                 "type": "address"
             },
             {
+                "internalType": "uint256",
+                "name": "timeStamp",
+                "type": "uint256"
+            },
+            {
                 "internalType": "address",
                 "name": "feeCollector",
                 "type": "address"
@@ -527,6 +593,11 @@
             {
                 "internalType": "uint256",
                 "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "timeStamp",
                 "type": "uint256"
             },
             {
@@ -709,12 +780,7 @@
             },
             {
                 "internalType": "uint256",
-                "name": "totalValue",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "gasAmount",
+                "name": "timeStamp",
                 "type": "uint256"
             },
             {
@@ -724,13 +790,18 @@
             },
             {
                 "internalType": "uint256",
+                "name": "gasAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
                 "name": "usdtAmount",
                 "type": "uint256"
             }
         ],
         "name": "editBid",
         "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "payable",
         "type": "function"
     },
     {
@@ -866,6 +937,25 @@
     {
         "inputs": [
             {
+                "internalType": "address",
+                "name": "forwarder",
+                "type": "address"
+            }
+        ],
+        "name": "isTrustedForwarder",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "string[]",
                 "name": "ipfsmetadata",
                 "type": "string[]"
@@ -884,6 +974,11 @@
                 "internalType": "bytes",
                 "name": "signature",
                 "type": "bytes"
+            },
+            {
+                "internalType": "uint256",
+                "name": "timeStamp",
+                "type": "uint256"
             },
             {
                 "internalType": "address",
@@ -908,7 +1003,7 @@
         ],
         "name": "lazyMinting",
         "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "payable",
         "type": "function"
     },
     {
@@ -942,6 +1037,11 @@
                 "internalType": "string",
                 "name": "_status",
                 "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "timeStamp",
+                "type": "uint256"
             },
             {
                 "internalType": "address",
@@ -1069,13 +1169,8 @@
             },
             {
                 "internalType": "uint256",
-                "name": "totalValue",
+                "name": "timeStamp",
                 "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "parentAddress",
-                "type": "address"
             },
             {
                 "internalType": "address",
@@ -1117,13 +1212,8 @@
             },
             {
                 "internalType": "uint256",
-                "name": "totalValue",
+                "name": "timeStamp",
                 "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "parentAddress",
-                "type": "address"
             },
             {
                 "internalType": "address",
@@ -1157,6 +1247,19 @@
     {
         "inputs": [
             {
+                "internalType": "address",
+                "name": "relayAddress",
+                "type": "address"
+            }
+        ],
+        "name": "setRelayerAddress",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "uint256",
                 "name": "_serviceValue",
                 "type": "uint256"
@@ -1177,11 +1280,6 @@
             {
                 "internalType": "address",
                 "name": "token",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "stakeAdd",
                 "type": "address"
             }
         ],
@@ -1246,26 +1344,16 @@
         "type": "function"
     },
     {
-        "inputs": [
+        "inputs": [],
+        "name": "trustedForwarder",
+        "outputs": [
             {
                 "internalType": "address",
-                "name": "from",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "feeCollector",
+                "name": "",
                 "type": "address"
             }
         ],
-        "name": "transferStaticToken",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -1334,7 +1422,18 @@
         "type": "function"
     },
     {
-        "inputs": [],
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "tokenAdress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
         "name": "withdrawAdminGasProfit",
         "outputs": [],
         "stateMutability": "nonpayable",

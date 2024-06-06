@@ -2,7 +2,7 @@
 // import ERC1155 from '../../src/Abi/erc1155.json'
 // import TRADE from '../../src/Abi/market.json'
 // import profile from '../../assets/images/avatar.png'
-var EnvName = 'demossl';
+var EnvName = 'demo';
 var key = {};
 key.ONEDAYINSECONDS = 0
 key.env = EnvName
@@ -48,12 +48,12 @@ if (EnvName === "demo") {
     // key.TradeContract = '0x19D4c0f9155C6517580f850D4D097AF0448a1B39'.toLowerCase() //sepolia old
     // key.TradeContract = '0xA40F308Ad28b520f1cd0a9A58e3b551F73602246'.toLowerCase() //sepolia
     key.TradeContract = '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase() //sepolia
+    // key.TradeContract = '0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3'.toLowerCase() //sepolia
     key.ERC721 = '0x575cd9E4099A38B536673F557063f9A546870d11'.toLowerCase() // sepolia
     // key.ERC721          =   '0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf'.toLowerCase() //bnb
     key.ERC1155 = '0x4958A36d8d71abd35D5434EF78023B3284D93e63'.toLowerCase()
     key.erc20Address = '0xEb4fFed6B324b5FdC4d72AD3dA75bf1Fb2bB004A'.toLowerCase()
-    // key.RPC_URL         =   "https://data-seed-prebsc-1-s1.binance.org:8545/"
-    // key.RPC_URL         =   "https://api.avax-test.network/ext/bc/C/rpc"
+    // key.RPC_URL         =   "https://data-seed-prebsc-2-s1.binance.org:8545/"
     key.chain_Id_List = [97, 11155111]
     key.BNBCHAIN = 97
     key.ETHCHAIN = 11155111
@@ -138,8 +138,8 @@ else if (EnvName == "localIp") {
     // key.TradeContract = '0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3'.toLowerCase() //sepolia
     // key.TradeContract = '0x19D4c0f9155C6517580f850D4D097AF0448a1B39'.toLowerCase() //sepolia old
     // key.TradeContract = '0x274C7D841002A74c3E4EABEcDB504e3af3f1f05A'.toLowerCase() //sepolia
-    // key.TradeContract = '0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208'.toLowerCase() //sepolia
-    key.TradeContract = '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase() //sepolia
+    key.TradeContract = '0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208'.toLowerCase() //sepolia
+    // key.TradeContract = '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase() //sepolia
     key.ERC721 = '0x575cd9E4099A38B536673F557063f9A546870d11'.toLowerCase() // sepolia
     // key.ERC721          =   '0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf'.toLowerCase() //bnb
     key.ERC1155 = '0x4958A36d8d71abd35D5434EF78023B3284D93e63'.toLowerCase()
@@ -169,8 +169,8 @@ else {
     // key.TradeContract = '0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3'.toLowerCase() //sepolia
     // key.TradeContract = '0x19D4c0f9155C6517580f850D4D097AF0448a1B39'.toLowerCase() //sepolia old
     // key.TradeContract = '0x274C7D841002A74c3E4EABEcDB504e3af3f1f05A'.toLowerCase() //sepolia
-    // key.TradeContract = '0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208'.toLowerCase() //sepolia
-    key.TradeContract = '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase() //sepolia
+    key.TradeContract = '0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208'.toLowerCase() //sepolia
+    // key.TradeContract = '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase() //sepolia
     key.ERC721 = '0x575cd9E4099A38B536673F557063f9A546870d11'.toLowerCase() // sepolia
     // key.ERC721          =   '0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf'.toLowerCase() //bnb
     key.ERC1155 = '0x4958A36d8d71abd35D5434EF78023B3284D93e63'.toLowerCase()

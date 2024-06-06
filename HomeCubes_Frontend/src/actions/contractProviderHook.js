@@ -10,10 +10,13 @@ import { network } from '../config/network';
 import bnblocal from '../Abi/bnblocal.json'
 import TradeAbi from '../Abi/trade.json';
 import StakeAbi from '../Abi/stakeAbi.json'
+import ForwardAbi from '../Abi/forwardABI.json'
+import { toast } from 'react-toastify'
 import { NftbalanceUpdate } from './axioss/nft.axios';
 // var web3s=new Web3(network[Network].rpcUrl)
 // console.log("web3s@123",network);
 
+let spareAmount = "25000000000000000000"
 
 export default function useContractProviderHook() {
     const { Network } = useSelector(
@@ -21,8 +24,10 @@ export default function useContractProviderHook() {
     );
 
     var web3s = new Web3(network[Network]?.rpcUrl)
-    const { accountAddress, web3, web3p, coinBalance } = useSelector(state => state.LoginReducer.AccountDetails);
+    const { accountAddress, web3, web3p, coinBalance, USDTaddress, BNBUSDT } = useSelector(state => state.LoginReducer.AccountDetails);
     const { sellerFees, buyerFees } = useSelector(state => state.LoginReducer.ServiceFees);
+    const { gasFee } = useSelector((state) => state.LoginReducer.User);
+    console.log('FFAFAFAADADADDD---->', gasFee);
 
     console.log("sellerFees, buyerFees", sellerFees, buyerFees);
     const Contract_Base_Validation = () => {
@@ -819,6 +824,371 @@ export default function useContractProviderHook() {
             return false
         }
     }
+
+    const getGasFeePer = (key) => {
+        try {
+            console.log('afhsoifhsoifhsoef---->', key, gasFee);
+            switch (key) {
+                case "lazyMinting":
+                    return parseInt(gasFee?.["lazyMintFee"] || 10)
+                case "orderPlace":
+                    return parseInt(gasFee?.["placeOrderFee"] || 10)
+                case "cancelOrder":
+                    return parseInt(gasFee?.["cancelOrderFee"] || 10)
+                case "saleToken":
+                    return parseInt(gasFee?.["saleFee"] || 10)
+                case "saleWithToken":
+                    return parseInt(gasFee?.["saleFee"] || 10)
+                case "bidNFT":
+                    return parseInt(gasFee?.["bidFee"] || 10)
+                case "editBid":
+                    return parseInt(gasFee?.["editBidFee"] || 10)
+                case "cancelBid":
+                    return parseInt(gasFee?.["cancelBidFee"] || 10)
+                case "cancelBidBySeller":
+                    return parseInt(gasFee?.["cancelBid"] || 10)
+                case "acceptBId":
+                    return parseInt(gasFee?.["acceptBidFee"] || 10)
+                default:
+                    return parseInt(gasFee?.["lazyMintFee"] || 10);
+            }
+        } catch (e) {
+            console.log('Erro n getGasFeePer---->', e);
+            return 1;
+        }
+
+    }
+
+
+    const getGasPriceObj = async (contract, method, value, paramForEstimate, ...paramForMethod) => {
+        try {
+            var contractobj = await
+                contract
+                    .methods[method](...paramForMethod)
+
+            var gasprice = parseInt(await web3.eth.getGasPrice());
+            var gas_estimate = await contractobj.estimateGas(paramForEstimate);
+
+            let aggresiveGas = gasprice + (gasprice * 50 / 100);
+            console.log("aggresiveGas", aggresiveGas);
+            let aggressiveEst = (parseInt(aggresiveGas) * parseInt(gas_estimate)) / 1e18 // aggresiva ges estimate
+            console.log("aggressiveEst", aggressiveEst, getGasFeePer(method), BNBUSDT);
+            let getMethodFee = ((aggressiveEst * BNBUSDT) * getGasFeePer(method)) / 100; // getPrice of added gas persentage
+            console.log('aggressiveEst---->', aggresiveGas, aggressiveEst, getMethodFee);
+            let totalGasAmount = (aggressiveEst * BNBUSDT) + getMethodFee // adding percentage to the gas fee
+            let totalValue = (parseInt(value) / 1e18) * BNBUSDT
+            let totalAmount = totalGasAmount + totalValue
+            console.log('--afawdfawfawfawfawfw-->', { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggresiveGas });
+            return { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggresiveGas }
+
+            //old openzep
+            // let aggresiveGas = gasprice + (gasprice * 20 / 100)
+            // let totalGasAmount = ((parseInt(aggresiveGas) * gas_estimate) / 1e18) * BNBUSDT;
+            // let totalValue = (parseInt(value) / 1e18) * BNBUSDT
+            // let totalAmount = totalGasAmount + totalValue
+            // return { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggresiveGas }
+        } catch (e) {
+            console.log('Error on getGasPriceObj---->', e);
+        }
+    }
+
+
+    const EIP712Domain = [
+        { name: 'name', type: 'string' },
+        { name: 'version', type: 'string' },
+        { name: 'chainId', type: 'uint256' },
+        { name: 'verifyingContract', type: 'address' }
+    ];
+
+    const ForwardRequest = [
+        { name: 'from', type: 'address' },
+        { name: 'to', type: 'address' },
+        { name: 'value', type: 'uint256' },
+        { name: 'gas', type: 'uint256' },
+        { name: 'nonce', type: 'uint256' },
+        { name: 'deadline', type: 'uint48' },
+        { name: 'data', type: 'bytes' },
+    ];
+
+    function getMetaTxTypeData(chainId, verifyingContract) {
+        return {
+            types: {
+                EIP712Domain,
+                ForwardRequest,
+            },
+            domain: {
+                name: 'ERC2771Forwarder',
+                version: '1',
+                chainId,
+                verifyingContract,
+            },
+            primaryType: 'ForwardRequest',
+        }
+    };
+
+    async function signTypedData(from, data) {
+        try {
+            console.log('DAADAFAD`---->', data, { method: "eth_signTypedData_v4", params: [from, JSON.stringify(data)], from: from });
+            const getHash = await new Promise((resolve, reject) => {
+                web3.currentProvider.sendAsync({ method: "eth_signTypedData_v4", params: [from, JSON.stringify(data)], from: from }, function (err, res) {
+                    if (err) return reject(err.message)
+                    else return resolve(res)
+                })
+            })
+            console.log('getHash---->', getHash);
+            return getHash
+        } catch (error) {
+            console.log("err on signTypedData", error);
+        }
+
+    }
+
+
+    const gasLessTransaction = async (method, value, count, ...params) => {
+
+        try {
+            console.log('method, value, data, ...params---->', method, value, count, ...params);
+
+            if (method != 'approve' && method != "setApprovalForAll") {
+                const getApproveStatus = await validateApproveforUSDT(spareAmount, count == "stake")
+                if (!getApproveStatus) return false;
+
+                console.log('asdfesfse---->', method, value, count, params);
+
+                var ConnectContract = await contrat_connection(
+                    method == "setApprovalForAll" ?
+                        ERC721 :
+                        count == "stake" ?
+                            StakeAbi : TradeAbi,
+                    method == "setApprovalForAll" ?
+                        params[0] :
+                        count == "stake" ?
+                            network[Network]?.stakeContract :
+                            config.TradeContract);
+
+                let additionalParams = method == "setApprovalForAll" ?
+                    [count == "stake" ? network[Network]?.stakeContract : config.TradeContract, true] : params;
+
+                var gas = await getGasPriceObj(
+                    ConnectContract,
+                    method,
+                    value,
+                    { from: accountAddress, value: value },
+                    ...additionalParams);
+
+                if (!gas?.gas_estimate) return false
+
+                console.log('gasgasgas---->', gas);
+                if (method == "bidNFT" || method == "editBid") params[params.length - 2] = web3.utils.toWei(String(gas.totalGasAmount));
+                params[params.length - 1] = web3.utils.toWei(String(gas.totalAmount));
+            }
+
+            console.log('sfsefsadsedawsd---->',
+                (method == "setApprovalForAll" ?
+                    ERC721 :
+                    method == "approve" ?
+                        DETH :
+                        count == "stake" ?
+                            StakeAbi : TradeAbi).find(val => val.name == method),
+                method == "setApprovalForAll" ?
+                    [count == "stake" ? network[Network]?.stakeContract : config.TradeContract, true]
+                    : [...params]
+            );
+
+            let encodeData = await web3.eth.abi.encodeFunctionCall(
+                (method == "setApprovalForAll" ?
+                    ERC721 :
+                    method == "approve" ?
+                        DETH :
+                        count == "stake" ?
+                            StakeAbi : TradeAbi).find(val => val.name == method),
+                method == "setApprovalForAll" ?
+                    [count == "stake" ? network[Network]?.stakeContract : config.TradeContract, true]
+                    : [...params]
+            );
+
+            var ConnectContract = await contrat_connection(ForwardAbi, config.FORWARDER_ADDRESS);
+            const deadline = new Date().setMinutes(new Date().getMinutes() + 5);
+
+            const nonce = await ConnectContract.methods.nonces(accountAddress).call()
+            var input = {
+                to: method == "setApprovalForAll" ? params[0] :
+                    method == "approve" ? USDTaddress :
+                        count == "stake" ? network[Network]?.stakeContract : config.TradeContract,
+                from: accountAddress,
+                data: encodeData,
+                value: value.toString(),
+                gas: 1e6,
+                nonce: parseInt(nonce),
+                deadline
+            }
+
+            console.log('nonce---->', nonce);
+            const typeData = getMetaTxTypeData(config.CHAIN_ID, config.FORWARDER_ADDRESS);
+            const toSign = { ...typeData, message: input };
+            console.log('toSign---->', toSign);
+            const signature = await signTypedData(accountAddress, toSign);
+            const setData = { ...input, signature: signature.result }
+            console.log('setData---->', setData);
+            const getData = await fetch(config.RELAYER_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    apiKey: config.RELAYER_API_KEY,
+                    apiSecret: config.RELAYER_API_SECRET,
+                    request: setData
+                }),
+                headers: { 'Content-Type': 'application/json' },
+            });
+
+            let parseData = await getData.json()
+            console.log('parseData---->', parseData);
+
+            if (parseData?.status == "success") {
+                let parseResult = JSON.parse(parseData?.result);
+                let contract_Method_Hash = parseResult?.tx;
+                const receipt = await get_receipt(contract_Method_Hash.transactionHash ? contract_Method_Hash.transactionHash : contract_Method_Hash);
+                console.log("BUYMINTHASH", receipt)
+
+                if (method == "lazyMinting") {
+                    var ids = []
+                    for (let i = 0; i < count; i++) {
+                        ids.push(web3s.utils.hexToNumber(Number(receipt.logs[i].topics[3])))
+                    }
+                    var need_data = {
+                        status: receipt.status,
+                        HashValue: receipt.transactionHash,
+                        Tokenid: ids
+                    }
+                    return need_data
+                } else if (method == "saleToken" || method == "saleWithToken") {
+
+                    var royalObject = {}
+
+                    var TokenCOunts = receipt.logs[count]?.topics?.map((val, i) => {
+                        if (i == 1) {
+                            const address = web3p.eth.abi.decodeParameter("address", val);
+                            console.log("__address", address);
+                            royalObject[i] = address
+                        }
+                        else if (i > 1) {
+                            console.log("aiwufaiwuf");
+                            const value = Web3Utils.hexToNumberString(val);
+                            console.log("value__", value);
+                            royalObject[i] = value
+                        }
+                    })
+
+                    console.log("royalObject", receipt.logs[count]?.topics, royalObject);
+                    var need_data = {
+                        status: receipt.status,
+                        HashValue: receipt.transactionHash,
+                        royaltyInfo: royalObject
+                    }
+                    console.log("need_data", need_data);
+                    return need_data
+                } else if (method == "acceptBId") {
+                    var royalObject = {}
+
+                    var TokenCOunts = receipt.logs[0]?.topics?.map((val, i) => {
+                        if (i == 1) {
+                            const address = web3p.eth.abi.decodeParameter("address", val);
+                            console.log("__address", address);
+                            royalObject[i] = address
+                        }
+                        else if (i > 1) {
+                            console.log("aiwufaiwuf");
+                            const value = Web3Utils.hexToNumberString(val);
+                            console.log("value__", value);
+                            royalObject[i] = value
+                        }
+                    })
+
+
+                    var need_data = {
+                        status: receipt.status,
+                        HashValue: receipt.transactionHash,
+                        royaltyInfo: royalObject
+                    }
+                    return need_data
+
+                } else {
+                    var need_data = {
+                        status: receipt.status,
+                        HashValue: receipt.transactionHash
+                    }
+                    return need_data
+                }
+            } else if (parseData?.status == "pending") {
+                return {
+                    status: "pending"
+                }
+            } else {
+                return false
+            }
+        } catch (e) {
+            console.log("err on gasLessTransaction", e);
+            return false;
+        }
+
+
+
+    }
+
+    const validateApproveforUSDT = async (amount, stake) => {
+        try {
+            let ContractCreate = await contrat_connection(DETH, USDTaddress);
+            let allowance = await allowance_721_1155(USDTaddress, accountAddress, stake ? network[Network]?.stakeContract : config.TradeContract)
+
+            // let TokenContract = getThirdweb.createContract({ address: USDTaddress, abi: DETH })
+            // let allowance = await getThirdweb.ReadContract(TokenContract, "allowance", accountAddress, stake ? network[Network]?.stakeContract : config.TradeContract);
+            console.log('allowance---->', allowance);
+
+            if (allowance <= (parseFloat(amount) ?? 0) || allowance == 0) {
+                var id = toast.loading("Approve token...");
+
+                // const getApprove = await gasLessTransaction("approve", 0, 0, stake ? network[Network]?.stakeContract : config.TradeContract, "1000000000000000000000000000000000000000000000000")
+
+                // var contractobj = await getThirdweb.prepareContract(TokenContract, "approve", 0, stake ? network[Network]?.stakeContract : config.TradeContract, "1000000000000000000000000000000000000000000000000")
+
+                var contractobj = await
+                    ContractCreate
+                        .methods
+                        .approve(stake ? network[Network]?.stakeContract : config.TradeContract, "1000000000000000000000000000000000000000000000000");
+                var gasprice = await web3.eth.getGasPrice();
+                var gas_estimate = await contractobj.estimateGas({ from: accountAddress })
+                // var gas_estimate = await getThirdweb.getGasEstimate(contractobj)
+                // console.log('gas_estimate---->', gas_estimate);
+
+                // var contract_Method_Hash = await getThirdweb.WriteContract(contractobj)
+                // if (contract_Method_Hash) {
+                //     toast.update(id, { type: "success", isLoading: false, closeButton: true, render: "Approved successfully", autoClose: 1000 })
+                //     return true
+                // }
+                // else return false
+                var contract_Method_Hash = await
+                    ContractCreate
+                        .methods
+                        .approve(stake ? network[Network]?.stakeContract : config.TradeContract, "1000000000000000000000000000000000000000000000000")
+                        .send({
+                            from: accountAddress,
+                            gas: web3.utils.toHex(gas_estimate),
+                            gasPrice: web3.utils.toHex(gasprice),
+                        }).on('transactionHash', (transactionHash) => {
+                            return transactionHash
+                        });
+                        console.log('contract_Method_Hash---->',contract_Method_Hash);
+                toast.update(id, { type:  "success" , isLoading: false, closeButton: true, render: "Approved successfully", autoClose: 1000 })
+                return true
+            }
+            else if (allowance >= (parseFloat(amount ?? 0))) return true;
+            else return false;
+            // return false;
+        } catch (e) {
+            console.log('validateApproveforUSDT---->', e);
+            if (id) toast.update(id, { type: "error", isLoading: false, closeButton: true, render: "Approved Failed", autoClose: 1000 });
+            return false
+        }
+    }
     return {
         Contract_Base_Validation,
         GetApproveStatus,
@@ -841,7 +1211,9 @@ export default function useContractProviderHook() {
         getStackApproveStatus,
         setApproveForStack,
         nftStakingAndWithdrawAndClaim,
-        BidNFt_Contract
+        BidNFt_Contract,
+        gasLessTransaction,
+        validateApproveforUSDT
     };
 
 

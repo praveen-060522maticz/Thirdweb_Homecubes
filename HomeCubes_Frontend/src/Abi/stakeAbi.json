@@ -3,6 +3,31 @@
         "anonymous": false,
         "inputs": [
             {
+                "indexed": false,
+                "internalType": "string",
+                "name": "method",
+                "type": "string"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "TimeStamp",
+                "type": "uint256"
+            }
+        ],
+        "name": "EventEmitMethod",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
                 "indexed": true,
                 "internalType": "address",
                 "name": "previousOwner",
@@ -34,33 +59,14 @@
     {
         "inputs": [
             {
-                "internalType": "address",
-                "name": "staticAdd",
-                "type": "address"
-            }
-        ],
-        "name": "changeStaticToken",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
                 "internalType": "uint256",
                 "name": "reward",
                 "type": "uint256"
             },
             {
-                "internalType": "address",
-                "name": "parentAddress",
-                "type": "address"
+                "internalType": "uint256",
+                "name": "timeStamp",
+                "type": "uint256"
             },
             {
                 "internalType": "address",
@@ -115,19 +121,6 @@
             }
         ],
         "name": "editPool",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "tradeAdd",
-                "type": "address"
-            }
-        ],
-        "name": "editTradeAddress",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -222,6 +215,25 @@
     {
         "inputs": [
             {
+                "internalType": "address",
+                "name": "forwarder",
+                "type": "address"
+            }
+        ],
+        "name": "isTrustedForwarder",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "uint256",
                 "name": "tokenId",
                 "type": "uint256"
@@ -235,6 +247,11 @@
                 "internalType": "address",
                 "name": "_collectionAddress",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "timeStamp",
+                "type": "uint256"
             },
             {
                 "internalType": "address",
@@ -268,6 +285,11 @@
                 "internalType": "address",
                 "name": "_collectionAddress",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "timeStamp",
+                "type": "uint256"
             },
             {
                 "internalType": "address",
@@ -552,19 +574,6 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "tradeAddress",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [
             {
                 "internalType": "address",
@@ -575,6 +584,19 @@
         "name": "transferOwnership",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "trustedForwarder",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {

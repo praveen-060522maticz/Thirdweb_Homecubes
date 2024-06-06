@@ -26,7 +26,7 @@ import RewardSchema from '../../models/admin_models/reward.schema'
 import whiteListSchema from "../../models/admin_models/whiteList.schema";
 import ActivitySchema from "../../models/front_models/activity.schema"
 import GasManager from "../../models/admin_models/gasManager.schema";
-
+import GasTokens from "../../models/admin_models/gasTokens.schema";
 const reader = require('xlsx')
 
 var ObjectId = mongoose.Types.ObjectId;
@@ -1876,7 +1876,7 @@ export const gasManagerFunc = async (req, res) => {
     }
 
     if (action == "edit") {
-      const resp = await GasManager.findOneAndUpdate({},req.body);
+      const resp = await GasManager.findOneAndUpdate({}, req.body);
       return res.json({
         success: resp ? "success" : "error",
         data: resp,
@@ -1890,5 +1890,46 @@ export const gasManagerFunc = async (req, res) => {
     }
   } catch (e) {
     console.log('Errorn gasManagerFunc---->', e);
+  }
+}
+
+export const gasTokensFunctions = async (req, res) => {
+  try {
+    const { action, name, contractAddress, symbol, decimal } = req.body;
+
+    if (action == "get") {
+      const Resp = await GasTokens.find({}, { value: "$symbol", label: "$symbol", "contractAddress": 1, Name: 1, symbol: 1, decimal: 1 });
+      return res.json({
+        status: Resp ? true : false,
+        msg: Resp ? "Success" : "error",
+        data: Resp
+      })
+    }
+
+    else if (action == "add") {
+
+      const check = await GasTokens.findOne({ contractAddress });
+      if (!isEmpty(check)) return res.json({
+        status: true,
+        msg: "already",
+        data: check
+      })
+
+      const Resp = await new GasTokens({
+        Name: name,
+        contractAddress,
+        symbol,
+        decimal
+      }).save()
+
+      return res.json({
+        status: Resp ? true : false,
+        msg: Resp ? "Success" : "error",
+        data: Resp
+      })
+    }
+
+  } catch (e) {
+    console.log('Error  on gasTokensFunctions---->', e);
   }
 }

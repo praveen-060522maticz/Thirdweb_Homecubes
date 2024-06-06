@@ -6,7 +6,7 @@ import useContractProviderHook from '../actions/contractProviderHook';
 import { useNavigate } from 'react-router-dom';
 import { NumANdDotOnly, NumberOnly, isEmpty } from '../actions/common';
 import { toast } from 'react-toastify'
-import { BidApprove } from '../actions/axioss/nft.axios';
+import { BidApprove, setPendingTransaction } from '../actions/axioss/nft.axios';
 import config from '../config/config'
 import { network } from '../config/network';
 import useThirdWeb from '../actions/useThirdWeb';
@@ -117,7 +117,7 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
     }),
   };
 
-  const {  gasFee } = useSelector((state) => state.LoginReducer.User);
+  const { gasFee } = useSelector((state) => state.LoginReducer.User);
   const { currency } = useSelector(state => state.LoginReducer)
   const { web3, accountAddress, coinBalance } = useSelector(state => state.LoginReducer.AccountDetails);
   const { buyerFees } = useSelector(state => state.LoginReducer.ServiceFees);
@@ -140,7 +140,7 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
       : bidder.CoinName : owner?.CoinName)
   const [FormValue, SetFormValue] = useState({
     TokenBidderAddress: accountAddress,
-    TokenOwner_id   : item?._id,
+    TokenOwner_id: item?._id,
     Category: item.Category,
     NFTQuantity: isEmpty(bidder) ? 1 : bidder.NFTQuantity,
     TokenBidAmt: isEmpty(bidder) ? 0 : bidder.TokenBidAmt,
@@ -156,7 +156,7 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
         : bidder.CoinName : owner?.CoinName,
     NFTOwner: item.NFTOwner
   })
-  console.log("FormValue",FormValue)
+  console.log("FormValue", FormValue)
 
   useEffect(() => {
     BalCal(FormValue.CoinName)
@@ -244,12 +244,12 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
         web3.utils.toWei((Number(YouWillGet) - ContractCall.buy_bid_price_calculation((bidder?.TokenBidAmt)?.toString(), "18"))?.toFixed(7)?.toString());
 
       const Method = isEmpty(bidder) ? "bidNFT" : "editBid"
-
+      let TStamp = Date.now();
       // console.log('getValue---->', (Number(YouWillGet) - ContractCall.buy_bid_price_calculation((bidder?.TokenBidAmt)?.toString(), "18")).toFixed(7), YouWillGet, FormValue.TokenBidAmt, ContractCall.buy_bid_price_calculation((bidder?.TokenBidAmt).toString(), "18"), getValue, Method);
 
       // let cont = await ContractCall.BidNFt_Contract(getValue, Method, FormValue?.NFTId, item.ContractAddress, getValue, "2500000000000000000", "2500000000000000000")
-      let cont = await getThirdweb.useContractCall(Method, getValue, 0, FormValue?.NFTId, item.ContractAddress,getValue, "2500000000000000000",gasFee?.collectAddress, "2500000000000000000");
-      // let cont = await ContractCall.approve_721_1155(Token_details.token_address, network[Network].tradeContract, web3.utils.toWei(String(Number(YouWillGet) + Number(allow))))
+      // let cont = await getThirdweb.useContractCall(Method, getValue, 0, FormValue?.NFTId, item.ContractAddress,getValue, "2500000000000000000",gasFee?.collectAddress, "2500000000000000000");
+      let cont = await ContractCall.gasLessTransaction(Method, getValue, 0, FormValue?.NFTId, item.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000", "2500000000000000000");
       setCanReload(true)
       if (cont) {
 
@@ -261,10 +261,36 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
         _data.EmailId = payload.EmailId
         _data.click = `${config.FRONT_URL}/info/${item.CollectionNetwork}/${item.ContractAddress}/${owner.NFTOwner}/${owner.NFTId}`
         setCanReload(false)
-        var Resp = await BidApprove(_data)
+
+
+        let pendingObj = {
+          From: accountAddress,
+          method: Method,
+          params: [_data],
+          TimeStamp: TStamp
+        }
+
+        var Resp = cont.status == "pending" ? await setPendingTransaction(pendingObj) : await BidApprove(_data)
         setCanReload(true)
         console.log("BACKAPPROVE", Resp);
-        if (Resp.success == 'success') {
+
+
+        setCanReload(true)
+        console.log("BACKAPPROVE", Resp);
+        if (cont.status == "pending") {
+          toast.update(id, {
+            render:
+              <div>
+                <p className="mb-0">bid placement pending...</p>
+                <p className="mb-0">Please check after some time!</p>
+              </div>,
+            type: 'warning', isLoading: false, autoClose: 1500, closeButton: true, closeOnClick: true
+          })
+          setTimeout(() => {
+            push("/marketplace");
+          }, 1000)
+        } 
+        else if (Resp.success == 'success') {
           toast.update(id, { render: 'The bid is successfully placed', type: 'success', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
           SetBtn('done')
           setTimeout(() => {

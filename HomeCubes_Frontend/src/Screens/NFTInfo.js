@@ -18,7 +18,7 @@ import Calendar from "../Modals/Calendar";
 import BreadPath from "../Components/BreadPath";
 import DataCard from "../Components/DataCard";
 import { useDispatch, useSelector } from "react-redux";
-import { BidApprove, Token_Info_Func, getActivitiesByNftId, getGalleryTokens } from "../actions/axioss/nft.axios";
+import { BidApprove, Token_Info_Func, getActivitiesByNftId, getGalleryTokens, setPendingTransaction } from "../actions/axioss/nft.axios";
 import config from '../config/config'
 import { address_showing, getBNBvalue, isEmpty } from "../actions/common";
 import ImgAudVideo from "../Components/ImgAudVideo";
@@ -47,7 +47,7 @@ function NFTInfo() {
   const location = useLocation();
   console.log(location, JSON.parse(location.state.nftInfo), "weioiwhe");
   const { gasFee } = useSelector((state) => state.LoginReducer.User);
-
+  const push = useNavigate()
   const nftData = JSON.parse(location?.state?.nftInfo);
   const { state } = useLocation();
   // listitem state
@@ -77,7 +77,6 @@ function NFTInfo() {
   const [showBid, setShowBid] = useState(false);
   const [showCancelBid, setShowCancelBid] = useState(false);
   const [showAcceptBid, setShowAcceptBid] = useState(false);
-  const [showPutSale, setShowPutSale] = useState(false);
   const [SendDet, SetSendDet] = useState({});
   const [BtnData, SetBtnData] = useState('start')
   const [Text, setText] = useState("");
@@ -407,9 +406,11 @@ function NFTInfo() {
 
   const cancelBidBySeller = async (address) => {
     const id = toast.loading('Canceling order... Do not refresh!');
-    console.log('AFFAFAFAAFFAF---->',gasFee);
+    console.log('AFFAFAFAAFFAF---->', gasFee);
+    const TStamp = Date.now()
     // let cont = await ContractCall.BidNFt_Contract(0, "cancelBidBySeller", Tokens_Detail.NFTId, Tokens_Detail.ContractAddress)
-    let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, gasFee?.collectAddress, "2500000000000000000")
+    // let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, gasFee?.collectAddress, "2500000000000000000")
+    let cont = await ContractCall.gasLessTransaction("cancelBidBySeller", 0, 0, Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000")
 
 
     if (cont) {
@@ -427,22 +428,43 @@ function NFTInfo() {
         click: `${config.FRONT_URL}/info/${Tokens_Detail.CollectionNetwork}/${Tokens_Detail.ContractAddress}/${Tokens["All"]?.owner?.WalletAddress}/${Tokens_Detail.NFTId}`
 
       }
-      setCanReload(false)
-      console.log('gsfgsfg', FormValue)
-      let Resp = await BidApprove(FormValue)
-      setCanReload(true)
-      console.log('dksfgsdhkg', Resp)
-      if (Resp.success == 'success') {
-        toast.update(id, { render: 'Cancelled Bid Successfully', type: 'success', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500);
-        // push(`/my-item/${payload?.CustomUrl}`)
-      }
-      else {
-        toast.update(id, { render: 'Transaction Failed', type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
-      }
 
+      if (cont?.status == "pending") {
+        let pendingObj = {
+          From: accountAddress,
+          method: "cancelBidBySeller",
+          params: [FormValue],
+          TimeStamp: TStamp
+        }
+        const pending = await setPendingTransaction(pendingObj);
+        toast.update(id, {
+          render:
+            <div>
+              <p className="mb-0">Cancel order pending...</p>
+              <p className="mb-0">Please check after some time!</p>
+            </div>,
+          type: 'warning', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true
+        })
+        return push("/marketplace");
+
+      } else {
+        setCanReload(false)
+        console.log('gsfgsfg', FormValue)
+        let Resp = await BidApprove(FormValue)
+        setCanReload(true)
+        console.log('dksfgsdhkg', Resp)
+        if (Resp.success == 'success') {
+          toast.update(id, { render: 'Cancelled Bid Successfully', type: 'success', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+          // push(`/my-item/${payload?.CustomUrl}`)
+        }
+        else {
+          toast.update(id, { render: 'Transaction Failed', type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
+        }
+
+      }
     } else {
       toast.update(id, { render: 'Transaction Failed', type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
     }
