@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify'
 import { BidApprove } from '../actions/axioss/nft.axios';
 import config from '../config/config'
-import useThirdWeb from '../actions/useThirdWeb';
+import { useWallets } from '@privy-io/react-auth';
 
 function CancelBid({ show, handleClose, owner, bidder, item }) {
 
@@ -20,7 +20,8 @@ function CancelBid({ show, handleClose, owner, bidder, item }) {
   const {  gasFee } = useSelector((state) => state.LoginReducer.User);
 console.log('segegsegeegasFee---->',gasFee);
   const [canReload, setCanReload] = useState(true);
-  const getThirdweb=useThirdWeb()
+  const {wallets} = useWallets();
+
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       if (!canReload) {
@@ -51,7 +52,7 @@ console.log('segegsegeegasFee---->',gasFee);
       const TStamp = Date.now()
       // let cont = await ContractCall.BidNFt_Contract(0, "cancelBid", item.NFTId, item.ContractAddress)
       // let cont = await getThirdweb.useContractCall("cancelBid", 0, 0, item.NFTId, item.ContractAddress, gasFee?.collectAddress,"2500000000000000000");
-      let cont = await ContractCall.gasLessTransaction("cancelBid", 0, 0, item.NFTId, item.ContractAddress,TStamp, gasFee?.collectAddress,"2500000000000000000");
+      let cont = await ContractCall.gasLessTransaction("cancelBid", 0, 0,wallets[0], item.NFTId, item.ContractAddress,TStamp, gasFee?.collectAddress,"2500000000000000000");
 
       if (cont) {
         console.log('biiddd', bidder, item);
@@ -102,7 +103,7 @@ console.log('segegsegeegasFee---->',gasFee);
     async function BalanceCheck() {
       if (once) {
         setOnce(false)
-        var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item)
+        var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item,wallets[0])
         console.log('cancelbidbalncheck ', Nftbalance, owner.NFTBalance);
         if (Nftbalance?.toLowerCase() != owner.NFTOwner?.toLowerCase()) {
           toast.warning("You won't buy at this moment please refresh you data");

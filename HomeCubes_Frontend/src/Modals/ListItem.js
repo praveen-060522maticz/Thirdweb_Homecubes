@@ -12,8 +12,8 @@ import { toast } from 'react-toastify'
 import { CreateOrder, setPendingTransaction } from '../actions/axioss/nft.axios';
 import { isEmpty } from '../actions/common';
 import Calendar from './Calendar';
-import useThirdWeb from '../actions/useThirdWeb';
-
+import web3utils from 'web3-utils';
+import { useWallets } from '@privy-io/react-auth';
 function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closePop, file, type, thumb, item }) {
 
   const [selectedOption, setSelectedOption] = useState(null);
@@ -30,7 +30,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
   const { currency } = useSelector((state) => state.LoginReducer);
   const { payload,gasFee } = useSelector((state) => state.LoginReducer.User);
   const { web3, accountAddress } = useSelector((state) => state.LoginReducer.AccountDetails);
-
+  const {wallets}=useWallets()
   useEffect(() => {
     SetFormValue({
       ...FormValue,
@@ -253,7 +253,6 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
       padding: 0,
     }),
   };
-  const getThirdweb = useThirdWeb();
   useEffect(() => {
     BalanceCheck();
   }, [item, owner]);
@@ -261,7 +260,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
   async function BalanceCheck() {
 
     if (Once) {
-      let Nftbalance = await ContractCall.Current_NFT_Balance(owner, item);
+      let Nftbalance = await ContractCall.Current_NFT_Balance(owner, item,wallets[0]);
       console.log("ownneerrsnftbusemmm in listitem", Nftbalance, owner?.NFTBalance, owner?.NFTOwner);
 
       if (Nftbalance && (Nftbalance.toLowerCase() != owner?.NFTOwner.toLowerCase())) {
@@ -330,7 +329,8 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
 
         const checkApprove = await ContractCall.GetApproveStatus(
           "single",
-          FormValue.ContractAddress
+          FormValue.ContractAddress,
+          wallets[0]
         )
         console.log("checkApprovecheckApprove", checkApprove);
         if (!checkApprove) {
@@ -352,6 +352,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
             "setApprovalForAll",
             0,
             0,
+            wallets[0],
             FormValue.ContractAddress, true
           );
 
@@ -412,8 +413,9 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
           "orderPlace",
           0,
           0,
+          wallets[0],
           owner.NFTId,
-          web3.utils.toWei(FormValue.NFTPrice?.toString()),
+          web3utils.toWei(FormValue.NFTPrice?.toString()),
           FormValue.ContractAddress,
           accountAddress,
           Number(FormValue.ContractType),
@@ -469,7 +471,6 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
       }
     } else {
       let _data = FormValue;
-      _data.CoinName = "BNB"
       _data.NFTOwner = payload.WalletAddress;
       _data.HashValue = "";
       _data.NFTId = owner.NFTId;
@@ -655,12 +656,12 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                         placeholder="Coin"
                         styles={stylesgraybg}
                         defaultValue={selectedOption}
-                        value={{ value: "BNB", label: "BNB" }}
+                        value={{ value: FormValue?.CoinName, label: FormValue?.CoinName }}
                         onChange={(e) => SetFormValue({
                           ...FormValue,
-                          ...{ ["CoinName"]: "BNB" },
+                          ...{ ["CoinName"]: e.value },
                         })}
-                        isDisabled={true}
+                        // isDisabled={true}
                         options={
                           currency?.filter(
                             (item) => item.address != config.DEADADDRESS
@@ -729,7 +730,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                         })}
                         options={
                           currency?.filter(
-                            (item) => item.deleted != true
+                            (item) => (item.deleted != true && item?.address != config.DEADADDRESS)
                           )}
                       />
                     </div>

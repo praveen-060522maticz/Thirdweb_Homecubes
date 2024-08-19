@@ -1,0 +1,21 @@
+PORT            =2053
+MONGOURI        ="mongodb://DeTbGs:HvRjXo@127.0.0.1:46986/homecubes"
+SECRET_KEY       ="MNBVCZX1234)(*"
+IPFSKEY         =   "2AvBEvHVMBtked6IWmVtjajJMaB"
+IPFSPASS        =   "1f1cb38214213634b6f39220efa515a9"
+SITE_URL = "https://nftdemo.bimaticz.com/naiftyadmin"
+RPC_URL="https://api.avax-test.network/ext/bc/C/rpc"
+user                          = "support@maticz.in"
+pass                          = "wSsVR60k+kH1Bvx1mT2tJehrnl5TAFPxEBkojlKiuX75Gq+R/ccyk0LLAAKiT6VKR2BrEWRBor99mk8AhmYJiYkkmVAAACiF9mqRe1U4J3x17qnvhDzOXG1VlReJJIoPwQ1skmBnG84m+g=="
+host                          = "smtp.zeptomail.com"
+ BNBRPC = "https://endpoints.omniatech.io/v1/bsc/testnet/public"
+ETHRPC = "https://api.avax-test.network/ext/bc/C/rpc"
+ETHCHAIN = 43113
+BNBCHAIN = 97
+BNBRPC = "https://endpoints.omniatech.io/v1/bsc/testnet/public"
+ETHRPC = "https://api.avax-test.network/ext/bc/C/rpc"
+SOCKET_RPC = "wss://sepolia.infura.io/ws/v3/6ff564943ab34875bdb2c3ddda2fb80a"
+SEPOLIA_RPC = "https://ethereum-sepolia-rpc.publicnode.com"
+ContractAdd = "0xb53a7d050fa197F267Ab295f30f26E97936d68f8"
+TradeAddress = "0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208"
+adminPrivKey = "6c87e33bfbb2ac40989d20ee5e6580fa30b9b9b06506e5923b5836d7e96247e3"

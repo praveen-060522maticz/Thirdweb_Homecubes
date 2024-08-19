@@ -1281,6 +1281,11 @@
                 "internalType": "address",
                 "name": "token",
                 "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "stakeAdd",
+                "type": "address"
             }
         ],
         "name": "setStaticToken",

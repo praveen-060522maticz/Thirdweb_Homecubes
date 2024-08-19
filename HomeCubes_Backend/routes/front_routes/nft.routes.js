@@ -25,6 +25,7 @@ routers.route('/getActivitiesByNftId').get(nftCtrl.getActivitiesByNftId);
 routers.route('/searchQueryForMyitems').get(nftCtrl.searchQueryForMyitems);
 routers.route('/getProjects').get(nftCtrl.getProjects);
 routers.route('/stackFunction').post(nftCtrl.stackFunction);
+routers.route('/setPendingTransaction').post(nftCtrl.setPendingTransaction);
 
 
 export default routers

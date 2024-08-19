@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Modal, Row, Col } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { connectWallet } from '../hooks/useWallet';
@@ -7,19 +7,24 @@ import { isEmpty } from '../actions/common';
 import { GetNftCookieToken } from '../actions/axioss/nft.axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 function ConnectWallet({ show, handleCloseWallet }) {
 
   const { token } = useSelector(state => state.LoginReducer.User)
 
 
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [web3auth, setWeb3auth] = useState(null);
+  const [provider, setProvider] = useState(null);
+  const [user, setUser] = useState(null);
+
 
   console.log("token", token);
   const onWalletClick = async (type) => {
-    if (type == "WalletConnect") handleCloseWallet();
+    if (type == "WalletConnect" || type == "Toruswallet") handleCloseWallet();
     try {
-      console.log("afaiwdhaoiwdhaoiwdh",type);
+      console.log("afaiwdhaoiwdhaoiwdh", type);
       const id = toast.loading(type + "Connecting");
       var accountDetails = await connectWallet(type)
       console.log("accountDetails", accountDetails, type)
@@ -108,14 +113,14 @@ function ConnectWallet({ show, handleCloseWallet }) {
               </Col>
             </Row>
 
-            {/* <Row className='mb-3 wallet_holder'>
+            <Row className='mb-3 wallet_holder'>
               <Col xs={5} className='d-flex justify-content-end'>
                 <img src={require('../assets/images/coinbase.svg').default} className='modal_walletImg' />
               </Col>
               <Col xs={7}>
                 <p className='modal_walletLabel'>Coinbase Wallet</p>
               </Col>
-            </Row> */}
+            </Row>
 
             <Row className='mb-3 wallet_holder' onClick={() => onWalletClick("WalletConnect")}>
               <Col xs={5} className='d-flex justify-content-end'>
@@ -125,6 +130,16 @@ function ConnectWallet({ show, handleCloseWallet }) {
                 <p className='modal_walletLabel'>Trust Wallet</p>
               </Col>
             </Row>
+
+
+            {/* <Row className='mb-3 wallet_holder' onClick={() => login("Toruswallet")}>
+              <Col xs={5} className='d-flex justify-content-end'>
+                <img src={require('../assets/images/trustwallet.svg').default} className='modal_walletImg' />
+              </Col>
+              <Col xs={7}>
+                <p className='modal_walletLabel'>Torus Wallet</p>
+              </Col>
+            </Row> */}
 
 
 

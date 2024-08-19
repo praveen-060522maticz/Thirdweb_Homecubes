@@ -9,7 +9,8 @@ import { toast } from 'react-toastify'
 import { BidApprove, setPendingTransaction } from '../actions/axioss/nft.axios';
 import config from '../config/config'
 import { network } from '../config/network';
-import useThirdWeb from '../actions/useThirdWeb';
+import web3utils from 'web3-utils';
+import { useWallets } from '@privy-io/react-auth';
 
 function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -122,7 +123,6 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
   const { web3, accountAddress, coinBalance } = useSelector(state => state.LoginReducer.AccountDetails);
   const { buyerFees } = useSelector(state => state.LoginReducer.ServiceFees);
   const ContractCall = useContractProviderHook();
-  const getThirdweb = useThirdWeb()
   const push = useNavigate()
   const { payload } = useSelector(state => state.LoginReducer.User)
   const { Network } = useSelector((state) => state.LoginReducer)
@@ -156,7 +156,9 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
         : bidder.CoinName : owner?.CoinName,
     NFTOwner: item.NFTOwner
   })
-  console.log("FormValue", FormValue)
+  console.log("FormValue", FormValue);
+
+  const {wallets} = useWallets();
 
   useEffect(() => {
     BalCal(FormValue.CoinName)
@@ -185,20 +187,20 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
 
   const Token_details = useMemo(() => {
     var data = currency?.filter(item => item.label === FormValue.CoinName)?.pop() ?? currency?.filter(item => item.label !== "BNB")?.pop()
-
+console.log('TOkendsetails data---->',data);
     return {
-      decimal: data?.decimal ?? 18,
+      decimal: data?.decimal || 18,
       token_address: data?.address ?? config.DEADADDRESS
     }
   }, [FormValue.CoinName])
-
+console.log('Token_details---->',Token_details);
   const BalCal = async (data) => {
-    let TokenBal = await ContractCall.Token_Balance_Calculation(Token_details.token_address, accountAddress)
+    let TokenBal = await ContractCall.Token_Balance_Calculation(Token_details.token_address, accountAddress,wallets[0])
     console.log('====================================TokenBal0', TokenBal);
     SetTokenBal(TokenBal)
   }
 
-  const YouWillGet = useMemo(() => { return ContractCall.buy_bid_price_calculation((FormValue.TokenBidAmt * FormValue.NFTQuantity).toString(), Token_details.decimal.toString()) }, [FormValue.TokenBidAmt, FormValue.NFTQuantity])
+  const YouWillGet = useMemo(() => { return ContractCall.buy_bid_price_calculation((FormValue?.TokenBidAmt * FormValue?.NFTQuantity).toString(), Token_details?.decimal?.toString()) }, [FormValue?.TokenBidAmt, FormValue?.NFTQuantity])
   console.log('YouWillGet---->', YouWillGet);
   const Validation = async () => {
     // console.log('validddddd',(Number(FormValue.NFTQuantity) % 1 !== 0),FormValue,FormValue.TokenBidAmt <= Number(owner.NFTPrice))
@@ -233,23 +235,30 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
       SetError(error)
     }
     else {
-      let allow = web3.utils.fromWei((await ContractCall.allowance_721_1155(Token_details.token_address, accountAddress)) ? String(await ContractCall.allowance_721_1155(Token_details.token_address, accountAddress)) : '0')
-      // console.log('fhfhfa',Token_details,accountAddress,Number(allow))
-      console.log("YouWillGet", YouWillGet, allow, String(Number(YouWillGet) + Number(allow)));
+
+      const checkApprove = await ContractCall.validateApproveforUSDT(YouWillGet, false, wallets[0], Token_details.token_address)
+      if (!checkApprove) return toast.update(id, { render: "Bidding failed", type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
+
+      // let allow = web3utils.fromWei((await ContractCall.allowance_721_1155(Token_details.token_address, accountAddress)) ? String(await ContractCall.allowance_721_1155(Token_details.token_address, accountAddress)) : '0')
+      // // console.log('fhfhfa',Token_details,accountAddress,Number(allow))
+      // console.log("YouWillGet", YouWillGet, allow, String(Number(YouWillGet) + Number(allow)));
 
       setCanReload(false)
 
       const getValue = isEmpty(bidder) ?
-        web3.utils.toWei(String(Number(YouWillGet))) :
-        web3.utils.toWei((Number(YouWillGet) - ContractCall.buy_bid_price_calculation((bidder?.TokenBidAmt)?.toString(), "18"))?.toFixed(7)?.toString());
+        web3utils.toWei(String(Number(YouWillGet))) :
+        web3utils.toWei((Number(YouWillGet) - ContractCall.buy_bid_price_calculation((bidder?.TokenBidAmt)?.toString(), "18"))?.toFixed(7)?.toString());
 
       const Method = isEmpty(bidder) ? "bidNFT" : "editBid"
       let TStamp = Date.now();
-      // console.log('getValue---->', (Number(YouWillGet) - ContractCall.buy_bid_price_calculation((bidder?.TokenBidAmt)?.toString(), "18")).toFixed(7), YouWillGet, FormValue.TokenBidAmt, ContractCall.buy_bid_price_calculation((bidder?.TokenBidAmt).toString(), "18"), getValue, Method);
+      console.log('getValue---->', getValue, Method);
 
       // let cont = await ContractCall.BidNFt_Contract(getValue, Method, FormValue?.NFTId, item.ContractAddress, getValue, "2500000000000000000", "2500000000000000000")
       // let cont = await getThirdweb.useContractCall(Method, getValue, 0, FormValue?.NFTId, item.ContractAddress,getValue, "2500000000000000000",gasFee?.collectAddress, "2500000000000000000");
-      let cont = await ContractCall.gasLessTransaction(Method, getValue, 0, FormValue?.NFTId, item.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000", "2500000000000000000");
+      var param = [Method, 0, 0,wallets[0], FormValue?.NFTId, item.ContractAddress,TStamp, gasFee?.collectAddress, getValue, "2500000000000000000"]
+      if(Method == "bidNFT") param.splice(8,0, FormValue?.CoinName)
+      console.log("paramamamamam",param);
+      let cont = await ContractCall.gasLessTransaction(...param);
       setCanReload(true)
       if (cont) {
 
@@ -328,7 +337,7 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
     async function BalanceCheck() {
       if (once) {
         setOnce(false);
-        var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item)
+        var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item,wallets[0])
         console.log('BIDBalanceCheck', owner, item, Nftbalance);
         if (Nftbalance?.toLowerCase() != owner.NFTOwner?.toLowerCase()) {
           toast.warning("You won't buy at this moment please refresh you data");
@@ -394,15 +403,13 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
                 className="border_select"
                 placeholder="CoinName"
                 styles={stylesgraybg}
-
-                value={{ label: "BNB", value: "BNB" }}
-                defaultValue={{ label: "BNB", value: "BNB" }}
-                onChange={(e) => { onChange(e, 'price') }}
-                options={currency?.filter(item => item.label == "BNB" && item.label != "ETH")}
+                value={{ label: FormValue?.CoinName, value: FormValue?.CoinName }}
+                onChange={(e) => { SetFormValue({...FormValue,CoinName:e.value}) }}
+                options={currency?.filter(item => item.address?.toLowerCase() != config.DEADADDRESS)}
                 id='CoinName'
                 isSearchable={false}
+                isDisabled={true}
                 classNamePrefix="react-select"
-                isDisabled={owner?.PutOnSaleType == "TimedAuction"}
               />
             </div>
 
@@ -412,24 +419,24 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
               <p className='modal_summaryLabel'>{parseFloat(coinBalance).toFixed(6)} {item?.CollectionNetwork}</p>
             </div>
 
-            {/* <div className='bidmodal_summary mb-3'>
+            <div className='bidmodal_summary mb-3'>
               <p className='modal_summaryLabel'>Token balance</p>
               <p className='modal_summaryLabel'>{TokenBal} {FormValue.CoinName}</p>
-            </div> */}
+            </div>
 
             <div className='bidmodal_summary mb-3'>
               <p className='modal_summaryLabel'>Service fees</p>
-              <p className='modal_summaryLabel'>{web3.utils.fromWei(String(buyerFees))}% BNB</p>
+              <p className='modal_summaryLabel'>{web3utils.fromWei(String(buyerFees))}% {FormValue?.CoinName}</p>
             </div>
 
             <div className='bidmodal_summary mb-3'>
               <p className='modal_summaryLabel'>Total bid amount</p>
-              <p className='modal_summaryLabel'>{Number(YouWillGet)?.toFixed(6)} BNB</p>
+              <p className='modal_summaryLabel'>{Number(YouWillGet)?.toFixed(6)} {FormValue?.CoinName}</p>
             </div>
 
             <div className='bidmodal_summary mb-3'>
               <p className='modal_summaryLabel'>Minimum bid amount</p>
-              <p className='modal_summaryLabel'>{bid?.TokenBidAmt ? bid?.TokenBidAmt : owner?.NFTPrice} BNB</p>
+              <p className='modal_summaryLabel'>{bid?.TokenBidAmt ? bid?.TokenBidAmt : owner?.NFTPrice} {FormValue?.CoinName}</p>
             </div>
 
             <button

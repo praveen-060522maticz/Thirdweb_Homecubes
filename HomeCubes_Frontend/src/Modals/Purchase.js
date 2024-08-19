@@ -270,7 +270,7 @@ function Purchase({ show, handleClose, owner, item  }) {
   async function BalanceCheck() {
     if (once) {
       setOnce(false)
-      var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item);
+      var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item,);
       console.log("ownneerrsnftbuynowbalittemmm", Nftbalance, "  sadsadas", owner);
       if (Nftbalance?.toLowerCase() != owner.NFTOwner?.toLowerCase()) {
         toast.warning("You won't buy at this moment please refresh you data");

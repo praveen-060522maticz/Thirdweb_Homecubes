@@ -227,7 +227,7 @@ export const SendMails = async (req, res) => {
 
     var finds = all.filter(item => item.Success == false)
 
-    res.status(200).json({ success: finds.length == 0 ? 'success' : "error", msg: finds.length == 0 ? "Sended successfulyy" : "error on something" });
+    res.status(200).json({ success: finds.length == 0 ? 'success' : "error", msg: finds.length == 0 ? "Sended successfully" : "error on something" });
   } catch (err) {
     console.log("mailerr", err);
     res.status(200).json({ success: "error", data: "Error on mail" });

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Modal } from 'react-bootstrap';
 import config from '../config/config';
 import { toast } from 'react-toastify';
-import useThirdWeb from '../actions/useThirdWeb';
 import { useSelector } from 'react-redux';
 import { BuyAccept } from '../actions/axioss/nft.axios';
 import { useNavigate } from 'react-router-dom';
 import { isEmpty } from '../actions/common';
 import useContractProviderHook from '../actions/contractProviderHook';
+import { useWallets } from '@privy-io/react-auth';
 
 function TransferToken({ show, handleClose, item, Tokens_Detail }) {
   console.log('TokenTedetailsss---->', item, Tokens_Detail);
@@ -19,14 +19,13 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
   const push = useNavigate()
 
 
-  const getThirdweb = useThirdWeb();
   const ContractCall = useContractProviderHook();
 
 
   const { accountAddress, web3 } = useSelector(state => state.LoginReducer.AccountDetails);
   const { payload, isAdmin } = useSelector((state) => state.LoginReducer.User);
   const { gasFee } = useSelector((state) => state.LoginReducer.User);
-
+  const {wallets} = useWallets();
 
   const FormSubmit = async () => {
 
@@ -56,6 +55,7 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
         "setApprovalForAll",
         0,
         0,
+        wallets[0],
         item.ContractAddress, true
       );
 
@@ -92,7 +92,7 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
     // console.log("to transfer", item.ContractAddress, item.ContractType, Quantity, Address, owner.NFTId)
     // let cont = await ContractCall.Trsanfer(item.ContractAddress, item.ContractType, Quantity, Address, owner.NFTId)
     // const cont = await getThirdweb.useContractCall("TransferToken", 0, 0, Tokens_Detail.NFTId,Address , Tokens_Detail.ContractAddress,gasFee?.collectAddress, "2500000000000000000")
-    const cont = await ContractCall.gasLessTransaction("TransferToken", 0, 0, Tokens_Detail.NFTId, Address, Tokens_Detail.ContractAddress, gasFee?.collectAddress, TStamp, "2500000000000000000")
+    const cont = await ContractCall.gasLessTransaction("TransferToken", 0, 0,wallets[0], Tokens_Detail.NFTId, Address, Tokens_Detail.ContractAddress, gasFee?.collectAddress, TStamp, "2500000000000000000")
 
     console.log("transfer hash ", cont?.HashValue, cont)
     if (cont) {
@@ -107,7 +107,7 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
         activity: "Transfer",
         TP: "0",
         New_EmailId: '',
-        CN: "BNB",
+        CN: "",
         click: "",
         initialBuy: "",
         referedBy: "",

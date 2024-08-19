@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import useContractProviderHook from '../actions/contractProviderHook';
 import { CreateOrder, setPendingTransaction } from '../actions/axioss/nft.axios';
 import { useSelector } from 'react-redux';
-import useThirdWeb from '../actions/useThirdWeb';
+import { useWallets } from '@privy-io/react-auth';
 
 function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item }) {
   console.log("propsprops", owner, types, file, type, thumb, item);
@@ -13,12 +13,11 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
 
   const push = useNavigate();
   const ContractCall = useContractProviderHook()
-  const getThirdweb = useThirdWeb();
   const [Btn, SetBtn] = useState('start')
 
   const { accountAddress, web3 } = useSelector(state => state.LoginReducer.AccountDetails);
   const { payload } = useSelector(state => state.LoginReducer.User);
-
+  const {wallets} = useWallets();
   const [canReload, setCanReload] = useState(true);
 
   useEffect(() => {
@@ -54,7 +53,7 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
         let TStamp = Date.now();
         // let cont = await ContractCall.cancel_order_721_1155(owner.NFTId)
         // let cont = await getThirdweb.useContractCall("cancelOrder", 0, 0, owner.NFTId,gasFee?.collectAddress, "2500000000000000000");
-        let cont = await ContractCall.gasLessTransaction("cancelOrder", 0, 0, owner.NFTId, TStamp, gasFee?.collectAddress, "2500000000000000000");
+        let cont = await ContractCall.gasLessTransaction("cancelOrder", 0, 0,wallets[0], owner.NFTId, TStamp, gasFee?.collectAddress, "2500000000000000000");
 
         setCanReload(true)
         if (cont) {
@@ -152,7 +151,7 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
               <p className='cp_nftName mt-3'>{item?.TokenName}</p>
             </div>
 
-            <p className='modal_summaryLabel text-center mt-4'>you are about to delete instant sale for <span className='cancelSale'>Animal</span> for <span className='cancelSale'>0ni3h3894yrh3h49y</span> </p>
+            <p className='modal_summaryLabel text-center mt-4'>you are about to delete instant sale for <span className='cancelSale'>{item?.TokenName}</span> </p>
 
             <p className='cancel_salePrice mt-3 text-center'>{item?.NFTPrice}  {item?.CoinName}</p>
 

@@ -1,7 +1,7 @@
 import config from './config'
 
 var net = {}
-if (config.env == "demo" || config.env == "local" || config.env == "demossl") {
+if (config.env == "demo" || config.env == "local" || config.env == "demossl" || config.env == "localIp") {
     net = {
         97: {   // binance testnet
 
@@ -47,8 +47,11 @@ if (config.env == "demo" || config.env == "local" || config.env == "demossl") {
             tokenSymbol: "CAKE",
             siteUrl: "https://testnet.snowtrace.io",
             tokenAddress: "0xEb4fFed6B324b5FdC4d72AD3dA75bf1Fb2bB004A".toLowerCase(),
-            deadaddress: '0x000000000000000000000000000000000000dEaD'.toLowerCase(),
-            tradeContract: '0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208'.toLowerCase(),
+            deadaddress: '0x000000000000000000000000000000000000dEaD'.toLowerCase(), 
+
+            // tradeContract: '0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208'.toLowerCase(),
+
+            tradeContract: '0x783FB9DD2C69101cd0E080403279b9fE7E6ac780'.toLowerCase(),
             // tradeContract: '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase(),
             // tradeContract: '0x19D4c0f9155C6517580f850D4D097AF0448a1B39'.toLowerCase(), // sepolia old
             // tradeContract: '0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3'.toLowerCase(),
@@ -58,7 +61,9 @@ if (config.env == "demo" || config.env == "local" || config.env == "demossl") {
             chainName: "FUJI",
             // stakeContract : "0x6fc5B10eAc3adeE4513d27341a30C73005d37F55".toLowerCase(),// sepolia old
             // stakeContract : "0x0e409bf120da9b6BBB8c777CEef5a20C57a60750".toLowerCase()
-            stakeContract : "0x4f9395bdA5E47566903b960895fdc2713890Fd41".toLowerCase()
+
+            // stakeContract : "0x4f9395bdA5E47566903b960895fdc2713890Fd41".toLowerCase()
+             stakeContract : "0x5eFe07C7A4F632b2c8Cd40aA2f4a70EC71d32348".toLowerCase()
         }
     }
 }

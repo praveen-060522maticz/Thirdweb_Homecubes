@@ -9,16 +9,16 @@ import { GetNftCookieToken } from "../actions/axioss/nft.axios";
 import { GetUserCookieToken, getFessFunc, userRegister } from "../actions/axioss/user.axios";
 import { connectWallet, getServiceFees } from "../hooks/useWallet";
 import { toast } from "react-toastify";
-import { address_showing, isEmpty, sleep } from "../actions/common";
+import { address_showing, getBNBvalue, isEmpty, sleep } from "../actions/common";
 import { Currency, TOKENPRICE, USDPRICE } from "../actions/axioss/cms.axios";
 import config from "../config/config";
 import CopyToClipboard from "react-copy-to-clipboard";
-
-import { client } from "../App";
-import { createWallet } from "thirdweb/wallets";
-import { sepolia } from 'thirdweb/chains'
-import { ConnectButton } from "thirdweb/react";
-import useThirdWeb from "../actions/useThirdWeb";
+import { usePrivy, useWallets, useLinkAccount } from "@privy-io/react-auth";
+import useContractProviderHook from "../actions/contractProviderHook";
+import Web3 from "web3";
+import TradeAbi from '../Abi/trade.json';
+import Token from '../Abi/token.json';
+import web3utill from 'web3-utils'
 
 function Header() {
   const [active, setActive] = useState();
@@ -36,6 +36,7 @@ function Header() {
 
   const wallet = useSelector((state) => state.LoginReducer.AccountDetails);
   const { payload, token, gasFee } = useSelector((state) => state.LoginReducer.User);
+  const { currency } = useSelector(state => state.LoginReducer)
   const isWalletConnected = useSelector((state) => state.LoginReducer.walletConnected);
   console.log('payloadpayloadpayload---->', payload, gasFee);
   console.log('isWalletConnected---->', isWalletConnected);
@@ -43,59 +44,47 @@ function Header() {
   const navigate = useNavigate();
 
   const [reconnect, setReconnect] = useState(true);
-
-  // const getThirdweb = useThirdWeb();
-  // console.log('smartAccount---->',);
-
-  // const walletDetails = getThirdweb.getSmartAccount();
-  // console.log('walletDetails---->', walletDetails);
+  const { login, logout,connectOrCreateWallet, authenticated } = usePrivy();
+  const { wallets, ready, } = useWallets();
+  const connectedwalet = wallets[0];
+  console.log('connectedwalet---->', connectedwalet, ready, authenticated, currency);
   useEffect(() => {
-    if (
-      localStorage.getItem("walletConnectType") &&
-      wallet?.accountAddress == "" &&
-      reconnect
-    ) {
-      initialConnectWallet(localStorage.getItem("walletConnectType"));
+    // if (
+    //   localStorage.getItem("walletConnectType") &&
+    //   wallet?.accountAddress == "" &&
+    //   reconnect
+    // ) {
+    //   initialConnectWallet(localStorage.getItem("walletConnectType"));
 
-      setReconnect(false);
-    }
-    CurrencyList();
+    //   setReconnect(false);
+    // }
     getInitialSeviceFee();
   }, []);
 
   useEffect(() => {
-    if (window.ethereum) {
-      window.ethereum?.on("accountsChanged", handleAccountChange);
-      return () => {
-        window.ethereum?.removeListener("accountsChanged", handleAccountChange);
-      };
-    }
-  }, []);
+    if (ready && authenticated && !isWalletConnected && reconnect && connectedwalet) {
+      // wallets[0].linked
+      initialConnectWallet("privyWallet");
+      CurrencyList();
+      return setReconnect(false)
+    } 
+    // else if (ready && authenticated && isEmpty(connectedwalet)) localStorage.clear()
 
-  const handleAccountChange = (...args) => {
-    initialConnectWallet(localStorage.walletConnectType, true);
-    // if (walletDetails) {
-    //   console.log('Inawaawawawawawaw---->',);
-    //   walletDisconnect()
-    //   // document.getElementById("ConnectWalletBtn").click();
-    //   // initialConnectWallet("smartWallet")
-    //   navigate("/");
-    // }
-  };
-
-  // const isInitialRender = useRef(true);
+  }, [ready, authenticated, isWalletConnected, connectedwalet])
 
   // useEffect(() => {
-  //   let localWallet = localStorage.getItem("thirdweb:active-wallet-id")
-  //   if (localWallet && walletDetails && !isWalletConnected) initialConnectWallet("smartWallet");
-  //   else {
-  //     if (!isInitialRender.current) {
-  //       walletDisconnect(true)
-  //     }
+  //   if (window.ethereum) {
+  //     window.ethereum?.on("accountsChanged", handleAccountChange);
+  //     return () => {
+  //       window.ethereum?.removeListener("accountsChanged", handleAccountChange);
+  //     };
   //   }
-  //   console.log('isInitialRender.current---->', isInitialRender.current, localWallet, walletDetails);
-  //   isInitialRender.current = false;
-  // }, [localStorage.getItem("thirdweb:active-wallet-id"), walletDetails])
+  // }, []);
+
+  // const handleAccountChange = (...args) => {
+  //   if (connectedwalet?.connectorType == "injected")
+  //     initialConnectWallet(localStorage.walletConnectType, true);
+  // };
 
 
   const initialConnectWallet = async (type, homePage) => {
@@ -105,14 +94,11 @@ function Header() {
     });
     console.log("ennanadkkuthu", type);
     // if(!localStorage.getItem("accountInfo")){
-    sleep(2000)
-    var accountDetails = await connectWallet(type);
+    // sleep(2000)
+    var accountDetails = type == "privyWallet" ? await connectPrivyWalllet(type) : await connectWallet(type);
     console.log('accountDetailsasa--->', accountDetails);
     if (!isEmpty(accountDetails)) {
       if (accountDetails?.accountAddress) {
-        const getAddress = ""
-        console.log('getAddress---->', getAddress);
-        accountDetails.parentAddress = getAddress[0]?.toString()?.toLowerCase();
         console.log("accountDetails", accountDetails);
         const getFees = await getFessFunc({ action: "get" });
         console.log('getFees---->', getFees);
@@ -153,6 +139,21 @@ function Header() {
             closeButton: true,
             closeOnClick: true,
           });
+          // setTimeout(()=>{
+          //   toast("ahfoiahwofahwf sgsg sgseg sgsegseges",{
+          //     autoClose:1000000000,
+          //     progressStyle:{
+          //       "color": "#190083",
+          //     },
+          //     style:{
+          //     "color": "#190083",
+          //     "background-color": "#78dca6",
+          //     "font-weight": 700,
+          //     "text-wrap": "wrap",
+
+          //   }})
+          // },2000)
+
           handleCloseWallet();
           dispatch({
             type: "Account_Section",
@@ -164,7 +165,7 @@ function Header() {
             toast.update(id, {
               render: Resp.msg,
               type: Resp.success,
-              autoClose: 1000,
+              autoClose: 100000,
               isLoading: false,
               closeButton: true,
               closeOnClick: true,
@@ -191,32 +192,39 @@ function Header() {
   };
 
   const walletDisconnect = async () => {
-    // localStorage.removeItem("accountInfo")
-    // localStorage.removeItem("walletConnectType")
-    localStorage.clear();
-    // getThirdweb.disconnectWallet();
-    dispatch({
-      type: "Account_Section",
-      Account_Section: {
-        AccountDetails: {
-          accountAddress: "",
-          tokenBalance: 0,
-          coinBalance: 0,
+    try {
+      localStorage.removeItem("accountInfo")
+      localStorage.removeItem("walletConnectType")
+      connectedwalet.disconnect();
+      await logout()
+      // localStorage.clear();
+      // getThirdweb.disconnectWallet();
+      dispatch({
+        type: "Account_Section",
+        Account_Section: {
+          AccountDetails: {
+            accountAddress: "",
+            tokenBalance: 0,
+            coinBalance: 0,
+          },
         },
-      },
-    });
-    dispatch({
-      type: "walletConnect",
-      walletSection: {
-        walletConnected: false
-      },
-    });
-    navigate("/");
-    toast.success("Wallet disconnected...");
-    // window.location.reload();
-    document.cookie = "token" + "=" + "" + ";" + ";path=/";
-    GetNftCookieToken();
-    GetUserCookieToken();
+      });
+      dispatch({
+        type: "walletConnect",
+        walletSection: {
+          walletConnected: false
+        },
+      });
+      navigate("/");
+      toast.success("Wallet disconnected...");
+      // window.location.reload();
+      document.cookie = "token" + "=" + "" + ";" + ";path=/";
+      GetNftCookieToken();
+      GetUserCookieToken();
+    } catch (e) {
+      console.log('Erorro on desconnect---->', e);
+    }
+
   };
 
 
@@ -239,7 +247,10 @@ function Header() {
     let Resp = await Currency();
     console.log("Resp@123currency", Resp?.msg);
 
-    if (typeof Resp?.msg != "string") {
+    if (connectedwalet && typeof Resp?.msg != "string") {
+
+
+
       var sen = [];
       var bnb =
         Resp?.msg?.filter((item) => item.ChainId == config.BNBCHAIN) ?? [];
@@ -249,29 +260,40 @@ function Header() {
       var bnbdatas = await Promise.all(
         bnb[0]?.CurrencyDetails ||
         []?.map(async (data) => {
-          if (data.label == "BNB" || data.label == "ETH")
-            var USD = await USDPRICE(data.label);
-          else var USD = await TOKENPRICE(data.address);
+          // if (data.label == "BNB" || data.label == "ETH")
+          //   var USD = await USDPRICE(data.label);
+          // else var USD = await TOKENPRICE(data.address);
+          const web3p = new Web3(config.RPC_URL)
+          let TokenContract = new web3p.eth.Contract(Token, data.address);
+          const getBalance = await TokenContract.methods.balanceOf(connectedwalet.address).call();
           sen.push({
             value: data.value,
             label: data.label,
             address: data.address.toLowerCase(),
-            usd: USD ? USD : 0,
+            balance: getBalance ? getBalance : 0,
             decimal: data.decimal,
           });
         })
       );
       var ethdatas = await Promise.all(
-        eth[0]?.CurrencyDetails ||
-        []?.map(async (data) => {
-          if (data.label == "BNB" || data.label == "ETH")
-            var USD = await USDPRICE(data.label);
-          else var USD = await TOKENPRICE(data.address);
+        eth[0]?.CurrencyDetails?.map(async (data) => {
+          console.log('data---->', data);
+          // if (data.label == "BNB" || data.label == "ETH")
+          //   var USD = await USDPRICE(data.label);
+          // else var USD = await TOKENPRICE(data.address);
+          const web3p = new Web3(config.RPC_URL)
+          if (data?.address == config.DEADADDRESS) {
+            var getBalance = await web3p.eth.getBalance(connectedwalet.address)
+          } else {
+            let TokenContract = new web3p.eth.Contract(Token, data.address);
+            var getBalance = await TokenContract.methods.balanceOf(connectedwalet.address).call();
+            console.log('getBalance---->', getBalance, parseFloat(getBalance));
+          }
           sen.push({
             value: data.value,
             label: data.label,
             address: data.address.toLowerCase(),
-            usd: USD ? USD : 0,
+            balance: getBalance ? (parseFloat(getBalance) / 1e18).toFixed(5) : 0,
             decimal: data.decimal,
           });
         })
@@ -280,13 +302,50 @@ function Header() {
       dispatch({
         type: "Register_Section",
         Register_Section: {
-          currency: config.CHAIN_ID == 97 ? bnbdatas : ethdatas,
+          currency: config.CHAIN_ID == 97 ? bnbdatas : sen,
           //   ethcurrency : ethdatas.length > 0 ? ethdatas : sen
         },
       });
     }
   };
   console.log("wwwwwwwwwwwwwwww", wallet);
+
+  const connectPrivyWalllet = async (type) => {
+    try {
+      var accountDetails = {}
+      // const wallet = wallets[0];
+      const provider = await connectedwalet.getEthereumProvider();
+      console.log('providerprovider---->', provider);
+      const web3 = new Web3(provider);
+      const web3p = new Web3(config.RPC_URL)
+      const address = connectedwalet.address
+
+      accountDetails.accountAddress = address?.toString()?.toLowerCase();
+      localStorage.setItem("accountInfo", address)
+      localStorage.setItem('walletConnectType', type);
+
+      accountDetails.coinBalance = parseInt(await web3p.eth.getBalance(address)) / 1e18
+      accountDetails.web3p = web3p;
+      accountDetails.web3 = web3;
+      accountDetails.tokenBalance = 0
+      console.log("acocococococo", accountDetails);
+      let CONTRACT = new web3p.eth.Contract(TradeAbi, config.TradeContract);
+
+      accountDetails.USDTaddress = CONTRACT.methods?.["staticToken"] ? await CONTRACT.methods?.staticToken()?.call() : config.STATIC_TOKEN
+      console.log("acocococococo", accountDetails);
+      let TokenContract = new web3p.eth.Contract(Token, accountDetails.USDTaddress);
+      const getSymbol = await TokenContract.methods.symbol().call();
+      const getBalance = await TokenContract.methods.balanceOf(address).call();
+      const getBnbValue = parseFloat(await getBNBvalue(getSymbol == "USDT" ? "BNBUSDT" : `${getSymbol.toString()?.toUpperCase()}BNB`))
+      const convertValue = getSymbol == "USDT" ? getBnbValue : (1 / getBnbValue)
+
+      accountDetails.BNBUSDT = convertValue || parseFloat(await getBNBvalue("BNBUSDT"))
+      console.log('Tokencinstra---->', getSymbol, getBalance, getBnbValue, convertValue);
+      return accountDetails;
+    } catch (e) {
+      console.log('Error on connectPrivyWalllet---->', e);
+    }
+  }
 
   return (
     <>
@@ -451,7 +510,7 @@ function Header() {
 
                 <div className="user_hidden_cnt">
                   <div className="mb-2 d-flex align-items-center justify-content-between">
-                    <p className="bal mb-0">Balance</p>
+                    <p className="bal mb-0">Balances</p>
                     <NavLink
                       className="sidetab_link"
                       to={`/profile/${wallet.accountAddress}`}
@@ -468,7 +527,12 @@ function Header() {
                       </li>
                     </NavLink>
                   </div>
-                  <p className="id mb-1">{parseFloat(wallet?.coinBalance).toFixed(5)} BNB</p>
+                  {/* <p className="id mb-1">{parseFloat(wallet?.coinBalance).toFixed(5)} BNB</p> */}
+                  {currency?.length != 0 && currency.map((val) => {
+                    return (
+                      <p className="id mb-1">{val?.balance} {val?.value}</p>
+                    )
+                  })}
                   <p className="metamask mb-1">MetaMask</p>
                   <div className="token mb-1 d-flex align-items-center justify-content-between">
                     <span>{address_showing(wallet?.accountAddress)}</span>
@@ -485,40 +549,41 @@ function Header() {
               </div>}
 
               <div className="header__thirdParty">
-              {wallet && wallet?.accountAddress ? (
-                <button
-                  className="header_gradientBtn"
-                  onClick={() => walletDisconnect()}
-                >
-                  <i class="fa-solid fa-right-from-bracket me-2"></i>
-                  Disconnect
-                  <Lottie
-                    animationData={wallety}
-                    className="header_walletLottie"
-                    loop={true}
-                  />
-                </button>
-              ) : (
-                <button
-                  className="header_gradientBtn"
-                  onClick={() => handleShowWallet()}
-                >
-                  <img
-                    className="header_wallet"
-                    src={require("../assets/images/wallet.svg").default}
-                  />
-                  Connect-Wallet
-                  <Lottie
-                    animationData={wallety}
-                    className="header_walletLottie"
-                    loop={true}
-                  />
-                </button>
-              )}
+                {/* {authenticated ? ( */}
+                {wallet && wallet?.accountAddress && authenticated ? (
+                  <button
+                    className="header_gradientBtn"
+                    onClick={() => walletDisconnect()}
+                  >
+                    <i class="fa-solid fa-right-from-bracket me-2"></i>
+                    Disconnect
+                    <Lottie
+                      animationData={wallety}
+                      className="header_walletLottie"
+                      loop={true}
+                    />
+                  </button>
+                ) : (
+                  <button
+                    className="header_gradientBtn"
+                    onClick={() => connectOrCreateWallet()}
+                  >
+                    <img
+                      className="header_wallet"
+                      src={require("../assets/images/wallet.svg").default}
+                    />
+                    Connect-Wallet
+                    <Lottie
+                      animationData={wallety}
+                      className="header_walletLottie"
+                      loop={true}
+                    />
+                  </button>
+                )}
               </div>
               {/* <Lottie animationData={wallety} className="header_simmer" loop={true}/> */}
 
-              {wallet && wallet?.accountAddress ? (
+              {wallet && wallet?.accountAddress && authenticated ? (
                 <div className="burger_head">
                   {/* <div className="wallet_only active header_link" onClick={() => walletDisconnect()} >Disconnect</div> */}
                   <button
@@ -541,7 +606,7 @@ function Header() {
               ) : (
                 <div className="burger_head">
                   <img
-                    onClick={() => handleShowWallet()}
+                    onClick={() => connectOrCreateWallet()}
                     className="header_wallet wallet_only"
                     src={require("../assets/images/wallet.svg").default}
                   />
@@ -574,7 +639,7 @@ function Header() {
 
                 <div className="user_hidden_cnt">
                   <div className="mb-2 d-flex align-items-center justify-content-between">
-                    <p className="bal mb-0">Balance</p>
+                    <p className="bal mb-0">Balances</p>
                     <NavLink
                       className="sidetab_link"
                       to={`/profile/${wallet.accountAddress}`}
@@ -591,7 +656,14 @@ function Header() {
                       </li>
                     </NavLink>
                   </div>
-                  <p className="id mb-1">{parseFloat(wallet?.coinBalance).toFixed(5)} BNB</p>
+                  {/* <p className="id mb-1">{parseFloat(wallet?.coinBalance).toFixed(5)} BNB</p> */}
+                  <div className="header_balanceScroller">
+                  {currency?.length != 0 && currency.map((val) => {
+                    return (
+                      <p className="id mb-1">{val?.balance} {val?.value}</p>
+                    )
+                  })}
+                  </div>
                   <p className="metamask mb-1">MetaMask</p>
                   <div className="token mb-1 d-flex align-items-center justify-content-between">
                     <span>{address_showing(wallet?.accountAddress)}</span>

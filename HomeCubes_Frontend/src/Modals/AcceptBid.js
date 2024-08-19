@@ -8,9 +8,9 @@ import { toast } from 'react-toastify';
 import { BidApprove } from '../actions/axioss/nft.axios';
 import { network } from '../config/network';
 import config from '../config/config'
-import useThirdWeb from '../actions/useThirdWeb';
 import { userRegister } from '../actions/axioss/user.axios';
-
+import web3utils from 'web3-utils';
+import { useWallets } from '@privy-io/react-auth';
 function AcceptBid({
    show,
    handleClose,
@@ -52,13 +52,13 @@ function AcceptBid({
    const { Network } = useSelector(
       (state) => state.LoginReducer
    );
+   const {wallets} = useWallets()
    console.log('token_address', token_address)
    useEffect(() => {
       BalCal(token_address);
    }, [token_address]);
 
    const [canReload, setCanReload] = useState(true);
-   const getThirdweb = useThirdWeb()
    useEffect(() => {
       const handleBeforeUnload = (event) => {
          if (!canReload) {
@@ -146,6 +146,7 @@ function AcceptBid({
          "setApprovalForAll",
          0,
          0,
+         wallets[0],
          item.ContractAddress, true
        );
 
@@ -237,11 +238,12 @@ function AcceptBid({
             "acceptBId",
             0,
             0,
-            "Coin",
+            wallets[0],
+            bidder?.CoinName,
             bidder?.TokenBidderAddress,
             [
                item.NFTId,
-               web3.utils.toWei(String(bidder?.TokenBidAmt * TokenQuantity)),
+               web3utils.toWei(String(bidder?.TokenBidAmt * TokenQuantity)),
                TokenQuantity,
                bidder?.ContractType,
             ],
@@ -289,8 +291,8 @@ function AcceptBid({
                   initialBuy: bidderDetail?.initialBuy,
                   referedBy: bidderDetail?.referedBy,
                   royaltyReceiver: cont?.royaltyInfo[1],
-                  earnPercentage: web3.utils.fromWei(String(cont?.royaltyInfo[2])),
-                  Earning: web3.utils.fromWei(String(cont?.royaltyInfo[3])),
+                  earnPercentage: web3utils.fromWei(String(cont?.royaltyInfo[2])),
+                  Earning: web3utils.fromWei(String(cont?.royaltyInfo[3])),
                   projectId: owner.projectId
                },
             };
@@ -347,7 +349,7 @@ function AcceptBid({
       async function BalanceCheck() {
          if (once) {
             setOnce(false)
-            var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item);
+            var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item,wallets[0]);
             console.log("ACEEPTBalanceCheck", owner, item, Nftbalance);
             if (Nftbalance?.toLowerCase() != owner.NFTOwner?.toLowerCase()) {
                toast.warning("You won't buy at this moment please refresh you data");
@@ -408,7 +410,7 @@ function AcceptBid({
 
                   <div className='bidmodal_summary mb-3'>
                      <p className='modal_summaryLabel'>Service fee in %</p>
-                     <p className='modal_summaryLabel'>{web3.utils.fromWei(String(sellerFees))}% {bidder?.CoinName}</p>
+                     <p className='modal_summaryLabel'>{web3utils.fromWei(String(sellerFees))}% {bidder?.CoinName}</p>
                   </div>
 
                   <div className='bidmodal_summary mb-3'>

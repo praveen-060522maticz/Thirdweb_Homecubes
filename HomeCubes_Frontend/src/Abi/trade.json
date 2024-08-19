@@ -5,31 +5,6 @@
             {
                 "indexed": true,
                 "internalType": "address",
-                "name": "token",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "spender",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "Approval",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
-                "internalType": "address",
                 "name": "from",
                 "type": "address"
             },
@@ -344,6 +319,11 @@
                 "internalType": "uint256",
                 "name": "withoutGasAmt",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "bidTokenAddress",
+                "type": "address"
             }
         ],
         "stateMutability": "view",
@@ -363,19 +343,6 @@
                 "internalType": "bool",
                 "name": "",
                 "type": "bool"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "_tid",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -468,35 +435,6 @@
     {
         "inputs": [
             {
-                "internalType": "address",
-                "name": "tokenAddress",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "spender",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "approveToken",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
                 "internalType": "uint256",
                 "name": "tokenId",
                 "type": "uint256"
@@ -517,13 +455,18 @@
                 "type": "address"
             },
             {
-                "internalType": "uint256",
-                "name": "gasAmount",
-                "type": "uint256"
+                "internalType": "string",
+                "name": "tokenName",
+                "type": "string"
             },
             {
                 "internalType": "uint256",
                 "name": "usdtAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "gasAmount",
                 "type": "uint256"
             }
         ],
@@ -873,19 +816,6 @@
                 "internalType": "address",
                 "name": "",
                 "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "getAdminProfitUSDT",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -1335,6 +1265,11 @@
                 "internalType": "address",
                 "name": "token",
                 "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "stakeAdd",
+                "type": "address"
             }
         ],
         "name": "setStaticToken",
@@ -1476,7 +1411,18 @@
         "type": "function"
     },
     {
-        "inputs": [],
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "tokenAdress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
         "name": "withdrawAdminGasProfit",
         "outputs": [],
         "stateMutability": "nonpayable",

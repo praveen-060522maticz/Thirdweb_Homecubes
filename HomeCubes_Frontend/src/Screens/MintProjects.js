@@ -88,7 +88,7 @@ function MintProjects() {
                               <p className="nft_coinname mt-3">
                                 {val.NFTPrice} {"  "}
                                 <span className="floor_prize">
-                                  {config.COIN_NAME}
+                                  {val.mintTokenName}
                                 </span>
                               </p>
 

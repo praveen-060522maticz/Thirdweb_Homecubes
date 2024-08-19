@@ -73,6 +73,14 @@ let project = new Schema({
         type: String,
         default: "",
     },
+    mintToken: {
+        type: String,
+        default: "",
+    },
+    mintTokenName: {
+        type: String,
+        default: "",
+    },
     unlockAt: {
         type: Date,
         default: new Date(),

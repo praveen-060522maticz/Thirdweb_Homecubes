@@ -1914,6 +1914,8 @@ export const projectTokenCount = async (data) => {
           projectTitle: 1,
           CMS: 1,
           propertyValue:1,
+          mintToken:1,
+          mintTokenName:1,
           fundReceiverAddress:1,
           locked: { $sum: "$tokens.locked" },
           isMinted: { $sum: "$tokens.isMintTrue" },

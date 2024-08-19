@@ -370,3 +370,17 @@ export const methodsArr = [
   'saleToken',
   'saleWithToken'
 ]
+
+export function extractAlphabets(inputString) {
+  try {
+      if (isEmpty(inputString)) return "";
+      const regex = /[a-zA-Z]+/g;
+      const matches = inputString.match(regex);
+      const result = matches ? matches.join('') : '';
+      return result;
+  } catch (e) {
+      console.log('Erro on extractAlphabets---->', e);
+      return false
+  }
+
+}

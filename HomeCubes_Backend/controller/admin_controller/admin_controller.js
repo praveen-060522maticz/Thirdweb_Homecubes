@@ -175,7 +175,9 @@ export const createProject = async (req, res) => {
     feeCollector,
     creatoraddress,
     color,
-    size
+    size,
+    mintToken,
+    mintTokenName
   } = req.body
   try {
 
@@ -239,7 +241,9 @@ export const createProject = async (req, res) => {
           contractAddress,
           imgfile: imgname,
           feeCollector,
-          propertyValue
+          propertyValue,
+          mintToken,
+          mintTokenName
         }).save();
 
 
@@ -430,7 +434,9 @@ export const createProject = async (req, res) => {
           propertyValue,
           feeCollector,
           ProjectThumbnail: ThumbImage ? ThumbImage : ProjectThumbnail,
-          imgfile: nftImage ? nftImage : imgfile
+          imgfile: nftImage ? nftImage : imgfile,
+          mintToken,
+          mintTokenName
         }
 
       })
@@ -553,7 +559,7 @@ export const createProject = async (req, res) => {
 }
 
 const saveMultiTokens = async (data, count) => {
-  const { symbol, projectDescription, imgname, baseUri, Hash, contractAddress, NFTRoyalty, color, size, creatoraddress, NFTPrice, nonce, randomname, projectId } = data
+  const { symbol, projectDescription, imgname, baseUri, Hash, contractAddress, NFTRoyalty, color, size, creatoraddress, NFTPrice, nonce, randomname, projectId,mintTokenName } = data
   const ref = Date.now()
 
   const getArr = Array(Number(data.maxNFTs)).fill().map((val, ind) => {
@@ -584,7 +590,7 @@ const saveMultiTokens = async (data, count) => {
       PutOnSale: "false",
       PutOnSaleType: "",
       NFTPrice: NFTPrice,
-      CoinName: "BNB",
+      CoinName: mintTokenName,
       Hash: Hash,
       NFTOwner: [creatoraddress],
       activity: "",
@@ -655,7 +661,7 @@ export const collectionFunctions = async (req, res) => {
       return res.json({
         success: "success",
         data: saveGallery,
-        msg: "Successfuly saved"
+        msg: "Successfully saved"
       })
     }
 

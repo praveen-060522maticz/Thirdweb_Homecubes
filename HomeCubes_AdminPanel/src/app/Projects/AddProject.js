@@ -23,6 +23,7 @@ import DateTimePicker from "react-datetime-picker";
 import useContractHook from "../../contract/contract.js";
 import web3 from 'web3'
 import { useSelector } from "react-redux";
+import * as tokenFunctions from '../../axioscalls/token.js'
 toast.configure();
 
 export function AddProject() {
@@ -111,6 +112,8 @@ export function AddProject() {
             }
         }
 
+        if (!formData?.mintToken) errors.mintToken = "Please select mint token"
+
         if (!formData.NFTRoyalty) errors.NFTRoyalty = "Royalty Required";
         else if (isEmpty(formData.NFTRoyalty))
             errors.NFTRoyalty = "Royalty Must Be Greate Than 0";
@@ -168,7 +171,7 @@ export function AddProject() {
             ).toFixed(6);
             formData.changePrice = false;
 
-            const create = await contract.createCollection([formData?.royaltyReceiver, [formData?.projectTitle, formData?.symbol, formData?.baseUri], web3.utils.toWei(String(formData?.NFTPrice)),formData?.feeCollector ]);
+            const create = await contract.createCollection([formData?.royaltyReceiver, [formData?.projectTitle, formData?.symbol, formData?.baseUri], web3.utils.toWei(String(formData?.NFTPrice)), formData?.feeCollector]);
             console.log("jhyyfegsiufs", create);
             if (!create.status) return (
                 toast.error("Error on contract."),
@@ -201,6 +204,113 @@ export function AddProject() {
         setLoading(false);
     };
 
+
+    const stylesgraybg = {
+        option: (styles, { isFocused, isSelected, isHovered }) => ({
+            ...styles,
+            color: "#6C6A81",
+            background: isFocused
+                ? "#F5F6F7"
+                : isSelected
+                    ? "#F5F6F7"
+                    : isHovered
+                        ? "red"
+                        : "#F5F6F7",
+
+            zIndex: 1,
+            cursor: "pointer",
+            fontSize: "13px",
+        }),
+        // header start
+        valueContainer: (provided, state) => ({
+            ...provided,
+            height: "40px",
+            padding: "0 20px",
+            backgroundColor: "#2A3038",
+            borderRadius: 5,
+            fontSize: "13px",
+            color: "#fff",
+        }),
+        control: (provided, state) => ({
+            ...provided,
+            height: "40px",
+            borderRadius: 5,
+            backgroundColor: "#2A3038",
+            border: "none",
+            outline: "none",
+            boxShadow: "none",
+            fontSize: "13px",
+            color: "#fff",
+        }),
+        //header end
+        indicatorsContainer: (provided, state) => ({
+            ...provided,
+            height: "40px",
+            position: "absolute",
+            right: 0,
+            top: 0,
+            color: "#6C6A81",
+        }),
+        //header color
+        singleValue: (provided, state) => ({
+            ...provided,
+            color: "white",
+        }),
+
+        // menu list start
+        menuList: (base) => ({
+            ...base,
+            //   padding: 0,
+            backgroundColor: "#2A3038",
+        }),
+        //menu options
+        option: (styles, { isFocused, isSelected, isHovered }) => {
+            return {
+                ...styles,
+                backgroundColor: isHovered
+                    ? "#16EBC3"
+                    : isSelected
+                        ? "#16EBC3"
+                        : isFocused
+                            ? "#16EBC3"
+                            : "#2A3038",
+                cursor: "pointer",
+                color: isHovered
+                    ? "#000"
+                    : isSelected
+                        ? "#000"
+                        : isFocused
+                            ? "#000"
+                            : "#fff",
+                fontSize: "13px",
+            };
+        },
+        // option: (base) => ({
+        //   ...base,
+        //   ":active": {
+        //     backgroundColor: "#16EBC3",
+        //   },
+        // }),
+    };
+
+    const [currencyArr, setCurrencyArr] = useState([])
+
+    useEffect(() => {
+        getTokenList();
+    }, [])
+
+    const getTokenList = async () => {
+        var resp = await tokenFunctions.getCurrencyList();
+        if (resp?.success) {
+            console.log(":", resp?.msg, config);
+            let eth = resp?.msg.filter((item) => item.ChainId == String(config?.ETHCHAIN))
+            console.log(":::", eth)
+            // setTokenList(resp?.msg[0]?.CurrencyDetails)
+            setCurrencyArr(eth[0]?.CurrencyDetails?.filter(val => val.address?.toLowerCase() != config.DEADADDRESS) || [])
+        }
+    }
+
+    console.log("formadatatatta", formData);
 
     return (
         <div>
@@ -268,8 +378,9 @@ export function AddProject() {
                                     />
                                     <p style={{ color: "red" }}>{Errors?.maxNFTs}</p>
                                 </Form.Group>
+
                                 <Form.Group>
-                                    <label htmlFor="exampleInputName1">Mint Price(In BNB)</label>
+                                    <label htmlFor="exampleInputName1">Mint Price</label>
                                     <Form.Control
                                         type="number"
                                         className="form-control"
@@ -282,6 +393,21 @@ export function AddProject() {
                                     />
                                     <p style={{ color: "red" }}>{Errors?.mintPrice}</p>
                                 </Form.Group>
+
+                                <Form.Group>
+                                    <label htmlFor="exampleInputName1">Mint token</label>
+                                    <Select
+                                        styles={stylesgraybg}
+                                        options={currencyArr}
+                                        value={formData?.mintTokenName ? { value: formData?.mintTokenName, label: formData?.mintTokenName } : null}
+                                        onChange={(e) => setFormData({ ...formData, mintTokenName: e.value, mintToken: e.address })}
+                                        disabled={path == "projectView"}
+                                        placeholder="Select token"
+                                    />
+                                    <p className='mt-2' style={{ color: "red" }} >{Errors?.mintToken}</p>
+                                </Form.Group>
+
+
                                 <Form.Group>
                                     <label htmlFor="exampleInputName1">
                                         Collection Token Symbol(Ex. HMCBS)

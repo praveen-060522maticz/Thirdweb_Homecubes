@@ -2,7 +2,7 @@
   "name": "impact",
   "version": "3.1.0",
   "private": true,
-  "homepage": "/ebucemoh",
+  "homepage": "/",
   "dependencies": {
     "@ashvin27/react-datatable": "^1.5.3",
     "@ckeditor/ckeditor5-build-classic": "^34.1.0",

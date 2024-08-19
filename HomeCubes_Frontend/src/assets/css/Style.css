@@ -298,6 +298,10 @@
 .header_aftConnect div:nth-child(2) span:nth-child(2){
   font-size: var(--lower_fontsize);
 }
+.header_balanceScroller{
+  max-height: 120px;
+  overflow-y: auto;
+}
 /* end of header css */
 
 /* sidetab css */
@@ -4993,7 +4997,7 @@ body.modal-open .container {
     display: none;
   }
   .user_hidden_cnt {
-    top: 36px;
+    top: 33px;
   }
 }
 @media (min-width: 1200px) {
@@ -5004,7 +5008,7 @@ body.modal-open .container {
     display: block;
   }
   .user_hidden_cnt {
-    top: 40px;
+    top: 30px;
   }
 }
 @media (min-width: 992px) and (max-width: 1199px) {

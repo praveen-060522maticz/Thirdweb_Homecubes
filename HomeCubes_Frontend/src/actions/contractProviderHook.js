@@ -13,6 +13,8 @@ import StakeAbi from '../Abi/stakeAbi.json'
 import ForwardAbi from '../Abi/forwardABI.json'
 import { toast } from 'react-toastify'
 import { NftbalanceUpdate } from './axioss/nft.axios';
+import { usePrivy, useWallets, useSignTypedData } from '@privy-io/react-auth';
+import { getBNBvalue, getErrorForToast } from './common';
 // var web3s=new Web3(network[Network].rpcUrl)
 // console.log("web3s@123",network);
 
@@ -24,10 +26,13 @@ export default function useContractProviderHook() {
     );
 
     var web3s = new Web3(network[Network]?.rpcUrl)
-    const { accountAddress, web3, web3p, coinBalance, USDTaddress, BNBUSDT } = useSelector(state => state.LoginReducer.AccountDetails);
+    const { accountAddress, web3, web3p, web3auth, coinBalance, USDTaddress, BNBUSDT } = useSelector(state => state.LoginReducer.AccountDetails);
     const { sellerFees, buyerFees } = useSelector(state => state.LoginReducer.ServiceFees);
     const { gasFee } = useSelector((state) => state.LoginReducer.User);
-    console.log('FFAFAFAADADADDD---->', gasFee);
+    const { wallets, ready } = useWallets();
+    const { signTypedData } = usePrivy()
+
+    console.log('FFAFAFAADwalletADADDD---->', gasFee);
 
     console.log("sellerFees, buyerFees", sellerFees, buyerFees);
     const Contract_Base_Validation = () => {
@@ -37,20 +42,25 @@ export default function useContractProviderHook() {
         else return ''
     }
 
-    const contrat_connection = async (...data) => {
+    const contrat_connection = async (conWallet, ...data) => {
+
         console.log('ddddaaattaaaa', ...data, web3, accountAddress, web3p);
-        if (web3) {
-            var contract_value = await new web3.eth.Contract(
-                ...data
-            );
-            return contract_value;
-        }
+        // if (web3) {
+        console.log('walgzesgseletswallets---->', conWallet);
+        // const getWallet = wallets[0]
+        const provider = await conWallet.getWeb3jsProvider();
+        const newWeb3 = new Web3(provider)
+        var contract_value = new newWeb3.eth.Contract(
+            ...data
+        );
+        return contract_value;
+        // }
     }
 
-    const GetApproveStatus = async (data, Addr) => {
+    const GetApproveStatus = async (data, Addr, conWallet) => {
 
         try {
-            var ConnectContract = await contrat_connection(ERC721, Addr)
+            var ConnectContract = await contrat_connection(conWallet, ERC721, Addr)
             var contract_Method_Hash = await
                 ConnectContract
                     .methods
@@ -60,6 +70,7 @@ export default function useContractProviderHook() {
 
         }
         catch (e) {
+            console.log('Error on GetApproveStatus---->', e);
             return 'error'
         }
     }
@@ -161,8 +172,8 @@ export default function useContractProviderHook() {
                     .minting(...data)
                     .send({
                         from: accountAddress,
-                        gas: web3.utils.toHex(gas_estimate),
-                        gasPrice: web3.utils.toHex(gasprice)
+                        gas: Web3Utils.toHex(gas_estimate),
+                        gasPrice: Web3Utils.toHex(gasprice)
                     })
                     .on('transactionHash', (transactionHash) => {
                         return transactionHash
@@ -204,8 +215,8 @@ export default function useContractProviderHook() {
                     .approve(...data)
                     .send({
                         from: accountAddress,
-                        gas: web3.utils.toHex(gas_estimate),
-                        gasPrice: web3.utils.toHex(gasprice)
+                        gas: Web3Utils.toHex(gas_estimate),
+                        gasPrice: Web3Utils.toHex(gasprice)
                     })
                     .on('transactionHash', (transactionHash) => {
                         return transactionHash
@@ -224,14 +235,14 @@ export default function useContractProviderHook() {
             return false
         }
     }
-    const Token_Balance_Calculation = async (token_Address, data) => {
+    const Token_Balance_Calculation = async (token_Address, data, conWallet) => {
 
         try {
             console.log('adddrreeeessss', token_Address, data)
-            const ConnectContract = await contrat_connection(DETH, token_Address)
+            const ConnectContract = await contrat_connection(conWallet, DETH, token_Address)
             var bidAMt = await ConnectContract.methods.balanceOf(data).call();
 
-            return Number(web3.utils.fromWei(String(bidAMt)))
+            return Number(Web3Utils.fromWei(String(bidAMt)))
         }
         catch (e) {
 
@@ -239,14 +250,20 @@ export default function useContractProviderHook() {
         }
     }
     var buy_bid_price_calculation = (val, decimal) => {
-        console.log("val", val, decimal)
-        var toMid = val * 1000000
-        var serfee = (toMid / 100000000) * (web3p.utils.fromWei(String(buyerFees ? buyerFees : 1)) * 1000000)
-        var totfee = serfee + toMid
-        var tot2cont = web3.utils.toWei(String(Number(totfee / 1000000)).length > 18 ? String(Number(totfee / 1000000).toFixed(18)) : String(Number(totfee / 1000000)))
-        var dec = decimal == 18 ? 18 : 18 - (decimal);
-        var aprrove = ((tot2cont) / 10 ** dec)
-        return (aprrove)
+        try {
+            console.log("val", val, decimal)
+            var toMid = val * 1000000
+            var serfee = (toMid / 100000000) * (Web3Utils.fromWei(String(buyerFees ? buyerFees : 1)) * 1000000)
+            var totfee = serfee + toMid
+            var tot2cont = Web3Utils.toWei(String(Number(totfee / 1000000)).length > 18 ? String(Number(totfee / 1000000).toFixed(18)) : String(Number(totfee / 1000000)))
+            var dec = decimal == 18 ? 18 : 18 - (decimal);
+            var aprrove = ((tot2cont) / 10 ** dec)
+            return (aprrove)
+        } catch (e) {
+            console.log('Error on byubidcalcu---->', e);
+            return false
+        }
+
     }
     const cancel_order_721_1155 = async (data) => {
         try {
@@ -263,8 +280,8 @@ export default function useContractProviderHook() {
                     .cancelOrder(data)
                     .send({
                         from: accountAddress,
-                        gas: web3.utils.toHex(gas_estimate),
-                        gasPrice: web3.utils.toHex(gasprice),
+                        gas: Web3Utils.toHex(gas_estimate),
+                        gasPrice: Web3Utils.toHex(gasprice),
                     })
                     .on('transactionHash', (transactionHash) => {
                         return transactionHash
@@ -283,7 +300,7 @@ export default function useContractProviderHook() {
     }
     var price_calculation = (data, roy) => {
         try {
-            var price = web3.utils.toWei(data);
+            var price = Web3Utils.toWei(data);
             // var weii = price*1e6
             // var ser_per = (weii/100000000)*((Wallet_Details.sellerfee/config.decimalvalues)*1000000)
             // var roy_per = (weii/100000000)*((roy)*1000000)
@@ -332,8 +349,8 @@ export default function useContractProviderHook() {
                     .orderPlace(...data)
                     .send({
                         from: accountAddress,
-                        gas: web3.utils.toHex(gas_estimate),
-                        gasPrice: web3.utils.toHex(gasprice)
+                        gas: Web3Utils.toHex(gas_estimate),
+                        gasPrice: Web3Utils.toHex(gasprice)
                     })
                     .on('transactionHash', (transactionHash) => {
                         return transactionHash
@@ -373,8 +390,8 @@ export default function useContractProviderHook() {
                         .send({
                             from: accountAddress,
                             value: Send,
-                            gas: web3.utils.toHex(gas_estimate),
-                            gasPrice: web3.utils.toHex(gasprice),
+                            gas: Web3Utils.toHex(gas_estimate),
+                            gasPrice: Web3Utils.toHex(gasprice),
                         })
                         .on('transactionHash', (transactionHash) => {
                             return transactionHash
@@ -394,8 +411,8 @@ export default function useContractProviderHook() {
                         .saleWithToken(CoinName, ...data)
                         .send({
                             from: accountAddress,
-                            gas: web3.utils.toHex(gas_estimate),
-                            gasPrice: web3.utils.toHex(gasprice)
+                            gas: Web3Utils.toHex(gas_estimate),
+                            gasPrice: Web3Utils.toHex(gasprice)
                         })
                         .on('transactionHash', (transactionHash) => {
                             return transactionHash
@@ -440,10 +457,10 @@ export default function useContractProviderHook() {
         }
 
     }
-    const allowance_721_1155 = async (token_Address, data, trade) => {
+    const allowance_721_1155 = async (token_Address, data, trade, conWallet) => {
 
         try {
-            const ConnectContract = await contrat_connection(DETH, token_Address)
+            const ConnectContract = await contrat_connection(conWallet, DETH, token_Address)
             var contract_Method_Hash = await
                 ConnectContract
                     .methods
@@ -478,8 +495,8 @@ export default function useContractProviderHook() {
                         .acceptBId(...data)
                         .send({
                             from: accountAddress,
-                            gas: web3.utils.toHex(gas_estimate),
-                            gasPrice: web3.utils.toHex(gasprice),
+                            gas: Web3Utils.toHex(gas_estimate),
+                            gasPrice: Web3Utils.toHex(gasprice),
                         })
                         .on('transactionHash', (transactionHash) => {
                             return transactionHash
@@ -557,13 +574,13 @@ export default function useContractProviderHook() {
         }
     }
 
-    const Current_NFT_Balance = async (ownerdet, data) => {
+    const Current_NFT_Balance = async (ownerdet, data, conWallet) => {
 
         try {
             var currbalance;
             if ((data.ContractType === "721" || data.ContractType === 721)) {
-                console.log("dataindsddas", ERC721, data?.ContractAddress)
-                const ConnectContract = await contrat_connection(ERC721, data?.ContractAddress)
+                console.log("dataindsddas", ERC721, data?.ContractAddress, conWallet)
+                const ConnectContract = await contrat_connection(conWallet, ERC721, data?.ContractAddress)
                 currbalance = await ConnectContract.methods.ownerOf(ownerdet?.NFTId).call();
 
                 console.log('ballllaanneceeee1111', currbalance)
@@ -589,7 +606,7 @@ export default function useContractProviderHook() {
         }
         catch (e) {
             console.log('errorrrr,e', e)
-            return ""
+            return "false"
         }
     }
 
@@ -634,7 +651,7 @@ export default function useContractProviderHook() {
             var ids = []
             if (count != "") {
                 for (let i = 0; i < count; i++) {
-                    ids.push(web3s.utils.hexToNumber(Number(receipt.logs[i].topics[3])))
+                    ids.push(Web3Utils.hexToNumber(Number(receipt.logs[i].topics[3])))
                 }
                 var need_data = {
                     status: receipt.status,
@@ -648,7 +665,7 @@ export default function useContractProviderHook() {
                 var sliceee = route.slice(2)
                 var lengthuh = sliceee.length / 2
 
-                var TokenID = web3s.utils.hexToNumber("0x" + sliceee.slice(0, lengthuh))
+                var TokenID = Web3Utils.hexToNumber("0x" + sliceee.slice(0, lengthuh))
 
                 console.log("qweqweqweqweqwe", TokenID);
                 ids.push(TokenID)
@@ -736,8 +753,8 @@ export default function useContractProviderHook() {
 
     }
 
-    const getStackApproveStatus = async (Addr) => {
-        var ConnectContract = await contrat_connection(ERC721, Addr)
+    const getStackApproveStatus = async (Addr, wallet) => {
+        var ConnectContract = await contrat_connection(wallet, ERC721, Addr)
         var contract_Method_Hash = await
             ConnectContract
                 .methods
@@ -764,8 +781,8 @@ export default function useContractProviderHook() {
                     .setApprovalForAll(network[Network]?.stakeContract, true)
                     .send({
                         from: accountAddress,
-                        gas: web3.utils.toHex(gas_estimate),
-                        gasPrice: web3.utils.toHex(gasprice),
+                        gas: Web3Utils.toHex(gas_estimate),
+                        gasPrice: Web3Utils.toHex(gasprice),
                     }).on('transactionHash', (transactionHash) => {
                         return transactionHash
                     })
@@ -804,8 +821,8 @@ export default function useContractProviderHook() {
                     .send({
                         from: accountAddress,
                         value: value,
-                        gas: web3.utils.toHex(gas_estimate),
-                        gasPrice: web3.utils.toHex(gasprice)
+                        gas: Web3Utils.toHex(gas_estimate),
+                        gasPrice: Web3Utils.toHex(gasprice)
                     })
                     .on('transactionHash', (transactionHash) => {
                         return transactionHash
@@ -822,6 +839,15 @@ export default function useContractProviderHook() {
         } catch (e) {
             console.log('erro on BidnftContract---->', e);
             return false
+        }
+    }
+
+    const getAllowance = async (token, wallets) => {
+        try {
+            let allowance = await allowance_721_1155(token, accountAddress, config.TradeContract, wallets);
+            return parseInt(allowance)
+        } catch (e) {
+            console.log('Error on getAllowance---->', e);
         }
     }
 
@@ -860,26 +886,44 @@ export default function useContractProviderHook() {
     }
 
 
-    const getGasPriceObj = async (contract, method, value, paramForEstimate, ...paramForMethod) => {
+    const getGasPriceObj = async (conWallet, contract, method, value, paramForEstimate, ...paramForMethod) => {
         try {
             var contractobj = await
                 contract
-                    .methods[method](...paramForMethod)
+                    .methods[method](...paramForMethod).encodeABI();
+            console.log('paramsForest---->', ...paramForMethod, contractobj, paramForEstimate);
+            const provider = await conWallet.getEthereumProvider();
+            const nWeb3 = new Web3(provider)
 
-            var gasprice = parseInt(await web3.eth.getGasPrice());
-            var gas_estimate = await contractobj.estimateGas(paramForEstimate);
+            var gasprice = parseInt(await nWeb3.eth.getGasPrice());
+            // var gas_estimate = await contractobj.estimateGas(paramForEstimate);
+            var gas_estimate = await nWeb3.eth.estimateGas({ ...paramForEstimate, data: contractobj });
 
-            let aggresiveGas = gasprice + (gasprice * 50 / 100);
-            console.log("aggresiveGas", aggresiveGas);
+            // let aggresiveGas = gasprice + (gasprice * 50 / 100);
+            // console.log("aggresiveGas",aggresiveGas);
+            // let aggressiveEst = (parseInt(aggresiveGas) * parseInt(gas_estimate)) / 1e18 // aggresiva ges estimate
+            // console.log("aggressiveEst",aggressiveEst,getGasFeePer(method),BNBUSDT);
+            // let getMethodFee = ((aggressiveEst * BNBUSDT) * getGasFeePer(method)) / 100; // getPrice of added gas persentage
+            // console.log('aggressiveEst---->',aggresiveGas,aggressiveEst,getMethodFee);
+            // let totalGasAmount = (aggressiveEst  * BNBUSDT) + getMethodFee // adding percentage to the gas fee
+            // let totalValue = (parseInt(value) / 1e18) * BNBUSDT
+            // let totalAmount = totalGasAmount + totalValue
+            // console.log('--afawdfawfawfawfawfw-->', { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggresiveGas });
+            // return { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggresiveGas }
+
+            let aggresiveGas = gasprice + (gasprice * (50 / 100));
+            // console.log("aggresiveGas", aggresiveGas,gasprice,gas_estimate,gasprice * 20 / 100);
             let aggressiveEst = (parseInt(aggresiveGas) * parseInt(gas_estimate)) / 1e18 // aggresiva ges estimate
-            console.log("aggressiveEst", aggressiveEst, getGasFeePer(method), BNBUSDT);
-            let getMethodFee = ((aggressiveEst * BNBUSDT) * getGasFeePer(method)) / 100; // getPrice of added gas persentage
+            console.log("aggressiveEst", gasprice, aggressiveEst, getGasFeePer(method), BNBUSDT);
+
+
+            let getMethodFee = aggressiveEst * getGasFeePer(method) / 100; // getPrice of added gas persentage
             console.log('aggressiveEst---->', aggresiveGas, aggressiveEst, getMethodFee);
-            let totalGasAmount = (aggressiveEst * BNBUSDT) + getMethodFee // adding percentage to the gas fee
+            let totalGasAmount = (aggressiveEst + getMethodFee) * BNBUSDT // adding percentage to the gas fee
             let totalValue = (parseInt(value) / 1e18) * BNBUSDT
-            let totalAmount = totalGasAmount + totalValue
+            let totalAmount = (totalGasAmount + totalValue) * 5
             console.log('--afawdfawfawfawfawfw-->', { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggresiveGas });
-            return { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggresiveGas }
+            return { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggressiveEst }
 
             //old openzep
             // let aggresiveGas = gasprice + (gasprice * 20 / 100)
@@ -888,7 +932,11 @@ export default function useContractProviderHook() {
             // let totalAmount = totalGasAmount + totalValue
             // return { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggresiveGas }
         } catch (e) {
-            console.log('Error on getGasPriceObj---->', e);
+            // console.log('Error on getGasPriceObj---->', e,"--------------------------------",JSON.stringify(e));
+            const ll = JSON?.stringify(e);
+            const bb = JSON?.parse(ll);
+            console.log('SBBBDDBBD---->',bb);
+            toast.error( bb?.cause?.message || bb?.innerError?.message ||"Error on transaction")
         }
     }
 
@@ -926,36 +974,55 @@ export default function useContractProviderHook() {
         }
     };
 
-    async function signTypedData(from, data) {
+    async function signTypedDataOP(connectedWallet, data) {
         try {
-            console.log('DAADAFAD`---->', data, { method: "eth_signTypedData_v4", params: [from, JSON.stringify(data)], from: from });
-            const getHash = await new Promise((resolve, reject) => {
-                web3.currentProvider.sendAsync({ method: "eth_signTypedData_v4", params: [from, JSON.stringify(data)], from: from }, function (err, res) {
-                    if (err) return reject(err.message)
-                    else return resolve(res)
+            // only metamask
+            // const getHash = await new Promise((resolve, reject) => {
+            //     web3.currentProvider.sendAsync({ method: "eth_signTypedData_v4", params: [from, JSON.stringify(data)], from: from }, function (err, res) {
+            //         if (err) return reject(err.message)
+            //         else return resolve(res)
+            //     })
+            // })
+            // console.log('getHash---->', getHash);
+            // return getHash
+
+            console.log('web3web3aawdd---->', web3);
+            // console.log('DAADAFAD`---->', data, { method: "eth._signTypedData_v4", params: [connectedWallet.address, JSON.stringify(data)], from: connectedWallet.address });
+            const provider = await connectedWallet.getEthereumProvider();
+            const newWeb3 = new Web3(provider)
+            console.log('newWeb3---->',connectedWallet, newWeb3,data);
+            const getHash =
+            //  connectedWallet.walletClientType == "privy" ?
+            //     await signTypedData(data) // for embedded wallets
+            //     : 
+                await provider.request({ // for external wallets ex: metamask
+                    method: 'eth_signTypedData_v4',
+                    params: [connectedWallet.address, JSON.stringify(data)],
                 })
-            })
             console.log('getHash---->', getHash);
             return getHash
         } catch (error) {
             console.log("err on signTypedData", error);
+            toast.error(getErrorForToast(error.toString()))
+            return false
         }
 
     }
 
 
-    const gasLessTransaction = async (method, value, count, ...params) => {
+    const gasLessTransaction = async (method, value, count, conWallet, ...params) => {
 
         try {
             console.log('method, value, data, ...params---->', method, value, count, ...params);
 
             if (method != 'approve' && method != "setApprovalForAll") {
-                const getApproveStatus = await validateApproveforUSDT(spareAmount, count == "stake")
+                const getApproveStatus = await validateApproveforUSDT(spareAmount, count == "stake", conWallet, USDTaddress)
                 if (!getApproveStatus) return false;
 
                 console.log('asdfesfse---->', method, value, count, params);
 
                 var ConnectContract = await contrat_connection(
+                    conWallet,
                     method == "setApprovalForAll" ?
                         ERC721 :
                         count == "stake" ?
@@ -970,20 +1037,26 @@ export default function useContractProviderHook() {
                     [count == "stake" ? network[Network]?.stakeContract : config.TradeContract, true] : params;
 
                 var gas = await getGasPriceObj(
+                    conWallet,
                     ConnectContract,
                     method,
                     value,
-                    { from: accountAddress, value: value },
+                    {
+                        from: conWallet?.address, value: value,
+                        to: method == "setApprovalForAll" ? params[0] :
+                            method == "approve" ? USDTaddress :
+                                count == "stake" ? network[Network]?.stakeContract : config.TradeContract
+                    },
                     ...additionalParams);
 
                 if (!gas?.gas_estimate) return false
 
                 console.log('gasgasgas---->', gas);
-                if (method == "bidNFT" || method == "editBid") params[params.length - 2] = web3.utils.toWei(String(gas.totalGasAmount));
-                params[params.length - 1] = web3.utils.toWei(String(gas.totalAmount));
+                // if (method == "bidNFT" || method == "editBid") params[params.length - 2] = Web3Utils.toWei(String(gas.totalGasAmount?.toFixed(14)));
+                params[params.length - 1] = Web3Utils.toWei(String(gas.totalAmount?.toFixed(14)));
             }
 
-            console.log('sfsefsadsedawsd---->',
+            console.log('paramsForest',
                 (method == "setApprovalForAll" ?
                     ERC721 :
                     method == "approve" ?
@@ -1007,15 +1080,15 @@ export default function useContractProviderHook() {
                     : [...params]
             );
 
-            var ConnectContract = await contrat_connection(ForwardAbi, config.FORWARDER_ADDRESS);
+            var ConnectContract = await contrat_connection(conWallet, ForwardAbi, config.FORWARDER_ADDRESS);
             const deadline = new Date().setMinutes(new Date().getMinutes() + 5);
 
-            const nonce = await ConnectContract.methods.nonces(accountAddress).call()
+            const nonce = await ConnectContract.methods.nonces(conWallet.address).call()
             var input = {
                 to: method == "setApprovalForAll" ? params[0] :
                     method == "approve" ? USDTaddress :
                         count == "stake" ? network[Network]?.stakeContract : config.TradeContract,
-                from: accountAddress,
+                from: conWallet.address,
                 data: encodeData,
                 value: value.toString(),
                 gas: 1e6,
@@ -1027,8 +1100,9 @@ export default function useContractProviderHook() {
             const typeData = getMetaTxTypeData(config.CHAIN_ID, config.FORWARDER_ADDRESS);
             const toSign = { ...typeData, message: input };
             console.log('toSign---->', toSign);
-            const signature = await signTypedData(accountAddress, toSign);
-            const setData = { ...input, signature: signature.result }
+            const signature = await signTypedDataOP(conWallet, toSign);
+            if (!signature) return false;
+            const setData = { ...input, signature }
             console.log('setData---->', setData);
             const getData = await fetch(config.RELAYER_URL, {
                 method: 'POST',
@@ -1052,7 +1126,7 @@ export default function useContractProviderHook() {
                 if (method == "lazyMinting") {
                     var ids = []
                     for (let i = 0; i < count; i++) {
-                        ids.push(web3s.utils.hexToNumber(Number(receipt.logs[i].topics[3])))
+                        ids.push(Web3Utils.hexToNumber(Number(receipt.logs[i].topics[3])))
                     }
                     var need_data = {
                         status: receipt.status,
@@ -1060,6 +1134,7 @@ export default function useContractProviderHook() {
                         Tokenid: ids
                     }
                     return need_data
+                    // return {status:"pending"}
                 } else if (method == "saleToken" || method == "saleWithToken") {
 
                     var royalObject = {}
@@ -1089,7 +1164,7 @@ export default function useContractProviderHook() {
                 } else if (method == "acceptBId") {
                     var royalObject = {}
 
-                    var TokenCOunts = receipt.logs[0]?.topics?.map((val, i) => {
+                    var TokenCOunts = receipt.logs[6]?.topics?.map((val, i) => {
                         if (i == 1) {
                             const address = web3p.eth.abi.decodeParameter("address", val);
                             console.log("__address", address);
@@ -1127,6 +1202,7 @@ export default function useContractProviderHook() {
             }
         } catch (e) {
             console.log("err on gasLessTransaction", e);
+            toast.error(getErrorForToast(e.toString()))
             return false;
         }
 
@@ -1134,10 +1210,12 @@ export default function useContractProviderHook() {
 
     }
 
-    const validateApproveforUSDT = async (amount, stake) => {
+    const validateApproveforUSDT = async (amount, stake, conWallet, tokenAddress) => {
         try {
-            let ContractCreate = await contrat_connection(DETH, USDTaddress);
-            let allowance = await allowance_721_1155(USDTaddress, accountAddress, stake ? network[Network]?.stakeContract : config.TradeContract)
+
+            var ContractCreate = await contrat_connection(conWallet, DETH, tokenAddress);
+
+            let allowance = await allowance_721_1155(tokenAddress, conWallet.address, stake ? network[Network]?.stakeContract : config.TradeContract, conWallet)
 
             // let TokenContract = getThirdweb.createContract({ address: USDTaddress, abi: DETH })
             // let allowance = await getThirdweb.ReadContract(TokenContract, "allowance", accountAddress, stake ? network[Network]?.stakeContract : config.TradeContract);
@@ -1145,7 +1223,6 @@ export default function useContractProviderHook() {
 
             if (allowance <= (parseFloat(amount) ?? 0) || allowance == 0) {
                 var id = toast.loading("Approve token...");
-
                 // const getApprove = await gasLessTransaction("approve", 0, 0, stake ? network[Network]?.stakeContract : config.TradeContract, "1000000000000000000000000000000000000000000000000")
 
                 // var contractobj = await getThirdweb.prepareContract(TokenContract, "approve", 0, stake ? network[Network]?.stakeContract : config.TradeContract, "1000000000000000000000000000000000000000000000000")
@@ -1155,7 +1232,7 @@ export default function useContractProviderHook() {
                         .methods
                         .approve(stake ? network[Network]?.stakeContract : config.TradeContract, "1000000000000000000000000000000000000000000000000");
                 var gasprice = await web3.eth.getGasPrice();
-                var gas_estimate = await contractobj.estimateGas({ from: accountAddress })
+                var gas_estimate = await contractobj.estimateGas({ from: conWallet.address })
                 // var gas_estimate = await getThirdweb.getGasEstimate(contractobj)
                 // console.log('gas_estimate---->', gas_estimate);
 
@@ -1170,25 +1247,56 @@ export default function useContractProviderHook() {
                         .methods
                         .approve(stake ? network[Network]?.stakeContract : config.TradeContract, "1000000000000000000000000000000000000000000000000")
                         .send({
-                            from: accountAddress,
-                            gas: web3.utils.toHex(gas_estimate),
-                            gasPrice: web3.utils.toHex(gasprice),
+                            from: conWallet.address,
+                            // gas: web3.utils.toHex(gas_estimate),
+                            // gasPrice: web3.utils.toHex(gasprice),
                         }).on('transactionHash', (transactionHash) => {
                             return transactionHash
                         });
-                        console.log('contract_Method_Hash---->',contract_Method_Hash);
-                toast.update(id, { type:  "success" , isLoading: false, closeButton: true, render: "Approved successfully", autoClose: 1000 })
+                console.log('contract_Method_Hash---->', contract_Method_Hash);
+                toast.update(id, { type: "success", isLoading: false, closeButton: true, render: "Approved successfully", autoClose: 1000 })
                 return true
             }
             else if (allowance >= (parseFloat(amount ?? 0))) return true;
             else return false;
             // return false;
         } catch (e) {
-            console.log('validateApproveforUSDT---->', e);
+            console.log('Error when approve contract---->', e);
             if (id) toast.update(id, { type: "error", isLoading: false, closeButton: true, render: "Approved Failed", autoClose: 1000 });
             return false
         }
     }
+
+    const connectPrivyWalllet = async (type) => {
+        try {
+            var accountDetails = {}
+            const wallet = wallets[0];
+            const provider = await wallet.getEthereumProvider();
+            console.log('providerprovider---->', provider);
+            const web3 = new Web3(provider);
+            const web3p = new Web3(config.RPC_URL)
+            const address = wallet.address
+
+            accountDetails.accountAddress = address?.toString()?.toLowerCase();
+            localStorage.setItem("accountInfo", address)
+            localStorage.setItem('walletConnectType', type);
+
+            accountDetails.coinBalance = await web3p.eth.getBalance(address) / 1e18
+            accountDetails.web3p = web3p;
+            accountDetails.web3 = web3;
+            accountDetails.tokenBalance = 0
+            accountDetails.BNBUSDT = parseFloat(await getBNBvalue("BNBUSDT"))
+            console.log("acocococococo", accountDetails);
+            let CONTRACT = new web3p.eth.Contract(TradeAbi, config.TradeContract);
+
+            accountDetails.USDTaddress = CONTRACT.methods?.["staticToken"] ? await CONTRACT.methods?.staticToken()?.call() : config.STATIC_TOKEN
+            console.log("acocococococo", accountDetails);
+            return accountDetails;
+        } catch (e) {
+            console.log('Error on connectPrivyWalllet---->', e);
+        }
+    }
+
     return {
         Contract_Base_Validation,
         GetApproveStatus,
@@ -1213,7 +1321,10 @@ export default function useContractProviderHook() {
         nftStakingAndWithdrawAndClaim,
         BidNFt_Contract,
         gasLessTransaction,
-        validateApproveforUSDT
+        validateApproveforUSDT,
+        getAllowance,
+        connectPrivyWalllet,
+        contrat_connection
     };
 
 

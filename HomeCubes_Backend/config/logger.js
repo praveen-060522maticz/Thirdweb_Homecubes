@@ -19,7 +19,7 @@ winston.addColors({
 // let currentLogFile = `${'logs'}/log-${getCurrentDate()}.log`;
 
 const logsDir = path.join(__dirname,'../public/logs') // '../logs';
-console.log('is exist -->',fs.existsSync(logsDir),__dirname,path.join(__dirname,'../public/logs'))
+// console.log('is exist -->',fs.existsSync(logsDir),__dirname,path.join(__dirname,'../public/logs'))
 if (!fs.existsSync(logsDir)) {
     fs.mkdirSync(logsDir);
 }

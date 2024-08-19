@@ -9,7 +9,7 @@ function DataCard(props) {
   const location = useLocation();
   const [pathname, setPathname] = useState(location.pathname);
   console.log(location.pathname, "pathuuuuu");
-  const { img, status, name, stackdays, expiry, nftName, stakeDetais, nftImg, coinImg, coinName, PutOnSale, PutOnSaleType, NFTName, NFTId, isStaked, id, NFTOwner, CollectionNetwork, NFTCreator, NFTOrginalImage, NFTPrice } = props.data;
+  const { img, status, name, stackdays, expiry, nftName, stakeDetais, nftImg, coinImg, CoinName, PutOnSale, PutOnSaleType, NFTName, NFTId, isStaked, id, NFTOwner, CollectionNetwork, NFTCreator, NFTOrginalImage, NFTPrice } = props.data;
   console.log(props.data, "asdfsf");
 
   const stake = stakeDetais?.[0]
@@ -66,7 +66,7 @@ function DataCard(props) {
               <div className="nftcard_coin">
                 <img className="nft_coinImg" src={BNBIcon} />
                 <p className="nft_coinname">
-                  {CollectionNetwork} {NFTPrice}
+                  {NFTPrice} {CoinName ? CoinName :CollectionNetwork} 
                 </p>
               </div>}
           </div>}

@@ -3,7 +3,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import config from '../config/config'
 
 function ProjectCard(props) {
-  const { projectTitle, projectId, mintPrice, _id, isNotMinted, NFTPrice, ProjectThumbnail, floorPrice, coinName, id, projectHint } = props.data;
+  const { projectTitle, projectId, mintPrice, _id, isNotMinted, NFTPrice, ProjectThumbnail, floorPrice, coinName, id, projectHint,mintTokenName  } = props.data;
   console.log("props.datashow", props);
   const navigate = useNavigate();
   return (
@@ -29,7 +29,7 @@ function ProjectCard(props) {
           <p className="nft_name">{projectTitle}</p>
           <p className="nft_coinname mt-3">
             floor price : {NFTPrice}{" "}
-            <span className="floor_prize">{config.COIN_NAME}</span>
+            <span className="floor_prize">{mintTokenName}</span>
 
           </p>
           {props?.show && <div className="projectcard_foot mt-2">

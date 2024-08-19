@@ -11,12 +11,13 @@ import { EthereumProvider } from '@walletconnect/ethereum-provider';
 import { toast } from "react-toastify";
 import { getBNBvalue } from "../actions/common";
 import TradeAbi from '../Abi/trade.json';
-
+import home from '../assets/images/home.svg'
 // const { Network } = useSelector(
 //   (state) => state.LoginReducer
 // );
 
-export const connectWallet = async (type, changechainid, switched) => {
+
+export const connectWallet = async (type, changechainid, switched, Torus) => {
 
   var accountDetails = {}
   var web3Obj = {}
@@ -34,19 +35,24 @@ export const connectWallet = async (type, changechainid, switched) => {
     web3Obj = await smartWalletConnect(type, changechainid)
   }
 
+  // if (type == "Toruswallet") {
+  // }
+
   if (web3Obj && Object.keys(web3Obj)?.length != 0) {
     console.log("get Web3", web3Obj)
     try {
       var web3p = new Web3(Config.RPC_URL)
       // console.log('web3ssssp---->',web3p);
-      const accounts = await web3Obj.eth.getAccounts();
-      console.log('accountsaaaa---->',accounts);
+      const accounts = web3Obj?.web3 ? await web3Obj?.web3.eth.getAccounts() : await web3Obj.eth.getAccounts();
+      console.log('accountsaaaa---->', accounts);
       accountDetails.accountAddress = accounts[0]?.toString()?.toLowerCase();
       // since integrated smart wallet in changechainid - smartaccount address provided
       // accountDetails.accountAddress = changechainid?.toLowerCase();
-      accountDetails.coinBalance = await web3Obj.eth.getBalance(accountDetails.accountAddress) / 1e18;
+      console.log("sgegegegxvdzsfezefefezf", await web3p.eth.getBalance(accountDetails.accountAddress));
+      accountDetails.coinBalance = await web3p.eth.getBalance(accountDetails.accountAddress) / 1e18
       accountDetails.web3p = web3p;
-      accountDetails.web3 = web3Obj;
+      accountDetails.web3 = web3Obj?.web3 ? web3Obj?.web3 : web3Obj;
+      accountDetails.web3auth = web3Obj?.web3auth ? web3Obj?.web3auth : web3Obj;
       accountDetails.tokenBalance = 0
       accountDetails.BNBUSDT = parseFloat(await getBNBvalue("BNBUSDT"))
       console.log("acocococococo", accountDetails);
@@ -69,7 +75,7 @@ export const connectWallet = async (type, changechainid, switched) => {
 export const smartWalletConnect = async (type, address) => {
   try {
     var web3 = new Web3(window.ethereum ?? Config?.RPC_URL);
-    console.log('window.ethereum---->',window.ethereum);
+    console.log('window.ethereum---->', window.ethereum);
     localStorage.setItem("accountInfo", address)
     localStorage.setItem('walletConnectType', type)
     return web3;
@@ -336,8 +342,8 @@ export const getServiceFees = async () => {
       );
       var servicefees = await marketObj.methods.getServiceFee().call()
       console.log("servicefeesfsefw", servicefees);
-      fees.buyerFees = servicefees[0]
-      fees.sellerFees = servicefees[1]
+      fees.buyerFees = parseInt(servicefees[0])
+      fees.sellerFees = parseInt(servicefees[1])
 
       return fees;
     }
@@ -346,4 +352,3 @@ export const getServiceFees = async () => {
     }
   }
 }
-

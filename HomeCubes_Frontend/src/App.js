@@ -23,30 +23,26 @@ import Profile from './Screens/Profile';
 import MintProjects from './Screens/MintProjects';
 import MintNFTCards from './Screens/MintNFTCards';
 import CollectionNfts from './Screens/CollectionNfts'
-import { createThirdwebClient } from 'thirdweb';
 import config from "./config/config";
-import { ThirdwebProvider } from "thirdweb/react";
-import { smartWallet } from 'thirdweb/wallets';
+import { base, baseGoerli, mainnet, sepolia, polygon, polygonMumbai } from 'viem/chains';
+import { PrivyProvider } from '@privy-io/react-auth';
 
-export const client = createThirdwebClient({
-  clientId: config.CLIENT_ID,
-  secretKey: config.SECRET_KEY
-});
 
 function App() {
-
   return (
     <>
-      <ThirdwebProvider
-        activeChain={'sepolia'}
-        supportedWallets={[
-          smartWallet({
-            factoryAddress: config.FACTORYADDRESS,
-            thirdwebApiKey: config.SECRET_KEY,
-            gasless: true
-          })
-        ]}
-      >
+      <PrivyProvider
+        appId={process.env.REACT_APP_APPKEY}
+        onSuccess={(user) => console.log(`User ${user.id} logged in!`)}
+        config={{
+          "appearance": { "accentColor": "#6A6FF5", "theme": "#222224", "showWalletLoginFirst": false, "logo": "https://home-cubes-frontend-2.pages.dev/static/media/logo.b931aee24b93273c30989770522e8f9c.svg" },
+          "loginMethods": ["email", "wallet", "google", "apple","sms"],
+          "embeddedWallets": { "createOnLogin": "users-without-wallets", "requireUserPasswordOnCreate": false },
+          defaultChain: sepolia,
+          // Replace this with a list of your desired supported chains
+          supportedChains: [mainnet, sepolia, base, baseGoerli, polygon, polygonMumbai],
+          "mfa": { "noPromptOnMfaRequired": false }
+        }}>
         <BrowserRouter basename='/'>
           <Routes>
             <Route path='/' element={<Home />} />
@@ -70,7 +66,7 @@ function App() {
             <Route path='/CollectionNfts/:projectTitle' element={<CollectionNfts />} />
           </Routes>
         </BrowserRouter>
-      </ThirdwebProvider>
+      </PrivyProvider>
       <ToastContainer
         position="top-right"
         autoClose={1000}

@@ -117,7 +117,7 @@ export function AddToken() {
           toast.error("Address Invalid")
         }
         else {
-          let formdata = { ...formData, ...{ 'name': resp.name.toUpperCase(), 'decimal': resp.decimal, "address": address } }
+          let formdata = { ...formData, ...{ 'name': resp.symbol.toUpperCase(), 'decimal': resp.decimal, "address": address } }
           setFormData(formdata)
         }
       }

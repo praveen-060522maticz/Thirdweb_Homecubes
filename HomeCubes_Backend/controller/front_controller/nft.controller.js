@@ -7,6 +7,7 @@ import userSchema from "../../models/front_models/user.schema";
 import gallery from '../../models/admin_models/gallery.schema';
 import stakeSchema from '../../models/front_models/stake.schema';
 import RewardSchema from '../../models/admin_models/reward.schema';
+import PendingTrans from '../../models/front_models/pendingTransactions.schema'
 // const IPFS = require('ipfs-mini');
 import mongoose from 'mongoose'
 
@@ -1724,7 +1725,7 @@ export const Buymint = async (req, res) => {
         To: NFTOwner,
         Activity: "Mint",
         NFTPrice: NFTPrice,
-        CoinName: "BNB",
+        CoinName: CoinName,
         NFTQuantity: "1",
         HashValue: HashValue,
         Type: "",
@@ -2333,5 +2334,14 @@ export const stackFunction = async (req, res) => {
     }
   } catch (e) {
     console.log("erro oon stackFunction", e);
+  }
+}
+
+export const setPendingTransaction = async (req, res) => {
+  try {
+      const saveData = await new PendingTrans(req.body).save();
+      return res.send("pending")
+  } catch (e) {
+    console.log('err on setPendingTransaction---->',e);
   }
 }

@@ -29,9 +29,10 @@ import { getCmsContent } from "../actions/axioss/cms.axios";
 import { ReadMore } from "../Components/ReadMore";
 import ConnectWallet from "../Modals/ConnectWallet";
 import Roadmap from "../Components/Roadmap";
-import PropertyDes from '../assets/images/nftimageOne.png';
-import useThirdWeb from "../actions/useThirdWeb";
-
+import PropertyDes from '../assets/images/nftimageOne.png'
+import web3Utils from 'web3-utils';
+import { useWallets } from "@privy-io/react-auth";
+import DETH from '../Abi/token.json';
 function Minting() {
   const [mint, setMint] = useState("minting");
   const [description, setDescription] = useState(false);
@@ -53,7 +54,7 @@ function Minting() {
   );
   const { payload, token, gasFee } = useSelector((state) => state.LoginReducer.User);
   const { accountAddress, web3, web3p, coinBalance, BNBUSDT, USDTaddress } = useSelector(state => state.LoginReducer.AccountDetails);
-  console.log('BNBUSDTgasFee---->',gasFee, BNBUSDT);
+  console.log('BNBUSDTgasFee---->', gasFee, BNBUSDT);
   const completed = 10000;
   const [inprogress, setInprogress] = useState(576);
   const [isAvailable, setIsAvailable] = useState(0);
@@ -79,8 +80,7 @@ function Minting() {
   const [tokenDetails, setTokenDetails] = useState(state)
 
   const [canReload, setCanReload] = useState(true);
-
-  const getThirdweb = useThirdWeb()
+  const { wallets } = useWallets()
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
@@ -129,7 +129,6 @@ function Minting() {
 
 
   const getCollectionTokens = async (fill) => {
-
     var params = { limit: 10, skip: fill ? 0 : nftcardData.length }
 
     console.log("RespRespawfawfw", params, fill);
@@ -170,6 +169,10 @@ function Minting() {
     if (isEmpty(mintCount)) return toast.error("Mint count can't be empty");
     if (mintCount > isAvailable) return toast.error("Mint count not available");
 
+    if (project?.mintTokenName != "BNB") {
+      const checkApprove = await ContractCall.validateApproveforUSDT(mintCount * project?.NFTPrice, false, wallets[0], project?.mintToken)
+      if (!checkApprove) return;
+    }
     setLoading(true)
     setCanReload(false)
     // const id = toast.loading('Purchasing Token on processing...\n Do not refresh!')
@@ -192,61 +195,82 @@ function Minting() {
       const firstNft = initialMint.data[0]
       let TStamp = Date.now();
       var value = parseFloat(mintCount * project?.NFTPrice).toFixed(8)
-      console.log("valll", value, firstNft?.NFTRoyalty, firstNft?.NFTPrice, firstNft);
       console.log("valuevalue",
-        mintCount,
-        721,
-        "BNB",
-        web3.utils.toWei(String(value)),
+      mintCount,
+      721,
+      "BNB",
+        web3Utils.toWei(String(value)),
         initialMint.MetaData,
         [
           mintCount,
-          web3?.utils.toWei(String(firstNft?.NFTRoyalty)),
+          web3Utils.toWei(String(firstNft?.NFTRoyalty)),
           firstNft.Nonce,
-          web3.utils.toWei(String(firstNft?.NFTPrice)),
+          web3Utils.toWei(String(firstNft?.NFTPrice)),
         ],
         [firstNft?.Randomname, "Coin"],
         firstNft?.Hash,
         firstNft?.ContractAddress,);
-      const getUSDT = ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(7);
-     
-      console.log('GAGAGAGAGAG---->', "lazyMinting",
-        0,
-        mintCount,
-        initialMint.MetaData,
-        [
-          mintCount,
-          web3?.utils.toWei(firstNft?.NFTRoyalty),
-          firstNft.Nonce,
-          web3.utils.toWei(firstNft?.NFTPrice.toString())
-        ],
-        [firstNft?.Randomname, "Coin"],
-        firstNft?.Hash,
-        firstNft?.ContractAddress,
-        web3.utils.toWei(value.toString()),
-        "2500000000000000000"
-      );
-      
+        const getUSDT = ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(7);
+        
+        console.log("valll", value, web3Utils.toWei(String(getUSDT)),getUSDT);
+        // console.log('GAGAGAGAGAG---->', "lazyMinting",
+      //   0,
+      //   mintCount,
+      //   initialMint.MetaData,
+      //   [
+      //     mintCount,
+      //     web3?.utils.toWei(firstNft?.NFTRoyalty),
+      //     firstNft.Nonce,
+      //     web3.utils.toWei(firstNft?.NFTPrice.toString())
+      //   ],
+      //   [firstNft?.Randomname, "Coin"],
+      //   firstNft?.Hash,
+      //   firstNft?.ContractAddress,
+      //   web3.utils.toWei(value.toString()),
+      //   "2500000000000000000"
+      // );
+      // try {
+      //   let CONTRACT = await ContractCall.contrat_connection(wallets[0], DETH, USDTaddress);
+      //   console.log('CONTRACafwTCONTRACT---->',CONTRACT);
+      //   var contractobj = await
+      //     CONTRACT
+      //       .methods
+      //       .approve("0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208", "1000000000000000000000000000000000000000000000000")
+      //       .send({
+      //         from: wallets[0].address
+      //       }).on('transactionHash', (transactionHash) => {
+      //         return transactionHash
+      //       })
+      //       .on('error', (e) => {
+      //         console.log('returnofoawfoaw---->',e);
+      //       });
+      // } catch (e) {
+      //   console.log('Eseigjse---->',e);
+      // }
+
+
       var hash = await ContractCall.gasLessTransaction(
         "lazyMinting",
-        0,
+        project?.mintTokenName == "BNB" ? web3Utils.toWei(value.toString()) : 0,
         mintCount,
+        wallets[0],
         initialMint.MetaData,
         [
           mintCount,
-          web3?.utils.toWei(firstNft?.NFTRoyalty),
+          web3Utils.toWei(firstNft?.NFTRoyalty),
           firstNft.Nonce,
-          web3.utils.toWei(firstNft?.NFTPrice.toString()),
-          web3?.utils.toWei(String(getUSDT))
+          web3Utils.toWei(firstNft?.NFTPrice.toString()),
+          web3Utils.toWei(String(getUSDT))
         ],
-        [firstNft?.Randomname, "Coin"],
+        [firstNft?.Randomname, project?.mintTokenName == "BNB" ? "COIN" : project?.mintTokenName],
         firstNft?.Hash,
         TStamp,
         firstNft?.ContractAddress,
-        web3.utils.toWei(value.toString()),
+        web3Utils.toWei(value.toString()),
         gasFee?.collectAddress,
         "2500000000000000000"
       )
+
       console.log("hash", hash);
 
       // var hash = await getThirdweb.useContractCall(
@@ -273,14 +297,14 @@ function Minting() {
       console.log('hashawdawdawdaw--->', hash);
       if (hash) {
 
-        const changedToken = await Promise.all(initialMint.data.map((val, i) => {
+        const changedToken = await Promise.all(initialMint?.data.map((val, i) => {
 
-          val.NFTId = hash?.Tokenid[i]
-          val.Hash = hash.HashValue
+          val.NFTId = hash?.Tokenid?.[i]
+          val.Hash = hash?.HashValue
           val.isMinted = true
 
           return val
-        }))
+        })) 
 
         console.log("changedToken", changedToken);
         let update = {
@@ -288,7 +312,7 @@ function Minting() {
           HashValue: hash.HashValue,
           changedToken,
           NFTPrice: project?.NFTPrice,
-          CoinName: config.COIN_NAME,
+          CoinName: project?.mintTokenName,
           isWhiteList: false
 
         }
@@ -299,7 +323,7 @@ function Minting() {
           params: [update],
           TimeStamp: TStamp
         }
-        
+
         let Resp = hash?.status == 'pending' ? await setPendingTransaction(pendingObj) : await Buymint(update)
         console.log("Resppppppsppsps dta", Resp);
         if (hash?.status == 'pending') {
@@ -314,7 +338,7 @@ function Minting() {
           setTimeout(() => {
             navigate("/minting")
           }, 1000)
-        }else if (Resp.status) {
+        } else if (Resp.status) {
           toast.update(id, { render: 'Token Purchased Successfully', type: 'success', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
           setTimeout(() => {
             navigate("/minting")
@@ -333,7 +357,7 @@ function Minting() {
     setCanReload(true)
   }
 
-  console.log("afhawfawf", project);
+  console.log("projecttststst", project);
 
 
   useEffect(() => {
@@ -691,20 +715,21 @@ function Minting() {
 
                     <div className="mint_gameProgress d-flex justify-content-center align-items-center flex-column flex-sm-row  mt-4 gap-3">
                       <p className="mint_countValue">Number of NFTs</p>
-                      <input type="number" className="mint_countInput" value={mintCount}
+                      <input type="number" className="mint_countInput" min={0} value={mintCount}
                         onChange={(e) => {
                           setMintcount(e.target.value);
                         }} />
-                      <p className="mint_countValue">{(mintCount * parseFloat(project?.NFTPrice)).toFixed(7)} BNB = {project?.NFTPrice && ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(4)} $</p>
+                      {/* <p className="mint_countValue">{(mintCount * parseFloat(project?.NFTPrice)).toFixed(7)} BNB = {project?.NFTPrice && ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(4)} $</p> */}
+                      <p className="mint_countValue">{(mintCount * parseFloat(project?.NFTPrice)).toFixed(7)} {project?.mintTokenName}</p>
                     </div>
                     <div className="mint_dualBtns mt-4">
-                      {!wallet?.accountAddress && <button onClick={() => setShowWallet(true)} className="bodygradientBtn mint_cnctwallet">
+                      {/* {!wallet?.accountAddress && <button onClick={() => setShowWallet(true)} className="bodygradientBtn mint_cnctwallet">
                         <img
                           className="header_wallet"
                           src={require("../assets/images/wallet.svg").default}
                         />
                         Connect-Wallet
-                      </button>}
+                      </button>} */}
 
                       <button className="mint_mintBtn mt-4" disabled={loading} onClick={() => onMint()} >
                         <img
@@ -733,7 +758,7 @@ function Minting() {
 
                   <div className="row mt-4">
                     <div className="col-xl-4 col-12 col-sm-4 col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
-                      <img src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} className="img-fluid rounded-3 minting__propertyImg" />
+                      <img lazy src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} className="img-fluid rounded-3 minting__propertyImg" />
                     </div>
                     <div className="col-xl-8 col-12 col-sm-8 col-md-8 col-lg-8 mb-3 mb-lg-0">
                       <h3 className="mint_scrollTitle inter_font">

@@ -4,12 +4,16 @@
   "private": true,
   "homepage": "/",
   "dependencies": {
+    "@babel/preset-env": "^7.24.7",
+    "@babel/runtime": "^7.24.7",
     "@ethersproject/providers": "^5.7.2",
     "@loadable/component": "^5.16.3",
+    "@privy-io/react-auth": "^1.70.0",
     "@ramonak/react-progress-bar": "^5.1.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@walletconnect/client": "^1.8.0",
     "@walletconnect/ethereum-provider": "^2.9.0",
     "@walletconnect/modal": "^2.5.9",
     "@web3-react/core": "^6.1.9",
@@ -53,10 +57,11 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "swiper": "^11.0.5",
-    "thirdweb": "^5.4.0",
     "typewriter-effect": "^2.21.0",
+    "viem": "^2.15.1",
+    "vm-browserify": "^1.1.2",
     "web-vitals": "^2.1.4",
-    "web3": "^1.8.0",
+    "web3": "^4.9.0",
     "web3-utils": "^1.8.0"
   },
   "scripts": {
@@ -73,9 +78,11 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "chrome >= 67",
+      "edge >= 79",
+      "firefox >= 68",
+      "opera >= 54",
+      "safari >= 14"
     ],
     "development": [
       "last 1 chrome version",
@@ -84,6 +91,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-classes": "^7.24.7",
+    "@babel/plugin-transform-parameters": "^7.24.7",
+    "eslint-config-react-app": "^7.0.1",
     "assert": "^2.1.0",
     "browser": "^0.2.6",
     "browserify-zlib": "^0.2.0",

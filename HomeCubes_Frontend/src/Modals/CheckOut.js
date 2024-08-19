@@ -8,9 +8,9 @@ import { toast } from 'react-toastify'
 import config from '../config/config';
 import { network } from '../config/network';
 import { BuyAccept } from '../actions/axioss/nft.axios';
-import useThirdWeb from '../actions/useThirdWeb';
 import { userRegister } from '../actions/axioss/user.axios';
-
+import { useWallets } from '@privy-io/react-auth';
+import web3utils from 'web3-utils';
 function CheckOut({ show, handleClose, item, owner, file }) {
 
 
@@ -21,7 +21,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
       (state) => state.LoginReducer.AccountDetails
    );
    const { Network } = useSelector((state) => state.LoginReducer)
-   // console.log('coinnnnballl',coinBalance,web3p.utils.fromWei(coinBalance.toString()))
+   // console.log('coinnnnballl',coinBalance,web3utils.fromWei(coinBalance.toString()))
    const { buyerFees, sellerFees } = useSelector(
       (state) => state.LoginReducer.ServiceFees
    );
@@ -43,6 +43,8 @@ function CheckOut({ show, handleClose, item, owner, file }) {
    const [TokenBalance, SetTokenBalance] = useState("0");
    const [buyerDetails, setBuyerDetails] = useState({});
    const [cakeValue, setCakeValue] = useState(0);
+   const {wallets} = useWallets();
+console.log('walletswallets---->',wallets);
 
    useEffect(() => {
       getBNBvalue("CAKEUSDT").then((val) => {
@@ -54,7 +56,6 @@ function CheckOut({ show, handleClose, item, owner, file }) {
 
    }, [])
 
-   const getThirdweb = useThirdWeb()
    const [canReload, setCanReload] = useState(true);
    const [allowed, setAllowed] = useState(false)
    useEffect(() => {
@@ -97,8 +98,8 @@ function CheckOut({ show, handleClose, item, owner, file }) {
    useEffect(() => {
 
       const getAllowance = async () => {
-         const getdata = await getThirdweb.getAllowance(token_address);
-         const getPay = web3.utils.toWei(String(YouWillGet))
+         const getdata = await ContractCall.getAllowance(token_address,wallets[0]);
+         const getPay = web3utils.toWei(String(YouWillGet))
          console.log('getThirdweb---->', getdata, getPay, getdata < getPay);
          setAllowed(getdata < getPay)
          SetApp_Btn((owner.CoinName != "BNB" && getdata < getPay) ? "init" : "start")
@@ -148,7 +149,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
          // let cont = await ContractCall.approve_721_1155( //normal
          //    token_address,
          //    network[Network].tradeContract,
-         //    web3p.utils.toWei(YouWillGet.toString())
+         //    web3utils.toWei(YouWillGet.toString())
          // );
 
          // let cont = await getThirdweb.useContractCall( //thirdweb
@@ -156,15 +157,17 @@ function CheckOut({ show, handleClose, item, owner, file }) {
          //    0,
          //    token_address,
          //    network[Network].tradeContract,
-         //    web3p.utils.toWei((YouWillGet + 2).toString()),
+         //    web3utils.toWei((YouWillGet + 2).toString()),
          // )
 
          let cont = await ContractCall.gasLessTransaction( // openzepline
             "approve",
             0,
+            0,
+            wallets[0],
             token_address,
             network[Network].tradeContract,
-            web3p.utils.toWei((YouWillGet + 2).toString()),
+            web3utils.toWei((YouWillGet + 2).toString()),
          ) 
          setCanReload(true)
          console.log("cont", cont);
@@ -197,7 +200,8 @@ function CheckOut({ show, handleClose, item, owner, file }) {
       (async () => {
          const TokenBalance = await ContractCall.Token_Balance_Calculation(
             token_address,
-            accountAddress
+            accountAddress,
+            wallets[0]
          );
          // console.log('tokkkeeeenballl',TokenBalance)
          SetTokenBalance(TokenBalance ? TokenBalance : 0);
@@ -212,16 +216,16 @@ function CheckOut({ show, handleClose, item, owner, file }) {
       var error = await Validation();
       console.log(
          "ghgdhdg errrrrrrrrr",
-         web3p.utils.toWei(YouWillGet.toString()),
+         web3utils.toWei(YouWillGet.toString()),
          owner.CoinName == "PancakeSwap Token" ? "CAKE" : owner.CoinName,
          owner.NFTOwner,
          [
             owner.NFTId,
-            web3p.utils.toWei(String(owner.NFTPrice * NFTQuantity)),
+            web3utils.toWei(String(owner.NFTPrice * NFTQuantity)),
             NFTQuantity,
             item.ContractType,
-            web3p.utils.toWei(String(referredUser?.earnPercentage ?? 0)),
-            web3p.utils.toWei(
+            web3utils.toWei(String(referredUser?.earnPercentage ?? 0)),
+            web3utils.toWei(
                String(payload?.referedBy && payload?.initialBuy == false ? 4 : 0)
             ),
          ],
@@ -234,15 +238,15 @@ function CheckOut({ show, handleClose, item, owner, file }) {
       if (isEmpty(error)) {
          setCanReload(false)
          // let cont = await ContractCall.buy_721_1155(
-         //    web3p.utils.toWei(YouWillGet.toString()),
+         //    web3utils.toWei(YouWillGet.toString()),
          //    owner.CoinName,
          //    owner.NFTOwner,
          //    [
          //       owner.NFTId,
-         //       web3p.utils.toWei(String(owner.NFTPrice * NFTQuantity)),
+         //       web3utils.toWei(String(owner.NFTPrice * NFTQuantity)),
          //       NFTQuantity,
          //       item.ContractType,
-         //       web3p.utils.toWei(YouWillGet.toString())
+         //       web3utils.toWei(YouWillGet.toString())
          //    ],
          //    item.ContractAddress,
          //    "2500000000000000000"
@@ -251,12 +255,13 @@ function CheckOut({ show, handleClose, item, owner, file }) {
 
          var Arr = [
             owner.CoinName == "BNB" ? "saleToken" : "saleWithToken",
-            owner.CoinName == "BNB" ? web3p.utils.toWei(YouWillGet.toString()) : 0,
+            owner.CoinName == "BNB" ? web3utils.toWei(YouWillGet.toString()) : 0,
             owner.CoinName !== "BNB" ? 6 : 0,
+            wallets[0],
             owner.NFTOwner,
             [
                owner.NFTId,
-               web3p.utils.toWei(String(owner.NFTPrice * NFTQuantity)),
+               web3utils.toWei(String(owner.NFTPrice * NFTQuantity)),
                NFTQuantity,
                item.ContractType
             ],
@@ -265,7 +270,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
             gasFee?.collectAddress,
             "2500000000000000000"
          ]
-         if (owner.CoinName != "BNB") Arr.splice(3, 0, owner.CoinName)
+         if (owner.CoinName != "BNB") Arr.splice(4, 0, owner.CoinName)
          console.log('ArrArrArrArrArr---->',Arr);
          // let cont = await getThirdweb.useContractCall(...Arr)
          let cont = await ContractCall.gasLessTransaction(...Arr)
@@ -288,8 +293,8 @@ function CheckOut({ show, handleClose, item, owner, file }) {
                initialBuy: payload?.initialBuy,
                referedBy: payload?.referedBy,
                royaltyReceiver: cont.royaltyInfo[1],
-               earnPercentage: web3p.utils.fromWei(String(cont.royaltyInfo[2])),
-               Earning: web3p.utils.fromWei(String(cont.royaltyInfo[3])),
+               earnPercentage: web3utils.fromWei(String(cont.royaltyInfo[2])),
+               Earning: web3utils.fromWei(String(cont.royaltyInfo[3])),
                projectId: owner.projectId
             };
             setCanReload(false)
@@ -351,8 +356,8 @@ function CheckOut({ show, handleClose, item, owner, file }) {
    async function BalanceCheck() {
       if (once) {
          setOnce(false)
-         var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item);
-         console.log("ownneerrsnftbuynowbalittemmm", Nftbalance, "  sadsadas", owner);
+         var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item,wallets[0]);
+         console.log("ownneerrsnftbuynowbalittemmm", Nftbalance, "  sadsadas", owner,wallets[0]);
          if (Nftbalance?.toLowerCase() != owner.NFTOwner?.toLowerCase()) {
             setTimeout(() => {
                toast.warning("You won't buy at this moment please refresh you data");
@@ -411,7 +416,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
 
                   <div className='bidmodal_summary mb-3'>
                      <p className='modal_summaryLabel'>Service fees</p>
-                     <p className='modal_summaryLabel'>{web3p.utils.fromWei(String(buyerFees))}% {owner.CoinName}</p>
+                     <p className='modal_summaryLabel'>{web3utils.fromWei(String(buyerFees))}% {owner.CoinName}</p>
                   </div>
 
                   <div className='bidmodal_summary mb-3'>

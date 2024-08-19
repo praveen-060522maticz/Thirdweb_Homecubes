@@ -231,12 +231,12 @@ export default function useContractHook() {
         try {
 
             const ConnectContract = await contrat_connection(TradeAbi, config.tradeAddress)
-            console.log("ConnectContract", ConnectContract);
+            console.log("ConnectContract", data,config?.stakeAddress);
 
             var contractobj = await
                 ConnectContract
                     .methods
-                    .setStaticToken(data)
+                    .setStaticToken(data,config?.stakeAddress)
             console.log("contractobj", contractobj);
             var gasprice = await web3.eth.getGasPrice();
             var gas_estimate = await contractobj.estimateGas({ from: UserAccountAddr })
@@ -244,7 +244,7 @@ export default function useContractHook() {
             var contract_Method_Hash = await
                 ConnectContract
                     .methods
-                    .setStaticToken(data)
+                    .setStaticToken(data,config?.stakeAddress)
                     .send({
                         from: UserAccountAddr,
                         gasLimit: parseInt(gas_estimate),

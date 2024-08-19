@@ -36,8 +36,8 @@ import useContractProviderHook from "../actions/contractProviderHook";
 import { toast } from "react-toastify";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { FacebookShareButton, TwitterShareButton, TelegramShareButton, WhatsappShareButton } from 'react-share';
-import useThirdWeb from "../actions/useThirdWeb";
 import TransferToken from "../Modals/TransferToken";
+import { useWallets } from "@privy-io/react-auth";
 
 
 function NFTInfo() {
@@ -45,10 +45,9 @@ function NFTInfo() {
   const [shareShow, setShareShow] = useState(false)
 
   const location = useLocation();
-  console.log(location, JSON.parse(location.state.nftInfo), "weioiwhe");
+  console.log(location,location?.state?.nftInfo, "weioiwhe");
   const { gasFee } = useSelector((state) => state.LoginReducer.User);
   const push = useNavigate()
-  const nftData = JSON.parse(location?.state?.nftInfo);
   const { state } = useLocation();
   // listitem state
 
@@ -172,8 +171,7 @@ function NFTInfo() {
       myowner: {},
     },
   });
-
-  const getThirdweb = useThirdWeb()
+  const {wallets}=useWallets();
 
   const filterData =
     accordionTab == "" ? activities :
@@ -220,7 +218,7 @@ function NFTInfo() {
         const bnbval = val.CoinName == "BNB" ? val.NFTPrice : parseFloat(val.NFTPrice) * parseFloat(getCakeValue)
 
         dateArr.push(new Date(val.createdAt).toDateString())
-        priceArr.push(parseFloat(Number(bnbval).toFixed(5)))
+        priceArr.push(parseFloat(Number(val.NFTPrice).toFixed(5)))
       }
 
     }))
@@ -354,7 +352,8 @@ function NFTInfo() {
                 Tokens_Detail.ContractType == "721"
                 ? "Single"
                 : "Multiple",
-              Tokens_Detail.ContractAddress
+              Tokens_Detail.ContractAddress,
+              wallets[0]
             );
             console.log("StatuStatuStatu", Statu);
             if ((Statu == false) || (Statu == "error")) {
@@ -410,7 +409,7 @@ function NFTInfo() {
     const TStamp = Date.now()
     // let cont = await ContractCall.BidNFt_Contract(0, "cancelBidBySeller", Tokens_Detail.NFTId, Tokens_Detail.ContractAddress)
     // let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, gasFee?.collectAddress, "2500000000000000000")
-    let cont = await ContractCall.gasLessTransaction("cancelBidBySeller", 0, 0, Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000")
+    let cont = await ContractCall.gasLessTransaction("cancelBidBySeller", 0, 0,wallets[0], Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000")
 
 
     if (cont) {
@@ -471,17 +470,6 @@ function NFTInfo() {
   }
 
   const navigate = useNavigate()
-
-  const transferNft = async () => {
-    try {
-      setCanReload(false)
-      const Resp = await getThirdweb.useContractCall("TransferToken", 0, 0, Tokens_Detail.NFTId, payload?.parentAddress, Tokens_Detail.ContractAddress, gasFee?.collectAddress, "2500000000000000000")
-      setCanReload(true)
-    } catch (e) {
-      console.log('Erro on transferNft---->', e);
-    }
-  }
-
 
   return (
     <>
