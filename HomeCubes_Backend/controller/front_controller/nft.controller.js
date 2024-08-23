@@ -1618,7 +1618,8 @@ export const onInitialMint = async (req, res) => {
                     $and: [
                       { $eq: [{ $toObjectId: "$projectId" }, "$$galId"] },
                       { $lt: ["$UnlockAt", new Date()] },
-                      { $eq: ["$isMinted", false] }
+                      { $eq: ["$isMinted", false] },
+                      { $eq: ["$status", "available"] }
                     ]
                   }
                 }
@@ -1651,6 +1652,8 @@ export const onInitialMint = async (req, res) => {
     }
 
     var hash = await Promise.all(tokenDatas?.map(async (dataa) => {
+
+      const upStatus = await Tokens.findOneAndUpdate({ _id: ObjectId(dataa?._id) }, { $set: { status: "inProgress" } })
 
       if (isEmpty(dataa.NFTOrginalImageIpfs)) {
         var imageipfshash = await ipfs_add({ path: `public/nft/${dataa.NFTCreator}/Original/${dataa.NFTOrginalImage}` })
@@ -1741,7 +1744,8 @@ export const Buymint = async (req, res) => {
         NFTId: val.NFTId,
         Hash: val.Hash,
         isMinted: val.isMinted,
-        NFTOwnerDetails: val.NFTOwnerDetails
+        NFTOwnerDetails: val.NFTOwnerDetails,
+        status: "success"
       }
 
       const setTokens = await Tokens.findOneAndUpdate({ _id: val._id }, { $set: tokenUpdata }, { new: true })
@@ -2339,9 +2343,29 @@ export const stackFunction = async (req, res) => {
 
 export const setPendingTransaction = async (req, res) => {
   try {
-      const saveData = await new PendingTrans(req.body).save();
-      return res.send("pending")
+    const saveData = await new PendingTrans(req.body).save();
+    return res.send("pending")
   } catch (e) {
-    console.log('err on setPendingTransaction---->',e);
+    console.log('err on setPendingTransaction---->', e);
+  }
+}
+
+export const setTokenStatus = async (req, res) => {
+  try {
+    const { arrData, status } = req.body
+    console.log('arrDataaaaa---->', arrData);
+    await Promise.all(
+      arrData?.map(async (val) => {
+
+        const update = await Tokens.findOneAndUpdate({ _id: ObjectId(val?._id) }, { $set: { status } });
+        console.log('update---->', update);
+      })
+    )
+    res.json({
+      status: true,
+      data: "success"
+    })
+  } catch (e) {
+    console.log('Error on setTokenStatus---->', e);
   }
 }

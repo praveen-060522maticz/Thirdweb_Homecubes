@@ -48,7 +48,9 @@ const token = new Schema({
     Randomname: { type: String, default: '' },
     NFTPrice: { type: String, default: '' },
     projectId: { type: String, default: '', ref: "project" },
-    baseUri: { type: String, default: '' }
+    baseUri: { type: String, default: '' },
+
+    status:{ type: String, default: '' }, // available,inProgress,success
 }, { timestamps: true })
 
 module.exports = model('token', token)

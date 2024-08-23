@@ -9,6 +9,16 @@
             "date": 1723789368130,
             "name": "public/logs/info/info-2024-08-16.log",
             "hash": "20df0f26608aefe4131eb7eaa97e40b866ef82dafc9f25083dd913213c2a020b"
+        },
+        {
+            "date": 1724218132032,
+            "name": "public/logs/info/info-2024-08-21.log",
+            "hash": "80fa607307b17a6f68339ff6af6fb408d4a4df199622e1a43dc8bd1e13d9f6f5"
+        },
+        {
+            "date": 1724388379750,
+            "name": "public/logs/info/info-2024-08-23.log",
+            "hash": "5238048c8170f69bcc5884346a7837c62179dfabde4af43d507f11d47122c3bd"
         }
     ],
     "hashType": "sha256"

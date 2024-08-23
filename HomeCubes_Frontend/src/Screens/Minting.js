@@ -17,7 +17,7 @@ import GalleryCard from "../Components/GalleryCard";
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
 import DataCard from "../Components/DataCard";
 import Typewriter from "typewriter-effect";
-import { Buymint, getCurrentProject, getGallery, getGalleryTokens, onInitialMint, setPendingTransaction } from "../actions/axioss/nft.axios";
+import { Buymint, getCurrentProject, getGallery, getGalleryTokens, onInitialMint, setPendingTransaction, setTokenStatus } from "../actions/axioss/nft.axios";
 import { useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import useContractProviderHook from "../actions/contractProviderHook";
@@ -196,9 +196,9 @@ function Minting() {
       let TStamp = Date.now();
       var value = parseFloat(mintCount * project?.NFTPrice).toFixed(8)
       console.log("valuevalue",
-      mintCount,
-      721,
-      "BNB",
+        mintCount,
+        721,
+        "BNB",
         web3Utils.toWei(String(value)),
         initialMint.MetaData,
         [
@@ -210,10 +210,10 @@ function Minting() {
         [firstNft?.Randomname, "Coin"],
         firstNft?.Hash,
         firstNft?.ContractAddress,);
-        const getUSDT = ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(7);
-        
-        console.log("valll", value, web3Utils.toWei(String(getUSDT)),getUSDT);
-        // console.log('GAGAGAGAGAG---->', "lazyMinting",
+      const getUSDT = ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(7);
+
+      console.log("valll", value, web3Utils.toWei(String(getUSDT)), getUSDT);
+      // console.log('GAGAGAGAGAG---->', "lazyMinting",
       //   0,
       //   mintCount,
       //   initialMint.MetaData,
@@ -304,7 +304,7 @@ function Minting() {
           val.isMinted = true
 
           return val
-        })) 
+        }))
 
         console.log("changedToken", changedToken);
         let update = {
@@ -345,10 +345,12 @@ function Minting() {
           }, 1000)
         }
         else {
+          setTokenStatus({ arrData: initialMint, stauts: "available" })
           toast.update(id, { render: 'Token Transaction Failed', type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
         }
       }
       else {
+        setTokenStatus({ arrData: initialMint?.data, status: "available" })
         toast.update(id, { render: 'Token Transaction Failed', type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
       }
 

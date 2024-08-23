@@ -44,10 +44,11 @@ function Header() {
   const navigate = useNavigate();
 
   const [reconnect, setReconnect] = useState(true);
-  const { login, logout,connectOrCreateWallet, authenticated } = usePrivy();
+  const { login, logout, connectOrCreateWallet, authenticated } = usePrivy();
   const { wallets, ready, } = useWallets();
   const connectedwalet = wallets[0];
-  console.log('connectedwalet---->', connectedwalet, ready, authenticated, currency);
+  console.log('connectedwalet---->', currency);
+  console.log('Check Page---->', ready, authenticated, !isWalletConnected, reconnect, connectedwalet);
   useEffect(() => {
     // if (
     //   localStorage.getItem("walletConnectType") &&
@@ -67,10 +68,10 @@ function Header() {
       initialConnectWallet("privyWallet");
       CurrencyList();
       return setReconnect(false)
-    } 
+    }
     // else if (ready && authenticated && isEmpty(connectedwalet)) localStorage.clear()
 
-  }, [ready, authenticated, isWalletConnected, connectedwalet])
+  }, [ready, authenticated, isWalletConnected, connectedwalet, reconnect])
 
   // useEffect(() => {
   //   if (window.ethereum) {
@@ -217,6 +218,7 @@ function Header() {
       });
       navigate("/");
       toast.success("Wallet disconnected...");
+      setReconnect(true)
       // window.location.reload();
       document.cookie = "token" + "=" + "" + ";" + ";path=/";
       GetNftCookieToken();
@@ -566,7 +568,16 @@ function Header() {
                 ) : (
                   <button
                     className="header_gradientBtn"
-                    onClick={() => connectOrCreateWallet()}
+                    onClick={() => {
+                      if (ready && authenticated && !isWalletConnected && connectedwalet) {
+                        // wallets[0].linked
+                        initialConnectWallet("privyWallet");
+                        CurrencyList();
+                        return setReconnect(false)
+                      }
+                      // else if (ready && authenticated && !isWalletConnected && isEmpty(connectedwalet)) logout();
+                      else login();
+                    }}
                   >
                     <img
                       className="header_wallet"
@@ -606,7 +617,14 @@ function Header() {
               ) : (
                 <div className="burger_head">
                   <img
-                    onClick={() => connectOrCreateWallet()}
+                    onClick={() => {
+                      if (ready && authenticated && !isWalletConnected && connectedwalet) {
+                        // wallets[0].linked
+                        initialConnectWallet("privyWallet");
+                        CurrencyList();
+                        return setReconnect(false)
+                      } else login();
+                    }}
                     className="header_wallet wallet_only"
                     src={require("../assets/images/wallet.svg").default}
                   />
@@ -658,11 +676,11 @@ function Header() {
                   </div>
                   {/* <p className="id mb-1">{parseFloat(wallet?.coinBalance).toFixed(5)} BNB</p> */}
                   <div className="header_balanceScroller">
-                  {currency?.length != 0 && currency.map((val) => {
-                    return (
-                      <p className="id mb-1">{val?.balance} {val?.value}</p>
-                    )
-                  })}
+                    {currency?.length != 0 && currency.map((val) => {
+                      return (
+                        <p className="id mb-1">{val?.balance} {val?.value}</p>
+                      )
+                    })}
                   </div>
                   <p className="metamask mb-1">MetaMask</p>
                   <div className="token mb-1 d-flex align-items-center justify-content-between">

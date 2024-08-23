@@ -93,7 +93,7 @@ console.log('walletswallets---->',wallets);
          decimal.toString()
       );
    }, [owner.TokenPrice, NFTQuantity]);
-   console.log("YouWillGet", YouWillGet);;
+   console.log("YouWillGet", YouWillGet);
 
    useEffect(() => {
 
@@ -160,15 +160,31 @@ console.log('walletswallets---->',wallets);
          //    web3utils.toWei((YouWillGet + 2).toString()),
          // )
 
-         let cont = await ContractCall.gasLessTransaction( // openzepline
-            "approve",
-            0,
-            0,
-            wallets[0],
-            token_address,
-            network[Network].tradeContract,
+         console.log("appprove log","approve",
+         0,
+         0,
+         wallets[0],
+         token_address,
+         network[Network]?.tradeContract,
+         web3utils.toWei((YouWillGet + 2).toString()),);
+
+         // let cont = await ContractCall.gasLessTransaction( // openzepline
+         //    "approve",
+         //    0,
+         //    0,
+         //    wallets[0],
+         //    token_address,
+         //    network[Network]?.tradeContract,
+         //    web3utils.toWei((YouWillGet + 2).toString()),
+         // ) 
+
+         let cont = await ContractCall.validateApproveforUSDT(
             web3utils.toWei((YouWillGet + 2).toString()),
-         ) 
+            false,
+            wallets[0],
+            token_address
+         )
+         
          setCanReload(true)
          console.log("cont", cont);
          if (cont) {
@@ -424,12 +440,12 @@ console.log('walletswallets---->',wallets);
                      <p className='modal_summaryLabel'>{Number(YouWillGet).toFixed(6)} {owner.CoinName}</p>
                   </div>
 
-                  <div className='bidmodal_summary mb-3'>
+                  {/* <div className='bidmodal_summary mb-3'>
                      <p className='modal_summaryLabel'>Price in $</p>{console.log("awfawfafawf", Number(YouWillGet), Number(YouWillGet) * BNBUSDT)}
                      <p className='modal_summaryLabel'> {owner.CoinName != "BNB" ? (Number(YouWillGet) * cakeValue).toFixed(6) : (Number(YouWillGet) * BNBUSDT).toFixed(6)}</p>
-                  </div>
+                  </div> */}
 
-                  {owner?.CoinName != "BNB" && allowed && <button
+                  {/* {owner?.CoinName != "BNB" && allowed && <button
                      className='bodygradientBtn modal_grdientBtn mt-4'
                      disabled={Btn == 'error' || Btn === "process" || Btn === "done" ? true : false}
                      onClick={Btn == 'start' || Btn === "try" ? FormSubmit : null}
@@ -440,11 +456,12 @@ console.log('walletswallets---->',wallets);
                         || Btn == 'done' && 'Done'
                         || Btn == 'process' && 'In-Progress'
                      }
-                  </button>}
+                  </button>} */}
                   <button
                      className='additional_btn modal_additionalBtn mt-3'
-                     disabled={Btn != 'done' && App_Btn == 'init' || App_Btn == 'error' || App_Btn === "process" || App_Btn === "done" ? true : false}
-                     onClick={App_Btn == 'start' || App_Btn === "try" ? _Buy : null}
+                     // disabled={Btn != 'done' && App_Btn == 'init' || App_Btn == 'error' || App_Btn === "process" || App_Btn === "done" ? true : false}
+                     // onClick={App_Btn == 'start' || App_Btn === "try" ? _Buy : null}
+                     onClick={()=> _Buy()}
                   >
                      {App_Btn == 'start' && 'Proceed to pay'
                         || App_Btn == 'try' && 'Try-Again'

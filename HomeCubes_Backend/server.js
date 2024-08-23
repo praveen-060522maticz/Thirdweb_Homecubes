@@ -80,7 +80,7 @@ web3.eth.subscribe('newBlockHeaders', (error, blockHeader) => {
 
                     for (const log of getData.logs) {
                         try {
-                            console.log('loggggg---->', log, web3Utils.hexToUtf8(log.data).split(""));
+                            // console.log('loggggg---->', log, web3Utils.hexToUtf8(log.data).split(""));
                             const method = extractAlphabets(web3Utils.hexToUtf8(log.data))
                             console.log('method---->', method);
                             if (methodsArr.includes(method)) {
@@ -141,10 +141,13 @@ web3.eth.subscribe('newBlockHeaders', (error, blockHeader) => {
                                     "saleToken",
                                     "saleWithToken"
                                 ]
+                                console.log('afrawwwfwfw---->',orderMethods.includes(method),);
                                 if (orderMethods.includes(method)) {
                                     setTimeout(async () => {
                                         let From = web3.eth.abi.decodeParameter("address", log.topics[1]);
+                                        console.log('From---->',From);
                                         let TimeStamp = web3Utils.hexToNumber(log?.topics?.[2])?.toString();
+                                        console.log('TimeStamp---->',TimeStamp);
                                         await handlePendingTrans(From, method, TimeStamp, (method == "nftStack" || method == "nftWithdraw" || method == "claimReward") ? "stackFunction" : "CreateOrder")
                                     }, 5000)
                                 }

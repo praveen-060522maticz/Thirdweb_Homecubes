@@ -240,6 +240,22 @@ export const onInitialMint = async (data) => {
     return Resp
 }
 
+
+export const setTokenStatus = async (data) => {
+    const encData = EncryptData(data)
+    var senddata = {
+        method: 'POST',
+        url: `${config.BACK_URL}/nft/setTokenStatus`,
+        data: { data: encData },
+        'headers': {
+            'Authorization': token
+        }
+    }
+    let Resp = await axiosFunc(senddata)
+    // console.log("ressspspsp",Resp);
+    return Resp
+}
+
 export const Buymint = async (data) => {
     const encData = EncryptData(data)
     var senddata = {

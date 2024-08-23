@@ -603,7 +603,7 @@ const saveMultiTokens = async (data, count) => {
       Category: "",
       baseUri,
       NFTOwnerDetails: [],
-      Status: "list",
+      status: "available",
     }
 
     return send_data

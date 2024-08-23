@@ -368,7 +368,10 @@ export const methodsArr = [
   'orderPlace',
   'order_place',
   'saleToken',
-  'saleWithToken'
+  'saleWithToken',
+  "nftStack",
+  "nftWithdraw",
+  "claimReward"
 ]
 
 export function extractAlphabets(inputString) {

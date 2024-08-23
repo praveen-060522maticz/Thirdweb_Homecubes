@@ -911,7 +911,7 @@ export default function useContractProviderHook() {
             // console.log('--afawdfawfawfawfawfw-->', { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggresiveGas });
             // return { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggresiveGas }
 
-            let aggresiveGas = gasprice + (gasprice * (50 / 100));
+            let aggresiveGas = gasprice + (gasprice * (25 / 100));
             // console.log("aggresiveGas", aggresiveGas,gasprice,gas_estimate,gasprice * 20 / 100);
             let aggressiveEst = (parseInt(aggresiveGas) * parseInt(gas_estimate)) / 1e18 // aggresiva ges estimate
             console.log("aggressiveEst", gasprice, aggressiveEst, getGasFeePer(method), BNBUSDT);
@@ -935,8 +935,8 @@ export default function useContractProviderHook() {
             // console.log('Error on getGasPriceObj---->', e,"--------------------------------",JSON.stringify(e));
             const ll = JSON?.stringify(e);
             const bb = JSON?.parse(ll);
-            console.log('SBBBDDBBD---->',bb);
-            toast.error( bb?.cause?.message || bb?.innerError?.message ||"Error on transaction")
+            console.log('SBBBDDBBD---->', bb);
+            toast.error((bb?.cause?.message || bb?.innerError?.message).length > 100 ? (bb?.message || "Error on transaction") : (bb?.cause?.message || bb?.innerError?.message || "Error on transaction"))
         }
     }
 
@@ -990,15 +990,15 @@ export default function useContractProviderHook() {
             // console.log('DAADAFAD`---->', data, { method: "eth._signTypedData_v4", params: [connectedWallet.address, JSON.stringify(data)], from: connectedWallet.address });
             const provider = await connectedWallet.getEthereumProvider();
             const newWeb3 = new Web3(provider)
-            console.log('newWeb3---->',connectedWallet, newWeb3,data);
+            console.log('newWeb3---->', connectedWallet, newWeb3, data);
             const getHash =
-            //  connectedWallet.walletClientType == "privy" ?
-            //     await signTypedData(data) // for embedded wallets
-            //     : 
-                await provider.request({ // for external wallets ex: metamask
-                    method: 'eth_signTypedData_v4',
-                    params: [connectedWallet.address, JSON.stringify(data)],
-                })
+                connectedWallet.walletClientType == "privy" ?
+                    await signTypedData(data) // for embedded wallets
+                    :
+                    await provider.request({ // for external wallets ex: metamask
+                        method: 'eth_signTypedData_v4',
+                        params: [connectedWallet.address, JSON.stringify(data)],
+                    })
             console.log('getHash---->', getHash);
             return getHash
         } catch (error) {
@@ -1063,6 +1063,12 @@ export default function useContractProviderHook() {
                         DETH :
                         count == "stake" ?
                             StakeAbi : TradeAbi).find(val => val.name == method),
+                // method == "setApprovalForAll" ?
+                //     [count == "stake" ? network[Network]?.stakeContract : config.TradeContract, true]
+                //     :
+                //     method == "approve" ?
+                //         [params[1], params[2]] :
+                //         [...params]
                 method == "setApprovalForAll" ?
                     [count == "stake" ? network[Network]?.stakeContract : config.TradeContract, true]
                     : [...params]
@@ -1075,6 +1081,12 @@ export default function useContractProviderHook() {
                         DETH :
                         count == "stake" ?
                             StakeAbi : TradeAbi).find(val => val.name == method),
+                // method == "setApprovalForAll" ?
+                //     [count == "stake" ? network[Network]?.stakeContract : config.TradeContract, true]
+                //     :
+                //     method == "approve" ?
+                //         [params[1], params[2]] :
+                //         [...params]
                 method == "setApprovalForAll" ?
                     [count == "stake" ? network[Network]?.stakeContract : config.TradeContract, true]
                     : [...params]
@@ -1086,7 +1098,7 @@ export default function useContractProviderHook() {
             const nonce = await ConnectContract.methods.nonces(conWallet.address).call()
             var input = {
                 to: method == "setApprovalForAll" ? params[0] :
-                    method == "approve" ? USDTaddress :
+                    method == "approve" ? params[0] :
                         count == "stake" ? network[Network]?.stakeContract : config.TradeContract,
                 from: conWallet.address,
                 data: encodeData,
