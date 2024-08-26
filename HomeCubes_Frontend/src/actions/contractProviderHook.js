@@ -921,7 +921,7 @@ export default function useContractProviderHook() {
             console.log('aggressiveEst---->', aggresiveGas, aggressiveEst, getMethodFee);
             let totalGasAmount = (aggressiveEst + getMethodFee) * BNBUSDT // adding percentage to the gas fee
             let totalValue = (parseInt(value) / 1e18) * BNBUSDT
-            let totalAmount = (totalGasAmount + totalValue) * 5
+            let totalAmount = (totalGasAmount + totalValue)
             console.log('--afawdfawfawfawfawfw-->', { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggresiveGas });
             return { gasprice, gas_estimate, totalAmount, totalValue, totalGasAmount, aggressiveEst }
 
@@ -1231,7 +1231,7 @@ export default function useContractProviderHook() {
 
             // let TokenContract = getThirdweb.createContract({ address: USDTaddress, abi: DETH })
             // let allowance = await getThirdweb.ReadContract(TokenContract, "allowance", accountAddress, stake ? network[Network]?.stakeContract : config.TradeContract);
-            console.log('allowance---->', allowance);
+            console.log('allowance---->',amount, stake, conWallet, tokenAddress, allowance);
 
             if (allowance <= (parseFloat(amount) ?? 0) || allowance == 0) {
                 var id = toast.loading("Approve token...");

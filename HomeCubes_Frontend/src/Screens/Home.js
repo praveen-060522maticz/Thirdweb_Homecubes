@@ -16,7 +16,7 @@ import Roadmap from "../Components/Roadmap";
 import PlaceaBid from "../Modals/PlaceaBid";
 import Typewriter from "typewriter-effect";
 import { useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { Newsletter } from "../actions/axioss/user.axios";
 import { isEmpty } from "../actions/common";
 import { toast } from "react-toastify";
@@ -97,8 +97,17 @@ function Home() {
     window.scrollTo(0, 0);
   }, []);
 
+  let location = useLocation();
+  let [historyIndex, setHistoryIndex] = React.useState(
+    window.history.state?.idx
+);
+  // Expose the underlying history index in the UI for debugging
+  React.useEffect(() => {
+      setHistoryIndex(window.history.state?.idx);
+  }, [location]);
+
   return (
-    <>
+    <div>
       <BottomBar />
       <Header />
       <Container fluid className="pt-3 home_wrapper">
@@ -607,7 +616,8 @@ function Home() {
       </Container >
 
       <div className="gradient_holder staking_gradholder"></div>
-    </>
+      {/* <Outlet /> */}
+    </div>
   );
 }
 

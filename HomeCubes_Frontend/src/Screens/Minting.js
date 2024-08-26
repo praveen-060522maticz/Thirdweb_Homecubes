@@ -14,7 +14,7 @@ import Countdown from "react-countdown";
 import CollectionCard from "../Components/CollectionCard";
 import BreadPath from "../Components/BreadPath";
 import GalleryCard from "../Components/GalleryCard";
-import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate, useParams, useHistory, unstable_usePrompt, useBlocker, useBeforeUnload } from 'react-router-dom'
 import DataCard from "../Components/DataCard";
 import Typewriter from "typewriter-effect";
 import { Buymint, getCurrentProject, getGallery, getGalleryTokens, onInitialMint, setPendingTransaction, setTokenStatus } from "../actions/axioss/nft.axios";
@@ -39,6 +39,9 @@ function Minting() {
   const { _id } = useParams()
 
   const navigate = useNavigate()
+
+  const location = useLocation();
+
 
   const desc = [
     {
@@ -67,37 +70,129 @@ function Minting() {
   const [nftcardData, setNftcardData] = useState([])
   const [loading, setLoading] = useState(false);
   const [showWallet, setShowWallet] = useState(false)
-  console.log("-----------project", project);
+  console.log("AWDWproject", project);
   useEffect(() => {
     window.scroll(0, 0)
   }, [])
 
-  var location = useLocation();
   const { pathname, state } = location;
   const path = pathname.split("/")[1];
   console.log("pathname,stae", pathname, state, path);
 
   const [tokenDetails, setTokenDetails] = useState(state)
 
-  const [canReload, setCanReload] = useState(true);
+  const [canReload, setCanReload] = useState(false);
   const { wallets } = useWallets()
 
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      if (!canReload) {
-        const confirmationMessage = 'Do Not Refresh!';
-        event.preventDefault();
-        event.returnValue = confirmationMessage; // For Chrome
-        return confirmationMessage; // For Safari
-      }
-    };
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+  //     if (!canReload) {
+  //       const confirmationMessage = 'Do Not Refresh!';
+  //       event.preventDefault();
+  //       event.returnValue = confirmationMessage; // For Chrome
+  //       return confirmationMessage; // For Safari
+  //     }
+  //   };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+  //   window.addEventListener('beforeunload', handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [canReload]);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBeforeUnload);
+  //   };
+  // }, [canReload]);
+
+  // unstable_usePrompt({
+  //   message: "Are you sure?",
+  //   when: ({ currentLocation, nextLocation }) =>
+  //     currentLocation.pathname !== nextLocation.pathname,
+  // });
+
+  // useEffect(() => {
+  //   // Push a new state into the history stack
+
+  //   const handlePopState = (e) => {
+  //     window.history.pushState(null, '', location.href);
+  //     // Push the same state back into the history stack to prevent back navigation
+
+  //     console.log('Page navigation detected---->', e);
+  //     const getSata = window.confirm("Are you sure...?");
+  //     if (!getSata) {
+  //       console.log("cancel click");
+  //       window.history.pushState(null, '', location.href);
+  //     }
+  //     else {
+  //       window.removeEventListener('popstate', handlePopState);
+  //     }
+  //     // if (getSata) return true;
+  //     // else return false      
+  //   };
+  //   window.addEventListener('popstate', handlePopState);
+
+  //   // return () => {
+  //   //   // Clean up the event listener on component unmount
+  //   //   window.removeEventListener('popstate', handlePopState);
+  //   // };
+  // }, []);
+
+  const [blocking, setBlocking] = useState(true);
+
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+  //     if (blocking) {
+  //       event.preventDefault();
+  //       event.returnValue = ''; // For modern browsers
+  //     }
+  //   };
+
+  //   window.addEventListener('beforeunload', handleBeforeUnload);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBeforeUnload);
+  //   };
+  // }, [blocking]);
+
+  // useEffect(() => {
+  //   if (blocking) {
+  //     const handleNavigate = (event) => {
+  //       if (window.confirm('Are you sure you want to leave this page?')) {
+  //         setBlocking(false);
+  //       } else {
+  //         event.preventDefault();
+  //       }
+  //     };
+
+  //     // Override the `popstate` event to intercept back/forward navigation
+  //     window.addEventListener('popstate', handleNavigate);
+
+  //     // Clean up event listener
+  //     return () => {
+  //       window.removeEventListener('popstate', handleNavigate);
+  //     };
+  //   }
+  // }, [blocking]);
+console.log('canReload---->',canReload);
+  // let canReload = false
+  let blocker = useBlocker(canReload);
+    console.log(blocker);
+    // Reset the blocker if the user cleans the form
+    React.useEffect(() => {
+        if (blocker.state === 'blocked' && !canReload) {
+            blocker.reset();
+        }
+    }, [blocker, canReload]);
+    const message = 'are you sure?';
+
+    useBeforeUnload(
+        React.useCallback(
+            (event) => {
+                if (canReload && typeof message === 'string') {
+                    event.preventDefault();
+                    event.returnValue = message;
+                }
+            },
+            [message, canReload]
+        ),
+        { capture: true }
+    );
 
   useEffect(() => {
     getProjects()
@@ -119,9 +214,11 @@ function Minting() {
 
   const getLatestGallery = async () => {
     try {
-      const Resp = await getGallery({ action: "getOneProjects", projectId: tokenDetails._id });
-      setCollection(Resp?.data)
-      console.log("resp getLatestGallery", Resp);
+      if (tokenDetails?._id) {
+        const Resp = await getGallery({ action: "getOneProjects", projectId: tokenDetails._id });
+        setCollection(Resp?.data)
+        console.log("resp getLatestGallery", Resp);
+      }
     } catch (error) {
       console.log("err or ongetLatestGallery ", error);
     }
@@ -174,7 +271,7 @@ function Minting() {
       if (!checkApprove) return;
     }
     setLoading(true)
-    setCanReload(false)
+    setCanReload(true)
     // const id = toast.loading('Purchasing Token on processing...\n Do not refresh!')
     const id = toast.loading(
       <div>
@@ -356,7 +453,7 @@ function Minting() {
 
     }
     setLoading(false)
-    setCanReload(true)
+    setCanReload(false)
   }
 
   console.log("projecttststst", project);
@@ -382,6 +479,7 @@ function Minting() {
     <>
       <BottomBar />
       <Header />
+      {blocker ? <ConfirmNavigation blocker={blocker} /> : null}
       <Container fluid className="pt-3 home_wrapper over_hidercon">
         <Container className="custom_container ">
           <Row>
@@ -894,3 +992,29 @@ function Minting() {
 }
 
 export default Minting;
+
+function ConfirmNavigation({ blocker }) {
+  if (blocker.state === 'blocked') {
+      return (
+          <>
+              <p style={{ color: 'red' }}>
+                  Blocked the last navigation to {blocker.location.pathname}
+              </p>
+              <button onClick={() => blocker.proceed?.()}>
+                  Let me through
+              </button>
+              <button onClick={() => blocker.reset?.()}>Keep me here</button>
+          </>
+      );
+  }
+
+  if (blocker.state === 'proceeding') {
+      return (
+          <p style={{ color: 'orange' }}>
+              Proceeding through blocked navigation
+          </p>
+      );
+  }
+
+  return <p style={{ color: 'green' }}>Blocker is currently unblocked</p>;
+}

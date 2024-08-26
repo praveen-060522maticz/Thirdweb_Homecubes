@@ -62,7 +62,8 @@ function Staking() {
   const [options, setOptions] = useState([
     { label: "Season 1", value: "Season 1", },
     { label: "Season 2", value: "Season 2", },
-    { label: "Season 3", value: "Season 3", }
+    { label: "Season 3", value: "Season 3", },
+    { label: "Season 4", value: "Season 4", },
   ])
 
   const stylesgraybg = {
@@ -552,8 +553,8 @@ function Staking() {
       isLoading: false,
       autoClose: 1000,
     });
-    onSelectChange()
-    getRewardDetails()
+    onSelectChange();
+    getRewardDetails();
   }
 
   return (
