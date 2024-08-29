@@ -7,14 +7,14 @@ import frontRoute from './routes/front_routes/front.routes.js'
 import adminRoute from './routes/admin_routes/admin.routes.js'
 const cors = require("cors");
 import compression from 'compression';
-import { Decryptdata, Encryptdata, extractAlphabets, isEmpty, methodsArr } from './helper/commonFUnction.js';
+import { Decryptdata, Encryptdata, extractAlphabets, handlePendingTrans, isEmpty, methodsArr } from './helper/commonFUnction.js';
 import pendingTrans from './models/front_models/pendingTransactions.schema.js';
 import * as nftCtrl from './controller/front_controller/nft.controller';
 import Web3 from 'web3'
 import { error } from 'console';
 import logger from './config/logger.js';
 import web3Utils from 'web3-utils';
-
+import cron from './config/cron.js';
 const getProvider = () => {
     const provider = new Web3.providers.WebsocketProvider(config.SOCKET_RPC, {
         clientConfig: {
@@ -103,7 +103,7 @@ web3.eth.subscribe('newBlockHeaders', (error, blockHeader) => {
 
                                         setTimeout(async () => {
                                             var getPending = await pendingTrans.findOne({ From: From?.toLowerCase(), method, status: "pending", TimeStamp });
-
+console.log('getPending---->',getPending);
                                             getPending?.params?.[0]?.changedToken?.map((val, i) => {
                                                 val.NFTId = ids[i]
                                                 val.Hash = getData.transactionHash;
@@ -141,13 +141,13 @@ web3.eth.subscribe('newBlockHeaders', (error, blockHeader) => {
                                     "saleToken",
                                     "saleWithToken"
                                 ]
-                                console.log('afrawwwfwfw---->',orderMethods.includes(method),);
+                                console.log('afrawwwfwfw---->', orderMethods.includes(method),);
                                 if (orderMethods.includes(method)) {
                                     setTimeout(async () => {
                                         let From = web3.eth.abi.decodeParameter("address", log.topics[1]);
-                                        console.log('From---->',From);
+                                        console.log('From---->', From);
                                         let TimeStamp = web3Utils.hexToNumber(log?.topics?.[2])?.toString();
-                                        console.log('TimeStamp---->',TimeStamp);
+                                        console.log('TimeStamp---->', TimeStamp);
                                         await handlePendingTrans(From, method, TimeStamp, (method == "nftStack" || method == "nftWithdraw" || method == "claimReward") ? "stackFunction" : "CreateOrder")
                                     }, 5000)
                                 }
@@ -176,7 +176,7 @@ web3.eth.subscribe('newBlockHeaders', (error, blockHeader) => {
                                     }))
 
                                     let From = web3.eth.abi.decodeParameter("address", log.topics[1]);
-                                    let TimeStamp = web3Utils.hexToNumberString("0x000000000000000000000000000000000000000000000000059e83d852340290");
+                                    let TimeStamp = web3Utils.hexToNumberString(log?.topics?.[2]);
 
                                     console.log("royalObject", royalObject);
                                     var need_data = {
@@ -224,21 +224,21 @@ web3.eth.subscribe('newBlockHeaders', (error, blockHeader) => {
     });
 });
 
-const handlePendingTrans = async (From, method, TimeStamp, func) => {
-    try {
-        var getPending = await pendingTrans.findOne({ From: From?.toLowerCase(), method, status: "pending", TimeStamp });
-        console.log('TimeStamp---->', TimeStamp, getPending?.TimeStamp);
-        if (getPending) {
-            const triggerlazmint = await nftCtrl[func]({ body: getPending?.params?.[0], query: getPending?.params?.[0] }, { json: function (para) { console.log('paraa---->', para); }, send: function (para) { console.log('paraa---->', para); } });
-            console.log('triggerlazmint---->', triggerlazmint);
+// const handlePendingTrans = async (From, method, TimeStamp, func) => {
+//     try {
+//         var getPending = await pendingTrans.findOne({ From: From?.toLowerCase(), method, status: "pending", TimeStamp });
+//         console.log('TimeStamp---->', TimeStamp, getPending?.TimeStamp);
+//         if (getPending) {
+//             const triggerlazmint = await nftCtrl[func]({ body: getPending?.params?.[0], query: getPending?.params?.[0] }, { json: function (para) { console.log('paraa---->', para); }, send: function (para) { console.log('paraa---->', para); } });
+//             console.log('triggerlazmint---->', triggerlazmint);
 
-            const changeStatus = await pendingTrans.findOneAndUpdate({ From: From?.toLowerCase(), method, status: "pending", TimeStamp }, { $set: { status: "success" } });
-            console.log('changeStatus---->', changeStatus);
-        }
-    } catch (e) {
-        console.log('Eroro on handlePendingTrans---->', e);
-    }
-}
+//             const changeStatus = await pendingTrans.findOneAndUpdate({ From: From?.toLowerCase(), method, status: "pending", TimeStamp }, { $set: { status: "success" } });
+//             console.log('changeStatus---->', changeStatus);
+//         }
+//     } catch (e) {
+//         console.log('Eroro on handlePendingTrans---->', e);
+//     }
+// }
 
 
 const getrans = async () => {
@@ -251,12 +251,12 @@ const getrans = async () => {
         // console.log('getDaaaata---->',getDaaaata);
 
         // console.log('Transaction:', tx);
-        const getData = await web3.eth.getTransactionReceipt("0x3d80d6a83ce6fcac8fc314021361cd94584d92a01ded12d2d75877bc2a3710e1");
+        const getData = await web3.eth.getTransactionReceipt("0x93959156e075ad1d9792c3097904ef0b2cb9883aab1288166d8d0ed09d7f4a01");
         console.log('getDatawdawdawda', JSON.stringify(getData, null, 2));
 
         for (const log of getData.logs) {
             try {
-                console.log('loggggg---->', log, web3Utils.hexToUtf8(log.data).split(""));
+                console.log('loggggg---->', log, log.topics, web3Utils.hexToUtf8(log.data).split(""));
                 const method = extractAlphabets(web3Utils.hexToUtf8(log.data))
                 console.log('method---->', method);
                 if (methodsArr.includes(method)) {
@@ -322,7 +322,7 @@ const getrans = async () => {
                     }))
 
                     let From = web3.eth.abi.decodeParameter("address", log.topics[1]);
-                    let TimeStamp = web3Utils.hexToNumberString("0x000000000000000000000000000000000000000000000000059e83d852340290");
+                    let TimeStamp = web3Utils.hexToNumberString(log.topics[2]);
 
                     console.log("royalObject", royalObject);
                     var need_data = {
@@ -332,23 +332,23 @@ const getrans = async () => {
                     }
                     console.log("need_data", need_data, TimeStamp, From);
 
-                    setTimeout(async () => {
-                        var getPending = await pendingTrans.findOne({ From: From?.toLowerCase(), method, status: "pending", TimeStamp });
-                        console.log('getPending---->', getPending);
-                        if (getPending) {
-                            getPending.params[0].newOwner.royaltyReceiver = royalObject[1];
-                            getPending.params[0].newOwner.earnPercentage = web3Utils.fromWei(royalObject[2]);
-                            getPending.params[0].newOwner.Earning = web3Utils.fromWei(royalObject[3]);
+                    // setTimeout(async () => {
+                    //     var getPending = await pendingTrans.findOne({ From: From?.toLowerCase(), method, status: "pending", TimeStamp });
+                    //     console.log('getPending---->', getPending);
+                    //     if (getPending) {
+                    //         getPending.params[0].newOwner.royaltyReceiver = royalObject[1];
+                    //         getPending.params[0].newOwner.earnPercentage = web3Utils.fromWei(royalObject[2]);
+                    //         getPending.params[0].newOwner.Earning = web3Utils.fromWei(royalObject[3]);
 
-                            console.log('getPending?.params?.[0]---->', getPending?.params?.[0]);
-                            const triggerlazmint = await nftCtrl.BuyAccept({ body: getPending?.params?.[0] }, { json: function (para) { console.log('paraa---->', para); } });
-                            console.log('triggerlazmint---->', triggerlazmint);
+                    //         console.log('getPending?.params?.[0]---->', getPending?.params?.[0]);
+                    //         const triggerlazmint = await nftCtrl.BuyAccept({ body: getPending?.params?.[0] }, { json: function (para) { console.log('paraa---->', para); } });
+                    //         console.log('triggerlazmint---->', triggerlazmint);
 
-                            const changeStatus = await pendingTrans.findOneAndUpdate({ From: From?.toLowerCase(), method, status: "pending", TimeStamp }, { $set: { status: "success" } });
-                            console.log('changeStatus---->', changeStatus);
-                        }
+                    //         const changeStatus = await pendingTrans.findOneAndUpdate({ From: From?.toLowerCase(), method, status: "pending", TimeStamp }, { $set: { status: "success" } });
+                    //         console.log('changeStatus---->', changeStatus);
+                    //     }
 
-                    }, 5000)
+                    // }, 5000)
 
                 }
 

@@ -559,7 +559,7 @@ export const createProject = async (req, res) => {
 }
 
 const saveMultiTokens = async (data, count) => {
-  const { symbol, projectDescription, imgname, baseUri, Hash, contractAddress, NFTRoyalty, color, size, creatoraddress, NFTPrice, nonce, randomname, projectId,mintTokenName } = data
+  const { symbol, projectDescription, imgname, baseUri, Hash, contractAddress, NFTRoyalty, color, size, creatoraddress, NFTPrice, nonce, randomname, projectId, mintTokenName } = data
   const ref = Date.now()
 
   const getArr = Array(Number(data.maxNFTs)).fill().map((val, ind) => {
@@ -1619,54 +1619,93 @@ export const saveCkeditorImage = async (req, res) => {
 }
 
 export const stakingFunctions = async (req, res) => {
-  const { action, Season, projectId, rewardArr } = req.body
+  const { action, Season, projectId, rewardArr, year } = req.body
   console.log("req.queryreq.query", req.body);
   const ref = Date.now();
   try {
     if (action == "getDetails") {
 
-      var date;
+      var date = getDaysOfDesiredMonth(
+        Season == "Season 1" ? 3 :
+          Season == "Season 2" ? 6 :
+            Season == "Season 3" ? 9 :
+              Season == "Season 4" ? 12 : 3,
+        parseInt(year)
+      );
 
-      if (Season == "Season 1") date = getDaysOfDesiredMonth(3); // next march last date
-      else if (Season == "Season 2") date = getDaysOfDesiredMonth(6); // next may last date
-      else if (Season == "Season 3") date = getDaysOfDesiredMonth(9); // next june last date
-      else if (Season == "Season 4") date = getDaysOfDesiredMonth(12); // next oct last date
-      console.log("date", date);
+      // if (Season == "Season 1") date = getDaysOfDesiredMonth(3); // next march last date
+      // else if (Season == "Season 2") date = getDaysOfDesiredMonth(6); // next may last date
+      // else if (Season == "Season 3") date = getDaysOfDesiredMonth(9); // next june last date
+      // else if (Season == "Season 4") date = getDaysOfDesiredMonth(12); // next oct last date
+      console.log("date", date, new Date(date.newStartDate), new Date(date.dateFormat));
+      // const getData = await StakingSchema.aggregate([
+      //   {
+      //     $match: {
+      //       // $expr:
+      //       // {
+      //       //   $and: [
+      //       //     { $gt: ["$startDate", new Date(date.newStartDate)] },
+      //       //     {
+      //       //       $or:
+      //       //         [{ $gt: ["$endDate", new Date(date.newStartDate)] },
+      //       //         { $lt: [new Date(date.dateFormat), "$endDate"] }]
+      //       //     },
+
+      //       //     { $eq: ["$projectId", projectId] }
+      //       //   ]
+      //       // }
+      //       $expr:
+      //       {
+      //         $and: [
+      //           { $eq: ["$withdraw", false] },
+      //           {
+      //             $or: [
+      //               { $gt: ["$startDate", new Date(date.newStartDate)] },
+      //               { $gt: ["$startDate", new Date(date.dateFormat)] },
+      //               { $lt: [new Date(date.dateFormat), "$endDate"] },
+      //               { $lt: [new Date(date.newStartDate), "$endDate"] },
+      //             ]
+      //           },
+      //           { $eq: ["$projectId", projectId] }
+      //         ]
+
+      //       }
+      //     }
+      //   },
+
+      // ])
+
       const getData = await StakingSchema.aggregate([
         {
           $match: {
-            // $expr:
-            // {
-            //   $and: [
-            //     { $gt: ["$startDate", new Date(date.newStartDate)] },
-            //     {
-            //       $or:
-            //         [{ $gt: ["$endDate", new Date(date.newStartDate)] },
-            //         { $lt: [new Date(date.dateFormat), "$endDate"] }]
-            //     },
-
-            //     { $eq: ["$projectId", projectId] }
-            //   ]
-            // }
-            $expr:
-            {
-              $and: [
-                { $eq: ["$withdraw", false] },
-                {
-                  $or: [
-                    { $gt: ["$startDate", new Date(date.newStartDate)] },
-                    { $gt: ["$startDate", new Date(date.dateFormat)] },
-                    { $lt: [new Date(date.dateFormat), "$endDate"] },
-                    { $lt: [new Date(date.newStartDate), "$endDate"] },
-                  ]
-                },
-                { $eq: ["$projectId", projectId] }
-              ]
-
-            }
+            $and: [
+              { withdraw: false },
+              { projectId: projectId },
+              {
+                $or: [
+                  {
+                    $and: [
+                      { startDate: { $gte: new Date(date.newStartDate) } },
+                      { startDate: { $lt: new Date(date.dateFormat) } },
+                    ]
+                  },
+                  {
+                    $and: [
+                      { endDate: { $gte: new Date(date.newStartDate) } },
+                      { endDate: { $lt: new Date(date.dateFormat) } },
+                    ]
+                  },
+                  {
+                    $and: [
+                      { startDate: { $lt: new Date(date.newStartDate) } },
+                      { endDate: { $gt: new Date(date.dateFormat) } },
+                    ]
+                  },
+                ]
+              }
+            ]
           }
-        },
-
+        }
       ])
       return res.json({
         success: getData.length != 0 ? "success" : "error",

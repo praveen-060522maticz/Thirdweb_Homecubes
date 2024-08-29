@@ -14,6 +14,7 @@ import { isEmpty } from '../actions/common';
 import Calendar from './Calendar';
 import web3utils from 'web3-utils';
 import { useWallets } from '@privy-io/react-auth';
+import Prompt from '../Components/Prompt';
 function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closePop, file, type, thumb, item }) {
 
   const [selectedOption, setSelectedOption] = useState(null);
@@ -26,11 +27,13 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
   const [TokenBtn, SetTokenBtn] = useState("start");
   const [Error, setError] = useState({});
   const [Once, setOnce] = useState(true)
+  const [canReload, setCanReload] = useState(true);
+
 
   const { currency } = useSelector((state) => state.LoginReducer);
-  const { payload,gasFee } = useSelector((state) => state.LoginReducer.User);
+  const { payload, gasFee } = useSelector((state) => state.LoginReducer.User);
   const { web3, accountAddress } = useSelector((state) => state.LoginReducer.AccountDetails);
-  const {wallets}=useWallets()
+  const { wallets } = useWallets()
   useEffect(() => {
     SetFormValue({
       ...FormValue,
@@ -260,7 +263,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
   async function BalanceCheck() {
 
     if (Once) {
-      let Nftbalance = await ContractCall.Current_NFT_Balance(owner, item,wallets[0]);
+      let Nftbalance = await ContractCall.Current_NFT_Balance(owner, item, wallets[0]);
       console.log("ownneerrsnftbusemmm in listitem", Nftbalance, owner?.NFTBalance, owner?.NFTOwner);
 
       if (Nftbalance && (Nftbalance.toLowerCase() != owner?.NFTOwner.toLowerCase())) {
@@ -340,14 +343,14 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
           //   FormValue.ContractType.includes('721') ? "Single" : "Multiple",
           //   FormValue.ContractAddress
           // );
-          
+
           // const cont = await getThirdweb.useContractCall(
           //   "setApprovalForAll",
           //   0,
           //   0,
           //   FormValue.ContractAddress, true
           // );
-
+          setCanReload(false)
           const cont = await ContractCall.gasLessTransaction(
             "setApprovalForAll",
             0,
@@ -355,7 +358,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
             wallets[0],
             FormValue.ContractAddress, true
           );
-
+          setCanReload(true)
           if (!cont) {
             toast.update(id, {
               render: "Transaction Failed",
@@ -393,7 +396,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
         // );
         // console.log("cont", cont)
         console.log('gasgasFeeee---->', gasFee);
-        
+
         // const cont = await getThirdweb.useContractCall(
         //   "orderPlace",
         //   0,
@@ -408,7 +411,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
         //   "2500000000000000000"
         // )
         let TStamp = Date.now();
-
+        setCanReload(false)
         const cont = await ContractCall.gasLessTransaction(
           "orderPlace",
           0,
@@ -424,7 +427,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
           gasFee?.collectAddress,
           "2500000000000000000"
         )
-
+        setCanReload(true)
         console.log('Cont---->', cont);
         if (cont) {
           let _data = FormValue;
@@ -456,7 +459,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
             })
             push("/marketplace");
           } else await BackCall(id, _data);
-          
+
         } else {
           console.log("json fil")
           toast.update(id, {
@@ -468,6 +471,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
           console.log("ewjewkljelwjrkwejkrweklr")
           SetMintbtn("try");
         }
+
       }
     } else {
       let _data = FormValue;
@@ -616,6 +620,8 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
 
   return (
     <>
+      <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />u
+
       <Modal
         show={show}
         onHide={handleClose}

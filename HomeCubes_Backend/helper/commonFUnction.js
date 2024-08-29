@@ -16,6 +16,9 @@ import Config from "../config/serverConfig";
 import { FindOne } from "./mongooseHelper";
 import CryptoJS from 'crypto-js'
 
+import pendingTrans from '../models/front_models/pendingTransactions.schema.js';
+import * as nftCtrl from '../controller/front_controller/nft.controller';
+
 export const isEmpty = (value) =>
   value === undefined ||
   value === null ||
@@ -273,13 +276,13 @@ export const containsDuplicates = async (array) => {
 
 }
 
-export const getDaysOfDesiredMonth = (month) => {
+export const getDaysOfDesiredMonth = (month, year) => {
 
   // Get the current date
   var currentDate = new Date();
 
   // Set the target date to March 1 of the current year
-  var targetDate = new Date(currentDate.getFullYear(), month, 1); // Note: Months are 0-indexed, so March is represented by 2
+  var targetDate = new Date(year, month, 1); // Note: Months are 0-indexed, so March is represented by 2
   console.log("targetDate", targetDate);
   // Calculate the difference in days
   var timeDifference = targetDate.getTime() - currentDate.getTime();
@@ -287,7 +290,7 @@ export const getDaysOfDesiredMonth = (month) => {
 
   console.log("Days until", daysDifference);
 
-  var newStartDate = new Date(currentDate.getFullYear(), month - 3, 1); // Note: Months are 0-indexed, so March is represented by 2
+  var newStartDate = new Date(year, month - 3, 1); // Note: Months are 0-indexed, so March is represented by 2
 
 
   // days difference from now and previous day of 1
@@ -376,14 +379,40 @@ export const methodsArr = [
 
 export function extractAlphabets(inputString) {
   try {
-      if (isEmpty(inputString)) return "";
-      const regex = /[a-zA-Z]+/g;
-      const matches = inputString.match(regex);
-      const result = matches ? matches.join('') : '';
-      return result;
+    if (isEmpty(inputString)) return "";
+    const regex = /[a-zA-Z]+/g;
+    const matches = inputString.match(regex);
+    const result = matches ? matches.join('') : '';
+    return result;
   } catch (e) {
-      console.log('Erro on extractAlphabets---->', e);
-      return false
+    console.log('Erro on extractAlphabets---->', e);
+    return false
   }
 
 }
+
+export const handlePendingTrans = async (From, method, TimeStamp, func) => {
+  try {
+    var getPending = await pendingTrans.findOne({ From: From?.toLowerCase(), method, status: "pending", TimeStamp });
+    console.log('TimeStamp---->', TimeStamp, getPending?.TimeStamp);
+    if (getPending) {
+      const triggerlazmint = await nftCtrl[func]({ body: getPending?.params?.[0], query: getPending?.params?.[0] }, { json: function (para) { console.log('paraa---->', para); }, send: function (para) { console.log('paraa---->', para); } });
+      console.log('triggerlazmint---->', triggerlazmint);
+
+      const changeStatus = await pendingTrans.findOneAndUpdate({ From: From?.toLowerCase(), method, status: "pending", TimeStamp }, { $set: { status: "success" } });
+      console.log('changeStatus---->', changeStatus);
+    }
+  } catch (e) {
+    console.log('Eroro on handlePendingTrans---->', e);
+  }
+}
+
+export const sleep = async (sec) => await new Promise(res => setTimeout(() => res(), sec))
+
+// export const createReqObj = (data) => {
+//   try {
+//     return 
+//   } catch (e) {
+//     console.log('Erro on createReqObj---->',e);
+//   }
+// }

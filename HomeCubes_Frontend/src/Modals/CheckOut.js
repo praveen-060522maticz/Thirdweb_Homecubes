@@ -7,10 +7,11 @@ import { getBNBvalue, isEmpty } from '../actions/common';
 import { toast } from 'react-toastify'
 import config from '../config/config';
 import { network } from '../config/network';
-import { BuyAccept } from '../actions/axioss/nft.axios';
+import { BuyAccept, setPendingTransaction } from '../actions/axioss/nft.axios';
 import { userRegister } from '../actions/axioss/user.axios';
 import { useWallets } from '@privy-io/react-auth';
 import web3utils from 'web3-utils';
+import Prompt from '../Components/Prompt';
 function CheckOut({ show, handleClose, item, owner, file }) {
 
 
@@ -25,7 +26,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
    const { buyerFees, sellerFees } = useSelector(
       (state) => state.LoginReducer.ServiceFees
    );
-   const {  gasFee } = useSelector((state) => state.LoginReducer.User);
+   const { gasFee } = useSelector((state) => state.LoginReducer.User);
 
    console.log("getServiceFees", buyerFees, sellerFees);
    const ContractCall = useContractProviderHook();
@@ -43,8 +44,8 @@ function CheckOut({ show, handleClose, item, owner, file }) {
    const [TokenBalance, SetTokenBalance] = useState("0");
    const [buyerDetails, setBuyerDetails] = useState({});
    const [cakeValue, setCakeValue] = useState(0);
-   const {wallets} = useWallets();
-console.log('walletswallets---->',wallets);
+   const { wallets } = useWallets();
+   console.log('walletswallets---->', wallets);
 
    useEffect(() => {
       getBNBvalue("CAKEUSDT").then((val) => {
@@ -58,22 +59,22 @@ console.log('walletswallets---->',wallets);
 
    const [canReload, setCanReload] = useState(true);
    const [allowed, setAllowed] = useState(false)
-   useEffect(() => {
-      const handleBeforeUnload = (event) => {
-         if (!canReload) {
-            const confirmationMessage = 'Do Not Refresh!';
-            event.preventDefault();
-            event.returnValue = confirmationMessage; // For Chrome
-            return confirmationMessage; // For Safari
-         }
-      };
+   // useEffect(() => {
+   //    const handleBeforeUnload = (event) => {
+   //       if (!canReload) {
+   //          const confirmationMessage = 'Do Not Refresh!';
+   //          event.preventDefault();
+   //          event.returnValue = confirmationMessage; // For Chrome
+   //          return confirmationMessage; // For Safari
+   //       }
+   //    };
 
-      window.addEventListener('beforeunload', handleBeforeUnload);
+   //    window.addEventListener('beforeunload', handleBeforeUnload);
 
-      return () => {
-         window.removeEventListener('beforeunload', handleBeforeUnload);
-      };
-   }, [canReload]);
+   //    return () => {
+   //       window.removeEventListener('beforeunload', handleBeforeUnload);
+   //    };
+   // }, [canReload]);
    console.log('allowed---->', allowed);
 
 
@@ -98,7 +99,7 @@ console.log('walletswallets---->',wallets);
    useEffect(() => {
 
       const getAllowance = async () => {
-         const getdata = await ContractCall.getAllowance(token_address,wallets[0]);
+         const getdata = await ContractCall.getAllowance(token_address, wallets[0]);
          const getPay = web3utils.toWei(String(YouWillGet))
          console.log('getThirdweb---->', getdata, getPay, getdata < getPay);
          setAllowed(getdata < getPay)
@@ -160,13 +161,13 @@ console.log('walletswallets---->',wallets);
          //    web3utils.toWei((YouWillGet + 2).toString()),
          // )
 
-         console.log("appprove log","approve",
-         0,
-         0,
-         wallets[0],
-         token_address,
-         network[Network]?.tradeContract,
-         web3utils.toWei((YouWillGet + 2).toString()),);
+         console.log("appprove log", "approve",
+            0,
+            0,
+            wallets[0],
+            token_address,
+            network[Network]?.tradeContract,
+            web3utils.toWei((YouWillGet + 2).toString()),);
 
          // let cont = await ContractCall.gasLessTransaction( // openzepline
          //    "approve",
@@ -184,7 +185,7 @@ console.log('walletswallets---->',wallets);
             wallets[0],
             token_address
          )
-         
+
          setCanReload(true)
          console.log("cont", cont);
          if (cont) {
@@ -287,7 +288,7 @@ console.log('walletswallets---->',wallets);
             "2500000000000000000"
          ]
          if (owner.CoinName != "BNB") Arr.splice(4, 0, owner.CoinName)
-         console.log('ArrArrArrArrArr---->',Arr);
+         console.log('ArrArrArrArrArr---->', Arr);
          // let cont = await getThirdweb.useContractCall(...Arr)
          let cont = await ContractCall.gasLessTransaction(...Arr)
          setCanReload(true)
@@ -308,15 +309,38 @@ console.log('walletswallets---->',wallets);
                click: `${config.FRONT_URL}/info/${item.CollectionNetwork}/${item.ContractAddress}/${accountAddress}/${owner.NFTId}`,
                initialBuy: payload?.initialBuy,
                referedBy: payload?.referedBy,
-               royaltyReceiver: cont.royaltyInfo[1],
-               earnPercentage: web3utils.fromWei(String(cont.royaltyInfo[2])),
-               Earning: web3utils.fromWei(String(cont.royaltyInfo[3])),
+               royaltyReceiver: cont?.royaltyInfo?.[1] || "",
+               earnPercentage: cont?.royaltyInfo?.[2] ? web3utils.fromWei(String(cont.royaltyInfo[2])) : 0,
+               Earning: cont?.royaltyInfo?.[3] ? web3utils.fromWei(String(cont.royaltyInfo[3])) : 0,
                projectId: owner.projectId
             };
-            setCanReload(false)
-            let Resp = await BuyAccept({ newOwner: newOwner, item: item });
-            setCanReload(true)
+
+            let pendingObj = {
+               From: accountAddress,
+               method: owner.CoinName == "BNB" ? "saleToken" : "saleWithToken",
+               params: [{ newOwner: newOwner, item: item }],
+               TimeStamp: TStamp
+            }
+
+            let Resp = cont.status == "pending" ? await setPendingTransaction(pendingObj) : await BuyAccept({ newOwner: newOwner, item: item });
             console.log("Resp", Resp);
+
+            if (cont.status == "pending") {
+               setTimeout(() => {
+                  navigate("/");
+               }, 1500)
+               
+               return toast.update(id, {
+                  render:
+                     <div>
+                        <p className="mb-0">Sale is pending...</p>
+                        <p className="mb-0">Please check after some time!</p>
+                     </div>,
+                  type: 'warning', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true
+               })
+
+            }
+
             if (Resp.success == "success") {
                toast.update(id, {
                   render: "The NFT is successfully purchased",
@@ -372,8 +396,8 @@ console.log('walletswallets---->',wallets);
    async function BalanceCheck() {
       if (once) {
          setOnce(false)
-         var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item,wallets[0]);
-         console.log("ownneerrsnftbuynowbalittemmm", Nftbalance, "  sadsadas", owner,wallets[0]);
+         var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item, wallets[0]);
+         console.log("ownneerrsnftbuynowbalittemmm", Nftbalance, "  sadsadas", owner, wallets[0]);
          if (Nftbalance?.toLowerCase() != owner.NFTOwner?.toLowerCase()) {
             setTimeout(() => {
                toast.warning("You won't buy at this moment please refresh you data");
@@ -390,12 +414,14 @@ console.log('walletswallets---->',wallets);
 
    const getBidderDetail = async () => {
       const getProfile = await userRegister({ Type: "getProfile", CustomUrl: owner.NFTOwner });
-      console.log('getProfile---->',getProfile);
+      console.log('getProfile---->', getProfile);
       setBuyerDetails(getProfile?.data ?? {})
    }
 
    return (
       <>
+         <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />u
+
          <Modal
             show={show}
             onHide={handleClose}
@@ -461,7 +487,7 @@ console.log('walletswallets---->',wallets);
                      className='additional_btn modal_additionalBtn mt-3'
                      // disabled={Btn != 'done' && App_Btn == 'init' || App_Btn == 'error' || App_Btn === "process" || App_Btn === "done" ? true : false}
                      // onClick={App_Btn == 'start' || App_Btn === "try" ? _Buy : null}
-                     onClick={()=> _Buy()}
+                     onClick={() => _Buy()}
                   >
                      {App_Btn == 'start' && 'Proceed to pay'
                         || App_Btn == 'try' && 'Try-Again'

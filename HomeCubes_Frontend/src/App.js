@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import './App.css';
 import '../src/assets/css/Style.css'
@@ -32,55 +30,104 @@ import CollectionNfts from './Screens/CollectionNfts';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { base, baseGoerli, mainnet, sepolia, polygon, polygonMumbai } from 'viem/chains';
-import ParentOutlet from './Screens/ParentOutlet';
+
+function App() {
 
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<ParentOutlet />}>
-      <Route path="Home" element={<Home />} />
-      <Route path="staking" element={<Staking />} />
-      <Route path="collectionInfo" element={<CollectionInfo />} />
-      <Route path="marketplace" element={<Marketplace />} />
-      <Route path="nftInfo/:Owner/:Id" element={<NFTInfo />} />
-      <Route path="projects" element={<Projects />} />
-      <Route path="projectInfo/:projectTitle" element={<ProjectInfo />} />
-      <Route path="minting" element={<MintProjects />} />
-      <Route path="mint/:_id" element={<Minting />} />
-      <Route path="mintNFTs/:_id" element={<MintNFTCards />} />
-      <Route path="howitworks" element={<HowitWorks />} />
-      <Route path="roadmap" element={<RoadMapView />} />
-      <Route path="about" element={<AboutUs />} />
-      <Route path="blogs" element={<Blogs />} />
-      <Route path="contact" element={<Contact />} />
-      <Route path="modalbuttons" element={<ModalButtons />} />
-      <Route path="blogInfo/:slug" element={<BlogInfo />} />
-      <Route path="profile/:customurl" element={<Profile />} />
-      <Route path="CollectionNfts/:projectTitle" element={<CollectionNfts />} />
-    </Route>
-  )
-);
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "/staking",
+      element: <Staking />,
+    },
+    {
+      path: "/collectionInfo",
+      element: <CollectionInfo />,
+    },
+    {
+      path: "/marketplace",
+      element: <Marketplace />,
+    },
+    {
+      path: "/nftInfo/:Owner/:Id",
+      element: <NFTInfo />,
+    },
+    {
+      path: "/projects",
+      element: <Projects />,
+    },
+    {
+      path: "/projectInfo/:projectTitle",
+      element: <ProjectInfo />,
+    },
+    {
+      path: "/minting",
+      element: <MintProjects />,
+    },
+    {
+      path: "/mint/:_id",
+      element: <Minting />,
+    },
+    {
+      path: "/mintNFTs/:_id",
+      element: <MintNFTCards />,
+    },
+    {
+      path: "/howitworks",
+      element: <HowitWorks />,
+    },
+    {
+      path: "/roadmap",
+      element: <RoadMapView />,
+    },
+    {
+      path: "/about",
+      element: <AboutUs />,
+    },
+    {
+      path: "/blogs",
+      element: <Blogs />,
+    },
+    {
+      path: "/contact",
+      element: <Contact />,
+    },
+    {
+      path: "/modalbuttons",
+      element: <ModalButtons />,
+    },
+    {
+      path: "/blogInfo/:slug",
+      element: <BlogInfo />,
+    },
+    {
+      path: "/profile/:customurl",
+      element: <Profile />,
+    },
+    {
+      path: "/CollectionNfts/:projectTitle",
+      element: <CollectionNfts />,
+    },
+    // Add routes for any additional screens
+  ]);
 
-export default function App() {
   return (
     <>
       <PrivyProvider
         appId={process.env.REACT_APP_APPKEY}
         onSuccess={(user) => console.log(`User ${user.id} logged in!`)}
         config={{
-          appearance: {
-            accentColor: "#6A6FF5",
-            theme: "#222224",
-            showWalletLoginFirst: false,
-            logo: "https://home-cubes-frontend-2.pages.dev/static/media/logo.b931aee24b93273c30989770522e8f9c.svg",
-          },
-          loginMethods: ["email", "wallet", "google", "apple", "sms"],
-          embeddedWallets: { createOnLogin: "users-without-wallets", requireUserPasswordOnCreate: false },
+          "appearance": { "accentColor": "#6A6FF5", "theme": "#222224", "showWalletLoginFirst": false, "logo": "https://home-cubes-frontend-2.pages.dev/static/media/logo.b931aee24b93273c30989770522e8f9c.svg" },
+          "loginMethods": ["email", "wallet", "google", "apple", "sms"],
+          "embeddedWallets": { "createOnLogin": "users-without-wallets", "requireUserPasswordOnCreate": false },
           defaultChain: sepolia,
+          // Replace this with a list of your desired supported chains
           supportedChains: [mainnet, sepolia, base, baseGoerli, polygon, polygonMumbai],
-          mfa: { noPromptOnMfaRequired: false },
-        }}
-      >
+          "mfa": { "noPromptOnMfaRequired": false }
+        }}>
         <RouterProvider router={router} />
       </PrivyProvider>
       <ToastContainer
@@ -90,19 +137,22 @@ export default function App() {
         rtl={true}
         closeOnClick={true}
         closeButton={true}
-        style={{
-          zIndex: "999999",
-          width: "400px",
-          wordBreak: "break-word",
-          textAlign: "center",
-          fontWeight: "500",
-          marginTop: "70px",
-        }}
+        style={
+          {
+            zIndex: "999999",
+            "width": "400px",
+            "wordBreak": "break-word",
+            "text-align": "center",
+            "fontWeight": "500",
+            marginTop: "70px",
+          }}
       />
     </>
+
   );
 }
 
+export default App;
 
 // import React, { useEffect } from 'react';
 // import './App.css';

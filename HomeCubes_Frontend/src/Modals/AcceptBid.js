@@ -11,6 +11,7 @@ import config from '../config/config'
 import { userRegister } from '../actions/axioss/user.axios';
 import web3utils from 'web3-utils';
 import { useWallets } from '@privy-io/react-auth';
+import Prompt from '../Components/Prompt';
 function AcceptBid({
    show,
    handleClose,
@@ -59,22 +60,22 @@ function AcceptBid({
    }, [token_address]);
 
    const [canReload, setCanReload] = useState(true);
-   useEffect(() => {
-      const handleBeforeUnload = (event) => {
-         if (!canReload) {
-            const confirmationMessage = 'Do Not Refresh!';
-            event.preventDefault();
-            event.returnValue = confirmationMessage; // For Chrome
-            return confirmationMessage; // For Safari
-         }
-      };
+   // useEffect(() => {
+   //    const handleBeforeUnload = (event) => {
+   //       if (!canReload) {
+   //          const confirmationMessage = 'Do Not Refresh!';
+   //          event.preventDefault();
+   //          event.returnValue = confirmationMessage; // For Chrome
+   //          return confirmationMessage; // For Safari
+   //       }
+   //    };
 
-      window.addEventListener('beforeunload', handleBeforeUnload);
+   //    window.addEventListener('beforeunload', handleBeforeUnload);
 
-      return () => {
-         window.removeEventListener('beforeunload', handleBeforeUnload);
-      };
-   }, [canReload]);
+   //    return () => {
+   //       window.removeEventListener('beforeunload', handleBeforeUnload);
+   //    };
+   // }, [canReload]);
 
    const BalCal = async (data) => {
       let TokenBal = await ContractCall.Token_Balance_Calculation(
@@ -373,6 +374,7 @@ function AcceptBid({
    }
    return (
       <>
+      <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />u
          <Modal
             show={show}
             onHide={handleClose}

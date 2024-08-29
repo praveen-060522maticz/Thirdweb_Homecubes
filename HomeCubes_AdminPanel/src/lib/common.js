@@ -292,3 +292,13 @@ console.log('utcDate---->',utcDate,utcDate.toUTCString());
   console.log(utcDate.toUTCString());
 } 
 getUtcTime()
+
+
+
+export const generateSeasonOptions = (startYear, endYear) => {
+  const options = [];
+  for (let year = startYear; year <= endYear; year++) {
+    options.push({ label: `${year}`, value: `${year}` });
+  }
+  return options;
+};

@@ -7,8 +7,8 @@ import userSchema from "../../models/front_models/user.schema";
 import gallery from '../../models/admin_models/gallery.schema';
 import stakeSchema from '../../models/front_models/stake.schema';
 import RewardSchema from '../../models/admin_models/reward.schema';
-import PendingTrans from '../../models/front_models/pendingTransactions.schema'
-// const IPFS = require('ipfs-mini');
+import PendingTrans from '../../models/front_models/pendingTransactions.schema';
+import Transactions from '../../models/front_models/transactions.schema';
 import mongoose from 'mongoose'
 
 import axios from 'axios'
@@ -2367,5 +2367,25 @@ export const setTokenStatus = async (req, res) => {
     })
   } catch (e) {
     console.log('Error on setTokenStatus---->', e);
+  }
+}
+
+export const saveTransaction = async (req, res) => {
+  try {
+    const saveData = await new Transactions(req.body).save();
+    if (saveData) return res.json({
+      status: true,
+      data: "success"
+    })
+    else return res.json({
+      status: false,
+      data: "error"
+    })
+  } catch (e) {
+    console.log('Erroro on saveTransaction---->', e);
+    res.json({
+      status: false,
+      data: "error"
+    })
   }
 }

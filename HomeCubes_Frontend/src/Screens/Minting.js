@@ -17,7 +17,7 @@ import GalleryCard from "../Components/GalleryCard";
 import { NavLink, useLocation, useNavigate, useParams, useHistory, unstable_usePrompt, useBlocker, useBeforeUnload } from 'react-router-dom'
 import DataCard from "../Components/DataCard";
 import Typewriter from "typewriter-effect";
-import { Buymint, getCurrentProject, getGallery, getGalleryTokens, onInitialMint, setPendingTransaction, setTokenStatus } from "../actions/axioss/nft.axios";
+import { Buymint, getCurrentProject, getGallery, getGalleryTokens, onInitialMint, saveTransaction, setPendingTransaction, setTokenStatus } from "../actions/axioss/nft.axios";
 import { useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import useContractProviderHook from "../actions/contractProviderHook";
@@ -33,6 +33,9 @@ import PropertyDes from '../assets/images/nftimageOne.png'
 import web3Utils from 'web3-utils';
 import { useWallets } from "@privy-io/react-auth";
 import DETH from '../Abi/token.json';
+import Prompt from "../Components/Prompt";
+// import { unstable_usePrompt as usePrompt } from 'react-router-dom';
+
 function Minting() {
   const [mint, setMint] = useState("minting");
   const [description, setDescription] = useState(false);
@@ -81,118 +84,15 @@ function Minting() {
 
   const [tokenDetails, setTokenDetails] = useState(state)
 
-  const [canReload, setCanReload] = useState(false);
+  const [canReload, setCanReload] = useState(true);
   const { wallets } = useWallets()
 
-  // useEffect(() => {
-  //   const handleBeforeUnload = (event) => {
-  //     if (!canReload) {
-  //       const confirmationMessage = 'Do Not Refresh!';
-  //       event.preventDefault();
-  //       event.returnValue = confirmationMessage; // For Chrome
-  //       return confirmationMessage; // For Safari
-  //     }
-  //   };
 
-  //   window.addEventListener('beforeunload', handleBeforeUnload);
 
-  //   return () => {
-  //     window.removeEventListener('beforeunload', handleBeforeUnload);
-  //   };
-  // }, [canReload]);
-
-  // unstable_usePrompt({
-  //   message: "Are you sure?",
-  //   when: ({ currentLocation, nextLocation }) =>
-  //     currentLocation.pathname !== nextLocation.pathname,
-  // });
-
-  // useEffect(() => {
-  //   // Push a new state into the history stack
-
-  //   const handlePopState = (e) => {
-  //     window.history.pushState(null, '', location.href);
-  //     // Push the same state back into the history stack to prevent back navigation
-
-  //     console.log('Page navigation detected---->', e);
-  //     const getSata = window.confirm("Are you sure...?");
-  //     if (!getSata) {
-  //       console.log("cancel click");
-  //       window.history.pushState(null, '', location.href);
-  //     }
-  //     else {
-  //       window.removeEventListener('popstate', handlePopState);
-  //     }
-  //     // if (getSata) return true;
-  //     // else return false      
-  //   };
-  //   window.addEventListener('popstate', handlePopState);
-
-  //   // return () => {
-  //   //   // Clean up the event listener on component unmount
-  //   //   window.removeEventListener('popstate', handlePopState);
-  //   // };
-  // }, []);
-
-  const [blocking, setBlocking] = useState(true);
-
-  // useEffect(() => {
-  //   const handleBeforeUnload = (event) => {
-  //     if (blocking) {
-  //       event.preventDefault();
-  //       event.returnValue = ''; // For modern browsers
-  //     }
-  //   };
-
-  //   window.addEventListener('beforeunload', handleBeforeUnload);
-  //   return () => {
-  //     window.removeEventListener('beforeunload', handleBeforeUnload);
-  //   };
-  // }, [blocking]);
-
-  // useEffect(() => {
-  //   if (blocking) {
-  //     const handleNavigate = (event) => {
-  //       if (window.confirm('Are you sure you want to leave this page?')) {
-  //         setBlocking(false);
-  //       } else {
-  //         event.preventDefault();
-  //       }
-  //     };
-
-  //     // Override the `popstate` event to intercept back/forward navigation
-  //     window.addEventListener('popstate', handleNavigate);
-
-  //     // Clean up event listener
-  //     return () => {
-  //       window.removeEventListener('popstate', handleNavigate);
-  //     };
-  //   }
-  // }, [blocking]);
-console.log('canReload---->',canReload);
-  // let canReload = false
-  let blocker = useBlocker(canReload);
-    console.log(blocker);
-    // Reset the blocker if the user cleans the form
-    React.useEffect(() => {
-        if (blocker.state === 'blocked' && !canReload) {
-            blocker.reset();
-        }
-    }, [blocker, canReload]);
-    const message = 'are you sure?';
-
-    useBeforeUnload(
-        React.useCallback(
-            (event) => {
-                if (canReload && typeof message === 'string') {
-                    event.preventDefault();
-                    event.returnValue = message;
-                }
-            },
-            [message, canReload]
-        ),
-        { capture: true }
-    );
+  // usePrompt({
+  //   when: !canReload,
+  //   message: "Are you sure!!! changes may be lost...!"
+  // })
 
   useEffect(() => {
     getProjects()
@@ -271,7 +171,7 @@ console.log('canReload---->',canReload);
       if (!checkApprove) return;
     }
     setLoading(true)
-    setCanReload(true)
+    setCanReload(false)
     // const id = toast.loading('Purchasing Token on processing...\n Do not refresh!')
     const id = toast.loading(
       <div>
@@ -406,7 +306,7 @@ console.log('canReload---->',canReload);
         console.log("changedToken", changedToken);
         let update = {
           NFTOwner: accountAddress,
-          HashValue: hash.HashValue,
+          HashValue: hash?.HashValue,
           changedToken,
           NFTPrice: project?.NFTPrice,
           CoinName: project?.mintTokenName,
@@ -418,10 +318,12 @@ console.log('canReload---->',canReload);
           From: accountAddress,
           method: "lazyMinting",
           params: [update],
-          TimeStamp: TStamp
+          TimeStamp: TStamp,
+          transactionData: hash?.data
         }
 
-        let Resp = hash?.status == 'pending' ? await setPendingTransaction(pendingObj) : await Buymint(update)
+        let Resp = await saveTransaction(pendingObj);
+        // let Resp = hash?.status == 'pending' ? await setPendingTransaction(pendingObj) : await Buymint(update)
         console.log("Resppppppsppsps dta", Resp);
         if (hash?.status == 'pending') {
           toast.update(id, {
@@ -442,7 +344,7 @@ console.log('canReload---->',canReload);
           }, 1000)
         }
         else {
-          setTokenStatus({ arrData: initialMint, stauts: "available" })
+          setTokenStatus({ arrData: initialMint?.data, stauts: "available" })
           toast.update(id, { render: 'Token Transaction Failed', type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
         }
       }
@@ -453,7 +355,7 @@ console.log('canReload---->',canReload);
 
     }
     setLoading(false)
-    setCanReload(false)
+    setCanReload(true)
   }
 
   console.log("projecttststst", project);
@@ -477,9 +379,9 @@ console.log('canReload---->',canReload);
 
   return (
     <>
+      <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />
       <BottomBar />
       <Header />
-      {blocker ? <ConfirmNavigation blocker={blocker} /> : null}
       <Container fluid className="pt-3 home_wrapper over_hidercon">
         <Container className="custom_container ">
           <Row>
@@ -995,26 +897,29 @@ export default Minting;
 
 function ConfirmNavigation({ blocker }) {
   if (blocker.state === 'blocked') {
-      return (
-          <>
-              <p style={{ color: 'red' }}>
-                  Blocked the last navigation to {blocker.location.pathname}
-              </p>
-              <button onClick={() => blocker.proceed?.()}>
-                  Let me through
-              </button>
-              <button onClick={() => blocker.reset?.()}>Keep me here</button>
-          </>
-      );
+    const get = window.confirm("Are you sure");
+    if (get) blocker.proceed?.();
+    else blocker.reset?.()
+    // return (
+    //     <>
+    //         <p style={{ color: 'red' }}>
+    //             Blocked the last navigation to {blocker.location.pathname}
+    //         </p>
+    //         <button onClick={() => blocker.proceed?.()}>
+    //             Let me through
+    //         </button>
+    //         <button onClick={() => blocker.reset?.()}>Keep me here</button>
+    //     </>
+    // );
   }
 
-  if (blocker.state === 'proceeding') {
-      return (
-          <p style={{ color: 'orange' }}>
-              Proceeding through blocked navigation
-          </p>
-      );
-  }
+  // if (blocker.state === 'proceeding') {
+  //     return (
+  //         <p style={{ color: 'orange' }}>
+  //             Proceeding through blocked navigation
+  //         </p>
+  //     );
+  // }
 
-  return <p style={{ color: 'green' }}>Blocker is currently unblocked</p>;
+  // return <p style={{ color: 'green' }}>Blocker is currently unblocked</p>;
 }

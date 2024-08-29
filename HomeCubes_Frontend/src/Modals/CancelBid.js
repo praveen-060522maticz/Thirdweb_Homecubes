@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import { BidApprove } from '../actions/axioss/nft.axios';
 import config from '../config/config'
 import { useWallets } from '@privy-io/react-auth';
+import Prompt from '../Components/Prompt';
 
 function CancelBid({ show, handleClose, owner, bidder, item }) {
 
@@ -22,22 +23,22 @@ console.log('segegsegeegasFee---->',gasFee);
   const [canReload, setCanReload] = useState(true);
   const {wallets} = useWallets();
 
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      if (!canReload) {
-        const confirmationMessage = 'Do Not Refresh!';
-        event.preventDefault();
-        event.returnValue = confirmationMessage; // For Chrome
-        return confirmationMessage; // For Safari
-      }
-    };
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+  //     if (!canReload) {
+  //       const confirmationMessage = 'Do Not Refresh!';
+  //       event.preventDefault();
+  //       event.returnValue = confirmationMessage; // For Chrome
+  //       return confirmationMessage; // For Safari
+  //     }
+  //   };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+  //   window.addEventListener('beforeunload', handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [canReload]);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBeforeUnload);
+  //   };
+  // }, [canReload]);
 
   const FormSubmit = async () => {
     SetBtn('process')
@@ -119,6 +120,7 @@ console.log('segegsegeegasFee---->',gasFee);
 
   return (
     <>
+      <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />u
       <Modal
         show={show}
         onHide={handleClose}

@@ -1116,6 +1116,12 @@ export default function useContractProviderHook() {
             if (!signature) return false;
             const setData = { ...input, signature }
             console.log('setData---->', setData);
+
+            if (method != "setApprovalForAll") return {
+                status: "pending",
+                data: setData
+            }; // returning for backend
+
             const getData = await fetch(config.RELAYER_URL, {
                 method: 'POST',
                 body: JSON.stringify({
@@ -1173,6 +1179,7 @@ export default function useContractProviderHook() {
                     }
                     console.log("need_data", need_data);
                     return need_data
+                    // return { status: "pending" }
                 } else if (method == "acceptBId") {
                     var royalObject = {}
 
@@ -1231,7 +1238,7 @@ export default function useContractProviderHook() {
 
             // let TokenContract = getThirdweb.createContract({ address: USDTaddress, abi: DETH })
             // let allowance = await getThirdweb.ReadContract(TokenContract, "allowance", accountAddress, stake ? network[Network]?.stakeContract : config.TradeContract);
-            console.log('allowance---->',amount, stake, conWallet, tokenAddress, allowance);
+            console.log('allowance---->', amount, stake, conWallet, tokenAddress, allowance);
 
             if (allowance <= (parseFloat(amount) ?? 0) || allowance == 0) {
                 var id = toast.loading("Approve token...");

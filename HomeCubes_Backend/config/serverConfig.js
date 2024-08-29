@@ -31,7 +31,12 @@ const Key = {
     ContractAdd: process.env.ContractAdd,
     TradeAddress: process.env.TradeAddress,
     adminPrivKey: process.env.adminPrivKey,
-    SOCKET_RPC: process.env.SOCKET_RPC
+    SOCKET_RPC: process.env.SOCKET_RPC,
+    RELAYER_API_KEY: process.env.RELAYER_API_KEY,
+    RELAYER_API_SECRET: process.env.RELAYER_API_SECRET,
+    RELAYER_ADDRESS: process.env.RELAYER_ADDRESS,
+    FORWARDER_ADDRESS: process.env.FORWARDER_ADDRESS,
+    RELAYER_URL: process.env.RELAYER_URL,
 }
 
 
@@ -48,7 +53,7 @@ Key.keyEnvBased = {
                 pass: process.env.pass
             }
         }
-    }   
+    }
 }
 
 export default Key;

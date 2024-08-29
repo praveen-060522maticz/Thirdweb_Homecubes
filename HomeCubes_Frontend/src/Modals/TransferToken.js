@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { isEmpty } from '../actions/common';
 import useContractProviderHook from '../actions/contractProviderHook';
 import { useWallets } from '@privy-io/react-auth';
+import Prompt from '../Components/Prompt';
 
 function TransferToken({ show, handleClose, item, Tokens_Detail }) {
   console.log('TokenTedetailsss---->', item, Tokens_Detail);
@@ -33,7 +34,8 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
     SetBtn('process')
     const checkApprove = await ContractCall.GetApproveStatus(
       "single",
-      item?.ContractAddress
+      item?.ContractAddress,
+      wallets[0]
     )
     console.log("checkApprovecheckApprove", checkApprove);
 
@@ -92,7 +94,9 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
     // console.log("to transfer", item.ContractAddress, item.ContractType, Quantity, Address, owner.NFTId)
     // let cont = await ContractCall.Trsanfer(item.ContractAddress, item.ContractType, Quantity, Address, owner.NFTId)
     // const cont = await getThirdweb.useContractCall("TransferToken", 0, 0, Tokens_Detail.NFTId,Address , Tokens_Detail.ContractAddress,gasFee?.collectAddress, "2500000000000000000")
+    setCanReload(false)
     const cont = await ContractCall.gasLessTransaction("TransferToken", 0, 0,wallets[0], Tokens_Detail.NFTId, Address, Tokens_Detail.ContractAddress, gasFee?.collectAddress, TStamp, "2500000000000000000")
+    setCanReload(true)
 
     console.log("transfer hash ", cont?.HashValue, cont)
     if (cont) {
@@ -116,9 +120,7 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
         Earning: "0",
         projectId: Tokens_Detail?.Current_Owner?.projectId
       };
-      setCanReload(false)
       let Resp = await BuyAccept({ newOwner: newOwner, item: item });
-      setCanReload(true)
       if (cont?.status == "pending") {
         toast.update(id, {
           render:
@@ -151,26 +153,28 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
   }
 
 
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      if (!canReload) {
-        const confirmationMessage = 'Do Not Refresh!';
-        event.preventDefault();
-        event.returnValue = confirmationMessage; // For Chrome
-        return confirmationMessage; // For Safari
-      }
-    };
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+  //     if (!canReload) {
+  //       const confirmationMessage = 'Do Not Refresh!';
+  //       event.preventDefault();
+  //       event.returnValue = confirmationMessage; // For Chrome
+  //       return confirmationMessage; // For Safari
+  //     }
+  //   };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+  //   window.addEventListener('beforeunload', handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [canReload]);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBeforeUnload);
+  //   };
+  // }, [canReload]);
 
 
   return (
     <>
+      <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />
+
       <Modal
         show={show}
         onHide={handleClose}

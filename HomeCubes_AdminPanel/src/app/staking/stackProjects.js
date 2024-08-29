@@ -6,10 +6,12 @@ import { Link } from 'react-router-dom';
 import { collectionFunctions, createProject, getKycList } from '../../axioscalls/admin';
 import config from '../../lib/config'
 import { useSelector } from 'react-redux';
-import { address_showing, isEmpty } from '../../lib/common';
+import { address_showing, generateSeasonOptions, isEmpty } from '../../lib/common';
 import Modal from "react-modal";
 import { toast } from 'react-toastify'
 import Select from 'react-select'
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 import { Button, Form } from "react-bootstrap";
 // import {TokenDetail} from '';
@@ -36,8 +38,14 @@ export default function StakeProjects(props) {
         { label: "Season 3", value: "Season 3", },
         { label: "Season 4", value: "Season 4", }
     ])
+    const [years, setYears] = useState([]);
+
+
 
     useEffect(() => {
+
+        const seasonOptions = generateSeasonOptions(2024, 2080);
+        setYears(seasonOptions)
         createProject({ action: "getProjects" })
             .then((val) => {
                 setProjectArr(val.data ?? [])
@@ -156,6 +164,7 @@ export default function StakeProjects(props) {
     console.log("selected", selected);
 
 
+
     return (
         <>
             <div>
@@ -185,6 +194,21 @@ export default function StakeProjects(props) {
                                         <p className='mt-2' style={{ color: "red" }} >{Error?.projectId}</p>
 
                                     </Form.Group>
+
+
+                                    {!notStake.includes(path) && <Form.Group>
+                                        <label htmlFor="exampleInputName1">Select year</label>
+                                        <Select
+                                            styles={stylesgraybg}
+                                            options={years}
+                                            // value={{ value: formData.blog_category, label: formData.blog_category }}
+                                            onChange={(e) => { setError({}); setselected({ ...selected, year: e.value }) }}
+                                        />
+                                        <p className='mt-2' style={{ color: "red" }} >{Error?.projectId}</p>
+
+                                    </Form.Group>}
+
+
 
                                     {!notStake.includes(path) && <Form.Group>
                                         <label htmlFor="exampleInputName1">Select Season</label>

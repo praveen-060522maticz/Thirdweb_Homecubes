@@ -6,6 +6,7 @@ import useContractProviderHook from '../actions/contractProviderHook';
 import { CreateOrder, setPendingTransaction } from '../actions/axioss/nft.axios';
 import { useSelector } from 'react-redux';
 import { useWallets } from '@privy-io/react-auth';
+import Prompt from '../Components/Prompt';
 
 function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item }) {
   console.log("propsprops", owner, types, file, type, thumb, item);
@@ -17,25 +18,25 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
 
   const { accountAddress, web3 } = useSelector(state => state.LoginReducer.AccountDetails);
   const { payload } = useSelector(state => state.LoginReducer.User);
-  const {wallets} = useWallets();
+  const { wallets } = useWallets();
   const [canReload, setCanReload] = useState(true);
 
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      if (!canReload) {
-        const confirmationMessage = 'Do Not Refresh!';
-        event.preventDefault();
-        event.returnValue = confirmationMessage; // For Chrome
-        return confirmationMessage; // For Safari
-      }
-    };
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+  //     if (!canReload) {
+  //       const confirmationMessage = 'Do Not Refresh!';
+  //       event.preventDefault();
+  //       event.returnValue = confirmationMessage; // For Chrome
+  //       return confirmationMessage; // For Safari
+  //     }
+  //   };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+  //   window.addEventListener('beforeunload', handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [canReload]);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBeforeUnload);
+  //   };
+  // }, [canReload]);
 
   const FormSubmit = async () => {
     // debugger
@@ -53,7 +54,7 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
         let TStamp = Date.now();
         // let cont = await ContractCall.cancel_order_721_1155(owner.NFTId)
         // let cont = await getThirdweb.useContractCall("cancelOrder", 0, 0, owner.NFTId,gasFee?.collectAddress, "2500000000000000000");
-        let cont = await ContractCall.gasLessTransaction("cancelOrder", 0, 0,wallets[0], owner.NFTId, TStamp, gasFee?.collectAddress, "2500000000000000000");
+        let cont = await ContractCall.gasLessTransaction("cancelOrder", 0, 0, wallets[0], owner.NFTId, TStamp, gasFee?.collectAddress, "2500000000000000000");
 
         setCanReload(true)
         if (cont) {
@@ -110,9 +111,7 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
     } else {
 
       console.log("dataincancelorger", owner)
-      setCanReload(false)
       let Resp = await CreateOrder(owner)
-      setCanReload(true)
       if (Resp.success == 'success') {
         toast.update(id, { render: "Cancelled Your Order Successfully", type: "success", isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
         SetBtn('done')
@@ -128,6 +127,7 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
   }
   return (
     <>
+      <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />u
       <Modal
         show={show}
         onHide={handleClose}

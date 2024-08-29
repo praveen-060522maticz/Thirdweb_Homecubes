@@ -349,52 +349,6 @@ function Header() {
     }
   }
 
-  // const location = useLocation();
-
-  // useEffect(() => {
-  //   // Push a new state into the history stack
-
-  //   const handlePopState = (e) => {
-  //     // Push the same state back into the history stack to prevent back navigation
-  //     console.log('Page navigation detected---->', e);
-  //     const getSata = window.confirm("Are you sure...?");
-  //     if (!getSata) {
-  //       console.log("cancel click");
-  //       // window.history.pushState(null, document.title, location.href);
-  //     }
-  //     else {
-  //       window.removeEventListener('popstate', handlePopState);
-  //     }
-  //     // if (getSata) return true;
-  //     // else return false
-
-
-  //   };
-  //   window.history.pushState(null, document.title, location.href);
-
-  //   // // Add event listener for the popstate event
-  //   window.addEventListener('popstate', handlePopState);
-
-  //   // return () => {
-  //   //   // Clean up the event listener on component unmount
-  //   //   window.removeEventListener('popstate', handlePopState);
-  //   // };
-  // }, []);
-
-  // useEffect(()=>{
-  //   window.history.pushState({name: "browserBack"}, "on browser back click", window.location.href);
-  //   window.history.pushState({name: "browserBack"}, "on browser back click", window.location.href);
-
-  //   window.addEventListener('popstate', (event) => {
-  //     if (event.state) {
-  //       console.log('in navigationnnnnnnnnnnnnn---->',event);
-  //       //do your code here
-  //     }
-  //    }, false);
-  // },[])
-
-
-
   return (
     <>
       <Container fluid className="whole_header">

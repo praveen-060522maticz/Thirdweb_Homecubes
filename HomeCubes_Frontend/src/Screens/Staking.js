@@ -23,6 +23,7 @@ import Web3 from "web3";
 import { useNavigate } from "react-router-dom";
 import web3utils from 'web3-utils';
 import { useWallets } from "@privy-io/react-auth";
+import Prompt from "../Components/Prompt";
 
 function Staking() {
 
@@ -144,23 +145,23 @@ function Staking() {
   };
 
   const [canReload, setCanReload] = useState(true);
-  const {wallets} = useWallets();
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      if (!canReload) {
-        const confirmationMessage = 'Do Not Refresh!';
-        event.preventDefault();
-        event.returnValue = confirmationMessage; // For Chrome
-        return confirmationMessage; // For Safari
-      }
-    };
+  const { wallets } = useWallets();
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+  //     if (!canReload) {
+  //       const confirmationMessage = 'Do Not Refresh!';
+  //       event.preventDefault();
+  //       event.returnValue = confirmationMessage; // For Chrome
+  //       return confirmationMessage; // For Safari
+  //     }
+  //   };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+  //   window.addEventListener('beforeunload', handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [canReload]);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBeforeUnload);
+  //   };
+  // }, [canReload]);
 
   useEffect(() => {
     const getData = [
@@ -169,7 +170,7 @@ function Staking() {
       { label: "180 days", value: "Season 3", poolId: 3, daysDifference: getDaysOfDesiredMonth(9).days, endDateFormat: getDaysOfDesiredMonth(9).dateFormat, startDate: getDaysOfDesiredMonth(9).startDate, poolDay: getDaysOfDesiredMonth(9).newStartDate },
       { label: "360 days", value: "Season 4", poolId: 4, daysDifference: getDaysOfDesiredMonth(12).days, endDateFormat: getDaysOfDesiredMonth(12).dateFormat, startDate: getDaysOfDesiredMonth(12).startDate, poolDay: getDaysOfDesiredMonth(12).newStartDate }
     ]
-    console.log('getDatsdagetData---->',getData);
+    console.log('getDatsdagetData---->', getData);
     const set = getData.filter((val) => val.daysDifference)[0]
     console.log("seifuhseoif", set);
     setRewardDetail(set)
@@ -336,7 +337,7 @@ function Staking() {
 
     // const stake = await contract.getStackPools()
 
-    const checkApprove = await contract.getStackApproveStatus(showData.ContractAddress,wallets[0])
+    const checkApprove = await contract.getStackApproveStatus(showData.ContractAddress, wallets[0])
     console.log("checkApprove", checkApprove);
     console.log("showData", showData);
     if (!checkApprove) {
@@ -344,7 +345,7 @@ function Staking() {
       setCanReload(false)
       // const setAppove = await contract.setApproveForStack(showData.ContractAddress);
       // const setAppove = await getThirdweb.useContractCall("setApprovalForAll", 0, "stake", showData.ContractAddress, true);
-      const setAppove = await contract.gasLessTransaction("setApprovalForAll", 0, "stake",wallets[0], showData.ContractAddress, true);
+      const setAppove = await contract.gasLessTransaction("setApprovalForAll", 0, "stake", wallets[0], showData.ContractAddress, true);
 
       setCanReload(true)
 
@@ -374,7 +375,7 @@ function Staking() {
     const TStamp = Date.now()
     // const stake = await contract.nftStakingAndWithdrawAndClaim("nftStack", showData.NFTId, selectedPlan?.poolId, showData.ContractAddress);
     // const stake = await getThirdweb.useContractCall("nftStack", 0, "stake", showData.NFTId, selectedPlan?.poolId, showData.ContractAddress, gasFee?.collectAddress, "2500000000000000000");
-    const stake = await contract.gasLessTransaction("nftStack", 0, "stake",wallets[0], showData.NFTId, selectedPlan?.poolId, showData.ContractAddress,TStamp, gasFee?.collectAddress, "2500000000000000000");
+    const stake = await contract.gasLessTransaction("nftStack", 0, "stake", wallets[0], showData.NFTId, selectedPlan?.poolId, showData.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000");
 
     setCanReload(true)
     if (!stake.status) return toast.update(id, {
@@ -396,7 +397,6 @@ function Staking() {
       projectId: showData.projectId
     }
     console.log("sendData", sendData);
-    setCanReload(false)
     let pendingObj = {
       From: accountAddress,
       method: "nftStack",
@@ -404,8 +404,7 @@ function Staking() {
       TimeStamp: TStamp
     }
     const Resp = stake.status == "pending" ? await setPendingTransaction(pendingObj) : await stackFunction(sendData);
-    setCanReload(true)
-    
+
     if (stake?.status == "pending") {
       toast.update(id, {
         render:
@@ -457,11 +456,10 @@ function Staking() {
       const TStamp = Date.now()
       // const unStake = await contract.nftStakingAndWithdrawAndClaim("nftWithdraw", nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress);
       // const unStake = await getThirdweb.useContractCall("nftWithdraw", 0, "stake", nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress, gasFee?.collectAddress, "2500000000000000000");
-      const unStake = await contract.gasLessTransaction("nftWithdraw", 0, "stake",wallets[0], nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress,TStamp, gasFee?.collectAddress, "2500000000000000000");
+      const unStake = await contract.gasLessTransaction("nftWithdraw", 0, "stake", wallets[0], nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000");
       console.log("unStake", unStake);
       setCanReload(true)
       if (unStake.status) {
-        setCanReload(false)
         let pendingObj = {
           From: accountAddress,
           method: "nftWithdraw",
@@ -470,7 +468,6 @@ function Staking() {
         }
         const Resp = unStake.status == "pending" ? await setPendingTransaction(pendingObj) : await stackFunction({ action: "onWithdraw", walletAddress: accountAddress, NFTId: nftObj.NFTId });
 
-        setCanReload(true)
         if (unStake.status == "pending") {
           toast.update(id, {
             render:
@@ -523,7 +520,7 @@ function Staking() {
     const TStamp = Date.now()
     // const unStake = await contract.nftStakingAndWithdrawAndClaim("claimReward", web3utils.toWei(String(pendingReward)));
     // const unStake = await getThirdweb.useContractCall("claimReward", 0, "stake", web3utils.toWei(String(pendingReward)), payload?.parentAddress, gasFee?.collectAddress, "2500000000000000000");
-    const unStake = await contract.gasLessTransaction("claimReward", 0, "stake",wallets[0], web3utils.toWei(String(pendingReward)), TStamp, gasFee?.collectAddress, "2500000000000000000");
+    const unStake = await contract.gasLessTransaction("claimReward", 0, "stake", wallets[0], web3utils.toWei(String(pendingReward)), TStamp, gasFee?.collectAddress, "2500000000000000000");
 
     setCanReload(true)
     if (!unStake.status) return toast.update(id, {
@@ -532,7 +529,6 @@ function Staking() {
       isLoading: false,
       autoClose: 1000,
     });
-    setCanReload(false)
     let pendingObj = {
       From: accountAddress,
       method: "claimReward",
@@ -540,7 +536,6 @@ function Staking() {
       TimeStamp: TStamp
     }
     const Resp = unStake.status == "pending" ? await setPendingTransaction(pendingObj) : await stackFunction({ action: "onClaimReward", walletAddress: accountAddress, projectId: rewardOption?.projectId, Season: rewardOption?.Season, Hash: unStake?.HashValue });
-    setCanReload(true)
     if (Resp?.success == "success") toast.update(id, {
       render: "Reward claimed",
       type: "success",
@@ -559,6 +554,7 @@ function Staking() {
 
   return (
     <>
+      <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />
       <BottomBar />
       <Header />
       <Container fluid className="pt-3 home_wrapper">

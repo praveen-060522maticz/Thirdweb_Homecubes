@@ -11,6 +11,7 @@ import config from '../config/config'
 import { network } from '../config/network';
 import web3utils from 'web3-utils';
 import { useWallets } from '@privy-io/react-auth';
+import Prompt from '../Components/Prompt';
 
 function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -166,22 +167,22 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
 
   const [canReload, setCanReload] = useState(true);
 
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      if (!canReload) {
-        const confirmationMessage = 'Do Not Refresh!';
-        event.preventDefault();
-        event.returnValue = confirmationMessage; // For Chrome
-        return confirmationMessage; // For Safari
-      }
-    };
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+  //     if (!canReload) {
+  //       const confirmationMessage = 'Do Not Refresh!';
+  //       event.preventDefault();
+  //       event.returnValue = confirmationMessage; // For Chrome
+  //       return confirmationMessage; // For Safari
+  //     }
+  //   };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+  //   window.addEventListener('beforeunload', handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [canReload]);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBeforeUnload);
+  //   };
+  // }, [canReload]);
 
 
 
@@ -269,7 +270,6 @@ console.log('Token_details---->',Token_details);
         _data.activity = isEmpty(bidder) ? 'Bid' : 'Edit'
         _data.EmailId = payload.EmailId
         _data.click = `${config.FRONT_URL}/info/${item.CollectionNetwork}/${item.ContractAddress}/${owner.NFTOwner}/${owner.NFTId}`
-        setCanReload(false)
 
 
         let pendingObj = {
@@ -280,11 +280,6 @@ console.log('Token_details---->',Token_details);
         }
 
         var Resp = cont.status == "pending" ? await setPendingTransaction(pendingObj) : await BidApprove(_data)
-        setCanReload(true)
-        console.log("BACKAPPROVE", Resp);
-
-
-        setCanReload(true)
         console.log("BACKAPPROVE", Resp);
         if (cont.status == "pending") {
           toast.update(id, {
@@ -355,6 +350,8 @@ console.log('Token_details---->',Token_details);
   return (
 
     <>
+      <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />u
+
       <Modal
         show={showBid}
         onHide={handleCloseBid}

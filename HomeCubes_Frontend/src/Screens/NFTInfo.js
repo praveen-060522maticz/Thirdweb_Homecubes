@@ -38,6 +38,7 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import { FacebookShareButton, TwitterShareButton, TelegramShareButton, WhatsappShareButton } from 'react-share';
 import TransferToken from "../Modals/TransferToken";
 import { useWallets } from "@privy-io/react-auth";
+import Prompt from "../Components/Prompt";
 
 
 function NFTInfo() {
@@ -45,7 +46,7 @@ function NFTInfo() {
   const [shareShow, setShareShow] = useState(false)
 
   const location = useLocation();
-  console.log(location,location?.state?.nftInfo, "weioiwhe");
+  console.log(location, location?.state?.nftInfo, "weioiwhe");
   const { gasFee } = useSelector((state) => state.LoginReducer.User);
   const push = useNavigate()
   const { state } = useLocation();
@@ -159,7 +160,7 @@ function NFTInfo() {
   const [Loader, setLoader] = useState(false);
   var [moreprops, setMoreprops] = useState('');
   const [InfoDetail, SetInfoDetail] = useState({});
-  console.log("Tokens_Detail", Tokens_Detail);
+  console.log("Tokens_Detail", Tokens_Detail, TabName);
   const [Tokens, SetTokens] = useState({
     All: {
       loader: true,
@@ -171,7 +172,7 @@ function NFTInfo() {
       myowner: {},
     },
   });
-  const {wallets}=useWallets();
+  const { wallets } = useWallets();
 
   const filterData =
     accordionTab == "" ? activities :
@@ -253,7 +254,7 @@ function NFTInfo() {
 
   }
 
-
+  console.log('Tokens[TabName]---->', Tokens[TabName]);
   const Explore = async (data, tab) => {
     var page = data ? data : Tokens[TabName]?.page;
     var SendDATA = {
@@ -385,22 +386,22 @@ function NFTInfo() {
 
   const [canReload, setCanReload] = useState(true);
 
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      if (!canReload) {
-        const confirmationMessage = 'Do Not Refresh!';
-        event.preventDefault();
-        event.returnValue = confirmationMessage; // For Chrome
-        return confirmationMessage; // For Safari
-      }
-    };
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+  //     if (!canReload) {
+  //       const confirmationMessage = 'Do Not Refresh!';
+  //       event.preventDefault();
+  //       event.returnValue = confirmationMessage; // For Chrome
+  //       return confirmationMessage; // For Safari
+  //     }
+  //   };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+  //   window.addEventListener('beforeunload', handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [canReload]);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBeforeUnload);
+  //   };
+  // }, [canReload]);
 
 
   const cancelBidBySeller = async (address) => {
@@ -409,7 +410,7 @@ function NFTInfo() {
     const TStamp = Date.now()
     // let cont = await ContractCall.BidNFt_Contract(0, "cancelBidBySeller", Tokens_Detail.NFTId, Tokens_Detail.ContractAddress)
     // let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, gasFee?.collectAddress, "2500000000000000000")
-    let cont = await ContractCall.gasLessTransaction("cancelBidBySeller", 0, 0,wallets[0], Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000")
+    let cont = await ContractCall.gasLessTransaction("cancelBidBySeller", 0, 0, wallets[0], Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000")
 
 
     if (cont) {
@@ -473,6 +474,7 @@ function NFTInfo() {
 
   return (
     <>
+      <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />
       <BottomBar />
       <Header />
       <Container fluid className="pt-3 home_wrapper">
@@ -544,19 +546,40 @@ function NFTInfo() {
                                 Tokens[TabName]?.myowner.EndClockTime
                               ).getTime() < Date.now()) ? (
                             <>
-                              <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3" onClick={() => {
-                                if (getVal != "") return toast.error(getVal);
-                                if (Tokens[TabName]?.highbid) return toast.warning("Please accept or cancel Bid")
-                                SetSendDet(Tokens[TabName]?.myowner); setText("Put on Sale"); handleShowListItem()
-                              }}>
-                                List Item
-                              </button>
-                              <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3"
-                                onClick={() => {
-                                  setShowTransfer(true)
-                                }}>
-                                Transfer Token
-                              </button>
+                              {Tokens[TabName]?.highbid ?
+                                <>
+                                  <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3"
+                                    onClick={() => {
+                                      if (getVal != "") return toast.error(getVal);
+                                      setShowAcceptBid(true);
+                                      POPUPACTION("dummy", "Accept", Tokens[TabName]?.highbid)
+                                    }
+                                    }>
+                                    Accept bid
+                                  </button>
+                                  <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3"
+                                    onClick={() => { if (getVal != "") return toast.error(getVal); cancelBidBySeller(Tokens[TabName]?.highbid?.TokenBidderAddress); }}
+                                  >
+                                    Cancel bid
+                                  </button>
+                                </> :
+                                <>
+                                  <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3" onClick={() => {
+                                    if (getVal != "") return toast.error(getVal);
+                                    if (Tokens[TabName]?.highbid) return toast.warning("Please accept or cancel Bid")
+                                    SetSendDet(Tokens[TabName]?.myowner); setText("Put on Sale"); handleShowListItem()
+                                  }}>
+                                    List Item
+                                  </button>
+                                  <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3"
+                                    onClick={() => {
+                                      setShowTransfer(true)
+                                    }}>
+                                    Transfer Token
+                                  </button>
+                                </>
+                              }
+
                             </>
                           ) : (
                             Tokens[TabName]?.myowner?.PutOnSaleType ==
