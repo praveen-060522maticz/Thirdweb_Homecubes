@@ -343,9 +343,9 @@ function Staking() {
     if (!checkApprove) {
       const apId = toast.loading("Need to approve")
       setCanReload(false)
-      // const setAppove = await contract.setApproveForStack(showData.ContractAddress);
+      const setAppove = await contract.setApproveForStack(wallets[0], showData?.ContractAddress);
       // const setAppove = await getThirdweb.useContractCall("setApprovalForAll", 0, "stake", showData.ContractAddress, true);
-      const setAppove = await contract.gasLessTransaction("setApprovalForAll", 0, "stake", wallets[0], showData.ContractAddress, true);
+      // const setAppove = await contract.gasLessTransaction("setApprovalForAll", 0, "stake", wallets[0], showData.ContractAddress, true);
 
       setCanReload(true)
 
@@ -373,9 +373,9 @@ function Staking() {
     }
     setCanReload(false)
     const TStamp = Date.now()
-    // const stake = await contract.nftStakingAndWithdrawAndClaim("nftStack", showData.NFTId, selectedPlan?.poolId, showData.ContractAddress);
+    const stake = await contract.nftStakingAndWithdrawAndClaim(wallets[0], "nftStack", showData.NFTId, selectedPlan?.poolId, showData.ContractAddress);
     // const stake = await getThirdweb.useContractCall("nftStack", 0, "stake", showData.NFTId, selectedPlan?.poolId, showData.ContractAddress, gasFee?.collectAddress, "2500000000000000000");
-    const stake = await contract.gasLessTransaction("nftStack", 0, "stake", wallets[0], showData.NFTId, selectedPlan?.poolId, showData.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000");
+    // const stake = await contract.gasLessTransaction("nftStack", 0, "stake", wallets[0], showData.NFTId, selectedPlan?.poolId, showData.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000");
 
     setCanReload(true)
     if (!stake.status) return toast.update(id, {
@@ -454,9 +454,9 @@ function Staking() {
     if (getStake?.success == "success") {
       setCanReload(false)
       const TStamp = Date.now()
-      // const unStake = await contract.nftStakingAndWithdrawAndClaim("nftWithdraw", nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress);
+      const unStake = await contract.nftStakingAndWithdrawAndClaim(wallets[0], "nftWithdraw", nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress);
       // const unStake = await getThirdweb.useContractCall("nftWithdraw", 0, "stake", nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress, gasFee?.collectAddress, "2500000000000000000");
-      const unStake = await contract.gasLessTransaction("nftWithdraw", 0, "stake", wallets[0], nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000");
+      // const unStake = await contract.gasLessTransaction("nftWithdraw", 0, "stake", wallets[0], nftObj.NFTId, getStake?.data?.poolId, nftObj.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000");
       console.log("unStake", unStake);
       setCanReload(true)
       if (unStake.status) {
@@ -517,10 +517,14 @@ function Staking() {
     if (isEmpty(pendingReward)) return toast.error("Don't have a reward")
     const id = toast.loading("Reward claiming... Do not refresh!");
     setCanReload(false)
-    const TStamp = Date.now()
-    // const unStake = await contract.nftStakingAndWithdrawAndClaim("claimReward", web3utils.toWei(String(pendingReward)));
+    const TStamp = Date.now();
+    const sign = await contract._signcall(wallets[0], web3utils.toWei(String(pendingReward)));
+    console.log('signsign---->', sign);
+    if (!sign) return toast.error("Approve not accepted");
+
+    const unStake = await contract.nftStakingAndWithdrawAndClaim(wallets[0], "claimReward", web3utils.toWei(String(pendingReward)), sign.tot, sign.signhash);
     // const unStake = await getThirdweb.useContractCall("claimReward", 0, "stake", web3utils.toWei(String(pendingReward)), payload?.parentAddress, gasFee?.collectAddress, "2500000000000000000");
-    const unStake = await contract.gasLessTransaction("claimReward", 0, "stake", wallets[0], web3utils.toWei(String(pendingReward)), TStamp, gasFee?.collectAddress, "2500000000000000000");
+    // const unStake = await contract.gasLessTransaction("claimReward", 0, "stake", wallets[0], web3utils.toWei(String(pendingReward)), TStamp, gasFee?.collectAddress, "2500000000000000000");
 
     setCanReload(true)
     if (!unStake.status) return toast.update(id, {

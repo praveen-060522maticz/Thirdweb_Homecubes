@@ -51,9 +51,11 @@ console.log('segegsegeegasFee---->',gasFee);
     }
     else {
       const TStamp = Date.now()
-      // let cont = await ContractCall.BidNFt_Contract(0, "cancelBid", item.NFTId, item.ContractAddress)
+      setCanReload(false)
+      let cont = await ContractCall.BidNFt_Contract(wallets[0],0, "cancelBid", item.NFTId, item.ContractAddress)
       // let cont = await getThirdweb.useContractCall("cancelBid", 0, 0, item.NFTId, item.ContractAddress, gasFee?.collectAddress,"2500000000000000000");
-      let cont = await ContractCall.gasLessTransaction("cancelBid", 0, 0,wallets[0], item.NFTId, item.ContractAddress,TStamp, gasFee?.collectAddress,"2500000000000000000");
+      // let cont = await ContractCall.gasLessTransaction("cancelBid", 0, 0,wallets[0], item.NFTId, item.ContractAddress,TStamp, gasFee?.collectAddress,"2500000000000000000");
+      setCanReload(true)
 
       if (cont) {
         console.log('biiddd', bidder, item);
@@ -71,10 +73,8 @@ console.log('segegsegeegasFee---->',gasFee);
           click: `${config.FRONT_URL}/info/${item.CollectionNetwork}/${item.ContractAddress}/${owner.NFTOwner}/${owner.NFTId}`,
           HashValue:cont.HashValue,
         }
-        setCanReload(false)
         console.log('gsfgsfg', FormValue, bidder)
         let Resp = await BidApprove(FormValue)
-        setCanReload(true)
         console.log('dksfgsdhkg', Resp)
         if (Resp.success == 'success') {
           toast.update(id, { render: 'Cancelled Bid Successfully', type: 'success', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })

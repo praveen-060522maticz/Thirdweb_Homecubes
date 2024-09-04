@@ -15,6 +15,8 @@ import { toast } from 'react-toastify'
 import { NftbalanceUpdate } from './axioss/nft.axios';
 import { usePrivy, useWallets, useSignTypedData } from '@privy-io/react-auth';
 import { getBNBvalue, getErrorForToast } from './common';
+import randomInteger from 'random-int';
+
 // var web3s=new Web3(network[Network].rpcUrl)
 // console.log("web3s@123",network);
 
@@ -56,6 +58,32 @@ export default function useContractProviderHook() {
         return contract_value;
         // }
     }
+
+    const _signcall = async (wallet, amount) => {
+        try {
+
+            var randomNum = randomInteger(10000000, 100000000);
+            var provider = await wallet.getEthereumProvider();
+            const web3D = new Web3(config.RPC_URL)
+            console.log('provider---->', provider, await wallet?.getWeb3jsProvider());
+            const _nonce = Date.now();
+            var tot = _nonce + Number(randomNum);
+            const result = web3D.utils.soliditySha3(wallet?.address, amount, config?.KEY, tot);
+            console.log('result---->', result, wallet?.address, amount, config?.KEY, tot);
+            const signhash = await provider.request({
+                method: 'personal_sign',
+                params: [result, wallet?.address],
+            });
+            if (signhash) {
+                return ({ signhash: signhash, tot: tot })
+            } else return undefined
+
+        } catch (error) {
+            console.log("error on _signcall", error);
+            return undefined
+        }
+    }
+
 
     const GetApproveStatus = async (data, Addr, conWallet) => {
 
@@ -105,7 +133,7 @@ export default function useContractProviderHook() {
         }
     }
 
-    const SetApproveStatus = async (data, Addr) => {
+    const SetApproveStatus = async (data, Addr, wallet) => {
         console.log("SETAPPROVETRADE", network[Network]?.tradeContract, accountAddress);
         console.log("sdefsedffe", data, Addr);
         try {
@@ -113,7 +141,7 @@ export default function useContractProviderHook() {
 
             // .send method
 
-            var ConnectContract = await contrat_connection(data == 'Single' ? ERC721 : ERC1155, Addr)
+            var ConnectContract = await contrat_connection(wallet, data == 'Single' ? ERC721 : ERC1155, Addr)
             var contractobj = await
                 ConnectContract
                     .methods
@@ -126,9 +154,7 @@ export default function useContractProviderHook() {
                     .methods
                     .setApprovalForAll(network[Network]?.tradeContract, true)
                     .send({
-                        from: accountAddress,
-                        gas: web3.utils.toHex(gas_estimate),
-                        gasPrice: web3.utils.toHex(gasprice),
+                        from: accountAddress
                     }).on('transactionHash', (transactionHash) => {
                         return transactionHash
                     })
@@ -172,8 +198,8 @@ export default function useContractProviderHook() {
                     .minting(...data)
                     .send({
                         from: accountAddress,
-                        gas: Web3Utils.toHex(gas_estimate),
-                        gasPrice: Web3Utils.toHex(gasprice)
+                        // gas: Web3Utils.toHex(gas_estimate),
+                        // gasPrice: Web3Utils.toHex(gasprice)
                     })
                     .on('transactionHash', (transactionHash) => {
                         return transactionHash
@@ -198,11 +224,11 @@ export default function useContractProviderHook() {
 
 
     }
-    const approve_721_1155 = async (token_address, ...data) => {
+    const approve_721_1155 = async (wallet, token_address, ...data) => {
 
         console.log("approve data", token_address, ...data)
         try {
-            const ConnectContract = await contrat_connection(DETH, token_address)
+            const ConnectContract = await contrat_connection(wallet, DETH, token_address)
             var contractobj = await
                 ConnectContract
                     .methods
@@ -215,8 +241,8 @@ export default function useContractProviderHook() {
                     .approve(...data)
                     .send({
                         from: accountAddress,
-                        gas: Web3Utils.toHex(gas_estimate),
-                        gasPrice: Web3Utils.toHex(gasprice)
+                        // gas: Web3Utils.toHex(parseFloat(gas_estimate).toString()),
+                        // gasPrice: Web3Utils.toHex(parseFloat(gasprice).toString())
                     })
                     .on('transactionHash', (transactionHash) => {
                         return transactionHash
@@ -265,9 +291,9 @@ export default function useContractProviderHook() {
         }
 
     }
-    const cancel_order_721_1155 = async (data) => {
+    const cancel_order_721_1155 = async (wallet, data) => {
         try {
-            var ConnectContract = await contrat_connection(Market, network[Network]?.tradeContract)
+            var ConnectContract = await contrat_connection(wallet, Market, network[Network]?.tradeContract)
             var contractobj = await
                 ConnectContract
                     .methods
@@ -280,8 +306,8 @@ export default function useContractProviderHook() {
                     .cancelOrder(data)
                     .send({
                         from: accountAddress,
-                        gas: Web3Utils.toHex(gas_estimate),
-                        gasPrice: Web3Utils.toHex(gasprice),
+                        // gas: Web3Utils.toHex(parseFloat(gas_estimate).toString()),
+                        // gasPrice: Web3Utils.toHex(parseFloat(gasprice).toString()),
                     })
                     .on('transactionHash', (transactionHash) => {
                         return transactionHash
@@ -294,6 +320,7 @@ export default function useContractProviderHook() {
             return need_data;
         }
         catch (e) {
+            console.log('Erro on cancel_order_721_1155---->', e);
             return false
         }
 
@@ -332,10 +359,10 @@ export default function useContractProviderHook() {
             return false
         }
     }
-    const place_order_721_1155 = async (...data) => {
+    const place_order_721_1155 = async (wallet, ...data) => {
         try {
             console.log("network[Network]?.tradeContract", ...data);
-            var ConnectContract = await contrat_connection(Market, network[Network]?.tradeContract)
+            var ConnectContract = await contrat_connection(wallet, Market, network[Network]?.tradeContract)
             var contractobj = await
                 ConnectContract.methods
                     .orderPlace(...data)
@@ -349,8 +376,8 @@ export default function useContractProviderHook() {
                     .orderPlace(...data)
                     .send({
                         from: accountAddress,
-                        gas: Web3Utils.toHex(gas_estimate),
-                        gasPrice: Web3Utils.toHex(gasprice)
+                        // gas: Web3Utils.toHex(gas_estimate),
+                        // gasPrice: Web3Utils.toHex(gasprice)
                     })
                     .on('transactionHash', (transactionHash) => {
                         return transactionHash
@@ -368,11 +395,11 @@ export default function useContractProviderHook() {
         }
 
     }
-    const buy_721_1155 = async (Send, CoinName, ...data) => {
+    const buy_721_1155 = async (wallet, Send, CoinName, ...data) => {
         try {
 
             console.log("buy_721_1155logssss", Send, CoinName, ...data, network[Network]?.tradeContract);
-            const ConnectContract = await contrat_connection(Market, network[Network]?.tradeContract)
+            const ConnectContract = await contrat_connection(wallet, Market, network[Network]?.tradeContract)
             console.log("ConnectContractbuy", ConnectContract);
             if (CoinName === "BNB" || CoinName === "ETH") {
                 var contractobj = await
@@ -390,8 +417,8 @@ export default function useContractProviderHook() {
                         .send({
                             from: accountAddress,
                             value: Send,
-                            gas: Web3Utils.toHex(gas_estimate),
-                            gasPrice: Web3Utils.toHex(gasprice),
+                            // gas: Web3Utils.toHex(gas_estimate),
+                            // gasPrice: Web3Utils.toHex(gasprice),
                         })
                         .on('transactionHash', (transactionHash) => {
                             return transactionHash
@@ -411,8 +438,6 @@ export default function useContractProviderHook() {
                         .saleWithToken(CoinName, ...data)
                         .send({
                             from: accountAddress,
-                            gas: Web3Utils.toHex(gas_estimate),
-                            gasPrice: Web3Utils.toHex(gasprice)
                         })
                         .on('transactionHash', (transactionHash) => {
                             return transactionHash
@@ -477,11 +502,11 @@ export default function useContractProviderHook() {
         }
 
     }
-    const accept_721_1155 = async (...data) => {
+    const accept_721_1155 = async (wallet, ...data) => {
         try {
             console.log("ehjusehfrefrwasDATA", ...data);
             if (web3 != null) {
-                const ConnectContract = await contrat_connection(Market, network[Network]?.tradeContract)
+                const ConnectContract = await contrat_connection(wallet, Market, network[Network]?.tradeContract)
                 console.log("ConnectContract", ConnectContract);
                 var contractobj = await
                     ConnectContract
@@ -495,8 +520,8 @@ export default function useContractProviderHook() {
                         .acceptBId(...data)
                         .send({
                             from: accountAddress,
-                            gas: Web3Utils.toHex(gas_estimate),
-                            gasPrice: Web3Utils.toHex(gasprice),
+                            // gas: Web3Utils.toHex(parseFloat(gas_estimate).toString()),
+                            // gasPrice: Web3Utils.toHex(parseFloat(gasprice).toString()),
                         })
                         .on('transactionHash', (transactionHash) => {
                             return transactionHash
@@ -506,7 +531,7 @@ export default function useContractProviderHook() {
 
                 var royalObject = {}
 
-                var TokenCOunts = receipt.logs[0]?.topics?.map((val, i) => {
+                var TokenCOunts = receipt.logs[data[0] == "Coin" ? 0 : 6]?.topics?.map((val, i) => {
                     if (i == 1) {
                         const address = web3p.eth.abi.decodeParameter("address", val);
                         console.log("__address", address);
@@ -610,12 +635,12 @@ export default function useContractProviderHook() {
         }
     }
 
-    const lazyminting_721_1155 = async (count, type, coin, Send, ...data) => {
-        console.log("VANTHADATA", accountAddress, type, coin, Send, ...data)
+    const lazyminting_721_1155 = async (wallet, count, coin, Send, ...data) => {
+        console.log("VANTHADATA", accountAddress, wallet, count, coin, Send, ...data)
         var ConnectContract = "";
         try {
 
-            ConnectContract = await contrat_connection(TradeAbi, config.TradeContract)
+            ConnectContract = await contrat_connection(wallet, TradeAbi, config.TradeContract)
             var contract_Method_Hash
             if (coin == "BNB" || coin == "ETH") {
                 console.log("METODASS", ConnectContract.methods)
@@ -685,10 +710,13 @@ export default function useContractProviderHook() {
 
     }
 
-    const nftStakingAndWithdrawAndClaim = async (method, ...data) => {
+    const nftStakingAndWithdrawAndClaim = async (wallet, method, ...data) => {
         try {
             console.log("...data", ...data);
-            var ConnectContract = await contrat_connection(StakeAbi, network[Network].stakeContract)
+            if (method == "claimReward") {
+
+            }
+            var ConnectContract = await contrat_connection(wallet, StakeAbi, network[Network].stakeContract)
             console.log("METODASS", ConnectContract.methods)
             var contract_Method_Hash = await
                 ConnectContract
@@ -764,10 +792,10 @@ export default function useContractProviderHook() {
         return contract_Method_Hash
     }
 
-    const setApproveForStack = async (Addr) => {
+    const setApproveForStack = async (wallet, Addr) => {
         // console.log("sdefsedffe", Addr);
         try {
-            var ConnectContract = await contrat_connection(ERC721, Addr)
+            var ConnectContract = await contrat_connection(wallet, ERC721, Addr)
             var contractobj = await
                 ConnectContract
                     .methods
@@ -781,8 +809,8 @@ export default function useContractProviderHook() {
                     .setApprovalForAll(network[Network]?.stakeContract, true)
                     .send({
                         from: accountAddress,
-                        gas: Web3Utils.toHex(gas_estimate),
-                        gasPrice: Web3Utils.toHex(gasprice),
+                        // gas: Web3Utils.toHex(parseFloat(gas_estimate).toString()),
+                        // gasPrice: Web3Utils.toHex(parseFloat(gasprice).toString()),
                     }).on('transactionHash', (transactionHash) => {
                         return transactionHash
                     })
@@ -801,10 +829,10 @@ export default function useContractProviderHook() {
         }
     }
 
-    const BidNFt_Contract = async (value, Method, ...data) => {
+    const BidNFt_Contract = async (wallet, value, Method, ...data) => {
         try {
             console.log("...data", ...data);
-            var ConnectContract = await contrat_connection(TradeAbi, config.TradeContract)
+            var ConnectContract = await contrat_connection(wallet, TradeAbi, config.TradeContract)
             console.log("METODASS", ConnectContract.methods)
 
             var contractobj = await
@@ -813,16 +841,16 @@ export default function useContractProviderHook() {
 
             var gasprice = await web3.eth.getGasPrice();
 
-            var gas_estimate = await contractobj.estimateGas({ from: accountAddress, value: value })
+            var gas_estimate = await contractobj.estimateGas({ from: accountAddress, value: data[2] == "Coin" ? value : 0 })
 
             var contract_Method_Hash = await
                 ConnectContract
                     .methods[Method](...data)
                     .send({
                         from: accountAddress,
-                        value: value,
-                        gas: Web3Utils.toHex(gas_estimate),
-                        gasPrice: Web3Utils.toHex(gasprice)
+                        value: data[2] == "Coin" ? value : 0,
+                        // gas: Web3Utils.toHex(parseFloat(gas_estimate).toString()),
+                        // gasPrice: Web3Utils.toHex(parseFloat(gasprice).toString())
                     })
                     .on('transactionHash', (transactionHash) => {
                         return transactionHash
@@ -1316,6 +1344,40 @@ export default function useContractProviderHook() {
         }
     }
 
+    const TransferToken = async (wallet, ...data) => {
+        try {
+            var ConnectContract = await contrat_connection(wallet, TradeAbi, network[Network]?.tradeContract)
+            var contractobj = await
+                ConnectContract
+                    .methods
+                    .TransferToken(...data)
+            var gasprice = await web3.eth.getGasPrice();
+            var gas_estimate = await contractobj.estimateGas({ from: accountAddress })
+            var contract_Method_Hash = await
+                ConnectContract
+                    .methods
+                    .TransferToken(...data)
+                    .send({
+                        from: accountAddress,
+                        gas: Web3Utils.toHex(parseFloat(gas_estimate).toString()),
+                        gasPrice: Web3Utils.toHex(parseFloat(gasprice).toString()),
+                    })
+                    .on('transactionHash', (transactionHash) => {
+                        return transactionHash
+                    })
+            const receipt = await get_receipt(contract_Method_Hash.transactionHash ? contract_Method_Hash.transactionHash : contract_Method_Hash);
+            var need_data = {
+                status: receipt.status,
+                HashValue: receipt.transactionHash,
+            }
+            return need_data;
+        }
+        catch (e) {
+            console.log('Erro on transferToken---->', e);
+            return false
+        }
+    }
+
     return {
         Contract_Base_Validation,
         GetApproveStatus,
@@ -1343,7 +1405,9 @@ export default function useContractProviderHook() {
         validateApproveforUSDT,
         getAllowance,
         connectPrivyWalllet,
-        contrat_connection
+        contrat_connection,
+        TransferToken,
+        _signcall
     };
 
 

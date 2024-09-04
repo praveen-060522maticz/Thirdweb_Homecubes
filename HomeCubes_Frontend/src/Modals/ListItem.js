@@ -339,10 +339,12 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
         if (!checkApprove) {
           const aprroveId = toast.loading("Approve in process... Do not refresh!");
 
-          // const cont = await ContractCall.SetApproveStatus(
-          //   FormValue.ContractType.includes('721') ? "Single" : "Multiple",
-          //   FormValue.ContractAddress
-          // );
+          setCanReload(false)
+          const cont = await ContractCall.SetApproveStatus(
+            FormValue.ContractType.includes('721') ? "Single" : "Multiple",
+            FormValue.ContractAddress,
+            wallets[0]
+          );
 
           // const cont = await getThirdweb.useContractCall(
           //   "setApprovalForAll",
@@ -350,14 +352,13 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
           //   0,
           //   FormValue.ContractAddress, true
           // );
-          setCanReload(false)
-          const cont = await ContractCall.gasLessTransaction(
-            "setApprovalForAll",
-            0,
-            0,
-            wallets[0],
-            FormValue.ContractAddress, true
-          );
+          // const cont = await ContractCall.gasLessTransaction(
+          //   "setApprovalForAll",
+          //   0,
+          //   0,
+          //   wallets[0],
+          //   FormValue.ContractAddress, true
+          // );
           setCanReload(true)
           if (!cont) {
             toast.update(id, {
@@ -386,15 +387,25 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
 
         }
 
-        // const cont = await ContractCall.place_order_721_1155(
-        //   owner.NFTId,
-        //   web3.utils.toWei(FormValue.NFTPrice?.toString()),
-        //   FormValue.ContractAddress,
-        //   accountAddress,
-        //   Number(FormValue.ContractType),
-        //   "data"
-        // );
-        // console.log("cont", cont)
+        console.log('Loogogogoog---->', wallets[0],
+          owner.NFTId,
+          FormValue.NFTPrice,
+          FormValue.ContractAddress,
+          accountAddress,
+          FormValue.ContractType,
+          "data");
+
+        setCanReload(false)
+        const cont = await ContractCall.place_order_721_1155(
+          wallets[0],
+          owner.NFTId,
+          web3utils.toWei(FormValue.NFTPrice),
+          FormValue.ContractAddress,
+          accountAddress,
+          Number(FormValue.ContractType),
+          "data"
+        );
+        console.log("cont", cont)
         console.log('gasgasFeeee---->', gasFee);
 
         // const cont = await getThirdweb.useContractCall(
@@ -411,22 +422,21 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
         //   "2500000000000000000"
         // )
         let TStamp = Date.now();
-        setCanReload(false)
-        const cont = await ContractCall.gasLessTransaction(
-          "orderPlace",
-          0,
-          0,
-          wallets[0],
-          owner.NFTId,
-          web3utils.toWei(FormValue.NFTPrice?.toString()),
-          FormValue.ContractAddress,
-          accountAddress,
-          Number(FormValue.ContractType),
-          "data",
-          TStamp,
-          gasFee?.collectAddress,
-          "2500000000000000000"
-        )
+        // const cont = await ContractCall.gasLessTransaction(
+        //   "orderPlace",
+        //   0,
+        //   0,
+        //   wallets[0],
+        //   owner.NFTId,
+        //   web3utils.toWei(FormValue.NFTPrice?.toString()),
+        //   FormValue.ContractAddress,
+        //   accountAddress,
+        //   Number(FormValue.ContractType),
+        //   "data",
+        //   TStamp,
+        //   gasFee?.collectAddress,
+        //   "2500000000000000000"
+        // )
         setCanReload(true)
         console.log('Cont---->', cont);
         if (cont) {
@@ -668,10 +678,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                           ...{ ["CoinName"]: e.value },
                         })}
                         // isDisabled={true}
-                        options={
-                          currency?.filter(
-                            (item) => item.address != config.DEADADDRESS
-                          )}
+                        options={currency}
                       />
 
                     </div>

@@ -159,7 +159,7 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
   })
   console.log("FormValue", FormValue);
 
-  const {wallets} = useWallets();
+  const { wallets } = useWallets();
 
   useEffect(() => {
     BalCal(FormValue.CoinName)
@@ -188,15 +188,15 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
 
   const Token_details = useMemo(() => {
     var data = currency?.filter(item => item.label === FormValue.CoinName)?.pop() ?? currency?.filter(item => item.label !== "BNB")?.pop()
-console.log('TOkendsetails data---->',data);
+    console.log('TOkendsetails data---->', data);
     return {
       decimal: data?.decimal || 18,
       token_address: data?.address ?? config.DEADADDRESS
     }
   }, [FormValue.CoinName])
-console.log('Token_details---->',Token_details);
+  console.log('Token_details---->', Token_details);
   const BalCal = async (data) => {
-    let TokenBal = await ContractCall.Token_Balance_Calculation(Token_details.token_address, accountAddress,wallets[0])
+    let TokenBal = await ContractCall.Token_Balance_Calculation(Token_details.token_address, accountAddress, wallets[0])
     console.log('====================================TokenBal0', TokenBal);
     SetTokenBal(TokenBal)
   }
@@ -236,9 +236,10 @@ console.log('Token_details---->',Token_details);
       SetError(error)
     }
     else {
-
-      const checkApprove = await ContractCall.validateApproveforUSDT(YouWillGet, false, wallets[0], Token_details.token_address)
-      if (!checkApprove) return toast.update(id, { render: "Bidding failed", type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
+      if (FormValue?.CoinName != "BNB") {
+        const checkApprove = await ContractCall.validateApproveforUSDT(YouWillGet, false, wallets[0], Token_details.token_address)
+        if (!checkApprove) return toast.update(id, { render: "Bidding failed", type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
+      }
 
       // let allow = web3utils.fromWei((await ContractCall.allowance_721_1155(Token_details.token_address, accountAddress)) ? String(await ContractCall.allowance_721_1155(Token_details.token_address, accountAddress)) : '0')
       // // console.log('fhfhfa',Token_details,accountAddress,Number(allow))
@@ -253,13 +254,13 @@ console.log('Token_details---->',Token_details);
       const Method = isEmpty(bidder) ? "bidNFT" : "editBid"
       let TStamp = Date.now();
       console.log('getValue---->', getValue, Method);
-
-      // let cont = await ContractCall.BidNFt_Contract(getValue, Method, FormValue?.NFTId, item.ContractAddress, getValue, "2500000000000000000", "2500000000000000000")
+      
+      let cont = await ContractCall.BidNFt_Contract(wallets[0], getValue, Method, FormValue?.NFTId, item.ContractAddress, FormValue?.CoinName == "BNB" ? "Coin" : FormValue?.CoinName, getValue)
       // let cont = await getThirdweb.useContractCall(Method, getValue, 0, FormValue?.NFTId, item.ContractAddress,getValue, "2500000000000000000",gasFee?.collectAddress, "2500000000000000000");
-      var param = [Method, 0, 0,wallets[0], FormValue?.NFTId, item.ContractAddress,TStamp, gasFee?.collectAddress, getValue, "2500000000000000000"]
-      if(Method == "bidNFT") param.splice(8,0, FormValue?.CoinName)
-      console.log("paramamamamam",param);
-      let cont = await ContractCall.gasLessTransaction(...param);
+      // var param = [Method, 0, 0,wallets[0], FormValue?.NFTId, item.ContractAddress,TStamp, gasFee?.collectAddress, getValue, "2500000000000000000"]
+      // if(Method == "bidNFT") param.splice(8,0, FormValue?.CoinName)
+      // console.log("paramamamamam",param);
+      // let cont = await ContractCall.gasLessTransaction(...param);
       setCanReload(true)
       if (cont) {
 
@@ -293,7 +294,7 @@ console.log('Token_details---->',Token_details);
           setTimeout(() => {
             push("/marketplace");
           }, 1000)
-        } 
+        }
         else if (Resp.success == 'success') {
           toast.update(id, { render: 'The bid is successfully placed', type: 'success', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
           SetBtn('done')
@@ -332,7 +333,7 @@ console.log('Token_details---->',Token_details);
     async function BalanceCheck() {
       if (once) {
         setOnce(false);
-        var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item,wallets[0])
+        var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item, wallets[0])
         console.log('BIDBalanceCheck', owner, item, Nftbalance);
         if (Nftbalance?.toLowerCase() != owner.NFTOwner?.toLowerCase()) {
           toast.warning("You won't buy at this moment please refresh you data");
@@ -401,8 +402,8 @@ console.log('Token_details---->',Token_details);
                 placeholder="CoinName"
                 styles={stylesgraybg}
                 value={{ label: FormValue?.CoinName, value: FormValue?.CoinName }}
-                onChange={(e) => { SetFormValue({...FormValue,CoinName:e.value}) }}
-                options={currency?.filter(item => item.address?.toLowerCase() != config.DEADADDRESS)}
+                onChange={(e) => { SetFormValue({ ...FormValue, CoinName: e.value }) }}
+                options={currency}
                 id='CoinName'
                 isSearchable={false}
                 isDisabled={true}

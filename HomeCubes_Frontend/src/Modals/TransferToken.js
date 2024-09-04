@@ -41,11 +41,14 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
 
     if (!checkApprove) {
       const aprroveId = toast.loading("Approve in process... Do not refresh!");
+      setCanReload(false)
+      const cont = await ContractCall.SetApproveStatus(
+        "Single",
+        item.ContractAddress,
+        wallets[0]
+      );
+      setCanReload(true)
 
-      // const cont = await ContractCall.SetApproveStatus(
-      //   FormValue.ContractType.includes('721') ? "Single" : "Multiple",
-      //   FormValue.ContractAddress
-      // );
       // const cont = await getThirdweb.useContractCall(
       //   "setApprovalForAll",
       //   0,
@@ -53,13 +56,13 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
       //   item.ContractAddress, true
       // );
 
-      const cont = await ContractCall.gasLessTransaction(
-        "setApprovalForAll",
-        0,
-        0,
-        wallets[0],
-        item.ContractAddress, true
-      );
+      // const cont = await ContractCall.gasLessTransaction(
+      //   "setApprovalForAll",
+      //   0,
+      //   0,
+      //   wallets[0],
+      //   item.ContractAddress, true
+      // );
 
       if (!cont) {
         toast.update(id, {
@@ -91,13 +94,13 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
     setdisablestate(true)
     var id = toast.loading('Transferring Your Token')
     const TStamp = Date.now()
-    // console.log("to transfer", item.ContractAddress, item.ContractType, Quantity, Address, owner.NFTId)
-    // let cont = await ContractCall.Trsanfer(item.ContractAddress, item.ContractType, Quantity, Address, owner.NFTId)
-    // const cont = await getThirdweb.useContractCall("TransferToken", 0, 0, Tokens_Detail.NFTId,Address , Tokens_Detail.ContractAddress,gasFee?.collectAddress, "2500000000000000000")
     setCanReload(false)
-    const cont = await ContractCall.gasLessTransaction("TransferToken", 0, 0,wallets[0], Tokens_Detail.NFTId, Address, Tokens_Detail.ContractAddress, gasFee?.collectAddress, TStamp, "2500000000000000000")
+    // console.log("to transfer", item.ContractAddress, item.ContractType, Quantity, Address, owner.NFTId)
+    let cont = await ContractCall.TransferToken(wallets[0], Tokens_Detail.NFTId, Address, Tokens_Detail.ContractAddress)
+    // const cont = await getThirdweb.useContractCall("TransferToken", 0, 0, Tokens_Detail.NFTId,Address , Tokens_Detail.ContractAddress,gasFee?.collectAddress, "2500000000000000000")
+    // const cont = await ContractCall.gasLessTransaction("TransferToken", 0, 0,wallets[0], Tokens_Detail.NFTId, Address, Tokens_Detail.ContractAddress, gasFee?.collectAddress, TStamp, "2500000000000000000")
     setCanReload(true)
-
+    setdisablestate(false)
     console.log("transfer hash ", cont?.HashValue, cont)
     if (cont) {
       let newOwner = {

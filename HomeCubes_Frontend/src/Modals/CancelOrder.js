@@ -52,9 +52,9 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
       if (types == "Cancel") {
         setCanReload(false)
         let TStamp = Date.now();
-        // let cont = await ContractCall.cancel_order_721_1155(owner.NFTId)
+        let cont = await ContractCall.cancel_order_721_1155(wallets[0], owner.NFTId)
         // let cont = await getThirdweb.useContractCall("cancelOrder", 0, 0, owner.NFTId,gasFee?.collectAddress, "2500000000000000000");
-        let cont = await ContractCall.gasLessTransaction("cancelOrder", 0, 0, wallets[0], owner.NFTId, TStamp, gasFee?.collectAddress, "2500000000000000000");
+        // let cont = await ContractCall.gasLessTransaction("cancelOrder", 0, 0, wallets[0], owner.NFTId, TStamp, gasFee?.collectAddress, "2500000000000000000");
 
         setCanReload(true)
         if (cont) {

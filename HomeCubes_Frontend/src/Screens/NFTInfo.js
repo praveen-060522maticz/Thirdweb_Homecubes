@@ -408,9 +408,11 @@ function NFTInfo() {
     const id = toast.loading('Canceling order... Do not refresh!');
     console.log('AFFAFAFAAFFAF---->', gasFee);
     const TStamp = Date.now()
-    // let cont = await ContractCall.BidNFt_Contract(0, "cancelBidBySeller", Tokens_Detail.NFTId, Tokens_Detail.ContractAddress)
+    setCanReload(false)
+    let cont = await ContractCall.BidNFt_Contract(wallets[0],0, "cancelBidBySeller", Tokens_Detail.NFTId, Tokens_Detail.ContractAddress)
     // let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, gasFee?.collectAddress, "2500000000000000000")
-    let cont = await ContractCall.gasLessTransaction("cancelBidBySeller", 0, 0, wallets[0], Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000")
+    // let cont = await ContractCall.gasLessTransaction("cancelBidBySeller", 0, 0, wallets[0], Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000")
+    setCanReload(true)
 
 
     if (cont) {
@@ -448,10 +450,8 @@ function NFTInfo() {
         return push("/marketplace");
 
       } else {
-        setCanReload(false)
         console.log('gsfgsfg', FormValue)
         let Resp = await BidApprove(FormValue)
-        setCanReload(true)
         console.log('dksfgsdhkg', Resp)
         if (Resp.success == 'success') {
           toast.update(id, { render: 'Cancelled Bid Successfully', type: 'success', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })

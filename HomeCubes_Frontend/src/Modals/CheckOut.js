@@ -147,11 +147,12 @@ function CheckOut({ show, handleClose, item, owner, file }) {
          );
          console.log("token_address", token_address, config.TradeContract, YouWillGet);
          setCanReload(false)
-         // let cont = await ContractCall.approve_721_1155( //normal
-         //    token_address,
-         //    network[Network].tradeContract,
-         //    web3utils.toWei(YouWillGet.toString())
-         // );
+         let cont = await ContractCall.approve_721_1155( //normal
+            wallets[0],
+            token_address,
+            network[Network].tradeContract,
+            web3utils.toWei(YouWillGet.toString())
+         );
 
          // let cont = await getThirdweb.useContractCall( //thirdweb
          //    "approve",
@@ -179,12 +180,12 @@ function CheckOut({ show, handleClose, item, owner, file }) {
          //    web3utils.toWei((YouWillGet + 2).toString()),
          // ) 
 
-         let cont = await ContractCall.validateApproveforUSDT(
-            web3utils.toWei((YouWillGet + 2).toString()),
-            false,
-            wallets[0],
-            token_address
-         )
+         // let cont = await ContractCall.validateApproveforUSDT(
+         //    web3utils.toWei((YouWillGet + 2).toString()),
+         //    false,
+         //    wallets[0],
+         //    token_address
+         // )
 
          setCanReload(true)
          console.log("cont", cont);
@@ -254,43 +255,43 @@ function CheckOut({ show, handleClose, item, owner, file }) {
       SetError(error);
       if (isEmpty(error)) {
          setCanReload(false)
-         // let cont = await ContractCall.buy_721_1155(
-         //    web3utils.toWei(YouWillGet.toString()),
-         //    owner.CoinName,
-         //    owner.NFTOwner,
-         //    [
-         //       owner.NFTId,
-         //       web3utils.toWei(String(owner.NFTPrice * NFTQuantity)),
-         //       NFTQuantity,
-         //       item.ContractType,
-         //       web3utils.toWei(YouWillGet.toString())
-         //    ],
-         //    item.ContractAddress,
-         //    "2500000000000000000"
-         // );
-         let TStamp = Date.now();
-
-         var Arr = [
-            owner.CoinName == "BNB" ? "saleToken" : "saleWithToken",
-            owner.CoinName == "BNB" ? web3utils.toWei(YouWillGet.toString()) : 0,
-            owner.CoinName !== "BNB" ? 6 : 0,
+         let cont = await ContractCall.buy_721_1155(
             wallets[0],
+            web3utils.toWei(YouWillGet.toString()),
+            owner.CoinName,
             owner.NFTOwner,
             [
                owner.NFTId,
                web3utils.toWei(String(owner.NFTPrice * NFTQuantity)),
                NFTQuantity,
-               item.ContractType
+               item.ContractType,
+               web3utils.toWei(YouWillGet.toString())
             ],
             item.ContractAddress,
-            TStamp,
-            gasFee?.collectAddress,
-            "2500000000000000000"
-         ]
-         if (owner.CoinName != "BNB") Arr.splice(4, 0, owner.CoinName)
-         console.log('ArrArrArrArrArr---->', Arr);
+         );
+         let TStamp = Date.now();
+
+         // var Arr = [
+         //    owner.CoinName == "BNB" ? "saleToken" : "saleWithToken",
+         //    owner.CoinName == "BNB" ? web3utils.toWei(YouWillGet.toString()) : 0,
+         //    owner.CoinName !== "BNB" ? 6 : 0,
+         //    wallets[0],
+         //    owner.NFTOwner,
+         //    [
+         //       owner.NFTId,
+         //       web3utils.toWei(String(owner.NFTPrice * NFTQuantity)),
+         //       NFTQuantity,
+         //       item.ContractType
+         //    ],
+         //    item.ContractAddress,
+         //    TStamp,
+         //    gasFee?.collectAddress,
+         //    "2500000000000000000"
+         // ]
+         // if (owner.CoinName != "BNB") Arr.splice(4, 0, owner.CoinName)
+         // console.log('ArrArrArrArrArr---->', Arr);
          // let cont = await getThirdweb.useContractCall(...Arr)
-         let cont = await ContractCall.gasLessTransaction(...Arr)
+         // let cont = await ContractCall.gasLessTransaction(...Arr)
          setCanReload(true)
          console.log("contcont", cont);
          if (cont) {
@@ -329,7 +330,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
                setTimeout(() => {
                   navigate("/");
                }, 1500)
-               
+
                return toast.update(id, {
                   render:
                      <div>
@@ -471,7 +472,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
                      <p className='modal_summaryLabel'> {owner.CoinName != "BNB" ? (Number(YouWillGet) * cakeValue).toFixed(6) : (Number(YouWillGet) * BNBUSDT).toFixed(6)}</p>
                   </div> */}
 
-                  {/* {owner?.CoinName != "BNB" && allowed && <button
+                  {owner?.CoinName != "BNB" && allowed && <button
                      className='bodygradientBtn modal_grdientBtn mt-4'
                      disabled={Btn == 'error' || Btn === "process" || Btn === "done" ? true : false}
                      onClick={Btn == 'start' || Btn === "try" ? FormSubmit : null}
@@ -482,12 +483,12 @@ function CheckOut({ show, handleClose, item, owner, file }) {
                         || Btn == 'done' && 'Done'
                         || Btn == 'process' && 'In-Progress'
                      }
-                  </button>} */}
+                  </button>}
                   <button
                      className='additional_btn modal_additionalBtn mt-3'
-                     // disabled={Btn != 'done' && App_Btn == 'init' || App_Btn == 'error' || App_Btn === "process" || App_Btn === "done" ? true : false}
-                     // onClick={App_Btn == 'start' || App_Btn === "try" ? _Buy : null}
-                     onClick={() => _Buy()}
+                     disabled={Btn != 'done' && App_Btn == 'init' || App_Btn == 'error' || App_Btn === "process" || App_Btn === "done" ? true : false}
+                     onClick={App_Btn == 'start' || App_Btn === "try" ? _Buy : null}
+                     // onClick={() => _Buy()}
                   >
                      {App_Btn == 'start' && 'Proceed to pay'
                         || App_Btn == 'try' && 'Try-Again'

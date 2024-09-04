@@ -2,7 +2,7 @@
 // import ERC1155 from '../../src/Abi/erc1155.json'
 // import TRADE from '../../src/Abi/market.json'
 // import profile from '../../assets/images/avatar.png'
-var EnvName = 'demossl2';
+var EnvName = 'production';
 var key = {};
 key.ONEDAYINSECONDS = 0
 key.env = EnvName
@@ -33,16 +33,16 @@ key.STATIC_TOKEN = "0xc6aBa068A91d327B259327523f71f51221943186"
 // key.FORWARDER_ADDRESS = "0x84732a7d2bC9336ECB59e651DCCcF9B42B6bc0d3"
 // key.RELAYER_URL = "https://api.defender.openzeppelin.com/actions/ca840de3-fa75-4118-bbee-9b51da6fc43e/runs/webhook/6b8630f5-37d9-4a4c-b68f-d102e14e71a4/3M79HzfiKyX7zMjHivtAHR"
 
-key.RELAYER_API_KEY = "HXVE6vGKGGU9nvi77HdT7izDPVpu9esK"
-key.RELAYER_API_SECRET = "4wEiRo9oCdqvgP4avUfqQ1NtQnKfSpe4YgmCDyGPcGqkLCp69KVyPaFMeVeUnTdV"
-key.RELAYER_ADDRESS = "0xfE496e90Ab4B4c1294C86e34e5054016E2734145"
-key.FORWARDER_ADDRESS = "0x84732a7d2bC9336ECB59e651DCCcF9B42B6bc0d3"
-key.RELAYER_URL = "https://api.defender.openzeppelin.com/actions/4904b432-556e-4d69-a52a-7a5189849519/runs/webhook/aa116472-2822-475a-aa88-3050ffa90432/2pDz8qauu4gm3h9VvyuJfG"
+key.RELAYER_API_KEY = process.env.RELAYER_API_KEY
+key.RELAYER_API_SECRET = process.env.RELAYER_API_SECRET
+key.RELAYER_ADDRESS = process.env.RELAYER_ADDRESS
+key.FORWARDER_ADDRESS = process.env.FORWARDER_ADDRESS
+key.RELAYER_URL = process.env.RELAYER_URL
 
 const ip = "200.140.70.125"
 
 if (EnvName === "demo") {
-    key.KEY = 'MNBVCZX1234)(*'
+    key.KEY = process.env.REACT_APP_SECKEY
     key.FRONT_URL = 'https://homecube.maticz.in/'
     key.BACK_URL = 'https://api-homecubes.maticz.in/v1/front'
     key.ADMIN_URL = 'https://api-homecubes.maticz.in/v1/admin'
@@ -54,7 +54,8 @@ if (EnvName === "demo") {
     // key.TradeContract = '0x19D4c0f9155C6517580f850D4D097AF0448a1B39'.toLowerCase() //sepolia old
     // key.TradeContract = '0xA40F308Ad28b520f1cd0a9A58e3b551F73602246'.toLowerCase() //sepolia
     // key.TradeContract = '0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208'.toLowerCase() //sepolia
-    key.TradeContract = '0x783FB9DD2C69101cd0E080403279b9fE7E6ac780'.toLowerCase() //sepolia
+    // key.TradeContract = '0x783FB9DD2C69101cd0E080403279b9fE7E6ac780'.toLowerCase() //sepolia
+    key.TradeContract = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase();
 
     // key.TradeContract = '0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3'.toLowerCase() //sepolia
     key.ERC721 = '0x575cd9E4099A38B536673F557063f9A546870d11'.toLowerCase() // sepolia
@@ -76,7 +77,7 @@ if (EnvName === "demo") {
 else if (EnvName === "stage") {
 }
 else if (EnvName === "production") {
-    key.KEY = 'MNBVCZX1234)(*'
+    key.KEY = process.env.REACT_APP_SECKEY
     key.FRONT_URL = 'http://localhost:3000'
     key.BACK_URL = 'https://api.homecubes.io/v1/front'
     key.ADMIN_URL = 'https://api.homecubes.io/v1/admin'
@@ -87,7 +88,10 @@ else if (EnvName === "production") {
     // key.TradeContract = '0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3'.toLowerCase() //sepolia
     // key.TradeContract = '0x19D4c0f9155C6517580f850D4D097AF0448a1B39'.toLowerCase() //sepolia old
     // key.TradeContract = '0x274C7D841002A74c3E4EABEcDB504e3af3f1f05A'.toLowerCase() //sepolia
-    key.TradeContract = '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase() //sepolia
+    // key.TradeContract = '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase() //sepolia
+
+    key.TradeContract = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase();
+
     key.ERC721 = '0x575cd9E4099A38B536673F557063f9A546870d11'.toLowerCase() // sepolia
     // key.ERC721          =   '0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf'.toLowerCase() //bnb
     key.ERC1155 = '0x4958A36d8d71abd35D5434EF78023B3284D93e63'.toLowerCase()
@@ -106,8 +110,8 @@ else if (EnvName === "production") {
     }
 }
 else if (EnvName === "demossl") {
-    
-    key.KEY = 'MNBVCZX1234)(*'
+
+    key.KEY = process.env.REACT_APP_SECKEY
     key.FRONT_URL = 'https://home-cubes-frontend-2.pages.dev/'
     key.BACK_URL = 'https://backend-homecubes.maticz.in/v1/front'
     key.ADMIN_URL = 'https://backend-homecubes.maticz.in/v1/admin'
@@ -138,8 +142,8 @@ else if (EnvName === "demossl") {
     }
 }
 else if (EnvName === "demossl2") {
-    
-    key.KEY = 'MNBVCZX1234)(*'
+
+    key.KEY = process.env.REACT_APP_SECKEY
     key.FRONT_URL = 'https://home-cubes-frontend-3.pages.dev/'
     key.BACK_URL = 'https://backend-homecubes.maticz.in/v1/front'
     key.ADMIN_URL = 'https://backend-homecubes.maticz.in/v1/admin'
@@ -170,7 +174,7 @@ else if (EnvName === "demossl2") {
     }
 }
 else if (EnvName == "localIp") {
-    key.KEY = 'MNBVCZX1234)(*'
+    key.KEY = process.env.REACT_APP_SECKEY
     key.FRONT_URL = `http://localhost:3000`
     key.BACK_URL = `http://${ip}:3030/v1/front`
     key.ADMIN_URL = `http://${ip}:3030/v1/admin`
@@ -201,7 +205,7 @@ else if (EnvName == "localIp") {
     }
 }
 else {
-    key.KEY = 'MNBVCZX1234)(*'
+    key.KEY = process.env.REACT_APP_SECKEY
     key.FRONT_URL = 'http://localhost:3000'
     key.BACK_URL = 'http://localhost:3030/v1/front'
     key.ADMIN_URL = 'http://localhost:3030/v1/admin'
@@ -215,7 +219,8 @@ else {
 
 
     // key.TradeContract = '0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208'.toLowerCase() //sepolia
-    key.TradeContract = '0x783FB9DD2C69101cd0E080403279b9fE7E6ac780'.toLowerCase() //sepolia
+    // key.TradeContract = '0x783FB9DD2C69101cd0E080403279b9fE7E6ac780'.toLowerCase() //sepolia openzepline
+    key.TradeContract = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase();
 
 
     // key.TradeContract = '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase() //sepolia

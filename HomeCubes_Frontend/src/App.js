@@ -120,7 +120,7 @@ function App() {
         appId={process.env.REACT_APP_APPKEY}
         onSuccess={(user) => console.log(`User ${user.id} logged in!`)}
         config={{
-          "appearance": { "accentColor": "#6A6FF5", "theme": "#222224", "showWalletLoginFirst": false, "logo": "https://home-cubes-frontend-2.pages.dev/static/media/logo.b931aee24b93273c30989770522e8f9c.svg" },
+          "appearance": { "accentColor": "#6A6FF5", "theme": "#222224", "showWalletLoginFirst": false, "logo": "https://home-cubes-frontend-3.pages.dev/static/media/logo.b931aee24b93273c30989770522e8f9c.svg" },
           "loginMethods": ["email", "wallet", "google", "apple", "sms"],
           "embeddedWallets": { "createOnLogin": "users-without-wallets", "requireUserPasswordOnCreate": false },
           defaultChain: sepolia,

@@ -210,47 +210,12 @@ function Minting() {
       const getUSDT = ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(7);
 
       console.log("valll", value, web3Utils.toWei(String(getUSDT)), getUSDT);
-      // console.log('GAGAGAGAGAG---->', "lazyMinting",
-      //   0,
-      //   mintCount,
-      //   initialMint.MetaData,
-      //   [
-      //     mintCount,
-      //     web3?.utils.toWei(firstNft?.NFTRoyalty),
-      //     firstNft.Nonce,
-      //     web3.utils.toWei(firstNft?.NFTPrice.toString())
-      //   ],
-      //   [firstNft?.Randomname, "Coin"],
-      //   firstNft?.Hash,
-      //   firstNft?.ContractAddress,
-      //   web3.utils.toWei(value.toString()),
-      //   "2500000000000000000"
-      // );
-      // try {
-      //   let CONTRACT = await ContractCall.contrat_connection(wallets[0], DETH, USDTaddress);
-      //   console.log('CONTRACafwTCONTRACT---->',CONTRACT);
-      //   var contractobj = await
-      //     CONTRACT
-      //       .methods
-      //       .approve("0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208", "1000000000000000000000000000000000000000000000000")
-      //       .send({
-      //         from: wallets[0].address
-      //       }).on('transactionHash', (transactionHash) => {
-      //         return transactionHash
-      //       })
-      //       .on('error', (e) => {
-      //         console.log('returnofoawfoaw---->',e);
-      //       });
-      // } catch (e) {
-      //   console.log('Eseigjse---->',e);
-      // }
 
-
-      var hash = await ContractCall.gasLessTransaction(
-        "lazyMinting",
-        project?.mintTokenName == "BNB" ? web3Utils.toWei(value.toString()) : 0,
-        mintCount,
+      var hash = await ContractCall.lazyminting_721_1155(
         wallets[0],
+        mintCount,
+        project?.mintTokenName == "BNB" ? "COIN" : project?.mintTokenName,
+        web3Utils.toWei(value.toString()),
         initialMint.MetaData,
         [
           mintCount,
@@ -261,12 +226,31 @@ function Minting() {
         ],
         [firstNft?.Randomname, project?.mintTokenName == "BNB" ? "COIN" : project?.mintTokenName],
         firstNft?.Hash,
-        TStamp,
         firstNft?.ContractAddress,
-        web3Utils.toWei(value.toString()),
-        gasFee?.collectAddress,
-        "2500000000000000000"
+        web3Utils.toWei(value.toString())
       )
+
+      // var hash = await ContractCall.gasLessTransaction(
+      //   "lazyMinting",
+      //   project?.mintTokenName == "BNB" ? web3Utils.toWei(value.toString()) : 0,
+      //   mintCount,
+      //   wallets[0],
+      //   initialMint.MetaData,
+      //   [
+      //     mintCount,
+      //     web3Utils.toWei(firstNft?.NFTRoyalty),
+      //     firstNft.Nonce,
+      //     web3Utils.toWei(firstNft?.NFTPrice.toString()),
+      //     web3Utils.toWei(String(getUSDT))
+      //   ],
+      //   [firstNft?.Randomname, project?.mintTokenName == "BNB" ? "COIN" : project?.mintTokenName],
+      //   firstNft?.Hash,
+      //   TStamp,
+      //   firstNft?.ContractAddress,
+      //   web3Utils.toWei(value.toString()),
+      //   gasFee?.collectAddress,
+      //   "2500000000000000000"
+      // )
 
       console.log("hash", hash);
 
@@ -292,7 +276,7 @@ function Minting() {
       // console.log('ssssssssss---->',getThirdweb.useContractCall("lazyMinting",));
 
       console.log('hashawdawdawdaw--->', hash);
-      if (hash) {
+      if (hash.status) {
 
         const changedToken = await Promise.all(initialMint?.data.map((val, i) => {
 
@@ -321,8 +305,8 @@ function Minting() {
           TimeStamp: TStamp,
           transactionData: hash?.data
         }
-
-        let Resp = await saveTransaction(pendingObj);
+        let Resp =  await Buymint(update);
+        // let Resp = await saveTransaction(pendingObj);
         // let Resp = hash?.status == 'pending' ? await setPendingTransaction(pendingObj) : await Buymint(update)
         console.log("Resppppppsppsps dta", Resp);
         if (hash?.status == 'pending') {

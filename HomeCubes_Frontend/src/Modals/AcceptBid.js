@@ -30,7 +30,7 @@ function AcceptBid({
    const { web3 } = useSelector(
       (state) => state.LoginReducer.AccountDetails
    );
-   const {  gasFee } = useSelector((state) => state.LoginReducer.User);
+   const { gasFee } = useSelector((state) => state.LoginReducer.User);
    const { buyerFees, sellerFees } = useSelector(
       (state) => state.LoginReducer.ServiceFees
    );
@@ -53,7 +53,7 @@ function AcceptBid({
    const { Network } = useSelector(
       (state) => state.LoginReducer
    );
-   const {wallets} = useWallets()
+   const { wallets } = useWallets()
    console.log('token_address', token_address)
    useEffect(() => {
       BalCal(token_address);
@@ -136,6 +136,8 @@ function AcceptBid({
    const TokenApproveCall = async () => {
       SetTokenBtn("process");
       const id = toast.loading("Approve Processing...Do not refresh!");
+      setCanReload(false)
+
       // const cont = await getThirdweb.useContractCall(
       //    "setApprovalForAll",
       //    0,
@@ -143,13 +145,22 @@ function AcceptBid({
       //    item.ContractAddress, true
       //  );
 
-       const cont = await ContractCall.gasLessTransaction(
-         "setApprovalForAll",
-         0,
-         0,
-         wallets[0],
-         item.ContractAddress, true
-       );
+      // const cont = await ContractCall.gasLessTransaction(
+      //    "setApprovalForAll",
+      //    0,
+      //    0,
+      //    wallets[0],
+      //    item.ContractAddress, true
+      // );
+
+      const cont = await ContractCall.SetApproveStatus(
+         item.ContractType == 721 || item.ContractType == "721"
+            ? "Single"
+            : "Multiple",
+         item.ContractAddress,
+         wallets[0]
+      );
+      setCanReload(true)
 
       toast.update(id, {
          render: cont ? "Approved Successfully" : "Approved Failed",
@@ -193,7 +204,6 @@ function AcceptBid({
             closeButton: true,
             closeOnClick: true,
          });
-         setCanReload(false)
          console.log(
             "swefred",
             bidder?.TokenBidAmt * TokenQuantity,
@@ -201,20 +211,22 @@ function AcceptBid({
             TokenQuantity,
             bidder?.CoinName,
             bidder?.TokenBidderAddress,
+            bidder?.ContractAddress,
+         );
+         setCanReload(false)
+         let cont = await ContractCall.accept_721_1155(
+            wallets[0],
+            bidder?.CoinName == "BNB" ? "Coin" : bidder?.CoinName,
+            bidder?.TokenBidderAddress,
+            [
+               item.NFTId,
+               web3utils.toWei(String(bidder?.TokenBidAmt * TokenQuantity)),
+               TokenQuantity,
+               bidder?.ContractType,
+            ],
             bidder?.ContractAddress
          );
-
-         // let cont = await ContractCall.accept_721_1155(
-         //    "Coin",
-         //    bidder?.TokenBidderAddress,
-         //    [
-         //       item.NFTId,
-         //       web3.utils.toWei(String(bidder?.TokenBidAmt * TokenQuantity)),
-         //       TokenQuantity,
-         //       bidder?.ContractType,
-         //    ],
-         //    bidder?.ContractAddress
-         // );
+         setCanReload(true)
 
          // let cont = await getThirdweb.useContractCall(
          //    "acceptBId",
@@ -235,25 +247,25 @@ function AcceptBid({
          // );
 
          let TStamp = Date.now();
-         let cont = await ContractCall.gasLessTransaction(
-            "acceptBId",
-            0,
-            0,
-            wallets[0],
-            bidder?.CoinName,
-            bidder?.TokenBidderAddress,
-            [
-               item.NFTId,
-               web3utils.toWei(String(bidder?.TokenBidAmt * TokenQuantity)),
-               TokenQuantity,
-               bidder?.ContractType,
-            ],
-            bidder?.ContractAddress,
-            TStamp,
-            gasFee?.collectAddress,
-            "2500000000000000000"
-         );
-         
+         // let cont = await ContractCall.gasLessTransaction(
+         //    "acceptBId",
+         //    0,
+         //    0,
+         //    wallets[0],
+         //    bidder?.CoinName,
+         //    bidder?.TokenBidderAddress,
+         //    [
+         //       item.NFTId,
+         //       web3utils.toWei(String(bidder?.TokenBidAmt * TokenQuantity)),
+         //       TokenQuantity,
+         //       bidder?.ContractType,
+         //    ],
+         //    bidder?.ContractAddress,
+         //    TStamp,
+         //    gasFee?.collectAddress,
+         //    "2500000000000000000"
+         // );
+
          console.log('contaaaaaaaaa---->', cont);
          if (cont) {
             var FormValue = {
@@ -335,7 +347,6 @@ function AcceptBid({
             });
             SetBtn("try");
          }
-         setCanReload(true)
       }
    };
 
@@ -350,7 +361,7 @@ function AcceptBid({
       async function BalanceCheck() {
          if (once) {
             setOnce(false)
-            var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item,wallets[0]);
+            var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item, wallets[0]);
             console.log("ACEEPTBalanceCheck", owner, item, Nftbalance);
             if (Nftbalance?.toLowerCase() != owner.NFTOwner?.toLowerCase()) {
                toast.warning("You won't buy at this moment please refresh you data");
@@ -374,7 +385,7 @@ function AcceptBid({
    }
    return (
       <>
-      <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />u
+         <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />u
          <Modal
             show={show}
             onHide={handleClose}

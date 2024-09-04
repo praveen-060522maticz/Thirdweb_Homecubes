@@ -333,16 +333,16 @@ function Header() {
       console.log("acocococococo", accountDetails);
       let CONTRACT = new web3p.eth.Contract(TradeAbi, config.TradeContract);
 
-      accountDetails.USDTaddress = CONTRACT.methods?.["staticToken"] ? await CONTRACT.methods?.staticToken()?.call() : config.STATIC_TOKEN
-      console.log("acocococococo", accountDetails);
-      let TokenContract = new web3p.eth.Contract(Token, accountDetails.USDTaddress);
-      const getSymbol = await TokenContract.methods.symbol().call();
-      const getBalance = await TokenContract.methods.balanceOf(address).call();
-      const getBnbValue = parseFloat(await getBNBvalue(getSymbol == "USDT" ? "BNBUSDT" : `${getSymbol.toString()?.toUpperCase()}BNB`))
-      const convertValue = getSymbol == "USDT" ? getBnbValue : (1 / getBnbValue)
+      // accountDetails.USDTaddress = CONTRACT.methods?.["staticToken"] ? await CONTRACT.methods?.staticToken()?.call() : config.STATIC_TOKEN
+      // console.log("acocococococo", accountDetails);
+      // let TokenContract = new web3p.eth.Contract(Token, accountDetails.USDTaddress);
+      // const getSymbol = await TokenContract.methods.symbol().call();
+      // const getBalance = await TokenContract.methods.balanceOf(address).call();
+      // const getBnbValue = parseFloat(await getBNBvalue("BNBUSDT"))
+      // const convertValue = getSymbol == "USDT" ? getBnbValue : (1 / getBnbValue)
 
-      accountDetails.BNBUSDT = convertValue || parseFloat(await getBNBvalue("BNBUSDT"))
-      console.log('Tokencinstra---->', getSymbol, getBalance, getBnbValue, convertValue);
+      accountDetails.BNBUSDT = parseFloat(await getBNBvalue("BNBUSDT"))
+      // console.log('Tokencinstra---->', getSymbol, getBalance, getBnbValue, convertValue);
       return accountDetails;
     } catch (e) {
       console.log('Error on connectPrivyWalllet---->', e);
