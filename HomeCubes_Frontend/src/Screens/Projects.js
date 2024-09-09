@@ -77,7 +77,7 @@ function Projects() {
     <>
       <BottomBar />
       <Header />
-      <Container fluid className='pt-3 home_wrapper'>
+      <Container fluid className='pt-3 home_wrapper hc-section__inner'>
         <Container className='custom_container '>
           <Row>
             <Col lg={1} md={2} className="sidetab_holder">
@@ -85,43 +85,35 @@ function Projects() {
             </Col>
             <Col lg={11} md={10} sm={12} xs={12} className='res_pad_aligner mt-3'>
               {/* <BreadPath/> */}
-              <h3 className='projects_title'>Home Cubes Projects</h3>
-              <p className='mp_detailbrief' dangerouslySetInnerHTML={{ __html: CMS?.content }} ></p>
+              <h3 className='hc-home__title home_titled'>All <strong>Listed Properties</strong></h3>
+              <p className='mp_detailbrief hc-home__desc mt-3' dangerouslySetInnerHTML={{ __html: CMS?.content }} ></p>
               <hr className='projects_hr' />
 
-              <Row>
-                <Col lg={5} md={6} sm={6} xs={12}>
-                  <div className=''>
-                    <div className="mp_collectionDetail mb-2">
-                      <p className="mp_collectionLabel">Number of NFTs :</p>
-                      <p className="mp_collectionValue">{nftLength}</p>
-                    </div>
-                    <div className="mp_collectionDetail mb-2">
-                      <p className="mp_collectionLabel">Number of Staked NFTs :</p>
-                      <p className="mp_collectionValue">{staked}</p>
-                    </div>
-                    <div className="mp_collectionDetail mb-2">
-                      <p className="mp_collectionLabel">Number of Non-Staked NFTs :</p>
-                      <p className="mp_collectionValue">{unStaked}</p>
-                    </div>
-                  </div>
-                </Col>
-                <Col lg={7} md={6} sm={6} xs={12}>
-                  <div className=''>
-                    <div className="mp_collectionDetail mb-2">
-                      <p className="mp_collectionLabel">Next Rewards Distribution :</p>
-                      <p className="mp_collectionValue"> {new Date(rewardDetail?.endDateFormat).toLocaleDateString()}</p>
-                    </div>
-                    <div className="mp_collectionDetail mb-2">
-                      <p className="mp_collectionLabel">Number of Projects :</p>
-                      <p className="mp_collectionValue">{projectLength}</p>
-                    </div>
+              <div className='d-flex flex-wrap align-items-center gap-4 gap-xl-5'>
+                <div className="mp_collectionDetail mb-2">
+                  <p className="mp_collectionLabel">Number of NFTs :</p>
+                  <p className="mp_collectionValue">{nftLength}</p>
+                </div>
+                <div className="mp_collectionDetail mb-2">
+                  <p className="mp_collectionLabel">Number of Staked NFTs :</p>
+                  <p className="mp_collectionValue">{staked}</p>
+                </div>
+                <div className="mp_collectionDetail mb-2">
+                  <p className="mp_collectionLabel">Number of Non-Staked NFTs :</p>
+                  <p className="mp_collectionValue">{unStaked}</p>
+                </div>
+                <div className="mp_collectionDetail mb-2">
+                  <p className="mp_collectionLabel">Next Rewards Distribution :</p>
+                  <p className="mp_collectionValue"> {new Date(rewardDetail?.endDateFormat).toLocaleDateString()}</p>
+                </div>
+                <div className="mp_collectionDetail mb-2">
+                  <p className="mp_collectionLabel">Number of Projects :</p>
+                  <p className="mp_collectionValue">{projectLength}</p>
+                </div>
+              </div>
 
-                  </div>
-                </Col>
-              </Row>
               <Row className='mt-5'>
-                <h6 className='projects_listTitle'>Projects List</h6>
+                <h6 className='hc-home__title home_titled'><strong>Properties </strong> List</h6>
                 <Col lg={4} md={6} sm={6} xs={12} className='mt-4'>
                   <div
                     className={
@@ -172,7 +164,7 @@ function Projects() {
 
               <Row className='mt-4'>
                 {Projects.length != 0 && Projects.map((i) =>
-                  <Col lg={4} md={6} sm={6} xs={12} className='mb-3'>
+                  <Col xl={3} lg={4} md={6} sm={6} xs={12} className='mb-3 d-flex justify-content-center justify-content-md-start'>
                     <ProjectCard data={i} show={true} />
                   </Col>
                 )}

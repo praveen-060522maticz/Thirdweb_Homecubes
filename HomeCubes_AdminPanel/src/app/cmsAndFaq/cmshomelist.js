@@ -44,12 +44,12 @@ export default function Cmshomelist(props) {
 
     },
     {
-      key: "title",
+      // key: "title",
       text: "CMS title",
       className: "NFT NAME",
       align: "left",
       sortable: true,
-
+      cell: rec => <div dangerouslySetInnerHTML={{ __html: rec?.title }} />
 
     },
     {

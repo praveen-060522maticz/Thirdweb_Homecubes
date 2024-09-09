@@ -23,12 +23,10 @@ function DataCard(props) {
   console.log('PutOnSaleType---->', PutOnSaleType, PutOnSale);
   return (
     <>
-
-
-      <div className="nft_card">
+      <div className="nft_card hc-card__nft-height">
         <div className="nftcard_imgwrapper_sep">
           {PutOnSaleType != "UnlimitedAuction" && PutOnSaleType != "NotForSale" &&
-            <div className={ isStaked ? "nftcard_statuslabelblue_dark" : PutOnSaleType != "FixedPrice" ? "nftcard_statuslabel" : "nftcard_statuslabelblue"}>
+            <div className={isStaked ? "nftcard_statuslabelblue_dark" : PutOnSaleType != "FixedPrice" ? "nftcard_statuslabel" : "nftcard_statuslabelblue"}>
               {/* class name -> nftcard_statuslabelblue_dark */}
               <div className="card_status">
                 {PutOnSaleType == "FixedPrice" ? "Listed" : PutOnSaleType}
@@ -53,7 +51,7 @@ function DataCard(props) {
               if (isStaked) props.onWithdraw(props.data);
               else props?.setShowModal(true);
             }} >
-            <p className="nft_name">{NFTName}</p>
+            <p className="nft_name hc-nft__card-title">{NFTName}</p>
             <p className="nft_stackdate">Days Staked on this Quarter : {getStakedDate ?? "None"}</p>
             <p className="nft_expiry">Staking expiry date: {stake?.endDate ? new Date(stake?.endDate).toLocaleDateString() : "None"}</p>
             <button className={!isStaked ? "nftcard_btnblue" : "nftcard_btnviolet"}>{!isStaked ? "Stake" : "Withdraw"}</button>
@@ -61,12 +59,12 @@ function DataCard(props) {
 
         {pathname == "/staking" ? <></> :
           <div className="nftcard_detailwrapper">
-            <p className="nft_name" title={NFTName} >{NFTName.length > 20 ? NFTName.slice(0, 20).concat('...') : NFTName}</p>
+            <p className="nft_name hc-nft__card-title" title={NFTName} >{NFTName.length > 20 ? NFTName.slice(0, 20).concat('...') : NFTName}</p>
             {pathname == '/profile' ? <></> :
               <div className="nftcard_coin">
                 <img className="nft_coinImg" src={BNBIcon} />
                 <p className="nft_coinname">
-                  {NFTPrice} {CoinName ? CoinName :CollectionNetwork} 
+                  {NFTPrice} <span>{CoinName ? CoinName : CollectionNetwork}</span>
                 </p>
               </div>}
           </div>}

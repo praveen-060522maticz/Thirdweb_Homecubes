@@ -254,7 +254,7 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
       const Method = isEmpty(bidder) ? "bidNFT" : "editBid"
       let TStamp = Date.now();
       console.log('getValue---->', getValue, Method);
-      
+
       let cont = await ContractCall.BidNFt_Contract(wallets[0], getValue, Method, FormValue?.NFTId, item.ContractAddress, FormValue?.CoinName == "BNB" ? "Coin" : FormValue?.CoinName, getValue)
       // let cont = await getThirdweb.useContractCall(Method, getValue, 0, FormValue?.NFTId, item.ContractAddress,getValue, "2500000000000000000",gasFee?.collectAddress, "2500000000000000000");
       // var param = [Method, 0, 0,wallets[0], FormValue?.NFTId, item.ContractAddress,TStamp, gasFee?.collectAddress, getValue, "2500000000000000000"]
@@ -359,16 +359,15 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
         backdrop="static"
         keyboard={false}
         centered
-        className='common_modal'
+        className='common_modal hc-modal hc-modal__md'
       >
         <Modal.Body>
           <div className='modal_top'>
             <p className='modal_title text-center'>Place a Bid</p>
             <img src={require('../assets/images/close.svg').default} onClick={() => handleCloseBid()} className='modal_closer' />
-
           </div>
 
-          <div className='modal_body mt-5'>
+          <div className='modal_body mt-4'>
 
             <div className='modal_inputGroup'>
               <input
@@ -411,30 +410,30 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
               />
             </div>
 
-            <p className='blogInfo_inplabel mt-3 mb-4'>Summary:</p>
+            <p className='modal_summaryLabel mt-3 mb-3'>Summary:</p>
             <div className='bidmodal_summary mb-3'>
               <p className='modal_summaryLabel'>Your balance</p>
-              <p className='modal_summaryLabel'>{parseFloat(coinBalance).toFixed(6)} {item?.CollectionNetwork}</p>
+              <p className='modal_summaryValue'>{parseFloat(coinBalance).toFixed(6)} {item?.CollectionNetwork}</p>
             </div>
 
             <div className='bidmodal_summary mb-3'>
               <p className='modal_summaryLabel'>Token balance</p>
-              <p className='modal_summaryLabel'>{TokenBal} {FormValue.CoinName}</p>
+              <p className='modal_summaryValue'>{TokenBal} {FormValue.CoinName}</p>
             </div>
 
             <div className='bidmodal_summary mb-3'>
               <p className='modal_summaryLabel'>Service fees</p>
-              <p className='modal_summaryLabel'>{web3utils.fromWei(String(buyerFees))}% {FormValue?.CoinName}</p>
+              <p className='modal_summaryValue'>{web3utils.fromWei(String(buyerFees))}% {FormValue?.CoinName}</p>
             </div>
 
             <div className='bidmodal_summary mb-3'>
               <p className='modal_summaryLabel'>Total bid amount</p>
-              <p className='modal_summaryLabel'>{Number(YouWillGet)?.toFixed(6)} {FormValue?.CoinName}</p>
+              <p className='modal_summaryValue'>{Number(YouWillGet)?.toFixed(6)} {FormValue?.CoinName}</p>
             </div>
 
             <div className='bidmodal_summary mb-3'>
               <p className='modal_summaryLabel'>Minimum bid amount</p>
-              <p className='modal_summaryLabel'>{bid?.TokenBidAmt ? bid?.TokenBidAmt : owner?.NFTPrice} {FormValue?.CoinName}</p>
+              <p className='modal_summaryValue'>{bid?.TokenBidAmt ? bid?.TokenBidAmt : owner?.NFTPrice} {FormValue?.CoinName}</p>
             </div>
 
             <button
@@ -451,7 +450,7 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
             </button>
 
             <button
-              className='additional_btn modal_additionalBtn mt-3'
+              className='hc-button__gray mt-3'
               onClick={() => handleCloseBid()}
               disabled={Btn == 'process'}
             >

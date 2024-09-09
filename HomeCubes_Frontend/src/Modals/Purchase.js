@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useContractProviderHook from '../actions/contractProviderHook';
 import { isEmpty } from '../actions/common';
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 import config from '../config/config';
 import { network } from '../config/network';
 import { BuyAccept } from '../actions/axioss/nft.axios';
 
-function Purchase({ show, handleClose, owner, item  }) {
+function Purchase({ show, handleClose, owner, item }) {
 
   const navigate = useNavigate();
   console.log('buyyyyyyyy', item, owner);
@@ -278,7 +278,7 @@ function Purchase({ show, handleClose, owner, item  }) {
           push("/");
         }, 1000);
       }
-      
+
     }
 
   }

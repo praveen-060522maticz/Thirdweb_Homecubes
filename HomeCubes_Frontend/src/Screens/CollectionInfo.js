@@ -226,25 +226,60 @@ function CollectionInfo() {
 
               {/* <BreadPath/> */}
               <Row>
-                <Col lg={12} md={10} sm={12} xs={12}>
-                  <Row className="mp_bottomal">
-                    <Col lg={4} md={6} sm={12} xs={12} className="mb-3">
+                <Col lg={12} md={10} sm={12} xs={12} className="hc-galler__col-top" >
+                  <div className="d-flex align-items-start gap-3">
+                    <div>
                       <div className="mp_topImg_holder">
                         <img
                           className="mp_topImg colinfo_img img-fluid"
                           src={`${config.IMG_URL}/collection/${collectionData?.projectId?._id
-                              ? collectionData?.projectId?._id
-                              : collectionData?.projectId
+                            ? collectionData?.projectId?._id
+                            : collectionData?.projectId
                             }/${collectionData?.galleryThumbImage}`}
                         />
                       </div>
-                    </Col>
-                    <Col lg={8} md={6} sm={12} xs={12} className="mb-3">
-                      <h3 className="mp_collectionname">
+                      <h3 className="mp_collectionname mt-3 hc-gallery__image-name">
                         {collectionData?.galleryTitle}
                       </h3>
-                      <div className="mp_likeshare">
-                        {/* {like ? (
+                      {description ? (
+                        <p className="mp_detailbrief hc-home__desc mt-2">
+                          {collectionData?.galleryDescription}
+                        </p>
+                      ) : (
+                        <p className="mp_detailbrief hc-home__desc mt-2">
+                          {collectionData?.galleryDescription?.length > 300
+                            ? collectionData?.galleryDescription
+                              .slice(0, 300)
+                              .concat("...")
+                            : collectionData?.galleryDescription}{" "}
+                        </p>
+                      )}
+                      {collectionData?.galleryDescription?.length > 300 ? (
+                        <button
+                          className="mp_readmoreBtn"
+                          onClick={() => setDescription(!description)}
+                        >
+                          {description ? "Read Less" : "Read More"}
+                        </button>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                    <div className="mp_likeshare ">
+                      <img
+                        className="img-fluid"
+                        src={require("../assets/images/share.svg").default}
+                      />
+                    </div>
+                  </div>
+                  {/* <Row className="mp_bottomal"> */}
+                  {/* <Col lg={4} md={6} sm={12} xs={12} className="mb-3">
+
+                    </Col> */}
+                  {/* <Col lg={8} md={6} sm={12} xs={12} className="mb-3"> */}
+
+                  {/* <div className="mp_likeshare">
+                        {like ? (
                           <img
                             className="img-fluid me-3"
                             onClick={() => setLike(false)}
@@ -256,14 +291,14 @@ function CollectionInfo() {
                             onClick={() => setLike(true)}
                             src={require("../assets/images/like.svg").default}
                           />
-                        )} */}
+                        )}
                         <img
                           className="img-fluid"
                           src={require("../assets/images/share.svg").default}
                         />
-                      </div>
+                      </div> */}
 
-                      {/* <Row className="mt-3">
+                  {/* <Row className="mt-3">
                         <Col lg={3} md={6} sm={12} xs={12} className="">
                           <div className="mp_collectionDetail">
                             <p className="mp_collectionLabel">Items :</p>
@@ -295,75 +330,60 @@ function CollectionInfo() {
                           </div>
                         </Col>
                       </Row> */}
-                    </Col>
-                  </Row>
-                  <Row className="mt-1">
-                    <Col lg={10} md={12} sm={12} xs={12}>
-                      {description ? (
-                        <p className="mp_detailbrief">
-                          {collectionData?.galleryDescription}
-                        </p>
-                      ) : (
-                        <p className="mp_detailbrief">
-                          {collectionData?.galleryDescription?.length > 300
-                            ? collectionData?.galleryDescription
-                              .slice(0, 300)
-                              .concat("...")
-                            : collectionData?.galleryDescription}{" "}
-                        </p>
-                      )}
-                      {collectionData?.galleryDescription?.length > 300 ? (
-                        <button
-                          className="mp_readmoreBtn"
-                          onClick={() => setDescription(!description)}
-                        >
-                          {description ? "Read Less" : "Read More"}
-                        </button>
-                      ) : (
-                        <></>
-                      )}
-                      {/* <ReadMoreReact text={""}
+                  {/* </Col> */}
+                  {/* </Row> */}
+                  {/* <Row className="mt-1"> */}
+                  {/* <Col lg={10} md={12} sm={12} xs={12}> */}
+
+                  {/* <ReadMoreReact text={""}
               min={100}
               ideal={200}
               max={500}
               readMoreText="Read more"/> */}
-                    </Col>
-                  </Row>
                 </Col>
+
               </Row>
-              <Row className="justify-content-between mt-5">
+
+              <Row className=" mt-5">
                 {collectionData &&
                   collectionData?.galleryImages?.length != 0 &&
                   collectionData?.galleryImages?.map((val) => {
                     return (
                       <>
-                        <Col lg={4} className="mb-3 ">
-                          {/* <a target="_blank" href={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`} > */}
-                          {videoFileFormats.includes(val.split(".")[1]) ? (
-                            <div
-                              className="position-relative"
-                              style={{ cursor: "pointer" }}
-                              onClick={() => handleShowVideo(val)}
-                            >
-                              <div className="blur_thumbnailer">
-                                <div className="playBtn_fitter">
-                                  <i class="fa-regular fa-circle-play" />
+                        <Col sm={6} lg={4} xl={3} className="mb-4 d-flex justify-content-center justify-content-sm-start">
+                          <div className="hc-collection__image-card d-flex flex-column align-items-center align-items-sm-start">
+                            <div className="hc-collection__image-wrapper" >
+                              {/* <a target="_blank" href={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`} > */}
+                              {videoFileFormats.includes(val.split(".")[1]) ? (
+                                <div
+                                  className="position-relative"
+                                  style={{ cursor: "pointer" }}
+                                  onClick={() => handleShowVideo(val)}
+                                >
+                                  <div className="blur_thumbnailer">
+                                    <div className="playBtn_fitter">
+                                      <i class="fa-regular fa-circle-play" />
+                                    </div>
+                                  </div>
+                                  <video
+                                    className="img-fluid collectionss_img"
+                                    src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
+                                  />
                                 </div>
-                              </div>
-                              <video
-                                className="img-fluid collectionss_img"
-                                src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
-                              />
+                              ) : (
+                                <img
+                                  className=""
+                                  style={{ cursor: "pointer" }}
+                                  src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
+                                  onClick={() => handleShowVideo(val)}
+                                />
+                              )}
+                              {/* </a> */}
                             </div>
-                          ) : (
-                            <img
-                              className="img-fluid collectionss_img mb-4"
-                              style={{ cursor: "pointer" }}
-                              src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
-                              onClick={() => handleShowVideo(val)}
-                            />
-                          )}
-                          {/* </a> */}
+                            <h3 className="hc-gallery__image-name--sm mt-3 mt-xxl-4 text-center">
+                              Image name
+                            </h3>
+                          </div>
                         </Col>
                       </>
                     );
@@ -391,22 +411,21 @@ function CollectionInfo() {
                     />
                   </div>
 
-                  <div className="modal_body mt-3">
-                    {videoFileFormats.includes(videoShow.split(".")[1]) ? (
-                      <video
-                        controls
-                        className="img-fluid collectionss_img  mb-4"
-                        src={`${config.IMG_URL}/collection/${collectionData?._id}/${videoShow}`}
-                      />
-                    ) : (
-                      <div className="img_sec">
-                        {" "}
-                        <img
-                          className="img-fluid collectionss_img_big mb-4"
+                  <div className="modal_body mt-3 hc-collection__modal--body">
+                    <div className="hc-collection__modal-imageWrapper ">
+                      {videoFileFormats.includes(videoShow.split(".")[1]) ? (
+                        <video
+                          controls
+                          className="hc-collection__imageFit"
                           src={`${config.IMG_URL}/collection/${collectionData?._id}/${videoShow}`}
                         />
-                      </div>
-                    )}
+                      ) : (
+                        < img
+                          className="hc-collection__imageFit"
+                          src={`${config.IMG_URL}/collection/${collectionData?._id}/${videoShow}`}
+                        />
+                      )}
+                    </div>
                   </div>
                 </Modal.Body>
               </Modal>
@@ -602,14 +621,14 @@ function CollectionInfo() {
                 </Col>
                 {Loadmore && <button className="seconday_btn" onClick={() => getCollectionTokens()} >Loadmore</button>}
               </Row> */}
-            </Col>
-          </Row>
-        </Container>
+            </Col >
+          </Row >
+        </Container >
         <Footer />
-      </Container>
+      </Container >
 
       <div className="gradient_holder staking_gradholder"></div>
-      <div className="dualImg_bg"></div>
+      {/* <div className="dualImg_bg"></div> */}
     </>
   );
 }

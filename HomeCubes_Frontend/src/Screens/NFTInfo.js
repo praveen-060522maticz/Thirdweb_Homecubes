@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import BottomBar from "../Components/BottomBar";
 import Header from "../Components/Header";
 import SideTab from "../Components/SideTab";
@@ -39,6 +39,7 @@ import { FacebookShareButton, TwitterShareButton, TelegramShareButton, WhatsappS
 import TransferToken from "../Modals/TransferToken";
 import { useWallets } from "@privy-io/react-auth";
 import Prompt from "../Components/Prompt";
+import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 
 function NFTInfo() {
@@ -83,6 +84,7 @@ function NFTInfo() {
   const [bidArr, setBitArr] = useState([]);
   const [graph, setGraph] = useState(false);
   const [showTransfer, setShowTransfer] = useState(false)
+  const swiperRef = useRef(null);
 
   var datas1 = {
     series: [
@@ -409,7 +411,7 @@ function NFTInfo() {
     console.log('AFFAFAFAAFFAF---->', gasFee);
     const TStamp = Date.now()
     setCanReload(false)
-    let cont = await ContractCall.BidNFt_Contract(wallets[0],0, "cancelBidBySeller", Tokens_Detail.NFTId, Tokens_Detail.ContractAddress)
+    let cont = await ContractCall.BidNFt_Contract(wallets[0], 0, "cancelBidBySeller", Tokens_Detail.NFTId, Tokens_Detail.ContractAddress)
     // let cont = await getThirdweb.useContractCall("cancelBidBySeller", 0, 0, Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, gasFee?.collectAddress, "2500000000000000000")
     // let cont = await ContractCall.gasLessTransaction("cancelBidBySeller", 0, 0, wallets[0], Tokens_Detail.NFTId, Tokens_Detail.ContractAddress, TStamp, gasFee?.collectAddress, "2500000000000000000")
     setCanReload(true)
@@ -470,6 +472,17 @@ function NFTInfo() {
     }
   }
 
+  const goPrev = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slidePrev();
+    }
+  };
+  const goNext = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
+    }
+  };
+
   const navigate = useNavigate()
 
   return (
@@ -477,7 +490,7 @@ function NFTInfo() {
       <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />
       <BottomBar />
       <Header />
-      <Container fluid className="pt-3 home_wrapper">
+      <Container fluid className="pt-3 home_wrapper hc-section__inner">
         <Container className="custom_container">
           <Row>
             <Col lg={1} md={2} className="sidetab_holder">
@@ -485,7 +498,7 @@ function NFTInfo() {
               {console.log("datas1", datas1)}
             </Col>
             <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner">
-              <BreadPath />
+              {/* <BreadPath /> */}
               <Row>
                 <div className="cus-back-btn mb-3">
                   <Button className="" onClick={() => navigate(-1)} >
@@ -493,9 +506,9 @@ function NFTInfo() {
                     Back
                   </Button>
                 </div>
-                <Col lg={4} md={12} sm={12} xs={12}>
+                <Col lg={3} md={12} sm={12} xs={12}>
 
-                  <div className="nftInfo_topLeft">
+                  <div className="nftInfo_topLeft hc-info__left--image">
                     {!isEmpty(Tokens_Detail) &&
                       <ImgAudVideo
                         file={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Original/${Tokens_Detail?.NFTOrginalImage}`}
@@ -825,83 +838,87 @@ function NFTInfo() {
                     }
                   </div>
                 </Col>
-                <Col lg={8} md={12} sm={12} xs={12}>
-                  <h3 className="marketplae_topdata mt-4">
-                    {!isEmpty(InfoDetail)
-                      ? InfoDetail?.NFTName?.length > 15 ? <>{InfoDetail?.NFTName.slice(0, 15)}...</> : InfoDetail?.NFTName
-                      : Tokens_Detail?.NFTName?.length > 15 ? <>{Tokens_Detail?.NFTName.slice(0, 15)}...</> : Tokens_Detail?.NFTName}
-                  </h3>
+                <Col lg={9} md={12} sm={12} xs={12} className="mt-5 mt-lg-0">
+                  <div className="d-flex align-items-center gap-3">
 
-                  <div className="nftInfo_iconsHolder">
-                    <img onClick={() => setShareShow(!shareShow)}
-                      className="nftInfo_socials"
-                      src={require("../assets/images/share.svg").default}
-                    />
-                    {shareShow ?
+                    <h3 className="marketplae_topdata hc-info__name-title mb-0">
+                      {!isEmpty(InfoDetail)
+                        ? InfoDetail?.NFTName?.length > 15 ? <>{InfoDetail?.NFTName.slice(0, 15)}...</> : InfoDetail?.NFTName
+                        : Tokens_Detail?.NFTName?.length > 15 ? <>{Tokens_Detail?.NFTName.slice(0, 15)}...</> : Tokens_Detail?.NFTName}
+                    </h3>
 
-                      <div className="shareOptions_holder">
+                    <div className="nftInfo_iconsHolder">
+                      <img onClick={() => setShareShow(!shareShow)}
+                        className="nftInfo_socials"
+                        src={require("../assets/images/share.svg").default}
+                      />
+                      {shareShow ?
 
-                        <div className="nftinfo_imgsep"></div>
-                        <TelegramShareButton
-                          title={"Telegram"}
-                          url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+                        <div className="shareOptions_holder">
 
-                        >
+                          <div className="nftinfo_imgsep"></div>
+                          <TelegramShareButton
+                            title={"Telegram"}
+                            url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+
+                          >
+                            <img
+                              className="nftInfo_socials"
+                              src={
+                                require("../assets/images/whitetelegram.svg").default
+                              }
+                            />
+                          </TelegramShareButton>
+
+                          <TwitterShareButton
+                            url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+                            title="Twitter Share"
+                          >
+                            <img
+                              className="nftInfo_socials"
+                              src={require("../assets/images/whitetwitter.svg").default}
+                            />
+                          </TwitterShareButton>
+
                           <img
                             className="nftInfo_socials"
-                            src={
-                              require("../assets/images/whitetelegram.svg").default
-                            }
+                            src={require("../assets/images/whiteinsta.svg").default}
                           />
-                        </TelegramShareButton>
 
-                        <TwitterShareButton
-                          url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
-                          title="Twitter Share"
-                        >
+
                           <img
                             className="nftInfo_socials"
-                            src={require("../assets/images/whitetwitter.svg").default}
-                          />
-                        </TwitterShareButton>
-
-                        <img
-                          className="nftInfo_socials"
-                          src={require("../assets/images/whiteinsta.svg").default}
-                        />
-
-
-                        <img
-                          className="nftInfo_socials"
-                          src={require("../assets/images/whitediscard.svg").default}
-                        />
-
-                        <CopyToClipboard
-                          onCopy={() => toast.success("Content copied successfully")}
-                          text={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
-                        >
-                          <img
-                            className="nftInfo_socials"
-                            src={require("../assets/images/whitecopy.svg").default}
-                          />
-                        </CopyToClipboard>
-
-                        <WhatsappShareButton
-                          title={'Whatsapp'}
-                          url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
-                        >
-                          <img
-                            className="nftInfo_socials"
-                            src={
-                              require("../assets/images/whitewhatsapp.svg").default
-                            }
+                            src={require("../assets/images/whitediscard.svg").default}
                           />
 
-                        </WhatsappShareButton>
-                      </div> :
-                      <></>}
+                          <CopyToClipboard
+                            onCopy={() => toast.success("Content copied successfully")}
+                            text={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+                          >
+                            <img
+                              className="nftInfo_socials"
+                              src={require("../assets/images/whitecopy.svg").default}
+                            />
+                          </CopyToClipboard>
 
+                          <WhatsappShareButton
+                            title={'Whatsapp'}
+                            url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+                          >
+                            <img
+                              className="nftInfo_socials"
+                              src={
+                                require("../assets/images/whitewhatsapp.svg").default
+                              }
+                            />
+
+                          </WhatsappShareButton>
+                        </div> :
+                        <></>}
+
+                    </div>
                   </div>
+
                   {console.log("asgfsefasfs", Tokens[TabName]?.owner?.CustomUrl)}
                   <p className="nftcard_ownedby mt-3">
                     Owned by :{" "}
@@ -972,15 +989,15 @@ function NFTInfo() {
 
                     <div className="nftInfo_greenBar">
                       <div className="greenBar_left">
-                        <img
+                        {/* <img
                           className="greenClock"
                           src={require("../assets/images/clock.svg").default}
-                        />
+                        />   */}
                         <p className="greenBar_time">
                           {new Date(Tokens["All"]?.owner?.EndClockTime) > Date.now() ? `Sale ends ${new Date(Tokens["All"]?.owner?.EndClockTime).toString()}` : "Auction Ended"}
                         </p>
                       </div>
-                      <div className="greenBar_countdown">
+                      <div className="greenBar_countdown mt-3">
                         {new Date(
                           Tokens["All"]?.owner?.EndClockTime
                         ) > Date.now() && (
@@ -995,7 +1012,7 @@ function NFTInfo() {
                     </div>}
 
 
-                  <div className="nftInfo_curPrice">
+                  <div className="nftInfo_curPrice mt-3">
                     {Tokens[TabName]?.owner?.PutOnSaleType === "FixedPrice" &&
                       // <p className="created">
                       <>
@@ -1134,6 +1151,12 @@ function NFTInfo() {
 
 
 
+
+                </Col>
+              </Row>
+
+              <Row>
+                <Col xs={12}>
                   <Accordion
                     defaultActiveKey="0"
                     className="mt-5 nftInfo_accordion"
@@ -1172,9 +1195,9 @@ function NFTInfo() {
                   <h6 className="nftInfo_descTitle">Description</h6>
 
                   {description ? (
-                    <p className="mp_detailbrief">{isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription}</p>
+                    <p className="mp_detailbrief hc-home__desc">{isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription}</p>
                   ) : (
-                    <p className="mp_detailbrief">
+                    <p className="mp_detailbrief hc-home__desc">
                       {(isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)?.length > 300 ?
                         (isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)?.slice(0, 300)?.concat("...") :
                         (isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)}
@@ -1187,11 +1210,6 @@ function NFTInfo() {
                   >
                     {(isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)?.length > 300 ? description ? "Read Less" : "Read More" : ""}
                   </button>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col xs={12}>
                   <Accordion
                     defaultActiveKey="0"
                     className="mt-5 nftInfo_accordion"
@@ -1199,7 +1217,7 @@ function NFTInfo() {
                   >
                     <Accordion.Item eventKey="0">
                       <Accordion.Header>
-                        Price History <i class="fa-solid fa-angle-down" />
+                        <h6 className="nftInfo_descTitle">Price History</h6><i class="fa-solid fa-angle-down" />
                       </Accordion.Header>
                       <Accordion.Body>
                         <div className="nftInfo_acrdTabs pb-3">
@@ -1494,60 +1512,81 @@ function NFTInfo() {
                   </Accordion>
                 </Col>
               </Row>
-              <Row className="mt-5">
-                <h3 className="marketplae_topdata">
+              <Row className="mt-3">
+                <h3 className="nftInfo_descTitle">
                   More From this Collection
                 </h3>
+                <div className="hc-mint__swiper-wrap">
 
-                <Swiper
-                  className="mySwiper bottomnav_colswiper nftcard_swiper pt-3"
-                  spaceBetween={30}
-                  navigation={true}
-                  keyboard={true}
-                  pagination={{
-                    clickable: true,
-                  }}
-                  breakpoints={{
-                    320: {
-                      slidesPerView: 1.2,
-                      spaceBetween: 20,
-                    },
-                    450: {
-                      slidesPerView: 2,
-                      spaceBetween: 20,
-                    },
-                    576: {
-                      slidesPerView: 2.3,
-                      spaceBetween: 20,
-                    },
-                    768: {
-                      slidesPerView: 3,
-                      spaceBetween: 20,
-                    },
-                    992: {
-                      slidesPerView: 3,
-                      spaceBetween: 20,
-                    },
-                    1200: {
-                      slidesPerView: 4,
-                      spaceBetween: 20,
-                    },
-                    1500: {
-                      slidesPerView: 5,
-                      spaceBetween: 20,
-                    },
-                  }}
-                  modules={[Navigation, Keyboard]}
-                >
-                  {nftcardData?.map((i) => (
-                    <SwiperSlide onClick={() => { setInc(!inc) }}>
-                      <DataCard data={i} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-                <div className="greenarrow_boxHolder position-relative">
-                  <div className="greenarrow_box"></div>
+                  <button
+                    className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
+                    onClick={() => goPrev()}
+                  >
+                    <FaChevronLeft fill="#fff" fontSize={22} className="me-2" />
+                  </button>
+
+
+                  <button
+                    className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
+                    onClick={() => goNext()}
+                  >
+
+                    <FaChevronRight fill="#fff" fontSize={22} className="ms-2" />
+                  </button>
+                  <Swiper
+                    className="mySwiper bottomnav_colswiper nftcard_swiper pt-3"
+                    spaceBetween={30}
+                    navigation={{
+                      nextEl: ".swiper-button-next1",
+                      prevEl: ".swiper-button-prev1",
+                    }}
+                    keyboard={true}
+                    ref={swiperRef}
+                    pagination={{
+                      clickable: true,
+                    }}
+                    breakpoints={{
+                      320: {
+                        slidesPerView: 1.2,
+                        spaceBetween: 20,
+                      },
+                      450: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                      },
+                      576: {
+                        slidesPerView: 2.3,
+                        spaceBetween: 20,
+                      },
+                      768: {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                      },
+                      992: {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                      },
+                      1200: {
+                        slidesPerView: 4,
+                        spaceBetween: 20,
+                      },
+                      1500: {
+                        slidesPerView: 4,
+                        spaceBetween: 20,
+                      },
+                    }}
+                    modules={[Navigation, Keyboard]}
+                  >
+                    {nftcardData?.map((i) => (
+                      <SwiperSlide onClick={() => { setInc(!inc) }}>
+                        <DataCard data={i} />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
                 </div>
+                {/* <div className="greenarrow_boxHolder position-relative">
+                  <div className="greenarrow_box"></div>
+                </div> */}
               </Row>
             </Col>
           </Row>
@@ -1745,7 +1784,7 @@ function NFTInfo() {
 
       {showTransfer &&
         <TransferToken
-          show={showTransfer}
+          show={true}
           handleClose={() => setShowTransfer(false)}
           item={{
             NFTId: Tokens_Detail.NFTId,
@@ -1760,7 +1799,8 @@ function NFTInfo() {
             chainType: Tokens_Detail?.ChainId
           }}
           Tokens_Detail={Tokens_Detail}
-        />}
+        />
+      }
 
       <Calendar show={showCalendar}
         setDate={(value) => {

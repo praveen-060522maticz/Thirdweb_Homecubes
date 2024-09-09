@@ -2,7 +2,7 @@
 // import ERC1155 from '../../src/Abi/erc1155.json'
 // import TRADE from '../../src/Abi/market.json'
 // import profile from '../../assets/images/avatar.png'
-var EnvName = 'production';
+var EnvName = 'demo';
 var key = {};
 key.ONEDAYINSECONDS = 0
 key.env = EnvName

@@ -3,8 +3,8 @@ import Lottie from "react-lottie";
 import axios from "axios";
 import { imgFormats, videoFileFormats } from "../lib/common";
 
-const ImageComp = ({ url, className,style }) => {
-console.log(' url, className,style---->', url, className,style);
+const ImageComp = ({ url, className, style }) => {
+    console.log(' url, className,style---->', url, className, style);
     const [lottieData, setLottieData] = useState(null);
     // useEffect(() => {
     //     axios.get(url)
@@ -21,7 +21,7 @@ console.log(' url, className,style---->', url, className,style);
     const defaultOptions = {
         loop: true,
         autoplay: true,
-        animationData:  url,
+        animationData: url,
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
@@ -38,14 +38,14 @@ console.log(' url, className,style---->', url, className,style);
                             options={defaultOptions}
                             style={style}
                             className={className}
-                            
+
                         />
                     ) : (
                         <div>Loading Lottie animation...</div>
                     ))
                     :
                     videoFileFormats.includes(getFormat) ?
-                        <video className={className} style={style}/>
+                        <video className={className} style={style} />
                         :
                         imgFormats.includes(getFormat) ?
                             <img className={className} src={url} style={style} />

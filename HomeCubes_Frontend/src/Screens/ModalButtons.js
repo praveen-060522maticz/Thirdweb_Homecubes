@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import PlaceaBid from '../Modals/PlaceaBid'
 import ChangePrice from '../Modals/ChangePrice';
 import PutonSale from '../Modals/PutonSale';
@@ -15,98 +15,98 @@ import CancelBid from '../Modals/CancelBid';
 
 function ModalButtons() {
 
-    const [showBid, setShowBid] = useState(false);
+  const [showBid, setShowBid] = useState(false);
 
-    const handleCloseBid = () => setShowBid(false);
-    const handleShowBid = () => setShowBid(true);
+  const handleCloseBid = () => setShowBid(false);
+  const handleShowBid = () => setShowBid(true);
 
-    // changeprice state
+  // changeprice state
 
-    const [showChangePrice, setShowChangePrice] = useState(false);
+  const [showChangePrice, setShowChangePrice] = useState(false);
 
-    const handleCloseChangePrice = () => setShowChangePrice(false);
-    const handleShowChangePrice = () => setShowChangePrice(true);
+  const handleCloseChangePrice = () => setShowChangePrice(false);
+  const handleShowChangePrice = () => setShowChangePrice(true);
 
-    // putonsale state
+  // putonsale state
 
-    const [showPutSale, setShowPutSale] = useState(false);
+  const [showPutSale, setShowPutSale] = useState(false);
 
-    const handleClosePutSale = () => setShowPutSale(false);
-    const handleShowPutSale = () => setShowPutSale(true);
+  const handleClosePutSale = () => setShowPutSale(false);
+  const handleShowPutSale = () => setShowPutSale(true);
 
-    // transfer token state
+  // transfer token state
 
-    const [showTransfer, setShowTransfer] = useState(false);
+  const [showTransfer, setShowTransfer] = useState(false);
 
-    const handleCloseTransfer = () => setShowTransfer(false);
-    const handleShowTransfer = () => setShowTransfer(true);
+  const handleCloseTransfer = () => setShowTransfer(false);
+  const handleShowTransfer = () => setShowTransfer(true);
 
-    // delete instant sale state
+  // delete instant sale state
 
-    const [showDelete, setShowDelete] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
 
-    const handleCloseDelete = () => setShowDelete(false);
-    const handleShowDelete = () => setShowDelete(true);
+  const handleCloseDelete = () => setShowDelete(false);
+  const handleShowDelete = () => setShowDelete(true);
 
-    // burn token state
+  // burn token state
 
-    const [showBurn, setShowBurn] = useState(false);
+  const [showBurn, setShowBurn] = useState(false);
 
-    const handleCloseBurn = () => setShowBurn(false);
-    const handleShowBurn = () => setShowBurn(true);
+  const handleCloseBurn = () => setShowBurn(false);
+  const handleShowBurn = () => setShowBurn(true);
 
-    // burn token state
+  // burn token state
 
-    const [showCheckout, setShowCheckout] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
 
-    const handleCloseCheckout = () => setShowCheckout(false);
-    const handleShowCheckout = () => setShowCheckout(true);
+  const handleCloseCheckout = () => setShowCheckout(false);
+  const handleShowCheckout = () => setShowCheckout(true);
 
-    // mint state
+  // mint state
 
-    const [showMint, setShowMint] = useState(false);
+  const [showMint, setShowMint] = useState(false);
 
-    const handleCloseMint = () => setShowMint(false);
-    const handleShowMint = () => setShowMint(true);
+  const handleCloseMint = () => setShowMint(false);
+  const handleShowMint = () => setShowMint(true);
 
-     // purchase state
+  // purchase state
 
-     const [showPurchase, setShowPurchase] = useState(false);
+  const [showPurchase, setShowPurchase] = useState(false);
 
-     const handleClosePurchase = () => setShowPurchase(false);
-     const handleShowPurchase = () => setShowPurchase(true);
+  const handleClosePurchase = () => setShowPurchase(false);
+  const handleShowPurchase = () => setShowPurchase(true);
 
-     // calendar state
+  // calendar state
 
-     const [showCalendar, setShowCalendar] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
 
-     const handleCloseCalendar = () => setShowCalendar(false);
-     const handleShowCalendar = () => setShowCalendar(true);
+  const handleCloseCalendar = () => setShowCalendar(false);
+  const handleShowCalendar = () => setShowCalendar(true);
 
-      // cancelorder state
+  // cancelorder state
 
-      const [showCancel, setShowCancel] = useState(false);
+  const [showCancel, setShowCancel] = useState(false);
 
-      const handleCloseCancel = () => setShowCancel(false);
-      const handleShowCancel = () => setShowCancel(true);
+  const handleCloseCancel = () => setShowCancel(false);
+  const handleShowCancel = () => setShowCancel(true);
 
-      // cancelbid state
+  // cancelbid state
 
-      const [showCancelBid, setShowCancelBid] = useState(false);
+  const [showCancelBid, setShowCancelBid] = useState(false);
 
-      const handleCloseCancelBid = () => setShowCancelBid(false);
-      const handleShowCancelBid = () => setShowCancelBid(true);
+  const handleCloseCancelBid = () => setShowCancelBid(false);
+  const handleShowCancelBid = () => setShowCancelBid(true);
 
-      // acceptbid state
+  // acceptbid state
 
-      const [showAcceptBid, setShowAcceptBid] = useState(false);
+  const [showAcceptBid, setShowAcceptBid] = useState(false);
 
-      const handleCloseAcceptBid = () => setShowAcceptBid(false);
-      const handleShowAcceptBid = () => setShowAcceptBid(true);
+  const handleCloseAcceptBid = () => setShowAcceptBid(false);
+  const handleShowAcceptBid = () => setShowAcceptBid(true);
 
   return (
     <>
-    <div className='d-flex'>
+      <div className='d-flex'>
         <button onClick={() => handleShowBid()}>place a bid</button>
         <button onClick={() => handleShowChangePrice()}>Change price</button>
         <button onClick={() => handleShowPutSale()}>Put on Sale</button>
@@ -120,23 +120,23 @@ function ModalButtons() {
         <button onClick={() => handleShowCancel()}>Cancel Order</button>
         <button onClick={() => handleShowAcceptBid()}>Accept Bid</button>
         <button onClick={() => handleShowCancelBid()}>Cancel Bid</button>
-        
-        </div>
 
-        <PlaceaBid showBid={showBid} handleCloseBid={handleCloseBid}/>
-        <ChangePrice show={showChangePrice} handleClose={handleCloseChangePrice}/>
-        <PutonSale show={showPutSale} handleClose={handleClosePutSale}/>
-        <TransferToken show={showTransfer} handleClose={handleCloseTransfer}/>
-        <DeleteInstantSale show={showDelete} handleClose={handleCloseDelete}/>
-        <BurnToken show={showBurn} handleClose={handleCloseBurn}/>
-        <CheckOut show={showCheckout} handleClose={handleCloseCheckout}/>
-        <Mint show={showMint} handleClose={handleCloseMint}/>
-        <Purchase show={showPurchase} handleClose={handleClosePurchase}/>
-        <Calendar show={showCalendar} handleClose={handleCloseCalendar}/>
-        <CancelOrder show={showCancel} handleClose={handleCloseCancel}/>
-        <AcceptBid show={showAcceptBid} handleClose={handleCloseAcceptBid}/>
-        <CancelBid show={showCancelBid} handleClose={handleCloseCancelBid}/>
-        </>
+      </div>
+
+      <PlaceaBid showBid={showBid} handleCloseBid={handleCloseBid} />
+      <ChangePrice show={showChangePrice} handleClose={handleCloseChangePrice} />
+      <PutonSale show={showPutSale} handleClose={handleClosePutSale} />
+      <TransferToken show={showTransfer} handleClose={handleCloseTransfer} />
+      <DeleteInstantSale show={showDelete} handleClose={handleCloseDelete} />
+      <BurnToken show={showBurn} handleClose={handleCloseBurn} />
+      <CheckOut show={showCheckout} handleClose={handleCloseCheckout} />
+      <Mint show={showMint} handleClose={handleCloseMint} />
+      <Purchase show={showPurchase} handleClose={handleClosePurchase} />
+      <Calendar show={showCalendar} handleClose={handleCloseCalendar} />
+      <CancelOrder show={showCancel} handleClose={handleCloseCancel} />
+      <AcceptBid show={showAcceptBid} handleClose={handleCloseAcceptBid} />
+      <CancelBid show={showCancelBid} handleClose={handleCloseCancelBid} />
+    </>
   )
 }
 

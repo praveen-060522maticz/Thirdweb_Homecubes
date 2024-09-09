@@ -353,8 +353,8 @@ function Header() {
     <>
       <Container fluid className="whole_header">
         <Container className="custom_container">
-          <Row className="header_row">
-            <Col lg={2} md={3} sm={4} xs={4} xl={2} xxl={2} className="d-flex justify-content-start align-items-center">
+          <div className="d-flex align-items-center justify-content-between">
+            <div className="hc-header__left">
               <NavLink to="/">
                 <img
                   className="img-fluid mainLogo"
@@ -367,8 +367,9 @@ function Header() {
                   src={require("../assets/images/logomob.svg").default}
                 />
               </NavLink>
-            </Col>
-            <Col xxl={7} xl={7} lg={7} sm={0} className="header_links">
+            </div>
+
+            <div className="hc-header__right d-flex align-items-center gap-2">
               <div className="header_navs">
                 <ul>
                   {/* <NavLink className="sidetab_link" to="/howitworks">
@@ -479,6 +480,345 @@ function Header() {
                     </NavLink> */}
                 </ul>
               </div>
+              <div className="d-flex align-items-center">
+                {wallet && wallet?.accountAddress && <div className="position-relative custom_user_token_detail mbl_view_user_hvr me-2">
+                  {/* <span className="user_hvr_btn primary_blueBtn ms-2">
+                  <i class="fa-solid fa-user"></i>
+                </span> */}
+
+                  <NavLink
+                    className="user_hvr_btn primary_blueBtn ms-2"
+                    to={`/profile/${wallet.accountAddress}`}
+                  >
+                    <span >
+                      {payload?.Profile != "" ?
+                        <img
+                          className='img-fluid prof_img_header'
+                          // style={{maxHeight:"100%",maxWidth:"100%"}}
+                          src={`${config?.IMG_URL}/user/${payload?.WalletAddress}/profile/${payload?.Profile}`}
+                        />
+                        :
+                        <i class="fa-solid fa-user mt-1"></i>}
+                    </span>
+                  </NavLink>
+
+                  <div className="user_hidden_cnt">
+                    <div className="mb-2 d-flex align-items-center justify-content-between">
+                      <p className="bal mb-0">Balances</p>
+                      <NavLink
+                        className="sidetab_link"
+                        to={`/profile/${wallet.accountAddress}`}
+                      >
+                        <li
+                          className={
+                            active == "contact"
+                              ? "active header_link"
+                              : "header_link"
+                          }
+                          onClick={() => setActive("profile")}
+                        >
+                          My Profile
+                        </li>
+                      </NavLink>
+                    </div>
+                    {/* <p className="id mb-1">{parseFloat(wallet?.coinBalance).toFixed(5)} BNB</p> */}
+                    {currency?.length != 0 && currency.map((val) => {
+                      return (
+                        <p className="id mb-1">{val?.balance} {val?.value}</p>
+                      )
+                    })}
+                    <p className="metamask mb-1">MetaMask</p>
+                    <div className="token mb-1 d-flex align-items-center justify-content-between">
+                      <span>{address_showing(wallet?.accountAddress)}</span>
+                      <CopyToClipboard
+                        onCopy={() => toast.success("Address copied successfully")}
+                        text={`${wallet?.accountAddress}`}
+                      >
+                        <i class="fa-regular fa-copy"></i>
+
+                      </CopyToClipboard>
+                    </div>
+                    <hr className="mt-2 mb-0" />
+                  </div>
+                </div>}
+
+                <div className="header__thirdParty">
+                  {/* {authenticated ? ( */}
+                  {wallet && wallet?.accountAddress && authenticated ? (
+                    <button
+                      className="header_gradientBtn"
+                      onClick={() => walletDisconnect()}
+                    >
+                      <i class="fa-solid fa-right-from-bracket me-2"></i>
+                      Disconnect
+                      <Lottie
+                        animationData={wallety}
+                        className="header_walletLottie"
+                        loop={true}
+                      />
+                    </button>
+                  ) : (
+                    <button
+                      className="header_gradientBtn"
+                      onClick={() => {
+                        if (ready && authenticated && !isWalletConnected && connectedwalet) {
+                          // wallets[0].linked
+                          initialConnectWallet("privyWallet");
+                          CurrencyList();
+                          return setReconnect(false)
+                        }
+                        else if (ready && authenticated && !isWalletConnected && isEmpty(connectedwalet)) logout();
+                        else login();
+                      }}
+                    >
+                      <img
+                        className="header_wallet"
+                        src={require("../assets/images/wallet.svg").default}
+                      />
+                      Connect-Wallet
+                      <Lottie
+                        animationData={wallety}
+                        className="header_walletLottie"
+                        loop={true}
+                      />
+                    </button>
+                  )}
+                </div>
+                {/* <Lottie animationData={wallety} className="header_simmer" loop={true}/> */}
+
+                {wallet && wallet?.accountAddress && authenticated ? (
+                  <div className="burger_head">
+                    {/* <div className="wallet_only active header_link" onClick={() => walletDisconnect()} >Disconnect</div> */}
+                    <button
+                      className="wallet_only disconnect_ic me-2"
+                      onClick={() => walletDisconnect()}
+                    >
+                      <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                    {/* <img
+                    onClick={() => handleShowWallet()}
+                    className="header_wallet wallet_only"
+                    src={require("../assets/images/wallet.svg").default}
+                  /> */}
+                    <img
+                      className="header_burger"
+                      onClick={handleShow}
+                      src={require("../assets/images/hamburger.svg").default}
+                    />
+                  </div>
+                ) : (
+                  <div className="burger_head">
+                    <img
+                      onClick={() => {
+                        if (ready && authenticated && !isWalletConnected && connectedwalet) {
+                          // wallets[0].linked
+                          initialConnectWallet("privyWallet");
+                          CurrencyList();
+                          return setReconnect(false)
+                        }
+                        else if (ready && authenticated && !isWalletConnected && isEmpty(connectedwalet)) logout();
+                        else login();
+                      }}
+                      className="header_wallet wallet_only"
+                      src={require("../assets/images/wallet.svg").default}
+                    />
+                    <img
+                      className="header_burger"
+                      onClick={handleShow}
+                      src={require("../assets/images/hamburger.svg").default}
+                    />
+                  </div>
+                )}
+
+                {wallet && wallet?.accountAddress && <div className="position-relative custom_user_token_detail web_view_user_hvr">
+                  <NavLink
+                    className="user_hvr_btn primary_blueBtn ms-2"
+                    to={`/profile/${wallet.accountAddress}`}
+                  >
+
+                    {payload?.Profile != "" ?
+                      <img
+                        className='img-fluid'
+                        src={`${config?.IMG_URL}/user/${payload?.WalletAddress}/profile/${payload?.Profile}`}
+                      />
+                      :
+                      <span >
+                        <i class="fa-solid fa-user"></i>
+                      </span>
+                    }
+
+                  </NavLink>
+
+                  <div className="user_hidden_cnt">
+                    <div className="mb-2 d-flex align-items-center justify-content-between">
+                      <p className="bal mb-0">Balances</p>
+                      <NavLink
+                        className="sidetab_link"
+                        to={`/profile/${wallet.accountAddress}`}
+                      >
+                        <li
+                          className={
+                            active == "contact"
+                              ? "active header_link"
+                              : "header_link"
+                          }
+                          onClick={() => setActive("profile")}
+                        >
+                          My Profile
+                        </li>
+                      </NavLink>
+                    </div>
+                    {/* <p className="id mb-1">{parseFloat(wallet?.coinBalance).toFixed(5)} BNB</p> */}
+                    <div className="header_balanceScroller">
+                      {currency?.length != 0 && currency.map((val) => {
+                        return (
+                          <p className="id mb-1">{val?.balance} {val?.value}</p>
+                        )
+                      })}
+                    </div>
+                    <p className="metamask mb-1">MetaMask</p>
+                    <div className="token mb-1 d-flex align-items-center justify-content-between">
+                      <span>{address_showing(wallet?.accountAddress)}</span>
+                      <CopyToClipboard
+                        onCopy={() => toast.success("Address copied successfully")}
+                        text={`${wallet?.accountAddress}`}
+                      >
+                        <i class="fa-regular fa-copy"></i>
+
+                      </CopyToClipboard>
+                    </div>
+                    <hr className="mt-3  mb-0" />
+                  </div>
+                </div>}
+              </div>
+            </div>
+          </div>
+          {/* <Row className="header_row">
+            <Col lg={2} md={3} sm={4} xs={4} xl={2} xxl={2} className="d-flex justify-content-start align-items-center">
+              <NavLink to="/">
+                <img
+                  className="img-fluid mainLogo"
+                  src={require("../assets/images/logo.svg").default}
+                />
+              </NavLink>
+              <NavLink to="/">
+                <img
+                  className="img-fluid logoMob"
+                  src={require("../assets/images/logomob.svg").default}
+                />
+              </NavLink>
+            </Col>
+            <Col xxl={7} xl={7} lg={7} sm={0} className="header_links">
+              <div className="header_navs">
+                <ul>
+                  <NavLink className="sidetab_link" to="/howitworks">
+                    <li
+                      className={
+                        active == "works" ? "active header_link" : "header_link"
+                      }
+                      onClick={() => setActive("works")}
+                    >
+                      How it works{" "}
+                    </li>
+                  </NavLink>
+                  <NavLink className="sidetab_link" to="/roadmap">
+                    <li
+                      className={
+                        active == "roadmap"
+                          ? "active header_link"
+                          : "header_link"
+                      }
+                      onClick={() => setActive("roadmap")}
+                    >
+                      Roadmap
+                    </li>
+                  </NavLink>
+                  <NavLink className="sidetab_link" to="/about">
+                    <li
+                      className={
+                        active == "about" ? "active header_link" : "header_link"
+                      }
+                      onClick={() => setActive("about")}
+                    >
+                      About & Team
+                    </li>
+                  </NavLink>
+                  <NavLink className="sidetab_link" to="/projects">
+                    <li
+                      className={
+                        active == "projects"
+                          ? "active header_link"
+                          : "header_link"
+                      }
+                      onClick={() => setActive("projects")}
+                    >
+                      Projects
+                    </li>
+                  </NavLink>
+                  <NavLink className="sidetab_link" to="/blogs">
+                    <li
+                      className={
+                        active == "news" ? "active header_link" : "header_link"
+                      }
+                      onClick={() => setActive("news")}
+                    >
+                      Blog
+                    </li>
+                  </NavLink>
+                  <a className="sidetab_link" href="https://homecubes.io/" target="_blank" >
+                    <li
+                      className={
+                        active == "contact"
+                          ? "active header_link"
+                          : "header_link"
+                      }
+                    >
+                      Website
+                    </li>
+                  </a>
+                  <NavLink className="sidetab_link" to="/contact">
+                    <li
+                      className={
+                        active == "contact"
+                          ? "active header_link"
+                          : "header_link"
+                      }
+                      onClick={() => setActive("contact")}
+                    >
+                      Contact
+                    </li>
+                  </NavLink>
+
+                  {wallet && wallet?.accountAddress && (
+                    <NavLink
+                      className="sidetab_link"
+                      to={`/profile/${wallet.accountAddress}`}
+                    >
+                      <li
+                        className={
+                          active == "contact"
+                            ? "active header_link"
+                            : "header_link"
+                        }
+                        onClick={() => setActive("profile")}
+                      >
+                        Profile
+                      </li>
+                    </NavLink>
+                  )}
+                  <li className={active == "whitepaper" ? "active header_link" : "header_link"}
+                    onClick={() => setActive("whitepaper")}>Whitepaper</li>
+
+                  <NavLink className="sidetab_link" to='/'>
+                    <li className={active == "buysell" ? "active header_link" : "header_link"}
+                      onClick={() => setActive("buysell")}>How-to-buy/sell </li>
+                  </NavLink>
+                  <NavLink className="sidetab_link" to='/'>
+                    <li className={active == "news" ? "active header_link" : "header_link"}
+                      onClick={() => setActive("news")}>News</li>
+                  </NavLink>
+                </ul>
+              </div>
             </Col>
             <Col
               xl={3}
@@ -490,9 +830,9 @@ function Header() {
               className="d-flex justify-content-end align-items-center"
             >
               {wallet && wallet?.accountAddress && <div className="position-relative custom_user_token_detail mbl_view_user_hvr me-2">
-                {/* <span className="user_hvr_btn primary_blueBtn ms-2">
+                <span className="user_hvr_btn primary_blueBtn ms-2">
                   <i class="fa-solid fa-user"></i>
-                </span> */}
+                </span>
 
                 <NavLink
                   className="user_hvr_btn primary_blueBtn ms-2"
@@ -502,7 +842,7 @@ function Header() {
                     {payload?.Profile != "" ?
                       <img
                         className='img-fluid prof_img_header'
-                        // style={{maxHeight:"100%",maxWidth:"100%"}}
+                        style={{ maxHeight: "100%", maxWidth: "100%" }}
                         src={`${config?.IMG_URL}/user/${payload?.WalletAddress}/profile/${payload?.Profile}`}
                       />
                       :
@@ -529,7 +869,7 @@ function Header() {
                       </li>
                     </NavLink>
                   </div>
-                  {/* <p className="id mb-1">{parseFloat(wallet?.coinBalance).toFixed(5)} BNB</p> */}
+                  <p className="id mb-1">{parseFloat(wallet?.coinBalance).toFixed(5)} BNB</p>
                   {currency?.length != 0 && currency.map((val) => {
                     return (
                       <p className="id mb-1">{val?.balance} {val?.value}</p>
@@ -551,7 +891,7 @@ function Header() {
               </div>}
 
               <div className="header__thirdParty">
-                {/* {authenticated ? ( */}
+
                 {wallet && wallet?.accountAddress && authenticated ? (
                   <button
                     className="header_gradientBtn"
@@ -570,7 +910,7 @@ function Header() {
                     className="header_gradientBtn"
                     onClick={() => {
                       if (ready && authenticated && !isWalletConnected && connectedwalet) {
-                        // wallets[0].linked
+                        wallets[0].linked
                         initialConnectWallet("privyWallet");
                         CurrencyList();
                         return setReconnect(false)
@@ -592,22 +932,22 @@ function Header() {
                   </button>
                 )}
               </div>
-              {/* <Lottie animationData={wallety} className="header_simmer" loop={true}/> */}
+              <Lottie animationData={wallety} className="header_simmer" loop={true} />
 
               {wallet && wallet?.accountAddress && authenticated ? (
                 <div className="burger_head">
-                  {/* <div className="wallet_only active header_link" onClick={() => walletDisconnect()} >Disconnect</div> */}
+                  <div className="wallet_only active header_link" onClick={() => walletDisconnect()} >Disconnect</div>
                   <button
                     className="wallet_only disconnect_ic me-2"
                     onClick={() => walletDisconnect()}
                   >
                     <i class="fa-solid fa-right-from-bracket"></i>
                   </button>
-                  {/* <img
+                  <img
                     onClick={() => handleShowWallet()}
                     className="header_wallet wallet_only"
                     src={require("../assets/images/wallet.svg").default}
-                  /> */}
+                  />
                   <img
                     className="header_burger"
                     onClick={handleShow}
@@ -619,7 +959,7 @@ function Header() {
                   <img
                     onClick={() => {
                       if (ready && authenticated && !isWalletConnected && connectedwalet) {
-                        // wallets[0].linked
+                        wallets[0].linked
                         initialConnectWallet("privyWallet");
                         CurrencyList();
                         return setReconnect(false)
@@ -676,7 +1016,7 @@ function Header() {
                       </li>
                     </NavLink>
                   </div>
-                  {/* <p className="id mb-1">{parseFloat(wallet?.coinBalance).toFixed(5)} BNB</p> */}
+                  <p className="id mb-1">{parseFloat(wallet?.coinBalance).toFixed(5)} BNB</p>
                   <div className="header_balanceScroller">
                     {currency?.length != 0 && currency.map((val) => {
                       return (
@@ -699,7 +1039,7 @@ function Header() {
                 </div>
               </div>}
             </Col>
-          </Row>
+          </Row> */}
         </Container>
       </Container>
 

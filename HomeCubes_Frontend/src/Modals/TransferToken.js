@@ -26,7 +26,7 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
   const { accountAddress, web3 } = useSelector(state => state.LoginReducer.AccountDetails);
   const { payload, isAdmin } = useSelector((state) => state.LoginReducer.User);
   const { gasFee } = useSelector((state) => state.LoginReducer.User);
-  const {wallets} = useWallets();
+  const { wallets } = useWallets();
 
   const FormSubmit = async () => {
 
@@ -184,13 +184,12 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
         backdrop="static"
         keyboard={false}
         centered
-        className='common_modal'
+        className='common_modal hc-modal'
       >
         <Modal.Body>
           <div className='modal_top'>
             <p className='modal_title text-center'>Transfer Token</p>
             <img src={require('../assets/images/close.svg').default} onClick={() => handleClose()} className='modal_closer' />
-
           </div>
 
           <div className='modal_body mt-3'>
@@ -213,13 +212,13 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
                 onChange={(e) => { SetAddress((e.target.value).toLowerCase()) }}
                 autoComplete="off"
                 disabled={disablestate}
-                className='modal_singleinput mt-3 cmnInput_scrollerHider'
+                className='modal_singleinput mt-2 cmnInput_scrollerHider'
                 placeholder='Enter wallet address' />
             </div>
 
 
             <button
-              className='bodygradientBtn modal_grdientBtn mt-4'
+              className='nftinfo_gradeientBtn web_listitem_btn mt-3'
               disabled={Btn == 'error' || Btn === "process" || Btn === "done" ? true : false}
               onClick={Btn == 'start' || Btn === "try" ? FormSubmit : null}
             >
@@ -230,7 +229,7 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
                 || Btn == 'process' && 'In-Progress'
               }
             </button>
-            <button className='additional_btn modal_additionalBtn mt-3' onClick={() => handleClose()}>Cancel</button>
+            <button className='hc-button__gray mt-3' onClick={() => handleClose()}>Cancel</button>
 
           </div>
         </Modal.Body>

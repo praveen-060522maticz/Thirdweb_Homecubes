@@ -100,14 +100,14 @@ function Roadmap(props) {
         // </>
 
         <>
-            <Row className=''>
+            {/* <Row className='hc-roadmap'>
 
                 {props?.data?.length != 0 && props?.data?.map((val, i) => {
                     console.log("lastststindwex", props?.data?.length - 1);
                     const lastIndex = props?.data?.length - 1
                     return (
                         <>
-                            {i == 0 && <Col lg={4} xs={4} className='d-flex justify-content-center align-items-center'>
+                            {i == 0 && <Col lg={5} xs={4} className='d-flex justify-content-center align-items-center'>
                                 <div className='home_roadmapSingle'>
                                     <h1 className='roadmap_strokeText'>{i + 1}</h1>
                                     <div className=''>
@@ -116,14 +116,16 @@ function Roadmap(props) {
                                     </div>
                                 </div>
                             </Col>}
-                            {i == 0 && <Col lg={4} xs={4}>
+                            {i == 0 && <Col lg={2} xs={4}>
                                 <img className='img-fluid roadmap_firstimg' src={require('../assets/images/roadmapfirst.svg').default} />
                             </Col>}
-                            {i == 0 && <Col lg={4} xs={4} className='d-flex justify-content-center align-items-center'>
+                            {i == 0 && <Col lg={5} xs={4} className='d-flex justify-content-center align-items-center'>
                                 {val.stepImage ?
                                     <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/projects/steps/${val.stepImage}`} /> :
                                     <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/cmsimg/${val.img}`} />}
                             </Col>}
+
+
 
                             {(i != 0) && (i % 2 != 0) && <Col lg={4} xs={4} className='d-flex justify-content-center align-items-center'>
                                 {val?.stepImage ?
@@ -140,6 +142,9 @@ function Roadmap(props) {
                                 <img className='img-fluid roadmap_lastimg' src={require('../assets/images/roadmaplastleft.svg').default} />
                             </Col>}
 
+
+
+
                             {(i != 0) && (i % 2 != 0) && <Col lg={4} xs={4} className='d-flex justify-content-center align-items-center'>
                                 <div className='home_roadmapSingle'>
                                     <h1 className='roadmap_strokeText'>{i + 1}</h1>
@@ -149,8 +154,6 @@ function Roadmap(props) {
                                     </div>
                                 </div>
                             </Col>}
-
-
                             {(i != 0) && (i % 2 === 0) && <Col lg={4} xs={4} className='d-flex justify-content-center align-items-center'>
                                 <div className='home_roadmapSingle'>
                                     <h1 className='roadmap_strokeText'>{i + 1}</h1>
@@ -165,12 +168,11 @@ function Roadmap(props) {
                                 <img className='img-fluid roadmap_centerimg' src={require('../assets/images/roadmapcenter.svg').default} />
                             </Col>}
 
+
+
                             {(lastIndex != 0) && (i == lastIndex) && (i % 2 === 0) && <Col lg={4} xs={4}>
                                 <img className='img-fluid roadmap_lastimg' src={require('../assets/images/roadmaplast.svg').default} />
                             </Col>}
-
-
-
                             {(i != 0) && (i % 2 === 0) && <Col lg={4} xs={4} className='d-flex justify-content-center align-items-center'>
                                 {val.stepImage ?
                                     <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/projects/steps/${val.stepImage}`} /> :
@@ -183,7 +185,119 @@ function Roadmap(props) {
                 })
 
                 }
-            </Row>
+            </Row> */}
+
+            <div className='hc-roadmap__new row mt-5'>
+                {props?.data?.length != 0 && props?.data?.map((val, i) => {
+                    console.log("lastststindwex", props?.data?.length - 1);
+                    const lastIndex = props?.data?.length - 1
+                    return (
+                        <>
+
+                            {/* row - 1 */}
+
+                            {i == 0 && <div className='col-5 '>
+                                <div className='hc-roadmap__new-col--left d-flex justify-content-end  gap-2 gap-sm-3 gap-md-4 gap-lg-5'>
+                                    <p className='roadmap_strokeText'>{i + 1}</p>
+                                    <div className=''>
+                                        <p className='hc-roadmap__new--themeText text-end'>{val.stepTitle ?? val.title}</p>
+                                        {val.stepDescription ? <p className='text-end hc-roadmap__new--whiteText'>{val.stepDescription}</p> : <p className='text-end hc-roadmap__new--whiteText' dangerouslySetInnerHTML={{ __html: val.content }} ></p>}
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                            {i == 0 &&
+                                <div className='col-2'>
+                                    <div className='hc-roadmap__new-col--center'>
+                                        <img src={require('../assets/images/threecube.svg').default} />
+                                    </div>
+                                </div>
+                            }
+                            {i == 0 &&
+                                <div className='col-5 '>
+                                    <div className='hc-roadmap__new-col--right'>
+                                        {val.stepImage ?
+                                            <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/projects/steps/${val.stepImage}`} /> :
+                                            <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/cmsimg/${val.img}`} />}
+                                    </div>
+                                </div>
+                            }
+
+                            {/* row-2  */}
+
+                            {(i != 0) && (i % 2 != 0) && <div className='col-5 hc-roadmap__new-padding--top'>
+                                <div className='hc-roadmap__new-col--left d-flex justify-content-end'>
+                                    {val.stepImage ?
+                                        <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/projects/steps/${val.stepImage}`} /> :
+                                        <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/cmsimg/${val.img}`} />}
+                                </div>
+                            </div>}
+
+                            {(i != lastIndex) && (i != 0) && (i % 2 != 0) && <div className='col-2 hc-roadmap__new-padding--top'>
+                                <div className='hc-roadmap__new-col--center'>
+                                    <img src={require('../assets/images/threecube.svg').default} />
+                                </div>
+                            </div>}
+
+                            {(lastIndex != 0) && (i == lastIndex) && (i % 2 !== 0) && <div className='col-5 hc-roadmap__new-padding--top'>
+                                <img className='img-fluid roadmap_lastimg' src={require('../assets/images/roadmaplastleft.svg').default} />
+                            </div>
+
+
+
+                            }
+
+
+                            {/* row -3  */}
+                            {(i != 0) && (i % 2 != 0) && <div className='col-5 hc-roadmap__new-padding--top'>
+                                <div className='hc-roadmap__new-col--left d-flex  gap-2 gap-sm-3 gap-md-4 gap-lg-5'>
+                                    <div className=''>
+                                        <p className='hc-roadmap__new--themeText text-start'>{val.stepTitle ?? val.title}</p>
+                                        {val.stepDescription ? <p className='text-start hc-roadmap__new--whiteText'>{val.stepDescription}</p> : <p className='roadmap_date' dangerouslySetInnerHTML={{ __html: val.content }} ></p>}
+                                    </div>
+                                    <h1 className='roadmap_strokeText'>{i + 1}</h1>
+                                </div>
+                            </div>}
+                            {(i != 0) && (i % 2 === 0) && <div className='col-5 hc-roadmap__new-padding--top'>
+                                <div className='hc-roadmap__new-col--left d-flex justify-content-end  gap-2 gap-sm-3 gap-md-4 gap-lg-5'>
+                                    <p className='roadmap_strokeText'>{i + 1}</p>
+                                    <div className=''>
+                                        <p className='hc-roadmap__new--themeText text-end'>{val.stepTitle ?? val.title}</p>
+                                        {val.stepDescription ? <p className='text-end hc-roadmap__new--whiteText'>{val.stepDescription}</p> : <p className='text-end hc-roadmap__new--whiteText' dangerouslySetInnerHTML={{ __html: val.content }} ></p>}
+                                    </div>
+                                </div>
+                            </div>}
+                            {(i != lastIndex) && (i != 0) && (i % 2 === 0) &&
+                                <div className='col-2 hc-roadmap__new-padding--top'>
+                                    <div className='hc-roadmap__new-col--center'>
+                                        <img src={require('../assets/images/threecube.svg').default} />
+                                    </div>
+                                </div>
+                            }
+
+
+                            {/* row- 4 */}
+
+
+                            {(lastIndex != 0) && (i == lastIndex) && (i % 2 === 0) && <div className='col-2 hc-roadmap__new-padding--top'>
+                                <div className='hc-roadmap__new-col--center'>
+                                    <img src={require('../assets/images/threecube.svg').default} />
+                                </div>
+                            </div>}
+                            {(i != 0) && (i % 2 === 0) && <div className='col-5 hc-roadmap__new-padding--top'>
+                                <div className='hc-roadmap__new-col--right'>
+                                    {val.stepImage ?
+                                        <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/projects/steps/${val.stepImage}`} /> :
+                                        <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/cmsimg/${val.img}`} />}
+                                </div>
+                            </div>}
+                        </>
+                    )
+                })
+
+                }
+
+            </div >
         </>
     )
 }

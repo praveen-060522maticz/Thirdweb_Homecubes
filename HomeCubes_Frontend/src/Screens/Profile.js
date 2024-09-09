@@ -21,13 +21,14 @@ import ProjectCard from '../Components/ProjectCard'
 import { toast } from 'react-toastify'
 import KycComment from '../Modals/KycRejected'
 import DonotRefresh from './DonotRefresh'
+import copyIcon from '../assets/images/copyicon.png'
 
 function Profile() {
 
   const { web3, web3p, accountAddress, coinBalance, BNBUSDT } = useSelector(
     (state) => state.LoginReducer.AccountDetails
   );
-  const { payload, token,gasFee } = useSelector((state) => state.LoginReducer.User);
+  const { payload, token, gasFee } = useSelector((state) => state.LoginReducer.User);
 
   const [selectedOption, setSelectedOption] = useState(null);
   const [showKYC, setShowKYC] = useState(false)
@@ -113,12 +114,12 @@ function Profile() {
       height: "40px",
       width: "40px",
       backgroundColor: isHovered
-        ? "#272727"
+        ? "transperant"
         : isSelected
-          ? "#272727"
+          ? "transperant"
           : isFocused
-            ? "#272727"
-            : "#272727",
+            ? "transperant"
+            : "transperant",
       // border: "1px solid rgba(34, 34, 34, 0.32)",
       borderRadius: 5,
       fontSize: "13px",
@@ -127,7 +128,7 @@ function Profile() {
     control: (provided, { isFocused, isSelected, isHovered }) => ({
       ...provided,
       height: "40px",
-      width: "100%",
+      width: "230px",
       borderRadius: 5,
       backgroundColor: isHovered
         ? "transperant"
@@ -136,16 +137,17 @@ function Profile() {
           : isFocused
             ? "transperant"
             : "transperant",
-      // backgroundColor: "#fff",
-      border: "none",
+      backgroundColor: "#080808B2",
+      border: "1px solid #525252",
       outline: "none",
       boxShadow: "none",
       color: "#16EBC3",
+
     }),
     indicatorsContainer: (provided, state) => ({
       ...provided,
       height: "40px",
-      width: "40px",
+      width: "unset",
       position: "absolute",
       right: 0,
       top: 0,
@@ -153,12 +155,13 @@ function Profile() {
     }),
     singleValue: (provided, state) => ({
       ...provided,
-      color: "#16EBC3",
+      color: "#fff",
     }),
     menuList: (base) => ({
       ...base,
       // kill the white space on first and last option
       padding: 0,
+      border: "1px solid #16EBC3"
     }),
   };
 
@@ -319,153 +322,192 @@ function Profile() {
     <>
       <BottomBar />
       <Header />
-      <Container fluid className='p-0'>
+      {/* <Container fluid className='p-0'>
 
         <div className='profile_emptygrad'>
           <img className='prfofile_gradImg' src={require('../assets/images/profilegrad.svg').default} />
         </div>
-      </Container>
+      </Container> */}
 
       <Container fluid className="home_wrapper">
-        <img src={require('../assets/images/pinkwaste.png')} className='prof_pinkwaste' />
-        <img src={require('../assets/images/greenwaste.png')} className='prof_greenwaste' />
-        <img src={require('../assets/images/violetwaste.png')} className='prof_violwaste' />
+        <section className='hc-section__inner'>
+          {/* <img src={require('../assets/images/pinkwaste.png')} className='prof_pinkwaste' />
+          <img src={require('../assets/images/greenwaste.png')} className='prof_greenwaste' />
+          <img src={require('../assets/images/violetwaste.png')} className='prof_violwaste' /> */}
 
-        <Container className="custom_container">
+          <Container className="custom_container">
 
-          <Row>
-            <Col lg={1} md={2} className="sidetab_holder">
-              <SideTab />
-            </Col>
-            <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner">
-              <Row className='row_bottomLine'>
-                <Col lg={6} md={12} sm={12} xs={12} className='mb-4'>
-                  <div className='profile_dtlswhole'>
-                    <div className='profile_imgDtls'>
-                      <img
-                        className='profile_img img-fluid'
-                        accept="image/*"
-                        src={
-                          isEmpty(userProfile?.Profile) ?
-                            require('../assets/images/collections/shapeEight.jpg') :
-                            `${config?.IMG_URL}/user/${userProfile?.WalletAddress}/profile/${userProfile?.Profile}`}
-                      />
-                      <button className='profile_editBtn'>
-                        <i class="fa-regular fa-pen-to-square"></i> Edit
+            <Row>
+              <Col lg={1} md={2} className="sidetab_holder">
+                <SideTab />
+              </Col>
+              <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner">
+                <Row className='row_bottomLine'>
+                  <Col xxl={7} xl={8} xs={12} className='mb-4'>
+                    <div className='profile_dtlswhole flex-wrap'>
+                      <div className='profile_imgDtls'>
+                        <img
+                          className='profile_img img-fluid'
+                          accept="image/*"
+                          src={
+                            isEmpty(userProfile?.Profile) ?
+                              require('../assets/images/collections/shapeEight.jpg') :
+                              `${config?.IMG_URL}/user/${userProfile?.WalletAddress}/profile/${userProfile?.Profile}`}
+                        />
+                        <button className='profile_editBtn'>
+                          <i class="fa-regular fa-pen-to-square"></i> Edit
 
-                        <input type='file' className='editprofile_input' id="Profile" onChange={(e) => onProfileChange(e)} />
-                      </button>
-                    </div>
-                    <div>
-                      <p className='profile_joinDate'>{new Date(userProfile?.createdAt).toDateString()}</p>
-                      <p className="profile_name" >{userProfile?.DisplayName ? userProfile?.DisplayName : address_showing(userProfile?.WalletAddress)}</p>
-                    </div>
-                  </div>
-
-                </Col>
-                <Col lg={6} md={12} sm={12} xs={12} className='mb-4'>
-                  <div className='profile_topright'>
-                    <Row className='align-items-end h-100'>
-                      {userProfile?.KycStatus == "complete" ?
-                        <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0' onClick={() => handleShowKYC()}>
-                          <div className='kyc_activated'>
-                            <img src={require('../assets/images/greenround.svg').default} />
-                            <p>KYC Activated</p>
+                          <input type='file' className='editprofile_input' id="Profile" onChange={(e) => onProfileChange(e)} />
+                        </button>
+                      </div>
+                      <div>
+                        <p className='mb-0 hc-profile__title'>Profile</p>
+                        <p className='profile_joinDate  mt-1'>{new Date(userProfile?.createdAt).toDateString()}</p>
+                        <div className='d-flex flex-wrap align-items-center gap-1 gap-sm-2  mt-2 mt-sm-1 '>
+                          <p className='profile_joinDate mb-0'>Wallet Address :</p>
+                          <div className='d-flex  align-items-center gap-2'>
+                            <p className="profile_name" >{userProfile?.DisplayName ? userProfile?.DisplayName : address_showing(userProfile?.WalletAddress)}</p>
+                            <button className='bg-transparent border-0 outline-0'>
+                              <img src={copyIcon} className='img-fluid' alt='copy' style={{ width: "25px" }} />
+                            </button>
                           </div>
-                        </Col>
-                        :
-                        userProfile?.KycStatus == "submit" ?
+                        </div>
+                        <div className='d-flex flex-wrap align-items-center gap-2  mt-3'>
+                          <p className='profile_joinDate mb-0'>Referral Link :</p>
+                          <div className='d-flex align-items-center gap-1 gap-sm-2'>
+                            <div className='hc-profile__wrapper-border'>
+                              Link Address
+                            </div>
+                            <button className='bg-transparent border-0 outline-0'>
+                              <img src={copyIcon} className='img-fluid' alt='copy' style={{ width: "25px" }} />
+                            </button>
+                          </div>
+
+                        </div>
+                        <div className='d-flex flex-wrap align-items-center gap-2  mt-3'>
+                          <p className='profile_joinDate mb-0'>Referral Code :</p>
+                          <div className='d-flex align-items-center gap-2'>
+                            <div className='hc-profile__wrapper-border'>
+                              WA098JA
+                            </div>
+                            <button className='bg-transparent border-0 outline-0'>
+                              <img src={copyIcon} className='img-fluid' alt='copy' style={{ width: "25px" }} />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </Col>
+                  <Col xxl={5} xl={4} xs={12} className='mb-4'>
+                    <div className='profile_topright'>
+                      <Row className='align-items-end h-100'>
+                        {userProfile?.KycStatus == "complete" ?
                           <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0' onClick={() => handleShowKYC()}>
-                            <div className='kyc_activated actiate_hint'>
-                              <img src={require('../assets/images/redround.svg').default} />
-                              <p>KYC submitted, please wait till it is reviewed</p>
+                            <div className='kyc_activated'>
+                              <img src={require('../assets/images/greenround.svg').default} />
+                              <p>KYC Activated</p>
                             </div>
                           </Col>
                           :
-                          userProfile?.KycStatus == "retry" ?
-                            <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0'>
-
-                              <div className='kyc_activated actiate_hint' onClick={() => handleShowKYC()}>
-
+                          userProfile?.KycStatus == "submit" ?
+                            <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0' onClick={() => handleShowKYC()}>
+                              <div className='kyc_activated actiate_hint'>
                                 <img src={require('../assets/images/redround.svg').default} />
-                                <p>Kyc got rejected retry please</p>
-
-                                {userProfile?.comment && <button className='primary_blueBtn kyc_reject_btn' onClick={(e) => handleShowKycCmd(e)}>
-                                  <i class="fa-regular fa-comment-dots"></i>
-                                </button>}
-
+                                <p>KYC submitted, please wait till it is reviewed</p>
                               </div>
-
                             </Col>
                             :
-                            <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0'>
-                              <div className='kyc_activated actiate_hint' onClick={() => handleShowKYC()}>
-                                <img src={require('../assets/images/redround.svg').default} />
-                                <p>Activate Your KYC</p>
-                              </div>
-                            </Col>}
+                            userProfile?.KycStatus == "retry" ?
+                              <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0'>
+
+                                <div className='kyc_activated actiate_hint' onClick={() => handleShowKYC()}>
+
+                                  <img src={require('../assets/images/redround.svg').default} />
+                                  <p>Kyc got rejected retry please</p>
+
+                                  {userProfile?.comment && <button className='primary_blueBtn kyc_reject_btn' onClick={(e) => handleShowKycCmd(e)}>
+                                    <i class="fa-regular fa-comment-dots"></i>
+                                  </button>}
+
+                                </div>
+
+                              </Col>
+                              :
+                              <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0'>
+                                <div className='kyc_activated actiate_hint' onClick={() => handleShowKYC()}>
+                                  <img src={require('../assets/images/redround.svg').default} />
+                                  <p>Activate Your KYC</p>
+                                </div>
+                              </Col>}
+                      </Row>
+
+
+                    </div>
+                  </Col>
+                </Row>
+
+                <Row className='hc-proile__border-top py-3 mx-auto'>
+                  <Col lg={7} xs={12}>
+                    {/* <div className='secondary_row'> */}
+                    <Row className='align-items-center'>
+                      <Col lg={5} md={5} sm={5} xs={12}>
+                        <p className='profile_balance'>Total Balance :  $ {(coinBalance * BNBUSDT)?.toFixed(6)}</p>
+
+                      </Col>
+                      <Col lg={1} md={1} sm={1} xs={12}>
+                        <div className='vert_line'></div>
+
+                      </Col>
+                      <Col lg={5} md={5} sm={5} xs={12}>
+                        <div className='pro_valuecount'>
+                          <div >
+                            <div className='profile_coinnameimg'>
+                              <img className='nft_coinImg' src={require('../assets/images/bnbcoin.svg').default} />
+                              <p className='profile_balance'>{config.COIN_NAME}</p>
+                            </div>
+                            <p className='hc-profile__text-xs'>
+                              BNB Smart Coin
+                            </p>
+                          </div>
+
+                          <div className='vertical_dtl'>
+                            <p className='profile_greentTxt'>{coinBalance?.toFixed(6)}</p>
+                            <p className='small_dollar'>$ {BNBUSDT}</p>
+                          </div>
+                        </div>
+
+                      </Col>
                     </Row>
 
+                    {/* </div> */}
+                  </Col>
+                </Row>
+                <Row className='hc-proile__border-top py-4 mx-auto'>
+                  <Col xl={3} lg={4} md={5} sm={12} xs={12} className='mb-3'>
+                    <div className="stack_nftcounter profile_counter">
+                      <p className="nftcounter_lable">Total NFTs :</p>
+                      <p className="nftcounter_value">{totalValues?.length}</p>
+                    </div>
+                  </Col>
+                  <Col xl={3} lg={4} md={5} sm={12} xs={12} className='mb-3'>
+                    <div className="stack_nftcounter profile_counter">
+                      <img className="top_reltabimg" src={require('../assets/images/whitestack.svg').default} />
+                      <p className="nftcounter_lable">Total NFTs Staked :</p>
+                      <p className="nftcounter_value">{totalValues?.filter((val) => val.isStaked)?.length ?? 0}</p>
+                    </div>
+                  </Col>
+                  <Col xl={4} lg={8} md={10} sm={12} xs={12} className='mb-3'>
+                    <div className="stack_nftcounter profile_counter">
+                      <img className="top_reltabimg" src={require('../assets/images/rewards.svg').default} />
+                      <p className="nftcounter_lable">Total Reward Claimed :</p>
+                      <p className="nftcounter_value">{Number(rewardAmount).toFixed(6)}</p>
+                    </div>
+                  </Col>
+                </Row>
 
-                  </div>
-                </Col>
-              </Row>
 
-              <Row className='row_bottomLine py-3'>
-                <Col lg={7} xs={12}>
-                  {/* <div className='secondary_row'> */}
-                  <Row className='align-items-center'>
-                    <Col lg={5} md={5} sm={5} xs={12}>
-                      <p className='profile_balance'>Total Balance :  $ {(coinBalance * BNBUSDT)?.toFixed(6)}</p>
-
-                    </Col>
-                    <Col lg={1} md={1} sm={1} xs={12}>
-                      <div className='vert_line'></div>
-
-                    </Col>
-                    <Col lg={5} md={5} sm={5} xs={12}>
-                      <div className='pro_valuecount'>
-                        <div className='profile_coinnameimg'>
-                          <img className='nft_coinImg' src={require('../assets/images/bnbcoin.svg').default} />
-                          <p className='profile_balance'>{config.COIN_NAME}</p>
-                        </div>
-                        <div className='vertical_dtl'>
-                          <p className='profile_greentTxt'>{coinBalance?.toFixed(6)}</p>
-                          <p className='small_dollar'>$ {BNBUSDT}</p>
-                        </div>
-                      </div>
-
-                    </Col>
-                  </Row>
-
-                  {/* </div> */}
-                </Col>
-              </Row>
-              <Row className='row_bottomLine row_hideLine  mt-4'>
-                <Col lg={3} md={5} sm={12} xs={12} className='mb-3'>
-                  <div className="stack_nftcounter profile_counter">
-                    <p className="nftcounter_lable">Total NFTs :</p>
-                    <p className="nftcounter_value">{totalValues?.length}</p>
-                  </div>
-                </Col>
-                <Col lg={3} md={5} sm={12} xs={12} className='mb-3'>
-                  <div className="stack_nftcounter profile_counter">
-                    <img className="top_reltabimg" src={require('../assets/images/whitestack.svg').default} />
-                    <p className="nftcounter_lable">Total NFTs Staked :</p>
-                    <p className="nftcounter_value">{totalValues?.filter((val) => val.isStaked)?.length ?? 0}</p>
-                  </div>
-                </Col>
-                <Col lg={4} md={6} sm={12} xs={12} className='mb-3'>
-                  <div className="stack_nftcounter profile_counter">
-                    <img className="top_reltabimg" src={require('../assets/images/rewards.svg').default} />
-                    <p className="nftcounter_lable">Total Reward Claimed :</p>
-                    <p className="nftcounter_value">{Number(rewardAmount).toFixed(6)}</p>
-                  </div>
-                </Col>
-              </Row>
-
-              <Row className='row_bottomLine row_hideLine mt-3'>
-                <Col lg={4} md={6} sm={6} xs={12} className='mb-3'>
+                <div className="d-flex flex-wrap flex-sm-nowrap align-items-center gap-3">
                   <div className="stack_searchbar">
                     <div className="d-flex justify-content-start align-items-center w-100">
                       <img
@@ -491,9 +533,6 @@ function Profile() {
                     </div>
 
                   </div>
-
-                </Col>
-                <Col lg={3} md={6} sm={6} xs={12} className='mb-3'>
                   <Select
                     className="border_select"
                     placeholder="Select Project"
@@ -502,62 +541,65 @@ function Profile() {
                     // value={selectedVal}
                     onChange={(e) => { setSearchVal(""); SetTabName(e.projectId ?? "owned") }}
                   />
-                </Col>
+                </div>
 
 
 
-              </Row>
-              {console.log('searchDataArr', searchDataArr)}
-              <Row className='row_bottomLine row_hideLine mt-5'>
-                {searchVal ?
-                  <>
-                    {searchDataArr?.Tokens && searchDataArr?.Tokens?.length != 0 &&
-                      searchDataArr?.Tokens.map((val) => (
-                        <Col lg={3} md={4} sm={6} xs={12} className='mb-3'>
-                          <DataCard data={val} />
-                        </Col>
-                      ))}
 
-                    {/* {searchDataArr?.collections && searchDataArr?.collections.length != 0 &&
+
+
+                {console.log('searchDataArr', searchDataArr)}
+                <Row className='row_bottomLine row_hideLine mt-5 mx-auto'>
+                  {searchVal ?
+                    <>
+                      {searchDataArr?.Tokens && searchDataArr?.Tokens?.length != 0 &&
+                        searchDataArr?.Tokens.map((val) => (
+                          <Col lg={3} md={3} sm={6} xs={12} className='mb-3'>
+                            <DataCard data={val} />
+                          </Col>
+                        ))}
+
+                      {/* {searchDataArr?.collections && searchDataArr?.collections.length != 0 &&
                       searchDataArr?.collections?.map((val) => (
                         <Col lg={3} md={4} sm={6} xs={12} className='mb-3'>
                           <GalleryCard data={val} />
                         </Col>
                       ))} */}
 
-                    {searchDataArr?.projects && searchDataArr?.projects.length != 0 &&
-                      searchDataArr?.projects?.map((val) => (
-                        <Col lg={3} md={4} sm={6} xs={12} className='mb-3'>
-                          <ProjectCard data={val} show={true} />
-                        </Col>
-                      ))}
-                    {searchLoad &&
-                      <div className='loadmore_holder'>
-                        <button className="seconday_btn width_fitter" onClick={() => LoadMore()} >Loadmore</button>
-                      </div>}
-                  </>
-                  :
-                  Tokens[value] &&
-                    Tokens[value]?.list?.length > 0 ?
-                    <>
-                      {Tokens[value].list.map((i) => (
-                        <Col lg={3} md={4} sm={6} xs={12} className='mb-3'>
-                          <DataCard data={i} />
-                        </Col>
-                      ))}
-                      {Loadmore &&
-                        <div className='loadmore_holder'><button className="seconday_btn width_fitter" onClick={() => LoadMore()} >Loadmore</button>
+                      {searchDataArr?.projects && searchDataArr?.projects.length != 0 &&
+                        searchDataArr?.projects?.map((val) => (
+                          <Col lg={3} md={4} sm={6} xs={12} className='mb-3'>
+                            <ProjectCard data={val} show={true} />
+                          </Col>
+                        ))}
+                      {searchLoad &&
+                        <div className='loadmore_holder'>
+                          <button className="seconday_btn width_fitter" onClick={() => LoadMore()} >Loadmore</button>
                         </div>}
                     </>
+                    :
+                    Tokens[value] &&
+                      Tokens[value]?.list?.length > 0 ?
+                      <>
+                        {Tokens[value].list.map((i) => (
+                          <Col xl={3} lg={4} md={6} sm={6} xs={12} className='mb-3'>
+                            <DataCard data={i} />
+                          </Col>
+                        ))}
+                        {Loadmore &&
+                          <div className='loadmore_holder'><button className="seconday_btn width_fitter" onClick={() => LoadMore()} >Load More</button>
+                          </div>}
+                      </>
 
-                    : <p className='nodata_found'>No data found</p>
-                }
-              </Row>
+                      : <p className='nodata_found'>No data found</p>
+                  }
+                </Row>
 
-            </Col>
-          </Row>
-        </Container>
-        <Footer />
+              </Col>
+            </Row>
+          </Container>
+          <Footer />
+        </section >
       </Container>
 
       {/* kyc modal */}

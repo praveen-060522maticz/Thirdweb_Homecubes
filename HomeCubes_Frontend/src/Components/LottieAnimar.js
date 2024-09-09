@@ -4,7 +4,7 @@ import axios from "axios";
 import { imgFormats, videoFileFormats } from "../actions/common";
 
 const LottieAnimation = ({ url, className }) => {
-
+    console.log("urlurlurl", url);
     const [lottieData, setLottieData] = useState(null);
     useEffect(() => {
         axios.get(url)
@@ -39,7 +39,7 @@ const LottieAnimation = ({ url, className }) => {
                             height={300}
                             width={300}
                             className={className}
-                            
+
                         />
                     ) : (
                         <div>Loading Lottie animation...</div>

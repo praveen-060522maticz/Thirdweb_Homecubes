@@ -70,7 +70,7 @@ function TransferToken({ show, handleClose, onStackNft, setSelectedPlan }) {
             ...provided,
             height: "40px",
             padding: "0 20px",
-            backgroundColor: "#16EBC3 ",
+            backgroundColor: "transparent ",
             // border: "1px solid rgba(34, 34, 34, 0.32)",
             borderRadius: 5,
             fontSize: "13px",
@@ -79,8 +79,8 @@ function TransferToken({ show, handleClose, onStackNft, setSelectedPlan }) {
             ...provided,
             height: "40px",
             borderRadius: 5,
-            // backgroundColor: "#fff",
-            border: "none",
+            backgroundColor: "transparent",
+            border: "1px solid #16EBC3",
             outline: "none",
             boxShadow: "none",
         }),
@@ -94,7 +94,7 @@ function TransferToken({ show, handleClose, onStackNft, setSelectedPlan }) {
         }),
         singleValue: (provided, state) => ({
             ...provided,
-            color: "#000",
+            color: "#fff",
         }),
         menuList: (base) => ({
             ...base,

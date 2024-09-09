@@ -31,16 +31,13 @@ export function Editcmshome() {
     page: "",
     File: null,
     url: null,
-    key:""
+    key: ""
   }
 
   const [formData, setFormData] = useState(initData)
   console.log("formDataaa", formData)
-  const [title, settitle] = useState('')
-  const [content, setcontent] = useState("")
-  const [position, setposition] = useState(false)
-  const [link, setlink] = useState("")
   const [ckcontent, setckcontent] = useState('')
+  const [ckTitle, setckTitle] = useState('')
   console.log(("ckcontent", ckcontent));
   // const [description, setdescription] = useState("")
 
@@ -92,6 +89,9 @@ export function Editcmshome() {
     setckcontent(description_text)
 
   }
+  const onTitleChange = (e) => {
+    setckTitle(e.editor.getData())
+  }
   useEffect(() => {
     // if (locate) {
     setFormData({ ...locate.state })
@@ -109,7 +109,7 @@ export function Editcmshome() {
 
     if (Object.keys(errors).length == 0) {
       var datacms = {
-        title: formData.title,
+        title: ckTitle,
         content: formData.content,
         link: formData.link,
         position: formData.link,
@@ -117,9 +117,9 @@ export function Editcmshome() {
         page: formData.page,
         File: formData?.File ?? "",
         content: ckcontent,
-        key:formData?.key
+        key: formData?.key
       }
-      console.log("datacms",datacms);
+      console.log("datacms", datacms);
       var resp = await editCmsCall(datacms);
 
       if (resp?.status) {
@@ -170,6 +170,8 @@ export function Editcmshome() {
 
   }
 
+  console.log('fontsdfl', formData)
+
 
   return (
     <div>
@@ -192,9 +194,14 @@ export function Editcmshome() {
                   <label htmlFor="exampleInputName1">title</label>
 
                   {/* {formData?.title && */}
-                  <input type="text" className="form-control" id="title"  placeholder="title" value={formData?.title} onChange={(e) => handlechange(e)} />
+                  {/* <input type="text" className="form-control" id="title" placeholder="title" value={formData?.title} onChange={(e) => handlechange(e)} /> */}
 
                   {/* } */}
+                  <CKEditor
+                    initData={formData.title != "" ? formData.title : ""}
+                    onChange={(e) => onTitleChange(e)}
+                  />
+
                 </Form.Group>
                 <Form.Group>
 
@@ -260,13 +267,13 @@ export function Editcmshome() {
                   <br /> */}
                   {/* <input type="file" id="File" onChange={(e) => handlechange(e)} /> */}
                   <div>
-                  <div class="upload-btn-wrapper">
-                    <button class="btn">Choose file</button>
-                    <input
-                      type="file" id="File" onChange={(e) => handlechange(e)}
+                    <div class="upload-btn-wrapper">
+                      <button class="btn">Choose file</button>
+                      <input
+                        type="file" id="File" onChange={(e) => handlechange(e)}
 
-                    />
-                  </div>
+                      />
+                    </div>
                   </div>
                   {console.log("awefaw", formData)}
                   {/* {formData && formData?.url && <img src={formData.url} style={{ height: 100, width: 100 }} />} */}

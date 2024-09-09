@@ -429,7 +429,8 @@ function CheckOut({ show, handleClose, item, owner, file }) {
             backdrop="static"
             keyboard={false}
             centered
-            className='common_modal'
+            className='common_modal hc-modal'
+            size='md'
          >
             <Modal.Body>
                <div className='modal_top'>
@@ -446,10 +447,10 @@ function CheckOut({ show, handleClose, item, owner, file }) {
                   </div>
 
 
-                  <p className='blogInfo_inplabel mt-3 mb-4'>Summary:</p>
+                  <p className='modal_summaryLabel mt-3 mb-3'>Summary:</p>
                   <div className='bidmodal_summary mb-3'>
                      <p className='modal_summaryLabel'>Your balance</p>
-                     <p className='modal_summaryLabel'>
+                     <p className='modal_summaryValue'>
                         {(owner.CoinName != "BNB" && owner.CoinName != "ETH")
                            ? TokenBalance
                            : coinBalance}{" "}
@@ -459,12 +460,12 @@ function CheckOut({ show, handleClose, item, owner, file }) {
 
                   <div className='bidmodal_summary mb-3'>
                      <p className='modal_summaryLabel'>Service fees</p>
-                     <p className='modal_summaryLabel'>{web3utils.fromWei(String(buyerFees))}% {owner.CoinName}</p>
+                     <p className='modal_summaryValue'>{web3utils.fromWei(String(buyerFees))}% {owner.CoinName}</p>
                   </div>
 
                   <div className='bidmodal_summary mb-3'>
                      <p className='modal_summaryLabel'>Price of the NFT</p>
-                     <p className='modal_summaryLabel'>{Number(YouWillGet).toFixed(6)} {owner.CoinName}</p>
+                     <p className='modal_summaryValue'>{Number(YouWillGet).toFixed(6)} {owner.CoinName}</p>
                   </div>
 
                   {/* <div className='bidmodal_summary mb-3'>
@@ -485,10 +486,10 @@ function CheckOut({ show, handleClose, item, owner, file }) {
                      }
                   </button>}
                   <button
-                     className='additional_btn modal_additionalBtn mt-3'
+                     className='nftinfo_gradeientBtn web_listitem_btn mt-3'
                      disabled={Btn != 'done' && App_Btn == 'init' || App_Btn == 'error' || App_Btn === "process" || App_Btn === "done" ? true : false}
                      onClick={App_Btn == 'start' || App_Btn === "try" ? _Buy : null}
-                     // onClick={() => _Buy()}
+                  // onClick={() => _Buy()}
                   >
                      {App_Btn == 'start' && 'Proceed to pay'
                         || App_Btn == 'try' && 'Try-Again'

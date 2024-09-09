@@ -3,12 +3,12 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import config from '../config/config'
 
 function ProjectCard(props) {
-  const { projectTitle, projectId, mintPrice, _id, isNotMinted, NFTPrice, ProjectThumbnail, floorPrice, coinName, id, projectHint,mintTokenName  } = props.data;
+  const { projectTitle, projectId, mintPrice, _id, isNotMinted, NFTPrice, ProjectThumbnail, floorPrice, coinName, id, projectHint, mintTokenName } = props.data;
   console.log("props.datashow", props);
   const navigate = useNavigate();
   return (
     <>
-      <div className="nft_card"  >
+      <div className="nft_card hc-card__nft"  >
         <div className="projectcard_wrapper_sep">
           <img className="img-fluid projectcard_img" src={`${config.IMG_URL}/projects/ProjectThumbnail/${ProjectThumbnail}`}
             onClick={() => {
@@ -26,8 +26,8 @@ function ProjectCard(props) {
           />
         </div>
         <div className="nftcard_detailwrapper">
-          <p className="nft_name">{projectTitle}</p>
-          <p className="nft_coinname mt-3">
+          <p className="nft_name hc-nft__card-title">{projectTitle}</p>
+          <p className="nft_coinname mt-2">
             floor price : {NFTPrice}{" "}
             <span className="floor_prize">{mintTokenName}</span>
 

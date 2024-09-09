@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import BottomBar from "../Components/BottomBar";
 import Header from "../Components/Header";
 import { Button, Col, Container, Row } from "react-bootstrap";
@@ -21,6 +21,7 @@ import { getGallery, getProjects, stackFunction } from "../actions/axioss/nft.ax
 import config from '../config/config';
 import { getNewsFeedsFunc } from "../actions/axioss/cms.axios";
 import { getDaysOfDesiredMonth } from "../actions/common";
+import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 function ProjectInfo() {
   const location = useLocation();
@@ -29,6 +30,7 @@ function ProjectInfo() {
   console.log(projectData, "oerwerhw");
   const [description, setDescription] = useState(false);
   const { projectTitle } = useParams()
+  const swiperRef = useRef(null);
 
   const [projectDetail, setProjectDetail] = useState({})
   const [galleryArr, setGalleryArr] = useState([])
@@ -107,8 +109,18 @@ function ProjectInfo() {
     const getData = await stackFunction({ action: "getRewards", projectId: projectDetail?._id ?? projectData?._id })
     setTotalReward((getData?.data?.totalprice)?.toFixed(6) ?? 0)
   }
+  const goPrev = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slidePrev();
+    }
+  };
+  const goNext = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
+    }
+  };
 
-  const navigate =useNavigate();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -133,50 +145,54 @@ function ProjectInfo() {
                 {projectDetail?.projectDescription}
               </p>
               <hr className="projects_hr" />
+              <div className="d-flex flex-wrap gap-4 gap-xl-5">
+                <div className="mp_collectionDetail mb-2">
+                  <p className="mp_collectionLabel">Number of NFTs :</p>
+                  <p className="mp_collectionValue">
+                    {projectDetail?.maxNFTs}
+                  </p>
+                </div>
+                <div className="mp_collectionDetail mb-2">
+                  <p className="mp_collectionLabel">
+                    Number of Staked NFTs :
+                  </p>
+                  <p className="mp_collectionValue">
+                    {staked}
+                  </p>
+                </div>
+                <div className="mp_collectionDetail mb-2">
+                  <p className="mp_collectionLabel">
+                    Number of Non-Staked NFTs :
+                  </p>
+                  <p className="mp_collectionValue">
+                    {unStaked}
+                  </p>
+                </div>
+                <div className="mp_collectionDetail mb-2">
+                  <p className="mp_collectionLabel">
+                    Next Rewards Distribution :
+                  </p>
+                  <p className="mp_collectionValue">
+                    {new Date(rewardDetail?.endDateFormat).toLocaleDateString()}
+                  </p>
+                </div>
+                <div className="mp_collectionDetail mb-2">
+                  <p className="mp_collectionLabel">Total reward distrubuted :</p>
+                  <p className="mp_collectionValue">
+                    {totalReward}
+                  </p>
+                </div>
+              </div>
 
               <Row>
                 <Col lg={5} md={6} sm={6} xs={12}>
                   <div className="">
-                    <div className="mp_collectionDetail mb-2">
-                      <p className="mp_collectionLabel">Number of NFTs :</p>
-                      <p className="mp_collectionValue">
-                        {projectDetail?.maxNFTs}
-                      </p>
-                    </div>
-                    <div className="mp_collectionDetail mb-2">
-                      <p className="mp_collectionLabel">
-                        Number of Staked NFTs :
-                      </p>
-                      <p className="mp_collectionValue">
-                        {staked}
-                      </p>
-                    </div>
-                    <div className="mp_collectionDetail mb-2">
-                      <p className="mp_collectionLabel">
-                        Number of Non-Staked NFTs :
-                      </p>
-                      <p className="mp_collectionValue">
-                        {unStaked}
-                      </p>
-                    </div>
+
                   </div>
                 </Col>
                 <Col lg={7} md={6} sm={6} xs={12}>
                   <div className="">
-                    <div className="mp_collectionDetail mb-2">
-                      <p className="mp_collectionLabel">
-                        Next Rewards Distribution :
-                      </p>
-                      <p className="mp_collectionValue">
-                        {new Date(rewardDetail?.endDateFormat).toLocaleDateString()}
-                      </p>
-                    </div>
-                    <div className="mp_collectionDetail mb-2">
-                      <p className="mp_collectionLabel">Total reward distrubuted :</p>
-                      <p className="mp_collectionValue">
-                        {totalReward}
-                      </p>
-                    </div>
+
                   </div>
                 </Col>
               </Row>
@@ -215,66 +231,88 @@ function ProjectInfo() {
                 <p className="mp_detailbrief">
                   {projectDetail?.CMS?.filter((val) => val.stepTitle == "Photo Galleries")?.[0]?.stepDescription}
                 </p>
-                <div className="projects_swiper">
-                  <Swiper
-                    className="mySwiper pt-3 mt-4"
-                    slidesPerView={3}
-                    spaceBetween={30}
-                    navigation={false}
-                    keyboard={true}
-                    pagination={{
-                      clickable: true,
-                    }}
-                    breakpoints={{
-                      0: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                      },
-                      320: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                      },
-                      450: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                      },
-                      576: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                      },
-                      768: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                      },
-                      850: {
-                        slidesPerView: 3,
-                        spaceBetween: 20,
-                      },
-                      992: {
-                        slidesPerView: 3,
-                        spaceBetween: 20,
-                      },
-                      1100: {
-                        slidesPerView: 4,
-                        spaceBetween: 20,
-                      },
-                      1200: {
-                        slidesPerView: 4,
-                        spaceBetween: 20,
-                      },
-                      1500: {
-                        slidesPerView: 5,
-                        spaceBetween: 20,
-                      },
-                    }}
-                    modules={[Navigation, Keyboard, Pagination]}
+                <div className="hc-mint__swiper-wrap">
+
+                  <button
+                    className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
+                    onClick={() => goPrev()}
                   >
-                    {galleryArr && galleryArr.map((i) => (
-                      <SwiperSlide className="dff_colcard">
-                        <GallerCardOne data={i} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                    <FaChevronLeft fill="#fff" fontSize={22} className="me-2" />
+                  </button>
+
+
+                  <button
+                    className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
+                    onClick={() => goNext()}
+                  >
+
+                    <FaChevronRight fill="#fff" fontSize={22} className="ms-2" />
+                  </button>
+                  <div className="projects_swiper">
+                    <Swiper
+                      className="mySwiper pt-3 mt-4"
+                      slidesPerView={3}
+                      spaceBetween={30}
+                      navigation={{
+                        nextEl: ".swiper-button-next1",
+                        prevEl: ".swiper-button-prev1",
+                      }}
+                      ref={swiperRef}
+                      keyboard={true}
+                      pagination={{
+                        clickable: true,
+                      }}
+                      breakpoints={{
+                        0: {
+                          slidesPerView: 1,
+                          spaceBetween: 20,
+                        },
+                        320: {
+                          slidesPerView: 1,
+                          spaceBetween: 20,
+                        },
+                        450: {
+                          slidesPerView: 1,
+                          spaceBetween: 20,
+                        },
+                        576: {
+                          slidesPerView: 2,
+                          spaceBetween: 20,
+                        },
+                        768: {
+                          slidesPerView: 2,
+                          spaceBetween: 20,
+                        },
+                        850: {
+                          slidesPerView: 3,
+                          spaceBetween: 20,
+                        },
+                        992: {
+                          slidesPerView: 3,
+                          spaceBetween: 20,
+                        },
+                        1100: {
+                          slidesPerView: 4,
+                          spaceBetween: 20,
+                        },
+                        1200: {
+                          slidesPerView: 4,
+                          spaceBetween: 20,
+                        },
+                        1500: {
+                          slidesPerView: 5,
+                          spaceBetween: 20,
+                        },
+                      }}
+                      modules={[Navigation, Keyboard, Pagination]}
+                    >
+                      {galleryArr && galleryArr.map((i) => (
+                        <SwiperSlide className="dff_colcard">
+                          <GallerCardOne data={i} />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
                 </div>
               </Row>
               <Row>
@@ -429,10 +467,11 @@ function ProjectInfo() {
             </Col>
           </Row>
         </Container>
+        <div className='gradient_holder'></div>
         <Footer />
       </Container>
 
-      <div className="dualImg_bg"></div>
+      {/* <div className="dualImg_bg"></div> */}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import BottomBar from "../Components/BottomBar";
 import Header from "../Components/Header";
 import SideTab from "../Components/SideTab";
@@ -34,6 +34,8 @@ import web3Utils from 'web3-utils';
 import { useWallets } from "@privy-io/react-auth";
 import DETH from '../Abi/token.json';
 import Prompt from "../Components/Prompt";
+import mintBg from '../assets/images/mintBg.png'
+import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 // import { unstable_usePrompt as usePrompt } from 'react-router-dom';
 
 function Minting() {
@@ -73,6 +75,8 @@ function Minting() {
   const [nftcardData, setNftcardData] = useState([])
   const [loading, setLoading] = useState(false);
   const [showWallet, setShowWallet] = useState(false)
+  const swiperRef = useRef(null);
+
   console.log("AWDWproject", project);
   useEffect(() => {
     window.scroll(0, 0)
@@ -93,6 +97,18 @@ function Minting() {
   //   when: !canReload,
   //   message: "Are you sure!!! changes may be lost...!"
   // })
+
+
+  const goPrev = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slidePrev();
+    }
+  };
+  const goNext = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
+    }
+  };
 
   useEffect(() => {
     getProjects()
@@ -305,7 +321,7 @@ function Minting() {
           TimeStamp: TStamp,
           transactionData: hash?.data
         }
-        let Resp =  await Buymint(update);
+        let Resp = await Buymint(update);
         // let Resp = await saveTransaction(pendingObj);
         // let Resp = hash?.status == 'pending' ? await setPendingTransaction(pendingObj) : await Buymint(update)
         console.log("Resppppppsppsps dta", Resp);
@@ -366,7 +382,122 @@ function Minting() {
       <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />
       <BottomBar />
       <Header />
-      <Container fluid className="pt-3 home_wrapper over_hidercon">
+      <div className="hc-mint__banner">
+        <img src={mintBg} className="hc-mint__banner-image" />
+        <div className="hc-mint__banner-content">
+          <div className="row mx-auto">
+            <div className="custom_container  container">
+              <div className="row">
+                <div className="col-md-2 col-lg-1">
+                </div>
+                <div className="col-md-10 col-lg-11 hc-mint__banner-col--right">
+                  <div className="row align-items-end mb-3 mx-auto">
+                    <div className="col-12 mt-4 mt-lg-0 order-2 order-lg-1 col-lg-6">
+                      <div className="hc-mint__bannerInner-col--left">
+                        <div className="cus-back-btn mb-3">
+                          <Button className="px-0" onClick={() => navigate(-1)} >
+                            <i className="fa-solid fa-chevron-left"></i>
+                            Back
+                          </Button>
+                        </div>
+                        <div className="hc-mint__banner--wrapper mt-2">
+                          <img lazy src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} />
+                        </div>
+                        <p className="hc-mint__banner--title mt-3">
+                          Burj Alarab
+                        </p>
+                        <p className="hc-mint__banner--desc mt-3 mb-0">
+                          {project?.projectDescription}
+                        </p>
+                      </div>
+
+                    </div>
+                    {mint == "minted" ? <div className="col-12 order-1 order-lg-2 col-lg-6 d-flex justify-content-end">
+                      <div className="hc-mint__bannerInner-col--right">
+                        <div className="hc-mint__card-initialSales">
+                          <p className="title text-center">Initial Sales</p>
+                          <div className="row align-items-center mt-3">
+                            <div className="col-12 col-sm-3">
+                              <p className="label text-center text-sm-end">
+                                3 Minted
+                              </p>
+                            </div>
+                            <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0">
+                              <div className="hc-mint__initialSales--border">
+                                <div className="hc-mint__initialSales--progress" style={{ width: "10%" }}>
+                                  3
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-12 col-sm-3 d-flex justify-content-center mt-2 mt-sm-0">
+                              <p className="label">
+                                From 100
+                              </p>
+                            </div>
+                          </div>
+                          <p className="hc-mint__initialSales--themeText my-2 text-center">
+                            Available 97
+                          </p>
+                          <div className="row align-items-center">
+                            <div className="col-12 col-sm-3">
+                              <p className="label  text-center text-sm-end">
+                                No of NFT's
+                              </p>
+                            </div>
+                            <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0">
+                              <div className="hc-mint__initialSales--border">
+                                <input type="number" />
+                              </div>
+                            </div>
+                            <div className="col-12 col-sm-3 d-flex justify-content-center justify-content-sm-start mt-2 mt-sm-0">
+                              <p className="label text-center">
+                                1.0000000 USDT
+                              </p>
+                            </div>
+                          </div>
+                          <div className="row justify-content-center">
+
+                            <div className="col-12 col-sm-6 d-flex justify-content-center">
+
+                              <button className="mint_mintBtn d-flex justify-content-center mt-3 w-100 hc-mint__button-mint" disabled={loading} onClick={() => onMint()} >
+                                <img
+                                  className="header_wallet"
+                                  src={
+                                    require("../assets/images/whiteminting.svg").default
+                                  }
+                                />
+                                Mint
+                              </button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div> : <></>}
+
+                    {mint == "minting" ? <div className="col-12 order-1 order-lg-2 col-lg-6 d-flex justify-content-end">
+                      <div className="hc-mint__bannerInner-col--right">
+                        <div className="hc-mint__card-initialSales">
+                          <p className="title text-center">Tic Tock</p>
+                          <p className="title text-center">Your Opportunity Awaits!</p>
+                          <div className="hc-mint__card-timerWraper mt-3 mb-2">
+                            {project.unlockAt && <Countdown date={new Date(project.unlockAt)} onComplete={() => window.location.reload()} />}
+                          </div>
+
+                        </div>
+                      </div>
+                    </div> : <></>}
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <Container fluid className="pt-3 home_wrapper over_hidercon hc-mint__homeWrapper">
         <Container className="custom_container ">
           <Row>
             <Col lg={1} md={2} className="sidetab_holder">
@@ -374,18 +505,19 @@ function Minting() {
             </Col>
 
             <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner">
-              <div className="cus-back-btn mb-3">
+
+              {/* <div className="cus-back-btn mb-3">
                 <Button className="" onClick={() => navigate(-1)} >
                   <i className="fa-solid fa-chevron-left"></i>
                   Back
                 </Button>
-              </div>
+              </div> */}
               {/* <BreadPath/> */}
               {mint == "beforeMint" ? (
                 <>
-                  {/* <p className="mint_violetText">
+                  <p className="mint_violetText">
                     There Is No Minting Scheduled Now
-                  </p> */}
+                  </p>
                   <div className="pink_typeletter mt-3">
                     <Typewriter
                       options={{
@@ -492,8 +624,8 @@ function Minting() {
 
               {mint == "minting" ? (
                 <>
-                  <Row className="align-items-center">
-                    <Col lg={6} className="position-relative mb-5">
+                  <Row className="minted_top_space position-relative">
+                    {/* <Col lg={6} className="position-relative mb-5">
                       <img className="mint_pinkwaste" src={require('../assets/images/pinkwaste.png')} />
                       <h3 className="minting_detail">
                         Can't wait, Buy from
@@ -521,16 +653,16 @@ function Minting() {
 
                         </div>
                       </NavLink>
-                    </Col>
+                    </Col> */}
 
-                    <Col lg={6} className="position-relative mb-5">
+                    {/* <Col lg={6} className="position-relative mb-5">
                       <img className="img-fluid" src={require('../assets/images/minting.png')} />
                       <img className="min_bluewaste" src={require('../assets/images/violetwaste.png')} />
                       <img className="mint_greenwaste" src={require('../assets/images/greenwaste.png')} />
-                    </Col>
+                    </Col> */}
 
                     {/* <p className="mint_violetText mt-5">Guideline</p> */}
-                    <div className="pink_typeletter">
+                    {/* <div className="pink_typeletter">
                       <Typewriter
                         options={{
                           strings: ["Guideline"],
@@ -538,11 +670,11 @@ function Minting() {
                           loop: true,
                         }}
                       />
-                    </div>
-                    <h3 className="minting_detail mint_secondaryTitle mt-4">
+                    </div> */}
+                    {/* <h3 className="minting_detail mint_secondaryTitle mt-4">
                       Property Description
-                    </h3>
-                    <div className="row">
+                    </h3> */}
+                    {/* <div className="row">
                       <div className="col-xl-8 col-12 col-sm-8 col-md-8 col-lg-8">
                         <p className="mp_detailbrief mt-4">
                           {project?.projectDescription}
@@ -554,93 +686,136 @@ function Minting() {
                           <img src={PropertyDes} className="img-fluid" />
                         </div>
                       </div>
-                    </div>
+                    </div> */}
+                    <Col xs={12}>
+                      <Row className="mx-auto">
+                        <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
+                          Gallerysdf
+                        </h3>
+                        <div className="hc-mint__swiper-wrap">
 
-                    <Row className="mt-4">
-                      <Col lg={6}>
-                        <Row>
-                          <Col lg={8}>
-                            <p className="mint_scrollTitle">
-                              {cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title}
-                            </p>
-                            <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} />
+                          <button
+                            className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
+                            onClick={() => goPrev()}
+                          >
+                            <FaChevronLeft fill="#fff" fontSize={22} className="me-2" />
+                          </button>
 
-                          </Col>
-                        </Row>
-                      </Col>
-                      <Col lg={6}>
-                        <Row>
-                          <Col lg={8}>
-                            <p className="mint_scrollTitle">
-                              {cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title}
-                            </p>
-                            <ReadMore descText={cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.content} />
-                          </Col>
-                        </Row>
-                      </Col>
-                      <Row className="pi_higherTop">
-                        <Col lg={4}>
-                          <h1 className="mint_gradValue">1M$</h1>
-                        </Col>
-                        <Col lg={8}>
-                          <h3 className="minting_detail">Property Value</h3>
-                          <p className="mp_detailbrief">
-                            {project?.CMS?.filter((val) => val.stepTitle == "PROPERTY VALUE")?.[0]?.stepDescription}
-                          </p>
-                        </Col>
+
+                          <button
+                            className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
+                            onClick={() => goNext()}
+                          >
+
+                            <FaChevronRight fill="#fff" fontSize={22} className="ms-2" />
+                          </button>
+                          <Swiper
+                            className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper"
+                            slidesPerView={1}
+                            spaceBetween={30}
+                            navigation={{
+                              nextEl: ".swiper-button-next1",
+                              prevEl: ".swiper-button-prev1",
+                            }}
+                            keyboard={true}
+                            ref={swiperRef}
+                            pagination={{
+                              clickable: true,
+                            }}
+                            breakpoints={{
+                              320: {
+                                slidesPerView: 1,
+                                spaceBetween: 20,
+                              },
+                              576: {
+                                slidesPerView: 2,
+                                spaceBetween: 20,
+                              },
+                              768: {
+                                slidesPerView: 3,
+                                spaceBetween: 20,
+                              },
+                              992: {
+                                slidesPerView: 4,
+                                spaceBetween: 20,
+                              },
+                              1200: {
+                                slidesPerView: 4,
+                                spaceBetween: 20,
+                              },
+                              1500: {
+                                slidesPerView: 4,
+                                spaceBetween: 20,
+                              },
+                            }}
+                            modules={[Navigation, Keyboard]}
+                          >
+                            {collection.length != 0 && collection.map((i) => (
+                              <SwiperSlide>
+                                <GalleryCard data={i} />u
+                              </SwiperSlide>
+                            ))}
+                          </Swiper>
+                        </div>
+                        {/* <div className="position-relative">
+                          <div className="greenarrow_box"></div>
+                        </div> */}
                       </Row>
-                    </Row>
-                    <Row>
-                      <h3 className="minting_detail mint_secondaryTitle mt-4">
-                        Gallery
-                      </h3>
-                      <Swiper
-                        className="mySwiper bottomnav_colswiper pt-3 mt-4"
-                        slidesPerView={3}
-                        spaceBetween={30}
-                        navigation={true}
-                        keyboard={true}
-                        pagination={{
-                          clickable: true,
-                        }}
-                        breakpoints={{
-                          320: {
-                            slidesPerView: 1,
-                            spaceBetween: 20,
-                          },
-                          576: {
-                            slidesPerView: 2,
-                            spaceBetween: 20,
-                          },
-                          768: {
-                            slidesPerView: 3,
-                            spaceBetween: 20,
-                          },
-                          992: {
-                            slidesPerView: 4,
-                            spaceBetween: 20,
-                          },
-                          1200: {
-                            slidesPerView: 4,
-                            spaceBetween: 20,
-                          },
-                          1500: {
-                            slidesPerView: 5,
-                            spaceBetween: 20,
-                          },
-                        }}
-                        modules={[Navigation, Keyboard]}
-                      >
-                        {collection.length != 0 && collection.map((i) => (
-                          <SwiperSlide>
-                            <GalleryCard data={i} />u
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
-                      <div className="position-relative">
-                        <div className="greenarrow_box"></div>
-                      </div>
-                    </Row>
+
+                      <Row className="mt-5">
+                        <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
+                          Estimated Property Value <span className="hc-mint__span-gradient"> {project?.CMS?.filter((val) => val.stepTitle == "PROPERTY VALUE")?.[0]?.stepDescription}</span>
+                        </h3>
+                        <h5 className="hc-mint__content-subtitle mt-5">
+                          Property <strong>Description</strong>
+                        </h5>
+                        <p className="hc-mint__banner--desc mt-3 mb-0">
+                          {project?.projectDescription}
+                        </p>
+                        <Col lg={6} md={6} xs={12} className="mt-4">
+                          <Row>
+                            <Col lg={10} md={12} xs={12}>
+                              <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5">
+                                {cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title}
+                              </h5>
+                              <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} />
+
+                            </Col>
+                          </Row>
+                        </Col>
+                        <Col lg={6} md={6} xs={12} className="mt-4">
+                          <Row>
+                            <Col lg={8} md={12} xs={12}>
+                              <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5">
+                                {cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title}
+                              </h5>
+                              <ReadMore descText={cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.content} />
+                            </Col>
+                          </Row>
+                        </Col>
+                        {/* <Row className="pi_higherTop">
+                          <Col lg={4}>
+                            <h1 className="mint_gradValue">1M$</h1>
+                          </Col>
+                          <Col lg={8}>
+                            <h3 className="minting_detail">Property Value</h3>
+                            <p className="mp_detailbrief">
+                              {project?.CMS?.filter((val) => val.stepTitle == "PROPERTY VALUE")?.[0]?.stepDescription}
+                            </p>
+                          </Col>
+                        </Row> */}
+                        <Row className="mt-5">
+                          {/* <h3 className="minting_detail">{project.name} Road map</h3> */}
+                          <h3 className="projects_title text-center">{project.name} Road map</h3>
+                          <p className="mp_detailbrief text-center">
+                            {project?.CMS?.filter((val) => val.stepTitle == "Road map")?.[0]?.stepDescription}
+                          </p>
+
+                          <Roadmap data={project?.roadMap} />
+                        </Row>
+                      </Row>
+                    </Col>
+
                   </Row>
                 </>
               ) : (
@@ -649,9 +824,143 @@ function Minting() {
 
               {mint == "minted" ? (
                 <Row className="minted_top_space position-relative">
-                  <img src={require('../assets/images/greenwaste.png')} className="mint_afgreenwaste" />
-                  <img src={require('../assets/images/violetwaste.png')} className="mint_afviowaste" />
-                  <Col lg={12} className="minted_bgset">
+                  {/* <img src={require('../assets/images/greenwaste.png')} className="mint_afgreenwaste" />
+                  <img src={require('../assets/images/violetwaste.png')} className="mint_afviowaste" /> */}
+                  <Col xs={12}>
+                    <Row className="mx-auto">
+                      <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
+                        Gallery
+                      </h3>
+                      <div className="hc-mint__swiper-wrap">
+
+                        <button
+                          className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
+                          onClick={() => goPrev()}
+                        >
+                          <FaChevronLeft fill="#fff" fontSize={22} className="me-2" />
+                        </button>
+
+
+                        <button
+                          className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
+                          onClick={() => goNext()}
+                        >
+
+                          <FaChevronRight fill="#fff" fontSize={22} className="ms-2" />
+                        </button>
+                        <Swiper
+                          className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper"
+                          slidesPerView={1}
+                          spaceBetween={30}
+                          // navigation={true}
+                          keyboard={true}
+                          ref={swiperRef}
+                          pagination={{
+                            clickable: true,
+                          }}
+                          navigation={{
+                            nextEl: ".swiper-button-next1",
+                            prevEl: ".swiper-button-prev1",
+                          }}
+                          breakpoints={{
+                            320: {
+                              slidesPerView: 1,
+                              spaceBetween: 20,
+                            },
+                            576: {
+                              slidesPerView: 2,
+                              spaceBetween: 20,
+                            },
+                            768: {
+                              slidesPerView: 3,
+                              spaceBetween: 20,
+                            },
+                            992: {
+                              slidesPerView: 4,
+                              spaceBetween: 20,
+                            },
+                            1200: {
+                              slidesPerView: 4,
+                              spaceBetween: 20,
+                            },
+                            1500: {
+                              slidesPerView: 4,
+                              spaceBetween: 20,
+                            },
+                          }}
+                          modules={[Navigation, Keyboard]}
+                        >
+
+                          {collection.length != 0 && collection.map((i) => (
+                            <SwiperSlide>
+                              <GalleryCard data={i} />
+                            </SwiperSlide>
+                          ))}
+                        </Swiper>
+
+                      </div>
+                      {/* <div className="position-relative">
+                        <div className="greenarrow_box"></div>
+                      </div> */}
+                    </Row>
+                    <Row className="mt-5">
+                      <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
+                        Estimated Property Value <span className="hc-mint__span-gradient"> {project?.propertyValue?.toUpperCase?.() ?? "1M"}$</span>
+                      </h3>
+                      <h5 className="hc-mint__content-subtitle mt-5">
+                        Property <strong>Description</strong>
+                      </h5>
+                      <p className="hc-mint__banner--desc mt-3 mb-0">
+                        {project?.projectDescription}
+                      </p>
+                      <Col lg={6} md={6} xs={12} className="mt-4">
+                        <Row>
+                          <Col lg={10} md={12} xs={12}>
+                            <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5">
+                              {cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title}
+                            </h5>
+                            <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} />
+
+                          </Col>
+                        </Row>
+                      </Col>
+                      <Col lg={6} md={6} xs={12} className="mt-4">
+                        <Row>
+                          <Col lg={8} md={12} xs={12}>
+                            <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5">
+
+                              {cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title}
+                            </h5>
+                            <ReadMore descText={cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.content} />
+                          </Col>
+                        </Row>
+                      </Col>
+                      {/* <Row className="pi_higherTop align-items-center">
+                        <Col lg={4}>
+                          <h1 className="mint_gradValue new">{project?.propertyValue?.toUpperCase?.() ?? "1M"}$</h1>
+                        </Col>
+                        <Col lg={8}>
+                          <h3 className="minting_detail">Property Value</h3>
+                          <p className="mp_detailbrief">
+                            {project?.CMS?.filter((val) => val.stepTitle == "PROPERTY VALUE")?.[0]?.stepDescription}
+                          </p>
+                        </Col>
+                      </Row> */}
+                    </Row>
+
+                    <Row className="mt-5">
+                      {/* <h3 className="minting_detail">{project.name} Road map</h3> */}
+                      <h3 className="hc-mint__content-subtitle mt-5 text-center">{project.name}<strong>Road</strong>  map</h3>
+                      <p className="hc-mint__banner--desc mt-3 mb-0 text-center mb-3">
+                        {project?.CMS?.filter((val) => val.stepTitle == "Road map")?.[0]?.stepDescription}
+                      </p>
+
+                      <Roadmap data={project?.roadMap} />
+                    </Row>
+
+
+                  </Col>
+                  {/* <Col lg={12} className="minted_bgset">
                     <h3 className="minting_detail text-center">
                       Buy a Piece of This Property RIGHT NOW!
                     </h3>
@@ -675,7 +984,7 @@ function Minting() {
 
                     </div>
                     <p className="minted_values" style={{ justifyContent: "center", display: "flex", marginTop: "10px" }}>Available {isAvailable}</p>
-                    {/* <Row className="justify-content-center mt-4">
+                    <Row className="justify-content-center mt-4">
                       <Col lg={5} md={5} sm={10} xs={10}  >
 
                         <ImgAudVideo
@@ -697,7 +1006,7 @@ function Minting() {
                         <h5 className="marketplae_topdata text-center mt-3">{tokenDetails?.NFTName}</h5>
                       </Col>
 
-                    </Row> */}
+                    </Row>
 
                     <div className="mint_gameProgress d-flex justify-content-center align-items-center flex-column flex-sm-row  mt-4 gap-3">
                       <p className="mint_countValue">Number of NFTs</p>
@@ -705,17 +1014,17 @@ function Minting() {
                         onChange={(e) => {
                           setMintcount(e.target.value);
                         }} />
-                      {/* <p className="mint_countValue">{(mintCount * parseFloat(project?.NFTPrice)).toFixed(7)} BNB = {project?.NFTPrice && ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(4)} $</p> */}
+                      <p className="mint_countValue">{(mintCount * parseFloat(project?.NFTPrice)).toFixed(7)} BNB = {project?.NFTPrice && ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(4)} $</p>
                       <p className="mint_countValue">{(mintCount * parseFloat(project?.NFTPrice)).toFixed(7)} {project?.mintTokenName}</p>
                     </div>
                     <div className="mint_dualBtns mt-4">
-                      {/* {!wallet?.accountAddress && <button onClick={() => setShowWallet(true)} className="bodygradientBtn mint_cnctwallet">
+                      {!wallet?.accountAddress && <button onClick={() => setShowWallet(true)} className="bodygradientBtn mint_cnctwallet">
                         <img
                           className="header_wallet"
                           src={require("../assets/images/wallet.svg").default}
                         />
                         Connect-Wallet
-                      </button>} */}
+                      </button>}
 
                       <button className="mint_mintBtn mt-4" disabled={loading} onClick={() => onMint()} >
                         <img
@@ -729,9 +1038,9 @@ function Minting() {
                     </div>
                   </Col>
 
-                  {/* <p className="mint_violetText minted_middletop_space">
+                  <p className="mint_violetText minted_middletop_space">
                     Guideline
-                  </p> */}
+                  </p>
                   <div className="pink_typeletter mt-5">
                     <Typewriter
                       options={{
@@ -793,7 +1102,7 @@ function Minting() {
                     </Row>
 
                     <Row className="mt-5">
-                      {/* <h3 className="minting_detail">{project.name} Road map</h3> */}
+                      <h3 className="minting_detail">{project.name} Road map</h3>
                       <h3 className="projects_title text-center">{project.name} Road map</h3>
                       <p className="mp_detailbrief text-center">
                         {project?.CMS?.filter((val) => val.stepTitle == "Road map")?.[0]?.stepDescription}
@@ -804,7 +1113,7 @@ function Minting() {
 
                     <Row className="mt-5">
                       <h3 className="minting_detail mint_secondaryTitle pt-3 mt-4 mb-3">
-                        Gallery
+                        Galleryasf
                       </h3>
                       <Swiper
                         className="mySwiper bottomnav_colswiper pt-4"
@@ -853,7 +1162,7 @@ function Minting() {
                         <div className="greenarrow_box"></div>
                       </div>
                     </Row>
-                  </Col>
+                  </Col> */}
                 </Row>
               ) : (
                 <></>
@@ -864,15 +1173,15 @@ function Minting() {
           </Row>
         </Container>
         <Footer />
-        {mint == "minted" ?
+        {/* {mint == "minted" ?
           <div className="five_imgbg">
 
           </div> :
           <></>
-        }
+        } */}
       </Container>
       {showWallet && <ConnectWallet show={showWallet} handleCloseWallet={() => setShowWallet(false)} />}
-      <div className='gradient_holder staking_gradholder'></div>
+      {/* <div className='gradient_holder staking_gradholder'></div> */}
     </>
   );
 }

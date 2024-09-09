@@ -6,7 +6,7 @@ function GalleryCard(props) {
   const { coinName, collectionImg, galleryTitle, projectId, galleryThumbImage, id } = props.data;
   return (
     <>
-      <div className="nft_card new">
+      <div className="nft_card new hc-card__nft-new">
         <div className="nftcard_imgwrapper">
           <NavLink to={{ pathname: `/collectionInfo` }}
             state={props.data}

@@ -111,17 +111,17 @@ function Staking() {
       ...provided,
       height: "40px",
       padding: "0 20px",
-      backgroundColor: "#000 ",
+      backgroundColor: "transparent ",
       // border: "1px solid rgba(34, 34, 34, 0.32)",
       borderRadius: 5,
       fontSize: "13px",
     }),
     control: (provided, state) => ({
       ...provided,
-      height: "40px",
+      height: "100%",
       borderRadius: 5,
-      // backgroundColor: "#fff",
-      border: "none",
+      backgroundColor: "transparent",
+      border: "1px solid #16EBC3",
       outline: "none",
       boxShadow: "none",
     }),
@@ -135,7 +135,7 @@ function Staking() {
     }),
     singleValue: (provided, state) => ({
       ...provided,
-      color: "#6C6A81",
+      color: "#fff",
     }),
     menuList: (base) => ({
       ...base,
@@ -256,7 +256,7 @@ function Staking() {
     control: (provided, { isFocused, isSelected, isHovered }) => ({
       ...provided,
       height: "40px",
-      width: "150px",
+      width: "230px",
       borderRadius: 5,
       backgroundColor: isHovered
         ? "transperant"
@@ -265,16 +265,17 @@ function Staking() {
           : isFocused
             ? "transperant"
             : "transperant",
-      // backgroundColor: "#fff",
-      border: "none",
+      backgroundColor: "#080808B2",
+      border: "1px solid #525252",
       outline: "none",
       boxShadow: "none",
       color: "#16EBC3",
+
     }),
     indicatorsContainer: (provided, state) => ({
       ...provided,
       height: "40px",
-      width: "20px",
+      width: "unset",
       position: "absolute",
       right: 0,
       top: 0,
@@ -282,12 +283,13 @@ function Staking() {
     }),
     singleValue: (provided, state) => ({
       ...provided,
-      color: "#16EBC3",
+      color: "#fff",
     }),
     menuList: (base) => ({
       ...base,
       // kill the white space on first and last option
       padding: 0,
+      border: "1px solid #16EBC3"
     }),
   };
 
@@ -571,15 +573,15 @@ function Staking() {
               {/* <BreadPath/> */}
               <Row className="timer_row ">
                 <Col lg={9}>
-                  <h3 className="lorem_title">Lorem ipsum dolor</h3>
+                  <h3 className=" hc-claim__title">Claim Rewards</h3>
                   <Row className="counter_row justify-content-center">
-                    <Col xl={4} lg={6} md={6} sm={6} xs={12} className="mb-3">
+                    <Col xl={4} sm={6} xs={12} className="mb-3">
                       <div className="stack_nftcounter">
                         <p className="nftcounter_lable">Number of NFTs :</p>
                         <p className="nftcounter_value">{nftCounts?.totalNfts}</p>
                       </div>
                     </Col>
-                    <Col xl={4} lg={6} md={6} sm={6} xs={12} className="mb-3">
+                    <Col xl={4} sm={6} xs={12} className="mb-3">
                       <div className="stack_nftcounter">
                         <p className="nftcounter_lable">
                           Number of Staked NFTs :
@@ -587,7 +589,7 @@ function Staking() {
                         <p className="nftcounter_value">{nftCounts?.isStaked}</p>
                       </div>
                     </Col>
-                    <Col xl={4} lg={6} md={6} sm={6} xs={12} className="mb-3">
+                    <Col xl={4} sm={6} xs={12} className="mb-3">
                       <div className="stack_nftcounter">
                         <p className="nftcounter_lable">
                           Number of non-staked NFTs :
@@ -598,15 +600,16 @@ function Staking() {
                   </Row>
 
                   <Row className="timer_row">
-                    <Col lg={6}>
-                      <div className="hr_aligner">
+                    <Col lg={9} xxl={8}>
+                      {/* <div className="hr_aligner">
                         <hr className="radiant_hr" />
-                      </div>
+                      </div> */}
                       <div className="stack_dateholder">
-                        <p className="stack_datehint">
-                          Next Reward Distribution Date:
-                        </p>
-                        <p className="stack_datevalue">{new Date(rewardDetail?.endDateFormat).toLocaleDateString()}</p>
+                        <h5 className="hc-stake__subtitle mt-3 text-center">
+                          Next Reward Distribution Date: <span>
+                            {new Date(rewardDetail?.endDateFormat).toLocaleDateString()}
+                          </span>
+                        </h5>
                       </div>
                       <div className="stack_countdown">
                         <Countdown date={new Date(rewardDetail?.endDateFormat)} />
@@ -620,7 +623,7 @@ function Staking() {
                 <Col lg={12}>
                   <div className="stck_nftwrapper">
                     <Row className="justify-content-center">
-                      <Col lg={4} md={8} sm={10} xs={12}>
+                      <Col xs={12} className="d-flex justify-content-center">
                         <Row className="top_reltab">
                           <Col lg={6} xs={6} className="reltab_holder">
                             <div
@@ -665,8 +668,8 @@ function Staking() {
                     </Row>
                     {activeTab == "staking" ? (
                       <>
-                        <Row className="justify-content-between mt-2">
-                          <Col lg={4} md={6} sm={6} xs={12}>
+                        <Row className=" mt-4">
+                          <div className="d-flex align-items-center gap-3">
                             <div
                               className={
                                 mobSearch
@@ -695,6 +698,15 @@ function Staking() {
                                 onClick={() => setMobSearch(false)}
                               />
                             </div>
+                            <Select
+                              className="border_select"
+                              placeholder="Select status"
+                              styles={stylesgraybgOne}
+                              value={filter}
+                              options={optionsOne}
+
+                              onChange={(e) => setFilter(e)}
+                            />
 
                             <div
                               className={
@@ -710,15 +722,11 @@ function Staking() {
                                 }
                               />
                             </div>
-                          </Col>
-                          <Col
-                            lg={4}
-                            md={6}
-                            sm={6}
-                            xs={12}
+                          </div>
+                          {/* <div
                             className="d-flex justify-content-end"
                           >
-                            {/* <Dropdown className="stack_dropdown">
+                            <Dropdown className="stack_dropdown">
                               <Dropdown.Toggle
                                 variant="dark"
                                 id="dropdown-basic"
@@ -738,18 +746,10 @@ function Staking() {
                                   Something else
                                 </Dropdown.Item>
                               </Dropdown.Menu>
-                            </Dropdown> */}
+                            </Dropdown>
 
-                            <Select
-                              className="border_select"
-                              placeholder="Select status"
-                              styles={stylesgraybgOne}
-                              value={filter}
-                              options={optionsOne}
-
-                              onChange={(e) => setFilter(e)}
-                            />
-                          </Col>
+   
+                          </div> */}
                         </Row>
 
                         <Row className="nftcard_wrap">
@@ -776,11 +776,11 @@ function Staking() {
                         {accountAddress ? (
                           <Row className="justify-content-center">
                             <Col lg={8}>
-                              <h3 className="lorem_title">
+                              <h5 className="hc-stake__subtitle mt-4 text-center">
                                 Total Rewards Received {rewardAmount.toFixed(7)} USDT
-                              </h3>
+                              </h5>
                               <Row className="select_holder">
-                                <Col lg={5}>
+                                <Col lg={5} className="mb-3">
                                   <Select
                                     className="border_select"
                                     placeholder="Project"
@@ -790,7 +790,7 @@ function Staking() {
                                     options={projectArr}
                                   />
                                 </Col>
-                                <Col lg={5}>
+                                <Col lg={5} className="mb-3">
                                   <Select
                                     className="border_select"
                                     placeholder="Quarter"
@@ -802,12 +802,12 @@ function Staking() {
                                   />
                                 </Col>
                               </Row>
-                              <div className="d-flex justify-content-center mt-4">
+                              <div className="d-flex justify-content-center mt-4 mt-lg-5">
                                 <button className="header_gradientBtn stack_submitbtn" onClick={() => onClaimReward()} >
                                   Submit
                                 </button>
                               </div>
-                              <Row className="justify-content-center mt-3">
+                              <Row className="justify-content-center mt-4">
                                 <Col lg={5}>
                                   <div className="stack_pendingholder">
                                     <p className="stack_pendinghint">

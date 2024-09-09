@@ -67,16 +67,16 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
     },
     valueContainer: (provided, { isFocused, isSelected, isHovered }) => ({
       ...provided,
-      height: "40px",
+      height: "49px",
       width: "40px",
       backgroundColor: isHovered
-        ? "#1D1D1D4F"
+        ? "transparent"
         : isSelected
-          ? "#1D1D1D4F"
+          ? "transparent"
           : isFocused
-            ? "#1D1D1D4F"
-            : "#1D1D1D4F",
-      border: "1px solid gray",
+            ? "transparent"
+            : "transparent",
+      border: "2px solid #16ebc3",
       borderRadius: 5,
       fontSize: "13px",
       color: "#fff",
@@ -105,12 +105,13 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
       width: "40px",
       position: "absolute",
       right: 0,
-      top: 0,
+      top: "5px",
       color: "#16EBC3",
     }),
     singleValue: (provided, state) => ({
       ...provided,
-      color: "#16EBC3",
+      color: "#fff",
+
     }),
     menuList: (base) => ({
       ...base,
@@ -188,10 +189,10 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
       >
         <Modal.Body>
           <div className='modal_top'>
-            <div className='kyc_poptop'>
-              <img src={require('../assets/images/redround.svg').default} />
+            <div className='kyc_poptop w-100'>
+              {/* <img src={require('../assets/images/redround.svg').default} /> */}
 
-              <p className='modal_title text-center text-danger'>Activate Your KYC</p>
+              <p className='modal_title text-center '>Activate Your KYC</p>
             </div>
             <img src={require('../assets/images/close.svg').default} id='redCloser' onClick={() => handleClose()} className='modal_closer' />
 
@@ -203,7 +204,7 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
             {/* {desc.map((i) => (
               <>
                 {description ? ( */}
-            <p className="mp_detailbrief mint_scrollText mt-4" dangerouslySetInnerHTML={{ __html: kycCon?.content }} >
+            <p className="hc-kyc__modal-p mt-4" dangerouslySetInnerHTML={{ __html: kycCon?.content }} >
             </p>
             {/* ) : (
                   <p className="mp_detailbrief mint_scrollText mt-4">
@@ -226,35 +227,35 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
               <Col lg={6} xs={12} className='mb-3'>
                 <div className='mt-3'>
                   <p className='modal_summaryLabel'>Name</p>
-                  <input type="text" className='modal_singleinput mt-3' id="Name" disabled={Profile?.KycStatus == "complete"} value={Profile?.Name} onChange={handleChange} placeholder='Parsa' />
+                  <input type="text" className='modal_singleinput mt-2' id="Name" disabled={Profile?.KycStatus == "complete"} value={Profile?.Name} onChange={handleChange} placeholder='Parsa' />
                   <p style={{ color: "red", fontSize: 12 }}>{Error?.Name}</p>
                 </div>
               </Col>
               <Col lg={6} xs={12} className='mb-3'>
                 <div className='mt-3'>
                   <p className='modal_summaryLabel'>Sure Name</p>
-                  <input type="text" className='modal_singleinput mt-3' id="SurName" disabled={Profile?.KycStatus == "complete"} value={Profile?.SurName} onChange={handleChange} placeholder='Parsa' />
+                  <input type="text" className='modal_singleinput mt-2' id="SurName" disabled={Profile?.KycStatus == "complete"} value={Profile?.SurName} onChange={handleChange} placeholder='Parsa' />
                   <p style={{ color: "red", fontSize: 12 }}>{Error?.SurName}</p>
                 </div>
               </Col>
               <Col lg={6} xs={12} className='mb-3'>
                 <div className='mt-3'>
                   <p className='modal_summaryLabel'>Email Address</p>
-                  <input type="text" className='modal_singleinput mt-3' id="EmailId" value={Profile?.EmailId} onChange={handleChange} placeholder='test@gmail.com' />
+                  <input type="text" className='modal_singleinput mt-2' id="EmailId" value={Profile?.EmailId} onChange={handleChange} placeholder='test@gmail.com' />
                   <p style={{ color: "red", fontSize: 12 }}>{Error?.EmailId}</p>
                 </div>
               </Col>
               <Col lg={6} xs={12} className='mb-3'>
                 <div className='mt-3'>
                   <p className='modal_summaryLabel'>Address</p>
-                  <input type="text" className='modal_singleinput mt-3' id="Address" value={Profile?.Address} onChange={handleChange} placeholder='Enter Address' />
+                  <input type="text" className='modal_singleinput mt-2' id="Address" value={Profile?.Address} onChange={handleChange} placeholder='Enter Address' />
                   <p style={{ color: "red", fontSize: 12 }}>{Error?.Address}</p>
                 </div>
               </Col>
               <Col lg={6} xs={12} className='mb-3'>
                 <div className=''>
                   <p className='modal_summaryLabel'>Telephone (with pincode)</p>
-                  <div className='kyc_phoneInput mt-3'>
+                  <div className='kyc_phoneInput mt-2'>
                     <PhoneInput
                       placeholder="Enter phone number"
                       value={Profile?.mobileNumber}
@@ -266,7 +267,7 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
               </Col>
               <Col lg={6} xs={12} className='mb-3'>
                 <div className=''>
-                  <p className='modal_summaryLabel mb-3'>Nationality</p>
+                  <p className='modal_summaryLabel mb-2'>Nationality</p>
                   <Select
                     className="border_select"
                     placeholder="Select Project"
@@ -305,7 +306,7 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
                     id="buynow"
                   >
                     <Form.Check.Input type="checkbox" isValid checked={Profile?.termsAccepted} onChange={(e) => setUserProfile({ ...Profile, termsAccepted: e.target.checked })} />
-                    <Form.Check.Label className='profile_joinDate style_none'>Accept Terms And Conditions</Form.Check.Label>
+                    <Form.Check.Label className='modal_summaryLabel '>Accept Terms And Conditions</Form.Check.Label>
                   </Form.Check>
                 </Form>
               </Col>

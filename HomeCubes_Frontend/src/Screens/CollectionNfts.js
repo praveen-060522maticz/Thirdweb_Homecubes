@@ -99,43 +99,47 @@ function CollectionNfts() {
                                 </Button>
                             </div>
                             <hr className="projects_hr" />
+                            <div className="d-flex flex-wrap gap-4  gap-xl-5">
+                                <div className="mp_collectionDetail mb-2">
+                                    <p className="mp_collectionLabel">Number of NFTs :</p>
+                                    <p className="mp_collectionValue">
+                                        {projectDetail?.maxNFTs}
+                                    </p>
+                                </div>
+                                <div className="mp_collectionDetail mb-2">
+                                    <p className="mp_collectionLabel">
+                                        Number of Minted NFTs :
+                                    </p>
+                                    <p className="mp_collectionValue">
+                                        {nftLength}
+                                    </p>
+                                </div>
+                                <div className="mp_collectionDetail mb-2">
+                                    <p className="mp_collectionLabel">
+                                        Number of Staked NFTs :
+                                    </p>
+                                    <p className="mp_collectionValue">
+                                        {staked}
+                                    </p>
+                                </div>
+                                <div className="mp_collectionDetail mb-2">
+                                    <p className="mp_collectionLabel">
+                                        Number of Non-Staked NFTs :
+                                    </p>
+                                    <p className="mp_collectionValue">
+                                        {unStaked}
+                                    </p>
+                                </div>
+                            </div>
 
                             <Row>
                                 <Col lg={5} md={6} sm={6} xs={12}>
                                     <div className="">
-                                        <div className="mp_collectionDetail mb-2">
-                                            <p className="mp_collectionLabel">Number of NFTs :</p>
-                                            <p className="mp_collectionValue">
-                                                {projectDetail?.maxNFTs}
-                                            </p>
-                                        </div>
-                                        <div className="mp_collectionDetail mb-2">
-                                            <p className="mp_collectionLabel">
-                                                Number of Minted NFTs :
-                                            </p>
-                                            <p className="mp_collectionValue">
-                                                {nftLength}
-                                            </p>
-                                        </div>
+
                                     </div>
                                 </Col>
                                 <Col lg={5} md={6} sm={6} xs={12}>
-                                    <div className="mp_collectionDetail mb-2">
-                                        <p className="mp_collectionLabel">
-                                            Number of Staked NFTs :
-                                        </p>
-                                        <p className="mp_collectionValue">
-                                            {staked}
-                                        </p>
-                                    </div>
-                                    <div className="mp_collectionDetail mb-2">
-                                        <p className="mp_collectionLabel">
-                                            Number of Non-Staked NFTs :
-                                        </p>
-                                        <p className="mp_collectionValue">
-                                            {unStaked}
-                                        </p>
-                                    </div>
+
                                 </Col>
                             </Row>
 
@@ -157,7 +161,7 @@ function CollectionNfts() {
             </Container>
 
             <div className="gradient_holder staking_gradholder"></div>
-            <div className="dualImg_bg"></div>
+            {/* <div className="dualImg_bg"></div> */}
         </>
     );
 }

@@ -1367,7 +1367,7 @@ export default function useContractProviderHook() {
                     })
             const receipt = await get_receipt(contract_Method_Hash.transactionHash ? contract_Method_Hash.transactionHash : contract_Method_Hash);
             var need_data = {
-                status: receipt.status,
+                status: receipt.status, 
                 HashValue: receipt.transactionHash,
             }
             return need_data;

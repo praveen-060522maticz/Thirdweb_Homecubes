@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Container, Row, Col, Accordion, Form } from "react-bootstrap";
 import SideTab from "../Components/SideTab";
 import BottomBar from "../Components/BottomBar";
@@ -21,6 +21,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify'
 import ProjectCard from "../Components/ProjectCard";
 import { getCmsContent } from "../actions/axioss/cms.axios";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+
 
 function Marketplace() {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -38,6 +40,7 @@ function Marketplace() {
   const [searchVal, setSearchVal] = useState('')
   const [filters, setFilters] = useState([])
   const [priceCal, setPriceCal] = useState({})
+  const swiperRef = useRef(null);
 
   const { BNBUSDT } = useSelector(
     (state) => state.LoginReducer.AccountDetails
@@ -177,7 +180,7 @@ function Marketplace() {
             ? "transperant"
             : "transperant",
       // backgroundColor: "#fff",
-      border: "none",
+      border: "1px solid #16ebc3",
       outline: "none",
       boxShadow: "none",
       color: "#fff",
@@ -230,6 +233,16 @@ function Marketplace() {
 
     }
   }
+  const goPrev = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slidePrev();
+    }
+  };
+  const goNext = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
+    }
+  };
 
   useEffect(() => {
     getCmsList()
@@ -250,7 +263,7 @@ function Marketplace() {
     <>
       <BottomBar />
       <Header />
-      <Container fluid className="pt-3 home_wrapper">
+      <Container fluid className="pt-3 home_wrapper hc-marketplace">
         <Container className="custom_container">
           <Row>
             <Col lg={1} md={2} className="sidetab_holder">
@@ -258,104 +271,98 @@ function Marketplace() {
             </Col>
             <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner mt-4">
               {/* <BreadPath/> */}
-              <h3 className="marketplace_title">Our Latest Collection</h3>
-              <p className="markeplace_hint" dangerouslySetInnerHTML={{ __html: coll?.content }} >
+              <h3 className="hc-home__title home_titled">Our <strong>Unique</strong> Marketplace</h3>
+              <p className="mp_detailbrief hc-home__desc mt-3" dangerouslySetInnerHTML={{ __html: coll?.content }} >
               </p>
-              <Swiper
-                className="mySwiper bottomnav_colswiper collection_swiper mt-4 pt-3"
-                spaceBetween={30}
-                navigation={true}
-                keyboard={true}
-                pagination={{
-                  clickable: true,
-                }}
-                breakpoints={{
-                  320: {
-                    slidesPerView: 1.2,
-                    spaceBetween: 20,
-                  },
-                  450: {
-                    slidesPerView: 1.5,
-                    spaceBetween: 20,
-                  },
-                  576: {
-                    slidesPerView: 1.6,
-                    spaceBetween: 20,
-                  },
-                  768: {
-                    slidesPerView: 2.1,
-                    spaceBetween: 20,
-                  },
-                  992: {
-                    slidesPerView: 3.1,
-                    spaceBetween: 20,
-                  },
-                  1200: {
-                    slidesPerView: 3.7,
-                    spaceBetween: 20,
-                  },
-                  1500: {
-                    slidesPerView: 4.2,
-                    spaceBetween: 20,
-                  },
-                  1900: {
-                    slidesPerView: 4.2,
-                    spaceBetween: 20,
-                  },
-                }}
-                modules={[Navigation, Keyboard]}
-              >
-                {/* {collection.map((val) => (
+              <div className="hc-mint__swiper-wrap">
+
+                <button
+                  className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
+                  onClick={() => goPrev()}
+                >
+                  <FaChevronLeft fill="#fff" fontSize={22} className="me-2" />
+                </button>
+
+
+                <button
+                  className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
+                  onClick={() => goNext()}
+                >
+
+                  <FaChevronRight fill="#fff" fontSize={22} className="ms-2" />
+                </button>
+                <Swiper
+                  className="mySwiper bottomnav_colswiper collection_swiper mt-4 pt-3"
+                  spaceBetween={30}
+                  navigation={{
+                    nextEl: ".swiper-button-next1",
+                    prevEl: ".swiper-button-prev1",
+                  }}
+                  keyboard={true}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  breakpoints={{
+                    320: {
+                      slidesPerView: 1.2,
+                      spaceBetween: 20,
+                    },
+                    450: {
+                      slidesPerView: 1.5,
+                      spaceBetween: 20,
+                    },
+                    576: {
+                      slidesPerView: 1.6,
+                      spaceBetween: 20,
+                    },
+                    768: {
+                      slidesPerView: 2.1,
+                      spaceBetween: 20,
+                    },
+                    992: {
+                      slidesPerView: 3.1,
+                      spaceBetween: 20,
+                    },
+                    1200: {
+                      slidesPerView: 3.7,
+                      spaceBetween: 20,
+                    },
+                    1500: {
+                      slidesPerView: 4.2,
+                      spaceBetween: 20,
+                    },
+                    1900: {
+                      slidesPerView: 4.2,
+                      spaceBetween: 20,
+                    },
+                  }}
+                  modules={[Navigation, Keyboard]}
+                >
+                  {/* {collection.map((val) => (
                   <SwiperSlide>
                     <CollectionCard data={val} />
                   </SwiperSlide>
                 ))} */}
 
-                {project.length != 0 && project.map((i) =>
-                  <SwiperSlide>
-                    <ProjectCard data={i} show={false} market={true} />
-                  </SwiperSlide>
-                )}
-              </Swiper>
-              <div className="greenarrow_boxHolder position-relative">
+                  {project.length != 0 && project.map((i) =>
+                    <SwiperSlide>
+                      <ProjectCard data={i} show={false} market={true} />
+                    </SwiperSlide>
+                  )}
+                </Swiper>
+                {/* <div className="greenarrow_boxHolder position-relative">
                 <div className="greenarrow_box"></div>
-              </div>
-              {/* <div className='swiper_buttons'>
+              </div> */}
+                {/* <div className='swiper_buttons'>
       </div> */}
+              </div>
 
               <Row className="justify-content-between mt-5">
-                <h3 className="marketplae_topdata">
-                  Top Trending <span className="gradient_text">NFT's</span>
+                <h3 className="hc-home__title home_titled">
+                  Top Trending <strong>NFT's</strong>
                 </h3>
                 <Col lg={4} md={6} sm={6} xs={12} className="mb-3">
-                  <div
-                    className={
-                      mobSearch
-                        ? "stack_searchbar"
-                        : " stack_searchbar stack_searchbarhider"
-                    }
-                  >
-                    <div className="d-flex justify-content-start align-items-center">
-                      <img
-                        className="searchglass"
-                        src={
-                          require("../assets/images/searchglass.svg").default
-                        }
-                      />
-                      {/* <input type='text' className='stack_search' placeholder='Search...' /> */}
-                      <ReactSearchBox
-                        placeholder="Search..."
-                        value={searchVal}
-                        onChange={(e) => setSearchVal(e)}
-                        data={nftcardData}
-                        callback={(record) => console.log("Searchinggggggg", record)}
-                      />
-                    </div>
-                    <i
-                      class="fa-solid fa-xmark search_closer"
-                      onClick={() => setMobSearch(false)}
-                    />
-                  </div>
+
 
                   <div
                     className={mobSearch ? "d-none" : " stack_searchbarmob"}
@@ -388,7 +395,7 @@ function Marketplace() {
                         setNftcardData(nftcardData.sort((a, b) => parseFloat(isEmpty(a.NFTPrice) ? 0 : a.NFTPrice) - parseFloat(isEmpty(b.NFTPrice) ? 0 : b.NFTPrice)))
                       }
                       else {
-                        getCollectionTokens(true,"onSale")
+                        getCollectionTokens(true, "onSale")
                       }
                       setSelectedOption(e)
                     }}
@@ -399,17 +406,45 @@ function Marketplace() {
 
               <Row className="mt-4">
                 <Col xl={3} lg={4} md={5} sm={6} xs={12} className=" mb-3">
-                  <div className="mp_accord_holder">
+                  <div
+                    className={
+                      ` mb-4 ${mobSearch
+                        ? "stack_searchbar"
+                        : " stack_searchbar stack_searchbarhider"}`
+                    }
+                  >
+                    <div className="d-flex justify-content-start align-items-center">
+                      <img
+                        className="searchglass"
+                        src={
+                          require("../assets/images/searchglass.svg").default
+                        }
+                      />
+                      {/* <input type='text' className='stack_search' placeholder='Search...' /> */}
+                      <ReactSearchBox
+                        placeholder="Search..."
+                        value={searchVal}
+                        onChange={(e) => setSearchVal(e)}
+                        data={nftcardData}
+                        callback={(record) => console.log("Searchinggggggg", record)}
+                      />
+                    </div>
+                    <i
+                      class="fa-solid fa-xmark search_closer"
+                      onClick={() => setMobSearch(false)}
+                    />
+                  </div>
+                  <div className="mp_accord_holder mb-4">
                     <Accordion
                       className="mp_accordion"
                       defaultActiveKey={["0"]}
                       flush
                     >
-                      <Accordion.Item eventKey="0" className="mb-2">
-                        <Accordion.Header className="mb-3" onClick={() => setPriceCal({})} >
+                      <Accordion.Item eventKey="0" className="">
+                        <Accordion.Header className="" onClick={() => setPriceCal({})} >
                           Status <i class="fa-solid fa-angle-down" />
                         </Accordion.Header>
-                        <Accordion.Body>
+                        <Accordion.Body className="mt-3">
                           <div className="mp_status">
                             <p className="mp_statusLabel">Buy Now</p>
                             <Form>
@@ -438,11 +473,18 @@ function Marketplace() {
                           </div>
                         </Accordion.Body>
                       </Accordion.Item>
+                    </Accordion>
+                  </div>
+                  <div className="mp_accord_holder">
+                    <Accordion
+                      className="mp_accordion"
+                    >
+
                       <Accordion.Item eventKey="1">
-                        <Accordion.Header className="mb-3">
+                        <Accordion.Header className="">
                           Price <i class="fa-solid fa-angle-down" />
                         </Accordion.Header>
-                        <Accordion.Body>
+                        <Accordion.Body className="mt-3">
                           <div className="mb_pricetab_holder">
                             <button
                               className={
