@@ -54,7 +54,7 @@ function DataCard(props) {
             <p className="nft_name hc-nft__card-title">{NFTName}</p>
             <p className="nft_stackdate">Days Staked on this Quarter : {getStakedDate ?? "None"}</p>
             <p className="nft_expiry">Staking expiry date: {stake?.endDate ? new Date(stake?.endDate).toLocaleDateString() : "None"}</p>
-            <button className={!isStaked ? "nftcard_btnblue" : "nftcard_btnviolet"}>{!isStaked ? "Stake" : "Withdraw"}</button>
+            <button className={!isStaked ? "bodygradientBtn modal_grdientBtn mt-3" : "nftcard_btnviolet mt-3"}>{!isStaked ? "List For Rent" : "Remove From Rent"}</button>
           </div>}
 
         {pathname == "/staking" ? <></> :

@@ -78,6 +78,7 @@
   --text-color-1: #F84A4A;
   --text-color-2: #9A9A9A;
   --text-color-3: #AAAAAA;
+  --text-color-4: #AF49FF;
 }
 
 @font-face {
@@ -548,17 +549,17 @@
   background-color: transparent;
   color: var(--white);
   font-size: var(--font-fifteen);
-  font-family: var(--poppins);
+  font-family: var(--montserrat-font);
   border: none;
   outline: none;
   width: 100%;
   /* max-width: 85%;
   min-width: 85%; */
+  font-weight: 500;
 }
 
 .stack_search::placeholder {
-  color: var(--placeholder_color);
-  letter-spacing: 1.5px;
+  color: var(--white);
 }
 
 .stack_searchbar {
@@ -791,22 +792,20 @@
 
 .nft_stackdate {
   color: var(--white);
-  font-size: var(--lower_fontsize);
-  font-family: var(--poppins);
+  font-size: 13px;
+  font-family: var(--montserrat-font);
   margin: 0;
   margin-top: 10px;
-  letter-spacing: 1px;
-  font-weight: var(--weight_four);
+  font-weight: 500;
 }
 
 .nft_expiry {
   color: var(--white);
-  font-size: var(--lower_fontsize);
-  font-family: var(--poppins);
+  font-size: 13px;
+  font-family: var(--montserrat-font);
   margin: 0;
   margin-top: 5px;
-  letter-spacing: 1px;
-  font-weight: var(--weight_four);
+  font-weight: 500;
 }
 
 .nftcard_btnblue {
@@ -828,37 +827,23 @@
 .nftcard_btnviolet {
   border: none;
   outline: none;
-  background-image: linear-gradient(to right,
-      var(--ntfcard_withdrawdark),
-      var(--ntfcard_withdrawlight) 20%);
+  background: var(--text-color-4);
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   color: var(--white);
-  font-family: var(--poppins);
-  font-size: var(--font-fifteen);
-  font-weight: var(--weight_four);
-  letter-spacing: 1px;
-  margin-top: 15px;
+  font-family: var(--montserrat-font);
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 5px;
+}
+
+.nftcard_btnviolet:hover {
+  opacity: 0.7;
 }
 
 .nftcard_statuslabel {
-  background-image: url("../images/violetlabel.svg");
-  width: 85px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 25px;
-  position: absolute;
-  top: 3%;
-  left: 5%;
-}
-
-.nftcard_statuslabelblue {
-  background: var(--gradinet_right);
-  width: 85px;
+  background: var(--text-color-4);
+  width: fit-content;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
@@ -867,23 +852,62 @@
   align-items: center;
   height: 30px;
   position: absolute;
+  padding-left: 10px;
+  padding-right: 10px;
   top: 0;
   left: 0;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border-radius: 3px;
+
 }
 
-.nftcard_statuslabelblue_dark {
-  background-image: url("../images/Drakblue-label.svg");
-  width: 85px;
+.nftcard_statuslabel .card_status {
+  color: var(--white);
+
+}
+
+.nftcard_statuslabelblue {
+  background: var(--gradinet_right);
+  width: fit-content;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 25px;
+  height: 30px;
   position: absolute;
-  top: 3%;
-  left: 5%;
+  border-radius: 3px;
+  top: 0;
+  left: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+
+}
+
+.nftcard_statuslabelblue_dark {
+  background: var(--gradinet_left);
+  width: fit-content;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  position: absolute;
+  border-radius: 3px;
+  color: var(--white);
+
+  padding-left: 10px;
+  padding-right: 10px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+
+}
+
+.nftcard_statuslabelblue_dark .card_status {
+  color: var(--white);
 }
 
 .nftImg {
@@ -896,7 +920,7 @@
 
 .card_status {
   color: var(--black);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 450;
   font-family: var(--poppins);
   margin: 0;
@@ -5841,6 +5865,12 @@ body {
 
 .hc-mint__swiper-wrap .swiper-button-disabled {
   opacity: 0.5;
+}
+
+.nftcard_btnviolet {}
+
+.hc-project__inner.gradient_holder {
+  height: 650px;
 }
 
 /* hari media */

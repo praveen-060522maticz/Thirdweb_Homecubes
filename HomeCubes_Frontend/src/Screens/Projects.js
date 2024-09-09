@@ -77,7 +77,7 @@ function Projects() {
     <>
       <BottomBar />
       <Header />
-      <Container fluid className='pt-3 home_wrapper hc-section__inner'>
+      <Container fluid className='pt-3 home_wrapper hc-section__inner hc-project__inner'>
         <Container className='custom_container '>
           <Row>
             <Col lg={1} md={2} className="sidetab_holder">
@@ -175,7 +175,7 @@ function Projects() {
         </Container>
         <Footer />
       </Container>
-      <div className='gradient_holder'></div>
+      <div className='gradient_holder hc-project__inner'></div>
     </>
   )
 }
