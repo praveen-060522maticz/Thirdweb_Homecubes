@@ -690,7 +690,7 @@ function Minting() {
                     <Col xs={12}>
                       <Row className="mx-auto">
                         <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
-                          Gallerysdf
+                          Gallery
                         </h3>
                         <div className="hc-mint__swiper-wrap">
 

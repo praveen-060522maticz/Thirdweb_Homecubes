@@ -210,7 +210,8 @@ function Home() {
                             data-aos-offset="100"
                             data-aos-duration="800">
 
-                            {CMS["About Home Cubes"]?.title}
+                            {/* {CMS["About Home Cubes"]?.title} */}
+                            About  <strong>Home <b>cubes</b> </strong>
                           </h3>
                           <p
                             className="mp_detailbrief hc-home__desc mt-3"
@@ -508,7 +509,7 @@ function Home() {
                                 <p className="home_singleCmtmnt">{i.title}</p>
                               </div>
                               <p
-                                className="home_investorli mt-3"
+                                className="home_investorli mt-3 hc-home_li--p "
                                 dangerouslySetInnerHTML={{ __html: i.content }}
                               ></p>
                             </div>

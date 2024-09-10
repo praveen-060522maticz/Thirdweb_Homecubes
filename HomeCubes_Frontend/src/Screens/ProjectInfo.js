@@ -22,6 +22,8 @@ import config from '../config/config';
 import { getNewsFeedsFunc } from "../actions/axioss/cms.axios";
 import { getDaysOfDesiredMonth } from "../actions/common";
 import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import mintBg from '../assets/images/mintBg.png'
+import { ReadMore } from "../Components/ReadMore";
 
 function ProjectInfo() {
   const location = useLocation();
@@ -126,21 +128,194 @@ function ProjectInfo() {
     <>
       <BottomBar />
       <Header />
+      <div className="hc-mint__banner">
+        <img src={mintBg} className="hc-mint__banner-image" />
+        <div className="hc-mint__banner-content">
+          <div className="row mx-auto">
+            <div className="custom_container  container">
+              <div className="row">
+                <div className="col-md-2 col-lg-1">
+                </div>
+                <div className="col-md-10 col-lg-11 hc-mint__banner-col--right">
+                  <div className="row align-items-end mb-3 mx-auto">
+                    <div className="col-12 mt-4 mt-lg-0  col-lg-6">
+                      <div className="hc-mint__bannerInner-col--left">
+                        <div className="cus-back-btn mb-3">
+                          <Button className="px-0" onClick={() => navigate(-1)} >
+                            <i className="fa-solid fa-chevron-left"></i>
+                            Back
+                          </Button>
+                        </div>
+                        <div className="hc-mint__banner--wrapper mt-2">
+                          <img lazy
+                            src={`${config.IMG_URL}/projects/ProjectThumbnail/${projectDetail?.ProjectThumbnail}`}
+                          />
+                        </div>
+                        <p className="hc-mint__banner--title mt-3">
+                          {projectDetail?.projectTitle}
+                        </p>
+                        {/* <p className="hc-mint__banner--desc mt-3 mb-0">
+                          {projectDetail?.aboutDescription?.length > 300
+                            ? projectDetail?.aboutDescription?.slice(0, 300).concat("...")
+                            : projectDetail?.aboutDescription}
+                        </p> */}
+                        {
+                          projectDetail?.aboutDescription && description ? (
+                            <p className="hc-mint__banner--desc mt-3 mb-0">{projectDetail?.aboutDescription}</p>
+                          ) : (
+                            <p className="hc-mint__banner--desc mt-3 mb-0">
+                              {projectDetail?.aboutDescription?.length > 300
+                                ? projectDetail?.aboutDescription?.slice(0, 300).concat("...")
+                                : projectDetail?.aboutDescription}
+                            </p>
+                          )}
+
+                      </div>
+
+                    </div>
+                    {/* {mint == "minted" ? <div className="col-12 order-1 order-lg-2 col-lg-6 d-flex justify-content-end">
+                      <div className="hc-mint__bannerInner-col--right">
+                        <div className="hc-mint__card-initialSales">
+                          <p className="title text-center">Initial Sales</p>
+                          <div className="row align-items-center mt-3">
+                            <div className="col-12 col-sm-3">
+                              <p className="label text-center text-sm-end">
+                                3 Minted
+                              </p>
+                            </div>
+                            <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0">
+                              <div className="hc-mint__initialSales--border">
+                                <div className="hc-mint__initialSales--progress" style={{ width: "10%" }}>
+                                  3
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-12 col-sm-3 d-flex justify-content-center mt-2 mt-sm-0">
+                              <p className="label">
+                                From 100
+                              </p>
+                            </div>
+                          </div>
+                          <p className="hc-mint__initialSales--themeText my-2 text-center">
+                            Available 97
+                          </p>
+                          <div className="row align-items-center">
+                            <div className="col-12 col-sm-3">
+                              <p className="label  text-center text-sm-end">
+                                No of NFT's
+                              </p>
+                            </div>
+                            <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0">
+                              <div className="hc-mint__initialSales--border">
+                                <input type="number" />
+                              </div>
+                            </div>
+                            <div className="col-12 col-sm-3 d-flex justify-content-center justify-content-sm-start mt-2 mt-sm-0">
+                              <p className="label text-center">
+                                1.0000000 USDT
+                              </p>
+                            </div>
+                          </div>
+                          <div className="row justify-content-center">
+
+                            <div className="col-12 col-sm-6 d-flex justify-content-center">
+
+                              <button className="mint_mintBtn d-flex justify-content-center mt-3 w-100 hc-mint__button-mint" disabled={loading} onClick={() => onMint()} >
+                                <img
+                                  className="header_wallet"
+                                  src={
+                                    require("../assets/images/whiteminting.svg").default
+                                  }
+                                />
+                                Mint
+                              </button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div> : <></>}
+
+                    {mint == "minting" ? <div className="col-12 order-1 order-lg-2 col-lg-6 d-flex justify-content-end">
+                      <div className="hc-mint__bannerInner-col--right">
+                        <div className="hc-mint__card-initialSales">
+                          <p className="title text-center">Tic Tock</p>
+                          <p className="title text-center">Your Opportunity Awaits!</p>
+                          <div className="hc-mint__card-timerWraper mt-3 mb-2">
+                            {project.unlockAt && <Countdown date={new Date(project.unlockAt)} onComplete={() => window.location.reload()} />}
+                          </div>
+
+                        </div>
+                      </div>
+                    </div> : <></>} */}
+                    <div className="col-12">
+                      <div>
+                        <hr className="projects_hr" />
+                        <div className="d-flex flex-wrap align-items-center gap-3 gap-xl-5">
+                          <div className="mp_collectionDetail mb-2">
+                            <p className="mp_collectionLabel">Number of NFTs :</p>
+                            <p className="mp_collectionValue">
+                              {projectDetail?.maxNFTs}
+                            </p>
+                          </div>
+                          <div className="mp_collectionDetail mb-2">
+                            <p className="mp_collectionLabel">
+                              Number of Staked NFTs :
+                            </p>
+                            <p className="mp_collectionValue">
+                              {staked}
+                            </p>
+                          </div>
+                          <div className="mp_collectionDetail mb-2">
+                            <p className="mp_collectionLabel">
+                              Number of Non-Staked NFTs :
+                            </p>
+                            <p className="mp_collectionValue">
+                              {unStaked}
+                            </p>
+                          </div>
+                          <div className="mp_collectionDetail mb-2">
+                            <p className="mp_collectionLabel">
+                              Next Rewards Distribution :
+                            </p>
+                            <p className="mp_collectionValue">
+                              {new Date(rewardDetail?.endDateFormat).toLocaleDateString()}
+                            </p>
+                          </div>
+                          <div className="mp_collectionDetail mb-2">
+                            <p className="mp_collectionLabel">Total reward distrubuted :</p>
+                            <p className="mp_collectionValue">
+                              {totalReward}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
       <Container fluid className="home_wrapper">
         <Container className="custom_container">
           <Row>
             <Col lg={1} md={2} className="sidetab_holder">
               <SideTab />
             </Col>
-            <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner ci_highertop">
-              <div className="cus-back-btn mb-3">
+            <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner ">
+              {/* <div className="cus-back-btn mb-3">
                 <Button className="" onClick={() => navigate(-1)} >
                   <i className="fa-solid fa-chevron-left"></i>
                   Back
                 </Button>
-              </div>
+              </div> */}
               {/* <BreadPath/> */}
-              <h3 className="projects_title">{projectDetail?.projectTitle}</h3>
+              {/* <h3 className="projects_title">{projectDetail?.projectTitle}</h3>
               <p className="mp_detailbrief widthen_text">
                 {projectDetail?.projectDescription}
               </p>
@@ -182,9 +357,9 @@ function ProjectInfo() {
                     {totalReward}
                   </p>
                 </div>
-              </div>
+              </div> */}
 
-              <Row>
+              {/* <Row>
                 <Col lg={5} md={6} sm={6} xs={12}>
                   <div className="">
 
@@ -224,11 +399,11 @@ function ProjectInfo() {
                     {description ? "Read Less" : "Read More"}
                   </button>
                 </Col>
-              </Row>
+              </Row> */}
 
-              <Row className="pi_higherTop">
-                <h3 className="projects_title">Photo Galleries</h3>
-                <p className="mp_detailbrief">
+              <Row className="mt-5">
+                <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">Photo Galleries</h3>
+                <p className="hc-mint__banner--desc  mb-0 text-center w-75 mx-auto ">
                   {projectDetail?.CMS?.filter((val) => val.stepTitle == "Photo Galleries")?.[0]?.stepDescription}
                 </p>
                 <div className="hc-mint__swiper-wrap">
@@ -259,9 +434,9 @@ function ProjectInfo() {
                       }}
                       ref={swiperRef}
                       keyboard={true}
-                      pagination={{
-                        clickable: true,
-                      }}
+                      // pagination={{
+                      //   clickable: true,
+                      // }}
                       breakpoints={{
                         0: {
                           slidesPerView: 1,
@@ -315,21 +490,66 @@ function ProjectInfo() {
                   </div>
                 </div>
               </Row>
-              <Row>
+              <Row className="mt-5">
+                <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
+                  Estimated Property Value <span className="hc-mint__span-gradient"> 100 $</span>
+                </h3>
+                <h5 className="hc-mint__content-subtitle mt-5">
+                  Property <strong>Description</strong>
+                </h5>
+                <p className="hc-mint__banner--desc mt-3 mb-0">
+                  Description
+                </p>
+                <Col lg={6} md={6} xs={12} className="mt-4">
+                  <Row>
+                    <Col lg={10} md={12} xs={12}>
+                      <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5">
+                        Title
+                      </h5>
+                      {/* <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} /> */}
+                      <ReadMore descText={"How to Mint out NFT ?"} />
+                    </Col>
+                  </Row>
+                </Col>
+                <Col lg={6} md={6} xs={12} className="mt-4">
+                  <Row>
+                    <Col lg={8} md={12} xs={12}>
+                      <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5">
+                        {/* 
+                        {cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title} */}
+                        Title
+                      </h5>
+                      <ReadMore descText={"How to Mint out NFT ?"} />
+                    </Col>
+                  </Row>
+                </Col>
+                {/* <Row className="pi_higherTop align-items-center">
+                        <Col lg={4}>
+                          <h1 className="mint_gradValue new">{project?.propertyValue?.toUpperCase?.() ?? "1M"}$</h1>
+                        </Col>
+                        <Col lg={8}>
+                          <h3 className="minting_detail">Property Value</h3>
+                          <p className="mp_detailbrief">
+                            {project?.CMS?.filter((val) => val.stepTitle == "PROPERTY VALUE")?.[0]?.stepDescription}
+                          </p>
+                        </Col>
+                      </Row> */}
+              </Row>
+              <Row className="mt-5">
                 <Col lg={6} md={8} sm={12} xs={12} className="mb-3">
-                  <h3 className="projects_title">News Feed and Updates</h3>
+                  <h5 className="hc-mint__content-subtitle mt-5">News Feed and Updates</h5>
                   <p className="mp_detailbrief" >
                     {projectDetail?.CMS?.filter((val) => val.stepTitle == "News Feed and Updates")?.[0]?.stepDescription}
                   </p>
                 </Col>
-                <Col lg={6} md={4} sm={12} xs={12} className="greenbox_cornerer">
+                {/* <Col lg={6} md={4} sm={12} xs={12} className="greenbox_cornerer">
                   <div className="pi_markeplaceLink">
                     <p className="pi_marketplace">See more</p>
                     <div className="green_box">
                       <img className="green_longright" src={require('../assets/images/rightlong.svg').default} />
                     </div>
                   </div>
-                </Col>
+                </Col> */}
 
 
                 <div className="rewardscard_swiper">
@@ -368,7 +588,7 @@ function ProjectInfo() {
                         spaceBetween: 20,
                       },
                       1500: {
-                        slidesPerView: 4,
+                        slidesPerView: 3,
                         spaceBetween: 20,
                       },
                     }}
@@ -385,7 +605,7 @@ function ProjectInfo() {
               </Row>
 
               <Row className="mt-5">
-                <h3 className="projects_title text-center">{projectData.name} Road map</h3>
+                <h3 className="hc-mint__content-subtitle mt-5 text-center"> <strong>Road</strong> map</h3>
                 <p className="mp_detailbrief text-center">
                   {projectDetail?.CMS?.filter((val) => val.stepTitle == "Road map")?.[0]?.stepDescription}
                 </p>
@@ -395,12 +615,12 @@ function ProjectInfo() {
 
               <Row className="mt-5">
                 <Col lg={6} md={8} sm={12} xs={12} className="mb-3">
-                  <h3 className="projects_title">{projectData.name} NFTs</h3>
+                  <h5 className="hc-mint__content-subtitle mt-5">{projectData.name} NFTs</h5>
                   <p className="mp_detailbrief">
                     {projectDetail?.CMS?.filter((val) => val.stepTitle == "NFTs")?.[0]?.stepDescription}
                   </p>
                 </Col>
-                <Col lg={6} md={4} sm={12} xs={12} className="greenbox_cornerer">
+                {/* <Col lg={6} md={4} sm={12} xs={12} className="greenbox_cornerer">
                   <NavLink className="sidetab_link" to='/marketplace'>
                     <div className="pi_markeplaceLink">
                       <p className="pi_marketplace">Check the Marketplace</p>
@@ -409,10 +629,10 @@ function ProjectInfo() {
                       </div>
                     </div>
                   </NavLink>
-                </Col>
+                </Col> */}
 
                 <Swiper
-                  className="mySwiper bottomnav_swiper pt-3 mt-4"
+                  className="mySwiper bottomnav_swiper mt-3"
                   spaceBetween={30}
                   navigation={true}
                   keyboard={true}
@@ -445,7 +665,7 @@ function ProjectInfo() {
                       spaceBetween: 20,
                     },
                     1500: {
-                      slidesPerView: 5,
+                      slidesPerView: 4,
                       spaceBetween: 20,
                     },
                   }}
@@ -467,7 +687,7 @@ function ProjectInfo() {
             </Col>
           </Row>
         </Container>
-        <div className='gradient_holder'></div>
+        {/* <div className='gradient_holder'></div> */}
         <Footer />
       </Container>
 

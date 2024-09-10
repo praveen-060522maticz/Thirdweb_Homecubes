@@ -73,6 +73,7 @@
   --bg-color-2: #080808B2;
   --bg-color-3: #08080899;
   --bg-color-4: #5A5A5A;
+  --bg-color-5: #111111;
   --border-color-1: #525252;
 
   --text-color-1: #F84A4A;
@@ -2036,14 +2037,15 @@ input.mint_countInput::-webkit-inner-spin-button{
 .rewards_card {
   padding: 20px;
   border-radius: 5px;
-  background-color: var(--nftcard_bgcolor);
+  background-color: var(--bg-color-5);
+  border: 1px solid var(--border-color-1);
 }
 
 .rewards_card h6 {
   margin: 0;
-  color: var(--white);
-  font-size: var(--font_eighteen);
-  font-weight: var(--weight_five);
+  color: var(--gradinet_right);
+  font-size: 23px;
+  font-weight: 300;
   font-family: var(--poppins);
 }
 
@@ -2402,7 +2404,7 @@ input.mint_countInput::-webkit-inner-spin-button{
   background-color: var(--gradinet_right);
   color: var(--black);
   border-radius: 5px;
-  font-size: var(--font_thirteen);
+  font-size: 14px;
   /* font-style: italic; */
   font-family: var(--montserrat-font);
   font-weight: 600;
@@ -2510,6 +2512,7 @@ input.mint_countInput::-webkit-inner-spin-button{
   align-items: flex-start;
   max-height: 250px;
   min-height: 250px;
+  border: 1px solid var(--border-color-1);
 }
 
 .home_commitCube {
@@ -2533,9 +2536,9 @@ input.mint_countInput::-webkit-inner-spin-button{
 
 .home_singleCmtmnt {
   margin: 0;
-  color: var(--white);
-  font-size: var(--font-fifteen);
-  font-weight: var(--weight_five);
+  color: var(--gradinet_right);
+  font-size: 23px;
+  font-weight: 300;
   font-family: var(--poppins);
 }
 
@@ -2646,6 +2649,8 @@ input.mint_countInput::-webkit-inner-spin-button{
   color: var(--gradinet_right);
   font-style: italic;
   margin-bottom: 20px;
+  font-family: var(--poppins);
+  font-weight: 600;
 }
 
 .pink_typeletter .Typewriter .Typewriter__wrapper,
@@ -4790,7 +4795,7 @@ body.modal-open .container {
   }
 
   .home_titled {
-    font-size: var(--font_eighteen);
+    font-size: 19px;
   }
 
   .investLotte.investor_lottie {
@@ -5207,6 +5212,11 @@ body {
 
 .hc-home__title.home_titled strong {
   color: var(--gradinet_right);
+  font-weight: 400;
+}
+
+.hc-home__title.home_titled b {
+  color: var(--gradinet_left);
   font-weight: 400;
 }
 
@@ -5871,6 +5881,13 @@ body {
 
 .hc-project__inner.gradient_holder {
   height: 650px;
+}
+
+.home_investorli.hc-home_li--p p {
+  font-family: var(--montserrat-font);
+  font-weight: 500;
+  line-height: 28px;
+  font-size: 15px;
 }
 
 /* hari media */
@@ -8407,7 +8424,7 @@ body {
   }
 
   .hc-home__desc {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .hc-roadmap .home_roadmapSingle {

@@ -7,7 +7,7 @@ let Back_Url = "";
 let decimalValues = 1000000000000000000;
 var FRONT_URL = "";
 var ImG = "";
-var EnvName = "stage";
+var EnvName = "demo";
 var networkTransUrl = ''
 
 var Front_market_Url = ''
