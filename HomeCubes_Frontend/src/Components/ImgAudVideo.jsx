@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { imgFormats, videoFileFormats } from "../actions/common";
 
 export default function ImgAudVideo({
   file,
@@ -39,19 +40,35 @@ export default function ImgAudVideo({
       setCheck(!Check)
     }
   }
+
+  const getFileType = (url) => {
+    const extension = url.split('.').pop().toLowerCase();
+    if (imgFormats.includes(extension)) {
+      return 'image';
+    } else if (videoFileFormats.includes(extension)) {
+      return 'video';
+    } else if (['pdf'].includes(extension)) {
+      return 'pdf';
+    }
+    return 'unknown';
+  };
+
+  const fileType = getFileType(file);
+console.log('fileTypefileType---->',fileType);
   return file ? (
-    type === "image" ? (
+    fileType === "image" ? (
       <img
         src={file}
         alt="img"
         className={classname}
-        // onContextMenu="return false;"
-        // onError={event => {
-        //   event.target.src = origFile
-        // }}
+      // onContextMenu="return false;"
+      // onError={event => {
+      //   event.target.src = origFile
+      // }}
       />
-    ) : type === "video" ? (
+    ) : fileType === "video" ? (
       <video
+      className={classname}
         loop={true}
         controlsList="nodownload"
         autoPlay={true}
@@ -66,7 +83,7 @@ export default function ImgAudVideo({
         }}
       >
       </video>
-    ) : type === "audio" ? (
+    ) : fileType === "audio" ? (
       <>
         {" "}
         <img src={thumb} alt="favicon" onClick={Audioaction} className={classname} />

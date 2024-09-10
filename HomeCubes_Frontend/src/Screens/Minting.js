@@ -91,7 +91,7 @@ function Minting() {
   const [canReload, setCanReload] = useState(true);
   const { wallets } = useWallets()
 
-
+  console.log('tokenDetails---->', tokenDetails);
 
   // usePrompt({
   //   when: !canReload,
@@ -383,7 +383,14 @@ function Minting() {
       <BottomBar />
       <Header />
       <div className="hc-mint__banner">
-        <img src={mintBg} className="hc-mint__banner-image" />
+        <ImgAudVideo
+          file={`${config.IMG_URL}/projects/ProjectBanner/${project?.ProjectBanner}`}
+          origFile={mintBg}
+          classname={"hc-mint__banner-image"}
+          noimg={mintBg}
+        />
+        {/* <img src={project?.ProjectBanner ? `${config.IMG_URL}/projects/ProjectBanner/${project?.ProjectBanner}` : mintBg} className="hc-mint__banner-image" /> */}
+
         <div className="hc-mint__banner-content">
           <div className="row mx-auto">
             <div className="custom_container  container">
@@ -404,7 +411,7 @@ function Minting() {
                           <img lazy src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} />
                         </div>
                         <p className="hc-mint__banner--title mt-3">
-                          Burj Alarab
+                          {project?.projectTitle}
                         </p>
                         <p className="hc-mint__banner--desc mt-3 mb-0">
                           {project?.projectDescription}
@@ -449,6 +456,7 @@ function Minting() {
                                 <input
                                   type="number"
                                   min={0}
+                                  max={Number(isAvailable)}
                                   value={mintCount}
                                   onChange={(e) => {
                                     setMintcount(e.target.value);

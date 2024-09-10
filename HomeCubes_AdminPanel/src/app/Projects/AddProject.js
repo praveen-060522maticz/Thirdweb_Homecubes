@@ -102,6 +102,12 @@ export function AddProject() {
             errors.aboutProject = "About Project can't be empty";
         if (!formData?.ProjectThumbnail)
             errors.ProjectThumbnail = "Thumbnail can't be empty";
+        if (!formData?.ProjectBanner)
+            errors.ProjectBanner = "ProjectBanner can't be empty";
+
+        if (formData?.ProjectBanner && (formData?.ProjectBanner?.size / (1024 * 1024)).toFixed(2) > 15)
+            errors.ProjectBanner = "ProjectBanner size can't be more than 10MB";
+
         if (path != "projectEdit" && !formData?.imgfile)
             errors.imgfile = "NFT image can't be empty";
 
@@ -636,6 +642,43 @@ export function AddProject() {
                                         ) : (
                                             <img
                                                 src={URL.createObjectURL(formData?.ProjectThumbnail)}
+                                                style={{ height: 100, width: 100 }}
+                                            />
+                                        )
+                                    ) : (
+                                        <></>
+                                    )}
+                                </Form.Group>
+
+                                <Form.Group>
+                                    <label htmlFor="exampleInputName1">Project banner</label>
+                                    {path != "projectView" && (
+                                        <div>
+                                            <div class="upload-btn-wrapper">
+                                                <button class="btn">Choose file</button>
+                                                <input
+                                                    type="file"
+                                                    disabled={path == "projectView"}
+                                                    className="form-control"
+                                                    id="ProjectBanner"
+                                                    accept='image/*, video/*'
+                                                    placeholder="Project Thumbnail"
+                                                    onChange={(e) => handleChange(e)}
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    <p style={{ color: "red" }}>{Errors?.ProjectBanner}</p>
+                                    {formData && formData?.ProjectBanner ? (
+                                        typeof formData?.ProjectBanner == "string" ? (
+                                            <img
+                                                src={`${config.ImG}/projects/ProjectBanner/${formData.ProjectBanner}`}
+                                                style={{ height: 100, width: 100 }}
+                                            />
+                                        ) : (
+                                            <img
+                                                src={URL.createObjectURL(formData?.ProjectBanner)}
                                                 style={{ height: 100, width: 100 }}
                                             />
                                         )
