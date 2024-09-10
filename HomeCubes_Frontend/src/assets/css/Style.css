@@ -5829,7 +5829,7 @@ body {
 
 .hc-roadmap__new-col--center img {
   position: absolute;
-  top: 0;
+  top: -2px;
   right: 50%;
   left: 50%;
   transform: translateX(-50%);
@@ -7765,7 +7765,7 @@ body {
   }
 
   .hc-banner__top {
-    margin-top: 60px;
+    margin-top: 20px;
   }
 
   .hc-card__nft {
@@ -7784,7 +7784,7 @@ body {
   }
 
   .hc-nft__card-title {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 20px;
   }
 
@@ -7810,8 +7810,9 @@ body {
 
   .hc-button___gradient p,
   .hc-border__left {
-    padding-left: 10px;
-    padding-right: 10px;
+    font-size: 11px;
+    padding-left: 6px;
+    padding-right: 6px;
   }
 
   .hc-nft__card-timer {
@@ -8056,12 +8057,12 @@ body {
   }
 
   .hc-roadmap__new .roadmap_strokeText {
-    font-size: 70px;
-    line-height: 45px;
+    font-size: 100px;
+    line-height: 60px;
   }
 
   .hc-roadmap__new--themeText {
-    font-size: 21px;
+    font-size: 27px;
   }
 
   .hc-roadmap__new--whiteText {
@@ -8070,17 +8071,21 @@ body {
   }
 
   .hc-roadmap__new-padding--top {
-    padding-top: 90px;
+    padding-top: 110px;
   }
 
   .hc-roadmap__new .gif_aligner {
-    max-width: 120px;
-    width: 120px;
-    min-width: 120px;
-    min-height: 120px;
-    height: 120px;
-    max-height: 120px;
+    max-width: 150px;
+    width: 150px;
+    min-width: 150px;
+    min-height: 150px;
+    height: 150px;
+    max-height: 150px;
     border-radius: 10px;
+    margin-top: -30px;
+  }
+  .hc-roadmap__new-padding--top .roadmap_date {
+    font-size: 13px;
   }
 
   .hc-roadmap__new-col--center img {
@@ -8093,6 +8098,10 @@ body {
 
   .hc-swiper__arrow--right {
     right: -18px;
+  }
+
+  .hc-roadmap__new-col--left {
+    gap: 110px !important;
   }
 }
 
@@ -8387,16 +8396,20 @@ body {
   }
 
   .hc-roadmap__new--themeText {
-    font-size: 25px;
+    font-size: 29px;
   }
 
   .hc-roadmap__new--whiteText {
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .hc-roadmap__new-padding--top {
     padding-top: 120px;
+  }
+
+  .hc-roadmap__new-padding--top .roadmap_date {
+    font-size: 13px;
   }
 
   .hc-roadmap__new-col--center img {
@@ -8410,6 +8423,22 @@ body {
   .hc-swiper__arrow--right {
     right: -18px;
   }
+
+  .hc-roadmap__new-col--left {
+    gap: 110px !important;
+  }
+
+  .hc-roadmap__new .gif_aligner {
+    max-width: 150px;
+    width: 150px;
+    min-width: 150px;
+    min-height: 150px;
+    height: 150px;
+    max-height: 150px;
+    border-radius: 10px;
+    margin-top: -30px;
+  }
+
 }
 
 @media(min-width:1500px) {
@@ -8677,8 +8706,8 @@ body {
 
 
   .hc-roadmap__new .roadmap_strokeText {
-    font-size: 100px;
-    line-height: 55px;
+    font-size: 110px;
+    line-height: 65px;
   }
 
   .hc-roadmap__new--themeText {
@@ -8687,7 +8716,10 @@ body {
 
   .hc-roadmap__new--whiteText {
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 15px;
+  }
+  .hc-roadmap__new-padding--top .roadmap_date {
+    font-size: 15px;
   }
 
   .hc-roadmap__new-padding--top {
@@ -8705,6 +8737,22 @@ body {
   .hc-swiper__arrow--right {
     right: -18px;
   }
+
+  .hc-roadmap__new-col--left {
+    gap: 120px !important;
+  }
+
+  .hc-roadmap__new .gif_aligner {
+    max-width: 150px;
+    width: 150px;
+    min-width: 150px;
+    min-height: 150px;
+    height: 150px;
+    max-height: 150px;
+    border-radius: 10px;
+    margin-top: -30px;
+  }
+
 }
 
 

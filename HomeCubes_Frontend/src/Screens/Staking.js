@@ -819,7 +819,7 @@ function Staking() {
                             </Col>
                           </Row>
                         ) : (
-                          <Row className="justify-content-center mb-5">
+                          <Row className="justify-content-center mb-5 mt-5">
                             <Col lg={8}>
                               <div className="staking_nowallet">
                                 <h3 className="lorem_title staking_nowalc">

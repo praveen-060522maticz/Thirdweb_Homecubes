@@ -526,8 +526,11 @@ function Home() {
                       >
                         Road Map
                       </h3>
-
+                      <div className="mt-3 mt-xl-5">
                       <Roadmap data={roadMap} />
+
+                      </div>
+
                     </Row>
 
                     {/* <Row className="justify-content-center pi_higherTop">
