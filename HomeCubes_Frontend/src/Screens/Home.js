@@ -509,7 +509,7 @@ function Home() {
                                 <p className="home_singleCmtmnt">{i.title}</p>
                               </div>
                               <p
-                                className="home_investorli mt-3"
+                                className="home_investorli mt-3 hc-home_li--p "
                                 dangerouslySetInnerHTML={{ __html: i.content }}
                               ></p>
                             </div>

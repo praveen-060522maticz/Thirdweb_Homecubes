@@ -9,7 +9,7 @@ function RewardsCard(props) {
       <div className='rewards_card'>
         <h6>{feedTitle}</h6>
         <p className='rc_dateText mt-2'>{new Date(createdAt).toLocaleDateString()}</p>
-        <p className='mp_detailbrief mint_scrollText'>{!show ? feedDescription.slice(0, 150) : feedDescription}</p>
+        <p className='hc-mint__banner--desc mt-3 mb-0'>{!show ? feedDescription.slice(0, 150) : feedDescription}</p>
         <div className='rc_readmore_aligner' onClick={() => setShow(!show)} >
           <button className="mp_readmoreBtn">{!show ? "Read More" : "Read Less"}</button>
         </div>

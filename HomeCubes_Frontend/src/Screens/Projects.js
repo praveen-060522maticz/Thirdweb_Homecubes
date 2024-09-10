@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import BottomBar from '../Components/BottomBar'
 import Header from '../Components/Header'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row, Button } from 'react-bootstrap'
 import SideTab from '../Components/SideTab'
 import ProjectCard from '../Components/ProjectCard'
 import { nftcard } from '../datas/CardData'
@@ -10,6 +10,8 @@ import BreadPath from '../Components/BreadPath'
 import { getProjects } from '../actions/axioss/nft.axios'
 import { getDaysOfDesiredMonth } from '../actions/common'
 import { getCmsContent } from '../actions/axioss/cms.axios'
+import mintBg from '../assets/images/mintBg.png'
+import { useNavigate } from 'react-router-dom'
 
 function Projects() {
 
@@ -23,6 +25,7 @@ function Projects() {
   const [staked, setstaked] = useState(0);
   const [unStaked, setunStaked] = useState(0);
   const [projectLength, setProjectLength] = useState(0)
+  const navigate = useNavigate()
 
   useEffect(() => {
     window.scroll(0, 0)
@@ -77,7 +80,8 @@ function Projects() {
     <>
       <BottomBar />
       <Header />
-      <Container fluid className='pt-3 home_wrapper hc-section__inner'>
+
+      <Container fluid className='pt-3 home_wrapper hc-section__inner hc-project__inner'>
         <Container className='custom_container '>
           <Row>
             <Col lg={1} md={2} className="sidetab_holder">
@@ -175,7 +179,7 @@ function Projects() {
         </Container>
         <Footer />
       </Container>
-      <div className='gradient_holder'></div>
+      {/* <div className='gradient_holder hc-project__inner'></div> */}
     </>
   )
 }

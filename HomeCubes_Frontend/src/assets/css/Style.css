@@ -73,11 +73,13 @@
   --bg-color-2: #080808B2;
   --bg-color-3: #08080899;
   --bg-color-4: #5A5A5A;
+  --bg-color-5: #111111;
   --border-color-1: #525252;
 
   --text-color-1: #F84A4A;
   --text-color-2: #9A9A9A;
   --text-color-3: #AAAAAA;
+  --text-color-4: #AF49FF;
 }
 
 @font-face {
@@ -548,17 +550,17 @@
   background-color: transparent;
   color: var(--white);
   font-size: var(--font-fifteen);
-  font-family: var(--poppins);
+  font-family: var(--montserrat-font);
   border: none;
   outline: none;
   width: 100%;
   /* max-width: 85%;
   min-width: 85%; */
+  font-weight: 500;
 }
 
 .stack_search::placeholder {
-  color: var(--placeholder_color);
-  letter-spacing: 1.5px;
+  color: var(--white);
 }
 
 .stack_searchbar {
@@ -791,22 +793,20 @@
 
 .nft_stackdate {
   color: var(--white);
-  font-size: var(--lower_fontsize);
-  font-family: var(--poppins);
+  font-size: 13px;
+  font-family: var(--montserrat-font);
   margin: 0;
   margin-top: 10px;
-  letter-spacing: 1px;
-  font-weight: var(--weight_four);
+  font-weight: 500;
 }
 
 .nft_expiry {
   color: var(--white);
-  font-size: var(--lower_fontsize);
-  font-family: var(--poppins);
+  font-size: 13px;
+  font-family: var(--montserrat-font);
   margin: 0;
   margin-top: 5px;
-  letter-spacing: 1px;
-  font-weight: var(--weight_four);
+  font-weight: 500;
 }
 
 .nftcard_btnblue {
@@ -828,37 +828,23 @@
 .nftcard_btnviolet {
   border: none;
   outline: none;
-  background-image: linear-gradient(to right,
-      var(--ntfcard_withdrawdark),
-      var(--ntfcard_withdrawlight) 20%);
+  background: var(--text-color-4);
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   color: var(--white);
-  font-family: var(--poppins);
-  font-size: var(--font-fifteen);
-  font-weight: var(--weight_four);
-  letter-spacing: 1px;
-  margin-top: 15px;
+  font-family: var(--montserrat-font);
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 5px;
+}
+
+.nftcard_btnviolet:hover {
+  opacity: 0.7;
 }
 
 .nftcard_statuslabel {
-  background-image: url("../images/violetlabel.svg");
-  width: 85px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 25px;
-  position: absolute;
-  top: 3%;
-  left: 5%;
-}
-
-.nftcard_statuslabelblue {
-  background: var(--gradinet_right);
-  width: 85px;
+  background: var(--text-color-4);
+  width: fit-content;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
@@ -867,23 +853,62 @@
   align-items: center;
   height: 30px;
   position: absolute;
+  padding-left: 10px;
+  padding-right: 10px;
   top: 0;
   left: 0;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border-radius: 3px;
+
 }
 
-.nftcard_statuslabelblue_dark {
-  background-image: url("../images/Drakblue-label.svg");
-  width: 85px;
+.nftcard_statuslabel .card_status {
+  color: var(--white);
+
+}
+
+.nftcard_statuslabelblue {
+  background: var(--gradinet_right);
+  width: fit-content;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 25px;
+  height: 30px;
   position: absolute;
-  top: 3%;
-  left: 5%;
+  border-radius: 3px;
+  top: 0;
+  left: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+
+}
+
+.nftcard_statuslabelblue_dark {
+  background: var(--gradinet_left);
+  width: fit-content;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  position: absolute;
+  border-radius: 3px;
+  color: var(--white);
+
+  padding-left: 10px;
+  padding-right: 10px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+
+}
+
+.nftcard_statuslabelblue_dark .card_status {
+  color: var(--white);
 }
 
 .nftImg {
@@ -896,7 +921,7 @@
 
 .card_status {
   color: var(--black);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 450;
   font-family: var(--poppins);
   margin: 0;
@@ -2012,14 +2037,15 @@ input.mint_countInput::-webkit-inner-spin-button{
 .rewards_card {
   padding: 20px;
   border-radius: 5px;
-  background-color: var(--nftcard_bgcolor);
+  background-color: var(--bg-color-5);
+  border: 1px solid var(--border-color-1);
 }
 
 .rewards_card h6 {
   margin: 0;
-  color: var(--white);
-  font-size: var(--font_eighteen);
-  font-weight: var(--weight_five);
+  color: var(--gradinet_right);
+  font-size: 23px;
+  font-weight: 300;
   font-family: var(--poppins);
 }
 
@@ -2378,7 +2404,7 @@ input.mint_countInput::-webkit-inner-spin-button{
   background-color: var(--gradinet_right);
   color: var(--black);
   border-radius: 5px;
-  font-size: var(--font_thirteen);
+  font-size: 14px;
   /* font-style: italic; */
   font-family: var(--montserrat-font);
   font-weight: 600;
@@ -2486,6 +2512,7 @@ input.mint_countInput::-webkit-inner-spin-button{
   align-items: flex-start;
   max-height: 250px;
   min-height: 250px;
+  border: 1px solid var(--border-color-1);
 }
 
 .home_commitCube {
@@ -2509,9 +2536,9 @@ input.mint_countInput::-webkit-inner-spin-button{
 
 .home_singleCmtmnt {
   margin: 0;
-  color: var(--white);
-  font-size: var(--font-fifteen);
-  font-weight: var(--weight_five);
+  color: var(--gradinet_right);
+  font-size: 23px;
+  font-weight: 300;
   font-family: var(--poppins);
 }
 
@@ -2622,6 +2649,8 @@ input.mint_countInput::-webkit-inner-spin-button{
   color: var(--gradinet_right);
   font-style: italic;
   margin-bottom: 20px;
+  font-family: var(--poppins);
+  font-weight: 600;
 }
 
 .pink_typeletter .Typewriter .Typewriter__wrapper,
@@ -4766,7 +4795,7 @@ body.modal-open .container {
   }
 
   .home_titled {
-    font-size: var(--font_eighteen);
+    font-size: 19px;
   }
 
   .investLotte.investor_lottie {
@@ -5183,6 +5212,11 @@ body {
 
 .hc-home__title.home_titled strong {
   color: var(--gradinet_right);
+  font-weight: 400;
+}
+
+.hc-home__title.home_titled b {
+  color: var(--gradinet_left);
   font-weight: 400;
 }
 
@@ -5841,6 +5875,19 @@ body {
 
 .hc-mint__swiper-wrap .swiper-button-disabled {
   opacity: 0.5;
+}
+
+.nftcard_btnviolet {}
+
+.hc-project__inner.gradient_holder {
+  height: 650px;
+}
+
+.home_investorli.hc-home_li--p p {
+  font-family: var(--montserrat-font);
+  font-weight: 500;
+  line-height: 28px;
+  font-size: 15px;
 }
 
 /* hari media */
@@ -8377,7 +8424,7 @@ body {
   }
 
   .hc-home__desc {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .hc-roadmap .home_roadmapSingle {

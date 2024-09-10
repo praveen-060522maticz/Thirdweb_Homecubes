@@ -188,7 +188,7 @@ function MintProjects() {
                     )
                   })
                     : <div>
-                      <p>No data Found</p>
+                      <p className='text-white text-center'>No data Found</p>
                     </div>
                   }
 
