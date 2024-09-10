@@ -65,7 +65,7 @@ let project = new Schema({
         type: String,
         default: "",
     },
-    feeCollector:{
+    feeCollector: {
         type: String,
         default: "",
     },
@@ -84,6 +84,10 @@ let project = new Schema({
     unlockAt: {
         type: Date,
         default: new Date(),
+    },
+    ProjectBanner: {
+        type: String,
+        default: ""
     },
     isCompleted: {
         type: Boolean,

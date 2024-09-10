@@ -1917,6 +1917,7 @@ export const projectTokenCount = async (data) => {
           mintToken:1,
           mintTokenName:1,
           fundReceiverAddress:1,
+          ProjectBanner:1,
           locked: { $sum: "$tokens.locked" },
           isMinted: { $sum: "$tokens.isMintTrue" },
           isNotMinted: { $sum: "$tokens.isMintFalse" },

@@ -177,7 +177,8 @@ export const createProject = async (req, res) => {
     color,
     size,
     mintToken,
-    mintTokenName
+    mintTokenName,
+    ProjectBanner
   } = req.body
   try {
 
@@ -199,6 +200,19 @@ export const createProject = async (req, res) => {
               "." +
               req?.files?.ProjectThumbnail.name.split(".")[
               req?.files?.ProjectThumbnail.name.split(".").length - 1
+              ],
+          }
+        ]) : null
+
+        const BannerImage = req?.files?.ProjectBanner ? await ImageAddFunc([
+          {
+            path: `public/projects/ProjectBanner/`,
+            files: req?.files?.ProjectBanner,
+            filename:
+              ref +
+              "." +
+              req?.files?.ProjectBanner.name.split(".")[
+              req?.files?.ProjectBanner.name.split(".").length - 1
               ],
           }
         ]) : null
@@ -237,6 +251,7 @@ export const createProject = async (req, res) => {
           NFTRoyalty,
           unlockAt: duration,
           ProjectThumbnail: ThumbImage,
+          ProjectBanner: BannerImage,
           NFTPrice,
           contractAddress,
           imgfile: imgname,
@@ -408,6 +423,19 @@ export const createProject = async (req, res) => {
 
       console.log("ThumbImage", ThumbImage);
 
+      const BannerImage = req?.files?.ProjectBanner ? await ImageAddFunc([
+        {
+          path: `public/projects/ProjectBanner/`,
+          files: req?.files?.ProjectBanner,
+          filename:
+            ref +
+            "." +
+            req?.files?.ProjectBanner.name.split(".")[
+            req?.files?.ProjectBanner.name.split(".").length - 1
+            ],
+        }
+      ]) : null
+
       // const day = duration.split("")[0]
       // if (duration.includes("day")) {
       //   var createDate = new Date(new Date().setDate(new Date().getDate() + parseInt(day)))
@@ -433,7 +461,8 @@ export const createProject = async (req, res) => {
           NFTPrice,
           propertyValue,
           feeCollector,
-          ProjectThumbnail: ThumbImage ? ThumbImage : ProjectThumbnail,
+          ProjectThumbnail: ThumbImage || ProjectThumbnail,
+          ProjectBanner: BannerImage || ProjectBanner,
           imgfile: nftImage ? nftImage : imgfile,
           mintToken,
           mintTokenName

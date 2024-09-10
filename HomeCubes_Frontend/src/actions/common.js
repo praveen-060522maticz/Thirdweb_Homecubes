@@ -347,7 +347,19 @@ export const videoFileFormats = [
   'swf',
 ];
 
-export const imgFormats = ['jpeg', 'jpg', 'png', 'gif', 'svg', 'webp'];
+export const imgFormats = [
+  "jpg",
+  "jpeg",
+  "png",
+  "gif",
+  "webp",
+  "svg",
+  "bmp",
+  "tiff",
+  "ico",
+  "heif",
+  "heic"
+];
 
 export const UaeTimeLineNow = () => new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Dubai' }))
 
@@ -356,10 +368,10 @@ export const getDaysOfDesiredMonth = () => {
   // Get the current date
   var currentDate = new Date();
   let currentMonth = new Date().getMonth() + 1
-  if(currentMonth >= 1 && currentMonth <= 3) month = 3;
-  if(currentMonth >= 4 && currentMonth <= 6) month = 6;
-  if(currentMonth >= 7 && currentMonth <= 9) month = 9;
-  if(currentMonth >= 9 && currentMonth <= 12) month = 12;
+  if (currentMonth >= 1 && currentMonth <= 3) month = 3;
+  if (currentMonth >= 4 && currentMonth <= 6) month = 6;
+  if (currentMonth >= 7 && currentMonth <= 9) month = 9;
+  if (currentMonth >= 9 && currentMonth <= 12) month = 12;
 
   // Set the target date to March 1 of the current year
   var targetDate = new Date(currentDate.getFullYear(), month, 1); // Note: Months are 0-indexed, so March is represented by 2
