@@ -7,7 +7,7 @@ let Back_Url = "";
 let decimalValues = 1000000000000000000;
 var FRONT_URL = "";
 var ImG = "";
-var EnvName = "stage";
+var EnvName = "local";
 var networkTransUrl = ''
 
 var Front_market_Url = ''
@@ -46,7 +46,8 @@ if (EnvName === "local") {
   var COIN_NAME = "BNB"
   networkTransUrl = "https://sepolia.etherscan.io/tx/"
   // var stakeAddress = "0x4f9395bdA5E47566903b960895fdc2713890Fd41"
-  var stakeAddress = "0x5eFe07C7A4F632b2c8Cd40aA2f4a70EC71d32348"
+  // var stakeAddress = "0x5eFe07C7A4F632b2c8Cd40aA2f4a70EC71d32348" // openxep
+  var stakeAddress = "0x9605Abafe5f6EE8B9EB671083d4412415e0f54F2"
 }
 
 if (EnvName === "stage") {
@@ -105,7 +106,7 @@ if (EnvName === "demo") {
   var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase(); // seplia openzep removed
   var singleAddress = "0x575cd9E4099A38B536673F557063f9A546870d11"; // seplia
   var multipeAddress = "0x0b6369b506e811df30ab7c0ce0ae00b8690b76be";
-  var networkVersion = "0x61"
+  var networkVersion = "0x61" 
   var chainId = 11155111;
   var ETHCHAIN = 11155111
   var BNBCHAIN = 97
@@ -121,7 +122,8 @@ if (EnvName === "demo") {
   var Back_Url_Token = "https://backend-homecubes.maticz.in/v1";
   networkTransUrl = "https://sepolia.etherscan.io/tx/"
   var COIN_NAME = "BNB"
-  var stakeAddress = "0x5eFe07C7A4F632b2c8Cd40aA2f4a70EC71d32348"
+  // var stakeAddress = "0x5eFe07C7A4F632b2c8Cd40aA2f4a70EC71d32348" // openxep
+  var stakeAddress = "0x9605Abafe5f6EE8B9EB671083d4412415e0f54F2"
 
 }
 

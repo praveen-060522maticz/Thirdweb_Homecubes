@@ -419,24 +419,24 @@ function Minting() {
                           <div className="row align-items-center mt-3">
                             <div className="col-12 col-sm-3">
                               <p className="label text-center text-sm-end">
-                                3 Minted
+                                {minted} Minted
                               </p>
                             </div>
                             <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0">
                               <div className="hc-mint__initialSales--border">
-                                <div className="hc-mint__initialSales--progress" style={{ width: "10%" }}>
-                                  3
+                                <div className="hc-mint__initialSales--progress" style={{ width: `${(minted / TotalToken) * 100}%` }}>
+                                  {minted}
                                 </div>
                               </div>
                             </div>
                             <div className="col-12 col-sm-3 d-flex justify-content-center mt-2 mt-sm-0">
                               <p className="label">
-                                From 100
+                                From {TotalToken}
                               </p>
                             </div>
                           </div>
                           <p className="hc-mint__initialSales--themeText my-2 text-center">
-                            Available 97
+                            Available {isAvailable}
                           </p>
                           <div className="row align-items-center">
                             <div className="col-12 col-sm-3">
@@ -446,12 +446,19 @@ function Minting() {
                             </div>
                             <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0">
                               <div className="hc-mint__initialSales--border">
-                                <input type="number" />
+                                <input
+                                  type="number"
+                                  min={0}
+                                  value={mintCount}
+                                  onChange={(e) => {
+                                    setMintcount(e.target.value);
+                                  }}
+                                />
                               </div>
                             </div>
                             <div className="col-12 col-sm-3 d-flex justify-content-center justify-content-sm-start mt-2 mt-sm-0">
                               <p className="label text-center">
-                                1.0000000 USDT
+                                {(mintCount * parseFloat(project?.NFTPrice)).toFixed(7)} {project?.mintTokenName}
                               </p>
                             </div>
                           </div>

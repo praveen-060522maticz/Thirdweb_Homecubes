@@ -208,9 +208,10 @@ function Home() {
                         >
                           <h3 className="home_titled hc-home__title mt-3" data-aos="fade-up"
                             data-aos-offset="100"
-                            data-aos-duration="800">
-
-                            {CMS["About Home Cubes"]?.title}
+                            data-aos-duration="800"
+                            dangerouslySetInnerHTML={{ __html: CMS["About Home Cubes"]?.title }}
+                          >
+                            {console.log("siehgse",CMS["About Home Cubes"]?.title)}
                           </h3>
                           <p
                             className="mp_detailbrief hc-home__desc mt-3"

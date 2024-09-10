@@ -197,10 +197,10 @@ export function Editcmshome() {
                   {/* <input type="text" className="form-control" id="title" placeholder="title" value={formData?.title} onChange={(e) => handlechange(e)} /> */}
 
                   {/* } */}
-                  <CKEditor
+                  {formData?.title && <CKEditor
                     initData={formData.title != "" ? formData.title : ""}
                     onChange={(e) => onTitleChange(e)}
-                  />
+                  />}
 
                 </Form.Group>
                 <Form.Group>

@@ -27,7 +27,6 @@ function Footer() {
 
                             <img className='footer_logo' src={require('../assets/images/logo.svg').default} />
                             <p className='footer_brief' dangerouslySetInnerHTML={{ __html: footerCon?.content }} ></p>
-                            <p>Test</p>
                             <div className='footer_social mt-4'>
                                 <img className='footer_sociallinks' src={require('../assets/images/vtele.svg').default} />
                                 <img className='footer_sociallinks' src={require('../assets/images/vtwitter.svg').default} />
