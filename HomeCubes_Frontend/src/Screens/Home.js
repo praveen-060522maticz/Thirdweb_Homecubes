@@ -154,7 +154,7 @@ function Home() {
                             /> */}
                         {CMS["Revolution your Home Ownership"]?.img &&
                           <div className="anim_div" data-aos="fade-up"
-                            data-aos-offset="50"
+                            data-aos-offset="150"
                             data-aos-duration="800">
 
                             <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["Revolution your Home Ownership"]?.img}`} className="banner_lottie" />
@@ -211,7 +211,7 @@ function Home() {
                             data-aos-duration="800"
                             dangerouslySetInnerHTML={{ __html: CMS["About Home Cubes"]?.title }}
                           >
-                            {console.log("siehgse",CMS["About Home Cubes"]?.title)}
+                            {console.log("siehgse", CMS["About Home Cubes"]?.title)}
                           </h3>
                           <p
                             className="mp_detailbrief hc-home__desc mt-3"

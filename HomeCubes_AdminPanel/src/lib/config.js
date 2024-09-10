@@ -7,7 +7,7 @@ let Back_Url = "";
 let decimalValues = 1000000000000000000;
 var FRONT_URL = "";
 var ImG = "";
-var EnvName = "local";
+var EnvName = "stage";
 var networkTransUrl = ''
 
 var Front_market_Url = ''
@@ -106,7 +106,7 @@ if (EnvName === "demo") {
   var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase(); // seplia openzep removed
   var singleAddress = "0x575cd9E4099A38B536673F557063f9A546870d11"; // seplia
   var multipeAddress = "0x0b6369b506e811df30ab7c0ce0ae00b8690b76be";
-  var networkVersion = "0x61" 
+  var networkVersion = "0x61"
   var chainId = 11155111;
   var ETHCHAIN = 11155111
   var BNBCHAIN = 97
