@@ -370,7 +370,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 7px;
+  padding: 10px 7px;
   cursor: pointer;
 }
 
@@ -380,8 +380,8 @@
 }
 
 .sidetab_logo {
-  height: 15px;
-  width: 15px;
+  height: 20px;
+  width: 20px;
   object-fit: contain;
 }
 
@@ -4448,7 +4448,7 @@ body.modal-open .container {
   }
 
   .singleTab {
-    padding: 15px 7px;
+    padding: 10px 7px;
   }
 
   .sidetab_laebl {
@@ -4456,8 +4456,8 @@ body.modal-open .container {
   }
 
   .sidetab_logo {
-    height: 24px;
-    width: 24px;
+    height: 20px;
+    width: 20px;
   }
 
   .sidetab_laebl {
@@ -4495,7 +4495,7 @@ body.modal-open .container {
 
 @media (768px < width) {
   .res_pad_aligner {
-    padding-left: 70px;
+    padding-left: 50px;
   }
 }
 
@@ -5633,7 +5633,7 @@ body {
 }
 
 .hc-modal.common_modal .modal-dialog {
-  max-width: 300px;
+  max-width: 350px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -5967,6 +5967,11 @@ body {
   background: var(--gradinet_right);
   color: var(--black);
 }
+
+.staking_gradholder.mintgrad {
+  height: 120vh;
+}
+
 
 .Typewriter {
   font-family: var(--poppins) !important;
@@ -7992,6 +7997,7 @@ body {
   .sidetab_whole.hc-sidetab {
     /* top: 25%; */
     top: calc(50% - 207px + 35px);
+    transform: translateY(18%);
   }
 
   .hc-home__desc {
@@ -8004,6 +8010,10 @@ body {
 
   .hc-banner__top {
     margin-top: 20px;
+  }
+
+  .mintpage .hc-banner__top {
+    margin-top: 0px;
   }
 
   .hc-card__nft {
@@ -8344,7 +8354,7 @@ body {
   }
 
   .hc-home__banner_height.staking_gradholder {
-    height: 700px;
+    height: 100vh
   }
 
   .hc-home__roadMap {
@@ -8385,7 +8395,7 @@ body {
   }
 
   .hc-home__banner.home_banner_row {
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 95px);
     height: unset;
     max-height: unset;
   }
@@ -8787,6 +8797,10 @@ body {
 
   .hc-banner__top {
     margin-top: 100px;
+  }
+
+  .mintpage .hc-banner__top {
+    margin-top: 30px;
   }
 
   .hc-card__nft {

@@ -625,7 +625,7 @@ function Home() {
           <Footer />
         </Container >
 
-        <div className="gradient_holder staking_gradholder hc-home__banner_height"></div>
+        <div className="gradient_holder staking_gradholder hc-home__banner_height homegrad"></div>
       </>
       {/* }
 
