@@ -269,7 +269,7 @@ function Marketplace() {
             <Col lg={1} md={2} className="sidetab_holder">
               <SideTab />
             </Col>
-            <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner mt-4">
+            <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner  mt-4">
               {/* <BreadPath/> */}
               <h3 className="hc-home__title home_titled">Our <strong>Unique</strong> Marketplace</h3>
               <p className="mp_detailbrief hc-home__desc mt-3" dangerouslySetInnerHTML={{ __html: coll?.content }} >
