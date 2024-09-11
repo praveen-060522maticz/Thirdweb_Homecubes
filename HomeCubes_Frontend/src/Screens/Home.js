@@ -103,7 +103,7 @@ function Home() {
       <>
         <BottomBar />
         <Header />
-        <Container fluid className="pt-3 home_wrapper">
+        <Container fluid className="pt-3 home_wrapper ">
           <Container className="custom_container ">
             <Row>
               <Col lg={1} md={2} className="sidetab_holder">
@@ -242,8 +242,9 @@ function Home() {
                           data-aos="fade-up"
                           data-aos-offset="100"
                           data-aos-duration="800"
+                          dangerouslySetInnerHTML={{ __html: CMS["CountDown to Our Next Launch"]?.title }}
                         >
-                          {CMS["CountDown to Our Next Launch"]?.title}
+
                         </h3>
                         <p
                           className="mp_detailbrief hc-home__desc mt-3"
@@ -253,7 +254,7 @@ function Home() {
                         ></p>
 
                         <button className="primary_blueBtn mt-5">
-                          About our Team
+                          Initial Sales
                         </button>
                       </Col>
                       <Col
@@ -278,22 +279,7 @@ function Home() {
                       </Col>
                     </Row>
                     {/* <LazyLoad height={200} placeholder={<LazyLoader />} offset={[-200, 0]} debounce={500}> */}
-                    {CMS?.youtube?.link && (
-                      <Row className="mt-4 justify-content-center">
-                        <Col lg={5}>
-                          <Iframe
-                            width="100%"
-                            height="350"
-                            src={CMS?.youtube?.link}
-                            title="YouTube video player"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen
-                            loading="lazy"
-                          />
-                        </Col>
-                      </Row>
-                    )}
+
                     {/* </LazyLoad> */}
                     <Row className="pi_higherTop">
                       <Col lg={6} md={6} sm={6} xs={12} className="d-flex justify-content-center align-items-center">
@@ -331,12 +317,18 @@ function Home() {
                             data-aos="fade-up"
                             data-aos-offset="100"
                             data-aos-duration="800"
+                            dangerouslySetInnerHTML={{
+                              __html:
+                                CMS[
+                                  "In addition to the product launch, we will also establish a marketplace."
+                                ]?.title
+                            }}
                           >
-                            {
+                            {/* {
                               CMS[
                                 "In addition to the product launch, we will also establish a marketplace."
                               ]?.title
-                            }
+                            } */}
                           </h3>
                           <p
                             className="mp_detailbrief hc-home__desc mt-3"
@@ -355,8 +347,23 @@ function Home() {
                         </div>
                       </Col>
                     </Row>
-
-                    <Row className="align-items-center mt-5">
+                    {CMS?.youtube?.link && (
+                      <Row className="pi_higherTop justify-content-center">
+                        <Col lg={5}>
+                          <Iframe
+                            width="100%"
+                            height="350"
+                            src={CMS?.youtube?.link}
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                          />
+                        </Col>
+                      </Row>
+                    )}
+                    <Row className="align-items-center pi_higherTop">
                       <Col lg={6} md={6} sm={12} xs={12}>
                         <Typewriter
                           options={{
@@ -371,21 +378,21 @@ function Home() {
                           data-aos-offset="100"
                           data-aos-duration="800"
                         >
-                          Investors Benefits
+                          Investors <strong>Benefits</strong>
                         </h3>
                         <ul className="home_investorList mt-4">
                           {investArr.length != 0 && investArr.map((val) => {
 
                             return (
-                              <li>
+                              <li className="">
                                 {" "}
                                 <img
-                                  className="home_threecube"
+                                  className="home_threecube mt-2"
                                   src={
                                     require("../assets/images/threecube.svg").default
                                   }
                                 />
-                                <p className="home_investorli" dangerouslySetInnerHTML={{ __html: val?.content }} >
+                                <p className=" mp_detailbrief hc-home__desc" dangerouslySetInnerHTML={{ __html: val?.content }} >
 
                                 </p>
                               </li>
@@ -486,7 +493,7 @@ function Home() {
                         data-aos-offset="50"
                         data-aos-duration="800"
                       >
-                        Our Commitment
+                        Our <strong>Commitment</strong>
                       </h3>
                       {commmitArr?.length != 0 &&
                         commmitArr?.map((i) => (
@@ -526,8 +533,11 @@ function Home() {
                       >
                         Road Map
                       </h3>
+                      <div className="mt-3 mt-xl-5">
+                        <Roadmap data={roadMap} />
 
-                      <Roadmap data={roadMap} />
+                      </div>
+
                     </Row>
 
                     {/* <Row className="justify-content-center pi_higherTop">
@@ -613,7 +623,7 @@ function Home() {
           <Footer />
         </Container >
 
-        <div className="gradient_holder staking_gradholder"></div>
+        <div className="gradient_holder staking_gradholder hc-home__banner_height"></div>
       </>
       {/* }
 

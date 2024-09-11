@@ -90,29 +90,29 @@ function Projects() {
             <Col lg={11} md={10} sm={12} xs={12} className='res_pad_aligner mt-3'>
               {/* <BreadPath/> */}
               <h3 className='hc-home__title home_titled'>All <strong>Listed Properties</strong></h3>
-              <p className='mp_detailbrief hc-home__desc mt-3' dangerouslySetInnerHTML={{ __html: CMS?.content }} ></p>
+              {/* <p className='mp_detailbrief hc-home__desc mt-3' dangerouslySetInnerHTML={{ __html: CMS?.content }} ></p> */}
               <hr className='projects_hr' />
 
-              <div className='d-flex flex-wrap align-items-center gap-4 gap-xl-5'>
+              <div className='d-flex flex-wrap align-items-center gap-3 gap-lg-4 gap-xl-5'>
                 <div className="mp_collectionDetail mb-2">
-                  <p className="mp_collectionLabel">Number of NFTs :</p>
+                  <p className="mp_collectionLabel">Properties :</p>
+                  <p className="mp_collectionValue">{projectLength}</p>
+                </div>
+                <div className="mp_collectionDetail mb-2">
+                  <p className="mp_collectionLabel">NFTs :</p>
                   <p className="mp_collectionValue">{nftLength}</p>
                 </div>
                 <div className="mp_collectionDetail mb-2">
-                  <p className="mp_collectionLabel">Number of Staked NFTs :</p>
+                  <p className="mp_collectionLabel">Staked NFTs :</p>
                   <p className="mp_collectionValue">{staked}</p>
                 </div>
                 <div className="mp_collectionDetail mb-2">
-                  <p className="mp_collectionLabel">Number of Non-Staked NFTs :</p>
+                  <p className="mp_collectionLabel">Non-Staked NFTs :</p>
                   <p className="mp_collectionValue">{unStaked}</p>
                 </div>
                 <div className="mp_collectionDetail mb-2">
                   <p className="mp_collectionLabel">Next Rewards Distribution :</p>
                   <p className="mp_collectionValue"> {new Date(rewardDetail?.endDateFormat).toLocaleDateString()}</p>
-                </div>
-                <div className="mp_collectionDetail mb-2">
-                  <p className="mp_collectionLabel">Number of Projects :</p>
-                  <p className="mp_collectionValue">{projectLength}</p>
                 </div>
               </div>
 
@@ -179,6 +179,8 @@ function Projects() {
         </Container>
         <Footer />
       </Container>
+      <div className="gradient_holder staking_gradholder hc-home__banner_height"></div>
+
       {/* <div className='gradient_holder hc-project__inner'></div> */}
     </>
   )

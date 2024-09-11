@@ -1284,9 +1284,9 @@
 }
 
 .mp_accordion .accordion-button {
-  font-size: var(--font_fourteen);
-  font-family: var(--poppins);
-  font-weight: var(--weight_five);
+  font-size: 18px;
+  font-family: var(--montserrat-font);
+  font-weight: 600;
   color: var(--gradinet_right);
   background-color: transparent !important;
   border: none !important;
@@ -1508,7 +1508,7 @@ input.mint_countInput::-webkit-inner-spin-button{
       var(--gradinet_right));
   padding: 8px 10px;
   border-radius: 5px;
-  font-size: 13px;
+  font-size: 14px;
   color: #fff;
   font-weight: 700;
   display: flex;
@@ -1521,6 +1521,14 @@ input.mint_countInput::-webkit-inner-spin-button{
   background-image: linear-gradient(to right,
       var(--gradinet_right),
       var(--gradinet_left));
+}
+
+.nftinfo_gradeientBtn:disabled {
+  opacity: 0.5;
+  background-image: linear-gradient(to right,
+      var(--gradinet_left),
+      var(--gradinet_right));
+  cursor: not-allowed;
 }
 
 .nftInfo_topLeft {
@@ -5215,7 +5223,7 @@ body {
   font-weight: 400;
 }
 
-.hc-home__title.home_titled b {
+.hc-home__title.home_titled .marker {
   color: var(--gradinet_left);
   font-weight: 400;
 }
@@ -5829,7 +5837,7 @@ body {
 
 .hc-roadmap__new-col--center img {
   position: absolute;
-  top: 0;
+  top: -2px;
   right: 50%;
   left: 50%;
   transform: translateX(-50%);
@@ -6263,9 +6271,9 @@ body {
     min-width: 100%;
     width: 100%;
     max-width: 100%;
-    min-height: 170px;
-    height: 170px;
-    max-height: 170px;
+    min-height: 185px;
+    height: 185px;
+    max-height: 185px;
   }
 
   .hc-nft__card-title {
@@ -6629,9 +6637,9 @@ body {
     min-width: 100%;
     width: 100%;
     max-width: 100%;
-    min-height: 170px;
-    height: 170px;
-    max-height: 170px;
+    min-height: 180px;
+    height: 180px;
+    max-height: 180px;
   }
 
   .hc-nft__card-title {
@@ -7000,9 +7008,9 @@ body {
     min-width: 100%;
     width: 100%;
     max-width: 100%;
-    min-height: 180px;
-    height: 180px;
-    max-height: 180px;
+    min-height: 190px;
+    height: 190px;
+    max-height: 190px;
   }
 
   .hc-nft__card-title {
@@ -7424,9 +7432,9 @@ body {
     min-width: 100%;
     width: 100%;
     max-width: 100%;
-    min-height: 180px;
-    height: 180px;
-    max-height: 180px;
+    min-height: 190px;
+    height: 190px;
+    max-height: 190px;
   }
 
   .hc-nft__card-title {
@@ -7765,7 +7773,7 @@ body {
   }
 
   .hc-banner__top {
-    margin-top: 60px;
+    margin-top: 20px;
   }
 
   .hc-card__nft {
@@ -7778,13 +7786,13 @@ body {
     min-width: 100%;
     width: 100%;
     max-width: 100%;
-    min-height: 155px;
-    height: 155px;
-    max-height: 155px;
+    min-height: 170px;
+    height: 170px;
+    max-height: 170px;
   }
 
   .hc-nft__card-title {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 20px;
   }
 
@@ -7810,8 +7818,9 @@ body {
 
   .hc-button___gradient p,
   .hc-border__left {
-    padding-left: 10px;
-    padding-right: 10px;
+    font-size: 11px;
+    padding-left: 6px;
+    padding-right: 6px;
   }
 
   .hc-nft__card-timer {
@@ -8056,12 +8065,12 @@ body {
   }
 
   .hc-roadmap__new .roadmap_strokeText {
-    font-size: 70px;
-    line-height: 45px;
+    font-size: 100px;
+    line-height: 60px;
   }
 
   .hc-roadmap__new--themeText {
-    font-size: 21px;
+    font-size: 27px;
   }
 
   .hc-roadmap__new--whiteText {
@@ -8070,17 +8079,22 @@ body {
   }
 
   .hc-roadmap__new-padding--top {
-    padding-top: 90px;
+    padding-top: 110px;
   }
 
   .hc-roadmap__new .gif_aligner {
-    max-width: 120px;
-    width: 120px;
-    min-width: 120px;
-    min-height: 120px;
-    height: 120px;
-    max-height: 120px;
+    max-width: 150px;
+    width: 150px;
+    min-width: 150px;
+    min-height: 150px;
+    height: 150px;
+    max-height: 150px;
     border-radius: 10px;
+    margin-top: -30px;
+  }
+
+  .hc-roadmap__new-padding--top .roadmap_date {
+    font-size: 13px;
   }
 
   .hc-roadmap__new-col--center img {
@@ -8093,6 +8107,14 @@ body {
 
   .hc-swiper__arrow--right {
     right: -18px;
+  }
+
+  .hc-roadmap__new-col--left {
+    gap: 110px !important;
+  }
+
+  .hc-home__banner_height.staking_gradholder {
+    height: 700px;
   }
 }
 
@@ -8133,9 +8155,9 @@ body {
     min-width: 100%;
     width: 100%;
     max-width: 100%;
-    min-height: 185px;
-    height: 185px;
-    max-height: 185px;
+    min-height: 200px;
+    height: 200px;
+    max-height: 200px;
   }
 
   .hc-nft__card-title {
@@ -8387,16 +8409,20 @@ body {
   }
 
   .hc-roadmap__new--themeText {
-    font-size: 25px;
+    font-size: 29px;
   }
 
   .hc-roadmap__new--whiteText {
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .hc-roadmap__new-padding--top {
     padding-top: 120px;
+  }
+
+  .hc-roadmap__new-padding--top .roadmap_date {
+    font-size: 13px;
   }
 
   .hc-roadmap__new-col--center img {
@@ -8410,6 +8436,22 @@ body {
   .hc-swiper__arrow--right {
     right: -18px;
   }
+
+  .hc-roadmap__new-col--left {
+    gap: 110px !important;
+  }
+
+  .hc-roadmap__new .gif_aligner {
+    max-width: 150px;
+    width: 150px;
+    min-width: 150px;
+    min-height: 150px;
+    height: 150px;
+    max-height: 150px;
+    border-radius: 10px;
+    margin-top: -30px;
+  }
+
 }
 
 @media(min-width:1500px) {
@@ -8445,9 +8487,9 @@ body {
     min-width: 100%;
     width: 100%;
     max-width: 100%;
-    min-height: 200px;
-    height: 200px;
-    max-height: 200px;
+    min-height: 210px;
+    height: 210px;
+    max-height: 210px;
   }
 
   .hc-nft__card-title {
@@ -8677,8 +8719,8 @@ body {
 
 
   .hc-roadmap__new .roadmap_strokeText {
-    font-size: 100px;
-    line-height: 55px;
+    font-size: 110px;
+    line-height: 65px;
   }
 
   .hc-roadmap__new--themeText {
@@ -8687,7 +8729,11 @@ body {
 
   .hc-roadmap__new--whiteText {
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 15px;
+  }
+
+  .hc-roadmap__new-padding--top .roadmap_date {
+    font-size: 15px;
   }
 
   .hc-roadmap__new-padding--top {
@@ -8705,6 +8751,22 @@ body {
   .hc-swiper__arrow--right {
     right: -18px;
   }
+
+  .hc-roadmap__new-col--left {
+    gap: 120px !important;
+  }
+
+  .hc-roadmap__new .gif_aligner {
+    max-width: 150px;
+    width: 150px;
+    min-width: 150px;
+    min-height: 150px;
+    height: 150px;
+    max-height: 150px;
+    border-radius: 10px;
+    margin-top: -30px;
+  }
+
 }
 
 
