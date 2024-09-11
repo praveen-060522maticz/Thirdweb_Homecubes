@@ -51,10 +51,10 @@ if (EnvName === "local") {
 }
 
 if (EnvName === "clientStage") {
-  Back_Url = "http://staging-backend.homecubes.io/v1/admin";
-  Front_market_Url = "http://localhost:3000/naiftyadmin";
-  var image_url = "http://staging-backend.homecubes.io/token";
-  ImG = "http://staging-backend.homecubes.io";
+  Back_Url = "https://staging-backend.homecubes.io/v1/admin";
+  Front_market_Url = "https://localhost:3000/naiftyadmin";
+  var image_url = "https://staging-backend.homecubes.io/token";
+  ImG = "https://staging-backend.homecubes.io";
   // var tradeAddress = "0xD370f5D497cc4b2344a9936f24E47284693d96D5"; // bnb
   // var singleAddress = "0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf"; // bnb
   // var tradeAddress = "0x19D4c0f9155C6517580f850D4D097AF0448a1B39"; // seplia old
@@ -80,7 +80,7 @@ if (EnvName === "clientStage") {
   var ETHprovider = "https://eth-sepolia.g.alchemy.com/v2/demo";
   var BNBprovider = "https://endpoints.omniatech.io/v1/bsc/testnet/public";
   // var Back_Url_Token = "https://naifty.io/v1";
-  var Back_Url_Token = "http://staging-backend.homecubes.io/v1";
+  var Back_Url_Token = "https://staging-backend.homecubes.io/v1";
   var COIN_NAME = "BNB"
   networkTransUrl = "https://sepolia.etherscan.io/tx/"
   // var stakeAddress = "0x4f9395bdA5E47566903b960895fdc2713890Fd41"

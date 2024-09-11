@@ -109,7 +109,7 @@ export function Editcmshome() {
 
     if (Object.keys(errors).length == 0) {
       var datacms = {
-        title: ckTitle,
+        title: ckTitle || formData?.title,
         content: formData.content,
         link: formData.link,
         position: formData.link,
