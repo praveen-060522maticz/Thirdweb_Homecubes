@@ -65,7 +65,7 @@ main .ck-editor[role='application'] .ck.ck-content,
   justify-content: center;
 }
 
-.editor-container--with-sidebar > .ck.ck-editor {
+.editor-container--with-sidebar>.ck.ck-editor {
   width: calc(100% - var(--ck-sample-sidebar-width));
 }
 
@@ -432,7 +432,7 @@ header nav ul li {
   display: inline-block;
 }
 
-header nav ul li + li {
+header nav ul li+li {
   margin-left: 1em;
 }
 

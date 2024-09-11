@@ -74,6 +74,8 @@
   --bg-color-3: #08080899;
   --bg-color-4: #5A5A5A;
   --bg-color-5: #111111;
+  --bg-color-6: #00000080;
+
   --border-color-1: #525252;
 
   --text-color-1: #F84A4A;
@@ -120,6 +122,21 @@
 }
 
 /* end of scrollbar css */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* header css */
 .whole_header {
@@ -353,7 +370,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 7px;
+  padding: 10px 7px;
   cursor: pointer;
 }
 
@@ -363,8 +380,8 @@
 }
 
 .sidetab_logo {
-  height: 15px;
-  width: 15px;
+  height: 20px;
+  width: 20px;
   object-fit: contain;
 }
 
@@ -2367,7 +2384,7 @@ input.mint_countInput::-webkit-inner-spin-button{
   font-family: var(--poppins);
   width: unset;
   padding: 10px 58px;
-  background-image: url("../images/mintbg.png");
+  background-image: url("../images/mintBg.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -2416,7 +2433,7 @@ input.mint_countInput::-webkit-inner-spin-button{
   font-size: 14px;
   /* font-style: italic; */
   font-family: var(--montserrat-font);
-  font-weight: 600;
+  font-weight: 500;
   padding: 8px 20px;
 }
 
@@ -2483,7 +2500,7 @@ input.mint_countInput::-webkit-inner-spin-button{
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 20px;
+  gap: 25px;
 }
 
 .home_investorli {
@@ -4431,7 +4448,7 @@ body.modal-open .container {
   }
 
   .singleTab {
-    padding: 15px 7px;
+    padding: 10px 7px;
   }
 
   .sidetab_laebl {
@@ -4439,8 +4456,8 @@ body.modal-open .container {
   }
 
   .sidetab_logo {
-    height: 24px;
-    width: 24px;
+    height: 20px;
+    width: 20px;
   }
 
   .sidetab_laebl {
@@ -4478,7 +4495,7 @@ body.modal-open .container {
 
 @media (768px < width) {
   .res_pad_aligner {
-    padding-left: 30px;
+    padding-left: 50px;
   }
 }
 
@@ -5143,6 +5160,15 @@ body.modal-open .container {
   .user_hidden_cnt {
     top: 33px;
   }
+
+  .hc-info__last-bid {
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+
 }
 
 @media (min-width: 1200px) {
@@ -5228,6 +5254,7 @@ body {
   color: var(--gradinet_left);
   font-weight: 400;
 }
+
 .hc-mint__content-subtitle.home_titled {
   font-family: var(--montserrat-font);
   font-weight: 600;
@@ -5606,7 +5633,7 @@ body {
 }
 
 .hc-modal.common_modal .modal-dialog {
-  max-width: 300px;
+  max-width: 350px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -5669,7 +5696,7 @@ body {
 
 .hc-button__gray {
   font-style: normal;
-  font-size: var(--font_thirteen);
+  font-size: 14px;
   width: 100%;
   padding: 10px 30px;
   border: none;
@@ -5677,7 +5704,7 @@ body {
   background-color: var(--bg-color-4);
   color: var(--white);
   font-weight: 700;
-  font-family: var(--poppins);
+  font-family: var(--montserrat-font);
   border-radius: 5px;
 }
 
@@ -5854,7 +5881,7 @@ body {
   position: absolute;
   top: -2px;
   right: 50%;
-  left: 50%;
+  left: 50.5%;
   transform: translateX(-50%);
   z-index: 2;
   transform: translateX(-50%);
@@ -5906,10 +5933,14 @@ body {
   height: 650px;
 }
 
+.home_investorli.hc-home_li--p {
+  scrollbar-width: none;
+}
+
 .home_investorli.hc-home_li--p p {
   font-family: var(--montserrat-font);
   font-weight: 500;
-  line-height: 28px;
+  line-height: 32px;
   font-size: 15px;
 }
 
@@ -5935,6 +5966,44 @@ body {
 .hc-home__button--linear:hover {
   background: var(--gradinet_right);
   color: var(--black);
+}
+
+.staking_gradholder.mintgrad {
+  height: 120vh;
+}
+
+
+.Typewriter {
+  font-family: var(--poppins) !important;
+}
+
+.hc-home__threecube.home_threecube {
+  height: 22px;
+  width: 22px;
+}
+
+.hc-info__last-bid {
+  border: 2px solid var(--gradinet_right);
+  background: var(--bg-color-6);
+}
+
+.hc-info__last-bid--title {
+  color: var(--white);
+  font-weight: 600;
+  font-family: var(--montserrat-font);
+  margin-bottom: 0px;
+}
+
+.hc-info__last-bid--value {
+  color: var(--white);
+  font-family: var(--montserrat-font);
+  font-weight: 600;
+  margin-bottom: 0px;
+  /* margin-top: 5px; */
+}
+
+.hc-info__last-bid--value span {
+  color: var(--gradinet_right);
 }
 
 /* hari media */
@@ -6246,11 +6315,11 @@ body {
 
   .hc-roadmap__new .roadmap_strokeText {
     font-size: 30px;
-    line-height: 25px;
+    line-height: 15px;
   }
 
   .hc-roadmap__new--themeText {
-    font-size: 16px;
+    font-size: 13px;
   }
 
   .hc-roadmap__new--whiteText {
@@ -6259,21 +6328,30 @@ body {
   }
 
   .hc-roadmap__new-padding--top {
-    padding-top: 60px;
+    padding-top: 30px;
   }
 
   .hc-roadmap__new .gif_aligner {
-    max-width: 60px;
-    width: 60px;
-    min-width: 60px;
-    min-height: 60px;
-    height: 60px;
-    max-height: 60px;
+    max-width: 100px;
+    width: 100px;
+    min-width: 100px;
+    min-height: 100px;
+    height: 100px;
+    max-height: 100px;
     border-radius: 8px;
+    margin-top: -30px;
   }
 
   .hc-roadmap__new-col--center img {
     width: 15px;
+  }
+
+  .hc-home__roadMap {
+    margin-top: 50px;
+  }
+
+  .hc-home__roadmap--content {
+    margin-top: 60px;
   }
 }
 
@@ -6611,12 +6689,12 @@ body {
   }
 
   .hc-roadmap__new .roadmap_strokeText {
-    font-size: 30px;
+    font-size: 40px;
     line-height: 25px;
   }
 
   .hc-roadmap__new--themeText {
-    font-size: 16px;
+    font-size: 13px;
   }
 
   .hc-roadmap__new--whiteText {
@@ -6625,21 +6703,30 @@ body {
   }
 
   .hc-roadmap__new-padding--top {
-    padding-top: 60px;
+    padding-top: 30px;
   }
 
   .hc-roadmap__new .gif_aligner {
-    max-width: 60px;
-    width: 60px;
-    min-width: 60px;
-    min-height: 60px;
-    height: 60px;
-    max-height: 60px;
+    max-width: 100px;
+    width: 100px;
+    min-width: 100px;
+    min-height: 100px;
+    height: 100px;
+    max-height: 100px;
     border-radius: 8px;
+    margin-top: -30px;
   }
 
   .hc-roadmap__new-col--center img {
     width: 15px;
+  }
+
+  .hc-home__roadMap {
+    margin-top: 50px;
+  }
+
+  .hc-home__roadmap--content {
+    margin-top: 60px;
   }
 }
 
@@ -6969,12 +7056,12 @@ body {
   }
 
   .hc-roadmap__new .roadmap_strokeText {
-    font-size: 50px;
+    font-size: 60px;
     line-height: 45px;
   }
 
   .hc-roadmap__new--themeText {
-    font-size: 20px;
+    font-size: 17px;
   }
 
   .hc-roadmap__new--whiteText {
@@ -6983,17 +7070,18 @@ body {
   }
 
   .hc-roadmap__new-padding--top {
-    padding-top: 80px;
+    padding-top: 40px;
   }
 
   .hc-roadmap__new .gif_aligner {
-    max-width: 100px;
-    width: 100px;
-    min-width: 100px;
-    min-height: 100px;
-    height: 100px;
-    max-height: 100px;
+    max-width: 150px;
+    width: 150px;
+    min-width: 150px;
+    min-height: 150px;
+    height: 150px;
+    max-height: 150px;
     border-radius: 8px;
+    margin-top: -50px;
   }
 
   .hc-roadmap__new-col--center img {
@@ -7008,6 +7096,32 @@ body {
     right: -18px;
   }
 
+  .hc-home__roadMap {
+    margin-top: 80px;
+  }
+
+  .hc-home__roadmap--content {
+    margin-top: 80px;
+  }
+
+  .hc-info__last-bid {
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  .hc-info__last-bid--title {
+    font-size: 14px;
+  }
+
+  .hc-info__last-bid--value {
+    font-size: 20px;
+  }
+
+  .hc-info__last-bid button {
+    font-size: 13px;
+  }
 }
 
 @media(min-width:768px) and (max-width:991px) {
@@ -7408,17 +7522,18 @@ body {
   }
 
   .hc-roadmap__new-padding--top {
-    padding-top: 80px;
+    padding-top: 50px;
   }
 
   .hc-roadmap__new .gif_aligner {
-    max-width: 100px;
-    width: 100px;
-    min-width: 100px;
-    min-height: 100px;
-    height: 100px;
-    max-height: 100px;
+    max-width: 150px;
+    width: 150px;
+    min-width: 150px;
+    min-height: 150px;
+    height: 150px;
+    max-height: 150px;
     border-radius: 8px;
+    margin-top: -60px;
   }
 
   .hc-roadmap__new-col--center img {
@@ -7431,6 +7546,33 @@ body {
 
   .hc-swiper__arrow--right {
     right: -18px;
+  }
+
+  .hc-home__roadMap {
+    margin-top: 100px;
+  }
+
+  .hc-home__roadmap--content {
+    margin-top: 80px;
+  }
+
+  .hc-info__last-bid {
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  .hc-info__last-bid--title {
+    font-size: 14px;
+  }
+
+  .hc-info__last-bid--value {
+    font-size: 20px;
+  }
+
+  .hc-info__last-bid button {
+    font-size: 13px;
   }
 }
 
@@ -7762,17 +7904,18 @@ body {
   }
 
   .hc-roadmap__new-padding--top {
-    padding-top: 90px;
+    padding-top: 55px;
   }
 
   .hc-roadmap__new .gif_aligner {
-    max-width: 120px;
-    width: 120px;
-    min-width: 120px;
-    min-height: 120px;
-    height: 120px;
-    max-height: 120px;
+    max-width: 220px;
+    width: 220px;
+    min-width: 220px;
+    min-height: 220px;
+    height: 220px;
+    max-height: 220px;
     border-radius: 10px;
+    margin-top: -80px;
   }
 
   .hc-roadmap__new-col--center img {
@@ -7786,6 +7929,35 @@ body {
   .hc-swiper__arrow--right {
     right: -18px;
   }
+
+  .hc-home__roadMap {
+    margin-top: 120px;
+  }
+
+  .hc-home__roadmap--content {
+    margin-top: 100px;
+  }
+
+  .hc-info__last-bid {
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  .hc-info__last-bid--title {
+    font-size: 14px;
+  }
+
+
+
+  .hc-info__last-bid--value {
+    font-size: 20px;
+  }
+
+  .hc-info__last-bid button {
+    font-size: 13px;
+  }
 }
 
 @media(min-width:1200px) and (max-width:1399px) {
@@ -7797,10 +7969,35 @@ body {
     min-height: calc(100vh - 100px);
     height: unset;
     max-height: unset;
+    position: relative;
   }
 
+  /* .hc-home__banner::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -100px;
+    width: 200px;
+    height: 2px;
+    background: red;
+  }
+
+
+
+  .sidetab_whole.hc-sidetab::after {
+    content: '';
+    position: absolute;
+    background: green;
+    width: 200px;
+    height: 2px;
+    top: 50%;
+    right: 0px;
+  } */
+
   .sidetab_whole.hc-sidetab {
-    top: 25%;
+    /* top: 25%; */
+    top: calc(50% - 207px + 35px);
+    transform: translateY(18%);
   }
 
   .hc-home__desc {
@@ -7813,6 +8010,10 @@ body {
 
   .hc-banner__top {
     margin-top: 20px;
+  }
+
+  .mintpage .hc-banner__top {
+    margin-top: 0px;
   }
 
   .hc-card__nft {
@@ -8118,18 +8319,18 @@ body {
   }
 
   .hc-roadmap__new-padding--top {
-    padding-top: 110px;
+    padding-top: 45px;
   }
 
   .hc-roadmap__new .gif_aligner {
-    max-width: 150px;
-    width: 150px;
-    min-width: 150px;
-    min-height: 150px;
-    height: 150px;
-    max-height: 150px;
+    max-width: 250px;
+    width: 250px;
+    min-width: 250px;
+    min-height: 250px;
+    height: 250px;
+    max-height: 250px;
     border-radius: 10px;
-    margin-top: -30px;
+    margin-top: -80px;
   }
 
   .hc-roadmap__new-padding--top .roadmap_date {
@@ -8153,7 +8354,38 @@ body {
   }
 
   .hc-home__banner_height.staking_gradholder {
-    height: 700px;
+    height: 100vh
+  }
+
+  .hc-home__roadMap {
+    margin-top: 150px;
+  }
+
+  .hc-home__roadmap--content {
+    margin-top: 120px;
+  }
+
+  .hc-info__last-bid--title {
+    font-size: 20px;
+  }
+
+  .hc-info__last-bid--value {
+    font-size: 20px;
+  }
+
+  .hc-info__last-bid {
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  .hc-info__last-bid--title {
+    font-size: 16px;
+  }
+
+  .hc-info__last-bid--value {
+    font-size: 23px;
   }
 }
 
@@ -8163,13 +8395,14 @@ body {
   }
 
   .hc-home__banner.home_banner_row {
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 95px);
     height: unset;
     max-height: unset;
   }
 
   .sidetab_whole.hc-sidetab {
-    top: 25%;
+    top: calc(50% + 35px);
+    transform: translateY(-50%);
   }
 
   .hc-home__desc {
@@ -8448,7 +8681,7 @@ body {
   }
 
   .hc-roadmap__new--themeText {
-    font-size: 29px;
+    font-size: 27px;
   }
 
   .hc-roadmap__new--whiteText {
@@ -8457,7 +8690,7 @@ body {
   }
 
   .hc-roadmap__new-padding--top {
-    padding-top: 120px;
+    padding-top: 45px;
   }
 
   .hc-roadmap__new-padding--top .roadmap_date {
@@ -8481,27 +8714,77 @@ body {
   }
 
   .hc-roadmap__new .gif_aligner {
-    max-width: 150px;
-    width: 150px;
-    min-width: 150px;
-    min-height: 150px;
-    height: 150px;
-    max-height: 150px;
+    max-width: 250px;
+    width: 250px;
+    min-width: 250px;
+    min-height: 250px;
+    height: 250px;
+    max-height: 250px;
     border-radius: 10px;
-    margin-top: -30px;
+    margin-top: -90px;
   }
 
+  .hc-home__roadMap {
+    margin-top: 150px;
+  }
+
+  .hc-home__roadmap--content {
+    margin-top: 130px;
+  }
+
+  .hc-info__last-bid {
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  .hc-info__last-bid--title {
+    font-size: 16px;
+  }
+
+  .hc-info__last-bid--value {
+    font-size: 23px;
+  }
 }
 
-@media(min-width:1500px) {
+@media(min-width:1500px) and (max-width:1799px) {
+  .custom_container.container {
+    max-width: 1450px !important;
+  }
+
   .hc-home__banner.home_banner_row {
     min-height: calc(100vh - 100px);
     height: unset;
     max-height: unset;
+    position: relative;
   }
 
+  /* .hc-home__banner::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -100px;
+    width: 200px;
+    height: 2px;
+    background: red;
+  }
+
+
+
+  .sidetab_whole.hc-sidetab::after {
+    content: '';
+    position: absolute;
+    background: green;
+    width: 200px;
+    height: 2px;
+    top: 50%;
+    right: 0px;
+  } */
+
   .sidetab_whole.hc-sidetab {
-    top: 25%;
+    top: calc(50% + 35px);
+    transform: translateY(-50%);
   }
 
   .hc-home__desc {
@@ -8514,6 +8797,10 @@ body {
 
   .hc-banner__top {
     margin-top: 100px;
+  }
+
+  .mintpage .hc-banner__top {
+    margin-top: 30px;
   }
 
   .hc-card__nft {
@@ -8763,7 +9050,7 @@ body {
   }
 
   .hc-roadmap__new--themeText {
-    font-size: 25px;
+    font-size: 27px;
   }
 
   .hc-roadmap__new--whiteText {
@@ -8776,7 +9063,383 @@ body {
   }
 
   .hc-roadmap__new-padding--top {
-    padding-top: 120px;
+    padding-top: 45px;
+  }
+
+  .hc-roadmap__new-col--center img {
+    width: 25px;
+  }
+
+  .hc-swiper__arrow--left {
+    left: -18px;
+  }
+
+  .hc-swiper__arrow--right {
+    right: -18px;
+  }
+
+  .hc-roadmap__new-col--left {
+    gap: 120px !important;
+  }
+
+
+  .hc-roadmap__new .gif_aligner {
+    max-width: 300px;
+    width: 300px;
+    min-width: 300px;
+    min-height: 300px;
+    height: 300px;
+    max-height: 300px;
+    border-radius: 10px;
+    margin-top: -100px;
+  }
+
+  .hc-home__roadMap {
+    margin-top: 150px;
+  }
+
+  .hc-home__roadmap--content {
+    margin-top: 130px;
+  }
+
+  .hc-info__last-bid {
+    margin-top: 20px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .hc-info__last-bid {
+    margin-top: 20px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .hc-info__last-bid--title {
+    font-size: 17px;
+  }
+
+  .hc-info__last-bid--value {
+    font-size: 25px;
+  }
+}
+
+@media(min-width:1800px) {
+  .custom_container.container {
+    max-width: 1750px !important;
+  }
+
+
+  .hc-home__banner.home_banner_row {
+    min-height: calc(100vh - 100px);
+    height: unset;
+    max-height: unset;
+    position: relative;
+  }
+
+  /* .hc-home__banner::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -100px;
+    width: 200px;
+    height: 2px;
+    background: red;
+  }
+
+  .sidetab_whole.hc-sidetab::after {
+    content: '';
+    position: absolute;
+    background: green;
+    width: 200px;
+    height: 2px;
+    top: 50%;
+    right: 0px;
+  } */
+
+  .sidetab_whole.hc-sidetab {
+    top: calc(50% + 35px);
+    transform: translateY(-50%);
+  }
+
+  .home_titled.hc-home__title {
+    font-size: 31px;
+  }
+
+  .hc-home__desc {
+    font-size: 16px;
+  }
+
+  .hc-roadmap .home_roadmapSingle {
+    gap: 80px;
+  }
+
+  .hc-banner__top {
+    margin-top: 100px;
+  }
+
+  .hc-card__nft {
+    min-width: 300px;
+    width: 300px;
+    max-width: 300px;
+  }
+
+  .hc-card__nft .projectcard_wrapper_sep {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 210px;
+    height: 210px;
+    max-height: 210px;
+  }
+
+  .hc-nft__card-title {
+    font-size: 20px;
+    line-height: 25px;
+  }
+
+  .hc-nft__card-details {
+    font-size: 14px;
+  }
+
+  .whole_header {
+    height: 70px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hc-header__left img {
+    width: 200px;
+  }
+
+  .hc-button___gradient.pc_buyBtn {
+    font-size: 13.5px;
+    letter-spacing: 0.5px;
+    height: 38px;
+  }
+
+  .hc-button___gradient p,
+  .hc-border__left {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .hc-nft__card-timer {
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .hc-mint__banner {
+    min-height: calc(100vh - 70px);
+    height: calc(100vh - 70px);
+    max-height: calc(100vh - 70px);
+  }
+
+  .hc-mint__banner::after {
+    height: 300px;
+  }
+
+  .hc-mint__banner-section {
+    min-height: 100vh;
+    height: 100vh;
+  }
+
+  .hc-mint__banner-content {
+    width: calc(100%);
+  }
+
+  .hc-mint__banner-col--right {
+    padding-left: 42px;
+  }
+
+  .hc-mint__banner--title {
+    font-size: 23px;
+  }
+
+  .hc-mint__banner--desc {
+    font-size: 14px;
+    line-height: 30px;
+  }
+
+  .hc-mint__card-initialSales {
+    width: 460px;
+    min-width: 460px;
+    max-width: 460px;
+  }
+
+  .hc-mint__card-initialSales .title {
+    font-size: 22px;
+  }
+
+  .hc-mint__card-initialSales .label {
+    font-size: 15px;
+  }
+
+  .hc-mint__initialSales--border {
+    max-width: 170px;
+  }
+
+  .hc-mint__initialSales--themeText {
+    font-size: 15px;
+  }
+
+  .hc-mint__banner--wrapper {
+    min-width: 280px;
+    width: 280px;
+    max-width: 280px;
+    min-height: 180px;
+    height: 180px;
+    max-height: 180px;
+  }
+
+  .hc-mint__content-title {
+    font-size: 30px;
+  }
+
+  .hc-card__nft-new.nft_card.new .gallerImg {
+    min-height: 210px;
+    height: 210px;
+    max-height: 210px;
+    border-radius: 8px;
+  }
+
+  .hc-card__nft-new.nft_card.new .nftcard_detailwrapper p {
+    font-size: 19px;
+  }
+
+  .hc-mint__content-subtitle {
+    font-size: 30px;
+  }
+
+  .hc-mint__card-timerWraper {
+    padding: 10px 20px;
+    font-size: 25px;
+    min-width: 225px;
+  }
+
+  .hc-marketplace {
+    padding-top: 50px !important;
+  }
+
+  .hc-card__nft-height.nft_card .nftImg {
+    min-height: 325px;
+    height: 325px;
+    max-height: 325px;
+  }
+
+  .hc-card__nft-height.nft_card .nftcard_detailwrapper {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 15px;
+  }
+
+  .hc-section__inner {
+    padding-top: 50px !important;
+  }
+
+  .nftInfo_topLeft.hc-info__left--image img {
+    min-height: 300px;
+    height: 300px;
+    max-height: 300px;
+  }
+
+  .hc-info__name-title {
+    font-size: 23px;
+  }
+
+  .nftInfo_curPrice p {
+    font-size: 15px;
+  }
+
+  .nftInfo_descTitle {
+    font-size: 21px;
+  }
+
+  .nftInfo_greenBar {
+    max-width: 320px;
+    padding: 15px;
+  }
+
+  .greenBar_time {
+    font-size: 16px;
+  }
+
+  .greenBar_countdown {
+    min-width: 190px;
+  }
+
+  .greenBar_countdown span {
+    font-size: 20px;
+  }
+
+  .stack_countdown span {
+    font-size: 34px;
+  }
+
+  .top_reltab {
+    width: 100%;
+    max-width: 330px;
+  }
+
+  .ci_highertop {
+    margin-top: 70px;
+  }
+
+  .hc-gallery__image-name {
+    font-size: 23px;
+  }
+
+  .hc-collection__image-wrapper {
+    min-width: 280px;
+    width: 280px;
+    max-width: 280px;
+    min-height: 180px;
+    height: 180px;
+    max-height: 180px;
+    border-radius: 5px;
+  }
+
+  .hc-gallery__image-name--sm {
+    font-size: 19px;
+    width: 280px;
+  }
+
+  .hc-collection__modal-imageWrapper {
+    min-height: 500px;
+    height: 500px;
+    max-height: 500px;
+  }
+
+  .hc-profile__title {
+    font-size: 18px;
+  }
+
+  .profile_name {
+    font-size: 18px;
+  }
+
+
+  .hc-roadmap__new .roadmap_strokeText {
+    font-size: 110px;
+    line-height: 65px;
+  }
+
+  .hc-roadmap__new--themeText {
+    font-size: 28px;
+  }
+
+  .hc-roadmap__new--whiteText {
+    margin-top: 8px;
+    font-size: 15px;
+  }
+
+  .hc-roadmap__new-padding--top .roadmap_date {
+    font-size: 15px;
+  }
+
+  .hc-roadmap__new-padding--top {
+    padding-top: 50px;
   }
 
   .hc-roadmap__new-col--center img {
@@ -8796,17 +9459,56 @@ body {
   }
 
   .hc-roadmap__new .gif_aligner {
-    max-width: 150px;
-    width: 150px;
-    min-width: 150px;
-    min-height: 150px;
-    height: 150px;
-    max-height: 150px;
+    max-width: 300px;
+    width: 300px;
+    min-width: 300px;
+    min-height: 300px;
+    height: 300px;
+    max-height: 300px;
     border-radius: 10px;
-    margin-top: -30px;
+    margin-top: -100px;
   }
 
+  .hc-home__roadMap {
+    margin-top: 150px;
+  }
+
+  .hc-home__roadmap--content {
+    margin-top: 130px;
+  }
+
+  .hc-info__last-bid--title {
+    font-size: 17px;
+  }
+
+  .hc-info__last-bid--value {
+    font-size: 25px;
+  }
+
+  .hc-info__last-bid {
+    margin-top: 20px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .hc-info__last-bid--title {
+    font-size: 17px;
+  }
+
+  .hc-info__last-bid--value {
+    font-size: 25px;
+  }
+
+  .nftinfo_gradeientBtn {
+    font-size: 15px;
+  }
+
+  .hc-button__gray {
+    font-size: 15px;
+  }
 }
+
 
 
 /* end of hariharan css */

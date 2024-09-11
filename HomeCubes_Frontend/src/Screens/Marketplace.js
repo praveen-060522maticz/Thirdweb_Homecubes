@@ -280,7 +280,7 @@ function Marketplace() {
                   className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                   onClick={() => goPrev()}
                 >
-                  <FaChevronLeft fill="#fff" fontSize={22} className="me-2" />
+                  <FaChevronLeft fill="#fff" fontSize={38} className="me-2" />
                 </button>
 
 
@@ -289,7 +289,7 @@ function Marketplace() {
                   onClick={() => goNext()}
                 >
 
-                  <FaChevronRight fill="#fff" fontSize={22} className="ms-2" />
+                  <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
                 </button>
                 <Swiper
                   className="mySwiper bottomnav_colswiper collection_swiper mt-4 pt-3"
@@ -383,6 +383,7 @@ function Marketplace() {
                 >
                   <Select
                     className="border_select"
+                    classNamePrefix={"react_select"}
                     placeholder="Select Order"
                     styles={stylesgraybg}
                     defaultValue={selectedOption}

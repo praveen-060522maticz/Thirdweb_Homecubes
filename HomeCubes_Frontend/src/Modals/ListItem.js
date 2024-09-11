@@ -653,7 +653,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
             <div className='mt-3'>
               <p className='modal_summaryLabel'>  </p>
               {<div className='modal_listitem_tab mt-4'>
-                <p className={FormValue.PutOnSaleType == 'FixedPrice' ? 'active modal_listitem_tabsingle' : 'modal_listitem_tabsingle'} onClick={() => { SetFormValue({ ...FormValue, PutOnSaleType: "FixedPrice" }) }}>Fix Price</p>
+                <p className={FormValue.PutOnSaleType == 'FixedPrice' ? 'active modal_listitem_tabsingle' : 'modal_listitem_tabsingle'} onClick={() => { SetFormValue({ ...FormValue, PutOnSaleType: "FixedPrice" }) }}>Fixed Price</p>
                 {text != "Change Price" &&
                   <p className={FormValue.PutOnSaleType == 'TimedAuction' ? 'active modal_listitem_tabsingle' : 'modal_listitem_tabsingle'}
                     onClick={() => { SetFormValue({ ...FormValue, ...{ PutOnSaleType: "TimedAuction", ClockTime: new Date(), CoinName: currency?.filter(val => val.address != config?.DEADADDRESS)?.[0]?.label } }) }}>
@@ -669,6 +669,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                       <input type="number" className='modal_input listitem_modalinput cmnInput_scrollerHider' placeholder='' value={FormValue?.NFTPrice} onChange={(e) => { SetFormValue({ ...FormValue, "NFTPrice": e.target.value }) }} />
                       <Select
                         className="border_select"
+                        classNamePrefix={"react_select"}
                         placeholder="Coin"
                         styles={stylesgraybg}
                         defaultValue={selectedOption}
@@ -691,6 +692,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                       {/* <input type="number" className='modal_input listitem_modalinput' placeholder='' /> */}
                       <Select
                         className="border_select side_slect"
+                        classNamePrefix={"react_select"}
                         placeholder=""
                         styles={stylesgraybgOne}
                         defaultValue={selectedOptionOne}
@@ -734,6 +736,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                       <input type="number" className='modal_input listitem_modalinput cmnInput_scrollerHider' placeholder='0' value={FormValue?.NFTPrice} onChange={(e) => { SetFormValue({ ...FormValue, "NFTPrice": String(e.target.value) }) }} />
                       <Select
                         className="border_select"
+                        classNamePrefix={"react_select"}
                         placeholder="Coin"
                         styles={stylesgraybg}
                         value={{ value: FormValue?.CoinName, label: FormValue?.CoinName }}

@@ -713,7 +713,7 @@ function Minting() {
                             className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                             onClick={() => goPrev()}
                           >
-                            <FaChevronLeft fill="#fff" fontSize={22} className="me-2" />
+                            <FaChevronLeft fill="#fff" fontSize={38} className="me-2" />
                           </button>
 
 
@@ -722,7 +722,7 @@ function Minting() {
                             onClick={() => goNext()}
                           >
 
-                            <FaChevronRight fill="#fff" fontSize={22} className="ms-2" />
+                            <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
                           </button>
                           <Swiper
                             className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper"
@@ -852,7 +852,7 @@ function Minting() {
                           className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                           onClick={() => goPrev()}
                         >
-                          <FaChevronLeft fill="#fff" fontSize={22} className="me-2" />
+                          <FaChevronLeft fill="#fff" fontSize={38} className="me-2" />
                         </button>
 
 
@@ -861,7 +861,7 @@ function Minting() {
                           onClick={() => goNext()}
                         >
 
-                          <FaChevronRight fill="#fff" fontSize={22} className="ms-2" />
+                          <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
                         </button>
                         <Swiper
                           className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper"
@@ -965,7 +965,7 @@ function Minting() {
 
                     <Row className="mt-5">
                       {/* <h3 className="minting_detail">{project.name} Road map</h3> */}
-                      <h3 className="hc-mint__content-subtitle mt-5 text-center">{project.name}<strong>Road</strong>  map</h3>
+                      <h3 className="hc-mint__content-subtitle mt-5 text-center">{project.name}<strong>Road</strong>  Map</h3>
                       <p className="hc-mint__banner--desc mt-3 mb-0 text-center mb-3">
                         {project?.CMS?.filter((val) => val.stepTitle == "Road map")?.[0]?.stepDescription}
                       </p>

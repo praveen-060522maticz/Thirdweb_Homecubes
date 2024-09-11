@@ -35,7 +35,7 @@ function MintProjects() {
   }
 
   return (
-    <>
+    <div className='mintpage'>
       <BottomBar />
       <Header />
       <Container fluid className="pt-3 home_wrapper over_hidercon hc-section">
@@ -72,16 +72,16 @@ function MintProjects() {
                 >
 
 
-                  <div className="anim_div" data-aos="fade-up"
+                  {/* <div className="anim_div" data-aos="fade-up"
                     data-aos-offset="100"
                     data-aos-duration="800">
 
                     <LottieAnimation url="https://api-homecubes.maticz.in/cmsimg/1710487245765.json" className="banner_lottie" />
-                  </div>
+                  </div> */}
                 </Col>
               </Row>
               <div className='mintProject_holder mt-5'>
-                <div className="home_titled hc-home__title hc-position__center mt-3" >
+                <div className="home_titled hc-home__title hc-position__center mt-3">
                   <p>Buy Now on Initial <strong>Sales !</strong></p>
                 </div>
                 <Row className='hc-margin__top-50px'>
@@ -108,18 +108,18 @@ function MintProjects() {
                               </div> : <></>} */}
                           </div>
                           <div className="nftcard_detailwrapper">
-                            <p className="nft_name hc-nft__card-title">
+                            <p className="nft_name hc-nft__card-title minhset">
                               {val.projectTitle}
                             </p>
                             <div className='row mt-2'>
                               <div className='col-6'>
                                 <p className="nft_name hc-nft__card-details">
-                                  Total suply : {val.maxNFTs}
+                                  Total Supply : {val.maxNFTs}
                                 </p>
                               </div>
                               <div className='col-6'>
                                 <p className="nft_name hc-nft__card-details text-end">
-                                  Minted NFT : {val.isMinted}
+                                  Minted NFT's : {val.isMinted}
                                 </p>
                               </div>
                             </div>
@@ -203,8 +203,8 @@ function MintProjects() {
         </Container>
         <Footer />
       </Container>
-      <div className="gradient_holder staking_gradholder"></div>
-    </>
+      <div className="gradient_holder staking_gradholder mintgrad"></div>
+    </div>
   )
 }
 

@@ -124,6 +124,7 @@ function TransferToken({ show, handleClose, onStackNft, setSelectedPlan }) {
                     <div className='modal_body mt-3'>
                         <Select
                             className="border_select"
+                            classNamePrefix={"react_select"}
                             placeholder="Pool"
                             styles={stylesgraybg}
                             // defaultValue={selectedOption}

@@ -120,7 +120,7 @@ function NFTInfo() {
         colors: ["transparent"],
       },
       xaxis: {
-        categories: []
+        categories: [],
       },
       yaxis: {},
       fill: {
@@ -526,319 +526,11 @@ function NFTInfo() {
                         origFile={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Original/${Tokens_Detail.OriginalFile}`}
                         classname={"img-fluid nftInfo_img"}
                       />
-
-
-                    }
-                    {/* <img
-                      className="img-fluid nftInfo_img"
-                      src={nftData?.nftImg}
-                    /> */}
-                    {/* <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3" onClick={() => handleShowListItem()}>
-                      List Item
-                    </button> */}
-                    {/* {console.log("Tokens[TabName]", Tokens[TabName])} */}
-                    {isEmpty(InfoDetail) && !Tokens_Detail?.isStaked ?
-                      // (Tokens_Detail?.ContractType?.toString() ===
-                      //   "721"
-                      //   ?
-                      (
-                        Tokens[TabName]?.myowner?.WalletAddress ==
-                          accountAddress ? (
-                          Tokens[TabName]?.myowner?.PutOnSaleType ==
-                            "FixedPrice" ? (
-                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.myowner); setShowCancel(true) }}>
-                              Cancel Now
-                            </button>
-                          ) : Tokens[TabName]?.myowner?.PutOnSaleType ==
-                            "NotForSale" ||
-                            Tokens[TabName]?.myowner?.PutOnSaleType ==
-                            "UnlimitedAuction" ||
-                            (Tokens[TabName]?.myowner?.PutOnSaleType ==
-                              "TimedAuction" &&
-                              new Date(
-                                Tokens[TabName]?.myowner.EndClockTime
-                              ).getTime() < Date.now()) ? (
-                            <>
-                              {Tokens[TabName]?.highbid ?
-                                <>
-                                  <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3"
-                                    onClick={() => {
-                                      if (getVal != "") return toast.error(getVal);
-                                      setShowAcceptBid(true);
-                                      POPUPACTION("dummy", "Accept", Tokens[TabName]?.highbid)
-                                    }
-                                    }>
-                                    Accept bid
-                                  </button>
-                                  <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3"
-                                    onClick={() => { if (getVal != "") return toast.error(getVal); cancelBidBySeller(Tokens[TabName]?.highbid?.TokenBidderAddress); }}
-                                  >
-                                    Cancel bid
-                                  </button>
-                                </> :
-                                <>
-                                  <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3" onClick={() => {
-                                    if (getVal != "") return toast.error(getVal);
-                                    if (Tokens[TabName]?.highbid) return toast.warning("Please accept or cancel Bid")
-                                    SetSendDet(Tokens[TabName]?.myowner); setText("Put on Sale"); handleShowListItem()
-                                  }}>
-                                    List Item
-                                  </button>
-                                  <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3"
-                                    onClick={() => {
-                                      setShowTransfer(true)
-                                    }}>
-                                    Transfer Token
-                                  </button>
-                                </>
-                              }
-
-                            </>
-                          ) : (
-                            Tokens[TabName]?.myowner?.PutOnSaleType ==
-                              "TimedAuction" &&
-                              new Date(Tokens[TabName]?.myowner?.ClockTime) > Date.now() ? (
-
-                              <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3">
-                                Auction Not Started Yet
-                              </button>
-                            ) :
-                              (new Date(Tokens[TabName]?.myowner?.EndClockTime).getTime() > Date.now()
-                                &&
-                                <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3">
-                                  Auction is Live Now
-                                </button>
-                              )
-                          )
-                        ) : (
-                          Tokens[TabName]?.owner &&
-                          Tokens[TabName]?.owner?.WalletAddress !=
-                          accountAddress &&
-                          (Tokens[TabName]?.owner?.PutOnSaleType ==
-                            "FixedPrice" ? (
-                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.owner); setShowCheckout(true) }}>
-                              Buy Now
-                            </button>
-                          ) : (
-                            Tokens[TabName]?.myBid?.WalletAddress ==
-                            accountAddress && (
-                              // <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowCancelBid(true); }}>
-                              //   Cancel Bid
-                              // </button>
-                              <></>
-                            )
-                          ))
-                        )
-                      )
-                      :
-                      <button className="nftinfo_gradeientBtn web_listitem_btn mt-3">
-                        This token is Staked
-                      </button>
-                      // :
-                      // Tokens[TabName]?.myowner?.WalletAddress ==
-                      //   Tokens[TabName]?.owner?.WalletAddress ? (
-                      //   <>
-                      //     {Tokens[TabName]?.myowner?.PutOnSaleType ==
-                      //       "FixedPrice" && (
-                      //         // <Button
-                      //         //   className="tf-button"
-                      //         //   onClick={() =>K
-                      //         //     POPUPACTION("dummy",
-                      //         //       "Cancel",
-                      //         //       Tokens[TabName]?.myowner
-                      //         //     )
-                      //         //   }
-                      //         // >
-                      //         //   Cancel Now
-                      //         // </Button>
-                      //         <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
-                      //           Cancel Now
-                      //         </button>
-                      //       )}
-                      //     {Tokens[TabName]?.myBid?.WalletAddress ==
-                      //       accountAddress ? (
-                      //       // <Button
-                      //       //   className="tf-button"
-                      //       //   onClick={() =>
-                      //       //     POPUPACTION("dummy", "Bid", Tokens[TabName]?.myBid)
-                      //       //   }
-                      //       // >
-                      //       //   Edit Bid
-                      //       // </Button>
-                      //       <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
-                      //         Cancel Now
-                      //       </button>
-                      //     ) : (
-                      //       Tokens[TabName]?.myowner?.WalletAddress !=
-                      //       Tokens[TabName]?.owner?.WalletAddress && (
-                      //         // <Button
-                      //         //   className="tf-button"
-                      //         //   onClick={() => POPUPACTION("dummy", "Bid", {})}
-                      //         // >
-                      //         //   Bid Now
-                      //         // </Button>
-                      //         <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
-                      //           Cancel Now
-                      //         </button>
-                      //       )
-                      //     )}
-                      //   </>
-                      // ) : Tokens[TabName]?.owner?.PutOnSaleType ===
-                      //   "FixedPrice" ? (
-                      //   // <Button
-                      //   //   className="tf-button"
-                      //   //   onClick={() =>
-                      //   //     POPUPACTION("dummy", "Buy", Tokens[TabName].owner)
-                      //   //   }
-                      //   // >
-                      //   //   Buy Now
-                      //   // </Button>
-                      //   <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
-                      //     Cancel Now
-                      //   </button>
-                      // ) : (
-                      //   Tokens[TabName]?.myBid?.WalletAddress ==
-                      //   accountAddress && (
-                      //     // <Button
-                      //     //   className="tf-button"
-                      //     //   onClick={() => POPUPACTION("dummy", "CancelBid", Tokens[TabName]?.myBid)}
-                      //     // >
-                      //     //   Cancel Bid
-                      //     // </Button>
-                      //     <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
-                      //       Cancel Now
-                      //     </button>
-                      //   )
-                      // ))
                     }
 
-                    {isEmpty(InfoDetail) && !Tokens_Detail?.isStaked &&
-                      // (Tokens_Detail?.ContractType?.toString() ===
-                      //   "721" ?
-                      (
-                        Tokens[TabName]?.myowner?.WalletAddress ==
-                          accountAddress ? (
-                          Tokens[TabName]?.myowner?.PutOnSaleType ==
-                          "FixedPrice" && (
-                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.myowner); setText("Change Price"); handleShowListItem() }}>
-                              Change Price
-                            </button>
-                          )
-                        ) : (
-                          Tokens[TabName]?.owner?.WalletAddress !=
-                          accountAddress &&
-                          (Tokens[TabName]?.owner?.PutOnSaleType ==
-                            "TimedAuction" &&
-                            (new Date(Tokens[TabName].owner.EndClockTime)?.getTime() < Date.now() ? (
-                              <button className="nftinfo_gradeientBtn web_listitem_btn mt-3">
-                                Auction Ended
-                              </button>
-                            ) : Tokens[TabName]?.highbid?.WalletAddress !=
-                              accountAddress &&
-                              Tokens[TabName]?.owner?.WalletAddress ==
-                              accountAddress ? (
-                              <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); handleShowListItem() }}>
-                                Accept
-                              </button>
-                            ) : Tokens[TabName]?.myBid?.WalletAddress ==
-                              accountAddress ? (
-                              <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowBid(true) }}>
-                                Edit Bid
-                              </button>
-                            ) : ((new Date(Tokens["All"]?.owner?.EndClockTime) > Date.now() &&
-                              new Date(Tokens["All"]?.owner?.ClockTime) > Date.now()) ?
-                              <button className="nftinfo_gradeientBtn web_listitem_btn mt-3">
-                                Not Started Yet
-                              </button>
-                              :
-                              <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowBid(true) }}>
-                                Bid Now
-                              </button>
-                            )))
-                        )
-                      )
-                      // : Tokens[TabName]?.myowner?.WalletAddress ==
-                      //   Tokens[TabName]?.owner?.WalletAddress ? (
-                      //   Tokens[TabName]?.owner?.PutOnSaleType ==
-                      //     "FixedPrice" ? (
-                      //     // <Button
-                      //     //   className="tf-button"
-                      //     //   onClick={() =>
-                      //     //     POPUPACTION("Change Price",
-                      //     //       "createorder",
-                      //     //       Tokens[TabName]?.myowner
-                      //     //     )
-                      //     //   }
-                      //     // >
-                      //     //   Change Price
-                      //     // </Button>
-                      //     <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
-                      //       Cancel Now
-                      //     </button>
-                      //   ) : (
-                      //     // <Button
-                      //     //   className="tf-button"
-                      //     //   onClick={() =>
-                      //     //     POPUPACTION("dummy",
-                      //     //       "createorder",
-                      //     //       Tokens[TabName]?.myowner
-                      //     //     )
-                      //     //   }
-                      //     // >
-                      //     //   Put on Sale
-                      //     // </Button>
-                      //     <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
-                      //       Cancel Now
-                      //     </button>
-                      //   )
-                      // ) : Tokens[TabName]?.owner?.WalletAddress !=
-                      //   accountAddress &&
-                      //   Tokens[TabName]?.highbid?.WalletAddress !=
-                      //   accountAddress &&
-                      //   Tokens[TabName]?.owner?.WalletAddress ==
-                      //   accountAddress ? (
-                      //   // <Button
-                      //   //   className="tf-button"
-                      //   //   onClick={() =>
-                      //   //     POPUPACTION("dummy",
-                      //   //       "Accept",
-                      //   //       Tokens[TabName]?.highbid
-                      //   //     )
-                      //   //   }
-                      //   // >
-                      //   //   Accept
-                      //   // </Button>
-                      //   <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
-                      //     Cancel Now
-                      //   </button>
-                      // ) : Tokens[TabName]?.myBid?.WalletAddress ==
-                      //   accountAddress ? (
-                      //   // <Button
-                      //   //   className="tf-button"
-                      //   //   onClick={() =>
-                      //   //     POPUPACTION("dummy", "Bid", Tokens[TabName]?.myBid)
-                      //   //   }
-                      //   // >
-                      //   //   Edit Bid
-                      //   // </Button>
-                      //   <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
-                      //     Cancel Now
-                      //   </button>
-                      // ) : (
-                      //   // <Button
-                      //   //   className="tf-button"
-                      //   //   onClick={() => POPUPACTION("dummy", "Bid", {})}
-                      //   // >
-                      //   //   Bid Now{" "}
-                      //   // </Button>
-                      //   <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
-                      //     Cancel Now
-                      //   </button>
-                      // ))
-                    }
                   </div>
                 </Col>
-                <Col lg={9} md={12} sm={12} xs={12} className="mt-5 mt-lg-0">
+                <Col s lg={9} md={12} sm={12} xs={12} className="mt-5 mt-lg-0">
                   <div className="d-flex align-items-center gap-3">
 
                     <h3 className="marketplae_topdata hc-info__name-title mb-0">
@@ -1153,6 +845,331 @@ function NFTInfo() {
               </Row>
 
               <Row>
+                <Col sm={9} md={7} lg={4}
+                >
+                  {/* <img
+                      className="img-fluid nftInfo_img"
+                      src={nftData?.nftImg}
+                    /> */}
+                  {/* <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3" onClick={() => handleShowListItem()}>
+                      List Item
+                    </button> */}
+                  {/* {console.log("Tokens[TabName]", Tokens[TabName])} */}
+                  {isEmpty(InfoDetail) && !Tokens_Detail?.isStaked ?
+                    // (Tokens_Detail?.ContractType?.toString() ===
+                    //   "721"
+                    //   ?
+                    (
+                      Tokens[TabName]?.myowner?.WalletAddress ==
+                        accountAddress ? (
+                        Tokens[TabName]?.myowner?.PutOnSaleType ==
+                          "FixedPrice" ? (
+                          <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.myowner); setShowCancel(true) }}>
+                            Cancel Now
+                          </button>
+                        ) : Tokens[TabName]?.myowner?.PutOnSaleType ==
+                          "NotForSale" ||
+                          Tokens[TabName]?.myowner?.PutOnSaleType ==
+                          "UnlimitedAuction" ||
+                          (Tokens[TabName]?.myowner?.PutOnSaleType ==
+                            "TimedAuction" &&
+                            new Date(
+                              Tokens[TabName]?.myowner.EndClockTime
+                            ).getTime() < Date.now()) ? (
+                          <>
+                            {Tokens[TabName]?.highbid ?
+
+                              <div className="hc-info__last-bid">
+                                <p className="hc-info__last-bid--title">
+                                  Last Bid
+                                </p>
+                                <p className="hc-info__last-bid--value mt-1">
+                                  300 <span>USDT</span>
+                                </p>
+                                <div className="d-flex  gap-3   mt-2">
+                                  <button className="nftinfo_gradeientBtn web_listitemBtn"
+                                    onClick={() => {
+                                      if (getVal != "") return toast.error(getVal);
+                                      setShowAcceptBid(true);
+                                      POPUPACTION("dummy", "Accept", Tokens[TabName]?.highbid)
+                                    }
+                                    }>
+                                    Accept
+                                  </button>
+                                  <button className="hc-button__gray"
+                                    onClick={() => { if (getVal != "") return toast.error(getVal); cancelBidBySeller(Tokens[TabName]?.highbid?.TokenBidderAddress); }}
+                                  >
+                                    Reject
+                                  </button>
+                                </div>
+
+
+
+                              </div> :
+                              <>
+                                <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3" onClick={() => {
+                                  if (getVal != "") return toast.error(getVal);
+                                  if (Tokens[TabName]?.highbid) return toast.warning("Please accept or cancel Bid")
+                                  SetSendDet(Tokens[TabName]?.myowner); setText("Put on Sale"); handleShowListItem()
+                                }}>
+                                  List Item
+                                </button>
+                                <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3"
+                                  onClick={() => {
+                                    setShowTransfer(true)
+                                  }}>
+                                  Transfer Token
+                                </button>
+                              </>
+                            }
+
+                          </>
+                        ) : (
+                          Tokens[TabName]?.myowner?.PutOnSaleType ==
+                            "TimedAuction" &&
+                            new Date(Tokens[TabName]?.myowner?.ClockTime) > Date.now() ? (
+
+                            <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3">
+                              Auction Not Started Yet
+                            </button>
+                          ) :
+                            (new Date(Tokens[TabName]?.myowner?.EndClockTime).getTime() > Date.now()
+                              &&
+                              <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3">
+                                Auction is Live Now
+                              </button>
+                            )
+                        )
+                      ) : (
+                        Tokens[TabName]?.owner &&
+                        Tokens[TabName]?.owner?.WalletAddress !=
+                        accountAddress &&
+                        (Tokens[TabName]?.owner?.PutOnSaleType ==
+                          "FixedPrice" ? (
+                          <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.owner); setShowCheckout(true) }}>
+                            Buy Now
+                          </button>
+                        ) : (
+                          Tokens[TabName]?.myBid?.WalletAddress ==
+                          accountAddress && (
+                            // <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowCancelBid(true); }}>
+                            //   Cancel Bid
+                            // </button>
+                            <></>
+                          )
+                        ))
+                      )
+                    )
+                    :
+                    <button className="nftinfo_gradeientBtn web_listitem_btn mt-3">
+                      This token is Staked
+                    </button>
+                    // :
+                    // Tokens[TabName]?.myowner?.WalletAddress ==
+                    //   Tokens[TabName]?.owner?.WalletAddress ? (
+                    //   <>
+                    //     {Tokens[TabName]?.myowner?.PutOnSaleType ==
+                    //       "FixedPrice" && (
+                    //         // <Button
+                    //         //   className="tf-button"
+                    //         //   onClick={() =>K
+                    //         //     POPUPACTION("dummy",
+                    //         //       "Cancel",
+                    //         //       Tokens[TabName]?.myowner
+                    //         //     )
+                    //         //   }
+                    //         // >
+                    //         //   Cancel Now
+                    //         // </Button>
+                    //         <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
+                    //           Cancel Now
+                    //         </button>
+                    //       )}
+                    //     {Tokens[TabName]?.myBid?.WalletAddress ==
+                    //       accountAddress ? (
+                    //       // <Button
+                    //       //   className="tf-button"
+                    //       //   onClick={() =>
+                    //       //     POPUPACTION("dummy", "Bid", Tokens[TabName]?.myBid)
+                    //       //   }
+                    //       // >
+                    //       //   Edit Bid
+                    //       // </Button>
+                    //       <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
+                    //         Cancel Now
+                    //       </button>
+                    //     ) : (
+                    //       Tokens[TabName]?.myowner?.WalletAddress !=
+                    //       Tokens[TabName]?.owner?.WalletAddress && (
+                    //         // <Button
+                    //         //   className="tf-button"
+                    //         //   onClick={() => POPUPACTION("dummy", "Bid", {})}
+                    //         // >
+                    //         //   Bid Now
+                    //         // </Button>
+                    //         <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
+                    //           Cancel Now
+                    //         </button>
+                    //       )
+                    //     )}
+                    //   </>
+                    // ) : Tokens[TabName]?.owner?.PutOnSaleType ===
+                    //   "FixedPrice" ? (
+                    //   // <Button
+                    //   //   className="tf-button"
+                    //   //   onClick={() =>
+                    //   //     POPUPACTION("dummy", "Buy", Tokens[TabName].owner)
+                    //   //   }
+                    //   // >
+                    //   //   Buy Now
+                    //   // </Button>
+                    //   <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
+                    //     Cancel Now
+                    //   </button>
+                    // ) : (
+                    //   Tokens[TabName]?.myBid?.WalletAddress ==
+                    //   accountAddress && (
+                    //     // <Button
+                    //     //   className="tf-button"
+                    //     //   onClick={() => POPUPACTION("dummy", "CancelBid", Tokens[TabName]?.myBid)}
+                    //     // >
+                    //     //   Cancel Bid
+                    //     // </Button>
+                    //     <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
+                    //       Cancel Now
+                    //     </button>
+                    //   )
+                    // ))
+                  }
+
+                  {isEmpty(InfoDetail) && !Tokens_Detail?.isStaked &&
+                    // (Tokens_Detail?.ContractType?.toString() ===
+                    //   "721" ?
+                    (
+                      Tokens[TabName]?.myowner?.WalletAddress ==
+                        accountAddress ? (
+                        Tokens[TabName]?.myowner?.PutOnSaleType ==
+                        "FixedPrice" && (
+                          <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.myowner); setText("Change Price"); handleShowListItem() }}>
+                            Change Price
+                          </button>
+                        )
+                      ) : (
+                        Tokens[TabName]?.owner?.WalletAddress !=
+                        accountAddress &&
+                        (Tokens[TabName]?.owner?.PutOnSaleType ==
+                          "TimedAuction" &&
+                          (new Date(Tokens[TabName].owner.EndClockTime)?.getTime() < Date.now() ? (
+                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3">
+                              Auction Ended
+                            </button>
+                          ) : Tokens[TabName]?.highbid?.WalletAddress !=
+                            accountAddress &&
+                            Tokens[TabName]?.owner?.WalletAddress ==
+                            accountAddress ? (
+                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); handleShowListItem() }}>
+                              Accept
+                            </button>
+                          ) : Tokens[TabName]?.myBid?.WalletAddress ==
+                            accountAddress ? (
+                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowBid(true) }}>
+                              Edit Bid
+                            </button>
+                          ) : ((new Date(Tokens["All"]?.owner?.EndClockTime) > Date.now() &&
+                            new Date(Tokens["All"]?.owner?.ClockTime) > Date.now()) ?
+                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3">
+                              Not Started Yet
+                            </button>
+                            :
+                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowBid(true) }}>
+                              Bid Now
+                            </button>
+                          )))
+                      )
+                    )
+                    // : Tokens[TabName]?.myowner?.WalletAddress ==
+                    //   Tokens[TabName]?.owner?.WalletAddress ? (
+                    //   Tokens[TabName]?.owner?.PutOnSaleType ==
+                    //     "FixedPrice" ? (
+                    //     // <Button
+                    //     //   className="tf-button"
+                    //     //   onClick={() =>
+                    //     //     POPUPACTION("Change Price",
+                    //     //       "createorder",
+                    //     //       Tokens[TabName]?.myowner
+                    //     //     )
+                    //     //   }
+                    //     // >
+                    //     //   Change Price
+                    //     // </Button>
+                    //     <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
+                    //       Cancel Now
+                    //     </button>
+                    //   ) : (
+                    //     // <Button
+                    //     //   className="tf-button"
+                    //     //   onClick={() =>
+                    //     //     POPUPACTION("dummy",
+                    //     //       "createorder",
+                    //     //       Tokens[TabName]?.myowner
+                    //     //     )
+                    //     //   }
+                    //     // >
+                    //     //   Put on Sale
+                    //     // </Button>
+                    //     <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
+                    //       Cancel Now
+                    //     </button>
+                    //   )
+                    // ) : Tokens[TabName]?.owner?.WalletAddress !=
+                    //   accountAddress &&
+                    //   Tokens[TabName]?.highbid?.WalletAddress !=
+                    //   accountAddress &&
+                    //   Tokens[TabName]?.owner?.WalletAddress ==
+                    //   accountAddress ? (
+                    //   // <Button
+                    //   //   className="tf-button"
+                    //   //   onClick={() =>
+                    //   //     POPUPACTION("dummy",
+                    //   //       "Accept",
+                    //   //       Tokens[TabName]?.highbid
+                    //   //     )
+                    //   //   }
+                    //   // >
+                    //   //   Accept
+                    //   // </Button>
+                    //   <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
+                    //     Cancel Now
+                    //   </button>
+                    // ) : Tokens[TabName]?.myBid?.WalletAddress ==
+                    //   accountAddress ? (
+                    //   // <Button
+                    //   //   className="tf-button"
+                    //   //   onClick={() =>
+                    //   //     POPUPACTION("dummy", "Bid", Tokens[TabName]?.myBid)
+                    //   //   }
+                    //   // >
+                    //   //   Edit Bid
+                    //   // </Button>
+                    //   <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
+                    //     Cancel Now
+                    //   </button>
+                    // ) : (
+                    //   // <Button
+                    //   //   className="tf-button"
+                    //   //   onClick={() => POPUPACTION("dummy", "Bid", {})}
+                    //   // >
+                    //   //   Bid Now{" "}
+                    //   // </Button>
+                    //   <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
+                    //     Cancel Now
+                    //   </button>
+                    // ))
+                  }
+                </Col>
+              </Row>
+
+              <Row>
                 <Col xs={12}>
                   <Accordion
                     defaultActiveKey="0"
@@ -1202,10 +1219,10 @@ function NFTInfo() {
                   )}
 
                   <button
-                    className="mp_readmoreBtn readmore_left mt-2"
+                    className="mp_readmoreBtn readmore_left mt-2 checkoutbtn"
                     onClick={() => setDescription(!description)}
                   >
-                    {(isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)?.length > 300 ? description ? "Read Less" : "Read More" : ""}
+                    {(isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)?.length > 300 ? description ? "Check Out Less" : "Check Out More" : ""}
                   </button>
                   <Accordion
                     defaultActiveKey="0"
@@ -1279,7 +1296,7 @@ function NFTInfo() {
                             <p>Collection Offers</p>
                           </div>
                         </div>
-                        <div className="nftInfo_table">
+                        <div className="nftInfo_table nftalltable">
                           <div className="table-responsive">
                             <table className="table">
                               <thead>
@@ -1519,7 +1536,7 @@ function NFTInfo() {
                     className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                     onClick={() => goPrev()}
                   >
-                    <FaChevronLeft fill="#fff" fontSize={22} className="me-2" />
+                    <FaChevronLeft fill="#fff" fontSize={38} className="me-2" />
                   </button>
 
 
@@ -1528,7 +1545,7 @@ function NFTInfo() {
                     onClick={() => goNext()}
                   >
 
-                    <FaChevronRight fill="#fff" fontSize={22} className="ms-2" />
+                    <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
                   </button>
                   <Swiper
                     className="mySwiper bottomnav_colswiper nftcard_swiper pt-3"

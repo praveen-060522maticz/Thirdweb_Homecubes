@@ -411,17 +411,23 @@ console.log('currency---->',currency);
                       <Row className='align-items-end h-100'>
                         {userProfile?.KycStatus == "complete" ?
                           <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0' onClick={() => handleShowKYC()}>
-                            <div className='kyc_activated'>
+                            <div 
+                            className={userProfile?.KycStatus == "complete" ? "kyc_activated greenkyc text-center" : "kyc_activated text-center"}
+                            // className='kyc_activated'
+                            >
                               <img src={require('../assets/images/greenround.svg').default} />
-                              <p>KYC Activated</p>
+                              <p>KYC Approved</p>
                             </div>
                           </Col>
                           :
                           userProfile?.KycStatus == "submit" ?
                             <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0' onClick={() => handleShowKYC()}>
-                              <div className='kyc_activated actiate_hint'>
-                                <img src={require('../assets/images/redround.svg').default} />
-                                <p>KYC submitted, please wait till it is reviewed</p>
+                              <div
+                              className={userProfile?.KycStatus == "submit"? "kyc_activated actiate_hint orange text-center" :"kyc_activated actiate_hint text-center" }
+                              // className='kyc_activated actiate_hint'
+                              >
+                              {userProfile?.KycStatus == "submit" ? <></> : <img src={require('../assets/images/redround.svg').default} />}
+                                <p className='text-center'>KYC submitted, please wait till it is reviewed</p>
                               </div>
                             </Col>
                             :
@@ -444,7 +450,7 @@ console.log('currency---->',currency);
                               <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0'>
                                 <div className='kyc_activated actiate_hint' onClick={() => handleShowKYC()}>
                                   <img src={require('../assets/images/redround.svg').default} />
-                                  <p>Activate Your KYC</p>
+                                  <p>Complete Your KYC</p>
                                 </div>
                               </Col>}
                       </Row>
@@ -529,7 +535,7 @@ console.log('currency---->',currency);
                     </div>
                   </Col>
                   <Col xl={4} lg={8} md={10} sm={12} xs={12} className='mb-3'>
-                    <div className="stack_nftcounter profile_counter">
+                    <div className="stack_nftcounter profile_counter pe-4" style={{ width:"max-content" }}>
                       <img className="top_reltabimg" src={require('../assets/images/rewards.svg').default} />
                       <p className="nftcounter_lable">Total Reward Claimed :</p>
                       <p className="nftcounter_value">{Number(rewardAmount).toFixed(6)}</p>
@@ -565,6 +571,7 @@ console.log('currency---->',currency);
 
                   </div>
                   <Select
+                   classNamePrefix={"react_select"}
                     className="border_select"
                     placeholder="Select Project"
                     styles={stylesgraybgOne}

@@ -177,6 +177,7 @@ function Blogs(props) {
               <Row className='mt-4'>
                 <Col lg={2} md={3} sm={4} xs={8}>
                   <Select
+                   classNamePrefix={"react_select"}
                     className="border_select"
                     placeholder="Blog"
                     styles={stylesgraybg}

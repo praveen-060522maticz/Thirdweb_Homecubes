@@ -238,7 +238,6 @@ function CollectionInfo() {
               {/* <BreadPath/> */}
               <Row>
                 <Col lg={12} md={10} sm={12} xs={12} className="hc-galler__col-top" >
-
                   <div className="d-flex align-items-start gap-3">
                     <div>
                       <div className="mp_topImg_holder">

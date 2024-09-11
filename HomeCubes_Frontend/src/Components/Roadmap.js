@@ -187,7 +187,7 @@ function Roadmap(props) {
                 }
             </Row> */}
 
-            <div className='hc-roadmap__new row mt-5'>
+            <div className='hc-roadmap__new row'>
                 {props?.data?.length != 0 && props?.data?.map((val, i) => {
                     console.log("lastststindwex", props?.data?.length - 1);
                     const lastIndex = props?.data?.length - 1
@@ -256,7 +256,7 @@ function Roadmap(props) {
                                 <div className='hc-roadmap__new-col--left d-flex  gap-2 gap-sm-3 gap-md-4 gap-lg-5'>
                                     <div className=''>
                                         <p className='hc-roadmap__new--themeText text-start' dangerouslySetInnerHTML={{ __html: val.stepTitle ?? val.title }} ></p>
-                                        {val.stepDescription ? <p className='text-start hc-roadmap__new--whiteText'>{val.stepDescription}</p> : <p className='roadmap_date' dangerouslySetInnerHTML={{ __html: val.content }} ></p>}
+                                        {val.stepDescription ? <p className='text-start hc-roadmap__new--whiteText'>{val.stepDescription}</p> : <p className='text-start hc-roadmap__new--whiteText' dangerouslySetInnerHTML={{ __html: val.content }} ></p>}
                                     </div>
                                     <h1 className='roadmap_strokeText'>{i + 1}</h1>
                                 </div>
