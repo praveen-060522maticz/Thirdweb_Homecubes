@@ -7,7 +7,7 @@ let Back_Url = "";
 let decimalValues = 1000000000000000000;
 var FRONT_URL = "";
 var ImG = "";
-var EnvName = "stage";
+var EnvName = "clientStage";
 var networkTransUrl = ''
 
 var Front_market_Url = ''
@@ -43,6 +43,44 @@ if (EnvName === "local") {
   var BNBprovider = "https://endpoints.omniatech.io/v1/bsc/testnet/public";
   // var Back_Url_Token = "https://naifty.io/v1";
   var Back_Url_Token = "http://localhost:3030/v1";
+  var COIN_NAME = "BNB"
+  networkTransUrl = "https://sepolia.etherscan.io/tx/"
+  // var stakeAddress = "0x4f9395bdA5E47566903b960895fdc2713890Fd41"
+  // var stakeAddress = "0x5eFe07C7A4F632b2c8Cd40aA2f4a70EC71d32348" // openxep
+  var stakeAddress = "0x9605Abafe5f6EE8B9EB671083d4412415e0f54F2"
+}
+
+if (EnvName === "clientStage") {
+  Back_Url = "http://staging-backend.homecubes.io/v1/admin";
+  Front_market_Url = "http://localhost:3000/naiftyadmin";
+  var image_url = "http://staging-backend.homecubes.io/token";
+  ImG = "http://staging-backend.homecubes.io";
+  // var tradeAddress = "0xD370f5D497cc4b2344a9936f24E47284693d96D5"; // bnb
+  // var singleAddress = "0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf"; // bnb
+  // var tradeAddress = "0x19D4c0f9155C6517580f850D4D097AF0448a1B39"; // seplia old
+
+  // var tradeAddress = "0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208".toLowerCase(); // seplia
+
+  // var tradeAddress = "0x783FB9DD2C69101cd0E080403279b9fE7E6ac780".toLowerCase(); // seplia openzepline
+  var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase()
+  // var tradeAddress = "0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac".toLowerCase(); // seplia
+  // var tradeAddress = "0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3"; // seplia
+  var singleAddress = "0x575cd9E4099A38B536673F557063f9A546870d11"; // seplia
+  var multipeAddress = "0x0b6369b506e811df30ab7c0ce0ae00b8690b76be";
+  var networkVersion = "0x61"
+  var chainId = 11155111;
+  var ETHCHAIN = 11155111
+  var BNBCHAIN = 97
+  var chainlist = [97, 11155111]
+  var versions = ["0x61", "0xa869"]
+  var BNBversion = "0x61"
+  var ETHversion = "0xa869"
+  var ETHTRADE = '0x5b6AaF50abD17EA1faE897c487B71CDf75d90769'.toLowerCase()
+  var BNBTRADE = "0x419Ee320F99287A93B4362C4A45679E30736d05a".toLowerCase()
+  var ETHprovider = "https://eth-sepolia.g.alchemy.com/v2/demo";
+  var BNBprovider = "https://endpoints.omniatech.io/v1/bsc/testnet/public";
+  // var Back_Url_Token = "https://naifty.io/v1";
+  var Back_Url_Token = "http://staging-backend.homecubes.io/v1";
   var COIN_NAME = "BNB"
   networkTransUrl = "https://sepolia.etherscan.io/tx/"
   // var stakeAddress = "0x4f9395bdA5E47566903b960895fdc2713890Fd41"

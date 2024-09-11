@@ -10,6 +10,7 @@
     "start": "NODE_ENV=local nodemon babel_hook.js",
     "demo": "NODE_ENV=demo nodemon babel_hook.js",
     "production": "NODE_ENV=production nodemon babel_hook.js",
+    "staging": "NODE_ENV=staging nodemon babel_hook.js",
     "localDemo": "NODE_ENV=localDemo nodemon babel_hook.js"
   },
   "dependencies": {

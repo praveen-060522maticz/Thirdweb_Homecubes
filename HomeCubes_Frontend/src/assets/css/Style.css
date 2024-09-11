@@ -5215,7 +5215,7 @@ body {
   font-weight: 400;
 }
 
-.hc-home__title.home_titled b {
+.hc-home__title.home_titled .marker {
   color: var(--gradinet_left);
   font-weight: 400;
 }
@@ -8102,6 +8102,9 @@ body {
 
   .hc-roadmap__new-col--left {
     gap: 110px !important;
+  }
+  .hc-home__banner_height.staking_gradholder{
+height: 700px;
   }
 }
 

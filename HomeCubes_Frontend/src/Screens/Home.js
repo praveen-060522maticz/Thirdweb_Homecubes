@@ -103,7 +103,7 @@ function Home() {
       <>
         <BottomBar />
         <Header />
-        <Container fluid className="pt-3 home_wrapper">
+        <Container fluid className="pt-3 home_wrapper ">
           <Container className="custom_container ">
             <Row>
               <Col lg={1} md={2} className="sidetab_holder">
@@ -242,8 +242,9 @@ function Home() {
                           data-aos="fade-up"
                           data-aos-offset="100"
                           data-aos-duration="800"
+                          dangerouslySetInnerHTML={{ __html: CMS["CountDown to Our Next Launch"]?.title }}
                         >
-                          {CMS["CountDown to Our Next Launch"]?.title}
+
                         </h3>
                         <p
                           className="mp_detailbrief hc-home__desc mt-3"
@@ -331,12 +332,18 @@ function Home() {
                             data-aos="fade-up"
                             data-aos-offset="100"
                             data-aos-duration="800"
+                            dangerouslySetInnerHTML={{
+                              __html:
+                                CMS[
+                                  "In addition to the product launch, we will also establish a marketplace."
+                                ]?.title
+                            }}
                           >
-                            {
+                            {/* {
                               CMS[
                                 "In addition to the product launch, we will also establish a marketplace."
                               ]?.title
-                            }
+                            } */}
                           </h3>
                           <p
                             className="mp_detailbrief hc-home__desc mt-3"
@@ -371,7 +378,7 @@ function Home() {
                           data-aos-offset="100"
                           data-aos-duration="800"
                         >
-                          Investors Benefits
+                          Investors <strong>Benefits</strong>
                         </h3>
                         <ul className="home_investorList mt-4">
                           {investArr.length != 0 && investArr.map((val) => {
@@ -486,7 +493,7 @@ function Home() {
                         data-aos-offset="50"
                         data-aos-duration="800"
                       >
-                        Our Commitment
+                        Our <strong>Commitment</strong>
                       </h3>
                       {commmitArr?.length != 0 &&
                         commmitArr?.map((i) => (
@@ -527,7 +534,7 @@ function Home() {
                         Road Map
                       </h3>
                       <div className="mt-3 mt-xl-5">
-                      <Roadmap data={roadMap} />
+                        <Roadmap data={roadMap} />
 
                       </div>
 
@@ -616,7 +623,7 @@ function Home() {
           <Footer />
         </Container >
 
-        <div className="gradient_holder staking_gradholder"></div>
+        <div className="gradient_holder staking_gradholder hc-home__banner_height"></div>
       </>
       {/* }
 

@@ -103,7 +103,7 @@ web3.eth.subscribe('newBlockHeaders', (error, blockHeader) => {
 
                                         setTimeout(async () => {
                                             var getPending = await pendingTrans.findOne({ From: From?.toLowerCase(), method, status: "pending", TimeStamp });
-console.log('getPending---->',getPending);
+                                            console.log('getPending---->', getPending);
                                             getPending?.params?.[0]?.changedToken?.map((val, i) => {
                                                 val.NFTId = ids[i]
                                                 val.Hash = getData.transactionHash;
@@ -372,7 +372,7 @@ const getrans = async () => {
     }
 }
 // db connection
-
+console.log('config.MONGOURI---->',config.MONGOURI);
 mongoose.connect(config.MONGOURI, (err) => {
     if (err) process.exit(1);
     console.log("Db connected Successfully")
