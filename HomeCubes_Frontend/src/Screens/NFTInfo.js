@@ -1149,9 +1149,6 @@ function NFTInfo() {
                     )
                   }
 
-
-
-
                 </Col>
               </Row>
 

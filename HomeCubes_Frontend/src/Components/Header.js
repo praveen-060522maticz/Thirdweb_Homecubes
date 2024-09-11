@@ -559,7 +559,7 @@ function Header() {
                     </button>
                   ) : (
                     <button
-                      className="header_gradientBtn"
+                      className="header_gradientBtn hc-auth__button"
                       onClick={() => {
                         if (ready && authenticated && !isWalletConnected && connectedwalet) {
                           // wallets[0].linked
@@ -575,7 +575,7 @@ function Header() {
                         className="header_wallet"
                         src={require("../assets/images/wallet.svg").default}
                       />
-                      Connect-Wallet
+                      Login
                       <Lottie
                         animationData={wallety}
                         className="header_walletLottie"

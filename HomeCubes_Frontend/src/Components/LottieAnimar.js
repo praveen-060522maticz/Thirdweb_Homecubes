@@ -3,7 +3,7 @@ import Lottie from "react-lottie";
 import axios from "axios";
 import { imgFormats, videoFileFormats } from "../actions/common";
 
-const LottieAnimation = ({ url, className }) => {
+const LottieAnimation = ({ url, className, divClassname }) => {
     console.log("urlurlurl", url);
     const [lottieData, setLottieData] = useState(null);
     useEffect(() => {
@@ -30,7 +30,7 @@ const LottieAnimation = ({ url, className }) => {
     const getFormat = url?.split(".")?.splice(-1)?.[0]?.toLowerCase();
 
     return <>
-        <div>
+        <div className={divClassname ? divClassname : ""}>
             {url &&
                 (getFormat == "json" ?
                     (lottieData ? (

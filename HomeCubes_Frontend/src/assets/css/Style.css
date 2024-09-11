@@ -181,10 +181,11 @@
 .header_link {
   list-style-type: none;
   font-size: var(--font_thirteen);
-  margin-right: 15px;
+  margin-right: 35px;
   color: var(--white);
   cursor: pointer;
-  font-family: var(--poppins);
+  font-family: var(--montserrat-font);
+  font-weight: 500;
 }
 
 .header_link.active {
@@ -5910,6 +5911,30 @@ body {
   font-weight: 500;
   line-height: 28px;
   font-size: 15px;
+}
+
+.hc-auth__button.header_gradientBtn {
+  font-family: var(--montserrat-font);
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.hc-home__button--linear {
+  background-image: linear-gradient(to right, var(--gradinet_left), var(--gradinet_right));
+  color: var(--white);
+  border: none;
+  outline: none;
+  background-color: var(--gradinet_right);
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: var(--montserrat-font);
+  font-weight: 600;
+  padding: 8px 23px;
+}
+
+.hc-home__button--linear:hover {
+  background: var(--gradinet_right);
+  color: var(--black);
 }
 
 /* hari media */
