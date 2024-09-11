@@ -221,7 +221,7 @@ function Home() {
                             }}
                           ></p>
                           <NavLink to="/howitworks">
-                            <button className="primary_blueBtn mt-3">
+                            <button className="primary_blueBtn ">
                               About our Team
                             </button>
                           </NavLink>
@@ -254,7 +254,7 @@ function Home() {
                           }}
                         ></p>
 
-                        <button className="primary_blueBtn mt-5">
+                        <button className="primary_blueBtn">
                           Initial Sales
                         </button>
                       </Col>
@@ -307,6 +307,7 @@ function Home() {
                       >
                         <div>
                           <Typewriter
+
                             options={{
                               strings: ["Marketplace"],
                               autoStart: true,
@@ -341,7 +342,7 @@ function Home() {
                             }}
                           ></p>
                           <NavLink to="/staking" className="sidetab_link">
-                            <button className="primary_blueBtn mt-5">
+                            <button className="primary_blueBtn mt-4">
                               Claim income
                             </button>
                           </NavLink>
@@ -366,13 +367,13 @@ function Home() {
                     )}
                     <Row className="align-items-center pi_higherTop">
                       <Col lg={6} md={6} sm={12} xs={12}>
-                        <Typewriter
+                        {/* <Typewriter
                           options={{
                             strings: ["Passive Income"],
                             autoStart: true,
                             loop: true,
                           }}
-                        />
+                        /> */}
                         <h3
                           className="home_titled hc-home__title mt-3"
                           data-aos="fade-up"
@@ -388,7 +389,7 @@ function Home() {
                               <li className="">
                                 {" "}
                                 <img
-                                  className="home_threecube mt-2"
+                                  className="home_threecube mt-2 hc-home__threecube"
                                   src={
                                     require("../assets/images/threecube.svg").default
                                   }
@@ -457,8 +458,8 @@ function Home() {
                         </li> */}
                         </ul>
 
-                        <button className="primary_blueBtn mt-5">
-                          Marketplace
+                        <button className="primary_blueBtn mt-4">
+                          Claim Income
                         </button>
                       </Col>
                       <Col
@@ -525,16 +526,16 @@ function Home() {
                         ))}
                     </Row>
 
-                    <Row className="mt-5">
+                    <Row className="hc-home__roadMap">
                       <h3
                         className="home_titled hc-home__title text-center"
                         data-aos="fade-up"
                         data-aos-offset="100"
                         data-aos-duration="800"
                       >
-                        Road Map
+                        <strong>Road</strong> Map
                       </h3>
-                      <div className="mt-3 mt-xl-5">
+                      <div className="hc-home__roadmap--content">
                         <Roadmap data={roadMap} />
 
                       </div>
