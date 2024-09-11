@@ -22,6 +22,7 @@ import { toast } from 'react-toastify'
 import KycComment from '../Modals/KycRejected'
 import DonotRefresh from './DonotRefresh'
 import copyIcon from '../assets/images/copyicon.png'
+import CopyToClipboard from 'react-copy-to-clipboard'
 
 function Profile() {
 
@@ -367,9 +368,14 @@ function Profile() {
                           <p className='profile_joinDate mb-0'>Wallet Address :</p>
                           <div className='d-flex  align-items-center gap-2'>
                             <p className="profile_name" >{userProfile?.DisplayName ? userProfile?.DisplayName : address_showing(userProfile?.WalletAddress)}</p>
-                            <button className='bg-transparent border-0 outline-0'>
-                              <img src={copyIcon} className='img-fluid' alt='copy' style={{ width: "25px" }} />
-                            </button>
+                            <CopyToClipboard
+                              onCopy={() => toast.success("Address copied successfully")}
+                              text={`${userProfile?.DisplayName ? userProfile?.DisplayName : address_showing(userProfile?.WalletAddress)}`}
+                            >
+                              <button className='bg-transparent border-0 outline-0'>
+                                <img src={copyIcon} className='img-fluid' alt='copy' style={{ width: "25px" }} />
+                              </button>
+                            </CopyToClipboard>
                           </div>
                         </div>
                         <div className='d-flex flex-wrap align-items-center gap-2  mt-3'>

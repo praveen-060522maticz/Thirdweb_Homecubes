@@ -339,9 +339,9 @@ function Home() {
                                 ]?.content,
                             }}
                           ></p>
-                          <NavLink to="/marketplace" className="sidetab_link">
+                          <NavLink to="/staking" className="sidetab_link">
                             <button className="primary_blueBtn mt-5">
-                              Marketplace
+                              Claim income
                             </button>
                           </NavLink>
                         </div>

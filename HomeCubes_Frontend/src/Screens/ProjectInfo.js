@@ -24,6 +24,7 @@ import { getDaysOfDesiredMonth } from "../actions/common";
 import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import mintBg from '../assets/images/mintBg.png'
 import { ReadMore } from "../Components/ReadMore";
+import ImgAudVideo from "../Components/ImgAudVideo";
 
 function ProjectInfo() {
   const location = useLocation();
@@ -129,7 +130,13 @@ function ProjectInfo() {
       <BottomBar />
       <Header />
       <div className="hc-mint__banner">
-        <img src={mintBg} className="hc-mint__banner-image" />
+        {/* <img src={mintBg} className="hc-mint__banner-image" /> */}
+        <ImgAudVideo
+          file={`${config.IMG_URL}/projects/ProjectBanner/${projectDetail?.ProjectBanner}`}
+          origFile={mintBg}
+          classname={"hc-mint__banner-image"}
+          noimg={mintBg}
+        />
         <div className="hc-mint__banner-content">
           <div className="row mx-auto">
             <div className="custom_container  container">
@@ -615,7 +622,7 @@ function ProjectInfo() {
 
               <Row className="mt-5">
                 <Col lg={6} md={8} sm={12} xs={12} className="mb-3">
-                  <h5 className="hc-mint__content-subtitle mt-5">{projectData.name} NFTs</h5>
+                  <h5 className="hc-mint__content-subtitle mt-5">{projectData.name} Go to <strong>Marketplace</strong></h5>
                   <p className="mp_detailbrief">
                     {projectDetail?.CMS?.filter((val) => val.stepTitle == "NFTs")?.[0]?.stepDescription}
                   </p>

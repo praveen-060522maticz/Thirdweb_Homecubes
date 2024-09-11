@@ -5227,6 +5227,20 @@ body {
   color: var(--gradinet_left);
   font-weight: 400;
 }
+.hc-mint__content-subtitle.home_titled {
+  font-family: var(--montserrat-font);
+  font-weight: 600;
+}
+
+.hc-mint__content-subtitle.home_titled strong {
+  color: var(--gradinet_right);
+  font-weight: 400;
+}
+
+.hc-mint__content-subtitle.home_titled .marker {
+  color: var(--gradinet_left);
+  font-weight: 400;
+}
 
 .mp_detailbrief.hc-home__desc {
   font-family: var(--montserrat-font);

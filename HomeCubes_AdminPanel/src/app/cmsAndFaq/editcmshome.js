@@ -106,6 +106,10 @@ export function Editcmshome() {
       errors.Content = "Content cannot be empty"
       return toast.error("Content cannot be empty")
     }
+    if (!formData?.title) {
+      errors.title = "Title cannot be empty"
+      return toast.error("Title cannot be empty")
+    }
 
     if (Object.keys(errors).length == 0) {
       var datacms = {
