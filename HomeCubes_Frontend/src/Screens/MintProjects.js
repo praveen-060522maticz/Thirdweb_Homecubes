@@ -35,7 +35,7 @@ function MintProjects() {
   }
 
   return (
-    <>
+    <div className='mintpage'>
       <BottomBar />
       <Header />
       <Container fluid className="pt-3 home_wrapper over_hidercon hc-section">
@@ -203,8 +203,8 @@ function MintProjects() {
         </Container>
         <Footer />
       </Container>
-      <div className="gradient_holder staking_gradholder"></div>
-    </>
+      <div className="gradient_holder staking_gradholder mintgrad"></div>
+    </div>
   )
 }
 
