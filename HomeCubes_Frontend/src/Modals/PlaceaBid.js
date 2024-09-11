@@ -406,7 +406,7 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
                 id='CoinName'
                 isSearchable={false}
                 isDisabled={true}
-                classNamePrefix="react-select"
+                classNamePrefix={"react_select"}
               />
             </div>
 

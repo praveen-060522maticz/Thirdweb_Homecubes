@@ -26,9 +26,9 @@ function ProjectCard(props) {
           />
         </div>
         <div className="nftcard_detailwrapper">
-          <p className="nft_name hc-nft__card-title">{projectTitle}</p>
+          <p className="nft_name hc-nft__card-title minhset">{projectTitle}</p>
           <p className="nft_coinname mt-2">
-            floor price : {NFTPrice}{" "}
+            Floor price : {NFTPrice}{" "}
             <span className="floor_prize">{mintTokenName}</span>
 
           </p>

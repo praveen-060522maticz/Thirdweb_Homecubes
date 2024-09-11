@@ -699,6 +699,7 @@ function Staking() {
                               />
                             </div>
                             <Select
+                             classNamePrefix={"react_select"}
                               className="border_select"
                               placeholder="Select status"
                               styles={stylesgraybgOne}
@@ -782,6 +783,7 @@ function Staking() {
                               <Row className="select_holder">
                                 <Col lg={5} className="mb-3">
                                   <Select
+                                   classNamePrefix={"react_select"}
                                     className="border_select"
                                     placeholder="Project"
                                     styles={stylesgraybg}
@@ -792,6 +794,7 @@ function Staking() {
                                 </Col>
                                 <Col lg={5} className="mb-3">
                                   <Select
+                                   classNamePrefix={"react_select"}
                                     className="border_select"
                                     placeholder="Quarter"
                                     styles={stylesgraybg}

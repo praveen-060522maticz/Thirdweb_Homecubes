@@ -1,3 +1,66 @@
+.hc-swiper__arrow--right,
+.hc-swiper__arrow--left {
+  top: 35% !important;
+}
+
+.minhset {
+  min-height: 50px;
+}
+
+/* input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+} */
+input::placeholder {
+  color: #fff !important;
+  font-weight: 400 !important;
+}
+
+.react_select__placeholder {
+  color: #fff !important;
+}
+
+.react_select__indicator svg {
+  fill: #fff !important;
+}
+
+.orange {
+  border: 2px solid #FF7E07 !important;
+}
+
+.actiate_hint.kyc_activated.orange p {
+  color: #FF7E07 !important;
+}
+
+.kyc_activated.greenkyc {
+  border: 2px solid #00DA09 !important;
+}
+
+.actiate_hint.kyc_activated.greenkyc p {
+  color: #00DA09 !important;
+}
+
+.apexcharts-text tspan {
+  fill: #16EBC3 !important;
+}
+
+.checkoutbtn {
+  background: #16EBC3 !important;
+  color: #000 !important;
+  padding: 8px 12px !important;
+  border-radius: 4px !important;
+  font-weight: 400 !important;
+}
+
+.nftInfo_table.nftalltable table thead tr th:last-child,
+.nftInfo_table.nftalltable table tbody tr td:last-child {
+  text-align: left;
+}
+
+
 @media(max-width:319px) {}
 
 @media(min-width:320px) and (max-width:575px) {}
@@ -8,18 +71,54 @@
 
 @media(min-width:992px) and (max-width:1199px) {}
 
-@media(min-width:1200px) and (max-width:1399px) {}
+@media(min-width:1200px) and (max-width:1399px) {
+  .nftInfo_greenBar {
+    max-width: 360px !important;
+  }
+}
 
-@media(min-width:1400px) and (max-width:1499px) {}
+@media(min-width:1400px) and (max-width:1499px) {
+  .nftInfo_greenBar {
+    max-width: 380px !important;
+  }
+
+  .greenBar_time {
+    font-size: 18px !important;
+  }
+}
 
 @media(min-width:1500px) and (max-width:1799px) {
   .custom_container.container {
     max-width: 1450px !important;
+  }
+
+  .nftInfo_greenBar {
+    max-width: 380px !important;
+  }
+
+  .greenBar_time {
+    font-size: 18px !important;
   }
 }
 
 @media(min-width:1800px) {
   .custom_container.container {
     max-width: 1750px !important;
+  }
+
+  .hc-swiper__arrow--right {
+    right: -34px !important;
+  }
+
+  .hc-swiper__arrow--left {
+    left: -28px !important;
+  }
+
+  .nftInfo_greenBar {
+    max-width: 380px !important;
+  }
+
+  .greenBar_time {
+    font-size: 18px !important;
   }
 }

@@ -123,6 +123,21 @@
 
 /* end of scrollbar css */
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* header css */
 .whole_header {
   /* background-image: linear-gradient(to right,var(--bggradient_dark) 55%,var(--bggradient_secondry)); */
@@ -2369,7 +2384,7 @@ input.mint_countInput::-webkit-inner-spin-button{
   font-family: var(--poppins);
   width: unset;
   padding: 10px 58px;
-  background-image: url("../images/mintbg.png");
+  background-image: url("../images/mintBg.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -9234,9 +9249,9 @@ body {
   }
 
   .hc-mint__card-initialSales {
-    width: 400px;
-    min-width: 400px;
-    max-width: 400px;
+    width: 460px;
+    min-width: 460px;
+    max-width: 460px;
   }
 
   .hc-mint__card-initialSales .title {

@@ -62,7 +62,7 @@ function CollectionInfo() {
   const getCollectionTokens = async (fill) => {
     var params = {
       galleryId: collectionData._id,
-      limit: 6,
+      limit: 4,
       skip: fill ? 0 : nftcardData.length,
       filters: fill ? fill : filters,
       priceCal,
@@ -227,6 +227,7 @@ function CollectionInfo() {
               {/* <BreadPath/> */}
               <Row>
                 <Col lg={12} md={10} sm={12} xs={12} className="hc-galler__col-top" >
+                 
                   <div className="d-flex align-items-start gap-3">
                     <div>
                       <div className="mp_topImg_holder">
@@ -241,7 +242,7 @@ function CollectionInfo() {
                       <h3 className="mp_collectionname mt-3 hc-gallery__image-name">
                         {collectionData?.galleryTitle}
                       </h3>
-                      {description ? (
+                      {/* {description ? (
                         <p className="mp_detailbrief hc-home__desc mt-2">
                           {collectionData?.galleryDescription}
                         </p>
@@ -253,7 +254,7 @@ function CollectionInfo() {
                               .concat("...")
                             : collectionData?.galleryDescription}{" "}
                         </p>
-                      )}
+                      )} */}
                       {collectionData?.galleryDescription?.length > 300 ? (
                         <button
                           className="mp_readmoreBtn"
@@ -272,6 +273,8 @@ function CollectionInfo() {
                       />
                     </div>
                   </div>
+
+
                   {/* <Row className="mp_bottomal"> */}
                   {/* <Col lg={4} md={6} sm={12} xs={12} className="mb-3">
 
@@ -343,14 +346,16 @@ function CollectionInfo() {
                 </Col>
 
               </Row>
-
-              <Row className=" mt-5">
+               
+            
+              <Row className=" mt-4">
+              <h3 className="text-white mb-4">Photos</h3>
                 {collectionData &&
                   collectionData?.galleryImages?.length != 0 &&
                   collectionData?.galleryImages?.map((val) => {
                     return (
                       <>
-                        <Col sm={6} lg={4} xl={3} className="mb-4 d-flex justify-content-center justify-content-sm-start">
+                        <Col sm={6} lg={4} xl={3} className="mb-5 d-flex justify-content-center justify-content-sm-start">
                           <div className="hc-collection__image-card d-flex flex-column align-items-center align-items-sm-start">
                             <div className="hc-collection__image-wrapper" >
                               {/* <a target="_blank" href={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`} > */}
@@ -380,16 +385,19 @@ function CollectionInfo() {
                               )}
                               {/* </a> */}
                             </div>
-                            <h3 className="hc-gallery__image-name--sm mt-3 mt-xxl-4 text-center">
+                            {/* <h3 className="hc-gallery__image-name--sm mt-3 mt-xxl-4 text-center">
                               Image name
-                            </h3>
+                            </h3> */}
                           </div>
                         </Col>
                       </>
                     );
                   })}
               </Row>
-
+              
+              <div className='loadmore_holder'><button className="seconday_btn width_fitter" >Load More</button>
+              </div>
+         
               {/* vide modal */}
 
               <Modal

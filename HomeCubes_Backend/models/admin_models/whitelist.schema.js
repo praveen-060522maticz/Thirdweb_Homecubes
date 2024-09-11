@@ -12,8 +12,11 @@ let whitelist = new Schema({
 	gmail: {
 		type:String,
 		default :''
-	}
- 
+	},
+    name: {
+		type:String,
+		default :''
+	},
 
 }, { timestamps: true });
 module.exports = mongoose.model('whitelist', whitelist, 'whitelist');
