@@ -7801,7 +7801,7 @@ body {
     position: relative;
   }
 
-  .hc-home__banner::before {
+  /* .hc-home__banner::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -7811,10 +7811,7 @@ body {
     background: red;
   }
 
-  .sidetab_whole.hc-sidetab {
-    top: 27.5%;
 
-  }
 
   .sidetab_whole.hc-sidetab::after {
     content: '';
@@ -7824,10 +7821,11 @@ body {
     height: 2px;
     top: 50%;
     right: 0px;
-  }
+  } */
 
   .sidetab_whole.hc-sidetab {
-    top: 25%;
+    /* top: 25%; */
+    top: calc(50% - 207px + 35px);
   }
 
   .hc-home__desc {
@@ -8196,7 +8194,8 @@ body {
   }
 
   .sidetab_whole.hc-sidetab {
-    top: 25%;
+    top: calc(50% + 35px);
+    transform: translateY(-50%);
   }
 
   .hc-home__desc {
@@ -8532,7 +8531,7 @@ body {
     position: relative;
   }
 
-  .hc-home__banner::before {
+  /* .hc-home__banner::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -8542,10 +8541,7 @@ body {
     background: red;
   }
 
-  .sidetab_whole.hc-sidetab {
-    top: 27.5%;
 
-  }
 
   .sidetab_whole.hc-sidetab::after {
     content: '';
@@ -8555,6 +8551,11 @@ body {
     height: 2px;
     top: 50%;
     right: 0px;
+  } */
+
+  .sidetab_whole.hc-sidetab {
+    top: calc(50% + 35px);
+    transform: translateY(-50%);
   }
 
   .hc-home__desc {
@@ -8866,6 +8867,7 @@ body {
     max-width: 1750px !important;
   }
 
+
   .hc-home__banner.home_banner_row {
     min-height: calc(100vh - 100px);
     height: unset;
@@ -8873,7 +8875,7 @@ body {
     position: relative;
   }
 
-  .hc-home__banner::before {
+  /* .hc-home__banner::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -8881,11 +8883,6 @@ body {
     width: 200px;
     height: 2px;
     background: red;
-  }
-
-  .sidetab_whole.hc-sidetab {
-    top: 27.5%;
-
   }
 
   .sidetab_whole.hc-sidetab::after {
@@ -8896,10 +8893,19 @@ body {
     height: 2px;
     top: 50%;
     right: 0px;
+  } */
+
+  .sidetab_whole.hc-sidetab {
+    top: calc(50% + 35px);
+    transform: translateY(-50%);
+  }
+
+  .home_titled.hc-home__title {
+    font-size: 31px;
   }
 
   .hc-home__desc {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .hc-roadmap .home_roadmapSingle {

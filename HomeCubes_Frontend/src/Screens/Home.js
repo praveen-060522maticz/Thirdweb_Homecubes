@@ -221,7 +221,7 @@ function Home() {
                             }}
                           ></p>
                           <NavLink to="/howitworks">
-                            <button className="primary_blueBtn mt-5">
+                            <button className="primary_blueBtn mt-3">
                               About our Team
                             </button>
                           </NavLink>
@@ -231,13 +231,13 @@ function Home() {
 
                     <Row className="pi_higherTop align-items-center">
                       <Col lg={6} md={6} xs={12}>
-                        <Typewriter
+                        {/* <Typewriter
                           options={{
                             strings: ["We Are Getting Regulated"],
                             autoStart: true,
                             loop: true,
                           }}
-                        />
+                        /> */}
                         <h3
                           className="home_titled hc-home__title mt-3"
                           data-aos="fade-up"
