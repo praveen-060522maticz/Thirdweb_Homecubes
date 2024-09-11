@@ -1,7 +1,9 @@
 import config from './config'
 
+const localArr = ["demo", "local", "demossl", "localIp", "demossl2", "clientStage"]
+
 var net = {}
-if (config.env == "demo" || config.env == "local" || config.env == "demossl" || config.env == "localIp" || config.env == "demossl2") {
+if (localArr.includes(config.env)) {
     net = {
         97: {   // binance testnet
 

@@ -123,17 +123,26 @@ export function Editcmshome() {
         content: ckcontent,
         key: formData?.key
       }
-      console.log("datacms", datacms);
-      var resp = await editCmsCall(datacms);
+      console.log("datacms", datacms);  
+      const toastin = toast.loading("Loading...")
 
+      var resp = await editCmsCall(datacms);
+      toast.update(toastin, {
+        render: resp?.msg || "Error",
+        type: resp?.status ? "success" : "error",
+        isLoading: false,
+        autoClose: 1000,
+        closeButton: true,
+        closeOnClick: true,
+      })
       if (resp?.status) {
-        toast.success(resp.msg)
+        // toast.success(resp.msg)
         setTimeout(function () {
           history.push("cmshomelist")
         }, 1000);
 
       }
-      else return toast.error(resp.msg)
+      // else return toast.error(resp.msg)
     }
 
 

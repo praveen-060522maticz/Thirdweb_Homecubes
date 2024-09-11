@@ -74,7 +74,8 @@ export const editcms = async (req, res) => {
           link: req.body.link,
           content: req.body.content,
           page: req.body.page,
-          img: cmsimage
+          img: cmsimage,
+          key: req.body.title
         }
       } else {
         savedata = {
@@ -83,26 +84,27 @@ export const editcms = async (req, res) => {
           link: req.body.link,
           content: req.body.content,
           page: req.body.page,
+          key: req.body.title
         }
       }
       var isExists = await Cms.findOne({ "title": req.body.title });
       console.log("isexists", isExists)
       if (isExists) {
-        res.status(200).json({ "status": false, "msg": "Cms Already Exists" })
+      return  res.status(200).json({ "status": false, "msg": "Cms Already Exists" })
       }
       else {
         var cmsadd = new Cms(savedata)
         await cmsadd.save()
         console.log("savecmsaddsave", cmsadd)
         if (cmsadd) {
-          res.send({ "status": true, "msg": "cms data saved", data: cmsadd })
+          return res.send({ "status": true, "msg": "cms data saved", data: cmsadd })
           // res.send("dsjidgasudvgausgd")
           //  res.json({"status":true,"data": result})
         }
 
         else {
           console.log("error");
-          res.send({ message: "error" })
+         return res.send({ message: "error" })
         }
       }
     }
@@ -110,10 +112,10 @@ export const editcms = async (req, res) => {
 
       await Cms.findOneAndUpdate({ "_id": _id }, { deleted: true }, { new: true }).then(() => {
         console.log("deleted");
-        res.status(200).json({ "status": true })
+        return res.status(200).json({ "status": true })
       }).catch(err => {
         console.log("not deleted")
-        res.status(200).json({ "status": false })
+        return res.status(200).json({ "status": false })
       })
 
     }
@@ -133,10 +135,10 @@ export const editcms = async (req, res) => {
       console.log("resp after cms", resp)
 
       if (resp) {
-        res.status(200).json({ "status": true, "msg": "cms updated successfully" })
+        return res.status(200).json({ "status": true, "msg": "cms updated successfully" })
       }
       else
-        res.status(200).json({ "status": false, "msg": "cms updation failed" })
+       return res.status(200).json({ "status": false, "msg": "cms updation failed" })
     } else {
 
       var ref = Date.now();
@@ -160,10 +162,10 @@ export const editcms = async (req, res) => {
       console.log('resp---->', resp);
       if (resp) {
         console.log("resp after cms", resp)
-        res.status(200).json({ "status": true, "msg": "cms updated successfully" })
+       return res.status(200).json({ "status": true, "msg": "cms updated successfully" })
       }
       else
-        res.status(200).json({ "status": false, "msg": "cms updation failed" })
+       return res.status(200).json({ "status": false, "msg": "cms updation failed" })
 
 
     }

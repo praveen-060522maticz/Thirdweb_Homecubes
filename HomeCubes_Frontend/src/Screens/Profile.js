@@ -30,7 +30,8 @@ function Profile() {
     (state) => state.LoginReducer.AccountDetails
   );
   const { payload, token, gasFee } = useSelector((state) => state.LoginReducer.User);
-
+  const { currency } = useSelector(state => state.LoginReducer)
+console.log('currency---->',currency);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showKYC, setShowKYC] = useState(false)
   const [showKycCmd, setShowKycCmd] = useState(false)
@@ -454,10 +455,10 @@ function Profile() {
                 </Row>
 
                 <Row className='hc-proile__border-top py-3 mx-auto'>
-                  <Col lg={7} xs={12}>
+                  <Col lg={11} xl={10} xs={12}>
                     {/* <div className='secondary_row'> */}
                     <Row className='align-items-center'>
-                      <Col lg={5} md={5} sm={5} xs={12}>
+                      <Col lg={4} md={5} sm={5} xs={12}>
                         <p className='profile_balance'>Total Balance :  $ {(coinBalance * BNBUSDT)?.toFixed(6)}</p>
 
                       </Col>
@@ -465,7 +466,31 @@ function Profile() {
                         <div className='vert_line'></div>
 
                       </Col>
-                      <Col lg={5} md={5} sm={5} xs={12}>
+                      <Col lg={3} md={5} sm={5} xs={12}>
+                        <div className='pro_valuecount'>
+                          <div >
+                            <div className='profile_coinnameimg'>
+                              <img className='nft_coinImg' src={require('../assets/images/Tether Usdt.png')} />
+                              <p className='profile_balance'>USDT</p>
+                            </div>
+                            <p className='hc-profile__text-xs'>
+                              BNB Smart Coin
+                            </p>
+                          </div>
+
+                          <div className='vertical_dtl'>
+                            <p className='profile_greentTxt'>{currency?.filter(val => val.value == "USDT")?.[0]?.balance}</p>
+                            <p className='small_dollar'>$ {BNBUSDT}</p>
+                          </div>
+                        </div>
+
+                      </Col>
+
+                       <Col lg={1} md={1} sm={1} xs={12}>
+                        <div className='vert_line'></div>
+
+                      </Col> 
+                      <Col lg={3} md={5} sm={5} xs={12}>
                         <div className='pro_valuecount'>
                           <div >
                             <div className='profile_coinnameimg'>

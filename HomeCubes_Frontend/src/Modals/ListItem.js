@@ -747,7 +747,8 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                           )}
                       />
                     </div>
-                    <p style={{ color: "red" }} >{Error?.CoinName}</p>
+                    <p  className='modal_summaryLabel' >{currency?.filter(val => val.label == FormValue?.CoinName)?.[0]?.balance} {FormValue?.CoinName}</p>
+                    <p style={{ color: "red",marginBottom:0 }} >{Error?.CoinName}</p>
                   </Col>
 
 

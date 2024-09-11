@@ -23,6 +23,7 @@ export function Addcmshome() {
     bsCustomFileInput.init()
   }, [])
 
+  const [ckTitle, setckTitle] = useState('')
   const [ans, setAns] = useState("")
   console.log("anssss", ans)
 
@@ -79,8 +80,9 @@ export function Addcmshome() {
   console.log("contencdfdft_text", formData)
 
   const handleSubmit = async () => {
-
+    console.log('Addddddddddddddddddddddddddddddddddd---->',);
     formData.content = ans
+    formData.title = ckTitle || formData?.title
     var errors = {};
     if (!formData?.title) {
       errors.title = "title cannot be empty"
@@ -112,20 +114,31 @@ export function Addcmshome() {
       sendata.img = formData.file ?? ""
       sendata.content = ans
       sendata.action = "add"
+      const toastin = toast.loading("Loading...")
       var resp = await addcmshome(formData);
+      toast.update(toastin, {
+        render: resp?.msg || "Error",
+        type: resp?.status ? "success" : "error",
+        isLoading: false,
+        autoClose: 1000,
+        closeButton: true,
+        closeOnClick: true,
+      })
       if (resp?.status == true) {
-        toast.success(resp?.msg)
+        // toast.success(resp?.msg)
         setTimeout(() => {
           history.push("/cmshomelist")
         }, 1000);
 
       }
-      else return toast.error(resp.msg)
+      // else return toast.error(resp.msg)
 
     }
   }
 
-
+  const onTitleChange = (e) => {
+    setckTitle(e.editor.getData())
+  }
 
   return (
     <div>
@@ -138,8 +151,13 @@ export function Addcmshome() {
               <div>
                 <button className='btn mt-2 allbtn mb-3' type='button' onClick={() => history.goBack()} >Back</button></div>
               <Form.Group>
-                <label htmlFor="exampleInputName1">Title</label>
-                <Form.Control type="text" className="form-control" id="title" placeholder="Enter title" value={formData?.title} onChange={(e) => handlechange(e)} />
+                {/* <label htmlFor="exampleInputName1">Title</label>
+                <Form.Control type="text" className="form-control" id="title" placeholder="Enter title" value={formData?.title} onChange={(e) => handlechange(e)} /> */}
+
+                <CKEditor
+                  initData={formData.title != "" ? formData.title : ""}
+                  onChange={(e) => onTitleChange(e)}
+                />
               </Form.Group>
               <Form.Group>
                 <label htmlFor="exampleInputName1">Page</label>
@@ -174,17 +192,17 @@ export function Addcmshome() {
 
               </Form.Group>
               <Form.Group>
-              <label htmlFor="exampleInputName1">Image</label>
+                <label htmlFor="exampleInputName1">Image</label>
                 {/* <input type="file" id="file" onChange={(e) => handlechange(e)} /> */}
                 <div>
-                <div class="upload-btn-wrapper">
+                  <div class="upload-btn-wrapper">
                     <button class="btn">Choose file</button>
                     <input
                       type="file" id="file" onChange={(e) => handlechange(e)}
 
                     />
                   </div>
-                  </div>
+                </div>
               </Form.Group>
 
               <div>

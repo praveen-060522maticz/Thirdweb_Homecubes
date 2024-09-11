@@ -401,10 +401,10 @@ export const newsAndFeed = async (req, res) => {
 
       const checkTitle = await newsFeedSchema.find({ feedTitle, deleted: false });
 
-      if (checkTitle.length != 0) return res.json({
-        success: "error",
-        msg: "Titile already exist"
-      });
+      // if (checkTitle.length != 0) return res.json({
+      //   success: "error",
+      //   msg: "Titile already exist"
+      // });
 
       const saveData = await new newsFeedSchema({
         feedDescription,
