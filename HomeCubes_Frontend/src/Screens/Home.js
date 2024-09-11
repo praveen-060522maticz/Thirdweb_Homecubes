@@ -254,7 +254,7 @@ function Home() {
                         ></p>
 
                         <button className="primary_blueBtn mt-5">
-                          About our Team
+                          Initial Sales
                         </button>
                       </Col>
                       <Col
@@ -279,22 +279,7 @@ function Home() {
                       </Col>
                     </Row>
                     {/* <LazyLoad height={200} placeholder={<LazyLoader />} offset={[-200, 0]} debounce={500}> */}
-                    {CMS?.youtube?.link && (
-                      <Row className="mt-4 justify-content-center">
-                        <Col lg={5}>
-                          <Iframe
-                            width="100%"
-                            height="350"
-                            src={CMS?.youtube?.link}
-                            title="YouTube video player"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen
-                            loading="lazy"
-                          />
-                        </Col>
-                      </Row>
-                    )}
+
                     {/* </LazyLoad> */}
                     <Row className="pi_higherTop">
                       <Col lg={6} md={6} sm={6} xs={12} className="d-flex justify-content-center align-items-center">
@@ -362,8 +347,23 @@ function Home() {
                         </div>
                       </Col>
                     </Row>
-
-                    <Row className="align-items-center mt-5">
+                    {CMS?.youtube?.link && (
+                      <Row className="pi_higherTop justify-content-center">
+                        <Col lg={5}>
+                          <Iframe
+                            width="100%"
+                            height="350"
+                            src={CMS?.youtube?.link}
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy"
+                          />
+                        </Col>
+                      </Row>
+                    )}
+                    <Row className="align-items-center pi_higherTop">
                       <Col lg={6} md={6} sm={12} xs={12}>
                         <Typewriter
                           options={{
@@ -384,15 +384,15 @@ function Home() {
                           {investArr.length != 0 && investArr.map((val) => {
 
                             return (
-                              <li>
+                              <li className="">
                                 {" "}
                                 <img
-                                  className="home_threecube"
+                                  className="home_threecube mt-2"
                                   src={
                                     require("../assets/images/threecube.svg").default
                                   }
                                 />
-                                <p className="home_investorli" dangerouslySetInnerHTML={{ __html: val?.content }} >
+                                <p className=" mp_detailbrief hc-home__desc" dangerouslySetInnerHTML={{ __html: val?.content }} >
 
                                 </p>
                               </li>
