@@ -129,7 +129,10 @@ function Home() {
                             }}
                           ></p>
                           <NavLink to="/howitworks">
-                            <button className="primary_blueBtn home_bannerPrimay hc-home__button-gradient mt-4">
+                            {/* <button className="primary_blueBtn home_bannerPrimay hc-home__button-gradient mt-4">
+                              Buy now on initial sales
+                            </button> */}
+                            <button className="hc-home__button--linear">
                               Buy now on initial sales
                             </button>
                           </NavLink>
@@ -173,9 +176,7 @@ function Home() {
                           <div className="anim_div" data-aos="fade-left"
                             data-aos-offset="50"
                             data-aos-duration="800">
-
-
-                            <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="cloud_cubics"
+                            <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid w-75" divClassname="d-flex justify-content-center"
                             />
                           </div>}
                       </div>
