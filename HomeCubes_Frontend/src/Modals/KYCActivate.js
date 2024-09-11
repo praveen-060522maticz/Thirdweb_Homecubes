@@ -228,32 +228,32 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
                 <div className='mt-3'>
                   <p className='modal_summaryLabel'>Name</p>
                   <input type="text" className='modal_singleinput mt-2' id="Name" disabled={Profile?.KycStatus == "complete"} value={Profile?.Name} onChange={handleChange} placeholder='Parsa' />
-                  <p style={{ color: "red", fontSize: 12 }}>{Error?.Name}</p>
+                 {Error?.Name&& <p style={{ color: "red", fontSize: 12 }}>{Error?.Name}</p> }
                 </div>
               </Col>
               <Col lg={6} xs={12} className='mb-3'>
                 <div className='mt-3'>
                   <p className='modal_summaryLabel'>Sure Name</p>
                   <input type="text" className='modal_singleinput mt-2' id="SurName" disabled={Profile?.KycStatus == "complete"} value={Profile?.SurName} onChange={handleChange} placeholder='Parsa' />
-                  <p style={{ color: "red", fontSize: 12 }}>{Error?.SurName}</p>
+                  {Error?.SurName && <p style={{ color: "red", fontSize: 12 }}>{Error?.SurName}</p> }
                 </div>
               </Col>
               <Col lg={6} xs={12} className='mb-3'>
                 <div className='mt-3'>
                   <p className='modal_summaryLabel'>Email Address</p>
                   <input type="text" className='modal_singleinput mt-2' id="EmailId" value={Profile?.EmailId} onChange={handleChange} placeholder='test@gmail.com' />
-                  <p style={{ color: "red", fontSize: 12 }}>{Error?.EmailId}</p>
+                  {Error?.EmailId && <p style={{ color: "red", fontSize: 12 }}>{Error?.EmailId}</p> }
                 </div>
               </Col>
               <Col lg={6} xs={12} className='mb-3'>
                 <div className='mt-3'>
                   <p className='modal_summaryLabel'>Address</p>
                   <input type="text" className='modal_singleinput mt-2' id="Address" value={Profile?.Address} onChange={handleChange} placeholder='Enter Address' />
-                  <p style={{ color: "red", fontSize: 12 }}>{Error?.Address}</p>
+                  {Error?.Address && <p style={{ color: "red", fontSize: 12 }}>{Error?.Address}</p> }
                 </div>
               </Col>
               <Col lg={6} xs={12} className='mb-3'>
-                <div className=''>
+                <div className='mt-3'>
                   <p className='modal_summaryLabel'>Telephone (with pincode)</p>
                   <div className='kyc_phoneInput mt-2'>
                     <PhoneInput
@@ -261,14 +261,15 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
                       value={Profile?.mobileNumber}
                       onChange={(e) => { setError({}); setUserProfile({ ...Profile, "mobileNumber": e }) }}
                     />
-                    <p style={{ color: "red", fontSize: 12 }}>{Error?.mobileNumber}</p>
+                  {Error?.mobileNumber &&  <p style={{ color: "red", fontSize: 12 }}>{Error?.mobileNumber}</p> }
                   </div>
                 </div>
               </Col>
               <Col lg={6} xs={12} className='mb-3'>
-                <div className=''>
+                <div className='mt-3'>
                   <p className='modal_summaryLabel mb-2'>Nationality</p>
                   <Select
+                   classNamePrefix={"react_select"}
                     className="border_select"
                     placeholder="Select Project"
                     styles={stylesgraybgOne}
@@ -276,7 +277,7 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
                     value={{ label: Profile?.Nationality, value: Profile?.Nationality }}
                     onChange={(e) => { setError({}); setUserProfile({ ...Profile, Nationality: e.label }) }}
                   />
-                  <p style={{ color: "red", fontSize: 12 }}>{Error?.Nationality}</p>
+                {Error?.Nationality &&  <p style={{ color: "red", fontSize: 12 }}>{Error?.Nationality}</p> }
                 </div>
               </Col>
 
@@ -293,10 +294,10 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
                   </div>
                   <div>
                     <p className='modal_summaryLabel'>Passport or ID Image</p>
-                    <p className='profile_joinDate style_none'>Lorem PNG,JPG files accepted</p>
+                    <p className='profile_joinDate style_none'>PNG,JPG files accepted</p>
                   </div>
                 </div>
-                <p style={{ color: "red", fontSize: 12 }}>{Error?.kycFile}</p>
+                {Error?.kycFile &&  <p style={{ color: "red", fontSize: 12 }}>{Error?.kycFile}</p> }
               </Col>
               <Col lg={6} xs={12}>
                 <Form className='mt-3'>
@@ -306,7 +307,7 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
                     id="buynow"
                   >
                     <Form.Check.Input type="checkbox" isValid checked={Profile?.termsAccepted} onChange={(e) => setUserProfile({ ...Profile, termsAccepted: e.target.checked })} />
-                    <Form.Check.Label className='modal_summaryLabel '>Accept Terms And Conditions</Form.Check.Label>
+                    <Form.Check.Label className='modal_summaryLabel ms-2 mt-1'>Accept Terms And Conditions</Form.Check.Label>
                   </Form.Check>
                 </Form>
               </Col>

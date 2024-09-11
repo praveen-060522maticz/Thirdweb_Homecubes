@@ -114,12 +114,12 @@ function MintProjects() {
                             <div className='row mt-2'>
                               <div className='col-6'>
                                 <p className="nft_name hc-nft__card-details">
-                                  Total suply : {val.maxNFTs}
+                                  Total Supply : {val.maxNFTs}
                                 </p>
                               </div>
                               <div className='col-6'>
                                 <p className="nft_name hc-nft__card-details text-end">
-                                  Minted NFT : {val.isMinted}
+                                  Minted NFT's : {val.isMinted}
                                 </p>
                               </div>
                             </div>

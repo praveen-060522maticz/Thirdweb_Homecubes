@@ -135,6 +135,7 @@ function ChangePrice({ show, handleClose }) {
               <input type="number" className='modal_input cmnInput_scrollerHider' placeholder='Enter your price' />
               <Select
                 className="border_select"
+                classNamePrefix={"react_select"}
                 placeholder="Coin"
                 styles={stylesgraybg}
                 defaultValue={selectedOption}

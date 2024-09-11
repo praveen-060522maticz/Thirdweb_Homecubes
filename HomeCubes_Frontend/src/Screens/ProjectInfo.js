@@ -409,7 +409,7 @@ function ProjectInfo() {
               </Row> */}
 
               <Row className="mt-5">
-                <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">Photo Galleries</h3>
+                <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">Gallery</h3>
                 <p className="hc-mint__banner--desc  mb-0 text-center w-75 mx-auto ">
                   {projectDetail?.CMS?.filter((val) => val.stepTitle == "Photo Galleries")?.[0]?.stepDescription}
                 </p>
@@ -419,7 +419,7 @@ function ProjectInfo() {
                     className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                     onClick={() => goPrev()}
                   >
-                    <FaChevronLeft fill="#fff" fontSize={22} className="me-2" />
+                    <FaChevronLeft fill="#fff" fontSize={38} className="me-2" />
                   </button>
 
 
@@ -428,7 +428,7 @@ function ProjectInfo() {
                     onClick={() => goNext()}
                   >
 
-                    <FaChevronRight fill="#fff" fontSize={22} className="ms-2" />
+                    <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
                   </button>
                   <div className="projects_swiper">
                     <Swiper
@@ -499,21 +499,20 @@ function ProjectInfo() {
               </Row>
               <Row className="mt-5">
                 <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
-                  Estimated Property Value <span className="hc-mint__span-gradient"> 100 $</span>
+                  Estimated Property Value <span className="hc-mint__span-gradient"> {projectDetail?.propertyValue?.toUpperCase?.() ?? "1M"}$</span>
                 </h3>
                 <h5 className="hc-mint__content-subtitle mt-5">
                   Property <strong>Description</strong>
                 </h5>
                 <p className="hc-mint__banner--desc mt-3 mb-0">
-                  Description
+                  {projectDetail?.aboutDescription}
                 </p>
-                <Col lg={6} md={6} xs={12} className="mt-4">
+                {/* <Col lg={6} md={6} xs={12} className="mt-4">
                   <Row>
                     <Col lg={10} md={12} xs={12}>
                       <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5">
                         Title
                       </h5>
-                      {/* <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} /> */}
                       <ReadMore descText={"How to Mint out NFT ?"} />
                     </Col>
                   </Row>
@@ -522,14 +521,12 @@ function ProjectInfo() {
                   <Row>
                     <Col lg={8} md={12} xs={12}>
                       <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5">
-                        {/* 
-                        {cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title} */}
                         Title
                       </h5>
                       <ReadMore descText={"How to Mint out NFT ?"} />
                     </Col>
                   </Row>
-                </Col>
+                </Col> */}
                 {/* <Row className="pi_higherTop align-items-center">
                         <Col lg={4}>
                           <h1 className="mint_gradValue new">{project?.propertyValue?.toUpperCase?.() ?? "1M"}$</h1>
@@ -544,7 +541,8 @@ function ProjectInfo() {
               </Row>
               <Row className="mt-5">
                 <Col lg={6} md={8} sm={12} xs={12} className="mb-3">
-                  <h5 className="hc-mint__content-subtitle mt-5">News Feed and Updates</h5>
+                  {/* <h5 className="hc-mint__content-subtitle mt-5">News Feed and Updates</h5> */}
+                  <h5 className="hc-mint__content-subtitle mt-5">News & Updates</h5>
                   <p className="mp_detailbrief" >
                     {projectDetail?.CMS?.filter((val) => val.stepTitle == "News Feed and Updates")?.[0]?.stepDescription}
                   </p>
@@ -612,7 +610,7 @@ function ProjectInfo() {
               </Row>
 
               <Row className="mt-5">
-                <h3 className="hc-mint__content-subtitle mt-5 text-center"> <strong>Road</strong> map</h3>
+                <h3 className="hc-mint__content-subtitle mt-5 text-center"> <strong>Road</strong> Map</h3>
                 <p className="mp_detailbrief text-center">
                   {projectDetail?.CMS?.filter((val) => val.stepTitle == "Road map")?.[0]?.stepDescription}
                 </p>
@@ -686,9 +684,9 @@ function ProjectInfo() {
 
                 </Swiper>
 
-                <div className="greenarrow_boxHolder position-relative">
+                {/* <div className="greenarrow_boxHolder position-relative">
                   <div className="greenarrow_box"></div>
-                </div>
+                </div> */}
 
               </Row>
             </Col>

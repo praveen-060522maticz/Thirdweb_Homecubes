@@ -34,6 +34,20 @@ input::placeholder{
 .actiate_hint.kyc_activated.greenkyc p{
   color: #00DA09 !important;
 }
+.apexcharts-text tspan{
+  fill: #16EBC3 !important;
+}
+.checkoutbtn{
+  background: #16EBC3 !important;
+  color: #000 !important;
+  padding: 8px 12px !important;
+  border-radius: 4px !important;
+  font-weight: 400 !important;
+}
+.nftInfo_table.nftalltable table thead tr th:last-child, .nftInfo_table.nftalltable table tbody tr td:last-child{
+  text-align: left;
+}
+
 
 @media(max-width:319px) {}
 
@@ -45,14 +59,31 @@ input::placeholder{
 
 @media(min-width:992px) and (max-width:1199px) {}
 
-@media(min-width:1200px) and (max-width:1399px) {}
+@media(min-width:1200px) and (max-width:1399px) {
+  .nftInfo_greenBar {
+    max-width: 360px !important;
+}
+}
 
-@media(min-width:1400px) and (max-width:1499px) {}
+@media(min-width:1400px) and (max-width:1499px) {
+  .nftInfo_greenBar {
+    max-width: 380px !important;
+}
+.greenBar_time {
+  font-size: 18px !important;
+}
+}
 
 @media(min-width:1500px) and (max-width:1799px) {
   .custom_container.container {
     max-width: 1450px !important;
   }
+  .nftInfo_greenBar {
+    max-width: 380px !important;
+}
+.greenBar_time {
+  font-size: 18px !important;
+}
 }
 
 @media(min-width:1800px) {
@@ -64,5 +95,11 @@ input::placeholder{
 }
 .hc-swiper__arrow--left {
   left: -28px !important;
+}
+.nftInfo_greenBar {
+  max-width: 380px !important;
+}
+.greenBar_time {
+  font-size: 18px !important;
 }
 }

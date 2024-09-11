@@ -120,7 +120,7 @@ function NFTInfo() {
         colors: ["transparent"],
       },
       xaxis: {
-        categories: []
+        categories: [],
       },
       yaxis: {},
       fill: {
@@ -582,7 +582,7 @@ function NFTInfo() {
                                     if (Tokens[TabName]?.highbid) return toast.warning("Please accept or cancel Bid")
                                     SetSendDet(Tokens[TabName]?.myowner); setText("Put on Sale"); handleShowListItem()
                                   }}>
-                                    List Item
+                                    List item
                                   </button>
                                   <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3"
                                     onClick={() => {
@@ -1053,7 +1053,7 @@ function NFTInfo() {
 
                           <>
                             <button className="nftinfo_gradeientBtn mob_listitem_btn  mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.myowner); setText("Put on Sale"); handleShowListItem() }}>
-                              List Item
+                              List item
                             </button>
                             <button className="nftinfo_gradeientBtn mob_listitem_btn  mt-3"
                               onClick={() => {
@@ -1202,10 +1202,10 @@ function NFTInfo() {
                   )}
 
                   <button
-                    className="mp_readmoreBtn readmore_left mt-2"
+                    className="mp_readmoreBtn readmore_left mt-2 checkoutbtn"
                     onClick={() => setDescription(!description)}
                   >
-                    {(isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)?.length > 300 ? description ? "Read Less" : "Read More" : ""}
+                    {(isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)?.length > 300 ? description ? "Check Out Less" : "Check Out More" : ""}
                   </button>
                   <Accordion
                     defaultActiveKey="0"
@@ -1279,7 +1279,7 @@ function NFTInfo() {
                             <p>Collection Offers</p>
                           </div>
                         </div>
-                        <div className="nftInfo_table">
+                        <div className="nftInfo_table nftalltable">
                           <div className="table-responsive">
                             <table className="table">
                               <thead>
@@ -1519,7 +1519,7 @@ function NFTInfo() {
                     className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                     onClick={() => goPrev()}
                   >
-                    <FaChevronLeft fill="#fff" fontSize={22} className="me-2" />
+                    <FaChevronLeft fill="#fff" fontSize={38} className="me-2" />
                   </button>
 
 
@@ -1528,7 +1528,7 @@ function NFTInfo() {
                     onClick={() => goNext()}
                   >
 
-                    <FaChevronRight fill="#fff" fontSize={22} className="ms-2" />
+                    <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
                   </button>
                   <Swiper
                     className="mySwiper bottomnav_colswiper nftcard_swiper pt-3"
