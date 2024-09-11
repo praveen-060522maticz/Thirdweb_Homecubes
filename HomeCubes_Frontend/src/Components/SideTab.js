@@ -9,12 +9,11 @@ function SideTab() {
 
     return (
         <>
-
             <div className='sidetab_whole hc-sidetab'>
                 <NavLink className="sidetab_link" to='/'>
                     <div className='singleTab'>
                         {location == '/' ? <img className='sidetab_logo' src={require('../assets/images/home_active.svg').default} /> : <img className='sidetab_logo' src={require('../assets/images/home.svg').default} />}
-                        <p className='sidetab_laebl'>Home</p>
+                        <p className='sidetab_laebl'>Homesdf</p>
                     </div>
                 </NavLink>
                 <NavLink className="sidetab_link" to='/minting'>

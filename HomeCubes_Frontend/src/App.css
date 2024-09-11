@@ -1,42 +1,6 @@
-.App {
-  text-align: center;
+.hc-swiper__arrow--right ,.hc-swiper__arrow--left {
+  top: 35% !important;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 
 .minhset{
   min-height: 50px;
@@ -47,4 +11,58 @@ input[type=number]::-webkit-outer-spin-button {
     -moz-appearance: none;
     appearance: none;
     margin: 0; 
+}
+input::placeholder{
+  color: #fff !important;
+  font-weight: 400 !important;
+}
+.react_select__placeholder{
+  color: #fff !important;
+}
+.react_select__indicator svg{
+  fill: #fff !important;
+}
+.orange{
+  border: 2px solid #FF7E07 !important;
+}
+.actiate_hint.kyc_activated.orange p{
+  color: #FF7E07 !important;
+}
+.kyc_activated.greenkyc {
+  border: 2px solid #00DA09 !important;
+}
+.actiate_hint.kyc_activated.greenkyc p{
+  color: #00DA09 !important;
+}
+
+@media(max-width:319px) {}
+
+@media(min-width:320px) and (max-width:575px) {}
+
+@media(min-width:576px) and (max-width:767px) {}
+
+@media(min-width:768px) and (max-width:991px) {}
+
+@media(min-width:992px) and (max-width:1199px) {}
+
+@media(min-width:1200px) and (max-width:1399px) {}
+
+@media(min-width:1400px) and (max-width:1499px) {}
+
+@media(min-width:1500px) and (max-width:1799px) {
+  .custom_container.container {
+    max-width: 1450px !important;
+  }
+}
+
+@media(min-width:1800px) {
+  .custom_container.container {
+    max-width: 1750px !important;
+  }
+  .hc-swiper__arrow--right {
+    right: -34px !important;
+}
+.hc-swiper__arrow--left {
+  left: -28px !important;
+}
 }
