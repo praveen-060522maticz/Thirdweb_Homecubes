@@ -392,7 +392,7 @@ function Header() {
             </div>
 
             <div className="hc-header__right d-flex align-items-center gap-2">
-              <div className="header_navs">
+              <div className="header_navs hc-home__header-navs">
                 <ul>
                   {/* <NavLink className="sidetab_link" to="/howitworks">
                     <li

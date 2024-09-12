@@ -47,7 +47,9 @@ function RoadMapView() {
 
               <Row className='pi_higherTop'>
                 <h3 className="home_titled text-center" data-aos="fade-up" data-aos-offset="100" data-aos-duration="800">Road Map</h3>
-                <Roadmap data={roadMap} />
+                <div className="hc-home__roadmap--content">
+                  <Roadmap data={roadMap} />
+                </div>
                 {/* {roadMap?.length != 0 && roadMap?.map((val, i) => {
                   console.log("vaalalalalalalalal", val, i, (i != 0), (i % 2 != 0));
                   console.log("lastststindwex", roadMap?.length - 1);

@@ -825,8 +825,10 @@ function Minting() {
                           <p className="mp_detailbrief text-center">
                             {project?.CMS?.filter((val) => val.stepTitle == "Road map")?.[0]?.stepDescription}
                           </p>
+                          <div className="hc-home__roadmap--content">
 
-                          <Roadmap data={project?.roadMap} />
+                            <Roadmap data={project?.roadMap} />
+                          </div>
                         </Row>
                       </Row>
                     </Col>
@@ -964,11 +966,12 @@ function Minting() {
                     <Row className="mt-5">
                       {/* <h3 className="minting_detail">{project.name} Road map</h3> */}
                       <h3 className="hc-mint__content-subtitle mt-5 text-center">{project.name}<strong>Road</strong>  Map</h3>
-                      <p className="hc-mint__banner--desc mt-3 mb-0 text-center mb-3">
+                      {/* <p className="hc-mint__banner--desc mt-3 mb-0 text-center mb-3">
                         {project?.CMS?.filter((val) => val.stepTitle == "Road map")?.[0]?.stepDescription}
-                      </p>
-
-                      <Roadmap data={project?.roadMap} />
+                      </p> */}
+                      <div className="hc-home__roadmap--content">
+                        <Roadmap data={project?.roadMap} />
+                      </div>
                     </Row>
 
 
@@ -1184,7 +1187,7 @@ function Minting() {
 
             </Col>
           </Row>
-        </Container>
+        </Container >
         <Footer />
         {/* {mint == "minted" ?
           <div className="five_imgbg">
@@ -1192,8 +1195,9 @@ function Minting() {
           </div> :
           <></>
         } */}
-      </Container>
-      {showWallet && <ConnectWallet show={showWallet} handleCloseWallet={() => setShowWallet(false)} />}
+      </Container >
+      {showWallet && <ConnectWallet show={showWallet} handleCloseWallet={() => setShowWallet(false)} />
+      }
       {/* <div className='gradient_holder staking_gradholder'></div> */}
     </>
   );

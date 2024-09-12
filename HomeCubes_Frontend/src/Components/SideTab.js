@@ -15,7 +15,7 @@ function SideTab() {
                 <NavLink className={`sidetab_link ${location == "/" ? "active" : ""}`} to='/'>
                     <div className='singleTab'>
                         {location == '/' ? <img className='sidetab_logo' src={require('../assets/images/home_active.svg').default} /> : <img className='sidetab_logo' src={require('../assets/images/home.svg').default} />}
-                        <p className='sidetab_laebl'>Homesdf</p>
+                        <p className='sidetab_laebl'>Home</p>
                     </div>
                 </NavLink>
                 <NavLink className={`sidetab_link ${(location == '/minting' || location.includes("/mint/")) ? "active" : ""}`} to='/minting'>
