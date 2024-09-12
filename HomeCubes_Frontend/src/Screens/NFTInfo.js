@@ -407,7 +407,7 @@ function NFTInfo() {
 
 
   const cancelBidBySeller = async (address) => {
-    const id = toast.loading('Canceling order... Do not refresh!');
+    const id = toast.loading('Canceling Bid... Do not refresh!');
     console.log('AFFAFAFAAFFAF---->', gasFee);
     const TStamp = Date.now()
     setCanReload(false)
@@ -1173,8 +1173,9 @@ function NFTInfo() {
                                 <p className="hc-info__last-bid--title">
                                   Last Bid
                                 </p>
+                                {console.log('Tokens[TabName]?.highbid---->',Tokens[TabName]?.highbid)}
                                 <p className="hc-info__last-bid--value mt-1">
-                                  300 <span>USDT</span>
+                                  {Tokens[TabName]?.highbid?.TokenBidAmt} <span>{Tokens[TabName]?.highbid?.CoinName}</span>
                                 </p>
                                 <div className="d-flex  gap-3   mt-2">
                                   <button className="nftinfo_gradeientBtn "
