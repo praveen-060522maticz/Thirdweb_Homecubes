@@ -240,14 +240,14 @@ function Roadmap(props) {
                             </div>}
 
                             {(lastIndex != 0) && (i == lastIndex) && (i % 2 !== 0) &&
-                            //  <div className='col-5 hc-roadmap__new-padding--top'>
-                            //     <img className='img-fluid roadmap_lastimg' src={require('../assets/images/roadmaplastleft.svg').default} />
-                            // </div>
-                            <div className='col-2 hc-roadmap__new-padding--top'>
-                                <div className='hc-roadmap__new-col--center'>
-                                    <img src={require('../assets/images/threecube.svg').default} />
+                                //  <div className='col-5 hc-roadmap__new-padding--top'>
+                                //     <img className='img-fluid roadmap_lastimg' src={require('../assets/images/roadmaplastleft.svg').default} />
+                                // </div>
+                                <div className='col-2 hc-roadmap__new-padding--top'>
+                                    <div className='hc-roadmap__new-col--center'>
+                                        <img src={require('../assets/images/threecube.svg').default} />
+                                    </div>
                                 </div>
-                            </div>
                             }
 
 

@@ -77,6 +77,7 @@
   --bg-color-6: #00000080;
 
   --border-color-1: #525252;
+  --border-color-2: #FFFFFFA8;
 
   --text-color-1: #F84A4A;
   --text-color-2: #9A9A9A;
@@ -961,7 +962,8 @@
 }
 
 .footer_topborder {
-  border-top: 1px solid;
+  border-top: 1px solid var(--border-color-2);
+  border-bottom: 1px solid var(--border-color-2);
 }
 
 .footer_backbg {
@@ -1040,8 +1042,8 @@
 
 .footer_links {
   color: var(--white);
-  font-family: var(--poppins);
-  font-weight: var(--weight_four);
+  font-family: var(--montserrat-font);
+  font-weight: 500;
   font-size: var(--font_fourteen);
   list-style-type: none;
   margin-bottom: 15px;
@@ -2564,7 +2566,6 @@ input.mint_countInput::-webkit-inner-spin-button{
 .home_singleCmtmnt {
   margin: 0;
   color: var(--gradinet_right);
-  font-size: 23px;
   font-weight: 300;
   font-family: var(--poppins);
 }
@@ -5402,6 +5403,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
+  font-weight: 600;
 }
 
 .hc-border__left {
@@ -6007,6 +6009,34 @@ body {
   color: var(--gradinet_right);
 }
 
+.swiper-button-next1,
+.swiper-button-prev1 {
+  z-index: 2;
+}
+
+.hc-info__price-title {
+  color: var(--white);
+  font-family: var(--montserrat-font);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color-2);
+  padding-bottom: 15px;
+}
+
+
+.nftInfo_table.hc-nftInfo__table table thead tr th {
+  border: none !important;
+
+}
+
+.hc-nftInfo__table {
+  border-bottom: 1px solid var(--border-color-2);
+}
+
+.hc-infoInfo__tabs {
+  border-bottom: 1px solid var(--border-color-2);
+  padding-bottom: 20px;
+}
+
 /* hari media */
 
 @media(max-width:319px) {
@@ -6063,7 +6093,7 @@ body {
   }
 
   .hc-header__left img {
-    width: 200px;
+    /* width: 200px; */
   }
 
   .hc-button___gradient.pc_buyBtn {
@@ -6317,10 +6347,14 @@ body {
   .hc-roadmap__new .roadmap_strokeText {
     font-size: 30px;
     line-height: 15px;
+    margin-top: -3px;
+
   }
 
   .hc-roadmap__new--themeText {
     font-size: 13px;
+    margin-top: -5px;
+
   }
 
   .hc-roadmap__new--whiteText {
@@ -6354,6 +6388,18 @@ body {
   .hc-home__roadmap--content {
     margin-top: 60px;
   }
+
+  .header_link {
+    margin-right: 10px;
+  }
+
+  .hc-home__header-navs {
+    display: none !important;
+  }
+
+  .home_singleCmtmnt {
+    font-size: 18px;
+  }
 }
 
 @media(min-width:320px) and (max-width:575px) {
@@ -6368,7 +6414,7 @@ body {
   }
 
   .hc-home__desc {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .hc-roadmap .home_roadmapSingle {
@@ -6410,7 +6456,7 @@ body {
   }
 
   .hc-header__left img {
-    width: 200px;
+    /* width: 200px; */
   }
 
   .hc-button___gradient.pc_buyBtn {
@@ -6692,10 +6738,13 @@ body {
   .hc-roadmap__new .roadmap_strokeText {
     font-size: 40px;
     line-height: 25px;
+    margin-top: -3px;
   }
 
   .hc-roadmap__new--themeText {
     font-size: 13px;
+    margin-top: -5px;
+
   }
 
   .hc-roadmap__new--whiteText {
@@ -6728,6 +6777,18 @@ body {
 
   .hc-home__roadmap--content {
     margin-top: 60px;
+  }
+
+  .header_link {
+    margin-right: 10px;
+  }
+
+  .hc-home__header-navs {
+    display: none !important;
+  }
+
+  .home_singleCmtmnt {
+    font-size: 18px;
   }
 }
 
@@ -7059,10 +7120,14 @@ body {
   .hc-roadmap__new .roadmap_strokeText {
     font-size: 60px;
     line-height: 45px;
+    margin-top: -8px;
+
   }
 
   .hc-roadmap__new--themeText {
     font-size: 17px;
+    margin-top: -2px;
+
   }
 
   .hc-roadmap__new--whiteText {
@@ -7122,6 +7187,10 @@ body {
 
   .hc-info__last-bid button {
     font-size: 13px;
+  }
+
+  .hc-home__header-navs {
+    display: none !important;
   }
 }
 
@@ -7511,10 +7580,13 @@ body {
   .hc-roadmap__new .roadmap_strokeText {
     font-size: 50px;
     line-height: 45px;
+    margin-top: -18px;
+
   }
 
   .hc-roadmap__new--themeText {
     font-size: 20px;
+    margin-top: -11px;
   }
 
   .hc-roadmap__new--whiteText {
@@ -7574,6 +7646,10 @@ body {
 
   .hc-info__last-bid button {
     font-size: 13px;
+  }
+
+  .hc-home__header-navs {
+    display: none !important;
   }
 }
 
@@ -7893,10 +7969,12 @@ body {
   .hc-roadmap__new .roadmap_strokeText {
     font-size: 70px;
     line-height: 45px;
+    margin-top: -11px;
   }
 
   .hc-roadmap__new--themeText {
     font-size: 21px;
+    margin-top: -11px;
   }
 
   .hc-roadmap__new--whiteText {
@@ -7958,6 +8036,10 @@ body {
 
   .hc-info__last-bid button {
     font-size: 13px;
+  }
+
+  .hc-home__header-navs {
+    display: none !important;
   }
 }
 
@@ -8102,9 +8184,9 @@ body {
   }
 
   .hc-mint__card-initialSales {
-    width: 370px;
-    min-width: 370px;
-    max-width: 370px;
+    width: 420px;
+    min-width: 420px;
+    max-width: 420px;
   }
 
   .hc-mint__card-initialSales .title {
@@ -8308,10 +8390,12 @@ body {
   .hc-roadmap__new .roadmap_strokeText {
     font-size: 100px;
     line-height: 60px;
+    margin-top: -18px;
   }
 
   .hc-roadmap__new--themeText {
     font-size: 27px;
+    margin-top: -11px;
   }
 
   .hc-roadmap__new--whiteText {
@@ -8387,6 +8471,10 @@ body {
 
   .hc-info__last-bid--value {
     font-size: 23px;
+  }
+
+  .hc-footer__bottomSpace {
+    padding-bottom: 200px !important;
   }
 }
 
@@ -8502,9 +8590,9 @@ body {
   }
 
   .hc-mint__card-initialSales {
-    width: 400px;
-    min-width: 400px;
-    max-width: 400px;
+    width: 460px;
+    min-width: 460px;
+    max-width: 460px;
   }
 
   .hc-mint__card-initialSales .title {
@@ -8679,10 +8767,12 @@ body {
   .hc-roadmap__new .roadmap_strokeText {
     font-size: 100px;
     line-height: 55px;
+    margin-top: -18px;
   }
 
   .hc-roadmap__new--themeText {
     font-size: 27px;
+    margin-top: -11px;
   }
 
   .hc-roadmap__new--whiteText {
@@ -8746,6 +8836,10 @@ body {
 
   .hc-info__last-bid--value {
     font-size: 23px;
+  }
+
+  .hc-footer__bottomSpace {
+    padding-bottom: 200px !important;
   }
 }
 
@@ -8888,9 +8982,9 @@ body {
   }
 
   .hc-mint__card-initialSales {
-    width: 400px;
-    min-width: 400px;
-    max-width: 400px;
+    width: 460px;
+    min-width: 460px;
+    max-width: 460px;
   }
 
   .hc-mint__card-initialSales .title {
@@ -8902,7 +8996,7 @@ body {
   }
 
   .hc-mint__initialSales--border {
-    max-width: 170px;
+    /* max-width: 170px; */
   }
 
   .hc-mint__initialSales--themeText {
@@ -9048,10 +9142,12 @@ body {
   .hc-roadmap__new .roadmap_strokeText {
     font-size: 110px;
     line-height: 65px;
+    margin-top: -18px;
   }
 
   .hc-roadmap__new--themeText {
     font-size: 27px;
+    margin-top: -11px;
   }
 
   .hc-roadmap__new--whiteText {
@@ -9123,6 +9219,14 @@ body {
 
   .hc-info__last-bid--value {
     font-size: 25px;
+  }
+
+  .footer_right_detail {
+    padding-right: 100px;
+  }
+
+  .hc-footer__bottomSpace {
+    padding-bottom: 200px !important;
   }
 }
 
@@ -9424,10 +9528,12 @@ body {
   .hc-roadmap__new .roadmap_strokeText {
     font-size: 110px;
     line-height: 65px;
+    margin-top: -18px;
   }
 
   .hc-roadmap__new--themeText {
     font-size: 28px;
+    margin-top: -11px;
   }
 
   .hc-roadmap__new--whiteText {
@@ -9507,6 +9613,10 @@ body {
 
   .hc-button__gray {
     font-size: 15px;
+  }
+
+  .hc-footer__bottomSpace {
+    padding-bottom: 200px !important;
   }
 }
 

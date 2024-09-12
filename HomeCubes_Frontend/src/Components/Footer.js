@@ -19,38 +19,38 @@ function Footer() {
 
     return (
         <>
-            <Container fluid className='footer pi_higherTop'>
-                <Container className='custom_container footer_topborder'>
-                    <img className='footer_backbg' src={require('../assets/images/footerbg.svg').default} />
-                    <Row className='footer_row'>
-                        <Col lg={6} md={6} sm={12} xs={12} className='footer_left'>
+            <Container fluid className='footer pi_higherTop footer_topborder py-4'>
 
+                <Container className='custom_container '>
+                    {/* <img className='footer_backbg' src={require('../assets/images/footerbg.svg').default} /> */}
+                    <Row className='footer_row'>
+                        <Col lg={4} md={6} sm={12} xs={12} className='footer_left'>
                             <img className='footer_logo' src={require('../assets/images/logo.svg').default} />
-                            <p className='footer_brief' dangerouslySetInnerHTML={{ __html: footerCon?.content }} ></p>
+                            <p className='mp_detailbrief hc-home__desc mt-4' dangerouslySetInnerHTML={{ __html: footerCon?.content }} ></p>
                             <div className='footer_social mt-4'>
                                 <img className='footer_sociallinks' src={require('../assets/images/vtele.svg').default} />
                                 <img className='footer_sociallinks' src={require('../assets/images/vtwitter.svg').default} />
                                 <img className='footer_sociallinks' src={require('../assets/images/vinsta.svg').default} />
-                                <img className='footer_sociallinks' src={require('../assets/images/vdiscard.svg').default} />
+                                <img className='footer_sociallinks' src={require('../assets/images/footer_youtube.svg').default} />
                             </div>
 
                         </Col>
-                        <Col lg={6} md={6} sm={12} xs={12} className='footer_right'>
+                        <Col lg={6} md={6} sm={12} xs={12} className='footer_right pe-md-5'>
                             <div className='footer_right_detail'>
                                 <h3 className='footer_right_title'>Quick Access</h3>
                                 <div className='footer_linkwrapper'>
                                     <ul>
-                                        <NavLink className="sidetab_link" to='/'>
-                                            <li className='footer_links'>Launch App</li>
+                                        <NavLink className="sidetab_link" to='/minting'>
+                                            <li className='footer_links'>Initial Sales</li>
                                         </NavLink>
-                                        <NavLink className="sidetab_link" to='/howitworks'>
-                                            <li className='footer_links'>How it works ?</li>
+                                        <NavLink className="sidetab_link" to='/marketplace'>
+                                            <li className='footer_links'>Marketplace</li>
                                         </NavLink>
-                                        <NavLink className="sidetab_link" to='/roadmap'>
-                                            <li className='footer_links'>Road Map</li>
+                                        <NavLink className="sidetab_link" to='/staking'>
+                                            <li className='footer_links'>Claim Income</li>
                                         </NavLink>
-                                        <NavLink className="sidetab_link" to='/'>
-                                            <li className='footer_links'>Learning Center</li>
+                                        <NavLink className="sidetab_link" to='/projects'>
+                                            <li className='footer_links'>All Properties</li>
                                         </NavLink>
                                     </ul>
                                 </div>
@@ -58,6 +58,22 @@ function Footer() {
                         </Col>
                     </Row>
                 </Container>
+
+            </Container>
+            <Container className='custom_container py-4 hc-footer__bottomSpace'>
+                <div className='d-flex flex-column flex-md-row align-items-center align-items-center gap-3 justify-content-between'>
+                    <p className='mp_detailbrief hc-home__desc'>
+                        All rights reserved by Homecubes FZE
+                    </p>
+                    <div className='d-flex align-items-center gap-4'>
+                        <NavLink className="sidetab_link" to='/staking'>
+                            <li className='footer_links'>Privacy Policy</li>
+                        </NavLink>
+                        <NavLink className="sidetab_link" to='/projects'>
+                            <li className='footer_links'>Terms of Service</li>
+                        </NavLink>
+                    </div>
+                </div>
             </Container>
         </>
     )

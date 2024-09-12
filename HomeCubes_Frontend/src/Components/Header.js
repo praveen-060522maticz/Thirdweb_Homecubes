@@ -266,14 +266,24 @@ function Header() {
           //   var USD = await USDPRICE(data.label);
           // else var USD = await TOKENPRICE(data.address);
           const web3p = new Web3(config.RPC_URL)
-          let TokenContract = new web3p.eth.Contract(Token, data.address);
-          const getBalance = await TokenContract.methods.balanceOf(connectedwalet.address).call();
+          let TokenContract;
+          try {
+
+            TokenContract = new web3p.eth.Contract(Token, data.address);
+          } catch (e) {
+            console.log('Error---->', e);
+          }
+          const getBalance = await TokenContract?.methods?.balanceOf(connectedwalet.address)?.call();
+          const getSymbol = await TokenContract?.methods?.symbol(connectedwalet.address)?.call();
+          const convertPrice = await getBNBvalue(`${getSymbol}USDT`)
+          console.log('convertPrice---->', convertPrice);
           sen.push({
             value: data.value,
             label: data.label,
             address: data.address.toLowerCase(),
             balance: getBalance ? getBalance : 0,
             decimal: data.decimal,
+            convertPrice
           });
         })
       );
@@ -284,19 +294,31 @@ function Header() {
           //   var USD = await USDPRICE(data.label);
           // else var USD = await TOKENPRICE(data.address);
           const web3p = new Web3(config.RPC_URL)
+          let TokenContract;
+
           if (data?.address == config.DEADADDRESS) {
             var getBalance = await web3p.eth.getBalance(connectedwalet.address)
           } else {
-            let TokenContract = new web3p.eth.Contract(Token, data.address);
-            var getBalance = await TokenContract.methods.balanceOf(connectedwalet.address).call();
+            try {
+
+              TokenContract = new web3p.eth.Contract(Token, data.address);
+            } catch (e) {
+              console.log('Error---->', e);
+            }
+            var getBalance = await TokenContract?.methods?.balanceOf(connectedwalet.address).call();
             console.log('getBalance---->', getBalance, parseFloat(getBalance));
           }
+          const getSymbol = await TokenContract?.methods?.symbol(connectedwalet.address).call();
+          const convertPrice = await getBNBvalue(`${getSymbol?.toUpperCase()}USDT`)
+          console.log('convertPrice---->', convertPrice);
+
           sen.push({
             value: data.value,
             label: data.label,
             address: data.address.toLowerCase(),
             balance: getBalance ? (parseFloat(getBalance) / 1e18).toFixed(5) : 0,
             decimal: data.decimal,
+            convertPrice: parseFloat(convertPrice)
           });
         })
       );
@@ -370,7 +392,7 @@ function Header() {
             </div>
 
             <div className="hc-header__right d-flex align-items-center gap-2">
-              <div className="header_navs">
+              <div className="header_navs hc-home__header-navs">
                 <ul>
                   {/* <NavLink className="sidetab_link" to="/howitworks">
                     <li
