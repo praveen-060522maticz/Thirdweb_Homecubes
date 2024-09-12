@@ -614,8 +614,9 @@ function ProjectInfo() {
                 <p className="mp_detailbrief text-center">
                   {projectDetail?.CMS?.filter((val) => val.stepTitle == "Road map")?.[0]?.stepDescription}
                 </p>
-
-                <Roadmap data={projectDetail?.roadMap} />
+                <div className="hc-home__roadmap--content">
+                  <Roadmap data={projectDetail?.roadMap} />
+                </div>
               </Row>
 
               <Row className="mt-5">

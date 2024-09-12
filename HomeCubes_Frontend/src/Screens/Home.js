@@ -173,10 +173,10 @@ function Home() {
                             src={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`}
                           /> */}
                         {CMS["About Home Cubes"]?.img &&
-                          <div className="anim_div" data-aos="fade-left"
+                          <div className="anim_div d-none d-sm-flex" data-aos="fade-left"
                             data-aos-offset="50"
                             data-aos-duration="800">
-                            <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid w-75" divClassname="d-flex justify-content-center"
+                            <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid w-75" divClassname="d-none d-md-flex justify-content-center"
                             />
                           </div>}
                       </div>
@@ -194,11 +194,11 @@ function Home() {
                             src={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`}
                           /> */}
                         {CMS["About Home Cubes"]?.img &&
-                          <div className="anim_div" data-aos="fade-up"
+                          <div className="anim_div d-md-none" data-aos="fade-up"
                             data-aos-offset="100"
                             data-aos-duration="800">
 
-                            <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid" />
+                            <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid w-75" divClassname="d-flex justify-content-center" />
                           </div>}
                         {/* <img className="img-fluid" src={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} /> */}
                       </Col>
@@ -389,7 +389,7 @@ function Home() {
                               <li className="">
                                 {" "}
                                 <img
-                                  className="home_threecube mt-2 hc-home__threecube"
+                                  className="home_threecube mt-1 hc-home__threecube"
                                   src={
                                     require("../assets/images/threecube.svg").default
                                   }
