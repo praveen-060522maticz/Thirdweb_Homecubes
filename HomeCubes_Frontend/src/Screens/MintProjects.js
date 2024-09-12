@@ -27,7 +27,6 @@ function MintProjects() {
     console.log("getCurrentProject", getPro);
 
     if (getPro.success == "success") {
-
       const filterData = getPro?.data?.filter(val => val.isNotMinted != 0)
       console.log("filterData", filterData);
       setProject(filterData ?? [])
@@ -53,9 +52,7 @@ function MintProjects() {
                     <div className="home_titled hc-home__title mt-3" >
                       <p>Initial <strong>Sales</strong></p>
                     </div>
-                    <p
-                      className="mp_detailbrief hc-home__desc mt-3"
-                    >
+                    <p className="mp_detailbrief hc-home__desc mt-3">
                       During our initial sales phase, you have the unique opportunity
                       to choose how many shares of a specific property you want to buy.
                       But don't wait too long—these shares are limited, and demand is high.

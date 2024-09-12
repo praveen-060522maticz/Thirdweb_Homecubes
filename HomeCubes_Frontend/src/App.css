@@ -6,7 +6,14 @@
 .minhset {
   min-height: 50px;
 }
-
+.minhset1{
+  min-height: 80px;
+}
+.pc_buyBtn.widthset{
+  width: 95px !important;
+  min-width: 95px !important;
+  padding: 10px 0px !important;
+}
 /* input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none;
