@@ -1479,7 +1479,8 @@ input.mint_countInput::-webkit-inner-spin-button{
   margin: 0;
   font-size: var(--font_fourteen);
   font-weight: var(--weight_five);
-  font-family: var(--poppins);
+  /* font-family: var(--poppins); */
+  font-family: var(--montserrat-font);
   color: var(--white);
 }
 
