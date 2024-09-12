@@ -269,7 +269,7 @@ function Marketplace() {
             <Col lg={1} md={2} className="sidetab_holder">
               <SideTab />
             </Col>
-            <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner mt-4">
+            <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner  mt-4">
               {/* <BreadPath/> */}
               <h3 className="hc-home__title home_titled">Our <strong>Unique</strong> Marketplace</h3>
               <p className="mp_detailbrief hc-home__desc mt-3" dangerouslySetInnerHTML={{ __html: coll?.content }} >
@@ -357,13 +357,11 @@ function Marketplace() {
       </div> */}
               </div>
 
-              <Row className="justify-content-between mt-5">
+              <Row className="justify-content-between mt-4">
                 <h3 className="hc-home__title home_titled">
                   Top Trending <strong>NFT's</strong>
                 </h3>
                 <Col lg={4} md={6} sm={6} xs={12} className="mb-3">
-
-
                   <div
                     className={mobSearch ? "d-none" : " stack_searchbarmob"}
                     onClick={() => setMobSearch(true)}

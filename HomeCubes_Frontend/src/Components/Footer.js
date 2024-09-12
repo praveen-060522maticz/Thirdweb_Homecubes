@@ -60,7 +60,7 @@ function Footer() {
                 </Container>
 
             </Container>
-            <Container className='custom_container py-4 hc-footer__bottomSpace'>
+            <Container className='custom_container py-4 hc-footer__bottom'>
                 <div className='d-flex flex-column flex-md-row align-items-center align-items-center gap-3 justify-content-between'>
                     <p className='mp_detailbrief hc-home__desc'>
                         All rights reserved by Homecubes FZE
