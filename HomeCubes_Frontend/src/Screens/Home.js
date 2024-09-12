@@ -105,7 +105,7 @@ function Home() {
         <>
           <BottomBar />
           <Header />
-          <Container fluid className="pt-3 home_wrapper position-relative ">
+          <Container fluid className="pt-3 home_wrapper  ">
             <Container className="custom_container ">
               <Row>
                 <Col lg={1} md={2} className="sidetab_holder">
