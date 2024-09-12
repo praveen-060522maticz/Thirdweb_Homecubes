@@ -429,7 +429,7 @@ function Minting() {
                                 {minted} Minted
                               </p>
                             </div>
-                            <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0">
+                            <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0 px-0">
                               <div className="hc-mint__initialSales--border">
                                 <div className="hc-mint__initialSales--progress" style={{ width: `${(minted / TotalToken) * 100}%` }}>
                                   {minted}
