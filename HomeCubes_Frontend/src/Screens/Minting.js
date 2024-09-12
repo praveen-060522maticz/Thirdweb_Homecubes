@@ -34,7 +34,7 @@ import web3Utils from 'web3-utils';
 import { useWallets } from "@privy-io/react-auth";
 import DETH from '../Abi/token.json';
 import Prompt from "../Components/Prompt";
-import mintBg from '../assets/images/mintBg.png'
+import mintBg from '../assets/images/mintBg3.png'
 import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 // import { unstable_usePrompt as usePrompt } from 'react-router-dom';
 
