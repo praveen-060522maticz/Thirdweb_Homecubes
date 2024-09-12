@@ -75,9 +75,23 @@ input::placeholder {
 
 @media(max-width:319px) {}
 
-@media(min-width:320px) and (max-width:575px) {}
+@media(min-width:320px) and (max-width:575px) {
+  .hc-button___gradient p {
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+}
 
-@media(min-width:576px) and (max-width:767px) {}
+}
+
+@media(min-width:576px) and (max-width:767px) {
+  .hc-button___gradient p {
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+}
+.nft_name.mons{
+  white-space: nowrap;
+}
+}
 
 @media(min-width:768px) and (max-width:991px) {}
 
@@ -103,13 +117,22 @@ input::placeholder {
   .hc-banner__top.initialsaletop{
     margin-top: 170px !important;
   }
+  .hc-button___gradient p {
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+}
+.nft_name.mons{
+   white-space: nowrap;
+}
 }
 
 @media(min-width:1500px) and (max-width:1799px) {
   .custom_container.container {
     max-width: 1450px !important;
   }
-
+  .nft_name.mons{
+    white-space: nowrap;
+ }
   .nftInfo_greenBar {
     max-width: 380px !important;
   }
