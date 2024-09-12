@@ -8471,6 +8471,10 @@ body {
   .hc-info__last-bid--value {
     font-size: 23px;
   }
+
+  .hc-footer__bottomSpace {
+    padding-bottom: 200px !important;
+  }
 }
 
 @media (min-width:1400px) and (max-width:1499px) {
@@ -8833,7 +8837,9 @@ body {
     font-size: 23px;
   }
 
-
+  .hc-footer__bottomSpace {
+    padding-bottom: 200px !important;
+  }
 }
 
 @media(min-width:1500px) and (max-width:1799px) {
@@ -8989,7 +8995,7 @@ body {
   }
 
   .hc-mint__initialSales--border {
-    max-width: 170px;
+    /* max-width: 170px; */
   }
 
   .hc-mint__initialSales--themeText {
@@ -9216,6 +9222,10 @@ body {
 
   .footer_right_detail {
     padding-right: 100px;
+  }
+
+  .hc-footer__bottomSpace {
+    padding-bottom: 200px !important;
   }
 }
 
@@ -9602,6 +9612,10 @@ body {
 
   .hc-button__gray {
     font-size: 15px;
+  }
+
+  .hc-footer__bottomSpace {
+    padding-bottom: 200px !important;
   }
 }
 

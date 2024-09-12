@@ -35,7 +35,7 @@ function Footer() {
                             </div>
 
                         </Col>
-                        <Col lg={6} md={6} sm={12} xs={12} className='footer_right'>
+                        <Col lg={6} md={6} sm={12} xs={12} className='footer_right pe-md-5'>
                             <div className='footer_right_detail'>
                                 <h3 className='footer_right_title'>Quick Access</h3>
                                 <div className='footer_linkwrapper'>
@@ -60,7 +60,7 @@ function Footer() {
                 </Container>
 
             </Container>
-            <Container className='custom_container py-4'>
+            <Container className='custom_container py-4 hc-footer__bottomSpace'>
                 <div className='d-flex flex-column flex-md-row align-items-center align-items-center gap-3 justify-content-between'>
                     <p className='mp_detailbrief hc-home__desc'>
                         All rights reserved by Homecubes FZE
