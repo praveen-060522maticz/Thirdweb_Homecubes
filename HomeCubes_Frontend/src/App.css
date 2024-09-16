@@ -6,14 +6,17 @@
 .minhset {
   min-height: 50px;
 }
-.minhset1{
+
+.minhset1 {
   min-height: 80px;
 }
-.pc_buyBtn.widthset{
+
+.pc_buyBtn.widthset {
   width: 95px !important;
   min-width: 95px !important;
   padding: 10px 0px !important;
 }
+
 /* input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none;
@@ -22,10 +25,12 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0; 
 } */
 
-.nft_name.mons, .nft_coinname.mons{
+.nft_name.mons,
+.nft_coinname.mons {
   font-family: var(--montserrat-font);
   letter-spacing: unset;
 }
+
 input::placeholder {
   color: #fff !important;
   font-weight: 400 !important;
@@ -101,7 +106,8 @@ input::placeholder {
   .nftInfo_greenBar {
     max-width: 360px !important;
   }
-  .hc-banner__top.initialsaletop{
+
+  .hc-banner__top.initialsaletop {
     margin-top: 165px !important;
   }
 }
@@ -114,7 +120,8 @@ input::placeholder {
   .greenBar_time {
     font-size: 18px !important;
   }
-  .hc-banner__top.initialsaletop{
+
+  .hc-banner__top.initialsaletop {
     margin-top: 170px !important;
   }
   .hc-button___gradient p {
@@ -140,7 +147,8 @@ input::placeholder {
   .greenBar_time {
     font-size: 18px !important;
   }
-  .hc-banner__top.initialsaletop{
+
+  .hc-banner__top.initialsaletop {
     margin-top: 170px !important;
   }
 }
@@ -165,7 +173,8 @@ input::placeholder {
   .greenBar_time {
     font-size: 18px !important;
   }
-  .hc-banner__top.initialsaletop{
+
+  .hc-banner__top.initialsaletop {
     margin-top: 190px !important;
   }
 }

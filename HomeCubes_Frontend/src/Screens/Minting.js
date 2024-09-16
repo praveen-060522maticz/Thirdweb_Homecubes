@@ -436,7 +436,7 @@ function Minting() {
                                 </div>
                               </div>
                             </div>
-                            <div className="col-12 col-sm-3 d-flex justify-content-center mt-2 mt-sm-0">
+                            <div className="col-12 col-sm-3 d-flex justify-content-center mt-2 mt-sm-0 px-0">
                               <p className="label">
                                 From {TotalToken}
                               </p>
@@ -451,7 +451,7 @@ function Minting() {
                                 No of NFT's
                               </p>
                             </div>
-                            <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0">
+                            <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0 px-0">
                               <div className="hc-mint__initialSales--border">
                                 <input
                                   type="number"

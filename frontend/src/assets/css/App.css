@@ -1,0 +1,38 @@
+.banner_section {
+    min-height: 100vh;
+    height: 100vh;
+    max-height: 100vh;
+    background: gray;
+}
+
+.sidetab {
+    position: fixed;
+    background: red;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.container {
+    max-width: 95% !important;
+}
+
+.content_container {
+    height: 100%;
+    background: orange;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    font-size: 2vw;
+}
+
+.sub_title {
+    font-size: 1.1vw;
+}
+
+.sub_title {
+    margin-top: 1vw;
+}
