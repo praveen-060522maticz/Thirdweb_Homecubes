@@ -11,7 +11,7 @@ import { EthereumProvider } from '@walletconnect/ethereum-provider';
 import { toast } from "react-toastify";
 import { getBNBvalue } from "../actions/common";
 import TradeAbi from '../Abi/trade.json';
-import home from '../assets/images/home.svg'
+import home from '../assets/images/home.svg';
 // const { Network } = useSelector(
 //   (state) => state.LoginReducer
 // );
