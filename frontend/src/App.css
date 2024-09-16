@@ -12,7 +12,9 @@
     top: 50%;
     transform: translateY(-50%);
 }
-
+.sidetab p {
+font-size: 1vw;
+}
 .container {
     max-width: 95% !important;
 }
