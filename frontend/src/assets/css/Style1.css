@@ -201,9 +201,10 @@ p{
     color: var(--gradinet_right);
 }
 .homecube_header{
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 3;
+  width: 100%;
+  z-index: 99;
 }
 .navbar{
     background-color: #151515;
@@ -440,6 +441,7 @@ p{
 .banner_section{
   background: linear-gradient(103.58deg, #240533 39.31%, #004448 95.31%);
   min-height: 100vh;
+  padding-top: 15vh;
 }
 .home_titled{
   font-size: 3.5vh;
@@ -470,7 +472,15 @@ p{
   border: 1px solid var(--border-color-1);
   border-radius: 0.4vh;
   padding: 1.5vh 0.4vh; 
-  width: 12vw;
+  width: 6vw;
+  position: absolute;
+  top: 15vh;
+  left: 6vh;
+}
+.sidetab_whole.active{
+  position: sticky;
+  top: 15vh;
+  left: 6vh;
 }
 .singleTab {
   align-items: center;
@@ -500,5 +510,31 @@ p{
 .side_left{
   position: sticky;
   top: 20vh;
+  left: 9vh;
+  width: 6vw;
+  height: auto;
 }
 /* banner section end */
+
+
+/* home  */
+.hc-home__title.home_titled .marker {
+  color: var(--gradinet_left);
+  font-weight: 400;
+}
+.primary_blueBtn {
+  background-color: var(--gradinet_right);
+  border: none;
+  border-radius: 0.5vh;
+  color: var(--black);
+  font-family: var(--montserrat-font);
+  font-size: 1.5vh;
+  font-weight: 500;
+  outline: none;
+  padding: 1vh 2vh;
+}
+.primary_blueBtn:hover {
+  background-image: linear-gradient(to right, var(--gradinet_left), var(--gradinet_right));
+  color: var(--white);
+}
+/* home end */
