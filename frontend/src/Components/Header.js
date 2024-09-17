@@ -425,10 +425,10 @@ function Header() {
                                                             src={`${config?.IMG_URL}/user/${payload?.WalletAddress}/profile/${payload?.Profile}`}
                                                         />
                                                         :
-                                                        <i class="fa-solid fa-user mt-1"></i>}
+                                                        <i class="fa-solid fa-user"></i>}
                                                 </span>
                                             </NavLink></DropdownToggle>
-                                        <DropdownMenu className="dropmenu" show={showDropdown}>
+                                        <DropdownMenu className="dropmenu px-2" show={showDropdown}>
                                             <div className="mb-2 d-flex align-items-center justify-content-between">
                                                 <p className="bal mb-0">Balances</p>
                                                 <NavLink
@@ -471,13 +471,13 @@ function Header() {
                                         className="logoutss"
                                         onClick={() => walletDisconnect()}
                                     >
-                                        <i class="fa-solid fa-right-from-bracket me-2"></i>
+                                        <i class="fa-solid fa-right-from-bracket"></i>
 
 
                                     </button>
                                 ) : (
                                     <button
-
+                                         className="walletbtn"
                                         onClick={() => {
                                             if (ready && authenticated && !isWalletConnected && connectedwalet) {
                                                 // wallets[0].linked
@@ -532,7 +532,7 @@ function Header() {
                                             className="header_gradientBtn"
                                             onClick={() => walletDisconnect()}
                                         >
-                                            <i class="fa-solid fa-right-from-bracket me-2"></i>
+                                            <i class="fa-solid fa-right-from-bracket"></i>
                                             Disconnect
                                             <Lottie
                                                 animationData={wallety}
@@ -571,7 +571,7 @@ function Header() {
                                             onMouseOver={() => setShowDropdown(true)}>
                                             <DropdownToggle className="droptoggle mt-3 mt-lg-0 py-0 px-0">
                                                 <NavLink
-                                                    className="user_hvr_btn primary_blueBtn me-0 mt-1"
+                                                    className="user_hvr_btn primary_blueBtn me-0"
                                                     to={`/profile/${wallet.accountAddress}`}
                                                 >
                                                     <span >
@@ -582,10 +582,10 @@ function Header() {
                                                                 src={`${config?.IMG_URL}/user/${payload?.WalletAddress}/profile/${payload?.Profile}`}
                                                             />
                                                             :
-                                                            <i class="fa-solid fa-user mt-1"></i>}
+                                                            <i class="fa-solid fa-user"></i>}
                                                     </span>
                                                 </NavLink></DropdownToggle>
-                                            <DropdownMenu className="dropmenu" show={showDropdown}>
+                                            <DropdownMenu className="dropmenu px-3 py-3" show={showDropdown}>
                                                 <div className="mb-2 d-flex align-items-center justify-content-between">
                                                     <p className="bal mb-0">Balances</p>
                                                     <NavLink

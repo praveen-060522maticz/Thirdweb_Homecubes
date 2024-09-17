@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import { PrivyProvider } from '@privy-io/react-auth';
 import Home from './Screens/Home';
+import Minting from './Screens/Minting';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { base, baseGoerli, mainnet, sepolia, polygon, polygonMumbai } from 'viem/chains';
@@ -22,6 +23,10 @@ function App() {
         {
             path: "/",
             element: <Home />,
+        },
+        {
+            path: "/minting",
+            element: <Minting />,
         },
         // Add routes for any additional screens
     ]);
