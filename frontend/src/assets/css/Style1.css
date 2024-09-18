@@ -470,6 +470,10 @@ p {
   .footer_right {
     display: unset;
   }
+  .mp_detailbrief {
+    line-height: 3.8vh;
+    font-size: 1.7vh;
+}
 }
 
 
@@ -495,15 +499,13 @@ p {
   display: none;
 }
 
-@media screen and (max-width:991px) {
+@media screen and (max-width:1199px) {
   .footer_all {
     margin-bottom: 10vh;
   }
-
   .bottomBar {
     display: block;
   }
-
   .bottombar_single {
     align-items: center;
     display: flex;
@@ -531,7 +533,6 @@ p {
     color: var(--white);
   }
 }
-
 /* bottom bar end */
 
 .innercontent {
@@ -641,16 +642,22 @@ p {
   display: none;
 }
 
+@media screen and (max-width:1199px) {
+  .sidetab_whole {
+    display: none;
+  }
+}
+
 @media screen and (min-width:992px) and (max-width:1199px) {
   .sidetab_whole {
     left: 7vh;
   }
+  .innercontent .container {
+    max-width: 90%;
+}
 }
 
 @media screen and (max-width:991px) {
-  .sidetab_whole {
-    display: none;
-  }
     .banner_section {
       padding-top: 18vh;
   }
@@ -671,7 +678,7 @@ p {
   border-radius: 0.5vh;
   color: var(--black);
   font-family: var(--montserrat-font);
-  font-size: 1.5vh;
+  font-size: 1.65vh;
   font-weight: 500;
   outline: none;
   padding: 1vh 2vh;
@@ -829,12 +836,25 @@ p {
   height: 2.8vh;
   width: 2.8vh;
 }
+.home__channelBtn:hover {
+  background-color: var(--gradinet_left);
+}
+.home__channelBtn:hover svg {
+  fill: var(--white);
+}
+.wauto{
+  width: 85%;
+  margin: auto;
+}
 @media screen and (min-width:1200px) {
   .anim_div div[aria-label="animation"] {
     height: 40vh !important;
     min-height: 40vh !important;
     width: 40vh !important;
     min-width: 40vh !important;
+  }
+  .anim_div.first_lottie div[aria-label="animation"]  {
+    margin: 0 0 0 auto !important;
   }
 }
 
@@ -994,3 +1014,93 @@ p {
 }
   }
 /* roadmap end */
+
+
+
+
+
+
+/* marketplace */
+.hc-card__nft {
+  max-width: 32vh;
+  min-width: 32vh;
+  width: 32vh;
+}
+.hc-card__nft, .hc-card__nft .projectcard_wrapper_sep {
+  overflow: hidden;
+}
+.projectcard_wrapper_sep {
+  position: relative;
+}
+.hc-card__nft .projectcard_wrapper_sep {
+  height: 22vh;
+  max-height: 22vh;
+  max-width: 100%;
+  min-height: 22vh;
+  min-width: 100%;
+  width: 100%;
+  border-radius: 0.5vh 0.5vh 0 0;
+}
+.hc-card__nft .projectcard_wrapper_sep img {
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.hc-card__nft .nftcard_detailwrapper {
+  background: var(--bg-color-1);
+  border-top-left-radius: 0.5vh;
+  border-top-right-radius: 0.5vh;
+  padding: 1.5vh 1.8vh;
+  position: relative;
+  z-index: 3;
+}
+.hc-card__nft .nftcard_detailwrapper:before {
+  background: var(--bg-color-1);
+  border-top-left-radius: 0.5vh;
+  border-top-right-radius: 0.5vh;
+  content: "";
+  height: 1vh;
+  left: 0;
+  position: absolute;
+  top: -0.5vh;
+  width: 100%;
+  z-index: 2;
+}
+.hc-card__nft .nftcard_detailwrapper:after {
+  background: var(--gradinet_right);
+  border-top-left-radius: 0.6vh;
+  border-top-right-radius: 0.6vh;
+  content: "";
+  height: 1vh;
+  left: 0;
+  position: absolute;
+  top: -1vh;
+  width: 100%;
+  z-index: 1;
+}
+.hc-nft__card-title {
+  font-family: var(--montserrat-font);
+  font-weight: 600;
+  letter-spacing: unset;
+  font-size: 2.3vh;
+  line-height: 2vh;
+  margin-bottom: 1.1vh !important;
+}
+.floor_prize, .viewMore {
+  color: var(--gradinet_right);
+  font-family: var(--poppins);
+}
+.nft_coinname {
+  color: var(--white);
+  font-family: var(--montserrat-font);
+}
+.floor_prize, .nft_coinname {
+  font-size: 1.5vh;
+  font-weight: 500;
+  margin: 0;
+}
+/* marketplace end */

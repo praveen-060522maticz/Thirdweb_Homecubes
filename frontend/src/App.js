@@ -18,7 +18,7 @@ import './App.css';
 import '../src/assets/css/Style1.css';
 import '../src/assets/css/App.css'
 import Home from './Screens/Home';
-import Sticky from './Screens/Sticky';
+import Marketplace from './Screens/Marketplace';
 import Minting from './Screens/Minting';
 import MintProjects from './Screens/MintProjects';
 
@@ -35,9 +35,9 @@ function App() {
             element: <Home />,
         },
         {
-            path: "/sticky",
-            element: <Sticky />,
-        },
+            path: "/marketplace",
+            element: <Marketplace />,
+          },
         {
             path: "/minting",
             element: <MintProjects />,
