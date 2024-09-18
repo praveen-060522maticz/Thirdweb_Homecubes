@@ -174,7 +174,7 @@ p {
   overflow: hidden;
   max-height: 4vh;
   /* min-width: 5vw; */
-  margin-right: 0.8vw;
+  /* margin-right: 0.8vw; */
   font-family: var(--montserrat-font);
 }
 
@@ -197,6 +197,7 @@ p {
   padding: 0;
   width: 4vh;
   background-color: var(--gradinet_right);
+  margin-left: 1vh;
 }
 
 .homecube_header a {
