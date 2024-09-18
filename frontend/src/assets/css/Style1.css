@@ -197,6 +197,7 @@ p {
   padding: 0;
   width: 4vh;
   background-color: var(--gradinet_right);
+  margin-left: 1vh;
 }
 
 .homecube_header a {
@@ -302,6 +303,10 @@ p {
 .dropmenu .fa-copy {
   color: var(--white);
   cursor: pointer;
+}
+
+.fa-right-from-bracket {
+  margin-right: 0.6vh;
 }
 
 @media screen and (max-width:991px) {
@@ -511,9 +516,20 @@ p {
 .banner_section {
   background: linear-gradient(103.58deg, #240533 39.31%, #004448 95.31%);
   min-height: 100vh;
-  padding-top: 15vh;
+  padding-top: 33.5vh;
+  position: relative;
+  z-index: 5;
 }
 
+/* .banner_section::after{
+  content: "";
+  position: absolute;
+  background: linear-gradient(177.64deg, rgba(8, 0, 16, 0) 16.11%, #080010 69.33%);
+  bottom: -40vh;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+} */
 .home_titled {
   font-size: 3.5vh;
   font-weight: 600;
@@ -548,9 +564,10 @@ p {
   border-radius: 0.4vh;
   padding: 1.5vh 0.4vh;
   width: 12.5vh;
-  position: absolute;
-  top: 15vh;
+  /* position: absolute;
+  top: 22vh;
   left: 8vh;
+  z-index: 9; */
 }
 
 .sidetab_whole.active {
@@ -588,12 +605,15 @@ p {
   color: var(--white);
 }
 
-.side_left {
-  position: sticky;
-  top: 20vh;
+.side_left.fixed {
+  position: fixed;
+  top: 33.5vh;
   left: 9vh;
-  width: 6vw;
-  height: auto;
+  z-index: 7;
+}
+
+.side_left.sticky {
+  display: none;
 }
 
 @media screen and (min-width:992px) and (max-width:1199px) {
@@ -634,9 +654,59 @@ p {
   color: var(--white);
 }
 
+.anim_div div[aria-label="animation"] {
+  height: 30vh !important;
+  min-height: 30vh !important;
+  width: 30vh !important;
+  min-width: 30vh !important;
+}
+
+.top_bottom {
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+}
+
+.Typewriter {
+  margin-bottom: 1.8vh;
+}
+
+.Typewriter .Typewriter__wrapper,
+.Typewriter .Typewriter__cursor {
+  color: var(--gradinet_right);
+  font-style: italic;
+  margin-bottom: 1.5vh;
+  font-family: var(--poppins);
+  font-weight: 600;
+}
+
+.video_set {
+  width: 100%;
+  height: 38vh;
+}
+
+.hc-home__threecube.home_threecube {
+  height: 2.5vh;
+  width: 2.5vh;
+}
+
+.home_investorList li {
+  align-items: flex-start;
+  display: flex;
+  gap: 25px;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+}
+
+.home_investorList {
+  list-style-type: none;
+  padding-left: 0;
+}
+
 @media screen and (min-width:1200px) {
   .anim_div div[aria-label="animation"] {
+    height: 40vh !important;
     min-height: 40vh !important;
+    width: 40vh !important;
     min-width: 40vh !important;
   }
 }
