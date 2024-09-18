@@ -21,14 +21,15 @@
     --blue_300: #1042f3;
     --black: #000000;
     --white: #ffffff;
+    --gray_200: #1c1c1c;
+
 
     --montserrat_font: "Montserrat", sans-serif;
     --poppins_font: "Poppins", sans-serif;
     --kanit_font: "Kanit", sans-serif;
 
-    --container-width-main: 92;
-    --container-width-inner: 75;
-    --container-width-marginRight: calc((100 - var(--container-width-main))/2)
+    --container-width-main: 92%;
+    --container-width-inner: 70%;
 }
 
 

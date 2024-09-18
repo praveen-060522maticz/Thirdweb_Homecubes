@@ -115,28 +115,31 @@ function MintProjects() {
                             </div>
 
                             <div className='mp-grid'>
-                                <div className='red'>
+                                {/* <div className='red'>
 
                                     <div className='red_inner'></div>
                                 </div>
 
                                 <div className='gree'></div>
                                 <div className='yello'></div>
-                                <div className='blue'></div>
+                                <div className='blue'></div> */}
 
                                 {project?.length != 0 ? project?.map((val) => {
                                     return (
 
                                         <div className="nft-card">
-                                            <NavLink
-                                                className="nft-card__a"
-                                                to={{ pathname: `/mint/${val._id}` }}
+                                            <div className='nft-card__a'>
+                                                <NavLink
+                                                    className=""
+                                                    to={{ pathname: `/mint/${val._id}` }}
 
-                                                // to={new Date(val.unlockAt) < new Date() ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
-                                                // to={((new Date(val.unlockAt) < new Date()) && (val.isAvailable != 0)) ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
-                                                state={val}>
-                                                <img className="" src={`${config.IMG_URL}/projects/ProjectThumbnail/${val.ProjectThumbnail}`} />
-                                            </NavLink>
+                                                    // to={new Date(val.unlockAt) < new Date() ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
+                                                    // to={((new Date(val.unlockAt) < new Date()) && (val.isAvailable != 0)) ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
+                                                    state={val}>
+                                                    <img className="" src={`${config.IMG_URL}/projects/ProjectThumbnail/${val.ProjectThumbnail}`} />
+                                                </NavLink>
+                                            </div>
+
                                             {/* {new Date() < new Date(val.unlockAt) ?
           <div className="timerrr_counter">
 
@@ -145,29 +148,26 @@ function MintProjects() {
             />
           </div> : <></>} */}
 
-                                            <div className="">
-                                                <p className="">
+                                            <div className="nft-card__content">
+                                                <p className="nft-card__content-title">
                                                     {val.projectTitle}
                                                 </p>
-                                                <div className=''>
-                                                    <div className=''>
-                                                        <p className="">
-                                                            Total Supply : {val.maxNFTs}
-                                                        </p>
-                                                    </div>
-                                                    <div className=''>
-                                                        <p className="">
-                                                            Minted NFT's : {val.isMinted}
-                                                        </p>
-                                                    </div>
+                                                <div className='d-flex align-items-center gap-3 justify-content-between nft-card__values-wrapper'>
+
+                                                    <p className="nft-card__content-values">
+                                                        Total Supply : {val.maxNFTs}
+                                                    </p>
+                                                    <p className="nft-card__content-values">
+                                                        Minted NFT's : {val.isMinted}
+                                                    </p>
                                                 </div>
 
                                                 {/* <p className="nft_name">
           Locked NFT : {val.locked}
         </p> */}
 
-                                                <div className=''>
-                                                    <p className="">
+                                                <div className='nft-card__content-currency'>
+                                                    <p className="nft-card__content-values">
                                                         {val.NFTPrice} {"  "}
                                                         <span className="">
                                                             {val.mintTokenName}
@@ -176,11 +176,11 @@ function MintProjects() {
 
                                                 </div>
 
-                                                <div className=" ">
+                                                <div className="nft-card__content-buttons">
 
                                                     {new Date() < new Date(val.unlockAt) ?
                                                         // <div className="timerrr_counter">
-                                                        <button className=''>
+                                                        <button className='nft-card__buttons--countdown'>
                                                             <Countdown
                                                                 date={val.duration}
                                                             />
@@ -189,13 +189,17 @@ function MintProjects() {
                                                         // </div>
                                                         :
                                                         <NavLink
-                                                            className=""
+                                                            className="text-decoration-none"
                                                             // to={new Date(val.unlockAt) < new Date() ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
                                                             to={{ pathname: `/mint/${val._id}` }}
                                                             // to={val.isAvailable != 0 ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
                                                             state={val}>
-                                                            <button className=''><p>Buy now on initial sales</p> <div className=''>
-                                                                <img src={cartIcon} className='' /></div></button>
+                                                            <button className='nft-card__buttons--gradient d-flex align-items-center justify-content-between w-100'>
+                                                                <p>Buy now on initial sales</p>
+                                                                <div className='nft-card__buttons-gradientCart'>
+                                                                    <img src={cartIcon} className='' />
+                                                                </div>
+                                                            </button>
                                                         </NavLink>
                                                     }
 
