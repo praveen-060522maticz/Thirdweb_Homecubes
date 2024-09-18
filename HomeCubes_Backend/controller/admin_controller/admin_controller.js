@@ -1764,6 +1764,7 @@ export const stakingFunctions = async (req, res) => {
         val.projectId = projectId;
         val.xlFile = saveFile
         val.season = Season
+        val.year = year
         delete val._id
         return val
       }))

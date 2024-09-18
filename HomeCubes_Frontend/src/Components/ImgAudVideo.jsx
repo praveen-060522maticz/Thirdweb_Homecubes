@@ -54,7 +54,7 @@ export default function ImgAudVideo({
   };
 
   const fileType = getFileType(file);
-console.log('fileTypefileType---->',fileType);
+  console.log('fileTypefileType---->', fileType);
   return file ? (
     fileType === "image" ? (
       <img
@@ -68,7 +68,7 @@ console.log('fileTypefileType---->',fileType);
       />
     ) : fileType === "video" ? (
       <video
-      className={classname}
+        className={classname}
         loop={true}
         controlsList="nodownload"
         autoPlay={true}

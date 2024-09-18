@@ -151,7 +151,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
             wallets[0],
             token_address,
             network[Network].tradeContract,
-            web3utils.toWei(YouWillGet.toString())
+            "100000000000000000000000000000000000000000000000000000000"
          );
 
          // let cont = await getThirdweb.useContractCall( //thirdweb

@@ -485,7 +485,7 @@ function Marketplace() {
                         </Accordion.Header>
                         <Accordion.Body className="mt-3">
                           <div className="mb_pricetab_holder">
-                            <button
+                            {/* <button
                               className={
                                 priceTab == "BNB"
                                   ? "mb_pricetab me-2 active"
@@ -494,16 +494,16 @@ function Marketplace() {
                               onClick={() => setPriceTab("BNB")}
                             >
                               BNB
-                            </button>
+                            </button> */}
                             <button
                               className={
                                 priceTab == "USD"
                                   ? "mb_pricetab me-2 active"
                                   : "mb_pricetab me-2"
                               }
-                              onClick={() => setPriceTab("USD")}
+                              onClick={() => setPriceTab("USDT")}
                             >
-                              USD
+                              USDT
                             </button>
                           </div>
 
@@ -516,7 +516,8 @@ function Marketplace() {
                                 // value={priceCal?.Min}
                                 onChange={(e) => {
                                   const value = e.target.value
-                                  setPriceCal({ ...priceCal, ...{ "Min": priceTab == "BNB" ? value : String(value / BNBUSDT) } })
+                                  // setPriceCal({ ...priceCal, ...{ "Min": priceTab == "BNB" ? value : String(value / BNBUSDT) } })
+                                  setPriceCal({ ...priceCal, ...{ "Min": value } })
                                 }}
                               />
                             </Col>
@@ -528,7 +529,8 @@ function Marketplace() {
                                 // value={priceCal?.Max}
                                 onChange={(e) => {
                                   const value = e.target.value
-                                  setPriceCal({ ...priceCal, ...{ "Max": priceTab == "BNB" ? value : String(value / BNBUSDT) } })
+                                  // setPriceCal({ ...priceCal, ...{ "Max": priceTab == "BNB" ? value : String(value / BNBUSDT) } })
+                                  setPriceCal({ ...priceCal, ...{ "Max": value } })
                                 }}
                               />
                             </Col>

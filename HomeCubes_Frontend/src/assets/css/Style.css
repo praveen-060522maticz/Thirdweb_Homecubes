@@ -6366,15 +6366,15 @@ body {
     padding-top: 30px;
   }
 
-  .hc-roadmap__new .gif_aligner {
+  .hc-roadmap__new .gif_aligner,   .hc-roadmap__new div[aria-label="animation"] {
     max-width: 100px;
-    width: 100px;
+    width: 100px !important;
     min-width: 100px;
     min-height: 100px;
-    height: 100px;
+    height: 100px !important;
     max-height: 100px;
     border-radius: 8px;
-    margin-top: -30px;
+    margin-top: -30px !important;
   }
 
   .hc-roadmap__new-col--center img {
@@ -6756,15 +6756,15 @@ body {
     padding-top: 30px;
   }
 
-  .hc-roadmap__new .gif_aligner {
+  .hc-roadmap__new .gif_aligner,  .hc-roadmap__new div[aria-label="animation"] {
     max-width: 100px;
-    width: 100px;
+    width: 100px !important;
     min-width: 100px;
     min-height: 100px;
-    height: 100px;
+    height: 100px !important;
     max-height: 100px;
     border-radius: 8px;
-    margin-top: -30px;
+    margin-top: -30px !important;
   }
 
   .hc-roadmap__new-col--center img {
@@ -7139,15 +7139,15 @@ body {
     padding-top: 40px;
   }
 
-  .hc-roadmap__new .gif_aligner {
+  .hc-roadmap__new .gif_aligner ,  .hc-roadmap__new div[aria-label="animation"]{
     max-width: 150px;
-    width: 150px;
+    width: 150px !important;
     min-width: 150px;
     min-height: 150px;
-    height: 150px;
+    height: 150px !important;
     max-height: 150px;
     border-radius: 8px;
-    margin-top: -50px;
+    margin-top: -50px !important;
   }
 
   .hc-roadmap__new-col--center img {
@@ -7598,15 +7598,15 @@ body {
     padding-top: 50px;
   }
 
-  .hc-roadmap__new .gif_aligner {
+  .hc-roadmap__new .gif_aligner,  .hc-roadmap__new div[aria-label="animation"] {
     max-width: 150px;
-    width: 150px;
+    width: 150px !important;
     min-width: 150px;
     min-height: 150px;
-    height: 150px;
+    height: 150px !important;
     max-height: 150px;
     border-radius: 8px;
-    margin-top: -60px;
+    margin-top: -60px !important;
   }
 
   .hc-roadmap__new-col--center img {
@@ -7986,15 +7986,15 @@ body {
     padding-top: 55px;
   }
 
-  .hc-roadmap__new .gif_aligner {
+  .hc-roadmap__new .gif_aligner,  .hc-roadmap__new div[aria-label="animation"] {
     max-width: 220px;
-    width: 220px;
+    width: 220px !important;
     min-width: 220px;
     min-height: 220px;
-    height: 220px;
+    height: 220px !important;
     max-height: 220px;
     border-radius: 10px;
-    margin-top: -80px;
+    margin-top: -80px !important;
   }
 
   .hc-roadmap__new-col--center img {
@@ -8407,15 +8407,15 @@ body {
     padding-top: 45px;
   }
 
-  .hc-roadmap__new .gif_aligner {
+  .hc-roadmap__new .gif_aligner,  .hc-roadmap__new div[aria-label="animation"] {
     max-width: 250px;
-    width: 250px;
+    width: 250px !important;
     min-width: 250px;
     min-height: 250px;
-    height: 250px;
+    height: 250px !important;
     max-height: 250px;
     border-radius: 10px;
-    margin-top: -80px;
+    margin-top: -80px !important;
   }
 
   .hc-roadmap__new-padding--top .roadmap_date {
@@ -8804,15 +8804,15 @@ body {
     gap: 110px !important;
   }
 
-  .hc-roadmap__new .gif_aligner {
+  .hc-roadmap__new .gif_aligner,  .hc-roadmap__new div[aria-label="animation"] {
     max-width: 250px;
-    width: 250px;
+    width: 250px !important;
     min-width: 250px;
     min-height: 250px;
-    height: 250px;
+    height: 250px !important;
     max-height: 250px;
     border-radius: 10px;
-    margin-top: -90px;
+    margin-top: -90px !important;
   }
 
   .hc-home__roadMap {
@@ -9180,15 +9180,15 @@ body {
   }
 
 
-  .hc-roadmap__new .gif_aligner {
+  .hc-roadmap__new .gif_aligner,  .hc-roadmap__new div[aria-label="animation"] {
     max-width: 300px;
-    width: 300px;
+    width: 300px !important;
     min-width: 300px;
     min-height: 300px;
-    height: 300px;
+    height: 300px !important;
     max-height: 300px;
     border-radius: 10px;
-    margin-top: -100px;
+    margin-top: -100px !important;
   }
 
   .hc-home__roadMap {
@@ -9565,15 +9565,15 @@ body {
     gap: 120px !important;
   }
 
-  .hc-roadmap__new .gif_aligner {
+  .hc-roadmap__new .gif_aligner,  .hc-roadmap__new div[aria-label="animation"] {
     max-width: 300px;
-    width: 300px;
+    width: 300px !important;
     min-width: 300px;
     min-height: 300px;
-    height: 300px;
+    height: 300px !important;
     max-height: 300px;
     border-radius: 10px;
-    margin-top: -100px;
+    margin-top: -100px !important;
   }
 
   .hc-home__roadMap {

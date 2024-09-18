@@ -1173,7 +1173,7 @@ function NFTInfo() {
                                 <p className="hc-info__last-bid--title">
                                   Last Bid
                                 </p>
-                                {console.log('Tokens[TabName]?.highbid---->',Tokens[TabName]?.highbid)}
+                                {console.log('Tokens[TabName]?.highbid---->', Tokens[TabName]?.highbid)}
                                 <p className="hc-info__last-bid--value mt-1">
                                   {Tokens[TabName]?.highbid?.TokenBidAmt} <span>{Tokens[TabName]?.highbid?.CoinName}</span>
                                 </p>
@@ -1407,7 +1407,7 @@ function NFTInfo() {
                                   </tr>
                                 ))} */}
 
-                          {accordionTab == "Offer" && TabName == "bid" && (Tokens["bid"]?.list?.length > 0 || Tokens["bid"]?.list?.filter((val) => val.WalletAddress != Tokens[TabName]?.owner?.NFTOwner).length > 0) &&
+                          {/* {accordionTab == "Offer" && TabName == "bid" && (Tokens["bid"]?.list?.length > 0 || Tokens["bid"]?.list?.filter((val) => val.WalletAddress != Tokens[TabName]?.owner?.NFTOwner).length > 0) &&
                             Tokens["bid"]?.list?.filter((val) => val.WalletAddress != Tokens[TabName]?.owner?.NFTOwner).map((data, key) => {
                               return (
                                 <>
@@ -1458,7 +1458,6 @@ function NFTInfo() {
                                               POPUPACTION("dummy", "Accept", data)
                                             }
                                             }
-                                          // onClick={() => setShowAcceptBid(true)}
                                           >
                                             Accept
                                           </button>
@@ -1469,110 +1468,12 @@ function NFTInfo() {
                                             Cancel
                                           </button>
                                         </div>
-                                        // :
-                                        // <button
-                                        //   className="table_btn"
-                                        //   onClick={() => { setShowCancelBid(true); }}
-                                        // >
-                                        //   Cancel Bid
-                                        // </button>
-                                        // <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { setShowCancelBid(true); }}>
-                                        //   Cancel Bid
-                                        // </button>
                                       }
                                     </td>
                                   </tr >
-
-                                  {/* <li className="mt-4">
-                                          <div className="box-bid">
-
-                                            <div className="infor infor_hover_blk">
-                                              <div className="image-bid">
-                                                <img
-                                                  src={
-                                                    data?.Profile
-                                                      && !isEmpty(data?.Profile) ? `${config.IMG_URL}/user/${data?.WalletAddress}/profile/${data?.Profile}`
-                                                      : config.profile
-                                                  }
-                                                  alt="Image"
-                                                />
-                                              </div>
-                                              <div className="history">
-                                                {
-                                                  <span className="price">
-                                                    {data.TokenBidAmt} {data.CoinName}
-                                                    {" "}
-                                                    by
-                                                  </span>
-                                                }{" "}
-                                                {console.log("fff", data.WalletAddress !=
-                                                  Tokens["bid"]?.myowner?.WalletAddress &&
-                                                  Tokens["bid"]?.myowner?.WalletAddress ==
-                                                  accountAddress &&
-                                                  new Date(
-                                                    Tokens[TabName]?.myowner?.EndClockTime
-                                                  ).getTime() < Date.now())}
-                                                <span className="name">
-                                                  {data?.DisplayName
-                                                    ? data?.DisplayName
-                                                    : address_showing(
-                                                      data?.TokenBidderAddress
-                                                    )}
-                                                  <div className="time">
-                                                    Bid for : {data?.Pending} Token
-                                                  </div>
-                                                  <div className="time">
-                                                    {moment(data.updatedAt).fromNow()}
-                                                  </div>
-                                                </span>
-                                              </div>
-
-                                            </div>
-                                          </div>
-                                          {data.WalletAddress == accountAddress && (
-                                            <>
-                                              <Button
-                                                className="tf-button edit_offer primary"
-                                                disableRipple
-                                                onClick={() =>
-                                                  POPUPACTION("dummy", "Bid", data)
-                                                }
-                                              >
-                                                Edit Offer
-                                              </Button>
-                                              <Button
-                                                className="tf-button edit_offer secondary"
-                                                disableRipple
-                                                onClick={() =>
-                                                  POPUPACTION("dummy", "CancelBid", data)
-                                                }
-                                              >
-                                                Cancel Offer
-                                              </Button>
-                                            </>
-                                          )}
-                                          {data.WalletAddress !=
-                                            Tokens["bid"]?.myowner?.WalletAddress &&
-                                            Tokens["bid"]?.myowner?.WalletAddress ==
-                                            accountAddress &&
-                                            new Date(
-                                              Tokens[TabName]?.myowner?.EndClockTime
-                                            ).getTime() < Date.now() &&
-                                            (
-                                              <Button
-                                                className="tf-button edit_offer primary"
-                                                disableRipple
-                                                onClick={() =>
-                                                  POPUPACTION("dummy", "Accept", data)
-                                                }
-                                              >
-                                                Accept Offer
-                                              </Button>
-                                            )}
-                                        </li> */}
                                 </>
                               );
-                            })}
+                            })} */}
 
                           {accordionTab == "Offer" ?
                             bidArr.length != 0 &&

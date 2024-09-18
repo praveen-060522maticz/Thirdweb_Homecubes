@@ -151,7 +151,7 @@ export default function StakeReward(props) {
     const onSubmit = async () => {
         if (stakeList?.length == 0 || stakeList?.length == undefined) return toast.error("Please upload valid file.");
         const id = toast.loading("Reward uploading");
-        const sendData = { rewardArr: JSON.stringify(stakeList), xlFile, action: "rewardDistribution", projectId: state?.projectId ?? "", Season: state?.Season };
+        const sendData = { rewardArr: JSON.stringify(stakeList), xlFile, action: "rewardDistribution", projectId: state?.projectId ?? "", Season: state?.Season, year: state?.year };
         const setData = await stakingFunctions(sendData);
         console.log("setData", setData, sendData);
         toast.update(id, { type: setData?.success, render: setData?.msg, isLoading: false, closeButton: true })

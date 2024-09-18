@@ -130,7 +130,7 @@ function Home() {
                                   CMS["Revolution your Home Ownership"]?.content,
                               }}
                             ></p>
-                            <NavLink to="/howitworks">
+                            <NavLink to="/minting">
                               {/* <button className="primary_blueBtn home_bannerPrimay hc-home__button-gradient mt-4">
                               Buy now on initial sales
                             </button> */}

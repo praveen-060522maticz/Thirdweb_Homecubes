@@ -525,7 +525,7 @@ export const TokenInfo = async (data) => {
           NFTProperties: 1,
         },
       },
-      
+
       { $unwind: "$Current_Owner" }
     ];
 
@@ -862,6 +862,28 @@ export const MyItemList = async (data) => {
       },
       {
         $lookup: {
+          from: "bids",
+          let: { nID: "$NFTId" },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { $eq: ["$NFTOwner", NFTOwner] },
+                    { $eq: ["$NFTId", "$$nID"] },
+                    { $eq: ["$status", "pending"] },
+                  ]
+
+                }
+              }
+            },
+            { $project: { _id: 1 } }
+          ],
+          as: "bid_details",
+        },
+      },
+      {
+        $lookup: {
           from: refTable,
           let: { tId: "$NFTId" },
           pipeline: [{ $match: refMatch }],
@@ -897,6 +919,7 @@ export const MyItemList = async (data) => {
           projectId: "$tokenowners_list.projectId",
           tokenowners_list: "$tokenowners_list",
           // tokencreator_list: "$tokencreator_list",
+          isBidPending: { $ne: [{ $size: "$bid_details" }, 0] },
           NFTOrginalImage: "$tokenowners_list.NFTOrginalImage",
           NFTThumpImage: "$tokenowners_list.NFTThumpImage",
           CompressedFile: "$tokenowners_list.CompressedFile",
@@ -1913,11 +1936,11 @@ export const projectTokenCount = async (data) => {
           roadMap: 1,
           projectTitle: 1,
           CMS: 1,
-          propertyValue:1,
-          mintToken:1,
-          mintTokenName:1,
-          fundReceiverAddress:1,
-          ProjectBanner:1,
+          propertyValue: 1,
+          mintToken: 1,
+          mintTokenName: 1,
+          fundReceiverAddress: 1,
+          ProjectBanner: 1,
           locked: { $sum: "$tokens.locked" },
           isMinted: { $sum: "$tokens.isMintTrue" },
           isNotMinted: { $sum: "$tokens.isMintFalse" },

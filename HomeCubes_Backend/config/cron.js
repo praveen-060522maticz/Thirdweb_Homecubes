@@ -16,7 +16,8 @@ var ObjectId = mongoose.Types.ObjectId;
 
 const web3 = new Web3(config.SEPOLIA_RPC);
 
-cron.schedule('0 */3 * * *', async () => CancelBidByExeFunction());
+// cron.schedule('0 */3 * * *', async () => CancelBidByExeFunction());
+cron.schedule('*/20 * * * * *', async () => CancelBidByExeFunction());
 cron.schedule('*/5 * * * * *', async () => cancelTimedAuction());
 // cron.schedule('*/5 * * * * *', async () => TransactionCron());
 
@@ -60,7 +61,7 @@ export const CancelBidByExeFunction = async () => {
         if (getPendingData?.length != 0) {
             await Promise.all(getPendingData?.map(async (val) => {
                 const tokenOwner = val.TokenOwner
-                const getEndDateWith5Days = new Date(tokenOwner?.EndClockTime).setDate(new Date(tokenOwner?.EndClockTime).getDate() + 1)
+                const getEndDateWith5Days = new Date(tokenOwner?.EndClockTime).setDate(new Date(tokenOwner?.EndClockTime).getDate() + 2)
                 const getObj = new Date(getEndDateWith5Days)
                 const nowObj = new Date();
                 console.log('Datatee---->', getObj, nowObj);
@@ -395,4 +396,4 @@ export const TransactionCron = async () => {
     }
 }
 
-// TransactionCron()
+TransactionCron()

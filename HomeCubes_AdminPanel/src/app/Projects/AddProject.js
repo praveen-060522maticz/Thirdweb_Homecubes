@@ -431,7 +431,7 @@ export function AddProject() {
                                 </Form.Group>
 
                                 <Form.Group>
-                                    <label htmlFor="exampleInputName1">NFT Royalty</label>
+                                    <label htmlFor="exampleInputName1">NFT Royalty (%)</label>
                                     <Form.Control
                                         type="number"
                                         className="form-control"

@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux'
 import { setPendingTransaction, stackFunction } from "../actions/axioss/nft.axios";
 import StakeModal from "../Modals/StakeModal";
 import { toast } from 'react-toastify'
-import { calculateStakingDaysPassed, getDaysOfDesiredMonth, isEmpty } from "../actions/common";
+import { calculateStakingDaysPassed, generateSeasonOptions, getDaysOfDesiredMonth, isEmpty } from "../actions/common";
 import useContractProviderHook from "../actions/contractProviderHook";
 import { network } from "../config/network";
 import Web3 from "web3";
@@ -162,6 +162,8 @@ function Staking() {
   //     window.removeEventListener('beforeunload', handleBeforeUnload);
   //   };
   // }, [canReload]);
+  const [years, setYears] = useState([]);
+
 
   useEffect(() => {
     const getData = [
@@ -187,6 +189,8 @@ function Staking() {
 
 
   useEffect(() => {
+    const seasonOptions = generateSeasonOptions(2024, 2080);
+    setYears(seasonOptions)
     createProject({ action: "getProjects" })
       .then((val) => {
         setProjectArr(val.data ?? [])
@@ -303,7 +307,7 @@ function Staking() {
   }, [accountAddress]);
 
   useEffect(() => {
-    if (rewardOption?.projectId && rewardOption?.Season) onSelectChange();
+    if (rewardOption?.projectId && rewardOption?.Season && rewardOption?.year) onSelectChange();
   }, [rewardOption])
 
   useEffect(() => {
@@ -699,7 +703,7 @@ function Staking() {
                               />
                             </div>
                             <Select
-                             classNamePrefix={"react_select"}
+                              classNamePrefix={"react_select"}
                               className="border_select"
                               placeholder="Select status"
                               styles={stylesgraybgOne}
@@ -781,9 +785,9 @@ function Staking() {
                                 Total Rewards Received {rewardAmount.toFixed(7)} USDT
                               </h5>
                               <Row className="select_holder">
-                                <Col lg={5} className="mb-3">
+                                <Col lg={4} className="mb-3">
                                   <Select
-                                   classNamePrefix={"react_select"}
+                                    classNamePrefix={"react_select"}
                                     className="border_select"
                                     placeholder="Project"
                                     styles={stylesgraybg}
@@ -792,9 +796,20 @@ function Staking() {
                                     options={projectArr}
                                   />
                                 </Col>
-                                <Col lg={5} className="mb-3">
+                                <Col lg={4} className="mb-3">
                                   <Select
-                                   classNamePrefix={"react_select"}
+                                    classNamePrefix={"react_select"}
+                                    className="border_select"
+                                    placeholder="Year"
+                                    styles={stylesgraybg}
+                                    // defaultValue={selectedOption}
+                                    onChange={(e) => setRewardOption({ ...rewardOption, year: e.value })}
+                                    options={years}
+                                  />
+                                </Col>
+                                <Col lg={4} className="mb-3">
+                                  <Select
+                                    classNamePrefix={"react_select"}
                                     className="border_select"
                                     placeholder="Quarter"
                                     styles={stylesgraybg}

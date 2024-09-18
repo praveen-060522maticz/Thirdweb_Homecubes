@@ -9,7 +9,8 @@ const reward = new Schema({
     season: { type: String, default: '' },
     projectId: { type: String, default: '', ref: "project" },
     withdraw: { type: Boolean, default: false },
-    withdrawedAt: { type: Date, default: null }
+    withdrawedAt: { type: Date, default: null },
+    year: { type: String, default: "" }
 }, { timestamps: true })
 
 module.exports = model('reward', reward, "reward")

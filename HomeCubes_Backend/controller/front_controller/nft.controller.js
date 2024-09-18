@@ -1386,6 +1386,23 @@ export const BidAction = async (req, res) => {
         update.NFTQuantity = NFTQuantity;
         update.Pending = NFTQuantity - List.msg.Completed;
         update.status = "pending";
+
+        let findingData = {
+          NFTId,
+          NFTOwner,
+          "PutOnSale": "true",
+          "PutOnSaleType": "TimedAuction",
+          "NFTBalance": "1"
+        }
+
+        let finVal = {
+          DBName: TokenOwners,
+          FinData: findingData,
+          Updata: { "NFTPrice": TokenBidAmt },
+          save: { new: true },
+        };
+        let Finds = await MongooseHelper.FindOneAndUpdate(finVal);
+
       } else if (from == "Cancel") {
         console.log("comed here");
         update.Pending = List.msg.Pending - NFTQuantity;
@@ -1468,6 +1485,22 @@ export const BidAction = async (req, res) => {
       let List = await MongooseHelper.Save(datas);
       if (List.success === "success") {
         if (activity == "Bid") var Send_Mail = await Node_Mailer({ Type: 'bid', EmailId: EmailId, Subject: 'Make Offer For A NFT', OTP: '', click: click })
+
+        let findingData = {
+          NFTId,
+          NFTOwner,
+          "PutOnSale": "true",
+          "PutOnSaleType": "TimedAuction",
+          "NFTBalance": "1"
+        }
+
+        let finVal = {
+          DBName: TokenOwners,
+          FinData: findingData,
+          Updata: { "NFTPrice": TokenBidAmt },
+          save: { new: true },
+        };
+        let Finds = await MongooseHelper.FindOneAndUpdate(finVal);
 
         await MongooseHelper.Activity({
           From: NFTOwner,
@@ -2201,7 +2234,7 @@ export const getProjects = async (req, res) => {
 
 
 export const stackFunction = async (req, res) => {
-  const { NFTId, walletAddress, action, Season, projectId, Hash } = req?.body
+  const { NFTId, walletAddress, action, Season, projectId, Hash, year } = req?.body
   try {
 
 
@@ -2264,7 +2297,7 @@ export const stackFunction = async (req, res) => {
     }
 
     if (action == "getProjectRewardDetail") {
-      const getData = await RewardSchema.find({ walletAddress, projectId, season: Season, withdraw: false });
+      const getData = await RewardSchema.find({ walletAddress, projectId, season: Season, year, withdraw: false });
       console.log("getDataongetprojectreward", getData);
       if (getData.length != 0) {
         var pending = 0

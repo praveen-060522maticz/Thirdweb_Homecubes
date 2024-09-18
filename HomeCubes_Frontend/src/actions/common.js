@@ -431,3 +431,11 @@ export const LSgetItem = (key) => {
 export const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 export const getErrorForToast = str => str?.split?.('\n')?.[0];
+
+export const generateSeasonOptions = (startYear, endYear) => {
+  const options = [];
+  for (let year = startYear; year <= endYear; year++) {
+    options.push({ label: `${year}`, value: `${year}` });
+  }
+  return options;
+};
