@@ -475,12 +475,12 @@ p{
   width: 6vw;
   position: absolute;
   top: 15vh;
-  left: 6vh;
+  left: 8vh;
 }
 .sidetab_whole.active{
   position: sticky;
   top: 15vh;
-  left: 6vh;
+  left: 8vh;
 }
 .singleTab {
   align-items: center;
@@ -537,4 +537,12 @@ p{
   background-image: linear-gradient(to right, var(--gradinet_left), var(--gradinet_right));
   color: var(--white);
 }
+
+@media screen and (min-width:1200px) {
+  .anim_div div[aria-label="animation"] {
+    min-height: 40vh !important;
+    min-width: 40vh !important;
+  }
+}
+
 /* home end */
