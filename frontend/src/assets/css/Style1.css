@@ -174,7 +174,7 @@ p {
   overflow: hidden;
   max-height: 4vh;
   /* min-width: 5vw; */
-  margin-right: 0.8vw;
+  /* margin-right: 0.8vw; */
   font-family: var(--montserrat-font);
 }
 
@@ -587,6 +587,7 @@ p {
 .sidetab_whole.hc-sidetab .sidetab_link.active .sidetab_laebl {
   color: var(--white);
 }
+
 .side_left {
   position: sticky;
   top: 20vh;
@@ -594,16 +595,19 @@ p {
   width: 6vw;
   height: auto;
 }
+
 @media screen and (min-width:992px) and (max-width:1199px) {
   .sidetab_whole {
     left: 7vh;
   }
 }
+
 @media screen and (max-width:991px) {
   .sidetab_whole {
     display: none;
   }
 }
+
 /* banner section end */
 
 

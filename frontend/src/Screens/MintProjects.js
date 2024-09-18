@@ -18,6 +18,7 @@ import SideTab from '../Components/SideTab'
 import { getCurrentProject } from '../actions/axioss/nft.axios'
 import config from '../config/config';
 import Countdown from "react-countdown";
+import Footer from '../Components/Footer';
 
 
 // import Footer from '../Components/Footer'
@@ -58,41 +59,88 @@ function MintProjects() {
     }
 
     return (
+
         <>
             <BottomBar />
             <Header />
 
-            <div className='innercontent'>
+            <div className="innercontent">
+                {/* <div className="side_left"> */}
                 <SideTab />
+                {/* </div> */}
+
+                <div className="banner_section">
+                    <Container>
+                        <Row>
+                            <Col lg={6} className="px-0">
+                                {/* <div className="home_titled hc-home__title head_txt" dangerouslySetInnerHTML={{ __html: CMS["Revolution your Home Ownership"]?.title }} >
+
+                                </div> */}
+                                {/* <p
+                                    className="mp_detailbrief hc-home__desc desc_txt"
+                                    dangerouslySetInnerHTML={{
+                                        __html:
+                                            CMS["Revolution your Home Ownership"]?.content,
+                                    }}
+                                ></p> */}
+                                <div className="home_titled hc-home__title head_txt"  >
+                                    Initial Sales
+                                </div>
+                                <p
+                                    className="mp_detailbrief hc-home__desc desc_txt"
+
+                                >
+                                    During our initial sales phase, you have the unique opportunity to choose how many shares of a specific property you want to buy. But don't wait too long—these shares are limited, and demand is high. Secure your stake now before others claim the best opportunities!
+                                </p>
+                            </Col>
+                            <Col lg={6} className="px-0">
+                                {/* {CMS["Revolution your Home Ownership"]?.img &&
+                                    <div className="anim_div" data-aos="fade-up"
+                                        data-aos-offset="150"
+                                        data-aos-duration="800">
+
+                                        <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["Revolution your Home Ownership"]?.img}`} className="banner_lottie" />
+                                    </div>} */}
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>
 
                 <div className='bottom_content'>
-                    <Container>
-                        <div className="">
-                            <p>Buy Now on Initial <strong>Sales !</strong></p>
-                        </div>
-                        <Row className=''>
-                            {project?.length != 0 ? project?.map((val) => {
-                                return (
-                                    <Col xl={3} lg={4} md={6} sm={6} xs={12} className=''>
-                                        <div className="">
-                                            <div className={""}>
-                                                <NavLink
-                                                    className=""
-                                                    to={{ pathname: `/mint/${val._id}` }}
+                    <div className='mp_inner--bottom'>
+                        <div className='px-0 inner-container__width'>
+                            <div className="">
+                                <p className='home_titled hc-home__title head_txt mp_bottom--title'>Buy Now on Initial <strong>Sales !</strong></p>
+                            </div>
 
-                                                    // to={new Date(val.unlockAt) < new Date() ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
-                                                    // to={((new Date(val.unlockAt) < new Date()) && (val.isAvailable != 0)) ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
-                                                    state={val}>
-                                                    <img className="" src={`${config.IMG_URL}/projects/ProjectThumbnail/${val.ProjectThumbnail}`} />
-                                                </NavLink>
-                                                {/* {new Date() < new Date(val.unlockAt) ?
-                              <div className="timerrr_counter">
+                            <div className='mp-grid'>
 
-                                <Countdown
-                                  date={val.duration}
-                                />
-                              </div> : <></>} */}
-                                            </div >
+                                <div className='red_inner'></div>
+                                <div className='gree'></div>
+                                <div className='yello'></div>
+                                <div className='blue'></div>
+
+                                {project?.length != 0 ? project?.map((val) => {
+                                    return (
+
+                                        <div className="nft-card">
+                                            <NavLink
+                                                className="nft-card__a"
+                                                to={{ pathname: `/mint/${val._id}` }}
+
+                                                // to={new Date(val.unlockAt) < new Date() ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
+                                                // to={((new Date(val.unlockAt) < new Date()) && (val.isAvailable != 0)) ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
+                                                state={val}>
+                                                <img className="" src={`${config.IMG_URL}/projects/ProjectThumbnail/${val.ProjectThumbnail}`} />
+                                            </NavLink>
+                                            {/* {new Date() < new Date(val.unlockAt) ?
+          <div className="timerrr_counter">
+
+            <Countdown
+              date={val.duration}
+            />
+          </div> : <></>} */}
+
                                             <div className="">
                                                 <p className="">
                                                     {val.projectTitle}
@@ -111,8 +159,8 @@ function MintProjects() {
                                                 </div>
 
                                                 {/* <p className="nft_name">
-                              Locked NFT : {val.locked}
-                            </p> */}
+          Locked NFT : {val.locked}
+        </p> */}
 
                                                 <div className=''>
                                                     <p className="">
@@ -148,45 +196,53 @@ function MintProjects() {
                                                     }
 
                                                     {/* {(new Date(val.unlockAt) < new Date()) && <NavLink
-                                className="sidetab_link"
-                                // to={new Date(val.unlockAt) < new Date() ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
-                                to={{ pathname: `/mint/${val._id}` }}
-                                // to={val.isAvailable != 0 ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
-                                state={val}>
-                                <button className='nftinfo_gradeientBtn pc_buyBtn me-3'>Buy</button>
-                              </NavLink>
+            className="sidetab_link"
+            // to={new Date(val.unlockAt) < new Date() ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
+            to={{ pathname: `/mint/${val._id}` }}
+            // to={val.isAvailable != 0 ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
+            state={val}>
+            <button className='nftinfo_gradeientBtn pc_buyBtn me-3'>Buy</button>
+          </NavLink>
 
-                              } */}
+          } */}
                                                     {/* <NavLink className="sidetab_link"
-                                // to={{ pathname: `/mintNFTs/${val._id}` }}
-                                // to={new Date(val.unlockAt) < new Date() ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
-                                // to={val.isAvailable != 0 ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
-                                // state={val}
-                                to={{ pathname: `/projectInfo/${val.projectTitle}` }}
-                                state={{ projectInfo: JSON.stringify(val) }}
-                              >
-                                <p style={{ padding: "8px 10px", width: "100%" }} className="viewMore ">View More</p>
-                              </NavLink> */}
+            // to={{ pathname: `/mintNFTs/${val._id}` }}
+            // to={new Date(val.unlockAt) < new Date() ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
+            // to={val.isAvailable != 0 ? { pathname: `/mintNFTs/${val._id}` } : { pathname: `/mint/${val._id}` }}
+            // state={val}
+            to={{ pathname: `/projectInfo/${val.projectTitle}` }}
+            state={{ projectInfo: JSON.stringify(val) }}
+          >
+            <p style={{ padding: "8px 10px", width: "100%" }} className="viewMore ">View More</p>
+          </NavLink> */}
                                                 </div>
                                             </div>
                                         </div >
-                                    </Col >
-                                )
-                            })
-                                : <div>
-                                    <p className=''>No data Found</p>
-                                </div>
-                            }
 
-                            {/* <div className='loadmore_holder mt-5'>
-                    <button className="seconday_btn width_fitter" >Loadmore</button>
-                  </div> */}
-                        </Row >
-                    </Container >
+                                    )
+                                })
+                                    : <div>
+                                        <p className=''>No data Found</p>
+                                    </div>
+                                }
+
+                                {/* <div className='loadmore_holder mt-5'>
+<button className="seconday_btn width_fitter" >Loadmore</button>
+</div> */}
+                            </div>
+
+                        </div >
+                    </div>
                 </div >
+
             </div >
-        </>
+
+            <Footer />
+        </ >
     )
 }
 
 export default MintProjects
+
+
+

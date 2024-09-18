@@ -1,0 +1,77 @@
+/* start of  mint projects*/
+
+.mp_inner--bottom {
+    margin-top: -30vh;
+}
+
+.mp_bottom--title {
+    text-align: center;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+.inner-container__width {
+    width: 83%;
+    margin-left: auto;
+    margin-right: 4%;
+}
+
+.mp-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1vw;
+}
+
+.mp-grid .red {
+    background: red;
+    height: 300px;
+}
+
+.mp-grid .gree {
+    background: green;
+    height: 300px;
+}
+
+.mp-grid .yello {
+    background: yellow;
+    height: 300px;
+}
+
+.mp-grid .blue {
+    background: blue;
+    height: 300px;
+}
+
+.red_inner {
+    min-width: 20vw;
+    width: 20vw;
+    max-width: 20vw;
+    background: white;
+    height: 30vh;
+}
+
+.nft-card {
+    min-width: 20vw;
+    width: 20vw;
+    max-width: 20vw;
+}
+
+.nft-card__a {
+    min-width: 20vw;
+    width: 20vw;
+    max-width: 20vw;
+}
+
+.nft-card__a img {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* end of mint projects */
+
+/* media */
+
+@media screen and (max-width:991px) {}
+
+@media screen and (max-width:575px) {}
