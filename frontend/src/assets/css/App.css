@@ -248,6 +248,10 @@
 
 /* start of mint id */
 
+.hc-mint__banner {
+    min-height: calc(100vh - 8vh);
+}
+
 
 .hc-mint__banner-content {
     position: absolute;
