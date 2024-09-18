@@ -15,7 +15,7 @@ function Minting() {
 
             <div className="innercontent">
                 <div className="banner_section">
-                 <h3>sadsadasdasd</h3>
+                    <h3>sadsadasdasd</h3>
                 </div>
             </div>
             <Footer />

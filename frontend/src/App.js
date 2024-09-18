@@ -1,7 +1,5 @@
+/** npm import */
 import React from 'react';
-import './App.css';
-import '../src/assets/css/Style1.css';
-import '../src/assets/css/App.css'
 import {
     createBrowserRouter,
     createRoutesFromElements,
@@ -9,13 +7,24 @@ import {
     RouterProvider
 } from 'react-router-dom';
 import { PrivyProvider } from '@privy-io/react-auth';
-import Home from './Screens/Home';
-import Minting from './Screens/Minting';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { base, baseGoerli, mainnet, sepolia, polygon, polygonMumbai } from 'viem/chains';
-import Sticky from './Screens/Sticky';
 
+import { base, baseGoerli, mainnet, sepolia, polygon, polygonMumbai } from 'viem/chains';
+
+/** local file import */
+
+import './App.css';
+import '../src/assets/css/Style1.css';
+import '../src/assets/css/App.css'
+import Home from './Screens/Home';
+import Sticky from './Screens/Sticky';
+import Minting from './Screens/Minting';
+import MintProjects from './Screens/MintProjects';
+
+
+
+/** code start */
 
 
 function App() {
@@ -31,7 +40,7 @@ function App() {
         },
         {
             path: "/minting",
-            element: <Minting />,
+            element: <MintProjects />,
         },
         // Add routes for any additional screens
     ]);
