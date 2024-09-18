@@ -45,7 +45,7 @@ function MintProjects() {
 
             </Col>
             <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner">
-            {/* initialsaletop */}
+              {/* initialsaletop */}
               <Row className="justify-content-between align-items-center hc-banner__top">
                 <Col lg={6} md={6} sm={12} xs={12} className="mb-3">
                   <div className="home_bannerleft">

@@ -21,6 +21,7 @@ import Token from '../Abi/token.json';
 import web3utill from 'web3-utils'
 
 function Header() {
+  
   const [active, setActive] = useState();
 
   const [show, setShow] = useState(false);
@@ -86,7 +87,6 @@ function Header() {
   //   if (connectedwalet?.connectorType == "injected")
   //     initialConnectWallet(localStorage.walletConnectType, true);
   // };
-
 
   const initialConnectWallet = async (type, homePage) => {
     const id = toast.loading("Wallet Connecting...", {

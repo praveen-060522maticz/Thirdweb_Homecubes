@@ -1,0 +1,184 @@
+/* start of  mint projects*/
+
+.mp_inner--bottom {
+    margin-top: -30vh;
+    position: relative;
+    z-index: 6;
+}
+
+.mp_bottom--title {
+    text-align: center;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+.inner-container__width {
+    /* width: 83%; */
+    /* width: calc(var(--container-width-inner) + ((100% - var(--container-width-main))/2)*2); */
+    width: 81%;
+    margin-left: auto;
+    /* margin-right: 4%; */
+    margin-right: calc((100% - var(--container-width-main))/2)
+}
+
+.mp-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2vw;
+}
+
+.mp-grid .red {
+    background: red;
+    height: 300px;
+}
+
+.mp-grid .gree {
+    background: green;
+    height: 300px;
+}
+
+.mp-grid .yello {
+    background: yellow;
+    height: 300px;
+}
+
+.mp-grid .blue {
+    background: blue;
+    height: 300px;
+}
+
+.red_inner {
+    min-width: 18.6vw;
+    width: 18.6vw;
+    max-width: 18.6vw;
+    background: white;
+    height: 30vh;
+
+}
+
+.nft-card {
+    min-width: 18.6vw;
+    width: 18.6vw;
+    max-width: 18.6vw;
+    border-radius: 0.4vw;
+    overflow: hidden;
+}
+
+.nft-card:hover {
+    transform: translateY(-2vh);
+    transition: all .5s ease;
+}
+
+.nft-card__a {
+    min-width: 18.6vw;
+    width: 18.6vw;
+    max-width: 18.6vw;
+    min-height: 30vh;
+    height: 30vh;
+    max-height: 30vh;
+}
+
+.nft-card__a img {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.nft-card__content {
+    background: var(--gray_200);
+    padding: 0.8vw;
+}
+
+.nft-card__content-title {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 2.7vh;
+    width: 30px;
+    white-space: nowrap;
+    width: 17vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nft-card__values-wrapper,
+.nft-card__content-currency {
+    margin-top: 1vh;
+}
+
+.nft-card__content-values {
+    font-weight: 500;
+    font-size: 1.8vh;
+}
+
+.nft-card__content-values span {
+    color: var(--blue_200);
+}
+
+.nft-card__content-buttons {
+    margin-top: 1.4vh;
+}
+
+.nft-card__buttons--countdown {
+    border: 0.3vh solid var(--blue_200);
+    width: 100%;
+    background: transparent;
+    outline: none;
+    color: var(--blue_200);
+    border-radius: .3vw;
+    padding: 0.5vh 1vw;
+    font-family: var(--kanit_font);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4.7vh;
+}
+
+.nft-card__buttons--countdown span {
+    font-family: var(--kanit_font);
+    font-size: 2.1vh;
+}
+
+.nft-card__buttons--gradient {
+    width: 100%;
+    background-color: var(--gradinet_right);
+    background-image: linear-gradient(to right, var(--gradinet_left), var(--gradinet_right));
+    border: none;
+    border-radius: 0.6vh;
+    color: var(--white);
+    font-family: var(--montserrat-font);
+    font-size: 1.6vh;
+    font-weight: 600;
+    outline: none;
+    height: 4.7vh;
+
+}
+
+.nft-card__buttons--gradient p {
+    padding: 1vh 2vh;
+    font-size: 1.8vh;
+}
+
+
+.nft-card__buttons-gradientCart {
+    padding: 1vh 2vh;
+}
+
+.nft-card__buttons-gradientCart {
+    border-left: 1px solid var(--white);
+}
+
+.nft-card__buttons-gradientCart img {
+    width: 2vh;
+}
+
+/* end of mint projects */
+
+/* media */
+
+@media screen and (max-width:991px) {}
+
+@media screen and (max-width:575px) {}
