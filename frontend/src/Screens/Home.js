@@ -5,6 +5,7 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Roadmap from "../Components/Roadmap";
 import Typewriter from "typewriter-effect";
 import SideTab from "../Components/SideTab";
 import { useSelector } from "react-redux";
@@ -166,9 +167,7 @@ function Home() {
                             <Col lg={6} className="px-0">
                                 <div className="cloudcubes_holder">
                                     {CMS["About Home Cubes"]?.img &&
-                                        <div className="anim_div d-none d-sm-flex" data-aos="fade-left"
-                                            data-aos-offset="50"
-                                            data-aos-duration="800">
+                                        <div className="anim_div d-none d-sm-flex">
                                             <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid w-75" divClassname="d-none d-md-flex justify-content-center"
                                             />
                                         </div>}
@@ -345,15 +344,54 @@ function Home() {
                         </Row>
 
                         <Row className="align-items-center top_bottom">
+                            <h3
+                                className="home_titled hc-home__title text-center head_txt"
+                                data-aos="fade-up"
+                                data-aos-offset="50"
+                                data-aos-duration="800"
+                            >
+                                Our <strong>Commitment</strong>
+                            </h3>
+                            {commmitArr?.length != 0 &&
+                                commmitArr?.map((i) => (
+                                    <Col lg={4} md={6} sm={6} xs={12} className="col_pad mt_3">
+                                        <div
+                                            className="home_commitemtnCard"
+
+                                        >
+                                            <div className="home_singleCommit">
+                                                <img
+                                                    className="home_commitCube"
+                                                    // className="home_commitCube"
+                                                    src={
+                                                        require("../assets/images/threecube.svg")
+                                                            .default
+                                                    }
+                                                />
+                                                <p className="home_singleCmtmnt">{i.title}</p>
+                                            </div>
+                                            <p
+                                                className="home_investorli hc-home_li--p "
+                                                dangerouslySetInnerHTML={{ __html: i.content }}
+                                            ></p>
+                                        </div>
+                                    </Col>
+                                ))}
+                        </Row>
+
+                        <Row className="hc-home__roadMap top_bottom">
                         <h3
-                          className="home_titled hc-home__title text-center mb-5"
+                          className="home_titled hc-home__title text-center head_txt"
                           data-aos="fade-up"
-                          data-aos-offset="50"
+                          data-aos-offset="100"
                           data-aos-duration="800"
                         >
-                          Our <strong>Commitment</strong>
+                          <strong>Road</strong> Map
                         </h3>
+                        <div className="hc-home__roadmap--content">
+                          <Roadmap data={roadMap} />
 
+                        </div>
                         </Row>
 
                     </Container>
