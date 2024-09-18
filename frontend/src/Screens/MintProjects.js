@@ -41,6 +41,7 @@ import Footer from '../Components/Footer';
 function MintProjects() {
 
     const [project, setProject] = useState([])
+    const [isFixed, setIsFixed] = useState(true);
 
     useEffect(() => {
         getProjects()
@@ -65,9 +66,9 @@ function MintProjects() {
             <Header />
 
             <div className="innercontent">
-                {/* <div className="side_left"> */}
-                <SideTab />
-                {/* </div> */}
+                <div className={isFixed ? "side_left fixed" : "side_left sticky"}  >
+                    <SideTab />
+                </div>
 
                 <div className="banner_section">
                     <Container>
@@ -114,8 +115,11 @@ function MintProjects() {
                             </div>
 
                             <div className='mp-grid'>
+                                <div className='red'>
 
-                                <div className='red_inner'></div>
+                                    <div className='red_inner'></div>
+                                </div>
+
                                 <div className='gree'></div>
                                 <div className='yello'></div>
                                 <div className='blue'></div>
