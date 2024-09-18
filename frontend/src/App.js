@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import '../src/assets/css/Style1.css';
-import '../src/assets/css/Style.css'
+import '../src/assets/css/App.css'
 import {
     createBrowserRouter,
     createRoutesFromElements,
@@ -14,6 +14,7 @@ import Minting from './Screens/Minting';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { base, baseGoerli, mainnet, sepolia, polygon, polygonMumbai } from 'viem/chains';
+import Sticky from './Screens/Sticky';
 
 
 
@@ -23,6 +24,10 @@ function App() {
         {
             path: "/",
             element: <Home />,
+        },
+        {
+            path: "/sticky",
+            element: <Sticky />,
         },
         {
             path: "/minting",

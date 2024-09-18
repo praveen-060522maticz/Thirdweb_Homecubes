@@ -18,11 +18,11 @@ function getLibrary(provider) {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-    <Provider store={store} >
-      <Web3ReactProvider getLibrary={(getLibrary)}>
-        <App />
-      </Web3ReactProvider>
-    </Provider>
+  <Provider store={store} >
+    <Web3ReactProvider getLibrary={(getLibrary)}>
+      <App />
+    </Web3ReactProvider>
+  </Provider>
   // </React.StrictMode>
 );
 
