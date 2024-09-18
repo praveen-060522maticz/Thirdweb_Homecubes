@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 
 function SideTab() {
@@ -7,11 +7,30 @@ function SideTab() {
 
     console.log('locationlocation', location)
 
+    const [isScrolled, setIsScrolled] = useState(false);
 
+    // Function to handle scroll event
+    const handleScroll = () => {
+      const scrollHeight = window.scrollY; // Current scroll position
+      if (scrollHeight > 300) {
+        setIsScrolled(true); 
+      }
+      else{
+        setIsScrolled(false); 
+      }
+    };
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+    
+        return () => {
+          window.removeEventListener('scroll', handleScroll); // Clean up event listener on unmount
+        };
+      }, []);
 
     return (
         <>
-            <div className='sidetab_whole hc-sidetab'>
+            {/* <div className='sidetab_whole hc-sidetab'> */}
+            <div className={`${isScrolled && "active"} sidetab_whole hc-sidetab `}>
                 <NavLink className={`sidetab_link ${location == "/" ? "active" : ""}`} to='/'>
                     <div className='singleTab'>
                         {location == '/' ? <img className='sidetab_logo' src={require('../assets/images/home_active.svg').default} /> : <img className='sidetab_logo' src={require('../assets/images/home.svg').default} />}
