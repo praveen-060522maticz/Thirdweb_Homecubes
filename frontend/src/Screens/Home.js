@@ -142,7 +142,7 @@ function Home() {
                                     }}
                                 ></p>
                                 <Link to="/howitworks">
-                                    <button className="hc-home__button--linear">
+                                    <button className="hc-home__button--linear btn_top">
                                         Buy now on initial sales
                                     </button>
                                 </Link>
@@ -162,7 +162,7 @@ function Home() {
 
                 <div className="bottom_content">
                     <Container>
-                        <Row className="top_bottom">
+                        <Row className="top_bottom align-items-center">
                             <Col lg={6} className="px-0">
                                 <div className="cloudcubes_holder">
                                     {CMS["About Home Cubes"]?.img &&
@@ -317,7 +317,7 @@ function Home() {
                                                         require("../assets/images/threecube.svg").default
                                                     }
                                                 />
-                                                <p className=" mp_detailbrief hc-home__desc" dangerouslySetInnerHTML={{ __html: val?.content }} >
+                                                <p className="mp_detailbrief hc-home__desc" dangerouslySetInnerHTML={{ __html: val?.content }} >
 
                                                 </p>
                                             </li>
@@ -329,6 +329,31 @@ function Home() {
                                     Claim Income
                                 </button>
                             </Col>
+                            <Col lg={6}>
+                                {console.log("filterImage", investArr?.filter(val => val?.img))}
+                                {investArr?.length != 0 && investArr?.filter(val => val?.img)[0]?.img &&
+                                    // <img
+                                    //   className="img-fluid width_seven howit_giffer"
+                                    //   src={`${config.IMG_URL}/cmsimg/${investArr?.filter(val => val?.img)[0]?.img}`}
+                                    // />
+                                    <div className="anim_div">
+
+                                        <LottieAnimation url={`${config.IMG_URL}/cmsimg/${investArr?.filter(val => val?.img)[0]?.img}`} />
+                                    </div>
+                                }
+                            </Col>
+                        </Row>
+
+                        <Row className="align-items-center top_bottom">
+                        <h3
+                          className="home_titled hc-home__title text-center mb-5"
+                          data-aos="fade-up"
+                          data-aos-offset="50"
+                          data-aos-duration="800"
+                        >
+                          Our <strong>Commitment</strong>
+                        </h3>
+
                         </Row>
 
                     </Container>

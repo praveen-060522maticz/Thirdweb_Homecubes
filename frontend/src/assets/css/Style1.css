@@ -115,7 +115,9 @@ p {
 .desc_txt {
   margin-bottom: 2vh !important;
 }
-
+.btn_top{
+  margin-top: 1vh;
+}
 /* scrollbar css */
 ::-webkit-scrollbar {
   width: 2px;
@@ -145,7 +147,12 @@ p {
   background-image: linear-gradient(to right, var(--gradinet_left), var(--gradinet_right));
   color: var(--white);
 }
-
+.header_wallet{
+  height: 2vh;
+  margin-right: 0.6vh;
+  object-fit: contain;
+  width: 2vh;
+}
 .homecube_header .primary_blueBtn:hover .fa-user {
   color: var(--white);
 }
@@ -233,10 +240,6 @@ p {
   background-color: #151515;
   padding: 1.6vh 0;
   height: 8vh;
-  /* position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 777; */
 }
 
 .mainLogo {
@@ -308,10 +311,13 @@ p {
   margin-right: 0.6vh;
 }
 @media screen and (max-width:991px) {
+  .header_wallet {
+    height: 4vh;
+    width: 4vh;
+}
   .navbar {
     height: 9vh;
   }
-
   .navbar-toggler-icon {
     width: 4vh !important;
     height: 4vh !important
@@ -363,7 +369,7 @@ p {
 }
 
 .innercontent .container {
-  max-width: 75%;
+  max-width: 70%;
 }
 
 .footer {
@@ -382,10 +388,10 @@ p {
 
 .mp_detailbrief {
   color: var(--white);
-  line-height: 2;
+  line-height: 4vh;
   margin: 0;
   word-spacing: 0.2vh;
-  font-size: 1.8vh;
+  font-size: 1.9vh;
 }
 
 .footer_linkwrapper ul {
@@ -435,14 +441,20 @@ p {
 
 .mp_detailbrief.hc-home__desc {
   font-family: var(--montserrat-font);
-  font-weight: 500;
+  font-weight: 450;
 }
 
+@media screen and (max-width:991px) {
+  .innercontent .container {
+    max-width: 90%;
+  }
+}
 @media screen and (max-width:767px) {
   .footer_right {
     display: unset;
   }
 }
+
 
 /* footer end */
 
@@ -518,17 +530,8 @@ p {
   position: relative;
   z-index: 5;
 }
-/* .banner_section::after{
-  content: "";
-  position: absolute;
-  background: linear-gradient(177.64deg, rgba(8, 0, 16, 0) 16.11%, #080010 69.33%);
-  bottom: -40vh;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-} */
 .home_titled {
-  font-size: 3.5vh;
+  font-size: 4.2vh;
   font-weight: 600;
 }
 
@@ -547,7 +550,7 @@ p {
   font-size: 1.6vh;
   font-weight: 600;
   outline: none;
-  padding: 1.2vh 2.3vh;
+  padding: 1vh 4vh;
 }
 
 .hc-home__button--linear:hover {
@@ -559,12 +562,8 @@ p {
   background: var(--bg-color-2);
   border: 1px solid var(--border-color-1);
   border-radius: 0.4vh;
-  padding: 1.5vh 0.4vh;
+  padding: 0.5vh 0.4vh;
   width: 12.5vh;
-  /* position: absolute;
-  top: 22vh;
-  left: 8vh;
-  z-index: 9; */
 }
 
 .sidetab_whole.active {
@@ -589,7 +588,7 @@ p {
 }
 
 .singleTab {
-  padding: 1vh 0.4vh;
+  padding: 1.5vh 0.4vh;
 }
 
 .sidetab_laebl {
@@ -620,6 +619,9 @@ p {
   .sidetab_whole {
     display: none;
   }
+  .banner_section {
+    padding-top: 16vh;
+}
 }
 /* banner section end */
 
@@ -678,9 +680,9 @@ p {
 .home_investorList li {
   align-items: flex-start;
   display: flex;
-  gap: 25px;
+  gap: 2vh;
   justify-content: flex-start;
-  margin-bottom: 15px;
+  margin-bottom: 2.2vh;
 }
 .home_investorList {
   list-style-type: none;
@@ -693,6 +695,11 @@ p {
     width: 40vh !important;
     min-width: 40vh !important;
   }
+}
+@media screen and (max-width:991px) {
+.home_titled {
+  font-size: 3.2vh;
+}
 }
 
 /* home end */
