@@ -531,7 +531,7 @@ export default function useContractProviderHook() {
 
                 var royalObject = {}
 
-                var TokenCOunts = receipt.logs[data[0] == "Coin" ? 0 : 6]?.topics?.map((val, i) => {
+                var TokenCOunts = receipt.logs[data[0] == "Coin" ? 0 : 3]?.topics?.map((val, i) => {
                     if (i == 1) {
                         const address = web3p.eth.abi.decodeParameter("address", val);
                         console.log("__address", address);
