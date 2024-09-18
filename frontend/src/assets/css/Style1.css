@@ -547,7 +547,7 @@ p {
   border: 1px solid var(--border-color-1);
   border-radius: 0.4vh;
   padding: 1.5vh 0.4vh;
-  width: 6vw;
+  width: 12.5vh;
   position: absolute;
   top: 15vh;
   left: 8vh;
@@ -555,8 +555,6 @@ p {
 
 .sidetab_whole.active {
   position: sticky;
-  top: 15vh;
-  left: 8vh;
 }
 
 .singleTab {
@@ -589,7 +587,6 @@ p {
 .sidetab_whole.hc-sidetab .sidetab_link.active .sidetab_laebl {
   color: var(--white);
 }
-
 .side_left {
   position: sticky;
   top: 20vh;
@@ -597,7 +594,16 @@ p {
   width: 6vw;
   height: auto;
 }
-
+@media screen and (min-width:992px) and (max-width:1199px) {
+  .sidetab_whole {
+    left: 7vh;
+  }
+}
+@media screen and (max-width:991px) {
+  .sidetab_whole {
+    display: none;
+  }
+}
 /* banner section end */
 
 
