@@ -12,7 +12,7 @@ function SideTab() {
     // Function to handle scroll event
     const handleScroll = () => {
       const scrollHeight = window.scrollY; // Current scroll position
-      if (scrollHeight > 300) {
+      if (scrollHeight > 100) {
         setIsScrolled(true); 
       }
       else{
