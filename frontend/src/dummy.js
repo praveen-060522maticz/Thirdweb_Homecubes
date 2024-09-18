@@ -28,7 +28,7 @@ const App = () => {
                   Discover a new era of property investment with HomeCubes. Our Web3-enabled platform leverages blockchain technology and fractional ownership to make real estate accessible for everyone. Enjoy the benefits of our unique staking model, which offers progressive income through rental and commission rewards. Experience hassle-free management and transparent investments, all through a user-friendly app.
                 </p>
               </div>
-               <div className='col-6'></div>
+              <div className='col-6'></div>
             </div>
           </div>
         </div>

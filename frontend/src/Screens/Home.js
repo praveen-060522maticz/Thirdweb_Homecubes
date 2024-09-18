@@ -87,7 +87,7 @@ function Home() {
     };
 
 
-    
+
 
 
     useEffect(() => {
@@ -102,9 +102,9 @@ function Home() {
 
             <div className="innercontent">
                 {/* <div className="side_left"> */}
-                <SideTab/>
+                <SideTab />
                 {/* </div> */}
-  
+
                 <div className="banner_section">
                     <Container>
                         <Row>
@@ -137,54 +137,51 @@ function Home() {
                 </div>
 
                 <div className="bottom_content">
-                <Container>
+                    <Container>
                         <Row>
                             <Col lg={6} className="px-0">
-                            <div className="cloudcubes_holder">
-                          {CMS["About Home Cubes"]?.img &&
-                            <div className="anim_div d-none d-sm-flex" data-aos="fade-left"
-                              data-aos-offset="50"
-                              data-aos-duration="800">
-                              <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid w-75" divClassname="d-none d-md-flex justify-content-center"
-                              />
-                            </div>}
-                        </div>
+                                <div className="cloudcubes_holder">
+                                    {CMS["About Home Cubes"]?.img &&
+                                        <div className="anim_div d-none d-sm-flex" data-aos="fade-left"
+                                            data-aos-offset="50"
+                                            data-aos-duration="800">
+                                            <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid w-75" divClassname="d-none d-md-flex justify-content-center"
+                                            />
+                                        </div>}
+                                </div>
                             </Col>
                             <Col lg={6} className="px-0">
-                            <div
-                            className="cloud_hideCont"
-                          >
-                            <h3 className="home_titled hc-home__title mt-3" data-aos="fade-up"
-                              data-aos-offset="100"
-                              data-aos-duration="800"
-                              dangerouslySetInnerHTML={{ __html: CMS["About Home Cubes"]?.title }}
-                            >
-                              {console.log("siehgse", CMS["About Home Cubes"]?.title)}
-                            </h3>
-                            <p
-                              className="mp_detailbrief hc-home__desc desc_txt mt-3"
-                              dangerouslySetInnerHTML={{
-                                __html: CMS["About Home Cubes"]?.content,
-                              }}
-                            ></p>
-                            <NavLink to="/howitworks">
-                              <button className="primary_blueBtn ">
-                                About our Team
-                              </button>
-                            </NavLink>
-                          </div>
+                                <div
+                                    className="cloud_hideCont"
+                                >
+                                    <h3 className="home_titled hc-home__title mt-3" data-aos="fade-up"
+                                        data-aos-offset="100"
+                                        data-aos-duration="800"
+                                        dangerouslySetInnerHTML={{ __html: CMS["About Home Cubes"]?.title }}
+                                    >
+                                        {console.log("siehgse", CMS["About Home Cubes"]?.title)}
+                                    </h3>
+                                    <p
+                                        className="mp_detailbrief hc-home__desc desc_txt mt-3"
+                                        dangerouslySetInnerHTML={{
+                                            __html: CMS["About Home Cubes"]?.content,
+                                        }}
+                                    ></p>
+                                    <NavLink to="/howitworks">
+                                        <button className="primary_blueBtn ">
+                                            About our Team
+                                        </button>
+                                    </NavLink>
+                                </div>
                             </Col>
                         </Row>
                     </Container>
                 </div>
 
             </div>
+        </ >
 
-            <Footer />
-
-
-        </>
-    );
+    )
 }
 
-export default Home;
+export default Home
