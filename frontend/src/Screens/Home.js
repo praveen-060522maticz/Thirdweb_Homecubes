@@ -380,18 +380,18 @@ function Home() {
                         </Row>
 
                         <Row className="hc-home__roadMap top_bottom">
-                        <h3
-                          className="home_titled hc-home__title text-center head_txt"
-                          data-aos="fade-up"
-                          data-aos-offset="100"
-                          data-aos-duration="800"
-                        >
-                          <strong>Road</strong> Map
-                        </h3>
-                        <div className="hc-home__roadmap--content">
-                          <Roadmap data={roadMap} />
+                            <h3
+                                className="home_titled hc-home__title text-center head_txt"
+                                data-aos="fade-up"
+                                data-aos-offset="100"
+                                data-aos-duration="800"
+                            >
+                                <strong>Road</strong> Map
+                            </h3>
+                            <div className="hc-home__roadmap--content">
+                                <Roadmap data={roadMap} />
 
-                        </div>
+                            </div>
                         </Row>
 
                     </Container>

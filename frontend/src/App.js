@@ -42,6 +42,10 @@ function App() {
             path: "/minting",
             element: <MintProjects />,
         },
+        {
+            path: "/mint/:_id",
+            element: <Minting />,
+        },
         // Add routes for any additional screens
     ]);
 
