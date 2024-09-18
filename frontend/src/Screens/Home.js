@@ -150,9 +150,7 @@ function Home() {
                             </Col>
                             <Col lg={6} className="px-0">
                                 {CMS["Revolution your Home Ownership"]?.img &&
-                                    <div className="anim_div" data-aos="fade-up"
-                                        data-aos-offset="150"
-                                        data-aos-duration="800">
+                                    <div className="anim_div" >
 
                                         <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["Revolution your Home Ownership"]?.img}`} className="banner_lottie" />
                                     </div>}
@@ -163,23 +161,21 @@ function Home() {
 
                 <div className="bottom_content">
                     <Container>
-                        <Row className="top_bottom align-items-center">
-                            <Col lg={6} className="px-0">
+                        <Row className="top_bottom align-items-center flexwrapreverse">
+                            <Col lg={6} className="col_pad">
                                 <div className="cloudcubes_holder">
                                     {CMS["About Home Cubes"]?.img &&
-                                        <div className="anim_div d-none d-sm-flex">
-                                            <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid w-75" divClassname="d-none d-md-flex justify-content-center"
+                                        <div className="anim_div">
+                                            <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid w-100 wauto" 
                                             />
                                         </div>}
                                 </div>
                             </Col>
-                            <Col lg={6} className="px-0">
+                            <Col lg={6} className="col_pad">
                                 <div
                                     className="cloud_hideCont"
                                 >
-                                    <h3 className="home_titled hc-home__title head_txt" data-aos="fade-up"
-                                        data-aos-offset="100"
-                                        data-aos-duration="800"
+                                    <h3 className="home_titled hc-home__title head_txt" 
                                         dangerouslySetInnerHTML={{ __html: CMS["About Home Cubes"]?.title }}
                                     >
                                         {console.log("siehgse", CMS["About Home Cubes"]?.title)}
@@ -202,9 +198,7 @@ function Home() {
                             <Col lg={6} className="px-0">
                                 <h3
                                     className="home_titled hc-home__title head_txt"
-                                    data-aos="fade-up"
-                                    data-aos-offset="100"
-                                    data-aos-duration="800"
+                                  
                                     dangerouslySetInnerHTML={{ __html: CMS["CountDown to Our Next Launch"]?.title }}
                                 >
 
@@ -228,7 +222,7 @@ function Home() {
                                 </div>}
                             </Col>
                         </Row>
-                        <Row className="top_bottom align-items-center">
+                        <Row className="top_bottom align-items-center flexwrapreverse">
                             <Col lg={6} className="px-0">
                                 {CMS["In addition to the product launch, we will also establish a marketplace."]?.img &&
                                     <div className="anim_div">
@@ -296,11 +290,17 @@ function Home() {
 
                         <Row className="top_bottom align-items-center">
                             <Col lg={6} className="px-0">
+                                <Typewriter
+
+                                    options={{
+                                        strings: ["Passive Income"],
+                                        autoStart: true,
+                                        loop: true,
+                                    }}
+                                />
                                 <h3
                                     className="home_titled hc-home__title head_txt"
-                                    data-aos="fade-up"
-                                    data-aos-offset="100"
-                                    data-aos-duration="800"
+
                                 >
                                     Investors <strong>Benefits</strong>
                                 </h3>
@@ -345,11 +345,7 @@ function Home() {
 
                         <Row className="align-items-center top_bottom">
                             <h3
-                                className="home_titled hc-home__title text-center head_txt"
-                                data-aos="fade-up"
-                                data-aos-offset="50"
-                                data-aos-duration="800"
-                            >
+                                className="home_titled hc-home__title text-center head_txt">
                                 Our <strong>Commitment</strong>
                             </h3>
                             {commmitArr?.length != 0 &&
@@ -380,18 +376,51 @@ function Home() {
                         </Row>
 
                         <Row className="hc-home__roadMap top_bottom">
-                        <h3
-                          className="home_titled hc-home__title text-center head_txt"
-                          data-aos="fade-up"
-                          data-aos-offset="100"
-                          data-aos-duration="800"
-                        >
-                          <strong>Road</strong> Map
-                        </h3>
-                        <div className="hc-home__roadmap--content">
-                          <Roadmap data={roadMap} />
+                            <h3
+                                className="home_titled hc-home__title text-center head_txt"
+                               
+                            >
+                                <strong>Road</strong> Map
+                            </h3>
+                            <div className="hc-home__roadmap--content">
+                                <Roadmap data={roadMap} />
 
-                        </div>
+                            </div>
+                        </Row>
+
+                        <Row className="justify-content-center top_bottom">
+                            <Col lg={8} className="home_mailer">
+                                <Row className="justify-content-center">
+                                    <Col
+                                        lg={8}
+                                        md={8}
+                                        sm={10}
+                                        xs={11}
+                                        className="mtb d-flex flex-column justify-content-center align-items-center"
+                                    >
+                                        <h3
+                                            className="home_titled text-center"
+                                          
+                                        >
+                                            Join Our Link Tree
+                                        </h3>
+                                        <div className="home__channelLinkHolder d-flex justify-content-center align-items-center">
+                                            <a href="https://t.me/HomeCubes_io" target="__blank" className="home__channelBtn rounded_5" ><BiLogoTelegram /></a>
+                                            <a href="https://twitter.com/HomeCubes" target="__blank" className="home__channelBtn rounded_5" ><FaXTwitter /></a>
+                                            <a href="https://discord.gg/y6mrj5E3" target="__blank" className="home__channelBtn rounded_5" ><BiLogoDiscordAlt /></a>
+                                            <a href="https://medium.com/@HomeCubes" target="__blank" className="home__channelBtn rounded_5" ><BiLogoMediumSquare /></a>
+                                            <a href="https://www.facebook.com/people/homecubesio/100090571700233/" target="__blank" className="home__channelBtn rounded_5" ><BiLogoFacebook /></a>
+                                            <a href="https://www.instagram.com/homecubes.io?igsh=MzRlODBiNWFlZA==" target="__blank" className="home__channelBtn rounded_5" ><BiLogoInstagram /></a>
+                                            {/* <button className="home__channelBtn rounded_5" data-aos="fade-left"
+                              data-aos-offset="100"
+                              data-aos-duration="500"><BiLogoGmail /></button> */}
+                                            <a href="https://www.youtube.com/@homecubes6047" target="__blank" className="home__channelBtn rounded_5"
+                                            ><BiLogoYoutube /></a>
+                                            <a href="https://www.linkedin.com/company/homecubes/" target="__blank" className="home__channelBtn rounded_5" ><BiLogoLinkedin /></a>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </Col>
                         </Row>
 
                     </Container>
