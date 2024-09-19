@@ -70,7 +70,13 @@ function Marketplace() {
         }
     };
 
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
 
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
     const getCollectionTokens = async (fill, action) => {
 
 
@@ -288,97 +294,99 @@ function Marketplace() {
                     <SideTab />
                 </div>
                 <div className="banner_section">
-                    <Container>
-                        <h3 className="hc-home__title home_titled">Our <strong>Unique</strong> Marketplace</h3>
-                        <p className="mp_detailbrief hc-home__desc homes desc_txt" dangerouslySetInnerHTML={{ __html: coll?.content }} >
-                        </p>
-                        <div className="hc-mint__swiper-wrap">
+                    <div className="inner-container__width">
+                        <Row>
+                            <h3 className="hc-home__title home_titled">Our <strong>Unique</strong> Marketplace</h3>
+                            <p className="mp_detailbrief hc-home__desc homes" dangerouslySetInnerHTML={{ __html: coll?.content }} >
+                            </p>
+                            <div className="hc-mint__swiper-wrap">
 
-                            <button
-                                className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
-                                onClick={() => goPrev()}
-                            >
-                                <img src={arrowleft} />
-                                {/* <FaChevronLeft fill="#fff" fontSize={38} /> */}
-                            </button>
+                                <button
+                                    className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
+                                    onClick={() => goPrev()}
+                                >
+                                    <img src={arrowleft} />
+                                    {/* <FaChevronLeft fill="#fff" fontSize={38} /> */}
+                                </button>
 
 
-                            <button
-                                className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
-                                onClick={() => goNext()}
-                            >
-                                <img src={arrowright} />
-                                {/* <FaChevronRight fill="#fff" fontSize={38} /> */}
-                            </button>
-                            <Swiper
-                                className="mySwiper bottomnav_colswiper collection_swiper mt_3"
-                                spaceBetween={30}
-                                navigation={{
-                                    nextEl: ".swiper-button-next1",
-                                    prevEl: ".swiper-button-prev1",
-                                }}
-                                keyboard={true}
-                                pagination={{
-                                    clickable: true,
-                                }}
-                                breakpoints={{
-                                    320: {
-                                        slidesPerView: 1.2,
-                                        spaceBetween: 20,
-                                    },
-                                    450: {
-                                        slidesPerView: 1.5,
-                                        spaceBetween: 20,
-                                    },
-                                    576: {
-                                        slidesPerView: 1.6,
-                                        spaceBetween: 20,
-                                    },
-                                    768: {
-                                        slidesPerView: 2.1,
-                                        spaceBetween: 20,
-                                    },
-                                    992: {
-                                        slidesPerView: 3.1,
-                                        spaceBetween: 20,
-                                    },
-                                    1200: {
-                                        slidesPerView: 3.2,
-                                        spaceBetween: 20,
-                                    },
-                                    1500: {
-                                        slidesPerView: 4.2,
-                                        spaceBetween: 20,
-                                    },
-                                    1900: {
-                                        slidesPerView: 4.2,
-                                        spaceBetween: 20,
-                                    },
-                                }}
-                                modules={[Navigation, Keyboard]}
-                            >
-                                {/* {collection.map((val) => (
+                                <button
+                                    className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
+                                    onClick={() => goNext()}
+                                >
+                                    <img src={arrowright} />
+                                    {/* <FaChevronRight fill="#fff" fontSize={38} /> */}
+                                </button>
+                                <Swiper
+                                    className="mySwiper bottomnav_colswiper collection_swiper mt_3"
+                                    spaceBetween={30}
+                                    navigation={{
+                                        nextEl: ".swiper-button-next1",
+                                        prevEl: ".swiper-button-prev1",
+                                    }}
+                                    keyboard={true}
+                                    pagination={{
+                                        clickable: true,
+                                    }}
+                                    breakpoints={{
+                                        320: {
+                                            slidesPerView: 2,
+                                            spaceBetween: 20,
+                                        },
+                                        450: {
+                                            slidesPerView: 2,
+                                            spaceBetween: 20,
+                                        },
+                                        576: {
+                                            slidesPerView: 2,
+                                            spaceBetween: 20,
+                                        },
+                                        768: {
+                                            slidesPerView: 3,
+                                            spaceBetween: 20,
+                                        },
+                                        992: {
+                                            slidesPerView: 3.5,
+                                            spaceBetween: 20,
+                                        },
+                                        1200: {
+                                            slidesPerView: 4,
+                                            spaceBetween: 20,
+                                        },
+                                        1500: {
+                                            slidesPerView: 4.2,
+                                            spaceBetween: 20,
+                                        },
+                                        1900: {
+                                            slidesPerView: 4.2,
+                                            spaceBetween: 20,
+                                        },
+                                    }}
+                                    modules={[Navigation, Keyboard]}
+                                >
+                                    {/* {collection.map((val) => (
   <SwiperSlide>
     <CollectionCard data={val} />
   </SwiperSlide>
 ))} */}
 
-                                {project.length != 0 && project.map((i) =>
-                                    <SwiperSlide>
-                                        <ProjectCard data={i} show={false} market={true} />
-                                    </SwiperSlide>
-                                )}
-                            </Swiper>
-                            {/* <div className="greenarrow_boxHolder position-relative">
+                                    {project.length != 0 && project.map((i) =>
+                                        <SwiperSlide>
+                                            <ProjectCard data={i} show={false} market={true} />
+                                        </SwiperSlide>
+                                    )}
+                                </Swiper>
+                                {/* <div className="greenarrow_boxHolder position-relative">
 <div className="greenarrow_box"></div>
 </div> */}
-                            {/* <div className='swiper_buttons'>
+                                {/* <div className='swiper_buttons'>
 </div> */}
-                        </div>
-                    </Container>
+                            </div>
+                        </Row>
+                    </div>
                 </div>
-                <div className="bottom_content">
-                    <Container>
+                <div className="bottom_content content_bot">
+                    <div className="inner-container__width">
                         <Row className="justify-content-between">
                             <h3 className="hc-home__title home_titled">
                                 Top Trending <strong>NFT's</strong>
@@ -399,9 +407,10 @@ function Marketplace() {
                                 md={6}
                                 sm={6}
                                 xs={12}
-                                className="mb_select_holder mt_3 ms-auto col_pad"
+                                className="mb_select_holder mt_3 ms-auto colpad"
                             >
                                 <Select
+                                    // menuIsOpen={true}
                                     className="border_select"
                                     classNamePrefix={"react_select"}
                                     placeholder="Select Order"
@@ -426,7 +435,7 @@ function Marketplace() {
                         </Row>
 
                         <Row className="mt_3">
-                            <Col xl={3} lg={4} md={5} sm={6} xs={12} className="col_pad">
+                            <Col xl={3} lg={4} md={4} sm={6} xs={12} className="colpad mt_3">
                                 <div
                                     className={
                                         `mb_3 ${mobSearch
@@ -466,7 +475,7 @@ function Marketplace() {
                                             <Accordion.Header className="" onClick={() => setPriceCal({})} >
                                                 Status <i class="fa-solid fa-angle-down" />
                                             </Accordion.Header>
-                                            <Accordion.Body className="mt_3">
+                                            <Accordion.Body className="mt_2">
                                                 <div className="mp_status">
                                                     <p className="mp_statusLabel">Buy Now</p>
                                                     <Form>
@@ -506,7 +515,7 @@ function Marketplace() {
                                             <Accordion.Header className="">
                                                 Price <i class="fa-solid fa-angle-down" />
                                             </Accordion.Header>
-                                            <Accordion.Body className="mt_3">
+                                            <Accordion.Body className="mt_2">
                                                 <div className="mb_pricetab_holder">
                                                     {/* <button
                               className={
@@ -530,8 +539,8 @@ function Marketplace() {
                                                     </button>
                                                 </div>
 
-                                                <Row className="justify-content-between mt_3">
-                                                    <Col lg={6} md={6} sm={6} xs={6} className="mb_3">
+                                                <Row className="justify-content-between mt_3 cols">
+                                                    <Col lg={6} md={6} sm={6} xs={6} className="mb_3 colpad">
                                                         <input
                                                             className="mb_priceInp cmnInput_scrollerHider"
                                                             type="number"
@@ -544,7 +553,7 @@ function Marketplace() {
                                                             }}
                                                         />
                                                     </Col>
-                                                    <Col lg={6} md={6} sm={6} xs={6} className="mb_3">
+                                                    <Col lg={6} md={6} sm={6} xs={6} className="mb_3 colpad">
                                                         <input
                                                             className="mb_priceInp cmnInput_scrollerHider"
                                                             type="number"
@@ -558,7 +567,7 @@ function Marketplace() {
                                                         />
                                                     </Col>
                                                 </Row>
-                                                <button className="seconday_btn" onClick={() => getCollectionTokens([])}>Apply</button>
+                                                <button className="seconday_btn mb_2" onClick={() => getCollectionTokens([])}>Apply</button>
                                             </Accordion.Body>
                                         </Accordion.Item>
                                     </Accordion>
@@ -566,8 +575,8 @@ function Marketplace() {
                             </Col>
 
 
-                            <Col xl={9} lg={8} md={7} sm={6} xs={12}>
-                                <Row>
+                            <Col xl={9} lg={8} md={8} sm={6} xs={12} className="colpad  mt_3">
+                                <Row className="cols">
                                     {filterData.length != 0 && filterData.map((i) => (
                                         <>
                                             {/* {
@@ -575,10 +584,10 @@ function Marketplace() {
                                             <Col
                                                 xl={4}
                                                 lg={6}
-                                                md={12}
+                                                md={6}
                                                 sm={12}
-                                                xs={12}
-                                                className="mb_3"
+                                                xs={6}
+                                                className="mb_5 col_pad"
                                             >
                                                 {console.log("sdffadasdf", i)}
                                                 <DataCard data={i} />
@@ -587,11 +596,14 @@ function Marketplace() {
                                         </>
                                     ))
                                     }
+                                    <div className='mt_2 mb_3 d-flex justify-content-center'>
+                                        <button className='button-loadMore mb_3'>Load More</button>
+                                    </div>
                                 </Row>
                             </Col>
 
                         </Row>
-                    </Container>
+                    </div>
                 </div>
             </div>
 
