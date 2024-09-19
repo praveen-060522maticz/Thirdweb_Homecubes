@@ -41,7 +41,9 @@ import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight } from "react-
 function Minting() {
     const [mint, setMint] = useState("minting");
     const [description, setDescription] = useState(false);
+    const [isFixed, setIsFixed] = useState(true);
     const { _id } = useParams()
+    const footerRef = useRef(null);
 
     const navigate = useNavigate()
 
@@ -376,13 +378,44 @@ function Minting() {
     }
     console.log("cmsCon", cmsCon);
 
+    const handleScroll = () => {
+
+        const footerTop = footerRef.current.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (footerTop < windowHeight) {
+            setIsFixed(false);
+
+
+        } else {
+            setIsFixed(true);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
 
     return (
         <>
             <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />
             <BottomBar />
             <Header />
-            <div className="hc-mint__banner">
+
+            {/* for mobile only */}
+
+            <div className="hc-min__banner-mobile d-xl-none">
                 <ImgAudVideo
                     file={`${config.IMG_URL}/projects/ProjectBanner/${project?.ProjectBanner}`}
                     origFile={mintBg}
@@ -390,250 +423,269 @@ function Minting() {
                     noimg={mintBg}
                 />
 
+            </div>
 
-                {/* <div className="hc-mint__banner-content">
-                    <div className="row mx-auto">
-                        <div className="custom_container  container">
-                            <div className="row">
+            {/* for mobile only */}
+            <div className="hc-mint__banner">
+                <ImgAudVideo
+                    file={`${config.IMG_URL}/projects/ProjectBanner/${project?.ProjectBanner}`}
+                    origFile={mintBg}
+                    classname={"hc-mint__banner-image d-none d-xl-block"}
+                    noimg={mintBg}
+                />
 
-                                <div className="col-md-10 col-lg-11 hc-mint__banner-col--right">
-                                    <div className="row align-items-end mb-3 mx-auto">
-                                        <div className="col-12 mt-4 mt-lg-0 order-2 order-lg-1 col-lg-6">
-                                            <div className="hc-mint__bannerInner-col--left">
-                                                <div className="cus-back-btn mb-3">
-                                                    <Button className="px-0" onClick={() => navigate(-1)} >
-                                                        <i className="fa-solid fa-chevron-left"></i>
-                                                        Back
-                                                    </Button>
+                <div className="hc-mint__banner-content  w-100">
+                    <div className="inner-container__width">
+                        <div className="row mx-auto">
+                            <div className="custom_container  container px-0">
+                                <div className="row mx-auto">
+
+                                    <div className="col-12 hc-mint__banner-col--right px-0">
+                                        <div className="row align-items-end mx-auto">
+                                            <div className="col-12    col-lg-6 px-0">
+                                                <div className="hc-mint__bannerInner-col--left">
+                                                    <div className="cus-back-btn ">
+                                                        <Button className="px-0" onClick={() => navigate(-1)} >
+                                                            <i className="fa-solid fa-chevron-left"></i>
+                                                            Back
+                                                        </Button>
+                                                    </div>
+                                                    <div className="hc-mint__banner--wrapper">
+                                                        <img lazy src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} />
+                                                    </div>
+                                                    <p className="hc-mint__banner--title">
+                                                        {project?.projectTitle}
+                                                    </p>
+                                                    <p className="hc-mint__banner--desc d-none d-xl-block ">
+                                                        {project?.projectDescription}
+                                                    </p>
                                                 </div>
-                                                <div className="hc-mint__banner--wrapper mt-2">
-                                                    <img lazy src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} />
-                                                </div>
-                                                <p className="hc-mint__banner--title mt-3">
-                                                    {project?.projectTitle}
-                                                </p>
-                                                <p className="hc-mint__banner--desc mt-3 mb-0">
-                                                    {project?.projectDescription}
-                                                </p>
+
                                             </div>
-
-                                        </div>
-                                        {mint == "minted" ? <div className="col-12 order-1 order-lg-2 col-lg-6 d-flex justify-content-end">
-                                            <div className="hc-mint__bannerInner-col--right">
-                                                <div className="hc-mint__card-initialSales">
-                                                    <p className="title text-center">Initial Sales</p>
-                                                    <div className="row align-items-center mt-3">
-                                                        <div className="col-12 col-sm-3">
-                                                            <p className="label text-center text-sm-end">
-                                                                {minted} Minted
-                                                            </p>
-                                                        </div>
-                                                        <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0 px-0">
-                                                            <div className="hc-mint__initialSales--border">
-                                                                <div className="hc-mint__initialSales--progress" style={{ width: `${(minted / TotalToken) * 100}%` }}>
-                                                                    {minted}
+                                            {mint == "minted" ? <div className="col-12  col-lg-6 d-flex justify-content-end px-0">
+                                                <div className="hc-mint__bannerInner-col--right">
+                                                    <div className="hc-mint__card-initialSales">
+                                                        <p className="title text-center">Initial Sales</p>
+                                                        <div className="hc-mint___col--right__content">
+                                                            <div className="row align-items-center mx-auto">
+                                                                <div className="col-3 px-0 hc-mint__col-paddingLeft">
+                                                                    <p className="label text-center text-sm-end hc-mint__col-right--nowrap">
+                                                                        {minted} Minted
+                                                                    </p>
+                                                                </div>
+                                                                <div className="col-6 d-flex justify-content-center px-0">
+                                                                    <div className="hc-mint__initialSales--border">
+                                                                        <div className="hc-mint__initialSales--progress" style={{ width: `${(minted / TotalToken) * 100}%` }}>
+                                                                            {minted}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="col-3 d-flex px-0 hc-mint__col-paddingRight" >
+                                                                    <p className="label ">
+                                                                        From {TotalToken}
+                                                                    </p>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div className="col-12 col-sm-3 d-flex justify-content-center mt-2 mt-sm-0 px-0">
-                                                            <p className="label">
-                                                                From {TotalToken}
+                                                            <p className="hc-mint__initialSales--themeText  text-center">
+                                                                Available {isAvailable}
                                                             </p>
-                                                        </div>
-                                                    </div>
-                                                    <p className="hc-mint__initialSales--themeText my-2 text-center">
-                                                        Available {isAvailable}
-                                                    </p>
-                                                    <div className="row align-items-center">
-                                                        <div className="col-12 col-sm-3">
-                                                            <p className="label  text-center text-sm-end">
-                                                                No of NFT's
-                                                            </p>
-                                                        </div>
-                                                        <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0 px-0">
-                                                            <div className="hc-mint__initialSales--border">
-                                                                <input
-                                                                    type="number"
-                                                                    min={0}
-                                                                    max={Number(isAvailable)}
-                                                                    value={mintCount}
-                                                                    onChange={(e) => {
-                                                                        setMintcount(e.target.value);
-                                                                    }}
-                                                                />
+                                                            <div className="row align-items-center mx-0">
+                                                                <div className="col-3 px-0 hc-mint__col-paddingLeft">
+                                                                    <p className="label  text-center text-sm-end">
+                                                                        No of NFT's
+                                                                    </p>
+                                                                </div>
+                                                                <div className=" col-6 d-flex  px-0 ">
+                                                                    <div className="hc-mint__initialSales--border">
+                                                                        <input
+                                                                            type="number"
+                                                                            min={0}
+                                                                            max={Number(isAvailable)}
+                                                                            value={mintCount}
+                                                                            onChange={(e) => {
+                                                                                setMintcount(e.target.value);
+                                                                            }}
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                <div className=" col-3 d-flex hc-mint__col-paddingRight">
+                                                                    <p className="label text-center">
+                                                                        {(mintCount * parseFloat(project?.NFTPrice)).toFixed(7)} {project?.mintTokenName}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="row justify-content-center">
+
+                                                                <div className=" col-6 d-flex justify-content-center">
+                                                                    <button className="  w-100 hc-mint__button-mint" disabled={loading} onClick={() => onMint()} >
+                                                                        <img
+                                                                            className="header_wallet"
+                                                                            src={
+                                                                                require("../assets/images/whiteminting.svg").default
+                                                                            }
+                                                                        />
+                                                                        Buy Now
+                                                                    </button>
+                                                                </div>
+
                                                             </div>
                                                         </div>
-                                                        <div className="col-12 col-sm-3 d-flex justify-content-center justify-content-sm-start mt-2 mt-sm-0">
-                                                            <p className="label text-center">
-                                                                {(mintCount * parseFloat(project?.NFTPrice)).toFixed(7)} {project?.mintTokenName}
-                                                            </p>
-                                                        </div>
                                                     </div>
-                                                    <div className="row justify-content-center">
+                                                </div>
+                                            </div> : <></>}
 
-                                                        <div className="col-12 col-sm-6 d-flex justify-content-center">
-
-                                                            <button className="mint_mintBtn d-flex justify-content-center mt-3 w-100 hc-mint__button-mint" disabled={loading} onClick={() => onMint()} >
-                                                                <img
-                                                                    className="header_wallet"
-                                                                    src={
-                                                                        require("../assets/images/whiteminting.svg").default
-                                                                    }
-                                                                />
-                                                                Mint
-                                                            </button>
+                                            {mint == "minting" ? <div className="col-12 order-1 order-lg-2 col-lg-6 d-flex justify-content-end px-0">
+                                                <div className="hc-mint__bannerInner-col--right">
+                                                    <div className="hc-mint__card-initialSales">
+                                                        <p className="title text-center">Tic Tock</p>
+                                                        <p className="title text-center">Your Opportunity Awaits!</p>
+                                                        <div className="hc-mint__card-timerWraper mb-2">
+                                                            {project.unlockAt && <Countdown date={new Date(project.unlockAt)} onComplete={() => window.location.reload()} />}
                                                         </div>
 
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div> : <></>}
+                                            </div> : <></>}
+                                            <p className="hc-mint__banner--desc d-xl-none">
+                                                {project?.projectDescription}
+                                            </p>
+                                        </div>
 
-                                        {mint == "minting" ? <div className="col-12 order-1 order-lg-2 col-lg-6 d-flex justify-content-end">
-                                            <div className="hc-mint__bannerInner-col--right">
-                                                <div className="hc-mint__card-initialSales">
-                                                    <p className="title text-center">Tic Tock</p>
-                                                    <p className="title text-center">Your Opportunity Awaits!</p>
-                                                    <div className="hc-mint__card-timerWraper mt-3 mb-2">
-                                                        {project.unlockAt && <Countdown date={new Date(project.unlockAt)} onComplete={() => window.location.reload()} />}
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div> : <></>}
                                     </div>
-
                                 </div>
+
                             </div>
 
                         </div>
+                        {/* <div className="row mx-auto">
+                            <div className="custom_container  container px-0">
+                                <div className="row mx-auto">
 
-                    </div>
-                </div> */}
-            </div>
-            <Container fluid className="pt-3 home_wrapper over_hidercon hc-mint__homeWrapper">
-                <Container className="custom_container ">
-                    <Row>
+                                    <div className="col-md-10 col-lg-11 hc-mint__banner-col--right px-0">
+                                        <div className="row align-items-end mb-3 mx-auto">
+                                            <div className="col-12 mt-4 mt-lg-0 order-2 order-lg-1 col-lg-6 px-0">
+                                                <div className="hc-mint__bannerInner-col--left">
+                                                    <div className="cus-back-btn mb-3">
+                                                        <Button className="px-0" onClick={() => navigate(-1)} >
+                                                            <i className="fa-solid fa-chevron-left"></i>
+                                                            Back
+                                                        </Button>
+                                                    </div>
+                                                    <div className="hc-mint__banner--wrapper mt-2">
+                                                        <img lazy src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} />
+                                                    </div>
+                                                    <p className="hc-mint__banner--title mt-3">
+                                                        {project?.projectTitle}
+                                                    </p>
+                                                    <p className="hc-mint__banner--desc mt-3 mb-0">
+                                                        {project?.projectDescription}
+                                                    </p>
+                                                </div>
 
+                                            </div>
+                                            {mint == "minted" ? <div className="col-12 order-1 order-lg-2 col-lg-6 d-flex justify-content-end">
+                                                <div className="hc-mint__bannerInner-col--right">
+                                                    <div className="hc-mint__card-initialSales">
+                                                        <p className="title text-center">Initial Sales</p>
+                                                        <div className="row align-items-center mt-3">
+                                                            <div className="col-12 col-sm-3">
+                                                                <p className="label text-center text-sm-end">
+                                                                    {minted} Minted
+                                                                </p>
+                                                            </div>
+                                                            <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0 px-0">
+                                                                <div className="hc-mint__initialSales--border">
+                                                                    <div className="hc-mint__initialSales--progress" style={{ width: `${(minted / TotalToken) * 100}%` }}>
+                                                                        {minted}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-12 col-sm-3 d-flex justify-content-center mt-2 mt-sm-0 px-0">
+                                                                <p className="label">
+                                                                    From {TotalToken}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <p className="hc-mint__initialSales--themeText my-2 text-center">
+                                                            Available {isAvailable}
+                                                        </p>
+                                                        <div className="row align-items-center">
+                                                            <div className="col-12 col-sm-3">
+                                                                <p className="label  text-center text-sm-end">
+                                                                    No of NFT's
+                                                                </p>
+                                                            </div>
+                                                            <div className="col-12 col-sm-6 d-flex justify-content-center mt-2 mt-sm-0 px-0">
+                                                                <div className="hc-mint__initialSales--border">
+                                                                    <input
+                                                                        type="number"
+                                                                        min={0}
+                                                                        max={Number(isAvailable)}
+                                                                        value={mintCount}
+                                                                        onChange={(e) => {
+                                                                            setMintcount(e.target.value);
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-12 col-sm-3 d-flex justify-content-center justify-content-sm-start mt-2 mt-sm-0">
+                                                                <p className="label text-center">
+                                                                    {(mintCount * parseFloat(project?.NFTPrice)).toFixed(7)} {project?.mintTokenName}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="row justify-content-center">
 
-                        <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner">
+                                                            <div className="col-12 col-sm-6 d-flex justify-content-center">
 
-                            {/* <div className="cus-back-btn mb-3">
-                <Button className="" onClick={() => navigate(-1)} >
-                  <i className="fa-solid fa-chevron-left"></i>
-                  Back
-                </Button>
-              </div> */}
-                            {/* <BreadPath/> */}
-                            {mint == "beforeMint" ? (
-                                <>
-                                    <p className="mint_violetText">
-                                        There Is No Minting Scheduled Now
-                                    </p>
-                                    <div className="pink_typeletter mt-3">
-                                        <Typewriter
-                                            options={{
-                                                strings: ["There Is No Minting Scheduled Now"],
-                                                autoStart: true,
-                                                loop: true,
-                                            }}
-                                        />
-                                    </div>
+                                                                <button className="mint_mintBtn d-flex justify-content-center mt-3 w-100 hc-mint__button-mint" disabled={loading} onClick={() => onMint()} >
+                                                                    <img
+                                                                        className="header_wallet"
+                                                                        src={
+                                                                            require("../assets/images/whiteminting.svg").default
+                                                                        }
+                                                                    />
+                                                                    Mint
+                                                                </button>
+                                                            </div>
 
-                                    <Row className="mt-4 position-relative">
-                                        <Col lg={6}>
-                                            <h3 className="minting_detail lh_aligner">
-                                                But you can buy away from our market place
-                                            </h3>
-                                            <img src={require('../assets/images/violetwaste.png')} className="mint_viopat" />
-                                            <img src={require('../assets/images/pinkwaste.png')} className="mint_pinkpat" />
-                                            <img src={require('../assets/images/greenwaste.png')} className="mint_greenpat" />
-                                        </Col>
-                                        <Row className="mt-4">
-                                            <Col lg={6} sm={8} xs={12} className="mb-3">
-                                                <p className="mp_detailbrief" dangerouslySetInnerHTML={{ __html: cmsCon?.filter((val) => val?.key == "coundDown description")?.[0]?.content }}  >
-                                                </p>
-                                            </Col>
-
-                                            <Col
-                                                lg={5}
-                                                sm={4}
-                                                xs={12}
-                                                className="greenbox_cornerer mb-3"
-                                            >
-                                                <NavLink to='/marketplace' className="sidetab_link">
-                                                    <div className="pi_markeplaceLink">
-                                                        <p className="pi_marketplace">Marketplace</p>
-                                                        <div className="green_box">
-                                                            <img
-                                                                className="green_longright"
-                                                                src={
-                                                                    require("../assets/images/rightlong.svg")
-                                                                        .default
-                                                                }
-                                                            />
                                                         </div>
                                                     </div>
-                                                </NavLink>
-                                            </Col>
-                                        </Row>
-                                        <Row className="mt-4">
-                                            <Swiper
-                                                className="mySwiper mt-4 pt-3 bottomnav_swiper"
-                                                spaceBetween={30}
-                                                navigation={true}
-                                                keyboard={true}
-                                                pagination={{
-                                                    clickable: true,
-                                                }}
-                                                breakpoints={{
-                                                    320: {
-                                                        slidesPerView: 1.2,
-                                                        spaceBetween: 20,
-                                                    },
-                                                    450: {
-                                                        slidesPerView: 1.8,
-                                                        spaceBetween: 20,
-                                                    },
-                                                    576: {
-                                                        slidesPerView: 2,
-                                                        spaceBetween: 20,
-                                                    },
-                                                    768: {
-                                                        slidesPerView: 2.5,
-                                                        spaceBetween: 20,
-                                                    },
-                                                    992: {
-                                                        slidesPerView: 3,
-                                                        spaceBetween: 20,
-                                                    },
-                                                    1200: {
-                                                        slidesPerView: 4,
-                                                        spaceBetween: 20,
-                                                    },
-                                                    1500: {
-                                                        slidesPerView: 5,
-                                                        spaceBetween: 20,
-                                                    },
-                                                }}
-                                                modules={[Navigation, Keyboard]}
-                                            >
-                                                {nftcardData.length != 0 && nftcardData?.map((i) => (
-                                                    <SwiperSlide>
-                                                        <DataCard data={i} />
-                                                    </SwiperSlide>
-                                                ))}
-                                            </Swiper>
-                                            <div className="greenarrow_boxHolder position-relative">
-                                                <div className="greenarrow_box"></div>
-                                            </div>
-                                        </Row>
-                                    </Row>
-                                </>
-                            ) : (
-                                <></>
-                            )}
+                                                </div>
+                                            </div> : <></>}
 
+                                            {mint == "minting" ? <div className="col-12 order-1 order-lg-2 col-lg-6 d-flex justify-content-end">
+                                                <div className="hc-mint__bannerInner-col--right">
+                                                    <div className="hc-mint__card-initialSales">
+                                                        <p className="title text-center">Tic Tock</p>
+                                                        <p className="title text-center">Your Opportunity Awaits!</p>
+                                                        <div className="hc-mint__card-timerWraper mt-3 mb-2">
+                                                            {project.unlockAt && <Countdown date={new Date(project.unlockAt)} onComplete={() => window.location.reload()} />}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div> : <></>}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div> */}
+                    </div>
+
+                </div>
+            </div>
+            <div className="innercontent">
+                <div className={isFixed ? "side_left fixed" : "side_left sticky"}  >
+                    <SideTab />
+                </div>
+                <div className="bottom_content">
+                    <div className="inner-container__width">
+
+                        <div>
                             {mint == "minting" ? (
                                 <>
                                     <Row className="minted_top_space position-relative">
@@ -774,20 +826,20 @@ function Minting() {
                         </div> */}
                                             </Row>
 
-                                            <Row className="mt-5">
+                                            <Row className="">
                                                 <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
                                                     Estimated Property Value <span className="hc-mint__span-gradient"> {project?.CMS?.filter((val) => val.stepTitle == "PROPERTY VALUE")?.[0]?.stepDescription}</span>
                                                 </h3>
-                                                <h5 className="hc-mint__content-subtitle mt-5">
+                                                <h5 className="hc-mint__content-subtitle">
                                                     Property <strong>Description</strong>
                                                 </h5>
-                                                <p className="hc-mint__banner--desc mt-3 mb-0">
+                                                <p className="hc-mint__banner--desc mb-0">
                                                     {project?.projectDescription}
                                                 </p>
-                                                <Col lg={6} md={6} xs={12} className="mt-4">
+                                                <Col lg={6} md={6} xs={12} className="">
                                                     <Row>
                                                         <Col lg={10} md={12} xs={12}>
-                                                            <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5" dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title }} >
+                                                            <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title }} >
 
                                                             </h5>
                                                             <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} />
@@ -795,10 +847,10 @@ function Minting() {
                                                         </Col>
                                                     </Row>
                                                 </Col>
-                                                <Col lg={6} md={6} xs={12} className="mt-4">
+                                                <Col lg={6} md={6} xs={12} className="">
                                                     <Row>
                                                         <Col lg={10} md={12} xs={12}>
-                                                            <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5" dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title }} >
+                                                            <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title }} >
 
                                                             </h5>
                                                             <ReadMore descText={cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.content} />
@@ -816,7 +868,7 @@ function Minting() {
                             </p>
                           </Col>
                         </Row> */}
-                                                <Row className="mt-5">
+                                                <Row className="">
                                                     {/* <h3 className="minting_detail">{project.name} Road map</h3> */}
                                                     <h3 className="projects_title text-center">{project.name} Road map</h3>
                                                     <p className="mp_detailbrief text-center">
@@ -835,50 +887,89 @@ function Minting() {
                             ) : (
                                 <></>
                             )}
+                        </div>
+                    </div>
 
-                            {mint == "minted" ? (
-                                <Row className="minted_top_space position-relative">
-                                    {/* <img src={require('../assets/images/greenwaste.png')} className="mint_afgreenwaste" />
-                  <img src={require('../assets/images/violetwaste.png')} className="mint_afviowaste" /> */}
-                                    <Col xs={12}>
-                                        <Row className="mx-auto">
-                                            <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
-                                                Gallery
-                                            </h3>
-                                            <div className="hc-mint__swiper-wrap">
+                    <Container className="custom_container ">
 
-                                                <button
-                                                    className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
-                                                    onClick={() => goPrev()}
+                        <Row>
+                            <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner">
+
+                                {/* <div className="cus-back-btn mb-3">
+                <Button className="" onClick={() => navigate(-1)} >
+                  <i className="fa-solid fa-chevron-left"></i>
+                  Back
+                </Button>
+              </div> */}
+                                {/* <BreadPath/> */}
+                                {mint == "beforeMint" ? (
+                                    <>
+                                        <p className="mint_violetText">
+                                            There Is No Minting Scheduled Now
+                                        </p>
+                                        <div className="pink_typeletter">
+                                            <Typewriter
+                                                options={{
+                                                    strings: ["There Is No Minting Scheduled Now"],
+                                                    autoStart: true,
+                                                    loop: true,
+                                                }}
+                                            />
+                                        </div>
+
+                                        <Row className="position-relative">
+                                            <Col lg={6}>
+                                                <h3 className="minting_detail lh_aligner">
+                                                    But you can buy away from our market place
+                                                </h3>
+                                                <img src={require('../assets/images/violetwaste.png')} className="mint_viopat" />
+                                                <img src={require('../assets/images/pinkwaste.png')} className="mint_pinkpat" />
+                                                <img src={require('../assets/images/greenwaste.png')} className="mint_greenpat" />
+                                            </Col>
+                                            <Row className="">
+                                                <Col lg={6} sm={8} xs={12} className="mb-3">
+                                                    <p className="mp_detailbrief" dangerouslySetInnerHTML={{ __html: cmsCon?.filter((val) => val?.key == "coundDown description")?.[0]?.content }}  >
+                                                    </p>
+                                                </Col>
+
+                                                <Col
+                                                    lg={5}
+                                                    sm={4}
+                                                    xs={12}
+                                                    className="greenbox_cornerer mb-3"
                                                 >
-                                                    <FaChevronLeft fill="#fff" fontSize={38} className="me-2" />
-                                                </button>
-
-
-                                                <button
-                                                    className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
-                                                    onClick={() => goNext()}
-                                                >
-
-                                                    <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
-                                                </button>
+                                                    <NavLink to='/marketplace' className="sidetab_link">
+                                                        <div className="pi_markeplaceLink">
+                                                            <p className="pi_marketplace">Marketplace</p>
+                                                            <div className="green_box">
+                                                                <img
+                                                                    className="green_longright"
+                                                                    src={
+                                                                        require("../assets/images/rightlong.svg")
+                                                                            .default
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </NavLink>
+                                                </Col>
+                                            </Row>
+                                            <Row className="">
                                                 <Swiper
-                                                    className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper"
-                                                    slidesPerView={1}
+                                                    className="mySwiper bottomnav_swiper"
                                                     spaceBetween={30}
-                                                    // navigation={true}
+                                                    navigation={true}
                                                     keyboard={true}
-                                                    ref={swiperRef}
                                                     pagination={{
                                                         clickable: true,
                                                     }}
-                                                    navigation={{
-                                                        nextEl: ".swiper-button-next1",
-                                                        prevEl: ".swiper-button-prev1",
-                                                    }}
                                                     breakpoints={{
                                                         320: {
-                                                            slidesPerView: 1,
+                                                            slidesPerView: 1.2,
+                                                            spaceBetween: 20,
+                                                        },
+                                                        450: {
+                                                            slidesPerView: 1.8,
                                                             spaceBetween: 20,
                                                         },
                                                         576: {
@@ -886,11 +977,11 @@ function Minting() {
                                                             spaceBetween: 20,
                                                         },
                                                         768: {
-                                                            slidesPerView: 3,
+                                                            slidesPerView: 2.5,
                                                             spaceBetween: 20,
                                                         },
                                                         992: {
-                                                            slidesPerView: 4,
+                                                            slidesPerView: 3,
                                                             spaceBetween: 20,
                                                         },
                                                         1200: {
@@ -898,56 +989,342 @@ function Minting() {
                                                             spaceBetween: 20,
                                                         },
                                                         1500: {
-                                                            slidesPerView: 4,
+                                                            slidesPerView: 5,
                                                             spaceBetween: 20,
                                                         },
                                                     }}
                                                     modules={[Navigation, Keyboard]}
                                                 >
-
-                                                    {collection.length != 0 && collection.map((i) => (
+                                                    {nftcardData.length != 0 && nftcardData?.map((i) => (
                                                         <SwiperSlide>
-                                                            <GalleryCard data={i} />
+                                                            <DataCard data={i} />
                                                         </SwiperSlide>
                                                     ))}
                                                 </Swiper>
+                                                <div className="greenarrow_boxHolder position-relative">
+                                                    <div className="greenarrow_box"></div>
+                                                </div>
+                                            </Row>
+                                        </Row>
+                                    </>
+                                ) : (
+                                    <></>
+                                )}
 
-                                            </div>
-                                            {/* <div className="position-relative">
+                                {mint == "minting" ? (
+                                    <>
+                                        <Row className="minted_top_space position-relative">
+                                            {/* <Col lg={6} className="position-relative mb-5">
+                      <img className="mint_pinkwaste" src={require('../assets/images/pinkwaste.png')} />
+                      <h3 className="minting_detail">
+                        Can't wait, Buy from
+                        Marketplace
+                      </h3>
+
+                      <div className="stack_countdown minting_countdown mt-4">
+                        {project.unlockAt && <Countdown date={new Date(project.unlockAt)} onComplete={() => window.location.reload()} />}
+                      </div>
+
+                      <p className="mp_detailbrief" dangerouslySetInnerHTML={{ __html: cmsCon?.filter((val) => val?.key == "coundDown description")?.[0]?.content }} >
+                      </p>
+                      <NavLink to='/marketplace' className="sidetab_link">
+                        <div className="pi_markeplaceLink mintmarket_lint mt-4">
+
+                          <p className="pi_marketplace">Marketplace</p>
+                          <div className="green_box">
+                            <img
+                              className="green_longright"
+                              src={
+                                require("../assets/images/rightlong.svg").default
+                              }
+                            />
+                          </div>
+
+                        </div>
+                      </NavLink>
+                    </Col> */}
+
+                                            {/* <Col lg={6} className="position-relative mb-5">
+                      <img className="img-fluid" src={require('../assets/images/minting.png')} />
+                      <img className="min_bluewaste" src={require('../assets/images/violetwaste.png')} />
+                      <img className="mint_greenwaste" src={require('../assets/images/greenwaste.png')} />
+                    </Col> */}
+
+                                            {/* <p className="mint_violetText mt-5">Guideline</p> */}
+                                            {/* <div className="pink_typeletter">
+                      <Typewriter
+                        options={{
+                          strings: ["Guideline"],
+                          autoStart: true,
+                          loop: true,
+                        }}
+                      />
+                    </div> */}
+                                            {/* <h3 className="minting_detail mint_secondaryTitle mt-4">
+                      Property Description
+                    </h3> */}
+                                            {/* <div className="row">
+                      <div className="col-xl-8 col-12 col-sm-8 col-md-8 col-lg-8">
+                        <p className="mp_detailbrief mt-4">
+                          {project?.projectDescription}
+                        </p>
+                      </div>
+                      <div className="col-xl-4 col-12 col-sm-4 col-md-4 col-lg-4 col-d-flex align-items-center justify-content-center">
+                        <div className="property-des-img">
+
+                          <img src={PropertyDes} className="img-fluid" />
+                        </div>
+                      </div>
+                    </div> */}
+                                            <Col xs={12}>
+                                                <Row className="mx-auto">
+                                                    <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
+                                                        Gallery
+                                                    </h3>
+                                                    <div className="hc-mint__swiper-wrap">
+
+                                                        <button
+                                                            className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
+                                                            onClick={() => goPrev()}
+                                                        >
+                                                            <FaChevronLeft fill="#fff" fontSize={38} className="me-2" />
+                                                        </button>
+
+
+                                                        <button
+                                                            className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
+                                                            onClick={() => goNext()}
+                                                        >
+
+                                                            <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
+                                                        </button>
+                                                        <Swiper
+                                                            className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper"
+                                                            slidesPerView={1}
+                                                            spaceBetween={30}
+                                                            navigation={{
+                                                                nextEl: ".swiper-button-next1",
+                                                                prevEl: ".swiper-button-prev1",
+                                                            }}
+                                                            keyboard={true}
+                                                            ref={swiperRef}
+                                                            pagination={{
+                                                                clickable: true,
+                                                            }}
+                                                            breakpoints={{
+                                                                320: {
+                                                                    slidesPerView: 1,
+                                                                    spaceBetween: 20,
+                                                                },
+                                                                576: {
+                                                                    slidesPerView: 2,
+                                                                    spaceBetween: 20,
+                                                                },
+                                                                768: {
+                                                                    slidesPerView: 3,
+                                                                    spaceBetween: 20,
+                                                                },
+                                                                992: {
+                                                                    slidesPerView: 4,
+                                                                    spaceBetween: 20,
+                                                                },
+                                                                1200: {
+                                                                    slidesPerView: 4,
+                                                                    spaceBetween: 20,
+                                                                },
+                                                                1500: {
+                                                                    slidesPerView: 4,
+                                                                    spaceBetween: 20,
+                                                                },
+                                                            }}
+                                                            modules={[Navigation, Keyboard]}
+                                                        >
+                                                            {collection.length != 0 && collection.map((i) => (
+                                                                <SwiperSlide>
+                                                                    <GalleryCard data={i} />u
+                                                                </SwiperSlide>
+                                                            ))}
+                                                        </Swiper>
+                                                    </div>
+                                                    {/* <div className="position-relative">
+                          <div className="greenarrow_box"></div>
+                        </div> */}
+                                                </Row>
+
+                                                <Row className="">
+                                                    <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
+                                                        Estimated Property Value <span className="hc-mint__span-gradient"> {project?.CMS?.filter((val) => val.stepTitle == "PROPERTY VALUE")?.[0]?.stepDescription}</span>
+                                                    </h3>
+                                                    <h5 className="hc-mint__content-subtitle">
+                                                        Property <strong>Description</strong>
+                                                    </h5>
+                                                    <p className="hc-mint__banner--desc mb-0">
+                                                        {project?.projectDescription}
+                                                    </p>
+                                                    <Col lg={6} md={6} xs={12} className="">
+                                                        <Row>
+                                                            <Col lg={10} md={12} xs={12}>
+                                                                <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title }} >
+
+                                                                </h5>
+                                                                <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} />
+
+                                                            </Col>
+                                                        </Row>
+                                                    </Col>
+                                                    <Col lg={6} md={6} xs={12} className="">
+                                                        <Row>
+                                                            <Col lg={10} md={12} xs={12}>
+                                                                <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title }} >
+
+                                                                </h5>
+                                                                <ReadMore descText={cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.content} />
+                                                            </Col>
+                                                        </Row>
+                                                    </Col>
+                                                    {/* <Row className="pi_higherTop">
+                          <Col lg={4}>
+                            <h1 className="mint_gradValue">1M$</h1>
+                          </Col>
+                          <Col lg={8}>
+                            <h3 className="minting_detail">Property Value</h3>
+                            <p className="mp_detailbrief">
+                              {project?.CMS?.filter((val) => val.stepTitle == "PROPERTY VALUE")?.[0]?.stepDescription}
+                            </p>
+                          </Col>
+                        </Row> */}
+                                                    <Row className="">
+                                                        {/* <h3 className="minting_detail">{project.name} Road map</h3> */}
+                                                        <h3 className="projects_title text-center">{project.name} Road map</h3>
+                                                        <p className="mp_detailbrief text-center">
+                                                            {project?.CMS?.filter((val) => val.stepTitle == "Road map")?.[0]?.stepDescription}
+                                                        </p>
+                                                        <div className="hc-home__roadmap--content">
+
+                                                            <Roadmap data={project?.roadMap} />
+                                                        </div>
+                                                    </Row>
+                                                </Row>
+                                            </Col>
+
+                                        </Row>
+                                    </>
+                                ) : (
+                                    <></>
+                                )}
+
+                                {mint == "minted" ? (
+                                    <Row className="minted_top_space position-relative">
+                                        {/* <img src={require('../assets/images/greenwaste.png')} className="mint_afgreenwaste" />
+                  <img src={require('../assets/images/violetwaste.png')} className="mint_afviowaste" /> */}
+                                        <Col xs={12}>
+                                            <Row className="mx-auto">
+                                                <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
+                                                    Gallery
+                                                </h3>
+                                                <div className="hc-mint__swiper-wrap">
+
+                                                    <button
+                                                        className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
+                                                        onClick={() => goPrev()}
+                                                    >
+                                                        <FaChevronLeft fill="#fff" fontSize={38} className="me-2" />
+                                                    </button>
+
+
+                                                    <button
+                                                        className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
+                                                        onClick={() => goNext()}
+                                                    >
+
+                                                        <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
+                                                    </button>
+                                                    <Swiper
+                                                        className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper"
+                                                        slidesPerView={1}
+                                                        spaceBetween={30}
+                                                        // navigation={true}
+                                                        keyboard={true}
+                                                        ref={swiperRef}
+                                                        pagination={{
+                                                            clickable: true,
+                                                        }}
+                                                        navigation={{
+                                                            nextEl: ".swiper-button-next1",
+                                                            prevEl: ".swiper-button-prev1",
+                                                        }}
+                                                        breakpoints={{
+                                                            320: {
+                                                                slidesPerView: 1,
+                                                                spaceBetween: 20,
+                                                            },
+                                                            576: {
+                                                                slidesPerView: 2,
+                                                                spaceBetween: 20,
+                                                            },
+                                                            768: {
+                                                                slidesPerView: 3,
+                                                                spaceBetween: 20,
+                                                            },
+                                                            992: {
+                                                                slidesPerView: 4,
+                                                                spaceBetween: 20,
+                                                            },
+                                                            1200: {
+                                                                slidesPerView: 4,
+                                                                spaceBetween: 20,
+                                                            },
+                                                            1500: {
+                                                                slidesPerView: 4,
+                                                                spaceBetween: 20,
+                                                            },
+                                                        }}
+                                                        modules={[Navigation, Keyboard]}
+                                                    >
+
+                                                        {collection.length != 0 && collection.map((i) => (
+                                                            <SwiperSlide>
+                                                                <GalleryCard data={i} />
+                                                            </SwiperSlide>
+                                                        ))}
+                                                    </Swiper>
+
+                                                </div>
+                                                {/* <div className="position-relative">
                         <div className="greenarrow_box"></div>
                       </div> */}
-                                        </Row>
-                                        <Row className="mt-5">
-                                            <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
-                                                Estimated Property Value <span className="hc-mint__span-gradient"> {project?.propertyValue?.toUpperCase?.() ?? "1M"}$</span>
-                                            </h3>
-                                            <h5 className="hc-mint__content-subtitle mt-5">
-                                                Property <strong>Description</strong>
-                                            </h5>
-                                            <p className="hc-mint__banner--desc mt-3 mb-0">
-                                                {project?.projectDescription}
-                                            </p>
-                                            <Col lg={6} md={6} xs={12} className="mt-4">
-                                                <Row>
-                                                    <Col lg={10} md={12} xs={12}>
-                                                        <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5" dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title }} >
+                                            </Row>
+                                            <Row className="">
+                                                <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
+                                                    Estimated Property Value <span className="hc-mint__span-gradient"> {project?.propertyValue?.toUpperCase?.() ?? "1M"}$</span>
+                                                </h3>
+                                                <h5 className="hc-mint__content-subtitle ">
+                                                    Property <strong>Description</strong>
+                                                </h5>
+                                                <p className="hc-mint__banner--desc mb-0">
+                                                    {project?.projectDescription}
+                                                </p>
+                                                <Col lg={6} md={6} xs={12} className="">
+                                                    <Row>
+                                                        <Col lg={10} md={12} xs={12}>
+                                                            <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title }} >
 
-                                                        </h5>
-                                                        <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} />
+                                                            </h5>
+                                                            <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} />
 
-                                                    </Col>
-                                                </Row>
-                                            </Col>
-                                            <Col lg={6} md={6} xs={12} className="mt-4">
-                                                <Row>
-                                                    <Col lg={10} md={12} xs={12}>
-                                                        <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5" dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title }} >
-                                                        </h5>
-                                                        <ReadMore descText={cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.content} />
-                                                    </Col>
-                                                </Row>
-                                            </Col>
-                                            {/* <Row className="pi_higherTop align-items-center">
+                                                        </Col>
+                                                    </Row>
+                                                </Col>
+                                                <Col lg={6} md={6} xs={12} className="">
+                                                    <Row>
+                                                        <Col lg={10} md={12} xs={12}>
+                                                            <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title }} >
+                                                            </h5>
+                                                            <ReadMore descText={cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.content} />
+                                                        </Col>
+                                                    </Row>
+                                                </Col>
+                                                {/* <Row className="pi_higherTop align-items-center">
                         <Col lg={4}>
                           <h1 className="mint_gradValue new">{project?.propertyValue?.toUpperCase?.() ?? "1M"}$</h1>
                         </Col>
@@ -958,22 +1335,22 @@ function Minting() {
                           </p>
                         </Col>
                       </Row> */}
-                                        </Row>
+                                            </Row>
 
-                                        <Row className="mt-5">
-                                            {/* <h3 className="minting_detail">{project.name} Road map</h3> */}
-                                            <h3 className="hc-mint__content-subtitle mt-5 text-center">{project.name}<strong>Road</strong>  Map</h3>
-                                            {/* <p className="hc-mint__banner--desc mt-3 mb-0 text-center mb-3">
+                                            <Row className="">
+                                                {/* <h3 className="minting_detail">{project.name} Road map</h3> */}
+                                                <h3 className="hc-mint__content-subtitle  text-center">{project.name}<strong>Road</strong>  Map</h3>
+                                                {/* <p className="hc-mint__banner--desc mt-3 mb-0 text-center mb-3">
                         {project?.CMS?.filter((val) => val.stepTitle == "Road map")?.[0]?.stepDescription}
                       </p> */}
-                                            <div className="hc-home__roadmap--content">
-                                                <Roadmap data={project?.roadMap} />
-                                            </div>
-                                        </Row>
+                                                <div className="hc-home__roadmap--content">
+                                                    <Roadmap data={project?.roadMap} />
+                                                </div>
+                                            </Row>
 
 
-                                    </Col>
-                                    {/* <Col lg={12} className="minted_bgset">
+                                        </Col>
+                                        {/* <Col lg={12} className="minted_bgset">
                     <h3 className="minting_detail text-center">
                       Buy a Piece of This Property RIGHT NOW!
                     </h3>
@@ -1176,26 +1553,33 @@ function Minting() {
                       </div>
                     </Row>
                   </Col> */}
-                                </Row>
-                            ) : (
-                                <></>
-                            )}
+                                    </Row>
+                                ) : (
+                                    <></>
+                                )}
 
 
-                        </Col>
-                    </Row>
-                </Container >
-                <Footer />
-                {/* {mint == "minted" ?
+                            </Col>
+                        </Row>
+                    </Container >
+                    <Footer />
+                    {/* {mint == "minted" ?
           <div className="five_imgbg">
 
           </div> :
           <></>
         } */}
-            </Container >
+
+                </div>
+
+            </div>
+
             {showWallet && <ConnectWallet show={showWallet} handleCloseWallet={() => setShowWallet(false)} />
             }
             {/* <div className='gradient_holder staking_gradholder'></div> */}
+            <div ref={footerRef}>
+                <Footer />
+            </div>
         </>
     );
 }

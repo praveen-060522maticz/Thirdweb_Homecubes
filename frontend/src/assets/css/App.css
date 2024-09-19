@@ -249,13 +249,36 @@
 /* start of mint id */
 
 .hc-mint__banner {
-    min-height: calc(100vh - 8vh);
+    min-height: 100vh;
+    height: 100vh;
+    margin-top: 8vh;
+    position: relative;
 }
 
+.hc-mint__banner-image {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.hc-mint__banner:after {
+    background: url('../images/linear-bg.png');
+    background-size: 100% 100%;
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 40vh;
+}
 
 .hc-mint__banner-content {
     position: absolute;
-    bottom: 0px;
+    bottom: 3vh;
     z-index: 2;
 }
 
@@ -264,9 +287,35 @@
     font-family: var(--montserrat-font);
 }
 
+.cus-back-btn button {
+    align-items: center;
+    background: #0000 !important;
+    border: none;
+    box-shadow: none !important;
+    display: flex;
+    font-weight: 500;
+    outline: none;
+    font-size: 2.3vh;
+    gap: 1vh;
+}
+
 .hc-mint__banner--wrapper {
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 0.5vw;
+    /* height: 180px;
+    max-height: 180px;
+    max-width: 280px;
+    min-height: 180px;
+    min-width: 280px;
+    width: 280px; */
+    min-width: 18vw;
+    width: 18vw;
+    max-width: 18vw;
+    min-height: 12vw;
+    height: 12vw;
+    max-height: 12vw;
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
 }
 
 .hc-mint__banner--wrapper img {
@@ -283,21 +332,25 @@
     color: var(--white);
     font-weight: 600;
     font-family: var(--montserrat-font);
-    margin-bottom: 0px;
+
+    font-size: 3vh;
+
 }
 
 .hc-mint__banner--desc {
     color: var(--white);
     font-family: var(--montserrat-font);
     font-weight: 500;
-    line-height: 25px;
+    line-height: 4.2vh;
+    font-size: 1.9vh;
+    margin-top: 2vh;
 }
 
 .hc-mint__card-initialSales {
-    padding: 15px;
-    border-radius: 8px;
-    border: 2px solid var(--gradinet_right);
-    width: fit-content;
+    padding: 1vw;
+    border-radius: 0.5vw;
+    border: 0.18vw solid var(--gradinet_right);
+    width: 29vw;
     background: var(--bg-color-3);
 
 }
@@ -306,14 +359,15 @@
     color: var(--white);
     font-family: var(--montserrat-font);
     font-weight: 600;
+    font-size: 3.2vh;
 }
 
 .hc-mint__initialSales--border {
-    border: 2px solid var(--gradinet_right);
+    border: 0.18vw solid var(--gradinet_right);
     width: 100%;
-    height: 40px;
-    padding: 3px;
-    border-radius: 5px;
+    height: 5vh;
+    padding: 0.2vw;
+    border-radius: 0.3vw;
 }
 
 .hc-mint__card-initialSales {
@@ -323,20 +377,29 @@
 .hc-mint__card-initialSales p {
     font-weight: 600;
     margin-bottom: 0px;
+    font-size: 2.1vh;
 }
 
 .hc-mint__initialSales--themeText {
     color: var(--gradinet_right);
+    margin-top: 2vh;
+    margin-bottom: 1.8vh !important;
 }
 
 .hc-mint__initialSales--progress {
     background: var(--gradinet_right);
     height: 100%;
-    border-radius: 3px;
-    padding-left: 3px;
-    padding-right: 3px;
+    border-radius: 0.3vw;
+    padding-left: 0.3vw;
+    padding-right: 0.3vw;
     display: flex;
     align-items: center;
+    font-size: 1.8vh;
+    font-family: var(--kanit_font);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hc-mint__initialSales--border input {
@@ -346,6 +409,9 @@
     color: var(--gradinet_right);
     height: 100%;
     width: 100%;
+    font-size: 2.4vh;
+    font-family: var(--kanit_font);
+    font-weight: 500;
 }
 
 .hc-mint__button-mint:hover {
@@ -362,6 +428,51 @@
 .hc-mint__content-title {
     font-family: var(--montserrat-font);
     font-weight: 700;
+}
+
+.hc-mint__content-title strong {
+    font-family: var(--montserrat-font);
+    font-weight: 700;
+}
+
+.hc-mint___col--right__content {
+    margin-top: 2vh;
+}
+
+.hc-mint__col-paddingLeft {
+    padding-right: 0.5vw !important;
+}
+
+.hc-mint__col-paddingRight {
+    padding-left: 0.5vw !important;
+}
+
+.hc-mint__col-right--nowrap {
+    white-space: nowrap;
+}
+
+.hc-mint__button-mint {
+    margin-top: 2vh;
+    background-image: url(../images/mintBg.png);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    border-radius: 0.3vw;
+    color: var(--white);
+    font-family: var(--kanit_font);
+    font-size: 2.3vh;
+    font-weight: var(--weight_five);
+    outline: none;
+    padding: 1vh 2vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5vw;
+}
+
+.hc-mint__content-title {
+    font-size: 3vh;
 }
 
 /* end of mint id */
@@ -538,6 +649,161 @@
 
     /* start of mint id */
 
+    .hc-min__banner-mobile {
+        min-height: 30vh;
+        height: 30vh;
+        max-height: 30vh;
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 9vh;
+        position: relative;
+    }
+
+    .hc-mint__bannerInner-col--right {
+        margin-top: 4vh;
+    }
+
+    .hc-mint__banner {
+        min-height: 30vh;
+        height: 30vh;
+        max-height: 30vh;
+    }
+
+    .hc-mint__banner--wrapper {
+        overflow: hidden;
+        border-radius: 2vw;
+        min-width: 55vw;
+        width: 55vw;
+        max-width: 55vw;
+        min-height: 40vw;
+        height: 40vw;
+        max-height: 40vw;
+        margin-top: 2.5vh;
+        margin-bottom: 2.5vh;
+    }
+
+    .hc-mint__banner-content {
+        bottom: unset;
+        position: relative;
+    }
+
+    .hc-mint__banner-content::after {
+        content: "";
+        background: url('../images/bottomlayer.png') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        width: 100%;
+        height: 20vh;
+        bottom: -0.2vh;
+        left: 0;
+        z-index: 1;
+        opacity: 0.9;
+    }
+
+    .hc-mint__banner {
+        margin-top: 0vh;
+        min-height: unset;
+        height: unset;
+        max-height: unset;
+    }
+
+    .hc-mint__banner:after {
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: linear-gradient(103.58deg, #240533 39.31%, #004448 95.31%);
+    }
+
+    .hc-min__banner-mobile::after {
+        content: "";
+        background: url('../images/bottomlayer.png') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        width: 100%;
+        height: 10vh;
+        bottom: -0.2vh;
+        left: 0;
+        z-index: 1;
+        opacity: 0.9;
+    }
+
+    .hc-min__banner-mobile::before {
+        content: "";
+        background: url('../images/bottomlayer.png') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        width: 100%;
+        height: 10vh;
+        bottom: -10.2vh;
+        left: 0;
+        z-index: 1;
+        transform: rotate(180deg);
+        opacity: 0.7;
+    }
+
+    .hc-mint__bannerInner-col--left {
+        margin-top: -14vh;
+    }
+
+    .hc-mint__card-initialSales {
+        padding: 3vw;
+        border-radius: 2vw;
+        border: 0.25vw solid var(--gradinet_right);
+        width: 90vw;
+        margin-bottom: 1vh;
+    }
+
+    .hc-mint__card-initialSales .title {
+        font-size: 2.5vh;
+    }
+
+    .hc-mint__card-initialSales p {
+        font-size: 1.6vh;
+    }
+
+    .hc-mint__col-paddingLeft {
+        padding-right: 1vw !important;
+    }
+
+    .hc-mint__col-paddingRight {
+        padding-left: 1vw !important;
+    }
+
+    .hc-mint__initialSales--border {
+        border: 0.6vw solid var(--gradinet_right);
+        height: 4vh;
+        padding: 0.5vw;
+        border-radius: 1vw;
+    }
+
+    .hc-mint__initialSales--progress {
+
+        border-radius: 1vw;
+        padding-left: 1vw;
+        padding-right: 1vw;
+        display: flex;
+        align-items: center;
+        font-size: 1.7vh;
+    }
+
+    .hc-mint__button-mint {
+        font-size: 1.8vh;
+        border-radius: 1vw;
+    }
+
+    .hc-mint__button-mint .header_wallet {
+        height: 2vh;
+        width: 2vh;
+    }
+
+    .hc-mint__banner--desc {
+        z-index: 2;
+        margin-bottom: 5vh !important;
+    }
+
     /* end of mint id */
 }
 
@@ -663,11 +929,8 @@
     }
 
     .nft-card__buttons--gradient:hover {
-
         background-color: var(--gradinet_left);
         background-image: linear-gradient(to right, var(--gradinet_right), var(--gradinet_left));
-
-
     }
 
     .nft-card__buttons--gradient p {
@@ -710,6 +973,161 @@
     }
 
     /* start of mint id */
+
+    .hc-min__banner-mobile {
+        min-height: 30vh;
+        height: 30vh;
+        max-height: 30vh;
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 9vh;
+        position: relative;
+    }
+
+    .hc-mint__bannerInner-col--right {
+        margin-top: 4vh;
+    }
+
+    .hc-mint__banner {
+        min-height: 30vh;
+        height: 30vh;
+        max-height: 30vh;
+    }
+
+    .hc-mint__banner--wrapper {
+        overflow: hidden;
+        border-radius: 2vw;
+        min-width: 55vw;
+        width: 55vw;
+        max-width: 55vw;
+        min-height: 40vw;
+        height: 40vw;
+        max-height: 40vw;
+        margin-top: 2.5vh;
+        margin-bottom: 2.5vh;
+    }
+
+    .hc-mint__banner-content {
+        bottom: unset;
+        position: relative;
+    }
+
+    .hc-mint__banner-content::after {
+        content: "";
+        background: url('../images/bottomlayer.png') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        width: 100%;
+        height: 20vh;
+        bottom: -0.2vh;
+        left: 0;
+        z-index: 1;
+        opacity: 0.9;
+    }
+
+    .hc-mint__banner {
+        margin-top: 0vh;
+        min-height: unset;
+        height: unset;
+        max-height: unset;
+    }
+
+    .hc-mint__banner:after {
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: linear-gradient(103.58deg, #240533 39.31%, #004448 95.31%);
+    }
+
+    .hc-min__banner-mobile::after {
+        content: "";
+        background: url('../images/bottomlayer.png') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        width: 100%;
+        height: 10vh;
+        bottom: -0.2vh;
+        left: 0;
+        z-index: 1;
+        opacity: 0.9;
+    }
+
+    .hc-min__banner-mobile::before {
+        content: "";
+        background: url('../images/bottomlayer.png') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        width: 100%;
+        height: 10vh;
+        bottom: -10.2vh;
+        left: 0;
+        z-index: 1;
+        transform: rotate(180deg);
+        opacity: 0.7;
+    }
+
+    .hc-mint__bannerInner-col--left {
+        margin-top: -14vh;
+    }
+
+    .hc-mint__card-initialSales {
+        padding: 3vw;
+        border-radius: 2vw;
+        border: 0.25vw solid var(--gradinet_right);
+        width: 90vw;
+        margin-bottom: 1vh;
+    }
+
+    .hc-mint__card-initialSales .title {
+        font-size: 2.5vh;
+    }
+
+    .hc-mint__card-initialSales p {
+        font-size: 1.6vh;
+    }
+
+    .hc-mint__col-paddingLeft {
+        padding-right: 1vw !important;
+    }
+
+    .hc-mint__col-paddingRight {
+        padding-left: 1vw !important;
+    }
+
+    .hc-mint__initialSales--border {
+        border: 0.6vw solid var(--gradinet_right);
+        height: 4vh;
+        padding: 0.5vw;
+        border-radius: 1vw;
+    }
+
+    .hc-mint__initialSales--progress {
+
+        border-radius: 1vw;
+        padding-left: 1vw;
+        padding-right: 1vw;
+        display: flex;
+        align-items: center;
+        font-size: 1.7vh;
+    }
+
+    .hc-mint__button-mint {
+        font-size: 1.8vh;
+        border-radius: 1vw;
+    }
+
+    .hc-mint__button-mint .header_wallet {
+        height: 2vh;
+        width: 2vh;
+    }
+
+    .hc-mint__banner--desc {
+        z-index: 2;
+        margin-bottom: 5vh !important;
+    }
 
     /* end of mint id */
 }
