@@ -150,7 +150,7 @@ function Home() {
                             </Col>
                             <Col lg={6} className="px-0">
                                 {CMS["Revolution your Home Ownership"]?.img &&
-                                    <div className="anim_div" >
+                                    <div className="anim_div first_lottie" >
 
                                         <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["Revolution your Home Ownership"]?.img}`} className="banner_lottie" />
                                     </div>}
@@ -165,8 +165,8 @@ function Home() {
                             <Col lg={6} className="col_pad">
                                 <div className="cloudcubes_holder">
                                     {CMS["About Home Cubes"]?.img &&
-                                        <div className="anim_div">
-                                            <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid w-100 wauto"
+                                        <div className="anim_div text-center text-xl-start">
+                                            <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid wauto"
                                             />
                                         </div>}
                                 </div>
