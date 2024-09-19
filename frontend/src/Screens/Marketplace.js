@@ -22,7 +22,8 @@ import { toast } from 'react-toastify'
 import ProjectCard from "../Components/ProjectCard";
 import { getCmsContent } from "../actions/axioss/cms.axios";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
-
+import arrowright from "../assets/images/rightarrow.svg";
+import arrowleft from "../assets/images/leftarrow.svg";
 
 function Marketplace() {
     const [selectedOption, setSelectedOption] = useState(null);
@@ -289,7 +290,7 @@ function Marketplace() {
                 <div className="banner_section">
                     <Container>
                         <h3 className="hc-home__title home_titled">Our <strong>Unique</strong> Marketplace</h3>
-                        <p className="mp_detailbrief hc-home__desc desc_txt" dangerouslySetInnerHTML={{ __html: coll?.content }} >
+                        <p className="mp_detailbrief hc-home__desc homes desc_txt" dangerouslySetInnerHTML={{ __html: coll?.content }} >
                         </p>
                         <div className="hc-mint__swiper-wrap">
 
@@ -297,7 +298,8 @@ function Marketplace() {
                                 className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                                 onClick={() => goPrev()}
                             >
-                                <FaChevronLeft fill="#fff" fontSize={38}  />
+                                <img src={arrowleft} />
+                                {/* <FaChevronLeft fill="#fff" fontSize={38} /> */}
                             </button>
 
 
@@ -305,11 +307,11 @@ function Marketplace() {
                                 className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
                                 onClick={() => goNext()}
                             >
-
-                                <FaChevronRight fill="#fff" fontSize={38} />
+                                <img src={arrowright} />
+                                {/* <FaChevronRight fill="#fff" fontSize={38} /> */}
                             </button>
                             <Swiper
-                                className="mySwiper bottomnav_colswiper collection_swiper mt-4 pt-3"
+                                className="mySwiper bottomnav_colswiper collection_swiper mt_3"
                                 spaceBetween={30}
                                 navigation={{
                                     nextEl: ".swiper-button-next1",
@@ -341,7 +343,7 @@ function Marketplace() {
                                         spaceBetween: 20,
                                     },
                                     1200: {
-                                        slidesPerView: 3.7,
+                                        slidesPerView: 3.2,
                                         spaceBetween: 20,
                                     },
                                     1500: {
@@ -373,6 +375,222 @@ function Marketplace() {
                             {/* <div className='swiper_buttons'>
 </div> */}
                         </div>
+                    </Container>
+                </div>
+                <div className="bottom_content">
+                    <Container>
+                        <Row className="justify-content-between">
+                            <h3 className="hc-home__title home_titled">
+                                Top Trending <strong>NFT's</strong>
+                            </h3>
+                            {/* <Col lg={4} md={6} sm={6} xs={12} className="mt_3">
+                                <div
+                                    className={mobSearch ? "d-none" : " stack_searchbarmob"}
+                                    onClick={() => setMobSearch(true)}
+                                >
+                                    <img
+                                        className="searchglass"
+                                        src={require("../assets/images/searchs.svg").default}
+                                    />
+                                </div>
+                            </Col> */}
+                            <Col
+                                lg={4}
+                                md={6}
+                                sm={6}
+                                xs={12}
+                                className="mb_select_holder mt_3 ms-auto col_pad"
+                            >
+                                <Select
+                                    className="border_select"
+                                    classNamePrefix={"react_select"}
+                                    placeholder="Select Order"
+                                    styles={stylesgraybg}
+                                    defaultValue={selectedOption}
+                                    onChange={(e) => {
+                                        console.log(e.value, "selectedOption")
+                                        if (e.value == "hightolow") {
+                                            setNftcardData(nftcardData.sort((a, b) => parseFloat(isEmpty(b.NFTPrice) ? 0 : b.NFTPrice) - parseFloat(isEmpty(a.NFTPrice) ? 0 : a.NFTPrice)))
+                                        }
+                                        else if (e.value == "lowtohigh") {
+                                            setNftcardData(nftcardData.sort((a, b) => parseFloat(isEmpty(a.NFTPrice) ? 0 : a.NFTPrice) - parseFloat(isEmpty(b.NFTPrice) ? 0 : b.NFTPrice)))
+                                        }
+                                        else {
+                                            getCollectionTokens(true, "onSale")
+                                        }
+                                        setSelectedOption(e)
+                                    }}
+                                    options={options}
+                                />
+                            </Col>
+                        </Row>
+
+                        <Row className="mt_3">
+                            <Col xl={3} lg={4} md={5} sm={6} xs={12} className="col_pad">
+                                <div
+                                    className={
+                                        `mb_3 ${mobSearch
+                                            ? "stack_searchbar"
+                                            : " stack_searchbar stack_searchbarhider"}`
+                                    }
+                                >
+                                    <div className="d-flex justify-content-start align-items-center">
+                                        <img
+                                            className="searchglass"
+                                            src={
+                                                require("../assets/images/searchs.svg").default
+                                            }
+                                        />
+                                        {/* <input type='text' className='stack_search' placeholder='Search...' /> */}
+                                        <ReactSearchBox
+                                            className="sadsa"
+                                            placeholder="Search"
+                                            value={searchVal}
+                                            onChange={(e) => setSearchVal(e)}
+                                            data={nftcardData}
+                                            callback={(record) => console.log("Searchinggggggg", record)}
+                                        />
+                                    </div>
+                                    <i
+                                        class="fa-solid fa-xmark search_closer"
+                                        onClick={() => setMobSearch(false)}
+                                    />
+                                </div>
+                                <div className="mp_accord_holder mb_3">
+                                    <Accordion
+                                        className="mp_accordion"
+                                        defaultActiveKey={["0"]}
+                                        flush
+                                    >
+                                        <Accordion.Item eventKey="0" className="">
+                                            <Accordion.Header className="" onClick={() => setPriceCal({})} >
+                                                Status <i class="fa-solid fa-angle-down" />
+                                            </Accordion.Header>
+                                            <Accordion.Body className="mt_3">
+                                                <div className="mp_status">
+                                                    <p className="mp_statusLabel">Buy Now</p>
+                                                    <Form>
+                                                        <Form.Check
+                                                            type="checkbox"
+                                                            className="mp_customCheck"
+                                                            id="buynow"
+                                                        >
+                                                            <Form.Check.Input type="checkbox" isValid onChange={(e) => onCheckChange("FixedPrice")} />
+                                                            <Form.Check.Label></Form.Check.Label>
+                                                        </Form.Check>
+                                                    </Form>
+                                                </div>
+                                                <div className="mp_status">
+                                                    <p className="mp_statusLabel">On Auction</p>
+                                                    <Form>
+                                                        <Form.Check
+                                                            type="checkbox"
+                                                            className="mp_customCheck"
+                                                            id="auction"
+                                                        >
+                                                            <Form.Check.Input type="checkbox" isValid onChange={() => onCheckChange("TimedAuction")} />
+                                                            <Form.Check.Label></Form.Check.Label>
+                                                        </Form.Check>
+                                                    </Form>
+                                                </div>
+                                            </Accordion.Body>
+                                        </Accordion.Item>
+                                    </Accordion>
+                                </div>
+                                <div className="mp_accord_holder">
+                                    <Accordion
+                                        className="mp_accordion"
+                                    >
+
+                                        <Accordion.Item eventKey="1">
+                                            <Accordion.Header className="">
+                                                Price <i class="fa-solid fa-angle-down" />
+                                            </Accordion.Header>
+                                            <Accordion.Body className="mt_3">
+                                                <div className="mb_pricetab_holder">
+                                                    {/* <button
+                              className={
+                                priceTab == "BNB"
+                                  ? "mb_pricetab me-2 active"
+                                  : "mb_pricetab me-2"
+                              }
+                              onClick={() => setPriceTab("BNB")}
+                            >
+                              BNB
+                            </button> */}
+                                                    <button
+                                                        className={
+                                                            priceTab == "USD"
+                                                                ? "mb_pricetab me_2 active"
+                                                                : "mb_pricetab me_2"
+                                                        }
+                                                        onClick={() => setPriceTab("USDT")}
+                                                    >
+                                                        USDT
+                                                    </button>
+                                                </div>
+
+                                                <Row className="justify-content-between mt_3">
+                                                    <Col lg={6} md={6} sm={6} xs={6} className="mb_3">
+                                                        <input
+                                                            className="mb_priceInp cmnInput_scrollerHider"
+                                                            type="number"
+                                                            placeholder="Min"
+                                                            // value={priceCal?.Min}
+                                                            onChange={(e) => {
+                                                                const value = e.target.value
+                                                                // setPriceCal({ ...priceCal, ...{ "Min": priceTab == "BNB" ? value : String(value / BNBUSDT) } })
+                                                                setPriceCal({ ...priceCal, ...{ "Min": value } })
+                                                            }}
+                                                        />
+                                                    </Col>
+                                                    <Col lg={6} md={6} sm={6} xs={6} className="mb_3">
+                                                        <input
+                                                            className="mb_priceInp cmnInput_scrollerHider"
+                                                            type="number"
+                                                            placeholder="Max"
+                                                            // value={priceCal?.Max}
+                                                            onChange={(e) => {
+                                                                const value = e.target.value
+                                                                // setPriceCal({ ...priceCal, ...{ "Max": priceTab == "BNB" ? value : String(value / BNBUSDT) } })
+                                                                setPriceCal({ ...priceCal, ...{ "Max": value } })
+                                                            }}
+                                                        />
+                                                    </Col>
+                                                </Row>
+                                                <button className="seconday_btn" onClick={() => getCollectionTokens([])}>Apply</button>
+                                            </Accordion.Body>
+                                        </Accordion.Item>
+                                    </Accordion>
+                                </div>
+                            </Col>
+
+
+                            <Col xl={9} lg={8} md={7} sm={6} xs={12}>
+                                <Row>
+                                    {filterData.length != 0 && filterData.map((i) => (
+                                        <>
+                                            {/* {
+                        (i?.coinValue > (min? min : 0) && i?.coinValue < (max?max:99999999999999999))  && */}
+                                            <Col
+                                                xl={4}
+                                                lg={6}
+                                                md={12}
+                                                sm={12}
+                                                xs={12}
+                                                className="mb_3"
+                                            >
+                                                {console.log("sdffadasdf", i)}
+                                                <DataCard data={i} />
+                                            </Col>
+                                            {/* } */}
+                                        </>
+                                    ))
+                                    }
+                                </Row>
+                            </Col>
+
+                        </Row>
                     </Container>
                 </div>
             </div>

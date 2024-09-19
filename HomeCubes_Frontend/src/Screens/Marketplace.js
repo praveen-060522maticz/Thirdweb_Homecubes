@@ -541,6 +541,8 @@ function Marketplace() {
                     </Accordion>
                   </div>
                 </Col>
+
+
                 <Col xl={9} lg={8} md={7} sm={6} xs={12}>
                   <Row>
                     {filterData.length != 0 && filterData.map((i) => (
@@ -564,6 +566,7 @@ function Marketplace() {
                     }
                   </Row>
                 </Col>
+                
               </Row>
             </Col>
           </Row>

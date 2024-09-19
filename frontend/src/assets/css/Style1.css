@@ -409,7 +409,9 @@ p {
   word-spacing: 0.2vh;
   font-size: 1.9vh;
 }
-
+.mp_detailbrief.homes{
+  font-size: 1.7vh;
+}
 .footer_linkwrapper ul {
   padding-left: 0;
 }
@@ -781,6 +783,12 @@ p {
 .mt_3 {
   margin-top: 3vh;
 }
+.mb_3{
+  margin-bottom: 3vh;
+}
+.me_2{
+  margin-right: 1.5vh;
+}
 
 .home_investorli.hc-home_li--p {
   scrollbar-width: none;
@@ -1022,9 +1030,7 @@ p {
 
 /* marketplace */
 .hc-card__nft {
-  max-width: 32vh;
-  min-width: 32vh;
-  width: 32vh;
+  /* min-width: 32vh; */
 }
 .hc-card__nft, .hc-card__nft .projectcard_wrapper_sep {
   overflow: hidden;
@@ -1103,4 +1109,207 @@ p {
   font-weight: 500;
   margin: 0;
 }
+.hc-swiper__arrow--right{
+  position: absolute;
+  right: 22vh;
+  top: 55vh;
+  z-index: 2;
+}
+.hc-swiper__arrow--right img, .hc-swiper__arrow--left img{
+  width: 6.5vh;
+  height: 6.5vh;
+}
+.hc-swiper__arrow--right.swiper-button-disabled, .hc-swiper__arrow--left.swiper-button-disabled{
+  opacity: 0.4;
+  pointer-events: none;
+}
+.hc-swiper__arrow--left{
+  position: absolute;
+  left: 25vh;
+  top: 55vh;
+  z-index: 2;
+}
+.swiper-slide{
+  margin-right: 2vw !important;
+}
+
+.stack_searchbar {
+  align-items: center;
+  background: var(--bg-color-2);
+  border: 1px solid var(--border-color-1);
+  border-radius: 0.6vh;
+  display: flex;
+  justify-content: space-between;
+  max-width: 35vh;
+  padding: 0.6vh 1.4vh;
+  position: relative;
+}
+.stack_searchbar div{
+  flex-direction: unset !important;
+}
+.stack_searchbar input{
+  background-color: initial;
+  border: none;
+  color: var(--white);
+  outline: none;
+  padding: 0.5vh;
+  height: unset;
+  font-size: 1.5vh;
+}
+input::placeholder{
+  color: var(--white);
+  font-family: var(--montserrat-font);
+  font-weight: 400;
+}
+.react_select__placeholder {
+  color: #fff !important;
+}
+.react_select__indicator svg {
+  fill: #fff !important;
+}
+.searchglass {
+  height: 2vh;
+  margin-right: 0.3vw;
+  width: 2vh;
+}
+.mb_select_holder {
+  display: flex;
+  justify-content: flex-end;
+}
+.mp_accord_holder {
+  background-color: var(--bg-color-2);
+  border: 1px solid var(--border-color-1);
+  border-radius: 0.6vh;
+  padding: 0.9vh 1.3vh;
+}
+.mp_accordion .accordion-header, .mp_accordion .accordion-item {
+  background-color: initial !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.mp_accordion .accordion-button.collapsed {
+  color: var(--white);
+}
+.mp_accordion .accordion-button {
+  align-items: center;
+  background-color: initial !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--gradinet_right);
+  display: flex;
+  font-family: var(--montserrat-font);
+  font-size: 2.4vh;
+  font-weight: 400;
+  justify-content: space-between;
+  outline: none !important;
+  padding: 0.5vh 0;
+  width: 100%;
+}
+.mp_accordion .accordion-button i {
+  transform: rotate(-180deg);
+  transition: all .3s ease;
+}
+.mp_accordion .accordion-button.collapsed i {
+  transform: rotate(0deg);
+  transition: all .3s ease;
+}
+.accordion-button::after{display: none;}
+.mp_customCheck input {
+  background-color: initial !important;
+  border-color: var(--gradinet_right) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  width: 1.4vh;
+  height: 1.4vh;
+}
+.form-check-input:checked[type="checkbox"] {
+  --bs-form-check-bg-image: url("../images/rectagle.svg");
+  background-image: url("../images/rectagle.svg");
+  background-size: 1vh;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+.mp_status {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.6vh;
+}
+.mp_statusLabel {
+  color: var(--white);
+  font-family: var(--montserrat-font);
+  font-size: 1.7vh;
+  font-weight:500;
+  margin: 0;
+}
+.mb_pricetab {
+  background-color: var(--sidetab_bglight);
+  border: none;
+  border-radius: 5px;
+  color: var(--white);
+  font-family: var(--montserrat-font);
+  font-size: 1.6vh;
+  font-weight: 500;
+  outline: none;
+  padding: 0.5vh 1.2vh;
+}
+.mb_priceInp, .mb_priceInp::placeholder {
+  color: var(--white);
+}
+.seconday_btn:hover {
+  background-color: var(--gradinet_right);
+  border-color: var(--gradinet_right);
+  color: var(--black);
+}
+.mb_priceInp {
+  background-color: initial;
+  border: 1px solid var(--border-color-1);
+  border-radius: 5px;
+  font-family: var(--montserrat-font);
+  font-size: 1.6vh;
+  font-weight:400;
+  max-width: 100%;
+  outline: none;
+  padding: 1vh;
+  text-align: center;
+}
+.seconday_btn {
+  background-color: initial;
+  border: 1px solid var(--border-color-1);
+  border-radius: 5px;
+  color: var(--white);
+  font-family: var(--montserrat-font);
+  font-size: 1.6vh;
+  font-weight: 500;
+  outline: none;
+  padding: 1vh;
+  width: 100%;
+}
+.mp_accordion .accordion-body {
+  padding: 0;
+}
+.mp_customCheck {
+  position: relative;
+  right: -1vh;
+}
+.form-check .form-check-input {
+  float: left;
+  margin-left: -2.4vh;
+}
+.form-check {
+  margin-bottom: 0.5vh !important;
+}
+@media screen and (min-width:1200px) and (max-width:1399px) {
+  .hc-swiper__arrow--right {
+    right: 18vh;
+    top: 60vh;
+  }
+  .hc-swiper__arrow--left {
+    left: 25vh;
+    top: 60vh;
+}
+}
+
 /* marketplace end */
