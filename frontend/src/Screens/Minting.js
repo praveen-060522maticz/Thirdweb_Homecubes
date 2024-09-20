@@ -1253,13 +1253,13 @@ function Minting() {
                                         <h3 className="text-center hc-mint__content-title px-0">
                                             Gallery
                                         </h3>
-                                        <div className="hc-mint__swiper-wrap">
+                                        <div className="hc-mint__swiper-wrap gallery-card__swiperWrapper">
 
                                             <button
                                                 className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                                                 onClick={() => goPrev()}
                                             >
-                                                <FaChevronLeft fill="#fff" fontSize={38} className="me-2" />
+                                                <FaChevronLeft fill="#fff" className="" />
                                             </button>
 
 
@@ -1268,12 +1268,12 @@ function Minting() {
                                                 onClick={() => goNext()}
                                             >
 
-                                                <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
+                                                <FaChevronRight fill="#fff" className="" />
                                             </button>
                                             <Swiper
-                                                className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper"
-                                                slidesPerView={1}
-                                                spaceBetween={30}
+                                                className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper gallery-card__swiper"
+                                                slidesPerView={2}
+                                                // spaceBetween={30}
                                                 // navigation={true}
                                                 keyboard={true}
                                                 ref={swiperRef}
@@ -1286,8 +1286,8 @@ function Minting() {
                                                 }}
                                                 breakpoints={{
                                                     320: {
-                                                        slidesPerView: 1,
-                                                        spaceBetween: 20,
+                                                        slidesPerView: 2,
+                                                        // spaceBetween: 20,
                                                     },
                                                     576: {
                                                         slidesPerView: 2,

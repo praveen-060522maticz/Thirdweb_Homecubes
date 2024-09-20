@@ -7,11 +7,11 @@ function RewardsCard(props) {
   return (
     <>
       <div className='rewards_card'>
-        <h6>{feedTitle}</h6>
-        <p className='rc_dateText mt-2'>{new Date(createdAt).toLocaleDateString()}</p>
-        <p className='hc-mint__banner--desc mt-3 mb-0'>{!show ? feedDescription.slice(0, 150) : feedDescription}</p>
-        <div className='rc_readmore_aligner' onClick={() => setShow(!show)} >
-          <button className="mp_readmoreBtn">{!show ? "Read More" : "Read Less"}</button>
+        <h6 className='rewards_card-title'>{feedTitle}</h6>
+        <p className='rc_dateText '>{new Date(createdAt).toLocaleDateString()}</p>
+        <p className='hc-mint__banner--desc '>{!show ? feedDescription.slice(0, 150) : feedDescription}</p>
+        <div className='rc_readmore_aligner' >
+          <button className="mp_readmoreBtn" onClick={() => setShow(!show)}>{!show ? "Read More" : "Read Less"}</button>
         </div>
       </div>
     </>

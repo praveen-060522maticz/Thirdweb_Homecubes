@@ -6,6 +6,7 @@ function GalleryCard(props) {
   const { coinName, collectionImg, galleryTitle, projectId, galleryThumbImage, id } = props.data;
   return (
     <>
+
       <div className="card-gallery">
         <div className="card-gallery__image--wrapper">
           <NavLink to={{ pathname: `/collectionInfo` }}

@@ -25,6 +25,7 @@ import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight } from "react-
 import mintBg from '../assets/images/mintBg.png'
 import { ReadMore } from "../Components/ReadMore";
 import ImgAudVideo from "../Components/ImgAudVideo";
+import propertyImage from '../assets/images/property.png'
 
 function ProjectInfo() {
   const location = useLocation();
@@ -35,6 +36,8 @@ function ProjectInfo() {
   const { projectTitle } = useParams()
   const swiperRef = useRef(null);
 
+  const footerRef = useRef(null);
+  const [isFixed, setIsFixed] = useState(true);
   const [projectDetail, setProjectDetail] = useState({})
   const [galleryArr, setGalleryArr] = useState([])
   const [tokens, setTokens] = useState([])
@@ -125,6 +128,34 @@ function ProjectInfo() {
 
   const navigate = useNavigate();
 
+  const handleScroll = () => {
+
+    const footerTop = footerRef.current.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+
+    if (footerTop < windowHeight) {
+      setIsFixed(false);
+
+
+    } else {
+      setIsFixed(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <BottomBar />
@@ -149,7 +180,7 @@ function ProjectInfo() {
         <ImgAudVideo
           file={`${config.IMG_URL}/projects/ProjectBanner/${projectDetail?.ProjectBanner}`}
           origFile={mintBg}
-          classname={"hc-mint__banner-image"}
+          classname={"hc-mint__banner-image d-none d-xl-block"}
           noimg={mintBg}
         />
         <div className="hc-mint__banner-content w-100">
@@ -181,7 +212,7 @@ function ProjectInfo() {
                             ? projectDetail?.aboutDescription?.slice(0, 300).concat("...")
                             : projectDetail?.aboutDescription}
                         </p> */}
-                          {
+                          {/* {
                             projectDetail?.aboutDescription && description ? (
                               <p className="hc-mint__banner--desc mb-0">{projectDetail?.aboutDescription}</p>
                             ) : (
@@ -189,6 +220,16 @@ function ProjectInfo() {
                                 {projectDetail?.aboutDescription?.length > 300
                                   ? projectDetail?.aboutDescription?.slice(0, 300).concat("...")
                                   : projectDetail?.aboutDescription}
+                              </p>
+                            )} */}
+                          {
+                            projectDetail?.aboutDescription && description ? (
+                              <p className="hc-mint__banner--desc projectInfo_banner--desc mb-0">{projectDetail?.aboutDescription}</p>
+                            ) : (
+                              <p className="hc-mint__banner--desc projectInfo_banner--desc  mb-0">
+                                {projectDetail?.aboutDescription?.length &&
+                                  projectDetail?.aboutDescription
+                                }
                               </p>
                             )}
 
@@ -273,40 +314,40 @@ function ProjectInfo() {
                       <div className="col-12">
                         <div>
                           <hr className="projects_hr" />
-                          <div className="d-flex flex-wrap align-items-center gap-3 gap-xl-5">
-                            <div className="mp_collectionDetail mb-2">
-                              <p className="mp_collectionLabel">Number of NFTs :</p>
-                              <p className="mp_collectionValue">
+                          <div className="projects__details ">
+                            <div className="projects__details-row order-4 order-xl-1">
+                              <p className="projects__detatils-row--label">NFTs :</p>
+                              <p className="projects__detatils-row--value">
                                 {projectDetail?.maxNFTs}
                               </p>
                             </div>
-                            <div className="mp_collectionDetail mb-2">
-                              <p className="mp_collectionLabel">
-                                Number of Staked NFTs :
+                            <div className="projects__details-row order-1 order-xl-2">
+                              <p className="projects__detatils-row--label">
+                                Staked NFTs :
                               </p>
-                              <p className="mp_collectionValue">
+                              <p className="projects__detatils-row--value">
                                 {staked}
                               </p>
                             </div>
-                            <div className="mp_collectionDetail mb-2">
-                              <p className="mp_collectionLabel">
-                                Number of Non-Staked NFTs :
+                            <div className="projects__details-row order-2 order-xl-3">
+                              <p className="projects__detatils-row--label">
+                                Non-Staked NFTs :
                               </p>
-                              <p className="mp_collectionValue">
+                              <p className="projects__detatils-row--value">
                                 {unStaked}
                               </p>
                             </div>
-                            <div className="mp_collectionDetail mb-2">
-                              <p className="mp_collectionLabel">
+                            <div className="projects__details-row order-3 order-xl-4">
+                              <p className="projects__detatils-row--label">
                                 Next Rewards Distribution :
                               </p>
-                              <p className="mp_collectionValue">
+                              <p className="projects__detatils-row--value">
                                 {new Date(rewardDetail?.endDateFormat).toLocaleDateString()}
                               </p>
                             </div>
-                            <div className="mp_collectionDetail mb-2">
-                              <p className="mp_collectionLabel">Total reward distrubuted :</p>
-                              <p className="mp_collectionValue">
+                            <div className="projects__details-row order-5 order-xl-5">
+                              <p className="projects__detatils-row--label">Total reward distrubuted :</p>
+                              <p className="projects__detatils-row--value">
                                 {totalReward}
                               </p>
                             </div>
@@ -324,111 +365,20 @@ function ProjectInfo() {
           </div>
         </div>
       </div>
-      <Container fluid className="home_wrapper">
-        <Container className="custom_container">
-          <Row>
-            <Col lg={1} md={2} className="sidetab_holder">
-              <SideTab />
-            </Col>
-            <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner ">
-              {/* <div className="cus-back-btn mb-3">
-                <Button className="" onClick={() => navigate(-1)} >
-                  <i className="fa-solid fa-chevron-left"></i>
-                  Back
-                </Button>
-              </div> */}
-              {/* <BreadPath/> */}
-              {/* <h3 className="projects_title">{projectDetail?.projectTitle}</h3>
-              <p className="mp_detailbrief widthen_text">
-                {projectDetail?.projectDescription}
-              </p>
-              <hr className="projects_hr" />
-              <div className="d-flex flex-wrap gap-4 gap-xl-5">
-                <div className="mp_collectionDetail mb-2">
-                  <p className="mp_collectionLabel">Number of NFTs :</p>
-                  <p className="mp_collectionValue">
-                    {projectDetail?.maxNFTs}
-                  </p>
-                </div>
-                <div className="mp_collectionDetail mb-2">
-                  <p className="mp_collectionLabel">
-                    Number of Staked NFTs :
-                  </p>
-                  <p className="mp_collectionValue">
-                    {staked}
-                  </p>
-                </div>
-                <div className="mp_collectionDetail mb-2">
-                  <p className="mp_collectionLabel">
-                    Number of Non-Staked NFTs :
-                  </p>
-                  <p className="mp_collectionValue">
-                    {unStaked}
-                  </p>
-                </div>
-                <div className="mp_collectionDetail mb-2">
-                  <p className="mp_collectionLabel">
-                    Next Rewards Distribution :
-                  </p>
-                  <p className="mp_collectionValue">
-                    {new Date(rewardDetail?.endDateFormat).toLocaleDateString()}
-                  </p>
-                </div>
-                <div className="mp_collectionDetail mb-2">
-                  <p className="mp_collectionLabel">Total reward distrubuted :</p>
-                  <p className="mp_collectionValue">
-                    {totalReward}
-                  </p>
-                </div>
-              </div> */}
 
-              {/* <Row>
-                <Col lg={5} md={6} sm={6} xs={12}>
-                  <div className="">
 
-                  </div>
-                </Col>
-                <Col lg={7} md={6} sm={6} xs={12}>
-                  <div className="">
-
-                  </div>
-                </Col>
-              </Row>
-              <Row className="pi_higherTop">
-                <Col lg={4} md={6} sm={12} xs={12} className="mb-3">
-                  <img
-                    className="img-fluid rounded-3"
-                    src={`${config.IMG_URL}/projects/ProjectThumbnail/${projectDetail?.ProjectThumbnail}`}
-                  />
-                </Col>
-                <Col lg={6} md={6} sm={12} xs={12} className="mb-3">
-                  <h3 className="projects_title">About {projectDetail?.projectTitle}</h3>
-                  <>
-                    {
-                      projectDetail?.aboutDescription && description ? (
-                        <p className="mp_detailbrief pi_scrollText">{projectDetail?.aboutDescription}</p>
-                      ) : (
-                        <p className="mp_detailbrief pi_scrollText">
-                          {projectDetail?.aboutDescription?.length > 300
-                            ? projectDetail?.aboutDescription?.slice(0, 300).concat("...")
-                            : projectDetail?.aboutDescription}
-                        </p>
-                      )}
-                  </>
-                  <button
-                    className="mp_readmoreBtn readmore_left mt-2"
-                    onClick={() => setDescription(!description)}
-                  >
-                    {description ? "Read Less" : "Read More"}
-                  </button>
-                </Col>
-              </Row> */}
-
+      <div className="innercontent">
+        <div className={isFixed ? "side_left fixed" : "side_left sticky"}  >
+          <SideTab />
+        </div>
+        <div className="bottom_content">
+          <div className="inner-container__width">
+            <div className="mint-bottom__content">
               <Row className="mx-auto">
                 <h3 className="text-center hc-mint__content-title px-0">Gallery</h3>
-                <p className="hc-mint__banner--desc  mb-0 text-center w-75 mx-auto ">
+                {/* <p className="hc-mint__banner--desc  mb-0 text-center w-75 mx-auto ">
                   {projectDetail?.CMS?.filter((val) => val.stepTitle == "Photo Galleries")?.[0]?.stepDescription}
-                </p>
+                </p> */}
                 <div className="hc-mint__swiper-wrap">
 
                   <button
@@ -448,7 +398,7 @@ function ProjectInfo() {
                   </button>
                   <div className="projects_swiper">
                     <Swiper
-                      className="mySwiper pt-3 mt-4"
+                      className="mySwiper pt-3 "
                       slidesPerView={3}
                       spaceBetween={30}
                       navigation={{
@@ -517,12 +467,25 @@ function ProjectInfo() {
                 <h3 className="hc-mint__content-title">
                   Estimated Property Value <span className="hc-mint__span-gradient"> {projectDetail?.propertyValue?.toUpperCase?.() ?? "1M"}$</span>
                 </h3>
-                <h5 className="hc-mint__content-subtitle mt-5">
-                  Property <strong>Description</strong>
-                </h5>
-                <p className="hc-mint__banner--desc mt-3 mb-0">
-                  {projectDetail?.aboutDescription}
-                </p>
+                <div className="row mint-margin__top align-items-center">
+                  <div className="col-12 col-xl-6 px-0">
+                    <div>
+                      <h5 className="hc-mint__content-subtitle">
+                        Property <strong>Description</strong>
+                      </h5>
+                      <p className="hc-mint__banner--desc">
+                        {projectDetail?.aboutDescription}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="col-12 col-xl-6 px-0 d-flex justify-content-center">
+                    <div className="mint-property__imageWrapper">
+                      <img src={propertyImage} className="img-fluid w-75" />
+                    </div>
+                  </div>
+                </div>
+
+
                 {/* <Col lg={6} md={6} xs={12} className="mt-4">
                   <Row>
                     <Col lg={10} md={12} xs={12}>
@@ -555,14 +518,14 @@ function ProjectInfo() {
                         </Col>
                       </Row> */}
               </div>
-              <Row className="mt-5">
-                <Col lg={6} md={8} sm={12} xs={12} className="mb-3">
+              <div className="news-grid mint-margin__top">
+                <div>
                   {/* <h5 className="hc-mint__content-subtitle mt-5">News Feed and Updates</h5> */}
-                  <h5 className="hc-mint__content-subtitle mt-5">News & Updates</h5>
-                  <p className="mp_detailbrief" >
+                  <h5 className="hc-mint__content-subtitle ">News & Updates</h5>
+                  {/* <p className="mp_detailbrief" >
                     {projectDetail?.CMS?.filter((val) => val.stepTitle == "News Feed and Updates")?.[0]?.stepDescription}
-                  </p>
-                </Col>
+                  </p> */}
+                </div>
                 {/* <Col lg={6} md={4} sm={12} xs={12} className="greenbox_cornerer">
                   <div className="pi_markeplaceLink">
                     <p className="pi_marketplace">See more</p>
@@ -573,9 +536,9 @@ function ProjectInfo() {
                 </Col> */}
 
 
-                <div className="rewardscard_swiper">
+                <div className=" d-xl-none ">
                   <Swiper
-                    className="mySwiper  mt-4"
+                    className="mySwiper "
                     slidesPerView={3}
                     spaceBetween={30}
                     navigation={false}
@@ -594,23 +557,20 @@ function ProjectInfo() {
                       },
                       576: {
                         slidesPerView: 1,
-                        spaceBetween: 20,
                       },
                       700: {
                         slidesPerView: 2,
-                        spaceBetween: 20,
                       },
                       992: {
                         slidesPerView: 3,
-                        spaceBetween: 20,
+
                       },
                       1200: {
                         slidesPerView: 3,
-                        spaceBetween: 20,
+
                       },
                       1500: {
                         slidesPerView: 3,
-                        spaceBetween: 20,
                       },
                     }}
                     modules={[Navigation, Keyboard, Pagination]}
@@ -622,27 +582,35 @@ function ProjectInfo() {
                     )}
                   </Swiper>
                 </div>
+                <div className="rewardscard_swiper d-none d-xl-block">
 
-              </Row>
+                  {feedArr.length != 0 && feedArr.map((i) =>
+                    <RewardsCard data={i} />
+                  )}
 
-              <Row className="mt-5">
-                <h3 className="hc-mint__content-subtitle mt-5 text-center"> <strong>Road</strong> Map</h3>
-                <p className="mp_detailbrief text-center">
+                </div>
+
+
+              </div>
+
+              <div className="section-roadMap">
+                <h3 className="hc-mint__content-subtitle  text-center"> <strong>Road</strong> Map</h3>
+                {/* <p className="mp_detailbrief text-center">
                   {projectDetail?.CMS?.filter((val) => val.stepTitle == "Road map")?.[0]?.stepDescription}
-                </p>
+                </p> */}
                 <div className="hc-home__roadmap--content">
                   <Roadmap data={projectDetail?.roadMap} />
                 </div>
-              </Row>
+              </div>
 
-              <Row className="mt-5">
-                <Col lg={6} md={8} sm={12} xs={12} className="mb-3">
-                  <h5 className="hc-mint__content-subtitle mt-5">{projectData.name} Go to <strong>Marketplace</strong></h5>
-                  <p className="mp_detailbrief">
+
+
+              <h5 className="hc-mint__content-subtitle ">{projectData.name} Go to <strong>Marketplace</strong></h5>
+              {/* <p className="mp_detailbrief">
                     {projectDetail?.CMS?.filter((val) => val.stepTitle == "NFTs")?.[0]?.stepDescription}
-                  </p>
-                </Col>
-                {/* <Col lg={6} md={4} sm={12} xs={12} className="greenbox_cornerer">
+                  </p> */}
+
+              {/* <Col lg={6} md={4} sm={12} xs={12} className="greenbox_cornerer">
                   <NavLink className="sidetab_link" to='/marketplace'>
                     <div className="pi_markeplaceLink">
                       <p className="pi_marketplace">Check the Marketplace</p>
@@ -653,8 +621,8 @@ function ProjectInfo() {
                   </NavLink>
                 </Col> */}
 
-                <Swiper
-                  className="mySwiper bottomnav_swiper mt-3"
+              {/* <Swiper
+                  className="mySwiper bottomnav_swiper"
                   spaceBetween={30}
                   navigation={true}
                   keyboard={true}
@@ -698,20 +666,28 @@ function ProjectInfo() {
                       <DataCard data={i} />
                     </SwiperSlide>
                   )}
+                </Swiper> */}
 
-                </Swiper>
+              <div className="mp-grid mp-grid_list marketplace_margin">
+                {tokens?.length != 0 && tokens?.map((i) =>
+                  <DataCard data={i} />
+                )}
+              </div>
 
-                {/* <div className="greenarrow_boxHolder position-relative">
+
+              {/* <div className="greenarrow_boxHolder position-relative">
                   <div className="greenarrow_box"></div>
                 </div> */}
 
-              </Row>
-            </Col>
-          </Row>
-        </Container>
-        {/* <div className='gradient_holder'></div> */}
+
+            </div>
+          </div>
+        </div>
+      </div >
+
+      <div ref={footerRef}>
         <Footer />
-      </Container>
+      </div>
 
       {/* <div className="dualImg_bg"></div> */}
     </>
