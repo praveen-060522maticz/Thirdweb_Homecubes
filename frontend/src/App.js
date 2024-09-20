@@ -22,6 +22,8 @@ import Marketplace from './Screens/Marketplace';
 import NFTInfo from './Screens/NFTInfo';
 import Minting from './Screens/Minting';
 import MintProjects from './Screens/MintProjects';
+import Projects from './Screens/Projects';
+import ProjectInfo from './Screens/ProjectInfo';
 
 
 
@@ -50,6 +52,14 @@ function App() {
         {
             path: "/mint/:_id",
             element: <Minting />,
+        },
+        {
+            path: "/projects",
+            element: <Projects />,
+        },
+        {
+            path: "/projectInfo/:projectTitle",
+            element: <ProjectInfo />,
         },
         // Add routes for any additional screens
     ]);

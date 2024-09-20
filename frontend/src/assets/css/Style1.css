@@ -245,9 +245,9 @@ p {
 }
 
 .navbar {
-  background-color: #151515;
+  background-color: var(--black);
   padding: 1.6vh 0;
-  height: 8vh;
+  height: 9vh;
 }
 
 .mainLogo {
@@ -380,12 +380,13 @@ p {
 /* footer */
 .footer_all .container,
 .homecube_header .container {
-  max-width: 92%;
+  max-width: var(--container-width-main);
   padding: 0;
 }
 
 .innercontent .container {
   max-width: 70%;
+  padding: 0;
 }
 
 .footer {
@@ -644,7 +645,7 @@ p {
 .side_left.fixed {
   position: fixed;
   top: 33.5vh;
-  left: 9vh;
+  left: 6.5%;
   z-index: 7;
 }
 
