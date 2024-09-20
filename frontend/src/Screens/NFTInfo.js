@@ -40,7 +40,8 @@ import TransferToken from "../Modals/TransferToken";
 import { useWallets } from "@privy-io/react-auth";
 import Prompt from "../Components/Prompt";
 import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
-
+import arrowright from "../assets/images/rightarrow.svg";
+import arrowleft from "../assets/images/leftarrow.svg";
 
 function NFTInfo() {
     // console.log(props,"woeiruowier");
@@ -521,16 +522,10 @@ function NFTInfo() {
                 </div>
                 <div className="banner_section">
                     <div className="inner-container__width">
-                    <Row>
-                                {/* <div className="cus-back-btn mb-3">
-                                    <Button className="" onClick={() => navigate(-1)} >
-                                        <i className="fa-solid fa-chevron-left"></i>
-                                        Back
-                                    </Button>
-                                </div> */}
-                                <Col lg={3} md={12} sm={12} xs={12}>
 
-                                    <div className="nftInfo_topLeft hc-info__left--image">
+                    <div className="nft_grid">
+                        <div>
+                    <div className="nftInfo_topLeft hc-info__left--image">
                                         {!isEmpty(Tokens_Detail) &&
                                             <ImgAudVideo
                                                 file={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Original/${Tokens_Detail?.NFTOrginalImage}`}
@@ -561,7 +556,7 @@ function NFTInfo() {
                                                     accountAddress ? (
                                                     Tokens[TabName]?.myowner?.PutOnSaleType ==
                                                         "FixedPrice" ? (
-                                                        <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.myowner); setShowCancel(true) }}>
+                                                        <button className="nftinfo_gradeientBtn web_listitem_btn mt_2" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.myowner); setShowCancel(true) }}>
                                                             Cancel Now
                                                         </button>
                                                     ) : Tokens[TabName]?.myowner?.PutOnSaleType ==
@@ -578,14 +573,14 @@ function NFTInfo() {
 
                                                                 <></> :
                                                                 <>
-                                                                    <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3" onClick={() => {
+                                                                    <button className="nftinfo_gradeientBtn web_listitemBtn  mt_2" onClick={() => {
                                                                         if (getVal != "") return toast.error(getVal);
                                                                         if (Tokens[TabName]?.highbid) return toast.warning("Please accept or cancel Bid")
                                                                         SetSendDet(Tokens[TabName]?.myowner); setText("Put on Sale"); handleShowListItem()
                                                                     }}>
                                                                         List Item
                                                                     </button>
-                                                                    <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3"
+                                                                    <button className="nftinfo_gradeientBtn web_listitemBtn  mt_2"
                                                                         onClick={() => {
                                                                             setShowTransfer(true)
                                                                         }}>
@@ -600,13 +595,13 @@ function NFTInfo() {
                                                             "TimedAuction" &&
                                                             new Date(Tokens[TabName]?.myowner?.ClockTime) > Date.now() ? (
 
-                                                            <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3">
+                                                            <button className="nftinfo_gradeientBtn web_listitemBtn  mt_2">
                                                                 Auction Not Started Yet
                                                             </button>
                                                         ) :
                                                             (new Date(Tokens[TabName]?.myowner?.EndClockTime).getTime() > Date.now()
                                                                 &&
-                                                                <button className="nftinfo_gradeientBtn web_listitemBtn  mt-3">
+                                                                <button className="nftinfo_gradeientBtn web_listitemBtn  mt_2">
                                                                     Auction is Live Now
                                                                 </button>
                                                             )
@@ -617,7 +612,7 @@ function NFTInfo() {
                                                     accountAddress &&
                                                     (Tokens[TabName]?.owner?.PutOnSaleType ==
                                                         "FixedPrice" ? (
-                                                        <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.owner); setShowCheckout(true) }}>
+                                                        <button className="nftinfo_gradeientBtn web_listitem_btn mt_2" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.owner); setShowCheckout(true) }}>
                                                             Buy Now
                                                         </button>
                                                     ) : (
@@ -632,7 +627,7 @@ function NFTInfo() {
                                                 )
                                             )
                                             :
-                                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3">
+                                            <button className="nftinfo_gradeientBtn web_listitem_btn mt_2">
                                                 This token is Staked
                                             </button>
                                             // :
@@ -721,7 +716,7 @@ function NFTInfo() {
                                                     accountAddress ? (
                                                     Tokens[TabName]?.myowner?.PutOnSaleType ==
                                                     "FixedPrice" && (
-                                                        <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.myowner); setText("Change Price"); handleShowListItem() }}>
+                                                        <button className="nftinfo_gradeientBtn web_listitem_btn mt_2" onClick={() => { if (getVal != "") return toast.error(getVal); SetSendDet(Tokens[TabName]?.myowner); setText("Change Price"); handleShowListItem() }}>
                                                             Change Price
                                                         </button>
                                                     )
@@ -731,28 +726,28 @@ function NFTInfo() {
                                                     (Tokens[TabName]?.owner?.PutOnSaleType ==
                                                         "TimedAuction" &&
                                                         (new Date(Tokens[TabName].owner.EndClockTime)?.getTime() < Date.now() ? (
-                                                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3">
+                                                            <button className="nftinfo_gradeientBtn web_listitem_btn mt_2">
                                                                 Auction Ended
                                                             </button>
                                                         ) : Tokens[TabName]?.highbid?.WalletAddress !=
                                                             accountAddress &&
                                                             Tokens[TabName]?.owner?.WalletAddress ==
                                                             accountAddress ? (
-                                                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); handleShowListItem() }}>
+                                                            <button className="nftinfo_gradeientBtn web_listitem_btn mt_2" onClick={() => { if (getVal != "") return toast.error(getVal); handleShowListItem() }}>
                                                                 Accept
                                                             </button>
                                                         ) : Tokens[TabName]?.myBid?.WalletAddress ==
                                                             accountAddress ? (
-                                                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowBid(true) }}>
+                                                            <button className="nftinfo_gradeientBtn web_listitem_btn mt_2" onClick={() => { if (getVal != "") return toast.error(getVal); setShowBid(true) }}>
                                                                 Edit Bid
                                                             </button>
                                                         ) : ((new Date(Tokens["All"]?.owner?.EndClockTime) > Date.now() &&
                                                             new Date(Tokens["All"]?.owner?.ClockTime) > Date.now()) ?
-                                                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3">
+                                                            <button className="nftinfo_gradeientBtn web_listitem_btn mt_2">
                                                                 Not Started Yet
                                                             </button>
                                                             :
-                                                            <button className="nftinfo_gradeientBtn web_listitem_btn mt-3" onClick={() => { if (getVal != "") return toast.error(getVal); setShowBid(true) }}>
+                                                            <button className="nftinfo_gradeientBtn web_listitem_btn mt_2" onClick={() => { if (getVal != "") return toast.error(getVal); setShowBid(true) }}>
                                                                 Bid Now
                                                             </button>
                                                         )))
@@ -837,219 +832,255 @@ function NFTInfo() {
                                             //   </button>
                                             // ))
                                         }
-                                    </div>
-                                </Col>
-                                <Col s lg={9} md={12} sm={12} xs={12} className="mt-5 mt-lg-0">
-                                    <div className="d-flex align-items-center gap-3">
+                      </div></div>
 
-                                        <h3 className="marketplae_topdata hc-info__name-title mb-0">
-                                            {!isEmpty(InfoDetail)
-                                                ? InfoDetail?.NFTName?.length > 15 ? <>{InfoDetail?.NFTName.slice(0, 15)}...</> : InfoDetail?.NFTName
-                                                : Tokens_Detail?.NFTName?.length > 15 ? <>{Tokens_Detail?.NFTName.slice(0, 15)}...</> : Tokens_Detail?.NFTName}
-                                        </h3>
+                      <div>
+                      <div className="d-flex align-items-center gap_2">
 
-                                        <div className="nftInfo_iconsHolder">
-                                            <img onClick={() => setShareShow(!shareShow)}
-                                                className="nftInfo_socials"
-                                                src={require("../assets/images/share.svg").default}
-                                            />
-                                            {shareShow ?
+<h3 className="marketplae_topdata hc-info__name-title">
+    {!isEmpty(InfoDetail)
+        ? InfoDetail?.NFTName?.length > 15 ? <>{InfoDetail?.NFTName.slice(0, 15)}...</> : InfoDetail?.NFTName
+        : Tokens_Detail?.NFTName?.length > 15 ? <>{Tokens_Detail?.NFTName.slice(0, 15)}...</> : Tokens_Detail?.NFTName}
+</h3>
 
-                                                <div className="shareOptions_holder">
+<div className="nftInfo_iconsHolder">
+    <img onClick={() => setShareShow(!shareShow)}
+        className="nftInfo_socials"
+        src={require("../assets/images/share.svg").default}
+    />
+    {shareShow ?
 
-                                                    <div className="nftinfo_imgsep"></div>
-                                                    <TelegramShareButton
-                                                        title={"Telegram"}
-                                                        url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+        <div className="shareOptions_holder">
 
-                                                    >
-                                                        <img
-                                                            className="nftInfo_socials"
-                                                            src={
-                                                                require("../assets/images/whitetelegram.svg").default
-                                                            }
-                                                        />
-                                                    </TelegramShareButton>
+            <div className="nftinfo_imgsep"></div>
+            <TelegramShareButton
+                title={"Telegram"}
+                url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
 
-                                                    <TwitterShareButton
-                                                        url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
-                                                        title="Twitter Share"
-                                                    >
-                                                        <img
-                                                            className="nftInfo_socials"
-                                                            src={require("../assets/images/whitetwitter.svg").default}
-                                                        />
-                                                    </TwitterShareButton>
+            >
+                <img
+                    className="nftInfo_socials"
+                    src={
+                        require("../assets/images/whitetelegram.svg").default
+                    }
+                />
+            </TelegramShareButton>
 
-                                                    <img
-                                                        className="nftInfo_socials"
-                                                        src={require("../assets/images/whiteinsta.svg").default}
-                                                    />
+            <TwitterShareButton
+                url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+                title="Twitter Share"
+            >
+                <img
+                    className="nftInfo_socials"
+                    src={require("../assets/images/whitetwitter.svg").default}
+                />
+            </TwitterShareButton>
+
+            <img
+                className="nftInfo_socials"
+                src={require("../assets/images/whiteinsta.svg").default}
+            />
 
 
-                                                    <img
-                                                        className="nftInfo_socials"
-                                                        src={require("../assets/images/whitediscard.svg").default}
-                                                    />
+            <img
+                className="nftInfo_socials"
+                src={require("../assets/images/whitediscard.svg").default}
+            />
 
-                                                    <CopyToClipboard
-                                                        onCopy={() => toast.success("Content copied successfully")}
-                                                        text={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
-                                                    >
-                                                        <img
-                                                            className="nftInfo_socials"
-                                                            src={require("../assets/images/whitecopy.svg").default}
-                                                        />
-                                                    </CopyToClipboard>
+            <CopyToClipboard
+                onCopy={() => toast.success("Content copied successfully")}
+                text={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+            >
+                <img
+                    className="nftInfo_socials"
+                    src={require("../assets/images/whitecopy.svg").default}
+                />
+            </CopyToClipboard>
 
-                                                    <WhatsappShareButton
-                                                        title={'Whatsapp'}
-                                                        url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
-                                                    >
-                                                        <img
-                                                            className="nftInfo_socials"
-                                                            src={
-                                                                require("../assets/images/whitewhatsapp.svg").default
-                                                            }
-                                                        />
+            <WhatsappShareButton
+                title={'Whatsapp'}
+                url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+            >
+                <img
+                    className="nftInfo_socials"
+                    src={
+                        require("../assets/images/whitewhatsapp.svg").default
+                    }
+                />
 
-                                                    </WhatsappShareButton>
-                                                </div> :
-                                                <></>}
+            </WhatsappShareButton>
+        </div> :
+        <></>}
 
-                                        </div>
-                                    </div>
+</div>
+</div>
 
-                                    {console.log("asgfsefasfs", Tokens[TabName]?.owner?.CustomUrl)}
-                                    <p className="nftcard_ownedby mt-3">
-                                        Owned by :{" "}
+{console.log("asgfsefasfs", Tokens[TabName]?.owner?.CustomUrl)}
+<p className="nftcard_ownedby mt_2">
+Owned by :{" "}
 
-                                        {InfoDetail && !isEmpty(InfoDetail) ? (
-                                            <NavLink className="sidetab_link" to={"/profile" + "/" + Tokens[TabName]?.owner?.CustomUrl}>
-                                                <span className="nft_ownerName">
-                                                    {payload?.DisplayName
-                                                        ? payload?.DisplayName
-                                                        : address_showing(payload?.WalletAddress)}
-                                                </span>
-                                            </NavLink>
-                                        ) : (
-                                            <NavLink className="sidetab_link" to={Tokens[TabName]?.owner?.CustomUrl ? "/profile" + "/" + Tokens[TabName]?.owner?.CustomUrl : "#"}>
-                                                <span className="nft_ownerName">
-                                                    {Tokens[TabName]?.owner?.DisplayName
-                                                        ? Tokens[TabName]?.owner?.DisplayName
-                                                        : address_showing(
-                                                            Tokens[TabName]?.owner?.NFTOwner
-                                                        )}
-                                                </span>
-                                            </NavLink>
-                                        )}
-                                    </p>
+{InfoDetail && !isEmpty(InfoDetail) ? (
+    <NavLink className="sidetab_link" to={"/profile" + "/" + Tokens[TabName]?.owner?.CustomUrl}>
+        <span className="nft_ownerName">
+            {payload?.DisplayName
+                ? payload?.DisplayName
+                : address_showing(payload?.WalletAddress)}
+        </span>
+    </NavLink>
+) : (
+    <NavLink className="sidetab_link" to={Tokens[TabName]?.owner?.CustomUrl ? "/profile" + "/" + Tokens[TabName]?.owner?.CustomUrl : "#"}>
+        <span className="nft_ownerName">
+            {Tokens[TabName]?.owner?.DisplayName
+                ? Tokens[TabName]?.owner?.DisplayName
+                : address_showing(
+                    Tokens[TabName]?.owner?.NFTOwner
+                )}
+        </span>
+    </NavLink>
+)}
+</p>
 
-                                    {/* {Tokens["All"]?.owner?.PutOnSaleType ===
-                    "TimedAuction" &&
+{/* {Tokens["All"]?.owner?.PutOnSaleType ===
+"TimedAuction" &&
 
-                    <div className="nftInfo_greenBar">
-                      <div className="greenBar_left">
-                        <img
-                          className="greenClock"
-                          src={require("../assets/images/clock.svg").default}
-                        />
+<div className="nftInfo_greenBar">
+<div className="greenBar_left">
+<img
+className="greenClock"
+src={require("../assets/images/clock.svg").default}
+/>
 
-                        {new Date(Tokens["All"]?.owner?.ClockTime) > Date.now() ? (
+{new Date(Tokens["All"]?.owner?.ClockTime) > Date.now() ? (
 
-                          <p className="greenBar_time">
-                            Auction Yet to Start {Math.ceil((new Date(Tokens["All"]?.owner.ClockTime).getTime() - new Date(Date.now()).getTime()) / (1000 * 3600 * 24))}
-                          </p>
+<p className="greenBar_time">
+Auction Yet to Start {Math.ceil((new Date(Tokens["All"]?.owner.ClockTime).getTime() - new Date(Date.now()).getTime()) / (1000 * 3600 * 24))}
+</p>
 
-                        )
-                          :
-                          ((new Date(Tokens["All"]?.owner?.EndClockTime) > Date.now()) ?
-                            <>
+)
+:
+((new Date(Tokens["All"]?.owner?.EndClockTime) > Date.now()) ?
+<>
 
-                              <div className="greenBar_countdown">
-                                {new Date(
-                                  Tokens["All"]?.owner?.EndClockTime
-                                ) > Date.now() && (
-                                    <Countdown
-                                      date={Tokens["All"]?.owner?.EndClockTime}
-                                      // autoStart={true}
-                                      renderer={renderer}
-                                    />
-                                  )}
-                              </div>
-                            </>
-                            :
-                            <span>Auction Ended</span>
-                          )}
+<div className="greenBar_countdown">
+{new Date(
+Tokens["All"]?.owner?.EndClockTime
+) > Date.now() && (
+<Countdown
+date={Tokens["All"]?.owner?.EndClockTime}
+// autoStart={true}
+renderer={renderer}
+/>
+)}
+</div>
+</>
+:
+<span>Auction Ended</span>
+)}
 
+</div>
+</div>
+} */}
+<div className="d-none d-md-block">
+{Tokens["All"]?.owner?.PutOnSaleType ===
+"TimedAuction" &&
+
+<div className="nftInfo_greenBar">
+    <div className="greenBar_left">
+        {/* <img
+className="greenClock"
+src={require("../assets/images/clock.svg").default}
+/>   */}
+        <p className="greenBar_time">
+            {new Date(Tokens["All"]?.owner?.EndClockTime) > Date.now() ? `Sale ends ${new Date(Tokens["All"]?.owner?.EndClockTime).toString()}` : "Auction Ended"}
+        </p>
+    </div>
+    <div className="greenBar_countdown mt_2">
+        {new Date(
+            Tokens["All"]?.owner?.EndClockTime
+        ) > Date.now() && (
+                <Countdown
+                    date={Tokens["All"]?.owner?.EndClockTime}
+                    onComplete={() => toast.warn("Auction ended...")}
+                // autoStart={true}
+                // renderer={renderer}
+                />
+            )}
+    </div>
+</div>}
+
+</div>
+
+
+
+<div className="nftInfo_curPrice mt_2">
+{Tokens[TabName]?.owner?.PutOnSaleType === "FixedPrice" &&
+    // <p className="created">
+    <>
+        <p>Current Price : </p>&nbsp;<p className="dollar_price">
+            <img
+                className="nft_coinImg"
+                src={BNBIcon}
+            />
+            &nbsp;{Tokens[TabName]?.owner?.NFTPrice}&nbsp;{Tokens[TabName]?.owner?.CoinName}
+        </p>
+        {/* </p> */}
+    </>
+}
+
+</div>
+{/* <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
+List Item
+</button> */}
                       </div>
-                    </div>
-                  } */}
-                                    {Tokens["All"]?.owner?.PutOnSaleType ===
-                                        "TimedAuction" &&
-
-                                        <div className="nftInfo_greenBar">
-                                            <div className="greenBar_left">
-                                                {/* <img
-                          className="greenClock"
-                          src={require("../assets/images/clock.svg").default}
-                        />   */}
-                                                <p className="greenBar_time">
-                                                    {new Date(Tokens["All"]?.owner?.EndClockTime) > Date.now() ? `Sale ends ${new Date(Tokens["All"]?.owner?.EndClockTime).toString()}` : "Auction Ended"}
-                                                </p>
-                                            </div>
-                                            <div className="greenBar_countdown mt_2">
-                                                {new Date(
-                                                    Tokens["All"]?.owner?.EndClockTime
-                                                ) > Date.now() && (
-                                                        <Countdown
-                                                            date={Tokens["All"]?.owner?.EndClockTime}
-                                                            onComplete={() => toast.warn("Auction ended...")}
-                                                        // autoStart={true}
-                                                        // renderer={renderer}
-                                                        />
-                                                    )}
-                                            </div>
-                                        </div>}
 
 
+                    
+</div>
 
-                                      
+<div className="d-block d-md-none mt_3">
+{Tokens["All"]?.owner?.PutOnSaleType ===
+"TimedAuction" &&
 
-                                    <div className="nftInfo_curPrice mt_3">
-                                        {Tokens[TabName]?.owner?.PutOnSaleType === "FixedPrice" &&
-                                            // <p className="created">
-                                            <>
-                                                <p>Current Price : </p>&nbsp;<p className="dollar_price">
-                                                    <img
-                                                        className="nft_coinImg"
-                                                        src={BNBIcon}
-                                                    />
-                                                    &nbsp;{Tokens[TabName]?.owner?.NFTPrice}&nbsp;{Tokens[TabName]?.owner?.CoinName}
-                                                </p>
-                                                {/* </p> */}
-                                            </>
-                                        }
+<div className="nftInfo_greenBar">
+    <div className="greenBar_left">
+        {/* <img
+className="greenClock"
+src={require("../assets/images/clock.svg").default}
+/>   */}
+        <p className="greenBar_time">
+            {new Date(Tokens["All"]?.owner?.EndClockTime) > Date.now() ? `Sale ends ${new Date(Tokens["All"]?.owner?.EndClockTime).toString()}` : "Auction Ended"}
+        </p>
+    </div>
+    <div className="greenBar_countdown mt_2">
+        {new Date(
+            Tokens["All"]?.owner?.EndClockTime
+        ) > Date.now() && (
+                <Countdown
+                    date={Tokens["All"]?.owner?.EndClockTime}
+                    onComplete={() => toast.warn("Auction ended...")}
+                // autoStart={true}
+                // renderer={renderer}
+                />
+            )}
+    </div>
+</div>}
 
-                                    </div>
-                                    {/* <button className="nftinfo_gradeientBtn mob_listitem_btn mt-3" onClick={() => handleShowListItem()}>
-                    List Item
-                  </button> */}
+</div>
 
-                                  
-                                </Col>
-                            </Row> 
+
+                 
                     </div>
                 </div>
                 <div className="bottom_content content_bot">
                 <div className="inner-container__width">
+
+         
+
+
+
+
                 <Row>      
-                        <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner">
-                            {/* <BreadPath /> */}
-                         
-
-
-                            {/* box  */}
+                        <Col lg={12} md={12} sm={12} xs={12} className="">
                             <Row>
                                 <Col sm={9} md={7} lg={4}
                                 >
@@ -1143,11 +1174,11 @@ function NFTInfo() {
                                 <Col xs={12}>
 
 
-                                    <p className="hc-info__price-title mt-4">Price History
+                                    <p className="hc-info__price-title">Price History
                                     </p>
 
-
-                                    <Row>
+                                     
+                                    <Row >
                                         <Col lg={1} xs={1}>
                                             <p className="apexchart_label">Average Price (BNB)</p>
 
@@ -1162,42 +1193,10 @@ function NFTInfo() {
                                         </Col>
                                     </Row>
 
-                                    {/* <Accordion
-                    defaultActiveKey="0"
-                    className="mt-5 nftInfo_accordion"
-                    flush
-                  >
-                    <Accordion.Item eventKey="0">
-                      <Accordion.Header>
-                        Price History <i class="fa-solid fa-angle-down" />
-                      </Accordion.Header>
-                      {graph && <Accordion.Body>
-                        <Row>
-                          <Col lg={1} xs={1}>
-                            <p className="apexchart_label">Average Price (BNB)</p>
+                                  
 
-                          </Col>
-                          <Col lg={11} xs={11}>
-                            <ReactApexChart
-                              options={graphData.options}
-                              series={graphData.series}
-                              type="bar"
-                              height={200}
-                            />
-                          </Col>
-                        </Row>
-
-                      </Accordion.Body>}
-                    </Accordion.Item>
-                    <Accordion.Item eventKey="1">
-                      <Accordion.Header>
-                        Offers <i class="fa-solid fa-angle-down" />
-                      </Accordion.Header>
-                      <Accordion.Body></Accordion.Body>
-                    </Accordion.Item>
-                  </Accordion> */}
-
-                                    <h6 className="nftInfo_descTitle">Description</h6>
+                                   <div className="mt_3 mb_4">
+                                    <h6 className="nftInfo_descTitle mb_3">Description</h6>
 
                                     {description ? (
                                         <p className="mp_detailbrief hc-home__desc">{isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription}</p>
@@ -1209,18 +1208,19 @@ function NFTInfo() {
                                         </p>
                                     )}
 
-                                    <button
-                                        className="mp_readmoreBtn readmore_left mt-2 checkoutbtn"
+                                    {
+                                        (isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)?.length > 300 &&
+                                        <button
+                                        className="primary_blueBtn mt_2 mb_2"
                                         onClick={() => setDescription(!description)}
                                     >
                                         {(isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)?.length > 300 ? description ? "Check Out Less" : "Check Out More" : ""}
-                                    </button>
+                                    </button>}
+                                    </div>
 
-
-
-
-                                    <h6 className="nftInfo_descTitle">Price History</h6>
-
+                               
+                                   <div className="mt_4">
+                                    <h6 className="nftInfo_descTitle mt_2">Price History</h6>
 
                                     <div className="nftInfo_acrdTabs hc-infoInfo__tabs ">
                                         <div
@@ -1410,7 +1410,7 @@ function NFTInfo() {
                                             </table>
                                         </div>
                                     </div>
-
+                                    </div>
 
                                     {/* <Accordion
                     defaultActiveKey="0"
@@ -1714,82 +1714,28 @@ function NFTInfo() {
                   </Accordion> */}
                                 </Col>
                             </Row>
-                            <Row className="mt-3">
-                                <h3 className="nftInfo_descTitle mt-4">
+                            <div className="mt_3 pt_4 mb_3">
+                                <h3 className="nftInfo_descTitle mt_3 mb_3">
                                     More From this Collection
                                 </h3>
-                                <div className="hc-mint__swiper-wrap">
+                                <div className="mp-grid mp-grid_list">
 
-                                    <button
-                                        className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
-                                        onClick={() => goPrev()}
-                                    >
-                                        <FaChevronLeft fill="#fff" fontSize={38} className="me-2" />
-                                    </button>
+                                 
 
-
-                                    <button
-                                        className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
-                                        onClick={() => goNext()}
-                                    >
-
-                                        <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
-                                    </button>
-                                    <Swiper
-                                        className="mySwiper bottomnav_colswiper nftcard_swiper pt-3"
-                                        spaceBetween={30}
-                                        navigation={{
-                                            nextEl: ".swiper-button-next1",
-                                            prevEl: ".swiper-button-prev1",
-                                        }}
-                                        keyboard={true}
-                                        ref={swiperRef}
-                                        pagination={{
-                                            clickable: true,
-                                        }}
-                                        breakpoints={{
-                                            320: {
-                                                slidesPerView: 1.2,
-                                                spaceBetween: 20,
-                                            },
-                                            450: {
-                                                slidesPerView: 2,
-                                                spaceBetween: 20,
-                                            },
-                                            576: {
-                                                slidesPerView: 2.3,
-                                                spaceBetween: 20,
-                                            },
-                                            768: {
-                                                slidesPerView: 3,
-                                                spaceBetween: 20,
-                                            },
-                                            992: {
-                                                slidesPerView: 3,
-                                                spaceBetween: 20,
-                                            },
-                                            1200: {
-                                                slidesPerView: 4,
-                                                spaceBetween: 20,
-                                            },
-                                            1500: {
-                                                slidesPerView: 4,
-                                                spaceBetween: 20,
-                                            },
-                                        }}
-                                        modules={[Navigation, Keyboard]}
-                                    >
                                         {nftcardData?.map((i) => (
-                                            <SwiperSlide onClick={() => { setInc(!inc) }}>
+                                            
                                                 <DataCard data={i} />
-                                            </SwiperSlide>
+                                          
                                         ))}
-                                    </Swiper>
+                             
                                 </div>
+                                <div className='mt_3 mb_3 d-flex justify-content-center'>
+                                        <button className='button-loadMore mb_3'>Load More</button>
+                                    </div>
                                 {/* <div className="greenarrow_boxHolder position-relative">
                   <div className="greenarrow_box"></div>
                 </div> */}
-                            </Row>
+                            </div>
                         </Col>
                     </Row>
                     </div>
