@@ -925,8 +925,8 @@ p {
 
 @media screen and (max-width:575px) {
   .col_pad {
-    padding-left: 0.2vh;
-    padding-right: 0.2vh;
+    padding-left: 0.5vh;
+    padding-right: 0.5vh;
   }
 }
 

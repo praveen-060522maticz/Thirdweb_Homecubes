@@ -407,7 +407,7 @@ function Marketplace() {
                                 md={6}
                                 sm={6}
                                 xs={12}
-                                className="mb_select_holder mt_3 ms-auto colpad"
+                                className="mb_select_holder mt_3 ms-auto"
                             >
                                 <Select
                                     // menuIsOpen={true}
@@ -435,7 +435,7 @@ function Marketplace() {
                         </Row>
 
                         <Row className="mt_3">
-                            <Col xl={3} lg={4} md={4} sm={6} xs={12} className="colpad mt_3">
+                            <Col xl={3} lg={4} md={4} sm={6} xs={12} className="mt_3">
                                 <div
                                     className={
                                         `mb_3 ${mobSearch
@@ -575,8 +575,8 @@ function Marketplace() {
                             </Col>
 
 
-                            <Col xl={9} lg={8} md={8} sm={6} xs={12} className="colpad  mt_3">
-                                <Row className="cols">
+                            <Col xl={9} lg={8} md={8} sm={6} xs={12} className="mt_3">
+                                <Row className="mx-auto">
                                     {filterData.length != 0 && filterData.map((i) => (
                                         <>
                                             {/* {
