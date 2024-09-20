@@ -509,6 +509,7 @@ function NFTInfo() {
                 <Col lg={3} md={12} sm={12} xs={12}>
 
                   <div className="nftInfo_topLeft hc-info__left--image">
+                  
                     {!isEmpty(Tokens_Detail) &&
                       <ImgAudVideo
                         file={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Original/${Tokens_Detail?.NFTOrginalImage}`}

@@ -759,6 +759,10 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 2vw;
     }
+    .mp-grid.mp-grid_list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2vw;
+    }
 
     .mp-grid .red {
         height: 300px;
@@ -1165,6 +1169,15 @@
     /* end of projects */
 }
 
+@media screen and (max-width:991px) {
+.mp-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+.mp-grid.mp-grid_list{
+    grid-template-columns: repeat(3, 1fr);
+}
+}
+
 @media screen and (max-width:767px) {
     .mp_inner--bottom {
         margin-top: -25vh;
@@ -1186,9 +1199,12 @@
 
     .mp-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 2vw;
+        gap: 5vw 2.2vw;
     }
-
+    .mp-grid.mp-grid_list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5vw 2.2vw;
+    }
     .mp-grid .red {
         height: 300px;
     }

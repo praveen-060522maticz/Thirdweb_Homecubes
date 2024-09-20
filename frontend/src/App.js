@@ -19,6 +19,7 @@ import '../src/assets/css/Style1.css';
 import '../src/assets/css/App.css'
 import Home from './Screens/Home';
 import Marketplace from './Screens/Marketplace';
+import NFTInfo from './Screens/NFTInfo';
 import Minting from './Screens/Minting';
 import MintProjects from './Screens/MintProjects';
 import Projects from './Screens/Projects';
@@ -39,7 +40,11 @@ function App() {
         {
             path: "/marketplace",
             element: <Marketplace />,
-        },
+          },
+          {
+            path: "/nftInfo/:Owner/:Id",
+            element: <NFTInfo />,
+          },
         {
             path: "/minting",
             element: <MintProjects />,
