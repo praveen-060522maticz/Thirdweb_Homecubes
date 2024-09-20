@@ -129,6 +129,21 @@ function ProjectInfo() {
     <>
       <BottomBar />
       <Header />
+
+      {/* for mobile only -start */}
+
+      <div className="hc-min__banner-mobile d-xl-none">
+        <ImgAudVideo
+          file={`${config.IMG_URL}/projects/ProjectBanner/${projectDetail?.ProjectBanner}`}
+          origFile={mintBg}
+          classname={"hc-mint__banner-image"}
+          noimg={mintBg}
+        />
+
+      </div>
+
+      {/* for mobile only -end */}
+
       <div className="hc-mint__banner">
         {/* <img src={mintBg} className="hc-mint__banner-image" /> */}
         <ImgAudVideo
@@ -137,50 +152,50 @@ function ProjectInfo() {
           classname={"hc-mint__banner-image"}
           noimg={mintBg}
         />
-        <div className="hc-mint__banner-content">
-          <div className="row mx-auto">
-            <div className="custom_container  container">
-              <div className="row">
-                <div className="col-md-2 col-lg-1">
-                </div>
-                <div className="col-md-10 col-lg-11 hc-mint__banner-col--right">
-                  <div className="row align-items-end mb-3 mx-auto">
-                    <div className="col-12 mt-4 mt-lg-0  col-lg-6">
-                      <div className="hc-mint__bannerInner-col--left">
-                        <div className="cus-back-btn mb-3">
-                          <Button className="px-0" onClick={() => navigate(-1)} >
-                            <i className="fa-solid fa-chevron-left"></i>
-                            Back
-                          </Button>
-                        </div>
-                        <div className="hc-mint__banner--wrapper mt-2">
-                          <img lazy
-                            src={`${config.IMG_URL}/projects/ProjectThumbnail/${projectDetail?.ProjectThumbnail}`}
-                          />
-                        </div>
-                        <p className="hc-mint__banner--title mt-3">
-                          {projectDetail?.projectTitle}
-                        </p>
-                        {/* <p className="hc-mint__banner--desc mt-3 mb-0">
+        <div className="hc-mint__banner-content w-100">
+          <div className="inner-container__width">
+            <div className="row mx-auto">
+              <div className="custom_container  container px-0">
+                <div className="row mx-auto">
+
+                  <div className="col-12 hc-mint__banner-col--right px-0">
+                    <div className="row align-items-end mb-3 mx-auto">
+                      <div className="col-12 col-xl-6 px-0">
+                        <div className="hc-mint__bannerInner-col--left">
+                          <div className="cus-back-btn">
+                            <Button className="px-0" onClick={() => navigate(-1)} >
+                              <i className="fa-solid fa-chevron-left"></i>
+                              Back
+                            </Button>
+                          </div>
+                          <div className="hc-mint__banner--wrapper ">
+                            <img lazy
+                              src={`${config.IMG_URL}/projects/ProjectThumbnail/${projectDetail?.ProjectThumbnail}`}
+                            />
+                          </div>
+                          <p className="hc-mint__banner--title ">
+                            {projectDetail?.projectTitle}
+                          </p>
+                          {/* <p className="hc-mint__banner--desc mt-3 mb-0">
                           {projectDetail?.aboutDescription?.length > 300
                             ? projectDetail?.aboutDescription?.slice(0, 300).concat("...")
                             : projectDetail?.aboutDescription}
                         </p> */}
-                        {
-                          projectDetail?.aboutDescription && description ? (
-                            <p className="hc-mint__banner--desc mt-3 mb-0">{projectDetail?.aboutDescription}</p>
-                          ) : (
-                            <p className="hc-mint__banner--desc mt-3 mb-0">
-                              {projectDetail?.aboutDescription?.length > 300
-                                ? projectDetail?.aboutDescription?.slice(0, 300).concat("...")
-                                : projectDetail?.aboutDescription}
-                            </p>
-                          )}
+                          {
+                            projectDetail?.aboutDescription && description ? (
+                              <p className="hc-mint__banner--desc mb-0">{projectDetail?.aboutDescription}</p>
+                            ) : (
+                              <p className="hc-mint__banner--desc  mb-0">
+                                {projectDetail?.aboutDescription?.length > 300
+                                  ? projectDetail?.aboutDescription?.slice(0, 300).concat("...")
+                                  : projectDetail?.aboutDescription}
+                              </p>
+                            )}
+
+                        </div>
 
                       </div>
-
-                    </div>
-                    {/* {mint == "minted" ? <div className="col-12 order-1 order-lg-2 col-lg-6 d-flex justify-content-end">
+                      {/* {mint == "minted" ? <div className="col-12 order-1 order-lg-2 col-lg-6 d-flex justify-content-end">
                       <div className="hc-mint__bannerInner-col--right">
                         <div className="hc-mint__card-initialSales">
                           <p className="title text-center">Initial Sales</p>
@@ -255,56 +270,57 @@ function ProjectInfo() {
                         </div>
                       </div>
                     </div> : <></>} */}
-                    <div className="col-12">
-                      <div>
-                        <hr className="projects_hr" />
-                        <div className="d-flex flex-wrap align-items-center gap-3 gap-xl-5">
-                          <div className="mp_collectionDetail mb-2">
-                            <p className="mp_collectionLabel">Number of NFTs :</p>
-                            <p className="mp_collectionValue">
-                              {projectDetail?.maxNFTs}
-                            </p>
-                          </div>
-                          <div className="mp_collectionDetail mb-2">
-                            <p className="mp_collectionLabel">
-                              Number of Staked NFTs :
-                            </p>
-                            <p className="mp_collectionValue">
-                              {staked}
-                            </p>
-                          </div>
-                          <div className="mp_collectionDetail mb-2">
-                            <p className="mp_collectionLabel">
-                              Number of Non-Staked NFTs :
-                            </p>
-                            <p className="mp_collectionValue">
-                              {unStaked}
-                            </p>
-                          </div>
-                          <div className="mp_collectionDetail mb-2">
-                            <p className="mp_collectionLabel">
-                              Next Rewards Distribution :
-                            </p>
-                            <p className="mp_collectionValue">
-                              {new Date(rewardDetail?.endDateFormat).toLocaleDateString()}
-                            </p>
-                          </div>
-                          <div className="mp_collectionDetail mb-2">
-                            <p className="mp_collectionLabel">Total reward distrubuted :</p>
-                            <p className="mp_collectionValue">
-                              {totalReward}
-                            </p>
+                      <div className="col-12">
+                        <div>
+                          <hr className="projects_hr" />
+                          <div className="d-flex flex-wrap align-items-center gap-3 gap-xl-5">
+                            <div className="mp_collectionDetail mb-2">
+                              <p className="mp_collectionLabel">Number of NFTs :</p>
+                              <p className="mp_collectionValue">
+                                {projectDetail?.maxNFTs}
+                              </p>
+                            </div>
+                            <div className="mp_collectionDetail mb-2">
+                              <p className="mp_collectionLabel">
+                                Number of Staked NFTs :
+                              </p>
+                              <p className="mp_collectionValue">
+                                {staked}
+                              </p>
+                            </div>
+                            <div className="mp_collectionDetail mb-2">
+                              <p className="mp_collectionLabel">
+                                Number of Non-Staked NFTs :
+                              </p>
+                              <p className="mp_collectionValue">
+                                {unStaked}
+                              </p>
+                            </div>
+                            <div className="mp_collectionDetail mb-2">
+                              <p className="mp_collectionLabel">
+                                Next Rewards Distribution :
+                              </p>
+                              <p className="mp_collectionValue">
+                                {new Date(rewardDetail?.endDateFormat).toLocaleDateString()}
+                              </p>
+                            </div>
+                            <div className="mp_collectionDetail mb-2">
+                              <p className="mp_collectionLabel">Total reward distrubuted :</p>
+                              <p className="mp_collectionValue">
+                                {totalReward}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
+                  </div>
                 </div>
+
               </div>
 
             </div>
-
           </div>
         </div>
       </div>
@@ -408,8 +424,8 @@ function ProjectInfo() {
                 </Col>
               </Row> */}
 
-              <Row className="mt-5">
-                <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">Gallery</h3>
+              <Row className="mx-auto">
+                <h3 className="text-center hc-mint__content-title px-0">Gallery</h3>
                 <p className="hc-mint__banner--desc  mb-0 text-center w-75 mx-auto ">
                   {projectDetail?.CMS?.filter((val) => val.stepTitle == "Photo Galleries")?.[0]?.stepDescription}
                 </p>
@@ -497,8 +513,8 @@ function ProjectInfo() {
                   </div>
                 </div>
               </Row>
-              <Row className="mt-5">
-                <h3 className="minting_detail mint_secondaryTitle text-center mb-3 hc-mint__content-title">
+              <div className="section-estimateProperty">
+                <h3 className="hc-mint__content-title">
                   Estimated Property Value <span className="hc-mint__span-gradient"> {projectDetail?.propertyValue?.toUpperCase?.() ?? "1M"}$</span>
                 </h3>
                 <h5 className="hc-mint__content-subtitle mt-5">
@@ -538,7 +554,7 @@ function ProjectInfo() {
                           </p>
                         </Col>
                       </Row> */}
-              </Row>
+              </div>
               <Row className="mt-5">
                 <Col lg={6} md={8} sm={12} xs={12} className="mb-3">
                   {/* <h5 className="hc-mint__content-subtitle mt-5">News Feed and Updates</h5> */}

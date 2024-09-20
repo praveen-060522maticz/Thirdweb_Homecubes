@@ -113,100 +113,96 @@ function Projects() {
       <Header />
 
 
-      <div className='innercontent'>
+      <div className='innercontent position-relative'>
         <div className={isFixed ? "side_left fixed" : "side_left sticky"}  >
           <SideTab />
         </div>
-        <div className=' project_banner_section'>
+        <div className='banner_section project_banner_section'>
+
+        </div>
+        <div className='project_bottom_section'>
           <div className='px-0 inner-container__width'>
             <h3 className='hc-home__title home_titled'>All <strong>Listed Properties</strong></h3>
             {/* <p className='mp_detailbrief hc-home__desc mt-3' dangerouslySetInnerHTML={{ __html: CMS?.content }} ></p> */}
             <hr className='projects_hr' />
 
-            <div className='d-flex flex-wrap align-items-center gap-3 gap-lg-4 gap-xl-5'>
-              <div className="mp_collectionDetail mb-2">
-                <p className="mp_collectionLabel">Properties :</p>
-                <p className="mp_collectionValue">{projectLength}</p>
+            <div className=' projects__details'>
+              <div className="projects__details-row order-4 order-xl-1">
+                <p className="projects__detatils-row--label">Properties :</p>
+                <p className="projects__detatils-row--value">{projectLength}</p>
               </div>
-              <div className="mp_collectionDetail mb-2">
-                <p className="mp_collectionLabel">NFTs :</p>
-                <p className="mp_collectionValue">{nftLength}</p>
+              <div className="projects__details-row order-1 order-xl-2">
+                <p className="projects__detatils-row--label">NFTs :</p>
+                <p className="projects__detatils-row--value">{nftLength}</p>
               </div>
-              <div className="mp_collectionDetail mb-2">
-                <p className="mp_collectionLabel">Staked NFTs :</p>
-                <p className="mp_collectionValue">{staked}</p>
+              <div className="projects__details-row order-2 order-xl-3">
+                <p className="projects__detatils-row--label">Staked NFTs :</p>
+                <p className="projects__detatils-row--value">{staked}</p>
               </div>
-              <div className="mp_collectionDetail mb-2">
-                <p className="mp_collectionLabel">Non-Staked NFTs :</p>
-                <p className="mp_collectionValue">{unStaked}</p>
+              <div className="projects__details-row order-3 order-xl-4">
+                <p className="projects__detatils-row--label">Non-Staked NFTs :</p>
+                <p className="projects__detatils-row--value">{unStaked}</p>
               </div>
-              <div className="mp_collectionDetail mb-2">
-                <p className="mp_collectionLabel">Next Rewards Distribution :</p>
-                <p className="mp_collectionValue"> {new Date(rewardDetail?.endDateFormat).toLocaleDateString()}</p>
+              <div className="projects__details-row order-5 order-xl-5">
+                <p className="projects__detatils-row--label">Next Rewards Distribution :</p>
+                <p className="projects__detatils-row--value"> {new Date(rewardDetail?.endDateFormat).toLocaleDateString()}</p>
               </div>
             </div>
 
-            <Row className='mt-5'>
+            <div className='projects__list'>
               <h6 className='hc-home__title home_titled'><strong>Properties </strong> List</h6>
-              <Col lg={4} md={6} sm={6} xs={12} className='mt-4'>
-                <div
-                  className={
-                    mobSearch
-                      ? "stack_searchbar"
-                      : " stack_searchbar stack_searchbarhider"
-                  }
-                >
-                  <div className="d-flex justify-content-start align-items-center width_aligner">
-                    <img
-                      className="searchglass"
-                      src={
-                        require("../assets/images/searchglass.svg")
-                          .default
-                      }
-                    />
-                    <input type='text' className='stack_search' value={search} placeholder='Search...' onChange={(e) => setSearch(e.target.value)} />
-                    {/* <ReactSearchBox
+
+
+              <div className="project__list--searchContainer">
+                <div className="d-flex justify-content-start align-items-center project__list--search">
+                  <img
+                    className="searchglass"
+                    src={require("../assets/images/searchs.svg").default} />
+                  <input type='text' className='stack_search' value={search} placeholder='Search Properties' onChange={(e) => setSearch(e.target.value)} />
+                  {/* <ReactSearchBox
                                   placeholder="Search..."
                                   value={search}
                                   data={data}
                                   onChange={(e) => setSearch(e)}
                                   callback={(record) => console.log(record)}
                                 /> */}
-                  </div>
-                  <i
-                    class="fa-solid fa-xmark search_closer"
-                    onClick={() => { setMobSearch(false); setSearch('') }}
-                  />
                 </div>
-
-                <div
-                  className={
-                    mobSearch ? "d-none" : " stack_searchbarmob"
+                <i
+                  class="fa-solid fa-xmark projects__list--searchCloser"
+                  onClick={() => { setMobSearch(false); setSearch('') }}
+                />
+              </div>
+              {/* <div
+                className={
+                  mobSearch ? "d-none" : " stack_searchbarmob"
+                }
+                onClick={() => setMobSearch(true)}
+              >
+                <img
+                  className="searchglass"
+                  src={
+                    require("../assets/images/searchglass.svg")
+                      .default
                   }
-                  onClick={() => setMobSearch(true)}
-                >
-                  <img
-                    className="searchglass"
-                    src={
-                      require("../assets/images/searchglass.svg")
-                        .default
-                    }
-                  />
-                </div>
-              </Col>
-            </Row>
+                />
+              </div> */}
 
-            <Row className='mt-4'>
-              {Projects.length != 0 && Projects.map((i) =>
-                <Col xl={3} lg={4} md={6} sm={6} xs={12} className='mb-3 d-flex justify-content-center justify-content-md-start'>
+            </div>
+
+            <div className='project__list-cards'>
+              <div className='mp-grid'>
+                {Projects.length != 0 && Projects.map((i) =>
                   <ProjectCard data={i} show={true} />
-                </Col>
-              )}
-
-            </Row>
+                )}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        <div className='project_bottom_section-empty'></div>
+        <div className='mp-margin d-flex justify-content-center'>
+          <button className='button-loadMore'>Load More</button>
+        </div>
+      </div >
       <div ref={footerRef}>
         <Footer />
       </div>

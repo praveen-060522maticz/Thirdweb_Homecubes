@@ -603,15 +603,133 @@
 
 /* start of project */
 
-.project_banner_section {
-    background: linear-gradient(103.58deg, #240533 39.31%, #004448 95.31%);
-    min-height: 100vh;
-    padding-top: 33.5vh;
-    position: relative;
+
+.project_bottom_section {
+    position: absolute;
+    top: 25vh;
     z-index: 5;
 }
 
+.projects_hr {
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+}
 
+.projects__details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2.5vw;
+}
+
+.projects__details-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.projects__detatils-row--label {
+    font-weight: 500;
+    font-size: 1.8vh;
+}
+
+.projects__detatils-row--value {
+    color: var(--blue_200);
+    font-weight: 500;
+    font-size: 1.8vh;
+}
+
+.projects__list {
+    margin-top: 8vh;
+}
+
+.project__list--searchContainer {
+    align-items: center;
+    background: var(--bg-color-2);
+    border: 1px solid var(--border-color-1);
+    border-radius: 0.6vh;
+    display: flex;
+    justify-content: space-between;
+    max-width: 23vw;
+    padding: 0.6vh 1.4vh;
+    position: relative;
+    gap: 1vw;
+    margin-top: 3vh;
+}
+
+.project__list--search {
+    flex: 1;
+}
+
+.project__list--search input {
+    background-color: initial;
+    border: none;
+    color: var(--white);
+    outline: none;
+    padding: 0.5vh;
+    height: unset;
+    font-size: 1.75vh;
+    width: 100%;
+    font-weight: 550;
+    font-family: var(--montserrat-font);
+}
+
+.project__list--search input::placeholder {
+    color: var(--white);
+    font-weight: 550;
+}
+
+.projects__list--searchCloser {
+    color: var(--white);
+    font-size: 2vh;
+}
+
+.project__list-cards {
+    margin-top: 6vh;
+}
+
+.projectcard_foot-btn--gradient {
+    background-color: var(--gradinet_right);
+    background-image: linear-gradient(to right, var(--gradinet_left), var(--gradinet_right));
+    border: none;
+    border-radius: 0.6vh;
+    color: var(--white);
+    font-family: var(--montserrat-font);
+    font-size: 1.6vh;
+    font-weight: 600;
+    outline: none;
+    padding: 0.8vh;
+    display: flex;
+}
+
+.projectcard_foot-btn--gradient:hover {
+    background-color: var(--gradinet_left);
+    background-image: linear-gradient(to right, var(--gradinet_right), var(--gradinet_left));
+
+}
+
+.hc-card__nft .nftcard_detailwrapper.project-card__details {
+    min-height: 6.7vh;
+}
+
+.project-card__title.nft_name.hc-nft__card-title {
+    margin-bottom: 0px !important;
+}
+
+.project-card__title {
+    width: 10vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.project_bottom_section-empty {
+    min-height: 22vh;
+}
+
+.banner_section.project_banner_section {
+    min-height: 110vh;
+}
 
 /* end of project */
 
@@ -984,6 +1102,67 @@
     }
 
     /* end of mint id */
+
+    /* start of projects */
+
+    .projects_hr {
+        margin-top: 4vh;
+        margin-bottom: 3vh;
+    }
+
+    .project_bottom_section {
+        top: 20vh;
+    }
+
+    .projects__details {
+        row-gap: 3vh;
+        column-gap: 9vw;
+    }
+
+    .projects__detatils-row--label {
+        font-size: 1.9vh;
+    }
+
+    .projects__detatils-row--value {
+        font-size: 1.5vh;
+    }
+
+    .project__list--searchContainer {
+
+        max-width: 60vw;
+    }
+
+    .project__list-cards .hc-card__nft .projectcard_wrapper_sep {
+        height: 23vh;
+        max-height: 23vh;
+        min-height: 23vh;
+        border-radius: 0.5vh 0.5vh 0 0;
+    }
+
+    .project__list-cards .hc-card__nft .nftcard_detailwrapper.project-card__details {
+        min-height: 6vh;
+    }
+
+    .project__list-cards .hc-card__nft .nftcard_detailwrapper {
+        padding: 1vh 2vh;
+    }
+
+    .project-card__title {
+        width: 22vw;
+        font-size: 2.2vh;
+    }
+
+    .projectcard_foot-btn--gradient {
+        border-radius: 0.4vh;
+        font-size: 1.7vh;
+        padding: 0.4vh 1.2vw;
+    }
+
+    .project_bottom_section-empty {
+        min-height: 77vh;
+    }
+
+    /* end of projects */
 }
 
 @media screen and (max-width:767px) {
@@ -1347,4 +1526,66 @@
     }
 
     /* end of mint id */
+
+    /* start of projects */
+
+    .projects_hr {
+        margin-top: 4vh;
+        margin-bottom: 3vh;
+    }
+
+    .project_bottom_section {
+        top: 20vh;
+    }
+
+    .projects__details {
+
+        gap: 6vw;
+    }
+
+    .projects__detatils-row--label {
+        font-size: 1.5vh;
+    }
+
+    .projects__detatils-row--value {
+        font-size: 1.5vh;
+    }
+
+    .project__list--searchContainer {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    .project__list-cards .hc-card__nft .projectcard_wrapper_sep {
+        height: 15vh;
+        max-height: 15vh;
+        min-height: 15vh;
+        border-radius: 0.5vh 0.5vh 0 0;
+    }
+
+    .project__list-cards .hc-card__nft .nftcard_detailwrapper.project-card__details {
+        min-height: 4vh;
+    }
+
+    .project__list-cards .hc-card__nft .nftcard_detailwrapper {
+        padding: 0.6vh 1vh;
+    }
+
+    .project-card__title {
+        width: 18vw;
+        font-size: 1.8vh;
+    }
+
+    .projectcard_foot-btn--gradient {
+        border-radius: 0.2vh;
+        font-size: 1.3vh;
+        padding: 0.4vh 1.2vw;
+    }
+
+    .project_bottom_section-empty {
+        min-height: 35vh;
+    }
+
+    /* end of projects */
+
 }
