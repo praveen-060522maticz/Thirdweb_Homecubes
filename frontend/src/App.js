@@ -21,6 +21,8 @@ import Home from './Screens/Home';
 import Marketplace from './Screens/Marketplace';
 import Minting from './Screens/Minting';
 import MintProjects from './Screens/MintProjects';
+import Projects from './Screens/Projects';
+import ProjectInfo from './Screens/ProjectInfo';
 
 
 
@@ -37,7 +39,7 @@ function App() {
         {
             path: "/marketplace",
             element: <Marketplace />,
-          },
+        },
         {
             path: "/minting",
             element: <MintProjects />,
@@ -45,6 +47,14 @@ function App() {
         {
             path: "/mint/:_id",
             element: <Minting />,
+        },
+        {
+            path: "/projects",
+            element: <Projects />,
+        },
+        {
+            path: "/projectInfo/:projectTitle",
+            element: <ProjectInfo />,
         },
         // Add routes for any additional screens
     ]);

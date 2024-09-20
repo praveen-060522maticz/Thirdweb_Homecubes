@@ -15,10 +15,11 @@
 .inner-container__width {
     /* width: 83%; */
     /* width: calc(var(--container-width-inner) + ((100% - var(--container-width-main))/2)*2); */
-    width: 81%;
+    width: 76%;
     margin-left: auto;
     /* margin-right: 4%; */
-    margin-right: calc((100% - var(--container-width-main))/2)
+    margin-right: calc((100% - var(--container-width-main))/2);
+    /* background: red; */
 }
 
 .mp-grid {
@@ -57,9 +58,9 @@
 }
 
 .nft-card {
-    min-width: 18.6vw;
-    width: 18.6vw;
-    max-width: 18.6vw;
+    min-width: 17.5vw;
+    width: 17.5vw;
+    max-width: 17.5vw;
     border-radius: 0.4vw;
     overflow: hidden;
 }
@@ -70,9 +71,9 @@
 }
 
 .nft-card__a {
-    min-width: 18.6vw;
-    width: 18.6vw;
-    max-width: 18.6vw;
+    min-width: 17.5vw;
+    width: 17.5vw;
+    max-width: 17.5vw;
     min-height: 26vh;
     height: 26vh;
     max-height: 26vh;
@@ -127,7 +128,7 @@
 
 .nft-card__content-values {
     font-weight: 500;
-    font-size: 1.8vh;
+    font-size: 1.6vh;
 }
 
 .nft-card__content-values span {
@@ -428,6 +429,7 @@
 .hc-mint__content-title {
     font-family: var(--montserrat-font);
     font-weight: 700;
+    text-align: center;
 }
 
 .hc-mint__content-title strong {
@@ -472,10 +474,147 @@
 }
 
 .hc-mint__content-title {
-    font-size: 3vh;
+    font-size: 4vh;
+}
+
+.mint-bottom__content {
+    margin-top: 10vh;
+}
+
+.hc-mint__swiper-wrap {
+    margin-top: 2vh;
+    padding: 0px;
+}
+
+.card-gallery {}
+
+.card-gallery__image--wrapper {
+    min-width: 19.7vw;
+    width: 19.7vw;
+    max-width: 19.7vw;
+    min-height: 25vh;
+    height: 25vh;
+    max-height: 25vh;
+    border-radius: 0.4vw;
+    overflow: hidden;
+}
+
+.card-gallery__image--wrapper a {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+}
+
+.card-gallery__image--wrapper a img {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.card-gallery__title {
+    margin-top: 3vh;
+}
+
+.card-gallery__title p {
+    font-size: 2.4vh;
+    font-weight: 700;
+}
+
+.section-estimateProperty {
+    margin-top: 10vh;
+}
+
+.hc-mint__span-gradient {
+    -webkit-text-fill-color: #0000;
+    background: linear-gradient(78.45deg, #0053b5 10.54%, #16ebc3 90.51%);
+    -webkit-background-clip: text;
+}
+
+.mint-margin__top {
+    margin-top: 10vh;
+}
+
+.hc-mint__content-subtitle {
+    font-family: var(--montserrat-font);
+    font-weight: 700;
+    font-size: 4vh;
+}
+
+.hc-mint__content-subtitle strong {
+    font-family: var(--poppins_font);
+    font-weight: 300;
+    color: var(--blue_200);
+}
+
+.section-roadMap {
+    margin-top: 12vh;
+    margin-bottom: 12vh;
+}
+
+.mint-property__imageWrapper {
+    min-width: 15vw;
+    width: 15vw;
+    max-width: 15vw;
+    min-height: 15vw;
+    height: 15vw;
+    max-height: 15vw;
+    border-radius: 0.3vw;
+    overflow: hidden;
+}
+
+.mint-property__imageWrapper img {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+
+.hc-mint__card-timerWraper {
+    border: 0.13vw solid var(--gradinet_right);
+    color: var(--gradinet_right);
+    display: flex;
+    font-family: var(--kanit_font);
+    font-weight: 600;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: -moz-fit-content;
+    width: fit-content;
+    font-size: 4.3vh;
+    min-width: 18.3vw;
+    padding: 1vh 2vw;
+    margin-top: 3vh;
+    border-radius: 0.2vw;
+    letter-spacing: 0.1vw;
 }
 
 /* end of mint id */
+
+/* start of project */
+
+.project_banner_section {
+    background: linear-gradient(103.58deg, #240533 39.31%, #004448 95.31%);
+    min-height: 100vh;
+    padding-top: 33.5vh;
+    position: relative;
+    z-index: 5;
+}
+
+
+
+/* end of project */
+
 
 /* media */
 
@@ -650,14 +789,11 @@
     /* start of mint id */
 
     .hc-min__banner-mobile {
-        min-height: 30vh;
-        height: 30vh;
-        max-height: 30vh;
-        min-width: 100%;
-        width: 100%;
-        max-width: 100%;
+        min-height: 38vh;
+        height: 38vh;
+        max-height: 38vh;
         margin-top: 9vh;
-        position: relative;
+
     }
 
     .hc-mint__bannerInner-col--right {
@@ -757,11 +893,11 @@
     }
 
     .hc-mint__card-initialSales .title {
-        font-size: 2.5vh;
+        font-size: 3vh;
     }
 
     .hc-mint__card-initialSales p {
-        font-size: 1.6vh;
+        font-size: 2vh;
     }
 
     .hc-mint__col-paddingLeft {
@@ -773,8 +909,8 @@
     }
 
     .hc-mint__initialSales--border {
-        border: 0.6vw solid var(--gradinet_right);
-        height: 4vh;
+        border: 0.3vw solid var(--gradinet_right);
+        height: 5vh;
         padding: 0.5vw;
         border-radius: 1vw;
     }
@@ -786,7 +922,7 @@
         padding-right: 1vw;
         display: flex;
         align-items: center;
-        font-size: 1.7vh;
+        font-size: 1.9vh;
     }
 
     .hc-mint__button-mint {
@@ -795,13 +931,56 @@
     }
 
     .hc-mint__button-mint .header_wallet {
-        height: 2vh;
-        width: 2vh;
+        height: 3vh;
+        width: 3vh;
     }
 
     .hc-mint__banner--desc {
         z-index: 2;
         margin-bottom: 5vh !important;
+    }
+
+    .hc-mint__button-mint {
+        font-size: 2.1vh;
+        border-radius: 1vw;
+        gap: 0.8vw;
+    }
+
+
+
+    .hc-mint__content-title {
+        font-size: 3.1vh;
+        line-height: 5.8vh;
+        display: flex;
+        flex-direction: column;
+        white-space: nowrap;
+    }
+
+    .hc-mint__content-title span {
+        font-size: 5.2vh;
+    }
+
+    .mint-margin__top {
+        margin-top: 7vh;
+    }
+
+    .hc-mint__content-subtitle {
+        font-size: 3.1vh;
+        line-height: 4.8vh;
+    }
+
+    .mint-property__imageWrapper {
+        min-width: 35vh;
+        width: 35vh;
+        max-width: 35vh;
+        min-height: 35vh;
+        height: 35vh;
+        max-height: 35vh;
+    }
+
+    .section-roadMap {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
     }
 
     /* end of mint id */
@@ -1033,14 +1212,7 @@
         max-height: unset;
     }
 
-    .hc-mint__banner:after {
-        height: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        background: linear-gradient(103.58deg, #240533 39.31%, #004448 95.31%);
-    }
+
 
     .hc-min__banner-mobile::after {
         content: "";
@@ -1109,8 +1281,6 @@
         border-radius: 1vw;
         padding-left: 1vw;
         padding-right: 1vw;
-        display: flex;
-        align-items: center;
         font-size: 1.7vh;
     }
 
@@ -1127,6 +1297,53 @@
     .hc-mint__banner--desc {
         z-index: 2;
         margin-bottom: 5vh !important;
+    }
+
+
+
+    .hc-mint__content-title {
+        font-size: 2.5vh;
+        line-height: 4.8vh;
+        display: flex;
+        flex-direction: column;
+        white-space: nowrap;
+    }
+
+    .hc-mint__content-title span {
+        font-size: 4.5vh;
+    }
+
+    .mint-margin__top {
+        margin-top: 7vh;
+    }
+
+    .hc-mint__content-subtitle {
+        font-size: 2.5vh;
+        line-height: 4.8vh;
+    }
+
+    .mint-property__imageWrapper {
+        min-width: 35vh;
+        width: 35vh;
+        max-width: 35vh;
+        min-height: 35vh;
+        height: 35vh;
+        max-height: 35vh;
+    }
+
+    .section-roadMap {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+    }
+
+    .hc-mint__card-timerWraper {
+        border: 0.13vw solid var(--gradinet_right);
+        font-size: 4vh;
+        min-width: 70vw;
+        padding: 1vh 2vw;
+        margin-top: 3vh;
+        border-radius: 0.2vw;
+        letter-spacing: 0.1vw;
     }
 
     /* end of mint id */

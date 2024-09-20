@@ -101,8 +101,8 @@ function MintProjects() {
                 </div>
 
                 <div className="banner_section">
-                    <Container>
-                        <Row>
+                    <div className='px-0 inner-container__width'>
+                        <Row className='mx-auto'>
                             <Col lg={6} className="px-0">
                                 {/* <div className="home_titled hc-home__title head_txt" dangerouslySetInnerHTML={{ __html: CMS["Revolution your Home Ownership"]?.title }} >
 
@@ -132,7 +132,7 @@ function MintProjects() {
                                     </div>} */}
                             </Col>
                         </Row>
-                    </Container>
+                    </div>
                 </div>
 
                 <div className='bottom_content'>
