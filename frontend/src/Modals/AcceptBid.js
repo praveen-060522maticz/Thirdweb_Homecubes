@@ -402,10 +402,10 @@ function AcceptBid({
 
                </div>
 
-               <div className='modal_body mt-3'>
-                  <p className='modal_summaryLabel text-center mt-4'>you are about to accept bid for <span className='cancelSale'>{item.NFTName}</span> from <span className='cancelSale'> {bidder?.DisplayName ? bidder?.DisplayName : bidder?.TokenBidderAddress}</span> </p>
+               <div className='modal_body mt_2'>
+                  <p className='modal_summaryLabel text-center mt_2 mb_2'>you are about to accept bid for <span className='cancelSale'>{item.NFTName}</span> from <span className='cancelSale'> {bidder?.DisplayName ? bidder?.DisplayName : bidder?.TokenBidderAddress}</span> </p>
 
-                  <p className='cancel_salePrice mt-3 text-center'>
+                  <p className='cancel_salePrice mt_2 text-center'>
                      {bidder?.TokenBidAmt + " " + bidder?.CoinName} for{" "}
                      {Number(TokenQuantity)} Edition(s)
                   </p>
@@ -415,26 +415,26 @@ function AcceptBid({
                      <input type="number" className='modal_singleinput mt-3 cmnInput_scrollerHider' placeholder='Enter your quality' />
                   </div> */}
 
-                  <p className='blogInfo_inplabel mt-4 mb-3'>Summary:</p>
-                  <div className='bidmodal_summary mb-3'>
+                  <p className='blogInfo_inplabel mt_2 mb_2'>Summary:</p>
+                  <div className='bidmodal_summary mb_2'>
                      <p className='modal_summaryLabel'>Royal fee in %</p>
-                     <p className='modal_summaryLabel'>{item.NFTRoyalty} %</p>
+                     <p className='modal_summaryValue'>{item.NFTRoyalty} %</p>
                   </div>
 
-                  <div className='bidmodal_summary mb-3'>
+                  <div className='bidmodal_summary mb_2'>
                      <p className='modal_summaryLabel'>Service fee in %</p>
-                     <p className='modal_summaryLabel'>{web3utils.fromWei(String(sellerFees))}% {bidder?.CoinName}</p>
+                     <p className='modal_summaryValue'>{web3utils.fromWei(String(sellerFees))}% {bidder?.CoinName}</p>
                   </div>
 
-                  <div className='bidmodal_summary mb-3'>
+                  <div className='bidmodal_summary mb_2'>
                      <p className='modal_summaryLabel'>You will get</p>
-                     <p className='modal_summaryLabel'>
+                     <p className='modal_summaryValue'>
                         {Number(YouWillGet).toFixed(6)}
                         {bidder?.CoinName}
                      </p>
                   </div>
 
-                  <div className='mt-3'>
+                  <div className='mt_2'>
                      {approvestatus === "open" &&
                         <button
                            disabled={
@@ -456,7 +456,7 @@ function AcceptBid({
 
                      {((approvestatus !== "open") || (TokenBtn == "done")) &&
                         <button
-                           className='bodygradientBtn modal_grdientBtn mt-4'
+                           className='bodygradientBtn modal_grdientBtn mt_3'
                            disabled={
                               TokenBtn == "done" ?
                                  Btn == "error" || Btn === "process" || Btn === "done"
@@ -473,7 +473,7 @@ function AcceptBid({
                            (Btn == "putonsale" && "List")}</button>
                      }
 
-                     <button className='additional_btn modal_additionalBtn mt-3'
+                     <button className='hc-button__gray mt_2'
                         disabled={
                            TokenBtn == "done" ?
                               Btn == "error" || Btn === "process" || Btn === "done"

@@ -24,7 +24,7 @@ import Minting from './Screens/Minting';
 import MintProjects from './Screens/MintProjects';
 import Projects from './Screens/Projects';
 import ProjectInfo from './Screens/ProjectInfo';
-
+import Profile from './Screens/Profile';
 
 
 /** code start */
@@ -61,6 +61,10 @@ function App() {
             path: "/projectInfo/:projectTitle",
             element: <ProjectInfo />,
         },
+        {
+            path: "/profile/:customurl",
+            element: <Profile />,
+          },
         // Add routes for any additional screens
     ]);
 
