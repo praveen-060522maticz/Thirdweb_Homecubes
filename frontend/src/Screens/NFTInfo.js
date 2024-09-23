@@ -24,7 +24,6 @@ import { address_showing, getBNBvalue, isEmpty } from "../actions/common";
 import ImgAudVideo from "../Components/ImgAudVideo";
 import CancelOrder from "../Modals/CancelOrder";
 import ChangePrice from "../Modals/ChangePrice";
-import PutonSale from "../Modals/PutonSale";
 import BNBIcon from "../assets/images/bnbcoin.svg"
 import Purchase from "../Modals/Purchase";
 import CheckOut from "../Modals/CheckOut";
@@ -835,9 +834,9 @@ function NFTInfo() {
                                 </div></div>
 
                             <div>
-                                <div className="d-flex align-items-center gap_2">
+                                <div className="d-block d-xl-flex align-items-center gap_2">
 
-                                    <h3 className="marketplae_topdata hc-info__name-title">
+                                    <h3 className="marketplae_topdata hc-info__name-title mb_mob_2">
                                         {!isEmpty(InfoDetail)
                                             ? InfoDetail?.NFTName?.length > 15 ? <>{InfoDetail?.NFTName.slice(0, 15)}...</> : InfoDetail?.NFTName
                                             : Tokens_Detail?.NFTName?.length > 15 ? <>{Tokens_Detail?.NFTName.slice(0, 15)}...</> : Tokens_Detail?.NFTName}

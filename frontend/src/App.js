@@ -26,7 +26,7 @@ import Projects from './Screens/Projects';
 import ProjectInfo from './Screens/ProjectInfo';
 import CollectionInfo from './Screens/CollectionInfo';
 import Profile from './Screens/Profile';
-
+import CollectionNfts from './Screens/CollectionNfts';
 
 /** code start */
 
@@ -69,6 +69,10 @@ function App() {
             path: "/profile/:customurl",
             element: <Profile />,
         },
+        {
+            path: "/CollectionNfts/:projectTitle",
+            element: <CollectionNfts />,
+          },
         // Add routes for any additional screens
     ]);
 

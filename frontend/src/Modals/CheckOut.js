@@ -439,7 +439,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
 
                </div>
 
-               <div className='modal_body mt-3'>
+               <div className='modal_body mt_2'>
 
                   <div className='cp_nftimage_holder'>
                      <img className='cp_nftImage' src={file} />
@@ -447,8 +447,8 @@ function CheckOut({ show, handleClose, item, owner, file }) {
                   </div>
 
 
-                  <p className='modal_summaryLabel mt-3 mb-3'>Summary:</p>
-                  <div className='bidmodal_summary mb-3'>
+                  <p className='modal_summaryLabel mt_2 mb_2'>Summary:</p>
+                  <div className='bidmodal_summary mb_2'>
                      <p className='modal_summaryLabel'>Your balance</p>
                      <p className='modal_summaryValue'>
                         {(owner.CoinName != "BNB" && owner.CoinName != "ETH")
@@ -458,12 +458,12 @@ function CheckOut({ show, handleClose, item, owner, file }) {
                      </p>
                   </div>
 
-                  <div className='bidmodal_summary mb-3'>
+                  <div className='bidmodal_summary mb_2'>
                      <p className='modal_summaryLabel'>Service fees</p>
                      <p className='modal_summaryValue'>{web3utils.fromWei(String(buyerFees))}% {owner.CoinName}</p>
                   </div>
 
-                  <div className='bidmodal_summary mb-3'>
+                  <div className='bidmodal_summary mb_2'>
                      <p className='modal_summaryLabel'>Price of the NFT</p>
                      <p className='modal_summaryValue'>{Number(YouWillGet).toFixed(6)} {owner.CoinName}</p>
                   </div>
@@ -474,7 +474,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
                   </div> */}
 
                   {owner?.CoinName != "BNB" && allowed && <button
-                     className='bodygradientBtn modal_grdientBtn mt-4'
+                     className='bodygradientBtn modal_grdientBtn mt_3'
                      disabled={Btn == 'error' || Btn === "process" || Btn === "done" ? true : false}
                      onClick={Btn == 'start' || Btn === "try" ? FormSubmit : null}
                   >
@@ -486,7 +486,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
                      }
                   </button>}
                   <button
-                     className='nftinfo_gradeientBtn web_listitem_btn mt-3'
+                     className='nftinfo_gradeientBtn web_listitem_btn mt_2'
                      disabled={Btn != 'done' && App_Btn == 'init' || App_Btn == 'error' || App_Btn === "process" || App_Btn === "done" ? true : false}
                      onClick={App_Btn == 'start' || App_Btn === "try" ? _Buy : null}
                   // onClick={() => _Buy()}
