@@ -29,7 +29,13 @@
     --kanit_font: "Kanit", sans-serif;
 
     --container-width-main: 87%;
+    --container-width-sm-main: 90%;
     --container-width-inner: 70%;
+
+    --main-title-font: 4.2vh;
+    --card-title-font: 2.5vh;
+    --card-desc-font: 1.5vh;
+    --modal-text: 1.8vh;
 }
 
 

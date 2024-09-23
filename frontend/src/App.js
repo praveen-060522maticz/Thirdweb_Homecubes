@@ -25,11 +25,10 @@ import MintProjects from './Screens/MintProjects';
 import Projects from './Screens/Projects';
 import ProjectInfo from './Screens/ProjectInfo';
 import CollectionInfo from './Screens/CollectionInfo';
-
+import Profile from './Screens/Profile';
 
 
 /** code start */
-
 
 function App() {
 
@@ -65,6 +64,10 @@ function App() {
         {
             path: "/collectionInfo",
             element: <CollectionInfo />,
+        },
+        {
+            path: "/profile/:customurl",
+            element: <Profile />,
         },
         // Add routes for any additional screens
     ]);

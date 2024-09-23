@@ -229,7 +229,7 @@ function Home() {
                                         <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["In addition to the product launch, we will also establish a marketplace."]?.img}`} />
                                     </div>}
                             </Col>
-                            <Col lg={6}>
+                            <Col lg={6} className="px-0">
                                 <div>
                                     <Typewriter
 

@@ -295,11 +295,11 @@ function Marketplace() {
                 </div>
                 <div className="banner_section">
                     <div className="inner-container__width">
-                        <Row>
+                        <Row className="mx-0">
                             <h3 className="hc-home__title home_titled">Our <strong>Unique</strong> Marketplace</h3>
-                            <p className="mp_detailbrief hc-home__desc homes" dangerouslySetInnerHTML={{ __html: coll?.content }} >
+                            <p className="mp_detailbrief hc-home__desc mt_2 homes" dangerouslySetInnerHTML={{ __html: coll?.content }} >
                             </p>
-                            <div className="hc-mint__swiper-wrap">
+                            <div className="hc-mint__swiper-wrap swiptop">
 
                                 <button
                                     className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
@@ -318,7 +318,7 @@ function Marketplace() {
                                     {/* <FaChevronRight fill="#fff" fontSize={38} /> */}
                                 </button>
                                 <Swiper
-                                    className="mySwiper bottomnav_colswiper collection_swiper mt_3"
+                                    className="mySwiper bottomnav_colswiper collection_swiper"
                                     spaceBetween={30}
                                     navigation={{
                                         nextEl: ".swiper-button-next1",
@@ -331,11 +331,11 @@ function Marketplace() {
                                     breakpoints={{
                                         320: {
                                             slidesPerView: 2,
-                                            spaceBetween: 20,
+                                            spaceBetween: 15,
                                         },
                                         450: {
                                             slidesPerView: 2,
-                                            spaceBetween: 20,
+                                            spaceBetween: 15,
                                         },
                                         576: {
                                             slidesPerView: 2,
@@ -387,7 +387,7 @@ function Marketplace() {
                 </div>
                 <div className="bottom_content content_bot">
                     <div className="inner-container__width">
-                        <Row className="justify-content-between">
+                        <Row className="justify-content-between mx-auto">
                             <h3 className="hc-home__title home_titled">
                                 Top Trending <strong>NFT's</strong>
                             </h3>

@@ -19,30 +19,30 @@ function PutonSale({ show, handleClose,text, owner, types, closePop, file, type,
 
                </div>
 
-               <div className='modal_body mt-3'>
+               <div className='modal_body mt_2'>
 
                   <div className='cp_nftimage_holder'>
                      <img className='ps_nftImage' src={file} />
-                     <p className='cp_nftName mt-3'>{item?.NFTName}</p>
+                     <p className='cp_nftName mt_2'>{item?.NFTName}</p>
                   </div>
 
-                  <div className='modal_inputGroup mt-3'>
+                  <div className='modal_inputGroup mt_2'>
                      <input type="number" className='modal_input cmnInput_scrollerHider' placeholder='Enter new price' />
                      <p className='modal_inpgrp_cointype'>matic</p>
                   </div>
 
-                  <p className='blogInfo_inplabel mt-3 mb-4'>Summary:</p>
-                  <div className='bidmodal_summary mb-3'>
+                  <p className='blogInfo_inplabel mt_2 mb_2'>Summary:</p>
+                  <div className='bidmodal_summary mb_2'>
                      <p className='modal_summaryLabel'>Seller Service</p>
                      <p className='modal_summaryLabel'>2.5 %</p>
                   </div>
 
-                  <div className='bidmodal_summary mb-3'>
+                  <div className='bidmodal_summary mb_2'>
                      <p className='modal_summaryLabel'>You will get</p>
                      <p className='modal_summaryLabel'>0 %</p>
                   </div>
 
-                  <button className='bodygradientBtn modal_grdientBtn mt-4'>Put on sale</button>
+                  <button className='bodygradientBtn modal_grdientBtn mt_3'>Put on sale</button>
 
                </div>
             </Modal.Body>

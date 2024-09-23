@@ -45,7 +45,7 @@ function SideTab() {
                 </NavLink>
                 <NavLink className={`sidetab_link ${location == "/marketplace" ? "active" : ""}`} to='/marketplace'>
                     <div className='singleTab'>
-                        {location == '/marketplace' ? <img className='sidetab_logo' src={require('../assets/images/marketplace.svg').default} /> : <img className='sidetab_logo' src={require('../assets/images/marketplace.svg').default} />}
+                        {location == '/marketplace' ? <img className='sidetab_logo' src={require('../assets/images/marketplace_active.svg').default} /> : <img className='sidetab_logo' src={require('../assets/images/marketplace.svg').default} />}
                         <p className='sidetab_laebl'>Marketplace</p>
                     </div>
                 </NavLink>

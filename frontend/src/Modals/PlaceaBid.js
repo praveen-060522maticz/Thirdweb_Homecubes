@@ -367,7 +367,7 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
             <img src={require('../assets/images/close.svg').default} onClick={() => handleCloseBid()} className='modal_closer' />
           </div>
 
-          <div className='modal_body mt-4'>
+          <div className='modal_body mt_3'>
 
             <div className='modal_inputGroup'>
               <input
@@ -410,34 +410,34 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
               />
             </div>
 
-            <p className='modal_summaryLabel mt-3 mb-3'>Summary:</p>
-            <div className='bidmodal_summary mb-3'>
+            <p className='modal_summaryLabel mt_2 mb_2'>Summary:</p>
+            <div className='bidmodal_summary mb_2'>
               <p className='modal_summaryLabel'>Your balance</p>
               <p className='modal_summaryValue'>{parseFloat(coinBalance).toFixed(6)} {item?.CollectionNetwork}</p>
             </div>
 
-            <div className='bidmodal_summary mb-3'>
+            <div className='bidmodal_summary mb_2'>
               <p className='modal_summaryLabel'>Token balance</p>
               <p className='modal_summaryValue'>{TokenBal} {FormValue.CoinName}</p>
             </div>
 
-            <div className='bidmodal_summary mb-3'>
+            <div className='bidmodal_summary mb_2'>
               <p className='modal_summaryLabel'>Service fees</p>
               <p className='modal_summaryValue'>{web3utils.fromWei(String(buyerFees))}% {FormValue?.CoinName}</p>
             </div>
 
-            <div className='bidmodal_summary mb-3'>
+            <div className='bidmodal_summary mb_2'>
               <p className='modal_summaryLabel'>Total bid amount</p>
               <p className='modal_summaryValue'>{Number(YouWillGet)?.toFixed(6)} {FormValue?.CoinName}</p>
             </div>
 
-            <div className='bidmodal_summary mb-3'>
+            <div className='bidmodal_summary mb_2'>
               <p className='modal_summaryLabel'>Minimum bid amount</p>
               <p className='modal_summaryValue'>{bid?.TokenBidAmt ? bid?.TokenBidAmt : owner?.NFTPrice} {FormValue?.CoinName}</p>
             </div>
 
             <button
-              className='bodygradientBtn modal_grdientBtn mt-4'
+              className='bodygradientBtn modal_grdientBtn mt_2'
               disabled={Btn == 'error' || Btn === "process" || Btn === "done" ? true : false}
               onClick={Btn == 'start' || Btn === "try" ? FormSubmit : null}
             >
@@ -450,7 +450,7 @@ function PlaceaBid({ showBid, handleCloseBid, bidder, bid, owner, item }) {
             </button>
 
             <button
-              className='hc-button__gray mt-3'
+              className='hc-button__gray mt_2'
               onClick={() => handleCloseBid()}
               disabled={Btn == 'process'}
             >
