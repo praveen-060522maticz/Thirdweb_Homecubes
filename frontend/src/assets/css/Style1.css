@@ -1298,6 +1298,51 @@ h6 {
   position: relative;
 }
 
+.projects_hr {
+  background-color: gray;
+  height: 0.2vh;
+}
+
+.mp_collectionDetail {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.cus-back-btn .fa-chevron-left {
+  font-size: 1.8vh;
+  margin-right: 0.5vh;
+}
+
+.mp_collectionLabel,
+.mp_collectionValue {
+  font-family: var(--montserrat-font);
+  font-size: 1.8vh;
+  font-weight: 500;
+}
+
+.mp_collectionValue {
+  color: var(--gradinet_right);
+  margin: 0 0 0 5px;
+}
+
+.mp_collectionLabel {
+  color: var(--white);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.cus-back-btn button {
+  align-items: center;
+  background: #0000 !important;
+  border: none;
+  box-shadow: none !important;
+  display: flex;
+  font-weight: 500;
+  outline: none;
+}
+
 .stack_searchbar div {
   flex-direction: unset !important;
 }
@@ -1316,18 +1361,6 @@ input::placeholder {
   color: var(--white);
   font-family: var(--montserrat-font);
   font-weight: 400;
-}
-
-.react_select__placeholder {
-  color: #fff !important;
-}
-
-.react_select__input {
-  color: var(--white) !important;
-}
-
-.react_select__indicator svg {
-  fill: #fff !important;
 }
 
 .searchglass {
@@ -1498,10 +1531,6 @@ input::placeholder {
   margin: 0;
 }
 
-.react_select__single-value {
-  font-size: 1.5vh;
-}
-
 .hc-card__nft-height.nft_card {
   background: #0000;
   border-radius: 0.7vh;
@@ -1580,6 +1609,11 @@ input::placeholder {
   margin: 0;
 }
 
+.cancelname {
+  font-size: 2vh;
+  font-weight: 600;
+}
+
 .nftcard_imgwrapper,
 .nftcard_imgwrapper_sep {
   position: relative;
@@ -1634,47 +1668,98 @@ input::placeholder {
   top: 0;
 }
 
+.modal-body .react_select__control {
+  width: 10vh !important;
+}
+
+.modal-body .duration .react_select__control {
+  width: 15vh !important;
+  height: 4.4vh !important;
+}
+
 .react_select__control {
-  min-height: 4.5vh !important;
-  border-radius: 0.6vh !important;
+  min-height: 3.8vh !important;
+  height: 3.8vh !important;
+  border-radius: 0.5vh !important;
   border-width: 0.2vh !important;
-  height: 4vh !important;
-  width: 8vh !important;
+}
+
+.react_select__single-value {
+  font-size: 1.5vh;
 }
 
 .react_select__value-container {
   padding: 0.4vh 1vh !important;
-  height: 4vh !important;
+  height: 3.8vh !important;
   width: 20vh !important;
   border-radius: 0.5vh !important;
-  font-size: 1.6vh !important;
+  font-size: 1.5vh !important;
 }
 
-.react_select__option {
-  font-size: 1.5vh !important;
-  padding: 0.5vw 0.5vw !important;
+.react_select__placeholder {
+  margin-left: 0.5vh !important;
+  margin-right: 0.5vh !important;
+}
+
+.react_select__single-value {
+  margin-left: 0.3vh !important;
+  margin-right: 0.3vh !important;
+}
+
+.react_select__input-container {
+  margin: 0.2vh !important;
+  padding-bottom: 0.2vh !important;
+  padding-top: 0.2vh !important;
+}
+
+.react_select__input,
+.react_select__input::after {
+  min-width: 1vh !important;
 }
 
 .react_select__indicators {
-  height: 4vh !important;
+  height: 3.8vh !important;
+  width: 3.8vh !important;
+}
+
+.react_select__placeholder {
+  color: #fff !important;
+}
+
+.react_select__input {
+  color: var(--white) !important;
 }
 
 .react_select__indicator-separator {
-  width: unset !important;
+  display: none;
 }
 
-.react_select__dropdown-indicator {
-  padding: 0.5vw !important;
+.react_select__indicator {
+  padding: 0.8vh !important;
 }
 
-.react_select__dropdown-indicator svg {
-  height: 1.4vw;
-  width: 1.4vw;
+.react_select__indicator svg {
+  fill: #fff !important;
+  width: 2.5vh !important;
+  height: 2.5vh !important;
 }
 
-.content_bot {
-  /* margin-top: -9vh; */
+.react_select__menu {
+  border-radius: 0.2vh !important;
+  margin-bottom: 0.2vh !important;
+  margin-top: 0.2vh !important;
 }
+
+.react_select__menu-list {
+  max-height: 20vh !important;
+}
+
+.react_select__option {
+  padding: 0.5vh 1vh !important;
+  font-size: 1.7vh !important;
+}
+
+
 
 @media screen and (max-width:991px) {
   .nft_card:hover {
@@ -1714,11 +1799,6 @@ input::placeholder {
     padding: 0 0.5vh;
   }
 
-  .react_select__dropdown-indicator svg {
-    height: 5vw;
-    width: 5vw;
-  }
-
   .hc-card__nft .nftcard_detailwrapper {
     padding: 1.5vh 1vh;
   }
@@ -1740,6 +1820,10 @@ input::placeholder {
   .floor_prize,
   .nft_coinname {
     font-size: 1.2vh;
+  }
+
+  .modal-body .duration .react_select__control {
+    width: 36vh !important;
   }
 }
 
@@ -1823,8 +1907,24 @@ input::placeholder {
   margin-bottom: 0;
 }
 
+.collection_top {
+  margin-top: -30vh;
+}
+
+.nftInfo_iconsHolder,
+.shareOptions_holder {
+  align-items: center;
+  display: flex;
+  gap: 0.9vh;
+  justify-content: flex-start;
+}
+
 .gap_3 {
   gap: 2vh;
+}
+
+.gap_4 {
+  gap: 2.5vw;
 }
 
 .hc-info__last-bid--title {
@@ -2040,6 +2140,12 @@ input::placeholder {
   padding-top: 7vh;
 }
 
+@media screen and (max-width:1199px) {
+  .mb_mob_2 {
+    margin-bottom: 2vh;
+  }
+}
+
 @media screen and (max-width:767px) {
   .pt_4 {
     padding-top: 2vh;
@@ -2082,6 +2188,18 @@ input::placeholder {
 
   .greenBar_time {
     font-size: 2.2vh;
+  }
+}
+
+@media screen and (max-width:575px) {
+  .nftInfo_socials {
+    height: 2.5vh;
+    width: 2.5vh;
+  }
+
+  .nftInfo_iconsHolder,
+  .shareOptions_holder {
+    gap: 0.5vh;
   }
 }
 
@@ -2152,7 +2270,7 @@ input::placeholder {
   background-color: var(--stepcard_bg);
   border: 0.3vh solid var(--gradinet_right);
   border-radius: 0.4vh;
-  padding: 0 2.5vh 0 0.5vh;
+  padding: 0 1.5vh 0 0.5vh;
 }
 
 .modal_input,
@@ -2171,10 +2289,6 @@ input::placeholder {
   max-width: 12vh;
   outline: none;
   padding: 1vh 0.5vh;
-}
-
-.duration .react_select__control {
-  width: 18vh !important;
 }
 
 .modal_title {
@@ -2343,9 +2457,105 @@ input::placeholder {
   font-weight: 600;
 }
 
-@media screen and (max-width:575px) {
-  .duration .react_select__control {
-    width: 33vh !important;
+.rdtPicker td,
+.rdtPicker th {
+  height: 4vh !important;
+  font-size: 1.8vh;
+}
+
+.rdtPicker th.rdtNext,
+.rdtPicker th.rdtPrev {
+  font-size: 3vh !important;
+}
+
+.rdtPicker th.rdtSwitch {
+  width: 10vh !important;
+}
+
+.modal_body .rdtPicker {
+  min-width: 30vh !important;
+  padding: 0.6vh !important;
+  margin-top: 0.2vh !important;
+}
+
+.rdtCounter .rdtBtn {
+  line-height: 5vh !important;
+}
+
+.rdtCounter .rdtCount {
+  font-size: 2vh !important;
+}
+
+.rdtCounter {
+  width: 5vh !important;
+}
+
+.rdtCounter {
+  height: 12vh !important;
+}
+
+.rdtCounterSeparator {
+  line-height: 12vh !important;
+}
+
+.rdt.rdtOpen input {
+  display: none;
+}
+
+.rdtPicker tfoot,
+.rdtPicker th {
+  border: none !important;
+}
+
+.modal_body .rdtPicker table .rdtDay {
+  padding: 0.8vh;
+}
+
+.modal_body .rdtPicker .dow,
+.modal_body .rdtPicker .rdtSwitch,
+.modal_body .rdtPicker .rdtTimeToggle,
+.modal_body .rdtPicker table .rdtDay {
+  color: var(--white);
+}
+
+.modal_body .rdtPicker .rdtTimeToggle:hover {
+  background-color: var(--gradinet_right);
+  color: var(--black);
+  padding: 0.4vh;
+}
+
+.modal_body .rdtBtn:hover,
+.modal_body .rdtPicker .rdtNext:hover,
+.modal_body .rdtPicker .rdtPrev:hover,
+.modal_body .rdtPicker .rdtSwitch:hover,
+.modal_body .rdtPicker table .rdtDay:hover {
+  background-color: var(--gradinet_right) !important;
+  color: var(--black) !important;
+}
+
+.modal_body .rdtPicker {
+  background-color: initial;
+  border: none;
+  position: relative;
+  width: 100%;
+}
+
+.modal_body .rdt.rdtOpen input.form-control {
+  background-color: var(--stepcard_bg);
+  border: 1px solid var(--stepcard_border);
+  border-radius: 5px;
+  box-shadow: none !important;
+  color: var(--white);
+  font-family: var(--poppins);
+  font-size: var(--font_thirteen);
+  font-weight: var(--weight_four);
+  padding: 8px 10px;
+  width: 100%;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 50vh;
   }
 }
 

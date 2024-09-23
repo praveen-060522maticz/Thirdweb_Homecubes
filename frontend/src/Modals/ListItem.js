@@ -685,7 +685,6 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                     </div>
                     <p style={{ color: "red" }} >{Error?.CoinName}</p>
                   </div>
-
                   <div  className='mb_2 mb-sm-0'>
                     <p className='modal_summaryLabel'>Duration</p>
                     <div className='modal_inputGroup duration mt_1'>
@@ -693,6 +692,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                       <Select
                         className="border_select side_slect"
                         classNamePrefix={"react_select"}
+                        // menuIsOpen={true}
                         placeholder=""
                         styles={stylesgraybgOne}
                         defaultValue={selectedOptionOne}

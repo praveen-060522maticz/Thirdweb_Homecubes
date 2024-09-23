@@ -28,6 +28,7 @@ import CollectionInfo from './Screens/CollectionInfo';
 import Profile from './Screens/Profile';
 import Staking from './Screens/Staking';
 
+import CollectionNfts from './Screens/CollectionNfts';
 
 /** code start */
 
@@ -73,6 +74,11 @@ function App() {
         {
             path: "/staking",
             element: <Staking />,
+        },
+        {
+
+            path: "/CollectionNfts/:projectTitle",
+            element: <CollectionNfts />,
         },
         // Add routes for any additional screens
     ]);

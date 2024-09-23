@@ -144,23 +144,23 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
 
           </div>
 
-          <div className='modal_body mt-3'>
+          <div className='modal_body mt_2'>
 
             <div className='cp_nftimage_holder'>
-              <img className='ps_nftImage' src={file} />
-              <p className='cp_nftName mt-3'>{item?.TokenName}</p>
+              <img className='cp_nftImage' src={file} />
+              <p className='cp_nftName cancelname mt_2'>{item?.TokenName}</p>
             </div>
 
-            <p className='modal_summaryLabel text-center mt-4'>you are about to delete instant sale for <span className='cancelSale'>{item?.TokenName}</span> </p>
+            <p className='modal_summaryLabel text-center mt_3'>you are about to delete instant sale for <span className='cancelSale'>{item?.TokenName}</span> </p>
 
-            <p className='cancel_salePrice mt-3 text-center'>{item?.NFTPrice}  {item?.CoinName}</p>
-
-
+            <p className='cancel_salePrice mt_2 text-center'>{item?.NFTPrice}  {item?.CoinName}</p>
 
 
-            <div className='mt-3'>
+
+
+            <div className='mt_2'>
               <button
-                className='bodygradientBtn modal_grdientBtn mt-4'
+                className='bodygradientBtn modal_grdientBtn mt_2'
                 disabled={Btn == 'error' || Btn === "process" || Btn === "done" ? true : false}
                 onClick={Btn == 'start' || Btn === "try" ? FormSubmit : null}
               >
@@ -172,7 +172,8 @@ function CancelOrder({ show, handleClose, owner, types, file, type, thumb, item 
                 }
               </button>
               <button
-                className='additional_btn modal_additionalBtn mt-3'
+                // className='additional_btn modal_additionalBtn mt_2'
+                className="hc-button__gray mt_2"
                 disabled={Btn === "process" || Btn === "done" ? true : false}
                 onClick={() => handleClose()}
               >
