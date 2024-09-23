@@ -1103,6 +1103,7 @@ function Minting() {
                                                     nextEl: ".swiper-button-next1",
                                                     prevEl: ".swiper-button-prev1",
                                                 }}
+
                                                 keyboard={true}
                                                 ref={swiperRef}
                                                 pagination={{
