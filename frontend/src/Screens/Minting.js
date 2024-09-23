@@ -1096,9 +1096,9 @@ function Minting() {
                                                 <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
                                             </button>
                                             <Swiper
-                                                className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper"
-                                                slidesPerView={1}
-                                                spaceBetween={30}
+                                                className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper gallery-card__swiper"
+                                                slidesPerView={4}
+                                                // spaceBetween={30}
                                                 navigation={{
                                                     nextEl: ".swiper-button-next1",
                                                     prevEl: ".swiper-button-prev1",
@@ -1110,35 +1110,20 @@ function Minting() {
                                                 }}
                                                 breakpoints={{
                                                     320: {
-                                                        slidesPerView: 1,
-                                                        spaceBetween: 20,
-                                                    },
-                                                    576: {
                                                         slidesPerView: 2,
-                                                        spaceBetween: 20,
-                                                    },
-                                                    768: {
-                                                        slidesPerView: 3,
-                                                        spaceBetween: 20,
-                                                    },
-                                                    992: {
-                                                        slidesPerView: 4,
-                                                        spaceBetween: 20,
+                                                        // spaceBetween: 20,
                                                     },
                                                     1200: {
                                                         slidesPerView: 4,
-                                                        spaceBetween: 20,
+                                                        // spaceBetween: 20,
                                                     },
-                                                    1500: {
-                                                        slidesPerView: 4,
-                                                        spaceBetween: 20,
-                                                    },
+
                                                 }}
                                                 modules={[Navigation, Keyboard]}
                                             >
                                                 {collection.length != 0 && collection.map((i) => (
                                                     <SwiperSlide>
-                                                        <GalleryCard data={i} />u
+                                                        <GalleryCard data={i} />
                                                     </SwiperSlide>
                                                 ))}
                                             </Swiper>
@@ -1272,7 +1257,7 @@ function Minting() {
                                             </button>
                                             <Swiper
                                                 className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper gallery-card__swiper"
-                                                slidesPerView={2}
+                                                slidesPerView={4}
                                                 // spaceBetween={30}
                                                 // navigation={true}
                                                 keyboard={true}
@@ -1289,26 +1274,11 @@ function Minting() {
                                                         slidesPerView: 2,
                                                         // spaceBetween: 20,
                                                     },
-                                                    576: {
-                                                        slidesPerView: 2,
-                                                        spaceBetween: 20,
-                                                    },
-                                                    768: {
-                                                        slidesPerView: 3,
-                                                        spaceBetween: 20,
-                                                    },
-                                                    992: {
-                                                        slidesPerView: 4,
-                                                        spaceBetween: 20,
-                                                    },
                                                     1200: {
                                                         slidesPerView: 4,
-                                                        spaceBetween: 20,
+                                                        // spaceBetween: 20,
                                                     },
-                                                    1500: {
-                                                        slidesPerView: 4,
-                                                        spaceBetween: 10,
-                                                    },
+
                                                 }}
                                                 modules={[Navigation, Keyboard]}
                                             >
