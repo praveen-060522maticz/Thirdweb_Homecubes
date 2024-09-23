@@ -2581,6 +2581,11 @@ input::placeholder {
   width: 100%;
 }
 
+@media (min-width: 992px) {
+  .modal-lg, .modal-xl {
+    max-width: 80vh !important;
+  }
+}
 @media (min-width: 576px) {
   .modal-dialog {
     max-width: 50vh;
@@ -2588,3 +2593,113 @@ input::placeholder {
 }
 
 /* modal end */
+
+
+
+/* profile page */
+.profile_dtlswhole {
+  display: flex;
+  gap: 2vh;
+  justify-content: flex-start;
+}
+.profile_imgDtls {
+  border-radius: 0.6vh;
+  box-shadow: 15px 14px 32.1px -10px #fff3;
+  height: 25vh;
+  width: 25vh;
+  overflow: hidden;
+  position: relative;
+}
+.profile_img {
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.editprofile_input {
+  cursor: pointer;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.profile_editBtn {
+  background-color: #ffffff38;
+  border: 0.2vh solid var(--white);
+  border-radius: 0.5vh;
+  bottom: 2%;
+  color: var(--white);
+  font-family: var(--poppins);
+  font-size: 1.5vh;
+  font-weight: var(--weight_four);
+  left: 2%;
+  outline: none;
+  padding: 0.4vh 0.8vh;
+  position: absolute;
+}
+.hc-profile__title, .profile_name {
+  font-size: 2.2vh;
+}
+.hc-profile__title, .hc-profile__wrapper-border {
+font-family: var(--montserrat-font);
+font-weight: 600;
+}
+.hc-profile__title {
+color: var(--gradinet_right);
+}
+.profile_joinDate {
+  color: var(--placeholder_color) !important;
+  font-family: var(--montserrat-font);
+  font-size: 1.8vh;
+  font-weight: 600;
+}
+.profile_name, .small_dollar {
+  color: var(--white);
+  font-family: var(--montserrat-font);
+  font-weight: 600;
+  margin: 0;
+}
+.hc-profile__wrapper-border {
+  border: 0.2px solid var(--gradinet_right);
+  color: var(--white);
+  font-size: 1.6vh;
+  max-width: 20vh;
+  min-width: 20vh;
+  padding-bottom: 0.3vh;
+  padding-top: 0.3vh;
+  text-align: center;
+  width: 20vh;
+}
+.kyc_activated {
+  align-items: center;
+  border: 0.3vh solid var(--text-color-1);
+  border-radius: 0;
+  cursor: pointer;
+  display: flex;
+  gap: 1.5vh;
+  justify-content: center;
+  padding: 1vh 2vh;
+  width: fit-content;
+}
+.orange {
+  border: 0.3vh solid #ff7e07 !important;
+}
+.kyc_activated p {
+  color: green;
+  font-family: var(--montserrat-font);
+  font-size: 1.8vh;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.actiate_hint.kyc_activated.orange p {
+  color: #ff7e07 !important;
+}
+.gap_1{
+  gap: 1vh;
+}
+/* profile page end */

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import BottomBar from '../Components/BottomBar'
 import Header from '../Components/Header'
 import { Container, Row, Col } from 'react-bootstrap'
@@ -31,7 +31,7 @@ function Profile() {
   );
   const { payload, token, gasFee } = useSelector((state) => state.LoginReducer.User);
   const { currency } = useSelector(state => state.LoginReducer)
-console.log('currency---->',currency);
+  console.log('currency---->', currency);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showKYC, setShowKYC] = useState(false)
   const [showKycCmd, setShowKycCmd] = useState(false)
@@ -71,6 +71,33 @@ console.log('currency---->',currency);
   console.log("userProfile", userProfile);
 
   console.log("searchVal", searchVal);
+
+
+
+  const footerRef = useRef(null);
+  const [isFixed, setIsFixed] = useState(true);
+  const handleScroll = () => {
+
+    const footerTop = footerRef.current.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+
+    if (footerTop < windowHeight) {
+      setIsFixed(false);
+
+
+    } else {
+      setIsFixed(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const stylesgraybgOne = {
     option: (styles, { isFocused, isSelected, isHovered }) => ({
       ...styles,
@@ -324,6 +351,319 @@ console.log('currency---->',currency);
     <>
       <BottomBar />
       <Header />
+
+      <div className="innercontent">
+        <div className={isFixed ? "side_left fixed" : "side_left sticky"}  >
+          <SideTab />
+        </div>
+        <div className="banner_section">
+          <div className="inner-container__width">
+           
+              <div className='mb_2'>
+                <div className='profile_dtlswhole'>
+                  
+                  <div className='profile_imgDtls'>
+                    <img
+                      className='profile_img img-fluid'
+                      accept="image/*"
+                      src={
+                        isEmpty(userProfile?.Profile) ?
+                          require('../assets/images/collections/shapeEight.jpg') :
+                          `${config?.IMG_URL}/user/${userProfile?.WalletAddress}/profile/${userProfile?.Profile}`}
+                    />
+                    <button className='profile_editBtn'>
+                      <i class="fa-regular fa-pen-to-square"></i> Edit
+
+                      <input type='file' className='editprofile_input' id="Profile" onChange={(e) => onProfileChange(e)} />
+                    </button>
+                  </div>
+              
+              
+                  <div>
+                    <p className='mb_1 hc-profile__title'>Profile</p>
+                    <p className='profile_joinDate  mt_1'>{new Date(userProfile?.createdAt).toDateString()}</p>
+                    <div className='d-flex flex-wrap align-items-center gap_1 mt_1'>
+                      <p className='profile_joinDate mb-0'>Wallet Address :</p>
+                      <div className='d-flex  align-items-center gap_1'>
+                        <p className="profile_name" >{userProfile?.DisplayName ? userProfile?.DisplayName : address_showing(userProfile?.WalletAddress)}</p>
+                        <CopyToClipboard
+                          onCopy={() => toast.success("Address copied successfully")}
+                          text={`${userProfile?.DisplayName ? userProfile?.DisplayName : address_showing(userProfile?.WalletAddress)}`}
+                        >
+                          <button className='bg-transparent border-0 outline-0'>
+                            <img src={copyIcon} className='img-fluid' alt='copy' style={{ width: "2.9vh" }} />
+                          </button>
+                        </CopyToClipboard>
+                      </div>
+                    </div>
+                    <div className='d-flex flex-wrap align-items-center gap_1 mt_2'>
+                      <p className='profile_joinDate mb-0'>Referral Link :</p>
+                      <div className='d-flex align-items-center gap_1 gap_1'>
+                        <div className='hc-profile__wrapper-border'>
+                          Link Address
+                        </div>
+                        <button className='bg-transparent border-0 outline-0'>
+                          <img src={copyIcon} className='img-fluid' alt='copy' style={{ width: "2.9vh" }} />
+                        </button>
+                      </div>
+
+                    </div>
+                    <div className='d-flex flex-wrap align-items-center gap_1  mt_2'>
+                      <p className='profile_joinDate mb-0'>Referral Code :</p>
+                      <div className='d-flex align-items-center gap_1'>
+                        <div className='hc-profile__wrapper-border'>
+                          WA098JA
+                        </div>
+                        <button className='bg-transparent border-0 outline-0'>
+                          <img src={copyIcon} className='img-fluid' alt='copy' style={{ width: "2.9vh" }} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+
+              </div>
+
+              <div className='mb_3'>
+                <div className='profile_topright'>
+                  <div className='align-items-end h-100'>
+                    {userProfile?.KycStatus == "complete" ?
+                      <div className='mb_2' onClick={() => handleShowKYC()}>
+                        <div
+                          className={userProfile?.KycStatus == "complete" ? "kyc_activated greenkyc text-center" : "kyc_activated text-center"}
+                        // className='kyc_activated'
+                        >
+                          <img src={require('../assets/images/greenround.svg').default} />
+                          <p>KYC Approved</p>
+                        </div>
+                      </div>
+                      :
+                      userProfile?.KycStatus == "submit" ?
+                        <div className='mb_2' onClick={() => handleShowKYC()}>
+                          <div
+                            className={userProfile?.KycStatus == "submit" ? "kyc_activated actiate_hint orange text-center" : "kyc_activated actiate_hint text-center"}
+                          // className='kyc_activated actiate_hint'
+                          >
+                            {userProfile?.KycStatus == "submit" ? <></> : <img src={require('../assets/images/redround.svg').default} />}
+                            <p className='text-center'>KYC submitted, please wait till it is reviewed</p>
+                          </div>
+                        </div>
+                        :
+                        userProfile?.KycStatus == "retry" ?
+                          <div className='mb_2'>
+
+                            <div className='kyc_activated actiate_hint' onClick={() => handleShowKYC()}>
+
+                              <img src={require('../assets/images/redround.svg').default} />
+                              <p>Kyc got rejected retry please</p>
+
+                              {userProfile?.comment && <button className='primary_blueBtn kyc_reject_btn' onClick={(e) => handleShowKycCmd(e)}>
+                                <i class="fa-regular fa-comment-dots"></i>
+                              </button>}
+
+                            </div>
+
+                          </div>
+                          :
+                          <div className='mb_2'>
+                            <div className='kyc_activated actiate_hint' onClick={() => handleShowKYC()}>
+                              <img src={require('../assets/images/redround.svg').default} />
+                              <p>Complete Your KYC</p>
+                            </div>
+                          </div>}
+                  </div>
+
+
+                </div>
+              </div>
+            
+
+
+            <Row className='hc-proile__border-top py-3 mx-auto'>
+              <Col lg={11} xl={10} xs={12}>
+                {/* <div className='secondary_row'> */}
+                <Row className='align-items-center'>
+                  <Col lg={4} md={5} sm={5} xs={12}>
+                    <p className='profile_balance'>Total Balance :  $ {(coinBalance * BNBUSDT)?.toFixed(6)}</p>
+
+                  </Col>
+                  <Col lg={1} md={1} sm={1} xs={12}>
+                    <div className='vert_line'></div>
+
+                  </Col>
+                  <Col lg={3} md={5} sm={5} xs={12}>
+                    <div className='pro_valuecount'>
+                      <div >
+                        <div className='profile_coinnameimg'>
+                          <img className='nft_coinImg' src={require('../assets/images/Tether Usdt.png')} />
+                          <p className='profile_balance'>USDT</p>
+                        </div>
+                        <p className='hc-profile__text-xs'>
+                          BNB Smart Coin
+                        </p>
+                      </div>
+
+                      <div className='vertical_dtl'>
+                        <p className='profile_greentTxt'>{currency?.filter(val => val.value == "USDT")?.[0]?.balance}</p>
+                        <p className='small_dollar'>$ {BNBUSDT}</p>
+                      </div>
+                    </div>
+
+                  </Col>
+
+                  <Col lg={1} md={1} sm={1} xs={12}>
+                    <div className='vert_line'></div>
+
+                  </Col>
+                  <Col lg={3} md={5} sm={5} xs={12}>
+                    <div className='pro_valuecount'>
+                      <div >
+                        <div className='profile_coinnameimg'>
+                          <img className='nft_coinImg' src={require('../assets/images/bnbcoin.svg').default} />
+                          <p className='profile_balance'>{config.COIN_NAME}</p>
+                        </div>
+                        <p className='hc-profile__text-xs'>
+                          BNB Smart Coin
+                        </p>
+                      </div>
+
+                      <div className='vertical_dtl'>
+                        <p className='profile_greentTxt'>{coinBalance?.toFixed(6)}</p>
+                        <p className='small_dollar'>$ {BNBUSDT}</p>
+                      </div>
+                    </div>
+
+                  </Col>
+                </Row>
+
+                {/* </div> */}
+              </Col>
+            </Row>
+            <Row className='hc-proile__border-top py-4 mx-auto'>
+              <Col xl={3} lg={4} md={5} sm={12} xs={12} className='mb-3'>
+                <div className="stack_nftcounter profile_counter">
+                  <p className="nftcounter_lable">Total NFTs :</p>
+                  <p className="nftcounter_value">{totalValues?.length}</p>
+                </div>
+              </Col>
+              <Col xl={3} lg={4} md={5} sm={12} xs={12} className='mb-3'>
+                <div className="stack_nftcounter profile_counter">
+                  <img className="top_reltabimg" src={require('../assets/images/whitestack.svg').default} />
+                  <p className="nftcounter_lable">Total NFTs Staked :</p>
+                  <p className="nftcounter_value">{totalValues?.filter((val) => val.isStaked)?.length ?? 0}</p>
+                </div>
+              </Col>
+              <Col xl={4} lg={8} md={10} sm={12} xs={12} className='mb-3'>
+                <div className="stack_nftcounter profile_counter pe-4" style={{ width: "max-content" }}>
+                  <img className="top_reltabimg" src={require('../assets/images/rewards.svg').default} />
+                  <p className="nftcounter_lable">Total Reward Claimed :</p>
+                  <p className="nftcounter_value">{Number(rewardAmount).toFixed(6)}</p>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </div>
+        <div className="bottom_content content_bot">
+          <div className="inner-container__width">
+            <div className="d-flex flex-wrap flex-sm-nowrap align-items-center gap-3">
+              <div className="stack_searchbar">
+                <div className="d-flex justify-content-start align-items-center w-100">
+                  <img
+                    className="searchglass"
+                    src={
+                      require("../assets/images/searchglass.svg")
+                        .default
+                    }
+                  />
+                  <input
+                    type='text'
+                    className='stack_search'
+                    placeholder='Search Project...'
+                    value={searchVal}
+                    onChange={(e) => setSearchVal(e.target.value)}
+                  />
+                  {/* <ReactSearchBox
+                                  placeholder="Search..."
+                                  value="Doe"
+                                  data={data}
+                                  callback={(record) => console.log(record)}
+                                /> */}
+                </div>
+
+              </div>
+              <Select
+                classNamePrefix={"react_select"}
+                className="border_select"
+                placeholder="Select Project"
+                styles={stylesgraybgOne}
+                options={optionVal}
+                // value={selectedVal}
+                onChange={(e) => { setSearchVal(""); SetTabName(e.projectId ?? "owned") }}
+              />
+            </div>
+
+
+
+
+
+
+            {console.log('searchDataArr', searchDataArr)}
+            <Row className='row_bottomLine row_hideLine mt-5 mx-auto'>
+              {searchVal ?
+                <>
+                  {searchDataArr?.Tokens && searchDataArr?.Tokens?.length != 0 &&
+                    searchDataArr?.Tokens.map((val) => (
+                      <Col lg={3} md={3} sm={6} xs={12} className='mb_2'>
+                        <DataCard data={val} />
+                      </Col>
+                    ))}
+
+                  {/* {searchDataArr?.collections && searchDataArr?.collections.length != 0 &&
+                      searchDataArr?.collections?.map((val) => (
+                        <Col lg={3} md={4} sm={6} xs={12} className='mb-3'>
+                          <GalleryCard data={val} />
+                        </Col>
+                      ))} */}
+
+                  {searchDataArr?.projects && searchDataArr?.projects.length != 0 &&
+                    searchDataArr?.projects?.map((val) => (
+                      <Col lg={3} md={4} sm={6} xs={12} className='mb_2'>
+                        <ProjectCard data={val} show={true} />
+                      </Col>
+                    ))}
+                  {searchLoad &&
+                    <div className='mp-margin d-flex justify-content-center'>
+                      <button className="button-loadMore" onClick={() => LoadMore()} >Loadmore</button>
+                    </div>}
+                </>
+                :
+                Tokens[value] &&
+                  Tokens[value]?.list?.length > 0 ?
+                  <>
+                    {Tokens[value].list.map((i) => (
+                      <Col xl={3} lg={4} md={6} sm={6} xs={12} className='mb_2'>
+                        <DataCard data={i} />
+                      </Col>
+                    ))}
+
+                    {Loadmore &&
+                      <div className='mp-margin d-flex justify-content-center'><button className="button-loadMore" onClick={() => LoadMore()} >Load More</button>
+                      </div>}
+                  </>
+
+                  : <p className='nodata_found'>No data found</p>
+              }
+            </Row>
+          </div>
+        </div>
+      </div>
+
+      <div ref={footerRef}>
+        <Footer />
+      </div>
+
       {/* <Container fluid className='p-0'>
 
         <div className='profile_emptygrad'>
@@ -331,314 +671,6 @@ console.log('currency---->',currency);
         </div>
       </Container> */}
 
-      <Container fluid className="home_wrapper">
-        <section className='hc-section__inner'>
-          {/* <img src={require('../assets/images/pinkwaste.png')} className='prof_pinkwaste' />
-          <img src={require('../assets/images/greenwaste.png')} className='prof_greenwaste' />
-          <img src={require('../assets/images/violetwaste.png')} className='prof_violwaste' /> */}
-
-          <Container className="custom_container">
-
-            <Row>
-              <Col lg={1} md={2} className="sidetab_holder">
-                <SideTab />
-              </Col>
-              <Col lg={11} md={10} sm={12} xs={12} className="res_pad_aligner">
-                <Row className='row_bottomLine'>
-                  <Col xxl={7} xl={8} xs={12} className='mb-4'>
-                    <div className='profile_dtlswhole flex-wrap'>
-                      <div className='profile_imgDtls'>
-                        <img
-                          className='profile_img img-fluid'
-                          accept="image/*"
-                          src={
-                            isEmpty(userProfile?.Profile) ?
-                              require('../assets/images/collections/shapeEight.jpg') :
-                              `${config?.IMG_URL}/user/${userProfile?.WalletAddress}/profile/${userProfile?.Profile}`}
-                        />
-                        <button className='profile_editBtn'>
-                          <i class="fa-regular fa-pen-to-square"></i> Edit
-
-                          <input type='file' className='editprofile_input' id="Profile" onChange={(e) => onProfileChange(e)} />
-                        </button>
-                      </div>
-                      <div>
-                        <p className='mb-0 hc-profile__title'>Profile</p>
-                        <p className='profile_joinDate  mt-1'>{new Date(userProfile?.createdAt).toDateString()}</p>
-                        <div className='d-flex flex-wrap align-items-center gap-1 gap-sm-2  mt-2 mt-sm-1 '>
-                          <p className='profile_joinDate mb-0'>Wallet Address :</p>
-                          <div className='d-flex  align-items-center gap-2'>
-                            <p className="profile_name" >{userProfile?.DisplayName ? userProfile?.DisplayName : address_showing(userProfile?.WalletAddress)}</p>
-                            <CopyToClipboard
-                              onCopy={() => toast.success("Address copied successfully")}
-                              text={`${userProfile?.DisplayName ? userProfile?.DisplayName : address_showing(userProfile?.WalletAddress)}`}
-                            >
-                              <button className='bg-transparent border-0 outline-0'>
-                                <img src={copyIcon} className='img-fluid' alt='copy' style={{ width: "25px" }} />
-                              </button>
-                            </CopyToClipboard>
-                          </div>
-                        </div>
-                        <div className='d-flex flex-wrap align-items-center gap-2  mt-3'>
-                          <p className='profile_joinDate mb-0'>Referral Link :</p>
-                          <div className='d-flex align-items-center gap-1 gap-sm-2'>
-                            <div className='hc-profile__wrapper-border'>
-                              Link Address
-                            </div>
-                            <button className='bg-transparent border-0 outline-0'>
-                              <img src={copyIcon} className='img-fluid' alt='copy' style={{ width: "25px" }} />
-                            </button>
-                          </div>
-
-                        </div>
-                        <div className='d-flex flex-wrap align-items-center gap-2  mt-3'>
-                          <p className='profile_joinDate mb-0'>Referral Code :</p>
-                          <div className='d-flex align-items-center gap-2'>
-                            <div className='hc-profile__wrapper-border'>
-                              WA098JA
-                            </div>
-                            <button className='bg-transparent border-0 outline-0'>
-                              <img src={copyIcon} className='img-fluid' alt='copy' style={{ width: "25px" }} />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </Col>
-                  <Col xxl={5} xl={4} xs={12} className='mb-4'>
-                    <div className='profile_topright'>
-                      <Row className='align-items-end h-100'>
-                        {userProfile?.KycStatus == "complete" ?
-                          <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0' onClick={() => handleShowKYC()}>
-                            <div 
-                            className={userProfile?.KycStatus == "complete" ? "kyc_activated greenkyc text-center" : "kyc_activated text-center"}
-                            // className='kyc_activated'
-                            >
-                              <img src={require('../assets/images/greenround.svg').default} />
-                              <p>KYC Approved</p>
-                            </div>
-                          </Col>
-                          :
-                          userProfile?.KycStatus == "submit" ?
-                            <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0' onClick={() => handleShowKYC()}>
-                              <div
-                              className={userProfile?.KycStatus == "submit"? "kyc_activated actiate_hint orange text-center" :"kyc_activated actiate_hint text-center" }
-                              // className='kyc_activated actiate_hint'
-                              >
-                              {userProfile?.KycStatus == "submit" ? <></> : <img src={require('../assets/images/redround.svg').default} />}
-                                <p className='text-center'>KYC submitted, please wait till it is reviewed</p>
-                              </div>
-                            </Col>
-                            :
-                            userProfile?.KycStatus == "retry" ?
-                              <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0'>
-
-                                <div className='kyc_activated actiate_hint' onClick={() => handleShowKYC()}>
-
-                                  <img src={require('../assets/images/redround.svg').default} />
-                                  <p>Kyc got rejected retry please</p>
-
-                                  {userProfile?.comment && <button className='primary_blueBtn kyc_reject_btn' onClick={(e) => handleShowKycCmd(e)}>
-                                    <i class="fa-regular fa-comment-dots"></i>
-                                  </button>}
-
-                                </div>
-
-                              </Col>
-                              :
-                              <Col lg={6} md={6} sm={6} xs={12} className='mb-3 mb-sm-0'>
-                                <div className='kyc_activated actiate_hint' onClick={() => handleShowKYC()}>
-                                  <img src={require('../assets/images/redround.svg').default} />
-                                  <p>Complete Your KYC</p>
-                                </div>
-                              </Col>}
-                      </Row>
-
-
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row className='hc-proile__border-top py-3 mx-auto'>
-                  <Col lg={11} xl={10} xs={12}>
-                    {/* <div className='secondary_row'> */}
-                    <Row className='align-items-center'>
-                      <Col lg={4} md={5} sm={5} xs={12}>
-                        <p className='profile_balance'>Total Balance :  $ {(coinBalance * BNBUSDT)?.toFixed(6)}</p>
-
-                      </Col>
-                      <Col lg={1} md={1} sm={1} xs={12}>
-                        <div className='vert_line'></div>
-
-                      </Col>
-                      <Col lg={3} md={5} sm={5} xs={12}>
-                        <div className='pro_valuecount'>
-                          <div >
-                            <div className='profile_coinnameimg'>
-                              <img className='nft_coinImg' src={require('../assets/images/Tether Usdt.png')} />
-                              <p className='profile_balance'>USDT</p>
-                            </div>
-                            <p className='hc-profile__text-xs'>
-                              BNB Smart Coin
-                            </p>
-                          </div>
-
-                          <div className='vertical_dtl'>
-                            <p className='profile_greentTxt'>{currency?.filter(val => val.value == "USDT")?.[0]?.balance}</p>
-                            <p className='small_dollar'>$ {BNBUSDT}</p>
-                          </div>
-                        </div>
-
-                      </Col>
-
-                       <Col lg={1} md={1} sm={1} xs={12}>
-                        <div className='vert_line'></div>
-
-                      </Col> 
-                      <Col lg={3} md={5} sm={5} xs={12}>
-                        <div className='pro_valuecount'>
-                          <div >
-                            <div className='profile_coinnameimg'>
-                              <img className='nft_coinImg' src={require('../assets/images/bnbcoin.svg').default} />
-                              <p className='profile_balance'>{config.COIN_NAME}</p>
-                            </div>
-                            <p className='hc-profile__text-xs'>
-                              BNB Smart Coin
-                            </p>
-                          </div>
-
-                          <div className='vertical_dtl'>
-                            <p className='profile_greentTxt'>{coinBalance?.toFixed(6)}</p>
-                            <p className='small_dollar'>$ {BNBUSDT}</p>
-                          </div>
-                        </div>
-
-                      </Col>
-                    </Row>
-
-                    {/* </div> */}
-                  </Col>
-                </Row>
-                <Row className='hc-proile__border-top py-4 mx-auto'>
-                  <Col xl={3} lg={4} md={5} sm={12} xs={12} className='mb-3'>
-                    <div className="stack_nftcounter profile_counter">
-                      <p className="nftcounter_lable">Total NFTs :</p>
-                      <p className="nftcounter_value">{totalValues?.length}</p>
-                    </div>
-                  </Col>
-                  <Col xl={3} lg={4} md={5} sm={12} xs={12} className='mb-3'>
-                    <div className="stack_nftcounter profile_counter">
-                      <img className="top_reltabimg" src={require('../assets/images/whitestack.svg').default} />
-                      <p className="nftcounter_lable">Total NFTs Staked :</p>
-                      <p className="nftcounter_value">{totalValues?.filter((val) => val.isStaked)?.length ?? 0}</p>
-                    </div>
-                  </Col>
-                  <Col xl={4} lg={8} md={10} sm={12} xs={12} className='mb-3'>
-                    <div className="stack_nftcounter profile_counter pe-4" style={{ width:"max-content" }}>
-                      <img className="top_reltabimg" src={require('../assets/images/rewards.svg').default} />
-                      <p className="nftcounter_lable">Total Reward Claimed :</p>
-                      <p className="nftcounter_value">{Number(rewardAmount).toFixed(6)}</p>
-                    </div>
-                  </Col>
-                </Row>
-
-
-                <div className="d-flex flex-wrap flex-sm-nowrap align-items-center gap-3">
-                  <div className="stack_searchbar">
-                    <div className="d-flex justify-content-start align-items-center w-100">
-                      <img
-                        className="searchglass"
-                        src={
-                          require("../assets/images/searchglass.svg")
-                            .default
-                        }
-                      />
-                      <input
-                        type='text'
-                        className='stack_search'
-                        placeholder='Search Project...'
-                        value={searchVal}
-                        onChange={(e) => setSearchVal(e.target.value)}
-                      />
-                      {/* <ReactSearchBox
-                                  placeholder="Search..."
-                                  value="Doe"
-                                  data={data}
-                                  callback={(record) => console.log(record)}
-                                /> */}
-                    </div>
-
-                  </div>
-                  <Select
-                   classNamePrefix={"react_select"}
-                    className="border_select"
-                    placeholder="Select Project"
-                    styles={stylesgraybgOne}
-                    options={optionVal}
-                    // value={selectedVal}
-                    onChange={(e) => { setSearchVal(""); SetTabName(e.projectId ?? "owned") }}
-                  />
-                </div>
-
-
-
-
-
-
-                {console.log('searchDataArr', searchDataArr)}
-                <Row className='row_bottomLine row_hideLine mt-5 mx-auto'>
-                  {searchVal ?
-                    <>
-                      {searchDataArr?.Tokens && searchDataArr?.Tokens?.length != 0 &&
-                        searchDataArr?.Tokens.map((val) => (
-                          <Col lg={3} md={3} sm={6} xs={12} className='mb-3'>
-                            <DataCard data={val} />
-                          </Col>
-                        ))}
-
-                      {/* {searchDataArr?.collections && searchDataArr?.collections.length != 0 &&
-                      searchDataArr?.collections?.map((val) => (
-                        <Col lg={3} md={4} sm={6} xs={12} className='mb-3'>
-                          <GalleryCard data={val} />
-                        </Col>
-                      ))} */}
-
-                      {searchDataArr?.projects && searchDataArr?.projects.length != 0 &&
-                        searchDataArr?.projects?.map((val) => (
-                          <Col lg={3} md={4} sm={6} xs={12} className='mb-3'>
-                            <ProjectCard data={val} show={true} />
-                          </Col>
-                        ))}
-                      {searchLoad &&
-                        <div className='loadmore_holder'>
-                          <button className="seconday_btn width_fitter" onClick={() => LoadMore()} >Loadmore</button>
-                        </div>}
-                    </>
-                    :
-                    Tokens[value] &&
-                      Tokens[value]?.list?.length > 0 ?
-                      <>
-                        {Tokens[value].list.map((i) => (
-                          <Col xl={3} lg={4} md={6} sm={6} xs={12} className='mb-3'>
-                            <DataCard data={i} />
-                          </Col>
-                        ))}
-                        {Loadmore &&
-                          <div className='loadmore_holder'><button className="seconday_btn width_fitter" onClick={() => LoadMore()} >Load More</button>
-                          </div>}
-                      </>
-
-                      : <p className='nodata_found'>No data found</p>
-                  }
-                </Row>
-
-              </Col>
-            </Row>
-          </Container>
-          <Footer />
-        </section >
-      </Container>
 
       {/* kyc modal */}
       {showKYC && <KYCActivate show={showKYC} userProfile={userProfile} getProfileDetails={getProfileDetails} handleClose={handleCloseKYC} />}
