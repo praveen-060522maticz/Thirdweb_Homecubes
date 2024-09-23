@@ -27,7 +27,7 @@ import ProjectInfo from './Screens/ProjectInfo';
 import CollectionInfo from './Screens/CollectionInfo';
 import Profile from './Screens/Profile';
 import Staking from './Screens/Staking';
-
+import Contact from './Screens/Contact';
 import CollectionNfts from './Screens/CollectionNfts';
 
 /** code start */
@@ -80,6 +80,10 @@ function App() {
             path: "/CollectionNfts/:projectTitle",
             element: <CollectionNfts />,
         },
+        {
+            path: "/contact",
+            element: <Contact />,
+          },
         // Add routes for any additional screens
     ]);
 

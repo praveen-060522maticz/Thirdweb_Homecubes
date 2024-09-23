@@ -1041,7 +1041,7 @@
     margin: 0 !important;
 }
 
-.react-select-2__single-value {
+.react-select-2__single-value, .react-select-2__placeholder {
     padding: 0 !important;
     margin: 0 !important;
     font-size: 1.75vh !important;
