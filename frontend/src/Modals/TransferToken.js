@@ -192,11 +192,11 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
             <img src={require('../assets/images/close.svg').default} onClick={() => handleClose()} className='modal_closer' />
           </div>
 
-          <div className='modal_body mt-3'>
+          <div className='modal_body mt_2'>
 
             <div className='cp_nftimage_holder'>
               <img className='cp_nftImage' src={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Original/${Tokens_Detail?.NFTOrginalImage}`} />
-              <p className='cp_nftName mt-3'>{item?.NFTName}</p>
+              <p className='cp_nftName mt_2'>{item?.NFTName}</p>
             </div>
 
             {/* <div className='mt-3'>
@@ -204,7 +204,7 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
               <input type="number" className='modal_singleinput mt-3 cmnInput_scrollerHider' placeholder='Enter quality to transfer' />
             </div> */}
 
-            <div className='mt-3'>
+            <div className='mt_2'>
               <p className='modal_summaryLabel'>Transfer to</p>
               <input
                 type="text"
@@ -212,13 +212,13 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
                 onChange={(e) => { SetAddress((e.target.value).toLowerCase()) }}
                 autoComplete="off"
                 disabled={disablestate}
-                className='modal_singleinput mt-2 cmnInput_scrollerHider'
+                className='modal_singleinput mt_2 cmnInput_scrollerHider'
                 placeholder='Enter wallet address' />
             </div>
 
 
             <button
-              className='nftinfo_gradeientBtn web_listitem_btn mt-3'
+              className='nftinfo_gradeientBtn web_listitem_btn mt_2'
               disabled={Btn == 'error' || Btn === "process" || Btn === "done" ? true : false}
               onClick={Btn == 'start' || Btn === "try" ? FormSubmit : null}
             >
@@ -229,7 +229,7 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
                 || Btn == 'process' && 'In-Progress'
               }
             </button>
-            <button className='hc-button__gray mt-3' onClick={() => handleClose()}>Cancel</button>
+            <button className='hc-button__gray mt_2' onClick={() => handleClose()}>Cancel</button>
 
           </div>
         </Modal.Body>

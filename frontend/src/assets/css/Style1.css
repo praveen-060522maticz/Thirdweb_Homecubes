@@ -596,7 +596,7 @@ p {
 }
 
 .home_titled {
-  font-size: 4.2vh;
+  font-size: var(--main-title-font);
   font-weight: 600;
   margin-bottom: 0;
 }
@@ -1213,7 +1213,7 @@ p {
 
 .floor_prize,
 .nft_coinname {
-  font-size: 1.5vh;
+  font-size: var(--card-desc-font);
   font-weight: 500;
   margin: 0;
 }
@@ -1498,7 +1498,7 @@ input::placeholder {
   position: relative;
 }
 .hc-nft__card-title {
-  font-size: 2.5vh;
+  font-size: var(--card-title-font);
   line-height: 2.5vh;
   font-family: var(--montserrat-font);
   font-weight: 600;
@@ -1981,7 +1981,7 @@ input::placeholder {
   font-weight: 600;
 }
 .modal-body {
-  padding: 2.5vh 2.5vh;
+  padding: 2.5vh 1.5vh;
 }
 .modal_top {
   align-items: center;
@@ -1995,7 +1995,7 @@ input::placeholder {
 }
 .hc-modal.common_modal .modal_summaryLabel {
   font-family: var(--montserrat-font);
-  font-size: 1.8vh;
+  font-size: var(--modal-text);
   font-weight: 600;
 }
 .modal_summaryLabel {
@@ -2013,8 +2013,8 @@ input::placeholder {
 .modal_inputGroup {
   background-color: var(--stepcard_bg);
   border: 0.3vh solid var(--gradinet_right);
-  border-radius: 5px;
-  padding: 0 3.2vh 0 0.5vh;
+  border-radius: 0.4vh;
+  padding: 0 2.5vh 0 0.5vh;
 }
 .modal_input, .modal_input::placeholder {
   color: var(--white);
@@ -2027,9 +2027,12 @@ input::placeholder {
   font-size: 1.6vh;
   font-weight: 400;
   font-weight: 600;
-  max-width: 75%;
+  max-width: 12vh;
   outline: none;
   padding: 1vh 0.5vh;
+}
+.duration .react_select__control {
+  width: 18vh !important;
 }
 .modal_title {
   color: var(--white);
@@ -2096,7 +2099,7 @@ input::placeholder {
 .hc-modal.common_modal .modal_summaryValue {
   color: var(--gradinet_right);
   font-family: var(--montserrat-font);
-  font-size: 1.7vh;
+  font-size: var(--modal-text);
   font-weight: 600;
   margin: 0;
 }
@@ -2135,5 +2138,46 @@ input::placeholder {
   font-weight: 600;
   margin: 0;
   padding: 0.9vh 2vh;
+}
+.cp_nftimage_holder {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cp_nftImage {
+  border-radius: 0.8vh;
+  height: 16vh;
+  object-fit: cover;
+  width: 16vh;
+}
+.hc-modal.common_modal .modal_singleinput {
+  border-color: var(--gradinet_right);
+  border-width: 0.3vh;
+  font-weight: 500;
+}
+.kyc_phoneInput input:focus, .modal_singleinput:focus {
+  outline: none !important;
+}
+.modal_singleinput {
+  background-color: initial;
+  border: 0.3vh solid var(--gradinet_right);
+  border-radius: 0.5vh;
+  color: var(--white);
+  font-family: var(--montserrat-font);
+  font-size: 1.6vh;
+  font-weight: 600;
+  padding: 0.9vh 1.2vh;
+  width: 100%;
+}
+.hc-modal.common_modal .cp_nftName {
+  font-family: var(--montserrat-font);
+  font-size: 2vh;
+  font-weight: 600;
+}
+@media screen and (max-width:575px) {
+  .duration .react_select__control {
+    width: 33vh !important;
+}
 }
 /* modal end */

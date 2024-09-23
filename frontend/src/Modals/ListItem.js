@@ -662,8 +662,8 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
               </div>}
 
               {FormValue.PutOnSaleType == 'TimedAuction' ?
-                <Row className='mt_3'>
-                  <Col lg={6} md={6} sm={6} xs={12} className='mb_2 mb-sm-0'>
+                <div className='d-block d-sm-flex gap_2 mt_3'>
+                  <div  className='mb_2 mb-sm-0'>
                     <p className='modal_summaryLabel'>Minimum Price</p>
                     <div className='modal_inputGroup min_pad mt_1'>
                       <input type="number" className='modal_input listitem_modalinput cmnInput_scrollerHider' placeholder='' value={FormValue?.NFTPrice} onChange={(e) => { SetFormValue({ ...FormValue, "NFTPrice": e.target.value }) }} />
@@ -684,11 +684,11 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
 
                     </div>
                     <p style={{ color: "red" }} >{Error?.CoinName}</p>
-                  </Col>
+                  </div>
 
-                  <Col lg={6} md={6} sm={6} xs={12} className='mb_2 mb-sm-0'>
+                  <div  className='mb_2 mb-sm-0'>
                     <p className='modal_summaryLabel'>Duration</p>
-                    <div className='modal_inputGroup mt_1'>
+                    <div className='modal_inputGroup duration mt_1'>
                       {/* <input type="number" className='modal_input listitem_modalinput' placeholder='' /> */}
                       <Select
                         className="border_select side_slect"
@@ -720,12 +720,12 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                     </div>
                     <p style={{ color: "red" }} >{Error?.EndClockTime}</p>
 
-                  </Col>
-                </Row>
+                  </div>
+                </div>
                 :
 
-                <Row className='mt_3'>
-                  <Col lg={12}>
+                <div className='mt_3'>
+                  <div>
                     <p className='modal_summaryLabel'>
                       {FormValue.PutOnSaleType ==
                         "FixedPrice"
@@ -752,10 +752,8 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                     </div>
                     <p  className='modal_summaryLabel mt_1' >{currency?.filter(val => val.label == FormValue?.CoinName)?.[0]?.balance} {FormValue?.CoinName}</p>
                     <p style={{ color: "red",marginBottom:0 }} >{Error?.CoinName}</p>
-                  </Col>
-
-
-                </Row>
+                  </div>
+                </div>
               }
             </div>
 
