@@ -599,7 +599,16 @@ h6 {
   position: relative;
   z-index: 5;
 }
-
+.nftcard_statuslabelblue_dark {
+  background: var(--gradinet_left);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--white) !important;
+}
+.nftcard_statuslabelblue_dark .card_status {
+  color: var(--white);
+}
 .banner_section::after {
   content: "";
   background: url("../images/bottomlayer.png") no-repeat;
@@ -1668,6 +1677,8 @@ input::placeholder {
   top: 0;
 }
 
+
+
 .modal-body .react_select__control {
   width: 10vh !important;
 }
@@ -1677,6 +1688,7 @@ input::placeholder {
   height: 4.4vh !important;
 }
 
+/* react select start */
 .react_select__control {
   min-height: 3.8vh !important;
   height: 3.8vh !important;
@@ -1739,26 +1751,42 @@ input::placeholder {
 }
 
 .react_select__indicator svg {
-  fill: #fff !important;
+  fill: var(--white) !important;
   width: 2.5vh !important;
   height: 2.5vh !important;
 }
-
+.react_select__menu-list {
+  max-height: 20vh !important;
+}
 .react_select__menu {
+  background: var(--black)!important;
+  border: 0.2vh solid var(--border-color-1) !important;
   border-radius: 0.2vh !important;
   margin-bottom: 0.2vh !important;
   margin-top: 0.2vh !important;
 }
-
-.react_select__menu-list {
-  max-height: 20vh !important;
-}
-
 .react_select__option {
-  padding: 0.5vh 1vh !important;
+  cursor: pointer !important;
+  background: transparent !important;
   font-size: 1.7vh !important;
+  font-weight: 500 !important;
+  padding: 0.5vh 1vh !important;
+  color: var(--white) !important;
+}
+.react_select__option:hover {
+  background: var(--blue_200) !important;
+  color: var(--black) !important;
+}
+.react_select__option:active {
+  background: var(--blue_300) !important;
+  color: var(--white) !important;
+}
+.react_select__option--is-selected {
+  background: var(--blue_200) !important;
+  color: var(--white) !important;
 }
 
+/* react select end */
 
 
 @media screen and (max-width:991px) {
@@ -2553,6 +2581,11 @@ input::placeholder {
   width: 100%;
 }
 
+@media (min-width: 992px) {
+  .modal-lg, .modal-xl {
+    max-width: 80vh !important;
+  }
+}
 @media (min-width: 576px) {
   .modal-dialog {
     max-width: 50vh;
@@ -2560,3 +2593,113 @@ input::placeholder {
 }
 
 /* modal end */
+
+
+
+/* profile page */
+.profile_dtlswhole {
+  display: flex;
+  gap: 2vh;
+  justify-content: flex-start;
+}
+.profile_imgDtls {
+  border-radius: 0.6vh;
+  box-shadow: 15px 14px 32.1px -10px #fff3;
+  height: 25vh;
+  width: 25vh;
+  overflow: hidden;
+  position: relative;
+}
+.profile_img {
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.editprofile_input {
+  cursor: pointer;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.profile_editBtn {
+  background-color: #ffffff38;
+  border: 0.2vh solid var(--white);
+  border-radius: 0.5vh;
+  bottom: 2%;
+  color: var(--white);
+  font-family: var(--poppins);
+  font-size: 1.5vh;
+  font-weight: var(--weight_four);
+  left: 2%;
+  outline: none;
+  padding: 0.4vh 0.8vh;
+  position: absolute;
+}
+.hc-profile__title, .profile_name {
+  font-size: 2.2vh;
+}
+.hc-profile__title, .hc-profile__wrapper-border {
+font-family: var(--montserrat-font);
+font-weight: 600;
+}
+.hc-profile__title {
+color: var(--gradinet_right);
+}
+.profile_joinDate {
+  color: var(--placeholder_color) !important;
+  font-family: var(--montserrat-font);
+  font-size: 1.8vh;
+  font-weight: 600;
+}
+.profile_name, .small_dollar {
+  color: var(--white);
+  font-family: var(--montserrat-font);
+  font-weight: 600;
+  margin: 0;
+}
+.hc-profile__wrapper-border {
+  border: 0.2px solid var(--gradinet_right);
+  color: var(--white);
+  font-size: 1.6vh;
+  max-width: 20vh;
+  min-width: 20vh;
+  padding-bottom: 0.3vh;
+  padding-top: 0.3vh;
+  text-align: center;
+  width: 20vh;
+}
+.kyc_activated {
+  align-items: center;
+  border: 0.3vh solid var(--text-color-1);
+  border-radius: 0;
+  cursor: pointer;
+  display: flex;
+  gap: 1.5vh;
+  justify-content: center;
+  padding: 1vh 2vh;
+  width: fit-content;
+}
+.orange {
+  border: 0.3vh solid #ff7e07 !important;
+}
+.kyc_activated p {
+  color: green;
+  font-family: var(--montserrat-font);
+  font-size: 1.8vh;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.actiate_hint.kyc_activated.orange p {
+  color: #ff7e07 !important;
+}
+.gap_1{
+  gap: 1vh;
+}
+/* profile page end */
