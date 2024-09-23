@@ -599,7 +599,16 @@ h6 {
   position: relative;
   z-index: 5;
 }
-
+.nftcard_statuslabelblue_dark {
+  background: var(--gradinet_left);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--white) !important;
+}
+.nftcard_statuslabelblue_dark .card_status {
+  color: var(--white);
+}
 .banner_section::after {
   content: "";
   background: url("../images/bottomlayer.png") no-repeat;
@@ -1668,6 +1677,8 @@ input::placeholder {
   top: 0;
 }
 
+
+
 .modal-body .react_select__control {
   width: 10vh !important;
 }
@@ -1677,6 +1688,7 @@ input::placeholder {
   height: 4.4vh !important;
 }
 
+/* react select start */
 .react_select__control {
   min-height: 3.8vh !important;
   height: 3.8vh !important;
@@ -1739,26 +1751,42 @@ input::placeholder {
 }
 
 .react_select__indicator svg {
-  fill: #fff !important;
+  fill: var(--white) !important;
   width: 2.5vh !important;
   height: 2.5vh !important;
 }
-
+.react_select__menu-list {
+  max-height: 20vh !important;
+}
 .react_select__menu {
+  background: var(--black)!important;
+  border: 0.2vh solid var(--border-color-1) !important;
   border-radius: 0.2vh !important;
   margin-bottom: 0.2vh !important;
   margin-top: 0.2vh !important;
 }
-
-.react_select__menu-list {
-  max-height: 20vh !important;
-}
-
 .react_select__option {
-  padding: 0.5vh 1vh !important;
+  cursor: pointer !important;
+  background: transparent !important;
   font-size: 1.7vh !important;
+  font-weight: 500 !important;
+  padding: 0.5vh 1vh !important;
+  color: var(--white) !important;
+}
+.react_select__option:hover {
+  background: var(--blue_200) !important;
+  color: var(--black) !important;
+}
+.react_select__option:active {
+  background: var(--blue_300) !important;
+  color: var(--white) !important;
+}
+.react_select__option--is-selected {
+  background: var(--blue_200) !important;
+  color: var(--white) !important;
 }
 
+/* react select end */
 
 
 @media screen and (max-width:991px) {
