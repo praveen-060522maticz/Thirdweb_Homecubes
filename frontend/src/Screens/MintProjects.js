@@ -29,16 +29,6 @@ import { useRef } from 'react';
 /* code start */
 
 
-
-
-
-
-
-
-
-
-
-
 function MintProjects() {
 
     const [project, setProject] = useState([])

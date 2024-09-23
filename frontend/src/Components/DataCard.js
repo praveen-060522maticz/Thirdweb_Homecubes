@@ -48,10 +48,10 @@ function DataCard(props) {
         {pathname == "/staking" &&
           <div className="nftcard_detailwrapper">
             <p className="nft_name hc-nft__card-title">{NFTName}</p>
-            <p className="nft_stackdate">Days Staked on this Quarter : {getStakedDate ?? "None"}</p>
-            <p className="nft_expiry">Staking expiry date: {stake?.endDate ? new Date(stake?.endDate).toLocaleDateString() : "None"}</p>
+            <p className="hh-nft__text-sm ">Days Staked on this Quarter : {getStakedDate ?? "None"}</p>
+            <p className="hh-nft__text-sm ">Staking expiry date: {stake?.endDate ? new Date(stake?.endDate).toLocaleDateString() : "None"}</p>
             <button
-              className={!isStaked ? "bodygradientBtn modal_grdientBtn mt-3" : "nftcard_btnviolet mt-3"}
+              className={!isStaked ? "bodygradientBtn modal_grdientBtn " : "nftcard_btnviolet "}
               // disabled={PutOnSaleType != "UnlimitedAuction" && (PutOnSaleType != "NotForSale") && !isStaked}
               onClick={() => {
                 if (isBidPending) return toast.warn("Please Complete the bid process")
