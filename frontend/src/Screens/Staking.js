@@ -25,6 +25,10 @@ import web3utils from 'web3-utils';
 import { useWallets } from "@privy-io/react-auth";
 import Prompt from "../Components/Prompt";
 
+import totalnft from '../assets/images/totalnft.svg'
+import totalrewards from '../assets/images/totalreward.svg'
+
+
 function Staking() {
 
   const { accountAddress } = useSelector(
@@ -597,23 +601,44 @@ function Staking() {
               <div className="home_titled hc-home__title head_txt text-center"  >
                 Claim Rewards
               </div>
-              <div className="d-flex flex-wrap align-items-start align-items-xl-center justify-content-center claim-value__wrapper">
+              <div className="d-flex flex-wrap align-items-center justify-content-start justify-content-xl-center claim-value__wrapper">
+
+
+
                 <div className="value__wrapper-blue">
-                  <p className="title">Number of NFT's :</p>
-                  <p className="value">{nftCounts?.totalNfts}</p>
+                  <p className="title d-none d-xl-block">Number of NFT's :</p>
+                  <p className="title d-xl-none">Total NFT's :</p>
+                  <p className="value"> {nftCounts?.totalNfts}</p>
                 </div>
+
                 <div className="value__wrapper-blue">
-                  <p className="title">
+                  <p className="title d-none d-xl-block">
                     Number of Staked NFTs :
                   </p>
-                  <p className="value">{nftCounts?.isStaked}</p>
+                  <div className="value__wrapper-image">
+                    <img src={totalnft} />
+                    <p className="title d-xl-none">
+                      Total NFTs stacked :
+                    </p>
+                  </div>
+                  <p className="value"> {nftCounts?.isStaked}</p>
                 </div>
                 <div className="value__wrapper-blue">
-                  <p className="title">
+                  <p className="title d-none d-xl-block">
                     Number of non-staked NFTs :
                   </p>
-                  <p className="value">{nftCounts?.isNotStaked}</p>
+                  <div className="value__wrapper-image">
+                    <img src={totalrewards} />
+                    <p className="title d-xl-none">
+                      Total Reward Claimed :
+                    </p>
+                  </div>
+                  <p className="value"> {nftCounts?.isNotStaked}</p>
                 </div>
+
+
+
+
               </div>
               <h5 className="hh-stake__subtitle text-center">
                 Next Reward Distribution Date: <span>
@@ -700,7 +725,7 @@ function Staking() {
                           onClick={() => { setMobSearch(false); }}
                         /> */}
                       </div>
-                      <div>
+                      <div className="react-select-2-wrap">
                         <Select
                           classNamePrefix='react-select-2'
                           className="border_select"
