@@ -78,6 +78,8 @@ function DataCard(props) {
                   {NFTPrice} <span>{CoinName ? CoinName : CollectionNetwork}</span>
                 </p>
               </div>}
+
+
           </div>}
 
       </div>
