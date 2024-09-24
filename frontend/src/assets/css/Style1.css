@@ -844,6 +844,10 @@ h6 {
   width: 2.5vh;
 }
 
+.mt_5 {
+  margin-top: 5vh;
+}
+
 .mt_4 {
   margin-top: 4vh;
 }
@@ -864,12 +868,20 @@ h6 {
   margin-bottom: 4vh;
 }
 
+.mb_5 {
+  margin-bottom: 5vh;
+}
+
 .mb_3 {
   margin-bottom: 3vh;
 }
 
 .mb_2 {
   margin-bottom: 2vh;
+}
+
+.mb_1 {
+  margin-bottom: 1vh;
 }
 
 .me_2 {
@@ -2292,7 +2304,7 @@ input::placeholder {
   color: var(--white) !important;
   font-family: var(--montserrat-font);
   font-size: 1.8vh;
-  font-weight: 600;
+  font-weight: 500;
   /* margin: 0; */
 }
 
@@ -2483,7 +2495,7 @@ input::placeholder {
   color: var(--white);
   font-family: var(--montserrat-font);
   font-size: 1.6vh;
-  font-weight: 600;
+  font-weight: 500;
   padding: 0.9vh 1.2vh;
   width: 100%;
 }
@@ -2609,6 +2621,19 @@ input::placeholder {
 
 
 /* profile page */
+.contact_container {
+  max-width: var(--container-width-main);
+  margin: auto;
+}
+
+.blogINfo_usercomment {
+  color: var(--white);
+  font-family: var(--montserrat-font);
+  font-size: 2vh;
+  font-weight: 500;
+  margin: 0;
+}
+
 .profile_dtlswhole {
   display: flex;
   gap: 2vh;
@@ -2717,20 +2742,445 @@ input::placeholder {
   border: 0.3vh solid #ff7e07 !important;
 }
 
+.actiate_hint.kyc_activated.orange p {
+  color: #FF7E07 !important;
+}
+
+.kyc_activated.greenkyc {
+  border: 2px solid #00DA09 !important;
+}
+
+.actiate_hint.kyc_activated.greenkyc p {
+  color: #00DA09 !important;
+}
+
+.kyc_activated.greenkyc p {
+  color: #00DA09 !important;
+}
+
+.kyc_activated.actiate_hint p {
+  color: #F84A4A !important;
+}
+
 .kyc_activated p {
   color: green;
   font-family: var(--montserrat-font);
   font-size: 1.8vh;
   font-weight: 600;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 
 .actiate_hint.kyc_activated.orange p {
   color: #ff7e07 !important;
 }
 
+.copyiconimg {
+  width: 2.9vh;
+}
+
 .gap_1 {
   gap: 1vh;
 }
 
+.pro_valuecount,
+.secondary_row {
+  align-items: center;
+  display: flex;
+  gap: 2vh;
+  justify-content: flex-start;
+}
+
+.profile_coinnameimg {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.hc-proile__border-top {
+  border-top: 0.2vh solid #ffffff54;
+  padding: 2.2vh 0vh;
+}
+
+.nft_coinImg {
+  height: 2.5vh;
+  margin-right: 1vh;
+  width: 2.5vh;
+}
+
+.profile_balance {
+  color: var(--white);
+  font-family: var(--montserrat-font);
+  font-size: 2vh;
+  font-weight: 600;
+  margin: 0;
+}
+
+.nftcounter_value {
+  color: var(--gradinet_right);
+  margin: 0;
+}
+
+.gap_set {
+  gap: 6vh;
+  display: flex;
+  align-items: center;
+}
+
+.vert_line {
+  background-color: var(--white);
+  height: 5vh;
+  width: 0.1vh;
+}
+
+.hc-profile__text-xs {
+  color: var(--text-color-2);
+  font-family: var(--montserrat-font);
+  font-size: 1.1vh;
+  font-weight: 600;
+  margin-bottom: 0;
+  margin-top: 0.4vh;
+}
+
+.profile_greentTxt {
+  color: var(--gradinet_right);
+  font-family: var(--montserrat-font);
+  font-size: 2vh;
+  font-weight: 600;
+  margin: 0;
+}
+
+.small_dollar {
+  font-size: 2vh;
+}
+
+.counterslist {
+  display: flex;
+  align-items: center;
+  gap: 4vh;
+}
+
+.profile_counter.stack_nftcounter {
+  justify-content: flex-start;
+}
+
+.stack_nftcounter {
+  align-items: center;
+  border: 0.3vh solid var(--gradinet_right);
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0.8vh 1vh;
+  width: 32vh;
+}
+
+.nftcounter_lable,
+.nftcounter_value {
+  font-family: var(--montserrat-font);
+  font-size: 1.8vh;
+  font-weight: 600;
+}
+
+.nftcounter_lable {
+  color: var(--white);
+  margin: 0 1vh 0 0;
+}
+
+.top_reltabimg {
+  height: 2.4vh;
+  margin-right: 1vh;
+  width: 2.4vh;
+}
+
+.profile_top {
+  margin-top: -8vh;
+}
+
+.react-select-2__placeholder {
+  color: var(--white);
+}
+
+.kyc_phoneInput input {
+  background-color: initial;
+  border: 0.3vh solid var(--gradinet_right);
+  border-radius: 5px;
+  color: var(--white);
+  font-family: var(--montserrat-font);
+  font-size: 1.6vh;
+  font-weight: 600;
+  padding: 1vh 0.8vh;
+  width: 100%;
+}
+
+.modal-body .nations .react_select__control {
+  width: 100% !important;
+}
+
+.modal-body .nations .react_select__value-container {
+  height: 4.8vh !important;
+}
+
+.kyc_flex {
+  align-items: flex-end;
+  display: flex;
+  gap: 2vh;
+  justify-content: flex-start;
+}
+
+.kyc_imagewrapper {
+  background-color: initial;
+  border: 0.2vh solid var(--gradinet_right);
+  border-radius: 0.5vh;
+  cursor: pointer !important;
+  height: 5vh;
+  justify-content: center;
+  position: relative;
+  width: 5vh;
+}
+
+.kyc_imagewrapper,
+.kyc_poptop {
+  align-items: center;
+  display: flex;
+}
+
+.customed_img {
+  border-radius: 0.5vh;
+  max-height: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.kyc_fileInput {
+  cursor: pointer !important;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.hc-kyc__modal-p p {
+  color: var(--white);
+  font-size: 1.7vh;
+  font-weight: 500;
+  margin-bottom: 2vh !important;
+}
+
+.mr_accept {
+  margin-left: 1vh;
+  margin-top: -0.2vh;
+}
+
+@media screen and (max-width:991px) {
+  .gap_set {
+    gap: 3vh;
+  }
+
+  .counterslist {
+    gap: 2vh;
+  }
+
+  .profile_counter {
+    width: fit-content;
+  }
+}
+
+@media screen and (max-width:767px) {
+  .gap_set {
+    gap: 3vh;
+    flex-wrap: wrap;
+  }
+
+  .counterslist {
+    flex-wrap: wrap;
+    gap: 1.8vh 1vh;
+  }
+
+  .profile_counter {
+    width: fit-content;
+  }
+}
+
+@media screen and (max-width:575px) {
+
+  .profile_balance,
+  .profile_greentTxt,
+  .small_dollar {
+    font-size: 1.8vh;
+  }
+
+  .pro_valuecount {
+    gap: 1.2vh;
+  }
+
+  .vert_line.vert_line1 {
+    display: none;
+  }
+
+  .profile_top {
+    margin-top: -5vh;
+  }
+
+  .gap_set {
+    gap: 2vh 1.4vh;
+    margin-top: 2.5vh;
+  }
+
+  .profile_dtlswhole {
+    gap: 1vh;
+  }
+
+  .profile_joinDate {
+    font-size: 1.7vh;
+  }
+
+  .hc-profile__title {
+    font-size: 2vh;
+  }
+
+  .profile_name {
+    font-size: 1.7vh;
+  }
+
+  .copyiconimg {
+    width: 2.5vh;
+  }
+
+  .copyiconimg.copy1 {
+    width: 3.5vh;
+  }
+
+  .kyc_activated {
+    padding: 1vh 0.6vh;
+  }
+
+  .kyc_activated p {
+    font-size: 1.6vh;
+  }
+
+  .profile_imgDtls {
+    height: 23vh;
+    width: 23vh;
+  }
+
+  .hc-profile__wrapper-border {
+    max-width: 100%;
+    min-width: auto;
+    width: 100%;
+  }
+}
+
 /* profile page end */
+
+
+
+/* contact */
+.blogInfo_placecomment {
+  background-color: var(--stepcard_bg);
+  border-radius: 1vh;
+  padding: 3vh 3vh 1vh 3vh;
+}
+
+.blogInfo_inplabel,
+.blogInfo_input {
+  font-family: var(--montserrat-font);
+  font-weight: 400;
+}
+
+.blogInfo_inplabel {
+  color: var(--input_label);
+  font-size: 1.7vh;
+  margin: 0;
+}
+
+.blogInfo_input,
+.blogInfo_textarea {
+  background-color: initial;
+  border: none;
+  border-bottom: 0.2vh solid var(--input_bottomborder);
+  color: var(--white);
+  font-size: 1.6vh;
+  outline: none;
+  padding: 0.6vh 0;
+  width: 100%;
+}
+
+.contact_bluebe {
+  background-color: var(--gradinet_right);
+  border-radius: 0.8vh;
+  padding: 1vh 1.5vh !important;
+}
+
+.contact_blackText {
+  color: var(--contact_black);
+  font-family: var(--helonika_font);
+  font-size: 1.8vh;
+  font-weight: 500;
+  margin: 0;
+}
+
+.contact_mailDtl,
+.contact_socialwrapper {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.contact_mailDtl {
+  gap: 1vh;
+}
+
+.contact_socialAll {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.contact_socialwrapper {
+  gap: 1.6vh;
+}
+
+.contact_blckmail {
+  height: 2vh;
+  object-fit: contain;
+  width: 2vh;
+}
+
+.contact_blckmail:hover {
+  filter: invert(1);
+}
+
+.px_0 {
+  padding-left: 1.5vh !important;
+  padding-right: 1.5vh !important;
+}
+
+.contact_mailadd {
+  color: var(--contact_black);
+  font-family: var(--montserrat-font);
+  font-size: 1.6vh;
+  font-weight: var(--weight_four);
+  margin: 0;
+}
+
+@media screen and (max-width:575px) {
+  .contact_bluemobcen {
+    display: flex;
+    justify-content: center;
+  }
+
+  .socialtext {
+    margin-top: 2vh;
+  }
+
+  .blogInfo_placecomment {
+    padding: 3vh 1vh 1vh 1vh;
+  }
+
+  .contact_container {
+    margin-top: 10vh;
+  }
+}
+
+/* contact end */
