@@ -883,14 +883,14 @@ function Staking() {
                       </Col>
                     </Row>
                   ) : (
-                    <Row className="justify-content-center mb-5 mt-5">
-                      <Col lg={8}>
+                    <Row className="justify-content-center margin__tb-5vh">
+                      <Col lg={8} className="d-flex justify-content-center">
                         <div className="staking_nowallet">
-                          <h3 className="lorem_title staking_nowalc">
+                          <h3 className="hh-stake__subtitle text-center">
                             Pending Rewards :
                           </h3>
                           <button
-                            className="stack_cnctwallet"
+                            className="nftinfo_gradeientBtn web_listitem_btn margin__tb-5vh"
                             onClick={() => handleOpebWallet()}
                           >
                             <img

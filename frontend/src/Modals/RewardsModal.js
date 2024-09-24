@@ -91,12 +91,12 @@ function RewardsModal({ show, handleClose, setWallet }) {
           <div className='modal_body mt-3'>
 
             <Row>
-              <Col lg={7} md={7} sm={7} xs={12} className='mob_centerr mb-3 mb-sm-0'>
+              <Col xs={12} className='mob_centerr '>
                 <p className='mp_detailbrief'>lorem text connect to wallet</p>
               </Col>
-              <Col lg={5} md={5} sm={5} xs={12} className='mob_centerr mb-3 mb-sm-0'>
+              <Col xs={12} className='mob_centerr mb-3 mb-sm-0 margin__tb-5vh'>
                 <button onClick={() => { onWalletClick("MetaMask") }}
-                  className="stack_cnctwallet"
+                  className="nftinfo_gradeientBtn web_listitem_btn"
                 >
                   <img
                     className="header_wallet"
