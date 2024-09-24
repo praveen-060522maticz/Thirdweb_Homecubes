@@ -32,7 +32,8 @@
     --container-width-sm-main: 90%;
     --container-width-inner: 70%;
 
-    --main-title-font: 4.2vh;
+    /* --main-title-font: 4.2vh; */
+    --main-title-font: 3.9vh;
     --card-title-font: 2.5vh;
     --card-desc-font: 1.5vh;
     --modal-text: 1.8vh;
