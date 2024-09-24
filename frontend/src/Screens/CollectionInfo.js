@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import BottomBar from "../Components/BottomBar";
 import Header from "../Components/Header";
 import {
@@ -42,7 +42,8 @@ function CollectionInfo() {
   const [Loadmore, setLoadMore] = useState(true);
   const galleryData = [...collectionData?.galleryImages || []]
   const [arrData, setArrData] = useState([])
-
+  const [isFixed, setIsFixed] = useState(true);
+  const footerRef = useRef(null);
 
   const [videoShow, setVideoShow] = useState("");
 
@@ -211,48 +212,56 @@ function CollectionInfo() {
     window.scrollTo(0, 0);
   }, []);
 
+  const handleScroll = () => {
+    const footerTop = footerRef.current.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+    if (footerTop < windowHeight) {
+      setIsFixed(false);
+    } else {
+      setIsFixed(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <BottomBar />
       <Header />
-      <Container fluid className="home_wrapper">
-        <Container className="custom_container">
-          <Row>
-            <Col lg={1} md={2} className="sidetab_holder">
-              <SideTab />
-            </Col>
-            <Col
-              lg={11}
-              md={10}
-              sm={12}
-              xs={12}
-              className="res_pad_aligner ci_highertop"
-            >
+      <div className="innercontent">
+        <div className={isFixed ? "side_left fixed" : "side_left sticky"}  >
+          <SideTab />
+        </div>
+        <div className="banner_section banner_section_content claim-section">
+          <div className='px-0 inner-container__width'>
+            <div>
               <div className="cus-back-btn mb-3">
                 <Button className="" onClick={() => navigate(-1)} >
                   <i className="fa-solid fa-chevron-left"></i>
                   Back
                 </Button>
               </div>
-
-              {/* <BreadPath/> */}
-              <Row>
-                <Col lg={12} md={10} sm={12} xs={12} className="hc-galler__col-top" >
-                  <div className="d-flex align-items-start gap-3">
-                    <div>
-                      <div className="mp_topImg_holder">
-                        <img
-                          className="mp_topImg colinfo_img img-fluid"
-                          src={`${config.IMG_URL}/collection/${collectionData?.projectId?._id
-                            ? collectionData?.projectId?._id
-                            : collectionData?.projectId
-                            }/${collectionData?.galleryThumbImage}`}
-                        />
-                      </div>
-                      <h3 className="mp_collectionname mt-3 hc-gallery__image-name">
-                        {collectionData?.galleryTitle}
-                      </h3>
-                      {/* {description ? (
+              <div className="d-flex align-items-start collection-info__header">
+                <div>
+                  <div className="collection-info__profile-image">
+                    <img
+                      className=""
+                      src={`${config.IMG_URL}/collection/${collectionData?.projectId?._id
+                        ? collectionData?.projectId?._id
+                        : collectionData?.projectId
+                        }/${collectionData?.galleryThumbImage}`}
+                    />
+                  </div>
+                  <h3 className="collection-info__profile-name">
+                    {collectionData?.galleryTitle}
+                  </h3>
+                  {/* {description ? (
                         <p className="mp_detailbrief hc-home__desc mt-2">
                           {collectionData?.galleryDescription}
                         </p>
@@ -265,33 +274,110 @@ function CollectionInfo() {
                             : collectionData?.galleryDescription}{" "}
                         </p>
                       )} */}
-                      {collectionData?.galleryDescription?.length > 300 ? (
-                        <button
-                          className="mp_readmoreBtn"
-                          onClick={() => setDescription(!description)}
-                        >
-                          {description ? "Read Less" : "Read More"}
-                        </button>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
-                    <div className="mp_likeshare ">
-                      <img
-                        className="img-fluid"
-                        src={require("../assets/images/share.svg").default}
-                      />
-                    </div>
-                  </div>
+                  {collectionData?.galleryDescription?.length > 300 ? (
+                    <button
+                      className="mp_readmoreBtn"
+                      onClick={() => setDescription(!description)}
+                    >
+                      {description ? "Read Less" : "Read More"}
+                    </button>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                <div className="mp_likeshare ">
+                  <img
+                    className="img-fluid"
+                    src={require("../assets/images/share.svg").default}
+                  />
+                </div>
+              </div>
+              <div className=" mt-4">
+                <h3 className="collection-info__grid-title">Photos</h3>
+                <div className="collection-grid">
+                  {collectionData &&
+                    arrData?.length != 0 &&
+                    arrData?.map((val) => {
+                      return (
 
 
-                  {/* <Row className="mp_bottomal"> */}
-                  {/* <Col lg={4} md={6} sm={12} xs={12} className="mb-3">
+                        <div className="collection__image-card d-flex flex-column align-items-center">
+
+                          <div className="collection__image-wrapper" >
+                            {videoFileFormats.includes(val.split(".")[1]) ? (
+                              <div
+                                className="position-relative"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => handleShowVideo(val)}
+                              >
+                                <div className="blur_thumbnailer">
+                                  <div className="playBtn_fitter">
+                                    <i class="fa-regular fa-circle-play" />
+                                  </div>
+                                </div>
+                                <video
+                                  className="img-fluid collectionss_img"
+                                  src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
+                                />
+                              </div>
+                            ) : (
+                              <img
+                                className="collection-width-fit"
+                                style={{ cursor: "pointer" }}
+                                src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
+                                onClick={() => handleShowVideo(val)}
+                              />
+                            )}
+
+                          </div>
+                          <h3 className="collection__image-wrapper--name  text-center">
+                            Image name
+                          </h3>
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+
+              {/* {Loadmore && <div className='mp-margin d-flex justify-content-center'>
+                <button className="button-loadMore" onClick={() => loadData()}>Load More</button>
+              </div>} */}
+
+              <div className='mp-margin d-flex justify-content-center'>
+                <button className="button-loadMore" onClick={() => loadData()}>Load More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <Container fluid className="home_wrapper">
+        <Container className="custom_container">
+          <Row>
+            <Col lg={1} md={2} className="sidetab_holder">
+              <SideTab />
+            </Col>
+            <Col
+              lg={11}
+              md={10}
+              sm={12}
+              xs={12}
+              className="res_pad_aligner ci_highertop"
+            > */}
+
+
+      {/* <BreadPath/> */}
+      {/* <Row>
+                <Col lg={12} md={10} sm={12} xs={12} className="hc-galler__col-top" > */}
+
+
+
+      {/* <Row className="mp_bottomal"> */}
+      {/* <Col lg={4} md={6} sm={12} xs={12} className="mb-3">
 
                     </Col> */}
-                  {/* <Col lg={8} md={6} sm={12} xs={12} className="mb-3"> */}
+      {/* <Col lg={8} md={6} sm={12} xs={12} className="mb-3"> */}
 
-                  {/* <div className="mp_likeshare">
+      {/* <div className="mp_likeshare">
                         {like ? (
                           <img
                             className="img-fluid me-3"
@@ -311,7 +397,7 @@ function CollectionInfo() {
                         />
                       </div> */}
 
-                  {/* <Row className="mt-3">
+      {/* <Row className="mt-3">
                         <Col lg={3} md={6} sm={12} xs={12} className="">
                           <div className="mp_collectionDetail">
                             <p className="mp_collectionLabel">Items :</p>
@@ -343,115 +429,66 @@ function CollectionInfo() {
                           </div>
                         </Col>
                       </Row> */}
-                  {/* </Col> */}
-                  {/* </Row> */}
-                  {/* <Row className="mt-1"> */}
-                  {/* <Col lg={10} md={12} sm={12} xs={12}> */}
+      {/* </Col> */}
+      {/* </Row> */}
+      {/* <Row className="mt-1"> */}
+      {/* <Col lg={10} md={12} sm={12} xs={12}> */}
 
-                  {/* <ReadMoreReact text={""}
+      {/* <ReadMoreReact text={""}
               min={100}
               ideal={200}
               max={500}
               readMoreText="Read more"/> */}
-                </Col>
+      {/* </Col>
 
-              </Row>
+              </Row> */}
 
 
-              <Row className=" mt-4">
-                <h3 className="text-white mb-4">Photos</h3>
-                {collectionData &&
-                  arrData?.length != 0 &&
-                  arrData?.map((val) => {
-                    return (
-                      <>
-                        <Col sm={6} lg={4} xl={3} className="mb-5 d-flex justify-content-center justify-content-sm-start">
-                          <div className="hc-collection__image-card d-flex flex-column align-items-center align-items-sm-start">
-                            <div className="hc-collection__image-wrapper" >
-                              {/* <a target="_blank" href={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`} > */}
-                              {videoFileFormats.includes(val.split(".")[1]) ? (
-                                <div
-                                  className="position-relative"
-                                  style={{ cursor: "pointer" }}
-                                  onClick={() => handleShowVideo(val)}
-                                >
-                                  <div className="blur_thumbnailer">
-                                    <div className="playBtn_fitter">
-                                      <i class="fa-regular fa-circle-play" />
-                                    </div>
-                                  </div>
-                                  <video
-                                    className="img-fluid collectionss_img"
-                                    src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
-                                  />
-                                </div>
-                              ) : (
-                                <img
-                                  className=""
-                                  style={{ cursor: "pointer" }}
-                                  src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
-                                  onClick={() => handleShowVideo(val)}
-                                />
-                              )}
-                              {/* </a> */}
-                            </div>
-                            {/* <h3 className="hc-gallery__image-name--sm mt-3 mt-xxl-4 text-center">
-                              Image name
-                            </h3> */}
-                          </div>
-                        </Col>
-                      </>
-                    );
-                  })}
-              </Row>
 
-              {Loadmore && <div className='loadmore_holder'>
-                <button className="seconday_btn width_fitter" onClick={() => loadData()}>Load More</button>
-              </div>}
 
-              {/* vide modal */}
+      {/* vide modal */}
 
-              <Modal
-                size="lg"
-                className="common_modal collection_info_modal"
-                centered
-                show={videoShow != ""}
-                onHide={handleCloseVideo}
-                backdrop="static"
-                keyboard={false}
-              >
-                <Modal.Body>
-                  <div className="modal_top">
-                    <p className="modal_title text-center">Preview</p>
-                    <img
-                      src={require("../assets/images/close.svg").default}
-                      onClick={() => handleCloseVideo()}
-                      className="modal_closer"
-                    />
-                  </div>
+      <Modal
+        size="lg"
+        className="common_modal collection_info_modal"
+        centered
+        show={videoShow != ""}
+        onHide={handleCloseVideo}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Body>
+          <div className="modal_top">
+            <p className="modal_title text-center">Preview</p>
+            <img
+              src={require("../assets/images/close.svg").default}
+              onClick={() => handleCloseVideo()}
+              className="modal_closer"
+            />
+          </div>
 
-                  <div className="modal_body mt-3 hc-collection__modal--body">
-                    <div className="hc-collection__modal-imageWrapper ">
-                      {videoFileFormats.includes(videoShow.split(".")[1]) ? (
-                        <video
-                          controls
-                          className="hc-collection__imageFit"
-                          src={`${config.IMG_URL}/collection/${collectionData?._id}/${videoShow}`}
-                        />
-                      ) : (
-                        < img
-                          className="hc-collection__imageFit"
-                          src={`${config.IMG_URL}/collection/${collectionData?._id}/${videoShow}`}
-                        />
-                      )}
-                    </div>
-                  </div>
-                </Modal.Body>
-              </Modal>
+          <div className="modal_body mt-3 hc-collection__modal--body">
+            <div className="hc-collection__modal-imageWrapper ">
+              {videoFileFormats.includes(videoShow.split(".")[1]) ? (
+                <video
+                  controls
+                  className="hc-collection__imageFit"
+                  src={`${config.IMG_URL}/collection/${collectionData?._id}/${videoShow}`}
+                />
+              ) : (
+                < img
+                  className="hc-collection__imageFit"
+                  src={`${config.IMG_URL}/collection/${collectionData?._id}/${videoShow}`}
+                />
+              )}
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
 
-              {/* end of video modal */}
+      {/* end of video modal */}
 
-              {/* <Row className="justify-content-between mt-5">
+      {/* <Row className="justify-content-between mt-5">
                 <Col lg={4} md={6} sm={6} xs={12} className="mb-3">
                   <div
                     className={
@@ -640,13 +677,15 @@ function CollectionInfo() {
                 </Col>
                 {Loadmore && <button className="seconday_btn" onClick={() => getCollectionTokens()} >Loadmore</button>}
               </Row> */}
-            </Col >
+      {/* </Col >
           </Row >
         </Container >
+    <Footer />
+      </Container > */}
+      <div ref={footerRef}>
         <Footer />
-      </Container >
-
-      <div className="gradient_holder staking_gradholder"></div>
+      </div>
+      {/* <div className="gradient_holder staking_gradholder"></div> */}
       {/* <div className="dualImg_bg"></div> */}
     </>
   );

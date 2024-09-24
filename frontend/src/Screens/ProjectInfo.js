@@ -26,6 +26,7 @@ import mintBg from '../assets/images/mintBg.png'
 import { ReadMore } from "../Components/ReadMore";
 import ImgAudVideo from "../Components/ImgAudVideo";
 import propertyImage from '../assets/images/property.png'
+import GalleryCard from "../Components/GalleryCard";
 
 function ProjectInfo() {
   const location = useLocation();
@@ -35,6 +36,8 @@ function ProjectInfo() {
   const [description, setDescription] = useState(false);
   const { projectTitle } = useParams()
   const swiperRef = useRef(null);
+  const newsSwiperRef = useRef(null);
+
 
   const footerRef = useRef(null);
   const [isFixed, setIsFixed] = useState(true);
@@ -125,6 +128,17 @@ function ProjectInfo() {
       swiperRef.current.swiper.slideNext();
     }
   };
+  const newsGoPrev = () => {
+    if (newsSwiperRef.current && newsSwiperRef.current.swiper) {
+      newsSwiperRef.current.swiper.slidePrev();
+    }
+  };
+  const newsGoNext = () => {
+    if (newsSwiperRef.current && newsSwiperRef.current.swiper) {
+      newsSwiperRef.current.swiper.slideNext();
+    }
+  };
+
 
   const navigate = useNavigate();
 
@@ -385,7 +399,7 @@ function ProjectInfo() {
                     className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                     onClick={() => goPrev()}
                   >
-                    <FaChevronLeft fill="#fff" fontSize={38} className="me-2" />
+                    <FaChevronLeft fill="#fff" fontSize={38} className="" />
                   </button>
 
 
@@ -394,73 +408,42 @@ function ProjectInfo() {
                     onClick={() => goNext()}
                   >
 
-                    <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
+                    <FaChevronRight fill="#fff" fontSize={38} className="" />
                   </button>
-                  <div className="projects_swiper">
-                    <Swiper
-                      className="mySwiper pt-3 "
-                      slidesPerView={3}
-                      spaceBetween={30}
-                      navigation={{
-                        nextEl: ".swiper-button-next1",
-                        prevEl: ".swiper-button-prev1",
-                      }}
-                      ref={swiperRef}
-                      keyboard={true}
-                      // pagination={{
-                      //   clickable: true,
-                      // }}
-                      breakpoints={{
-                        0: {
-                          slidesPerView: 1,
-                          spaceBetween: 20,
-                        },
-                        320: {
-                          slidesPerView: 1,
-                          spaceBetween: 20,
-                        },
-                        450: {
-                          slidesPerView: 1,
-                          spaceBetween: 20,
-                        },
-                        576: {
-                          slidesPerView: 2,
-                          spaceBetween: 20,
-                        },
-                        768: {
-                          slidesPerView: 2,
-                          spaceBetween: 20,
-                        },
-                        850: {
-                          slidesPerView: 3,
-                          spaceBetween: 20,
-                        },
-                        992: {
-                          slidesPerView: 3,
-                          spaceBetween: 20,
-                        },
-                        1100: {
-                          slidesPerView: 4,
-                          spaceBetween: 20,
-                        },
-                        1200: {
-                          slidesPerView: 4,
-                          spaceBetween: 20,
-                        },
-                        1500: {
-                          slidesPerView: 5,
-                          spaceBetween: 20,
-                        },
-                      }}
-                      modules={[Navigation, Keyboard, Pagination]}
-                    >
-                      {galleryArr && galleryArr.map((i) => (
-                        <SwiperSlide className="dff_colcard">
-                          <GallerCardOne data={i} />
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
-                  </div>
+
+                  <Swiper
+                    className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper gallery-card__swiper"
+                    slidesPerView={4}
+                    // spaceBetween={30}
+                    navigation={{
+                      nextEl: ".swiper-button-next1",
+                      prevEl: ".swiper-button-prev1",
+                    }}
+                    ref={swiperRef}
+                    keyboard={true}
+                    // pagination={{
+                    //   clickable: true,
+                    // }}
+                    breakpoints={{
+                      320: {
+                        slidesPerView: 2,
+                        // spaceBetween: 20,
+                      },
+                      1200: {
+                        slidesPerView: 4,
+                        // spaceBetween: 20,
+                      },
+
+                    }}
+                    modules={[Navigation, Keyboard, Pagination]}
+                  >
+                    {galleryArr && galleryArr.map((i) => (
+                      <SwiperSlide >
+                        <GalleryCard data={i} />
+                        {/* <GallerCardOne data={i} /> */}
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
                 </div>
               </Row>
               <div className="section-estimateProperty">
@@ -536,42 +519,42 @@ function ProjectInfo() {
                 </Col> */}
 
 
-                <div className=" d-xl-none ">
+                {/* for mobile section - start */}
+
+                <div className=" d-xl-none position-relative news-update__swipper-wrapper">
+
+                  <button
+                    className="swiper-button-prev1-news border-0 outline-0 bg-transparent hc-swiper__arrow--left"
+                    onClick={() => newsGoPrev()}
+                  >
+                    <FaChevronLeft fill="#fff" fontSize={38} className="" />
+                  </button>
+
+
+                  <button
+                    className="swiper-button-next1-news border-0 outline-0 bg-transparent hc-swiper__arrow--right"
+                    onClick={() => newsGoNext()}
+                  >
+
+                    <FaChevronRight fill="#fff" fontSize={38} className="" />
+                  </button>
                   <Swiper
-                    className="mySwiper "
-                    slidesPerView={3}
-                    spaceBetween={30}
-                    navigation={false}
+                    className="mySwiper bottomnav_colswiper  hc-mint__swiper gallery-card__swiper "
+                    slidesPerView={1}
+                    // spaceBetween={30}
+
+                    ref={newsSwiperRef}
                     keyboard={true}
-                    pagination={{
-                      clickable: true,
-                    }}
+                    pagination={false}
                     breakpoints={{
                       0: {
                         slidesPerView: 1,
-                        spaceBetween: 20,
+                        // spaceBetween: 20,
                       },
-                      320: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                      },
-                      576: {
-                        slidesPerView: 1,
-                      },
-                      700: {
-                        slidesPerView: 2,
-                      },
-                      992: {
-                        slidesPerView: 3,
-
-                      },
-                      1200: {
-                        slidesPerView: 3,
-
-                      },
-                      1500: {
-                        slidesPerView: 3,
-                      },
+                    }}
+                    navigation={{
+                      nextEl: ".swiper-button-next1-news",
+                      prevEl: ".swiper-button-prev1-news",
                     }}
                     modules={[Navigation, Keyboard, Pagination]}
                   >
@@ -582,14 +565,28 @@ function ProjectInfo() {
                     )}
                   </Swiper>
                 </div>
-                <div className="rewardscard_swiper d-none d-xl-block">
 
-                  {feedArr.length != 0 && feedArr.map((i) =>
-                    <RewardsCard data={i} />
-                  )}
+                {/* for mobile section - end */}
+
+                {/* for web section - start */}
+
+                <div className="rewardscard_swiper d-none d-xl-block">
+                  <div className="new-update-grid">
+                    {/* <div className="box">
+                      <div className="update-white"></div>
+                    </div>
+                    <div className="box"></div>
+                    <div className="box"></div> */}
+
+                    {feedArr.length != 0 && feedArr.map((i) =>
+                      <RewardsCard data={i} />
+                    )}
+                  </div>
+
 
                 </div>
 
+                {/* for web section - end */}
 
               </div>
 

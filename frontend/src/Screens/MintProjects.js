@@ -20,6 +20,7 @@ import config from '../config/config';
 import Countdown from "react-countdown";
 import Footer from '../Components/Footer';
 import { useRef } from 'react';
+import { getCmsContent } from '../actions/axioss/cms.axios';
 
 
 // import Footer from '../Components/Footer'
@@ -33,6 +34,8 @@ function MintProjects() {
 
     const [project, setProject] = useState([])
     const [isFixed, setIsFixed] = useState(true);
+    const [CMS, SetCMS] = useState({});
+    console.log("CMSCMS", CMS);
     const footerRef = useRef(null);
 
     useEffect(() => {
@@ -77,7 +80,22 @@ function MintProjects() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        getCmsContentFunc();
     }, []);
+
+    const getCmsContentFunc = async () => {
+        const Resp = await getCmsContent({
+            page: [
+                "minting"
+            ],
+        });
+        console.log("sejhfgeiusf", Resp);
+        const obj = {};
+        const valuse = Resp.data.map((val) => {
+            obj[val.key] = val;
+        });
+        SetCMS(obj);
+    };
 
     return (
 
@@ -114,12 +132,14 @@ function MintProjects() {
                                 </p>
                             </Col>
                             <Col lg={6} className="px-0">
-                                {/* {CMS["Revolution your Home Ownership"]?.img &&
-                                    <div className="anim_div" data-aos="fade-up"
-                                        data-aos-offset="150"
-                                        data-aos-duration="800">
-                                        <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["Revolution your Home Ownership"]?.img}`} className="banner_lottie" />
-                                    </div>} */}
+                                {CMS["Initial Sales"]?.img &&
+                                    <div className="anim_div first_lottie">
+                                        <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["Initial Sales"]?.img}`} className="banner_lottie" />
+                                    </div>}
+                                {/* <div className="anim_div" >
+
+                                    <LottieAnimation url="https://api-homecubes.maticz.in/cmsimg/1710487245765.json" className="banner_lottie" />
+                                </div> */}
                             </Col>
                         </Row>
                     </div>

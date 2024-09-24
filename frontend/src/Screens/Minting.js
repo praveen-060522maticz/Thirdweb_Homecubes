@@ -425,7 +425,6 @@ function Minting() {
                     classname={"hc-mint__banner-image"}
                     noimg={mintBg}
                 />
-
             </div>
 
             {/* for mobile only -end */}
@@ -1084,7 +1083,7 @@ function Minting() {
                                                 className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                                                 onClick={() => goPrev()}
                                             >
-                                                <FaChevronLeft fill="#fff" fontSize={38} className="me-2" />
+                                                <FaChevronLeft fill="#fff" fontSize={38} className="" />
                                             </button>
 
 
@@ -1093,7 +1092,7 @@ function Minting() {
                                                 onClick={() => goNext()}
                                             >
 
-                                                <FaChevronRight fill="#fff" fontSize={38} className="ms-2" />
+                                                <FaChevronRight fill="#fff" fontSize={38} className="" />
                                             </button>
                                             <Swiper
                                                 className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper gallery-card__swiper"

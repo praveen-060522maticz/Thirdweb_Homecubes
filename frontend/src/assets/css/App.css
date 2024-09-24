@@ -116,7 +116,7 @@
     font-weight: 600;
     font-size: 2.7vh;
     white-space: nowrap;
-    width: 17vw;
+    width: 16vw;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -128,7 +128,7 @@
 
 .nft-card__content-values {
     font-weight: 500;
-    font-size: 1.6vh;
+    font-size: 0.8vw;
 }
 
 .nft-card__content-values span {
@@ -191,8 +191,9 @@
 }
 
 .nft-card__buttons--gradient p {
-    padding: 1vh 2vh;
-    font-size: 1.6vh;
+    padding: 1vh 1vh;
+    /* font-size: 1.4vh; */
+    font-size: 0.8vw;
     display: flex;
     justify-content: center;
     flex: 1;
@@ -733,6 +734,9 @@
     min-height: 110vh;
 }
 
+.project_section.banner_section {
+    padding-top: 23vh;
+}
 
 
 /* end of project */
@@ -797,6 +801,10 @@
     margin-top: 6vh;
 }
 
+.news-update__swipper-wrapper {
+    margin-top: 4vh;
+}
+
 .gallery-card__swiper .card-gallery {
     min-width: 19vw;
     width: 19vw;
@@ -811,6 +819,7 @@
 
 .gallery-card__swiper .swiper-wrapper {
     /* gap: 4vw !important; */
+    padding-top: 0px !important;
 }
 
 .gallery-card__swiper .swiper-slide {
@@ -849,6 +858,39 @@
 .gallery-card__swiperWrapper .hc-swiper__arrow--left {
     left: -4%;
 }
+
+.new-update-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3vw;
+}
+
+.box {
+    height: 300px;
+    background: red;
+}
+
+.update-white {
+    width: 21.9vw;
+    height: 100%;
+    background: white;
+}
+
+/* .news-update__swipper-wrapper {
+    background: blue;
+} */
+
+.gallery-card__swiper .rewards_card {
+    /* min-width: 87vw;
+    width: 87vw;
+    max-width: 87vw; */
+    /* height: 200px;
+    background: white; */
+}
+
+/* .swiper-button-prev1-news {
+    top: 50%;
+} */
 
 /* end of project info */
 
@@ -1104,6 +1146,100 @@
 
 /* end of react-select -2  */
 
+/* start of react-select - 3 */
+
+.react-select-3__indicator-separator {
+    display: none;
+}
+
+.react-select-3__control {
+    min-width: 18vw !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0.6vh 1.4vh !important;
+    background: transparent !important;
+    border: 0.27vh solid var(--blue_200) !important;
+    min-height: 5.5vh !important;
+    height: 5.5vh !important;
+    max-height: 5.5vh !important;
+    border-radius: 0.6vh !important;
+}
+
+.react-select-3__value-container {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.react-select-3__single-value {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 2vh !important;
+    font-family: var(--montserrat-font) !important;
+    font-weight: 500 !important;
+    color: var(--white) !important;
+}
+
+.react-select-3__input-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 2vh !important;
+}
+
+.react-select-3__input-container input {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 2vh !important;
+    font-family: var(--montserrat-font) !important;
+    font-weight: 500 !important;
+    color: var(--white) !important;
+}
+
+.react-select-3__indicator {
+    padding: 0 !important;
+}
+
+.react-select-3__indicator svg {
+    height: 3vh !important;
+    width: 3vh !important;
+}
+
+.react-select-3__menu {
+    background: var(--black) !important;
+    border: 0.2vh solid var(--blue_200) !important;
+}
+
+.react-select-3__option {
+    cursor: pointer !important;
+    background: transparent !important;
+    font-size: 1.9vh !important;
+    font-weight: 500 !important;
+    padding: 1.2vh 1.4vh !important;
+}
+
+.react-select-3__option:hover {
+    background: var(--blue_200) !important;
+    color: var(--black) !important;
+}
+
+.react-select-3__option:active {
+    background: var(--blue_300) !important;
+    color: var(--white) !important;
+}
+
+.react-select-3__option--is-selected {
+    background: var(--blue_200) !important;
+    color: var(--black) !important;
+}
+
+.react-select-3__placeholder {
+    font-size: 2vh !important;
+    font-weight: 500 !important;
+    color: var(--white) !important;
+}
+
+/* end of react-select - 3 */
+
 
 .hh-nft__text-sm {
     font-weight: 500;
@@ -1176,7 +1312,156 @@
     color: var(--white);
 }
 
+.stake-rewards__selects {
+    margin-top: 4vh;
+}
+
+.hh-col__paddings {
+    padding-left: 2vw !important;
+    padding-right: 2vw !important;
+    margin-bottom: 3vh !important;
+
+}
+
+.stack-button__wrap {
+    margin-top: 5vh;
+}
+
+.stack__button-submit {
+    border: none;
+    outline: none;
+    background-image: linear-gradient(to right, var(--gradinet_left), var(--gradinet_right));
+    padding: 0.7vh 1.5vw;
+    border-radius: 0.5vh;
+    font-size: 1.6vh;
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.stack__button-submit:hover {
+    background-image: linear-gradient(to right, var(--gradinet_right), var(--gradinet_left));
+}
+
+.margin__tb-5vh {
+    margin-top: 4vh;
+    margin-bottom: 5vh;
+}
+
 /* end of staking */
+
+/* start of collection info */
+
+.collection-info__header {
+    gap: 1.4vw;
+    border-bottom: 0.2vh solid var(--border-color-1);
+    width: 75%;
+}
+
+.collection-info__profile-image {
+    min-width: 18vw;
+    width: 18vw;
+    max-width: 18vw;
+    min-height: 13vw;
+    height: 13vw;
+    max-height: 13vw;
+    border-radius: 0.3vw;
+    overflow: hidden;
+}
+
+.collection-info__profile-image img {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.collection-info__profile-name {
+    font-weight: 700;
+    font-size: 2.8vh;
+    margin-top: 3vh;
+    margin-bottom: 3vh !important;
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2vw;
+}
+
+/* .collection__image-card {
+    width: 100%;
+    height: 40px;
+    background: red;
+} */
+
+.collection__image-wrapper {
+    min-width: 17.5vw;
+    width: 17.5vw;
+    max-width: 17.5vw;
+    min-height: 23vh;
+    height: 23vh;
+    max-height: 23vh;
+    border-radius: 0.5vw;
+    overflow: hidden;
+}
+
+.collection-width-fit {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+}
+
+.collection__image-wrapper--name {
+    font-weight: 700;
+    font-size: 2.5vh;
+    margin-top: 3vh;
+}
+
+.collection-info__grid-title {
+    font-weight: 600;
+    font-size: 3vh;
+    margin-bottom: 3vh !important;
+}
+
+/* end of collection info */
+
+/* start of collection info modal */
+
+.hc-collection__modal--body {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+}
+
+.hc-collection__modal-imageWrapper {
+
+    min-height: 50vh;
+    height: 50vh;
+    max-height: 50vh;
+    border-radius: 0.5vw;
+    overflow: hidden;
+}
+
+.hc-collection__imageFit {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+/* end of collection info modal */
 
 
 /* media */
@@ -1629,9 +1914,9 @@
         min-width: 45vw;
         width: 45vw;
         max-width: 45vw;
-        min-height: 27vh;
-        height: 27vh;
-        max-height: 27vh;
+        min-height: 22vh;
+        height: 22vh;
+        max-height: 22vh;
         padding-left: 2vw;
         padding-right: 2vw;
 
@@ -1645,14 +1930,23 @@
         margin-right: 0vw !important;
     }
 
+    /* .card-gallery {
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+        min-height: 100%;
+        height: 100%;
+        max-height: 100%;
+        background: green;
+    } */
 
     .gallery-card__swiper .card-gallery__image--wrapper {
         min-width: 100%;
         width: 100%;
         max-width: 100%;
-        min-height: 21vh;
-        height: 21vh;
-        max-height: 21vh;
+        min-height: 15vh;
+        height: 15vh;
+        max-height: 15vh;
         border-radius: 1.3vw;
         overflow: hidden;
     }
@@ -1662,12 +1956,12 @@
     }
 
     .gallery-card__swiper.gallery-card__swiper .card-gallery__title p {
-        font-size: 2.2vh;
+        font-size: 1.8vh;
     }
 
     .gallery-card__swiperWrapper .hc-swiper__arrow--right svg,
     .gallery-card__swiperWrapper .hc-swiper__arrow--left svg {
-        font-size: 4vh;
+        font-size: 3vh;
     }
 
     .gallery-card__swiperWrapper .hc-swiper__arrow--right {
@@ -1676,6 +1970,33 @@
 
     .gallery-card__swiperWrapper .hc-swiper__arrow--left {
         left: -5%;
+    }
+
+    .gallery-card__swiper .rewards_card {
+        min-width: 90vw;
+        width: 90vw;
+        max-width: 90vw;
+    }
+
+    .swiper-button-next1-news svg {
+        font-size: 2.5vh;
+    }
+
+    .swiper-button-prev1-news svg {
+        font-size: 2.5vh;
+    }
+
+    .swiper-button-prev1-news.hc-swiper__arrow--left {
+        left: -5%;
+    }
+
+    .gallery-card__swiper .rewards_card {
+        padding: 3vw 3vw 1vw 3vw;
+        border-radius: 2vw;
+    }
+
+    .gallery-card__swiper .rewards_card .hc-mint__banner--desc {
+        margin-bottom: 2vh !important;
     }
 
     /* end of project info */
@@ -1840,7 +2161,88 @@
         height: 3.5vh;
     }
 
+    .stack-button__wrap {
+        margin-top: 4vh;
+    }
+
+    .stack__button-submit {
+
+        padding: 0.7vh 4vw;
+
+    }
+
     /* end of staking */
+
+    /* start of collection info */
+
+    .collection-info__header {
+        gap: 1.4vw;
+        border-bottom: 0.2vh solid var(--border-color-1);
+        width: 75%;
+    }
+
+    .collection-info__profile-image {
+        min-width: 50vw;
+        width: 50vw;
+        max-width: 50vw;
+        min-height: 40vw;
+        height: 40vw;
+        max-height: 40vw;
+        border-radius: 2vw;
+    }
+
+    .collection-info__profile-name {
+        font-size: 2.8vh;
+        margin-top: 3vh;
+        margin-bottom: 3vh !important;
+    }
+
+    .collection-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2vw;
+        row-gap: 3vh;
+    }
+
+    /* .collection__image-card {
+        width: 100%;
+        height: 40px;
+        background: red;
+    } */
+
+    .collection__image-wrapper {
+        min-width: 42.5vw;
+        width: 42.5vw;
+        max-width: 42.5vw;
+        min-height: 21vh;
+        height: 21vh;
+        max-height: 21vh;
+        border-radius: 1.7vw;
+    }
+
+    .collection__image-wrapper--name {
+        font-size: 2.5vh;
+        margin-top: 2.5vh;
+    }
+
+    .collection-info__grid-title {
+        font-size: 3vh;
+        margin-bottom: 3vh !important;
+    }
+
+    /* end of collection info */
+
+    /* start of collection info modal */
+
+    .hc-collection__modal-imageWrapper {
+
+        min-height: 30vh;
+        height: 30vh;
+        max-height: 30vh;
+        border-radius: 2vw;
+    }
+
+    /* end of collection info modal */
 }
 
 @media screen and (max-width:991px) {
@@ -2355,6 +2757,33 @@
         left: -5%;
     }
 
+    .gallery-card__swiper .rewards_card {
+        min-width: 90vw;
+        width: 90vw;
+        max-width: 90vw;
+    }
+
+    .swiper-button-next1-news svg {
+        font-size: 2.5vh;
+    }
+
+    .swiper-button-prev1-news svg {
+        font-size: 2.5vh;
+    }
+
+    .swiper-button-prev1-news.hc-swiper__arrow--left {
+        left: -5%;
+    }
+
+    .gallery-card__swiper .rewards_card {
+        padding: 3vw 3vw 1vw 3vw;
+        border-radius: 2vw;
+    }
+
+    .gallery-card__swiper .rewards_card .hc-mint__banner--desc {
+        margin-bottom: 2vh !important;
+    }
+
     /* end of project info */
 
     /* start of staking */
@@ -2521,6 +2950,86 @@
         height: 2.8vh;
     }
 
+    .stack-button__wrap {
+        margin-top: 3vh;
+    }
+
+    .stack__button-submit {
+        padding: 0.7vh 4vw;
+    }
+
     /* end of staking */
+
+    /* start of collection info */
+
+    .collection-info__header {
+        gap: 1.4vw;
+        border-bottom: 0.2vh solid var(--border-color-1);
+        width: 75%;
+    }
+
+    .collection-info__profile-image {
+        min-width: 50vw;
+        width: 50vw;
+        max-width: 50vw;
+        min-height: 40vw;
+        height: 40vw;
+        max-height: 40vw;
+        border-radius: 2vw;
+    }
+
+    .collection-info__profile-name {
+        font-size: 2.8vh;
+        margin-top: 3vh;
+        margin-bottom: 3vh !important;
+    }
+
+    .collection-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2vw;
+        row-gap: 3vh;
+    }
+
+    /* .collection__image-card {
+    width: 100%;
+    height: 40px;
+    background: red;
+} */
+
+    .collection__image-wrapper {
+        min-width: 42.5vw;
+        width: 42.5vw;
+        max-width: 42.5vw;
+        min-height: 15vh;
+        height: 15vh;
+        max-height: 15vh;
+        border-radius: 1.7vw;
+    }
+
+    .collection__image-wrapper--name {
+        font-size: 2vh;
+        margin-top: 2vh;
+    }
+
+    .collection-info__grid-title {
+        font-weight: 600;
+        font-size: 3vh;
+        margin-bottom: 3vh !important;
+    }
+
+    /* end of collection info */
+
+    /* start of collection info modal */
+
+    .hc-collection__modal-imageWrapper {
+
+        min-height: 30vh;
+        height: 30vh;
+        max-height: 30vh;
+        border-radius: 2vw;
+    }
+
+    /* end of collection info modal */
 
 }

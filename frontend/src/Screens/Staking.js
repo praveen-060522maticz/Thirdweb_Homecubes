@@ -586,6 +586,7 @@ function Staking() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
   return (
     <>
       <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />
@@ -615,21 +616,23 @@ function Staking() {
                   <p className="title d-none d-xl-block">
                     Number of Staked NFTs :
                   </p>
-                  <div className="value__wrapper-image">
+                  <div className="value__wrapper-image d-xl-none">
                     <img src={totalnft} />
-                    <p className="title d-xl-none">
+                    <p className="title">
                       Total NFTs stacked :
                     </p>
+
                   </div>
+
                   <p className="value"> {nftCounts?.isStaked}</p>
                 </div>
                 <div className="value__wrapper-blue">
                   <p className="title d-none d-xl-block">
                     Number of non-staked NFTs :
                   </p>
-                  <div className="value__wrapper-image">
+                  <div className="value__wrapper-image d-xl-none">
                     <img src={totalrewards} />
-                    <p className="title d-xl-none">
+                    <p className="title ">
                       Total Reward Claimed :
                     </p>
                   </div>
@@ -825,40 +828,37 @@ function Staking() {
               ) : (
                 <>
                   {accountAddress ? (
-                    <Row className="justify-content-center">
-                      <Col lg={8}>
-                        <h5 className="hc-stake__subtitle mt-4 text-center">
+                    <Row className="justify-content-center ">
+                      <Col lg={10} className="px-0">
+                        <h5 className="hh-stake__subtitle text-center">
                           Total Rewards Received {rewardAmount.toFixed(7)} USDT
                         </h5>
-                        <Row className="select_holder">
-                          <Col lg={4} className="mb-3">
+                        <Row className="select_holder  stake-rewards__selects justify-content-center">
+                          <Col xs={6} lg={4} className="hh-col__paddings">
                             <Select
-                              classNamePrefix={"react_select"}
+                              classNamePrefix="react-select-3"
                               className="border_select"
                               placeholder="Project"
-                              styles={stylesgraybg}
                               // defaultValue={selectedOption}
                               onChange={(e) => setRewardOption({ ...rewardOption, projectId: e._id })}
                               options={projectArr}
                             />
                           </Col>
-                          <Col lg={4} className="mb-3">
+                          <Col xs={6} lg={4} className="hh-col__paddings">
                             <Select
-                              classNamePrefix={"react_select"}
+                              classNamePrefix="react-select-3"
                               className="border_select"
                               placeholder="Year"
-                              styles={stylesgraybg}
                               // defaultValue={selectedOption}
                               onChange={(e) => setRewardOption({ ...rewardOption, year: e.value })}
                               options={years}
                             />
                           </Col>
-                          <Col lg={4} className="mb-3">
+                          <Col xs={6} lg={4} className="hh-col__paddings">
                             <Select
-                              classNamePrefix={"react_select"}
+                              classNamePrefix="react-select-3"
                               className="border_select"
                               placeholder="Quarter"
-                              styles={stylesgraybg}
                               onChange={(e) => setRewardOption({ ...rewardOption, Season: e.value })}
                               // defaultValue={selectedOption}
                               // onChange={setSelectedOption}
@@ -866,15 +866,15 @@ function Staking() {
                             />
                           </Col>
                         </Row>
-                        <div className="d-flex justify-content-center mt-4 mt-lg-5">
-                          <button className="header_gradientBtn stack_submitbtn" onClick={() => onClaimReward()} >
+                        <div className="d-flex justify-content-center stack-button__wrap">
+                          <button className="stack__button-submit" onClick={() => onClaimReward()} >
                             Submit
                           </button>
                         </div>
-                        <Row className="justify-content-center mt-4">
-                          <Col lg={5}>
-                            <div className="stack_pendingholder">
-                              <p className="stack_pendinghint">
+                        <Row className="justify-content-center margin__tb-5vh">
+                          <Col lg={5} className="px-0 d-flex justify-content-center">
+                            <div className="value__wrapper-blue">
+                              <p className="title">
                                 Pending Rewards {pendingReward} USDT
                               </p>
                             </div>
