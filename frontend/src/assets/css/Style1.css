@@ -863,7 +863,9 @@ h6 {
 .mb_4 {
   margin-bottom: 4vh;
 }
-
+.mb_5 {
+  margin-bottom: 5vh;
+}
 .mb_3 {
   margin-bottom: 3vh;
 }
@@ -2608,9 +2610,9 @@ input::placeholder {
 }
 .blogINfo_usercomment {
   color: var(--white);
-  font-family: var(--helonika_font);
+  font-family: var(--montserrat-font);
   font-size:2vh;
-  font-weight: var(--weight_five);
+  font-weight: 500;
   margin: 0;
 }
 .profile_dtlswhole {
@@ -2978,8 +2980,87 @@ color: var(--gradinet_right);
 /* contact */
 .blogInfo_placecomment {
   background-color: var(--stepcard_bg);
-  border-radius: 0.5vh;
-  padding: 3vh 2vh;
+  border-radius: 1vh;
+  padding: 3vh 3vh 1vh 3vh;
 }
-
+.blogInfo_inplabel, .blogInfo_input {
+  font-family: var(--montserrat-font);
+  font-weight: 400;
+}
+.blogInfo_inplabel {
+  color: var(--input_label);
+  font-size: 1.7vh;
+  margin: 0;
+}
+.blogInfo_input, .blogInfo_textarea {
+  background-color: initial;
+  border: none;
+  border-bottom: 0.2vh solid var(--input_bottomborder);
+  color: var(--white);
+  font-size: 1.6vh;
+  outline: none;
+  padding: 0.6vh 0;
+  width: 100%;
+}
+.contact_bluebe {
+  background-color: var(--gradinet_right);
+  border-radius: 0.8vh;
+  padding: 1vh 1.5vh !important;
+}
+.contact_blackText {
+  color: var(--contact_black);
+  font-family: var(--helonika_font);
+  font-size: 1.8vh;
+  font-weight: 500;
+  margin: 0;
+}
+.contact_mailDtl, .contact_socialwrapper {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+}
+.contact_mailDtl{
+  gap: 1vh;
+}
+.contact_socialAll {
+  display: flex;
+  justify-content: flex-end;
+}
+.contact_socialwrapper {
+  gap: 1.6vh;
+}
+.contact_blckmail {
+  height: 2vh;
+  object-fit: contain;
+  width: 2vh;
+}
+.contact_blckmail:hover {
+  filter: invert(1);
+}
+.px_0{
+  padding-left: 1.5vh !important;
+  padding-right: 1.5vh !important;
+}
+.contact_mailadd {
+  color: var(--contact_black);
+  font-family: var(--montserrat-font);
+  font-size: 1.6vh;
+  font-weight: var(--weight_four);
+  margin: 0;
+}
+@media screen and (max-width:575px) {
+.contact_bluemobcen {
+  display: flex;
+  justify-content: center;
+}
+.socialtext{
+  margin-top: 2vh;
+}
+.blogInfo_placecomment {
+  padding: 3vh 1vh 1vh 1vh;
+}
+.contact_container{
+  margin-top: 10vh;
+}
+}
 /* contact end */

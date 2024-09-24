@@ -608,7 +608,7 @@ function Profile() {
                 <p className="nftcounter_lable">Total NFTs Staked :</p>
                 <p className="nftcounter_value">{totalValues?.filter((val) => val.isStaked)?.length ?? 0}</p>
               </div>
-              <div className="stack_nftcounter profile_counter pe-4" style={{ width: "max-content" }}>
+              <div className="stack_nftcounter profile_counter">
                 <img className="top_reltabimg" src={require('../assets/images/rewards.svg').default} />
                 <p className="nftcounter_lable">Total Reward Claimed :</p>
                 <p className="nftcounter_value">{Number(rewardAmount).toFixed(6)}</p>

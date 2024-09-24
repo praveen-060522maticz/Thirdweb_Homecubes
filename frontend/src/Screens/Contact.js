@@ -58,24 +58,24 @@ function Contact() {
 
             <div className="contact_container">
             <img className='img-fluid' src={require('../assets/images/map.png')} />
-            <Row className='justify-content-center mt_5'>
-                        <Col lg={8}>
-                            <Row className=''>
-                                <div className='blogInfo_placecomment'>
+            <Row className='justify-content-center mt_5 px-0 mx-auto'>
+                        <Col lg={8} className='px-0'>
+                            <Row className='mx-auto mb_2'>
+                                <div className='blogInfo_placecomment mb_5'>
                                     <p className='blogINfo_usercomment text-center mt_4'>Send us Message</p>
 
-                                    <Row className='justify-content-between mt_4'>
-                                        <Col lg={6} md={6} sm={6} xs={12} className='mb_2'>
+                                    <Row className='justify-content-between mt_4 mx-auto'>
+                                        <Col lg={6} md={6} sm={6} xs={12} className='mb_2 px_0'>
                                             <p className='blogInfo_inplabel'>Full Name</p>
                                             <input type="text" className='blogInfo_input mt-2' id="Name" placeholder='Enter Name' value={Name} onChange={(e) => { setName(e.target.value) }} />
                                         </Col>
-                                        <Col lg={6} md={6} sm={6} xs={12} className='mb_2 mt_2'>
+                                        <Col lg={6} md={6} sm={6} xs={12} className='mb_2  px_0'>
                                             <p className='blogInfo_inplabel'>Email address</p>
                                             <input type="text" className='blogInfo_input mt-2' placeholder='Enter Email Address' value={email} onChange={(e) => { setEmail(e.target.value) }} />
                                         </Col>
-                                        <Col lg={12} xs={12} className='mt_2'>
+                                        <Col lg={12} xs={12} className='mt_2 px_0'>
                                             <p className='blogInfo_inplabel'>Message</p>
-                                            <textarea id="comment" className='blogInfo_textarea mt-2' name="comment" rows="4" cols="50" value={comment} onChange={(e) => { setComment(e.target.value) }} />
+                                            <textarea id="comment" className='blogInfo_textarea mt_1' name="comment" rows="4" cols="50" value={comment} onChange={(e) => { setComment(e.target.value) }} />
                                         </Col>
 
                                         <div className='text-center mt_4'>
@@ -84,9 +84,10 @@ function Contact() {
 
                                                 Submit</button>
                                         </div>
+
                                         <Col lg={12} xs={12} className='mt_4 contact_bluebe'>
-                                            <Row>
-                                                <Col lg={6} md={6} sm={6} xs={12} className='contact_bluemobcen mb-3 mb-sm-0'>
+                                            <Row className='mx-auto'>
+                                                <Col lg={6} md={6} sm={6} xs={12} className='contact_bluemobcen  px-0'>
                                                     <div>
                                                         <p className='contact_blackText'>Contact Information</p>
                                                         <div className='contact_mailDtl mt_1'>
@@ -96,9 +97,9 @@ function Contact() {
                                                     </div>
 
                                                 </Col>
-                                                <Col lg={6} md={6} sm={6} xs={12} className='contact_socialAll contact_bluemobcen'>
+                                                <Col lg={6} md={6} sm={6} xs={12} className='contact_socialAll contact_bluemobcen px-0'>
                                                     <div>
-                                                        <p className='contact_blackText'>Social Media</p>
+                                                        <p className='contact_blackText socialtext'>Social Media</p>
                                                         <div className='contact_socialwrapper mt_1'>
                                                             <NavLink to=''>
                                                                 <img className='contact_blckmail' src={require('../assets/images/blacktele.svg').default} />
