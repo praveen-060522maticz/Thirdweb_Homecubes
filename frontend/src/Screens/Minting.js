@@ -1301,7 +1301,7 @@ function Minting() {
                                         <h3 className=" hc-mint__content-title ">
                                             Estimated Property Value <span className="hc-mint__span-gradient"> {project?.propertyValue?.toUpperCase?.() ?? "1M"}$</span>
                                         </h3>
-                                        <div className="row mint-margin__top align-items-center">
+                                        <div className="row mint-margin__top align-items-center mx-auto">
                                             <div className="col-12 col-xl-6 px-0">
                                                 <div>
                                                     <h5 className="hc-mint__content-subtitle ">
@@ -1320,7 +1320,7 @@ function Minting() {
                                             </div>
                                         </div>
 
-                                        <div className="row mint-margin__top">
+                                        <div className="row mint-margin__top mx-auto">
                                             <div className="col-12 col-xl-5 px-0">
                                                 <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title }} >
 

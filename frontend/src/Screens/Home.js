@@ -131,8 +131,8 @@ function Home() {
                 </div>
 
                 <div className="banner_section">
-                    <Container>
-                        <Row>
+                    <div className="inner-container__width">
+                        <Row className="mx-auto">
                             <Col lg={6} className="px-0">
                                 <div className="home_titled hc-home__title head_txt" dangerouslySetInnerHTML={{ __html: CMS["Revolution your Home Ownership"]?.title }} ></div>
                                 <p
@@ -156,12 +156,12 @@ function Home() {
                                     </div>}
                             </Col>
                         </Row>
-                    </Container>
+                    </div>
                 </div>
 
                 <div className="bottom_content">
-                    <Container>
-                        <Row className="top_bottom align-items-center flexwrapreverse">
+                    <div className="inner-container__width">
+                        <Row className="top_bottom align-items-center flexwrapreverse mx-auto">
                             <Col lg={6} className="col_pad">
                                 <div className="cloudcubes_holder">
                                     {CMS["About Home Cubes"]?.img &&
@@ -194,7 +194,7 @@ function Home() {
                                 </div>
                             </Col>
                         </Row>
-                        <Row className="top_bottom align-items-center">
+                        <Row className="top_bottom align-items-center mx-auto">
                             <Col lg={6} className="px-0">
                                 <h3
                                     className="home_titled hc-home__title head_txt"
@@ -222,7 +222,7 @@ function Home() {
                                 </div>}
                             </Col>
                         </Row>
-                        <Row className="top_bottom align-items-center flexwrapreverse">
+                        <Row className="top_bottom align-items-center flexwrapreverse mx-auto">
                             <Col lg={6} className="px-0">
                                 {CMS["In addition to the product launch, we will also establish a marketplace."]?.img &&
                                     <div className="anim_div">
@@ -288,7 +288,7 @@ function Home() {
                             </Row>
                         )}
 
-                        <Row className="top_bottom align-items-center">
+                        <Row className="top_bottom align-items-center mx-auto">
                             <Col lg={6} className="px-0">
                                 <Typewriter
 
@@ -343,7 +343,7 @@ function Home() {
                             </Col>
                         </Row>
 
-                        <Row className="align-items-center top_bottom">
+                        <Row className="align-items-center top_bottom mx-auto">
                             <h3
                                 className="home_titled hc-home__title text-center head_txt">
                                 Our <strong>Commitment</strong>
@@ -375,7 +375,7 @@ function Home() {
                                 ))}
                         </Row>
 
-                        <Row className="hc-home__roadMap top_bottom">
+                        <Row className="hc-home__roadMap top_bottom mx-auto">
                             <h3
                                 className="home_titled hc-home__title text-center head_txt"
 
@@ -388,7 +388,7 @@ function Home() {
                             </div>
                         </Row>
 
-                        <Row className="justify-content-center top_bottom">
+                        <Row className="justify-content-center top_bottom mx-auto">
                             <Col lg={8} className="home_mailer">
                                 <Row className="justify-content-center">
                                     <Col
@@ -423,7 +423,7 @@ function Home() {
                             </Col>
                         </Row>
 
-                    </Container>
+                    </div>
                 </div>
 
             </div>
