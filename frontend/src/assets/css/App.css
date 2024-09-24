@@ -245,6 +245,17 @@
     color: var(--black);
 }
 
+.anim_div.is-banner__lottie div[aria-label="animation"] {
+    min-width: 50vh !important;
+    width: 50vh !important;
+    max-width: 50vh !important;
+    min-height: 50vh !important;
+    height: 50vh !important;
+    max-height: 50vh !important;
+    margin-top: -11vh !important;
+}
+
+
 /* end of mint projects */
 
 
@@ -379,7 +390,7 @@
 .hc-mint__card-initialSales p {
     font-weight: 600;
     margin-bottom: 0px;
-    font-size: 2.1vh;
+    font-size: 1.05vw;
 }
 
 .hc-mint__initialSales--themeText {
@@ -464,7 +475,7 @@
     border-radius: 0.3vw;
     color: var(--white);
     font-family: var(--kanit_font);
-    font-size: 2.3vh;
+    font-size: 1.1vw;
     font-weight: var(--weight_five);
     outline: none;
     padding: 1vh 2vh;
@@ -1083,7 +1094,8 @@
     margin: 0 !important;
 }
 
-.react-select-2__single-value, .react-select-2__placeholder {
+.react-select-2__single-value,
+.react-select-2__placeholder {
     padding: 0 !important;
     margin: 0 !important;
     font-size: 1.75vh !important;
@@ -1467,8 +1479,18 @@
 /* media */
 
 @media screen and (max-width:1199px) {
+    .anim_div.is-banner__lottie div[aria-label="animation"] {
+        min-width: 40vh !important;
+        width: 40vh !important;
+        max-width: 40vh !important;
+        min-height: 40vh !important;
+        height: 40vh !important;
+        max-height: 40vh !important;
+        margin-top: 0vh !important;
+    }
+
     .mp_inner--bottom {
-        margin-top: -25vh;
+        margin-top: -20vh;
     }
 
     .mp_bottom--title {
@@ -1646,6 +1668,7 @@
         height: 38vh;
         max-height: 38vh;
         margin-top: 9vh;
+        position: relative;
 
     }
 
@@ -1750,7 +1773,7 @@
     }
 
     .hc-mint__card-initialSales p {
-        font-size: 2vh;
+        font-size: 3.3vw;
     }
 
     .hc-mint__col-paddingLeft {
@@ -1775,7 +1798,7 @@
         padding-right: 1vw;
         display: flex;
         align-items: center;
-        font-size: 1.9vh;
+        font-size: 3vw;
     }
 
     .hc-mint__button-mint {
@@ -2259,7 +2282,7 @@
 
 @media screen and (max-width:767px) {
     .mp_inner--bottom {
-        margin-top: -25vh;
+        margin-top: -15vh;
     }
 
     .mp_bottom--title {
@@ -2356,7 +2379,7 @@
     }
 
     .nft-card__content-values {
-        font-size: 0.9vh;
+        font-size: 2vw;
     }
 
 
@@ -2369,7 +2392,7 @@
         border: 0.2vh solid var(--blue_200);
         border-radius: .7vw;
         padding: 0.7vh;
-        height: 3vh;
+        height: 2.5vh;
     }
 
     .nft-card__buttons--countdown span {
@@ -2379,7 +2402,7 @@
     .nft-card__buttons--gradient {
         border-radius: 0.3vh;
         font-size: 1.2vh;
-        height: 3vh;
+        height: 2.5vh;
 
     }
 
@@ -2390,7 +2413,7 @@
 
     .nft-card__buttons--gradient p {
         padding: 0.5vh;
-        font-size: 1vh;
+        font-size: 2.1vw;
         display: flex;
         justify-content: center;
         flex: 1;
@@ -2425,6 +2448,16 @@
         font-size: 1.3vh;
         padding: 0.8vh 2vh;
         border-radius: 0.4vh;
+    }
+
+    .anim_div.is-banner__lottie div[aria-label="animation"] {
+        min-width: 35vh !important;
+        width: 35vh !important;
+        max-width: 35vh !important;
+        min-height: 35vh !important;
+        height: 35vh !important;
+        max-height: 30vh !important;
+        margin-top: 0 !important;
     }
 
     /* start of mint id */
@@ -2534,7 +2567,7 @@
     }
 
     .hc-mint__card-initialSales p {
-        font-size: 1.6vh;
+        font-size: 3.4vw;
     }
 
     .hc-mint__col-paddingLeft {
@@ -2557,11 +2590,11 @@
         border-radius: 1vw;
         padding-left: 1vw;
         padding-right: 1vw;
-        font-size: 1.7vh;
+        font-size: 4vw;
     }
 
     .hc-mint__button-mint {
-        font-size: 1.8vh;
+        font-size: 4.5vw;
         border-radius: 1vw;
     }
 

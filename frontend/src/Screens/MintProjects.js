@@ -133,7 +133,7 @@ function MintProjects() {
                             </Col>
                             <Col lg={6} className="px-0">
                                 {CMS["Initial Sales"]?.img &&
-                                    <div className="anim_div first_lottie">
+                                    <div className="anim_div first_lottie is-banner__lottie">
                                         <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["Initial Sales"]?.img}`} className="banner_lottie" />
                                     </div>}
                                 {/* <div className="anim_div" >
