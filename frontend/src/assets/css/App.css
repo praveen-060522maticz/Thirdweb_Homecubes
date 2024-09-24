@@ -91,7 +91,7 @@
 
 .nft-card__content {
     background: var(--gray_200);
-    padding: 0.8vw;
+    padding: 0 0.8vw 0.8vw 0.8vw;
     position: relative;
     border-top-left-radius: 0.3vw;
     border-top-right-radius: 0.3vw;
@@ -100,16 +100,31 @@
 
 .nft-card__content:after {
     background: var(--gradinet_right);
-    border-top-left-radius: 0.9vw;
-    border-top-right-radius: 0.9vw;
+    border-top-left-radius: 0.6vh;
+    border-top-right-radius: 0.6vh;
     content: "";
-    height: 0.6vh;
+    height: 1vh;
     left: 0;
     position: absolute;
-    top: -0.3vh;
+    top: -1vh;
     width: 100%;
     z-index: 1;
 }
+
+.nft-card__content:before {
+    background: var(--bg-color-1);
+    border-top-left-radius: 0.5vh;
+    border-top-right-radius: 0.5vh;
+    content: "";
+    height: 1vh;
+    left: 0;
+    position: absolute;
+    top: -0.5vh;
+    width: 100%;
+    z-index: 2;
+}
+
+
 
 .nft-card__content-title {
     color: var(--white);
@@ -119,6 +134,8 @@
     width: 16vw;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 1.35vw;
+    line-height: 1.8vw;
 }
 
 .nft-card__values-wrapper,
@@ -486,7 +503,7 @@
 }
 
 .hc-mint__content-title {
-    font-size: 4vh;
+    font-size: 2vw;
 }
 
 .mint-bottom__content {
@@ -494,7 +511,7 @@
 }
 
 .hc-mint__swiper-wrap {
-    margin-top: 2vh;
+    margin-top: 5vh;
     padding: 0px;
 }
 
@@ -809,7 +826,7 @@
 }
 
 .mint-bottom__content {
-    margin-top: 6vh;
+    margin-top: 8vh;
 }
 
 .news-update__swipper-wrapper {
@@ -820,9 +837,9 @@
     min-width: 19vw;
     width: 19vw;
     max-width: 19vw;
-    min-height: 33vh;
-    height: 33vh;
-    max-height: 33vh;
+    min-height: 30vh;
+    height: 30vh;
+    max-height: 30vh;
     padding-left: 1vw;
     padding-right: 1vw;
 
@@ -842,10 +859,10 @@
     min-width: 100%;
     width: 100%;
     max-width: 100%;
-    min-height: 23vh;
-    height: 23vh;
-    max-height: 23vh;
-    border-radius: 0.3vw;
+    min-height: 11.5vw;
+    height: 11.5vw;
+    max-height: 11.5vw;
+    border-radius: 0.5vw;
     overflow: hidden;
 }
 
@@ -1255,7 +1272,7 @@
 
 .hh-nft__text-sm {
     font-weight: 500;
-    font-size: 1.6vh;
+    font-size: 0.8vw;
     margin-bottom: 1vh;
 }
 
@@ -1825,8 +1842,8 @@
 
 
     .hc-mint__content-title {
-        font-size: 3.1vh;
-        line-height: 5.8vh;
+        font-size: 4.2vw;
+        line-height: 6.5vw;
         display: flex;
         flex-direction: column;
         white-space: nowrap;
@@ -1930,19 +1947,18 @@
     }
 
     .mint-bottom__content {
-        margin-top: 5vh;
+        margin-top: 7vh;
     }
 
     .gallery-card__swiper .card-gallery {
         min-width: 45vw;
         width: 45vw;
         max-width: 45vw;
-        min-height: 22vh;
-        height: 22vh;
-        max-height: 22vh;
+        min-height: 36vw;
+        height: 36vw;
+        max-height: 36vw;
         padding-left: 2vw;
         padding-right: 2vw;
-
     }
 
     .gallery-card__swiper .swiper-wrapper {
@@ -1967,9 +1983,9 @@
         min-width: 100%;
         width: 100%;
         max-width: 100%;
-        min-height: 15vh;
-        height: 15vh;
-        max-height: 15vh;
+        min-height: 27vw;
+        height: 27vw;
+        max-height: 27vw;
         border-radius: 1.3vw;
         overflow: hidden;
     }
@@ -1979,7 +1995,7 @@
     }
 
     .gallery-card__swiper.gallery-card__swiper .card-gallery__title p {
-        font-size: 1.8vh;
+        font-size: 3.5vw;
     }
 
     .gallery-card__swiperWrapper .hc-swiper__arrow--right svg,
@@ -2611,11 +2627,15 @@
 
 
     .hc-mint__content-title {
-        font-size: 2.5vh;
-        line-height: 4.8vh;
+        font-size: 5.5vw;
+        line-height: 8.5vw;
         display: flex;
         flex-direction: column;
         white-space: nowrap;
+    }
+
+    .hc-mint__swiper-wrap {
+        margin-top: 3.5vh;
     }
 
     .hc-mint__content-title span {
@@ -2623,7 +2643,7 @@
     }
 
     .mint-margin__top {
-        margin-top: 7vh;
+        margin-top: 5vh;
     }
 
     .hc-mint__content-subtitle {
@@ -2632,12 +2652,12 @@
     }
 
     .mint-property__imageWrapper {
-        min-width: 35vh;
-        width: 35vh;
-        max-width: 35vh;
-        min-height: 35vh;
-        height: 35vh;
-        max-height: 35vh;
+        min-width: 50vw;
+        width: 50vw;
+        max-width: 50vw;
+        min-height: 50vw;
+        height: 50vw;
+        max-height: 50vw;
     }
 
     .section-roadMap {
@@ -2732,9 +2752,9 @@
         min-width: 45vw;
         width: 45vw;
         max-width: 45vw;
-        min-height: 22vh;
-        height: 22vh;
-        max-height: 22vh;
+        min-height: 18vh;
+        height: 18vh;
+        max-height: 18vh;
         padding-left: 2vw;
         padding-right: 2vw;
 
@@ -2762,9 +2782,9 @@
         min-width: 100%;
         width: 100%;
         max-width: 100%;
-        min-height: 15vh;
-        height: 15vh;
-        max-height: 15vh;
+        min-height: 28vw;
+        height: 28vw;
+        max-height: 28vw;
         border-radius: 1.3vw;
         overflow: hidden;
     }
@@ -2774,7 +2794,7 @@
     }
 
     .gallery-card__swiper.gallery-card__swiper .card-gallery__title p {
-        font-size: 1.8vh;
+        font-size: 4vw;
     }
 
     .gallery-card__swiperWrapper .hc-swiper__arrow--right svg,

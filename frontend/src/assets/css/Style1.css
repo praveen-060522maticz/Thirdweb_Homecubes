@@ -165,6 +165,7 @@ h6 {
   position: relative;
   z-index: 5;
 }
+
 .nodata_found {
   font-size: 2vh;
   color: var(--white);
@@ -501,10 +502,12 @@ h6 {
 }
 
 @media screen and (max-width:1199px) {
-.footer_all .container, .homecube_header .container {
-  max-width: 90%;
-  padding: 0;
-}
+
+  .footer_all .container,
+  .homecube_header .container {
+    max-width: 90%;
+    padding: 0;
+  }
 }
 
 @media screen and (max-width:991px) {
@@ -980,40 +983,48 @@ h6 {
   .col_pad.commit_pad {
     padding-left: 1.3vh;
     padding-right: 1.3vh;
+  }
+
+  .home_commitemtnCard {
+    max-height: 32vh;
+    min-height: 32vh;
+  }
+
+  .home_investorli {
+    max-height: 25vh;
+  }
 }
-.home_commitemtnCard {
-  max-height: 32vh;
-  min-height: 32vh;
-}
-.home_investorli {
-  max-height: 25vh;
-}
-}
+
 @media screen and (min-width:992px) and (max-width:1199px) {
   .col_pad.commit_pad {
     padding-left: 1.2vh;
     padding-right: 1.2vh;
+  }
+
+  .home_commitemtnCard {
+    max-height: 35vh;
+    min-height: 35vh;
+  }
+
+  .home_investorli {
+    max-height: 28vh;
+  }
 }
-.home_commitemtnCard {
-  max-height: 35vh;
-  min-height: 35vh;
-}
-.home_investorli {
-  max-height: 28vh;
-}
-}
+
 @media screen and (min-width:768px) and (max-width:991px) {
   .col_pad.commit_pad {
     padding-left: 1.2vh;
     padding-right: 1.2vh;
-}
-.home_commitemtnCard {
-  max-height: 35vh;
-  min-height: 35vh;
-}
-.home_investorli {
-  max-height: 28vh;
-}
+  }
+
+  .home_commitemtnCard {
+    max-height: 35vh;
+    min-height: 35vh;
+  }
+
+  .home_investorli {
+    max-height: 28vh;
+  }
 }
 
 @media screen and (min-width:1200px) {
@@ -1221,16 +1232,17 @@ h6 {
 }
 
 @media screen and (max-width:575px) {
+
   .hc-roadmap__new .gif_aligner,
-.hc-roadmap__new div[aria-label=animation] {
-  height: 16vh !important;
-  margin-top: -7vh !important;
-  max-height: 16vh;
-  max-width: 16vh;
-  min-height: 16vh;
-  min-width: 16vh;
-  width: 16vh !important;
-}
+  .hc-roadmap__new div[aria-label=animation] {
+    height: 16vh !important;
+    margin-top: -7vh !important;
+    max-height: 16vh;
+    max-width: 16vh;
+    min-height: 16vh;
+    min-width: 16vh;
+    width: 16vh !important;
+  }
 }
 
 /* roadmap end */
@@ -2939,9 +2951,11 @@ input::placeholder {
   padding: 0.8vh 1vh;
   width: 32vh;
 }
-.stack_nftcounter.lasttotal{
+
+.stack_nftcounter.lasttotal {
   width: 38vh;
-} 
+}
+
 .nftcounter_lable,
 .nftcounter_value {
   font-family: var(--montserrat-font);
@@ -3043,10 +3057,11 @@ input::placeholder {
 }
 
 @media screen and (max-width:1199px) {
-.counterslist {
-  gap: 3vh;
+  .counterslist {
+    gap: 3vh;
+  }
 }
-}
+
 @media screen and (max-width:991px) {
   .gap_set {
     gap: 3vh;
@@ -3276,9 +3291,10 @@ input::placeholder {
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
 }
+
 .loaderss::after,
 .loaderss::before {
-  content: '';  
+  content: '';
   box-sizing: border-box;
   position: absolute;
   width: 3vh;
@@ -3290,6 +3306,7 @@ input::placeholder {
   border-radius: 50%;
   animation: animloader 1s infinite ease-in-out;
 }
+
 .loaderss::before {
   background-color: var(--gradinet_right);
   transform: scale(0.5) translate(-4vh, -4vh);
@@ -3299,13 +3316,14 @@ input::placeholder {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
-} 
+}
+
 @keyframes animloader {
-    50% {
-      transform: scale(1) translate(-50%, -50%);
+  50% {
+    transform: scale(1) translate(-50%, -50%);
+  }
 }
-}
-    

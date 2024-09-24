@@ -1075,7 +1075,7 @@ function Minting() {
 
                                     <Row className="mx-auto">
                                         <h3 className="text-center hc-mint__content-title px-0">
-                                            Gallery
+                                            Gallery sdf
                                         </h3>
                                         <div className="hc-mint__swiper-wrap">
 
@@ -1095,7 +1095,7 @@ function Minting() {
                                                 <FaChevronRight fill="#fff" fontSize={38} className="" />
                                             </button>
                                             <Swiper
-                                                className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper gallery-card__swiper"
+                                                className="mySwiper bottomnav_colswiper hc-mint__swiper gallery-card__swiper"
                                                 slidesPerView={4}
                                                 // spaceBetween={30}
                                                 navigation={{
@@ -1139,7 +1139,7 @@ function Minting() {
                                         <h3 className="hc-mint__content-title ">
                                             Estimated Property Value <span className="hc-mint__span-gradient"> {project?.CMS?.filter((val) => val.stepTitle == "PROPERTY VALUE")?.[0]?.stepDescription}</span>
                                         </h3>
-                                        <div className="row mint-margin__top align-items-center">
+                                        <div className="row mx-auto mint-margin__top align-items-center">
                                             <div className="col-12 col-xl-6 px-0">
                                                 <div>
                                                     <h5 className="hc-mint__content-subtitle ">
@@ -1157,7 +1157,7 @@ function Minting() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="row mint-margin__top">
+                                        <div className="row mx-auto mint-margin__top">
                                             <div className="col-12 col-xl-5 px-0">
                                                 <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title }} >
 
@@ -1214,7 +1214,7 @@ function Minting() {
                         </Row> */}
                                         <div className="section-roadMap">
                                             {/* <h3 className="minting_detail">{project.name} Road map</h3> */}
-                                            <h3 className="projects_title text-center">{project.name} <strong>Road</strong> Map</h3>
+                                            <h3 className="home_titled hc-home__title head_txt text-center">{project.name} <strong>Road</strong> Map</h3>
                                             <p className="mp_detailbrief text-center">
                                                 {project?.CMS?.filter((val) => val.stepTitle == "Road map")?.[0]?.stepDescription}
                                             </p>
