@@ -42,7 +42,8 @@ const LottieAnimation = ({ url, className, divClassname }) => {
 
                         />
                     ) : (
-                        <div>Loading Lottie animation...</div>
+                        // <div>Loading Lottie animation...</div>
+                        <span class="loaderss"></span>
                     ))
                     :
                     videoFileFormats.includes(getFormat) ?
