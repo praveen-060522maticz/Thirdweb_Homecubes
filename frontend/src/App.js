@@ -83,7 +83,7 @@ function App() {
         {
             path: "/contact",
             element: <Contact />,
-          },
+        },
         // Add routes for any additional screens
     ]);
 

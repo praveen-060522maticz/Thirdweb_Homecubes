@@ -3007,8 +3007,11 @@ input::placeholder {
   .nft_coinImg {
     height: 2.1vh;
     width: 2.1vh;
-}
-  .profile_balance, .profile_greentTxt, .small_dollar{
+  }
+
+  .profile_balance,
+  .profile_greentTxt,
+  .small_dollar {
     font-size: 1.8vh;
   }
 
