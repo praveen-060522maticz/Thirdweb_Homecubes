@@ -113,14 +113,11 @@ function Projects() {
       <Header />
 
 
-      <div className='innercontent position-relative'>
+      <div className='innercontent '>
         <div className={isFixed ? "side_left fixed" : "side_left sticky"}  >
           <SideTab />
         </div>
-        <div className='banner_section project_banner_section'>
-
-        </div>
-        <div className='project_bottom_section'>
+        <div className='banner_section banner_section_content project_section'>
           <div className='px-0 inner-container__width'>
             <h3 className='hc-home__title home_titled'>All <strong>Listed Properties</strong></h3>
             {/* <p className='mp_detailbrief hc-home__desc mt-3' dangerouslySetInnerHTML={{ __html: CMS?.content }} ></p> */}
@@ -198,7 +195,8 @@ function Projects() {
             </div>
           </div>
         </div>
-        <div className='project_bottom_section-empty'></div>
+
+        {/* <div className='project_bottom_section-empty'></div> */}
         <div className='mp-margin d-flex justify-content-center'>
           <button className='button-loadMore'>Load More</button>
         </div>

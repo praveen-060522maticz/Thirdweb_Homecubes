@@ -599,6 +599,7 @@ h6 {
   position: relative;
   z-index: 5;
 }
+
 .nftcard_statuslabelblue_dark {
   background: var(--gradinet_left);
   background-position: bottom;
@@ -606,9 +607,11 @@ h6 {
   background-size: cover;
   color: var(--white) !important;
 }
+
 .nftcard_statuslabelblue_dark .card_status {
   color: var(--white);
 }
+
 .banner_section::after {
   content: "";
   background: url("../images/bottomlayer.png") no-repeat;
@@ -841,9 +844,10 @@ h6 {
   width: 2.5vh;
 }
 
-.mt_5{
+.mt_5 {
   margin-top: 5vh;
 }
+
 .mt_4 {
   margin-top: 4vh;
 }
@@ -863,9 +867,11 @@ h6 {
 .mb_4 {
   margin-bottom: 4vh;
 }
+
 .mb_5 {
   margin-bottom: 5vh;
 }
+
 .mb_3 {
   margin-bottom: 3vh;
 }
@@ -873,9 +879,11 @@ h6 {
 .mb_2 {
   margin-bottom: 2vh;
 }
-.mb_1{
+
+.mb_1 {
   margin-bottom: 1vh;
 }
+
 .me_2 {
   margin-right: 1.5vh;
 }
@@ -1762,16 +1770,19 @@ input::placeholder {
   width: 2.5vh !important;
   height: 2.5vh !important;
 }
+
 .react_select__menu-list {
   max-height: 20vh !important;
 }
+
 .react_select__menu {
-  background: var(--black)!important;
+  background: var(--black) !important;
   border: 0.2vh solid var(--border-color-1) !important;
   border-radius: 0.2vh !important;
   margin-bottom: 0.2vh !important;
   margin-top: 0.2vh !important;
 }
+
 .react_select__option {
   cursor: pointer !important;
   background: transparent !important;
@@ -1780,14 +1791,17 @@ input::placeholder {
   padding: 0.5vh 1vh !important;
   color: var(--white) !important;
 }
+
 .react_select__option:hover {
   background: var(--blue_200) !important;
   color: var(--black) !important;
 }
+
 .react_select__option:active {
   background: var(--blue_300) !important;
   color: var(--white) !important;
 }
+
 .react_select__option--is-selected {
   background: var(--blue_200) !important;
   color: var(--white) !important;
@@ -2589,10 +2603,13 @@ input::placeholder {
 }
 
 @media (min-width: 992px) {
-  .modal-lg, .modal-xl {
+
+  .modal-lg,
+  .modal-xl {
     max-width: 80vh !important;
   }
 }
+
 @media (min-width: 576px) {
   .modal-dialog {
     max-width: 50vh;
@@ -2604,22 +2621,25 @@ input::placeholder {
 
 
 /* profile page */
-.contact_container{
+.contact_container {
   max-width: var(--container-width-main);
   margin: auto;
 }
+
 .blogINfo_usercomment {
   color: var(--white);
   font-family: var(--montserrat-font);
-  font-size:2vh;
+  font-size: 2vh;
   font-weight: 500;
   margin: 0;
 }
+
 .profile_dtlswhole {
   display: flex;
   gap: 2vh;
   justify-content: flex-start;
 }
+
 .profile_imgDtls {
   border-radius: 0.6vh;
   box-shadow: 15px 14px 32.1px -10px #fff3;
@@ -2628,6 +2648,7 @@ input::placeholder {
   overflow: hidden;
   position: relative;
 }
+
 .profile_img {
   height: 100%;
   max-height: 100%;
@@ -2637,6 +2658,7 @@ input::placeholder {
   object-fit: cover;
   width: 100%;
 }
+
 .editprofile_input {
   cursor: pointer;
   height: 100%;
@@ -2646,6 +2668,7 @@ input::placeholder {
   top: 0;
   width: 100%;
 }
+
 .profile_editBtn {
   background-color: #ffffff38;
   border: 0.2vh solid var(--white);
@@ -2660,28 +2683,37 @@ input::placeholder {
   padding: 0.4vh 0.8vh;
   position: absolute;
 }
-.hc-profile__title, .profile_name {
+
+.hc-profile__title,
+.profile_name {
   font-size: 2.2vh;
 }
-.hc-profile__title, .hc-profile__wrapper-border {
-font-family: var(--montserrat-font);
-font-weight: 600;
+
+.hc-profile__title,
+.hc-profile__wrapper-border {
+  font-family: var(--montserrat-font);
+  font-weight: 600;
 }
+
 .hc-profile__title {
-color: var(--gradinet_right);
+  color: var(--gradinet_right);
 }
+
 .profile_joinDate {
   color: var(--placeholder_color) !important;
   font-family: var(--montserrat-font);
   font-size: 1.8vh;
   font-weight: 600;
 }
-.profile_name, .small_dollar {
+
+.profile_name,
+.small_dollar {
   color: var(--white);
   font-family: var(--montserrat-font);
   font-weight: 600;
   margin: 0;
 }
+
 .hc-profile__wrapper-border {
   border: 0.2px solid var(--gradinet_right);
   color: var(--white);
@@ -2693,6 +2725,7 @@ color: var(--gradinet_right);
   text-align: center;
   width: 20vh;
 }
+
 .kyc_activated {
   align-items: center;
   border: 0.3vh solid var(--text-color-1);
@@ -2704,24 +2737,31 @@ color: var(--gradinet_right);
   padding: 1vh 2vh;
   width: fit-content;
 }
+
 .orange {
   border: 0.3vh solid #ff7e07 !important;
 }
+
 .actiate_hint.kyc_activated.orange p {
   color: #FF7E07 !important;
 }
+
 .kyc_activated.greenkyc {
   border: 2px solid #00DA09 !important;
 }
+
 .actiate_hint.kyc_activated.greenkyc p {
   color: #00DA09 !important;
 }
-.kyc_activated.greenkyc p{
+
+.kyc_activated.greenkyc p {
   color: #00DA09 !important;
 }
-.kyc_activated.actiate_hint p{
+
+.kyc_activated.actiate_hint p {
   color: #F84A4A !important;
 }
+
 .kyc_activated p {
   color: green;
   font-family: var(--montserrat-font);
@@ -2729,35 +2769,44 @@ color: var(--gradinet_right);
   font-weight: 600;
   /* white-space: nowrap; */
 }
+
 .actiate_hint.kyc_activated.orange p {
   color: #ff7e07 !important;
 }
-.copyiconimg{
+
+.copyiconimg {
   width: 2.9vh;
 }
-.gap_1{
+
+.gap_1 {
   gap: 1vh;
 }
-.pro_valuecount, .secondary_row {
+
+.pro_valuecount,
+.secondary_row {
   align-items: center;
   display: flex;
   gap: 2vh;
   justify-content: flex-start;
 }
+
 .profile_coinnameimg {
   align-items: center;
   display: flex;
   justify-content: flex-start;
 }
+
 .hc-proile__border-top {
   border-top: 0.2vh solid #ffffff54;
   padding: 2.2vh 0vh;
 }
+
 .nft_coinImg {
   height: 2.5vh;
   margin-right: 1vh;
   width: 2.5vh;
 }
+
 .profile_balance {
   color: var(--white);
   font-family: var(--montserrat-font);
@@ -2765,20 +2814,24 @@ color: var(--gradinet_right);
   font-weight: 600;
   margin: 0;
 }
+
 .nftcounter_value {
   color: var(--gradinet_right);
   margin: 0;
 }
-.gap_set{
+
+.gap_set {
   gap: 6vh;
   display: flex;
   align-items: center;
 }
+
 .vert_line {
   background-color: var(--white);
   height: 5vh;
   width: 0.1vh;
 }
+
 .hc-profile__text-xs {
   color: var(--text-color-2);
   font-family: var(--montserrat-font);
@@ -2787,6 +2840,7 @@ color: var(--gradinet_right);
   margin-bottom: 0;
   margin-top: 0.4vh;
 }
+
 .profile_greentTxt {
   color: var(--gradinet_right);
   font-family: var(--montserrat-font);
@@ -2794,17 +2848,21 @@ color: var(--gradinet_right);
   font-weight: 600;
   margin: 0;
 }
-.small_dollar{
+
+.small_dollar {
   font-size: 2vh;
 }
-.counterslist{
+
+.counterslist {
   display: flex;
   align-items: center;
   gap: 4vh;
 }
+
 .profile_counter.stack_nftcounter {
   justify-content: flex-start;
 }
+
 .stack_nftcounter {
   align-items: center;
   border: 0.3vh solid var(--gradinet_right);
@@ -2814,26 +2872,33 @@ color: var(--gradinet_right);
   padding: 0.8vh 1vh;
   width: 32vh;
 }
-.nftcounter_lable, .nftcounter_value {
+
+.nftcounter_lable,
+.nftcounter_value {
   font-family: var(--montserrat-font);
   font-size: 1.8vh;
   font-weight: 600;
 }
+
 .nftcounter_lable {
   color: var(--white);
   margin: 0 1vh 0 0;
 }
+
 .top_reltabimg {
   height: 2.4vh;
   margin-right: 1vh;
   width: 2.4vh;
 }
-.profile_top{
+
+.profile_top {
   margin-top: -8vh;
 }
-.react-select-2__placeholder{
+
+.react-select-2__placeholder {
   color: var(--white);
 }
+
 .kyc_phoneInput input {
   background-color: initial;
   border: 0.3vh solid var(--gradinet_right);
@@ -2845,18 +2910,22 @@ color: var(--gradinet_right);
   padding: 1vh 0.8vh;
   width: 100%;
 }
+
 .modal-body .nations .react_select__control {
   width: 100% !important;
 }
-.modal-body .nations .react_select__value-container{
+
+.modal-body .nations .react_select__value-container {
   height: 4.8vh !important;
 }
+
 .kyc_flex {
   align-items: flex-end;
   display: flex;
   gap: 2vh;
   justify-content: flex-start;
 }
+
 .kyc_imagewrapper {
   background-color: initial;
   border: 0.2vh solid var(--gradinet_right);
@@ -2867,10 +2936,13 @@ color: var(--gradinet_right);
   position: relative;
   width: 5vh;
 }
-.kyc_imagewrapper, .kyc_poptop {
+
+.kyc_imagewrapper,
+.kyc_poptop {
   align-items: center;
   display: flex;
 }
+
 .customed_img {
   border-radius: 0.5vh;
   max-height: 100%;
@@ -2878,6 +2950,7 @@ color: var(--gradinet_right);
   min-height: 100%;
   min-width: 100%;
 }
+
 .kyc_fileInput {
   cursor: pointer !important;
   height: 100%;
@@ -2887,13 +2960,15 @@ color: var(--gradinet_right);
   top: 0;
   width: 100%;
 }
+
 .hc-kyc__modal-p p {
   color: var(--white);
   font-size: 1.7vh;
   font-weight: 500;
   margin-bottom: 2vh !important;
 }
-.mr_accept{
+
+.mr_accept {
   margin-left: 1vh;
   margin-top: -0.2vh;
 }
@@ -2902,26 +2977,32 @@ color: var(--gradinet_right);
   .gap_set {
     gap: 3vh;
   }
+
   .counterslist {
     gap: 2vh;
-}
-  .profile_counter{
+  }
+
+  .profile_counter {
     width: fit-content;
   }
 }
+
 @media screen and (max-width:767px) {
   .gap_set {
     gap: 3vh;
     flex-wrap: wrap;
   }
-  .counterslist{
+
+  .counterslist {
     flex-wrap: wrap;
     gap: 1.8vh 1vh;
   }
-  .profile_counter{
+
+  .profile_counter {
     width: fit-content;
   }
 }
+
 @media screen and (max-width:575px) {
   .nft_coinImg {
     height: 2.1vh;
@@ -2930,53 +3011,68 @@ color: var(--gradinet_right);
   .profile_balance, .profile_greentTxt, .small_dollar{
     font-size: 1.8vh;
   }
-  .pro_valuecount{
+
+  .pro_valuecount {
     gap: 1.2vh;
   }
-  .vert_line.vert_line1{
+
+  .vert_line.vert_line1 {
     display: none;
   }
-  .profile_top{
+
+  .profile_top {
     margin-top: -5vh;
   }
+
   .gap_set {
     gap: 2vh 1.4vh;
     margin-top: 2.5vh;
-}
+  }
+
   .profile_dtlswhole {
     gap: 1vh;
+  }
+
+  .profile_joinDate {
+    font-size: 1.7vh;
+  }
+
+  .hc-profile__title {
+    font-size: 2vh;
+  }
+
+  .profile_name {
+    font-size: 1.7vh;
+  }
+
+  .copyiconimg {
+    width: 2.5vh;
+  }
+
+  .copyiconimg.copy1 {
+    width: 3.5vh;
+  }
+
+  .kyc_activated {
+    padding: 1vh 0.6vh;
+  }
+
+  .kyc_activated p {
+    font-size: 1.6vh;
+  }
+
+  .profile_imgDtls {
+    height: 23vh;
+    width: 23vh;
+  }
+
+  .hc-profile__wrapper-border {
+    max-width: 100%;
+    min-width: auto;
+    width: 100%;
+  }
 }
-.profile_joinDate {
-  font-size: 1.7vh;
-}
-.hc-profile__title{
-  font-size: 2vh;
-}
-.profile_name {
-  font-size: 1.7vh;
-}
-.copyiconimg{
-  width: 2.5vh;
-}
-.copyiconimg.copy1{
-  width: 3.5vh;
-}
-.kyc_activated{
-  padding: 1vh 0.6vh;
-}
-.kyc_activated p{
-  font-size: 1.6vh;
-}
-.profile_imgDtls {
-  height: 23vh;
-  width: 23vh;
-}
-.hc-profile__wrapper-border {
-  max-width: 100%;
-  min-width: auto;
-  width: 100%;
-}
-}
+
 /* profile page end */
 
 
@@ -2987,16 +3083,21 @@ color: var(--gradinet_right);
   border-radius: 1vh;
   padding: 3vh 3vh 1vh 3vh;
 }
-.blogInfo_inplabel, .blogInfo_input {
+
+.blogInfo_inplabel,
+.blogInfo_input {
   font-family: var(--montserrat-font);
   font-weight: 400;
 }
+
 .blogInfo_inplabel {
   color: var(--input_label);
   font-size: 1.7vh;
   margin: 0;
 }
-.blogInfo_input, .blogInfo_textarea {
+
+.blogInfo_input,
+.blogInfo_textarea {
   background-color: initial;
   border: none;
   border-bottom: 0.2vh solid var(--input_bottomborder);
@@ -3006,11 +3107,13 @@ color: var(--gradinet_right);
   padding: 0.6vh 0;
   width: 100%;
 }
+
 .contact_bluebe {
   background-color: var(--gradinet_right);
   border-radius: 0.8vh;
   padding: 1vh 1.5vh !important;
 }
+
 .contact_blackText {
   color: var(--contact_black);
   font-family: var(--helonika_font);
@@ -3018,33 +3121,42 @@ color: var(--gradinet_right);
   font-weight: 500;
   margin: 0;
 }
-.contact_mailDtl, .contact_socialwrapper {
+
+.contact_mailDtl,
+.contact_socialwrapper {
   align-items: center;
   display: flex;
   justify-content: flex-start;
 }
-.contact_mailDtl{
+
+.contact_mailDtl {
   gap: 1vh;
 }
+
 .contact_socialAll {
   display: flex;
   justify-content: flex-end;
 }
+
 .contact_socialwrapper {
   gap: 1.6vh;
 }
+
 .contact_blckmail {
   height: 2vh;
   object-fit: contain;
   width: 2vh;
 }
+
 .contact_blckmail:hover {
   filter: invert(1);
 }
-.px_0{
+
+.px_0 {
   padding-left: 1.5vh !important;
   padding-right: 1.5vh !important;
 }
+
 .contact_mailadd {
   color: var(--contact_black);
   font-family: var(--montserrat-font);
@@ -3052,19 +3164,24 @@ color: var(--gradinet_right);
   font-weight: var(--weight_four);
   margin: 0;
 }
+
 @media screen and (max-width:575px) {
-.contact_bluemobcen {
-  display: flex;
-  justify-content: center;
+  .contact_bluemobcen {
+    display: flex;
+    justify-content: center;
+  }
+
+  .socialtext {
+    margin-top: 2vh;
+  }
+
+  .blogInfo_placecomment {
+    padding: 3vh 1vh 1vh 1vh;
+  }
+
+  .contact_container {
+    margin-top: 10vh;
+  }
 }
-.socialtext{
-  margin-top: 2vh;
-}
-.blogInfo_placecomment {
-  padding: 3vh 1vh 1vh 1vh;
-}
-.contact_container{
-  margin-top: 10vh;
-}
-}
+
 /* contact end */
