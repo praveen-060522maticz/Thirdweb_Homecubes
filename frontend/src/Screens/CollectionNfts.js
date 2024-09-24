@@ -152,7 +152,7 @@ function CollectionNfts() {
                       
                     </div>
                 </div>
-                 <div className="bottom_content collection_top">
+                 <div className="bottom_content collection_top mb_5">
                     <div className="inner-container__width">
                     <div  className="mp-grid mb_2 ">
                         {tokens?.length != 0 && tokens?.map((i) =>

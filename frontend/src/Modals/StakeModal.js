@@ -121,7 +121,8 @@ function TransferToken({ show, handleClose, onStackNft, setSelectedPlan }) {
 
                     </div>
 
-                    <div className='modal_body mt-3'>
+                    <div className='modal_body mt_2'>
+                        <div className='pool_select'>
                         <Select
                             className="border_select"
                             classNamePrefix={"react_select"}
@@ -131,6 +132,7 @@ function TransferToken({ show, handleClose, onStackNft, setSelectedPlan }) {
                             onChange={setSelectedPlan}
                             options={options}
                         />
+                        </div>
                         {/* <div className='cp_nftimage_holder'>
                     <img className='cp_nftImage' src={require('../assets/images/nftimage.png')} />
                     <p className='cp_nftName mt-3'>3D Cubes</p>

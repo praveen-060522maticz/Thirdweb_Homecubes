@@ -290,21 +290,19 @@ function Marketplace() {
             <Header />
 
             <div className="innercontent">
-                <div className={isFixed ? "side_left fixed" : "side_left sticky"}  >
+                <div className={isFixed ? "side_left fixed" : "side_left sticky"}>
                     <SideTab />
                 </div>
-                <div className="banner_section">
+                <div className="banner_section market_sections">
                     <div className="inner-container__width">
                         <Row className="mx-0">
-                            <h3 className="hc-home__title home_titled">Our <strong>Unique</strong> Marketplace</h3>
+                            <h3 className="hc-home__title home_titled inner_title">Our <strong>Unique</strong> Marketplace</h3>
                             <p className="mp_detailbrief hc-home__desc mt_2 homes" dangerouslySetInnerHTML={{ __html: coll?.content }} >
                             </p>
                             <div className="hc-mint__swiper-wrap swiptop">
-
                                 <button
                                     className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
-                                    onClick={() => goPrev()}
-                                >
+                                    onClick={() => goPrev()}>
                                     <img src={arrowleft} />
                                     {/* <FaChevronLeft fill="#fff" fontSize={38} /> */}
                                 </button>
@@ -385,10 +383,10 @@ function Marketplace() {
                         </Row>
                     </div>
                 </div>
-                <div className="bottom_content content_bot">
+                <div className="bottom_content market_bot">
                     <div className="inner-container__width">
                         <Row className="justify-content-between mx-auto">
-                            <h3 className="hc-home__title home_titled">
+                            <h3 className="hc-home__title home_titled inner_title">
                                 Top Trending <strong>NFT's</strong>
                             </h3>
                             {/* <Col lg={4} md={6} sm={6} xs={12} className="mt_3">
@@ -407,7 +405,7 @@ function Marketplace() {
                                 md={6}
                                 sm={6}
                                 xs={12}
-                                className="mb_select_holder mt_3 ms-auto"
+                                className="mb_select_holder mt_1 ms-auto"
                             >
                                 <Select
                                     // menuIsOpen={true}
@@ -434,8 +432,8 @@ function Marketplace() {
                             </Col>
                         </Row>
 
-                        <Row className="mt_3">
-                            <Col xl={3} lg={4} md={4} sm={6} xs={12} className="mt_3">
+                        <Row className="mt_1">
+                            <Col xl={3} lg={4} md={4} sm={6} xs={12} className="mt_2">
                                 <div
                                     className={
                                         `mb_3 ${mobSearch
@@ -577,7 +575,7 @@ function Marketplace() {
 
 
 
-                            <Col xl={9} lg={8} md={8} sm={6} xs={12} className="mt_3 pe-sm-0">
+                            <Col xl={9} lg={8} md={8} sm={6} xs={12} className="mt_2 pe-sm-0">
 
                                 <Row className="mx-auto">
                                     {filterData.length != 0 && filterData.map((i) => (

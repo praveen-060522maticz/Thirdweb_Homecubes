@@ -516,10 +516,10 @@ function NFTInfo() {
             <Header />
 
             <div className="innercontent">
-                <div className={isFixed ? "side_left fixed" : "side_left sticky"}  >
+                <div className={isFixed ? "side_left fixed" : "side_left sticky"}>
                     <SideTab />
                 </div>
-                <div className="banner_section">
+                <div className="banner_section nftinfo_section">
                     <div className="inner-container__width">
 
                         <div className="nft_grid">
@@ -1152,11 +1152,8 @@ src={require("../assets/images/clock.svg").default}
 
                     </div>
                 </div>
-                <div className="bottom_content content_bot">
+                <div className={Tokens[TabName]?.highbid ? "bottom_content nftinfo_bot" : "bottom_content nftinfo_bots" }>
                     <div className="inner-container__width">
-
-
-
                         <Row>
                             <Col lg={12} md={12} sm={12} xs={12} className="">
                                 {/* <Row>
