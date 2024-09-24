@@ -159,7 +159,7 @@ function Home() {
                     </div>
                 </div>
 
-                <div className="bottom_content">
+                <div className="bottom_content home_top">
                     <div className="inner-container__width">
                         <Row className="top_bottom align-items-center flexwrapreverse mx-auto">
                             <Col lg={6} className="col_pad">
@@ -335,7 +335,7 @@ function Home() {
                                     //   className="img-fluid width_seven howit_giffer"
                                     //   src={`${config.IMG_URL}/cmsimg/${investArr?.filter(val => val?.img)[0]?.img}`}
                                     // />
-                                    <div className="anim_div">
+                                    <div className="anim_div first_lottie">
 
                                         <LottieAnimation url={`${config.IMG_URL}/cmsimg/${investArr?.filter(val => val?.img)[0]?.img}`} />
                                     </div>
@@ -345,16 +345,15 @@ function Home() {
 
                         <Row className="align-items-center top_bottom mx-auto">
                             <h3
-                                className="home_titled hc-home__title text-center head_txt">
+                                className="home_titled hc-home__title text-center  mb_5">
                                 Our <strong>Commitment</strong>
                             </h3>
+                            <div className="home-grid px-0">
                             {commmitArr?.length != 0 &&
                                 commmitArr?.map((i) => (
-                                    <Col lg={4} md={6} sm={12} xs={12} className="col_pad commit_pad mt_3">
+                                    // <Col lg={4} md={6} sm={12} xs={12} className="col_pad commit_pad mt_3">
                                         <div
-                                            className="home_commitemtnCard"
-
-                                        >
+                                            className="home_commitemtnCard">
                                             <div className="home_singleCommit">
                                                 <img
                                                     className="home_commitCube"
@@ -371,8 +370,9 @@ function Home() {
                                                 dangerouslySetInnerHTML={{ __html: i.content }}
                                             ></p>
                                         </div>
-                                    </Col>
+                                    // </Col>
                                 ))}
+                                </div>
                         </Row>
 
                         <Row className="hc-home__roadMap top_bottom mx-auto">
@@ -388,8 +388,8 @@ function Home() {
                             </div>
                         </Row>
 
-                        <Row className="justify-content-center top_bottom mx-auto">
-                            <Col lg={8} className="home_mailer">
+                        <Row className="justify-content-center top_bottom mx-auto mb_4">
+                            <Col lg={8} xl={6} className="home_mailer">
                                 <Row className="justify-content-center">
                                     <Col
                                         lg={8}
@@ -399,7 +399,7 @@ function Home() {
                                         className="mtb d-flex flex-column justify-content-center align-items-center"
                                     >
                                         <h3
-                                            className="home_titled text-center"
+                                            className="home_titled text-center mb_1"
 
                                         >
                                             Join Our Link Tree
