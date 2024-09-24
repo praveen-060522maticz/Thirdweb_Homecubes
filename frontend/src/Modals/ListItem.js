@@ -692,7 +692,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                       <Select
                         className="border_select side_slect"
                         classNamePrefix={"react_select"}
-                        menuIsOpen={true}
+                        // menuIsOpen={true}
                         placeholder=""
                         styles={stylesgraybgOne}
                         defaultValue={selectedOptionOne}

@@ -350,7 +350,7 @@ function Home() {
                             </h3>
                             {commmitArr?.length != 0 &&
                                 commmitArr?.map((i) => (
-                                    <Col lg={4} md={6} sm={6} xs={12} className="col_pad mt_3">
+                                    <Col lg={4} md={6} sm={12} xs={12} className="col_pad commit_pad mt_3">
                                         <div
                                             className="home_commitemtnCard"
 
