@@ -1076,7 +1076,7 @@ src={require("../assets/images/clock.svg").default}
 
 
 
-                                <div className="nftInfo_curPrice mt_2">
+                                <div className="nftInfo_curPrice flexcut mt_2">
                                     {Tokens[TabName]?.owner?.PutOnSaleType === "FixedPrice" &&
                                         // <p className="created">
                                         <>
@@ -1217,7 +1217,17 @@ src={require("../assets/images/clock.svg").default}
 
                     </div>
                 </div>
-                <div className={Tokens[TabName]?.highbid ? "bottom_content nftinfo_bot" : "bottom_content nftinfo_bots"}>
+
+                {/* Tokens[TabName]?.myowner?.PutOnSaleType ==
+                                                "FixedPrice" */}
+
+                <div className={
+                    Tokens[TabName]?.highbid ? "bottom_content nftinfo_bot" :
+                        Tokens[TabName]?.myowner?.PutOnSaleType == "FixedPrice" ?
+                            "bottom_content nftinfo_bot2" : Tokens["All"]?.owner?.PutOnSaleType ===
+                                        "TimedAuction" ? "bottom_content salesend_bot" :
+                            "bottom_content nftinfo_bots"   
+                }>
                     <div className="inner-container__width">
                         <Row>
                             <Col lg={12} md={12} sm={12} xs={12} className="">
@@ -1336,7 +1346,7 @@ src={require("../assets/images/clock.svg").default}
 
 
                                         <div className="mt_4 mb_4">
-                                            <h6 className="nftInfo_descTitle mb_3">Description</h6>
+                                            <h6 className="nftInfo_descTitle mb_2">Description</h6>
 
                                             {description ? (
                                                 <p className="mp_detailbrief hc-home__desc">{isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription}</p>
@@ -1854,7 +1864,7 @@ src={require("../assets/images/clock.svg").default}
                   </Accordion> */}
                                     </Col>
                                 </Row>
-                                <div className="mt_3 pt_4 mb_3">
+                                <div className="mt_2 pt_3 mb_3">
                                     <h3 className="nftInfo_descTitle mt_3 mb_3">
                                         More From this Collection
                                     </h3>

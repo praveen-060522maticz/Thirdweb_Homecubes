@@ -560,8 +560,9 @@ function Profile() {
               </div>
             </div>
 
+            <div className='d-none d-md-block'>
             <div className='hc-proile__border-top gap_set'>
-              <p className='profile_balance'>Total Balance :  $ {(coinBalance * BNBUSDT)?.toFixed(6)}</p>
+              <p className='profile_balance'>Total Balance :  $ {(coinBalance * BNBUSDT)?.toFixed(6)}</p>             
               <div className='vert_line vert_line1'></div>
               <div className='pro_valuecount'>
                 <div >
@@ -597,6 +598,52 @@ function Profile() {
                 </div>
               </div>
             </div>
+            </div>
+
+            <div className='d-block d-md-none'>
+            <div className='hc-proile__border-top balancecheck gap_set'>
+              <p className='profile_balance'>Total Balance :  $ {(coinBalance * BNBUSDT)?.toFixed(6)}</p>             
+          
+              <div className='sub_flex'>
+              <div className='pro_valuecount'>
+                <div >
+                  <div className='profile_coinnameimg'>
+                    <img className='nft_coinImg' src={require('../assets/images/Tether Usdt.png')} />
+                    <p className='profile_balance'>USDT</p>
+                  </div>
+                  <p className='hc-profile__text-xs'>
+                    BNB Smart Coin
+                  </p>
+                </div>
+
+                <div className='vertical_dtl'>
+                  <p className='profile_greentTxt'>{currency?.filter(val => val.value == "USDT")?.[0]?.balance}</p>
+                  <p className='small_dollar'>$ {BNBUSDT}</p>
+                </div>
+              </div>
+
+              <div className='vert_line'></div>
+              <div className='pro_valuecount'>
+                <div >
+                  <div className='profile_coinnameimg'>
+                    <img className='nft_coinImg' src={require('../assets/images/bnbcoin.svg').default} />
+                    <p className='profile_balance'>{config.COIN_NAME}</p>
+                  </div>
+                  <p className='hc-profile__text-xs'>
+                    BNB Smart Coin
+                  </p>
+                </div>
+
+                <div className='vertical_dtl'>
+                  <p className='profile_greentTxt'>{coinBalance?.toFixed(6)}</p>
+                  <p className='small_dollar'>$ {BNBUSDT}</p>
+                </div>
+              </div>
+              </div>
+            </div>
+            </div>
+
+
 
             <div className='hc-proile__border-top counterslist'>
               <div className="stack_nftcounter profile_counter">
