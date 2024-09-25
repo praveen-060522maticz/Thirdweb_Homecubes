@@ -415,7 +415,7 @@ function AcceptBid({
                      <input type="number" className='modal_singleinput mt-3 cmnInput_scrollerHider' placeholder='Enter your quality' />
                   </div> */}
 
-                  <p className='blogInfo_inplabel mt_2 mb_2'>Summary:</p>
+                  <p className='modal_summaryLabel mt_2 mb_2'>Summary:</p>
                   <div className='bidmodal_summary mb_2'>
                      <p className='modal_summaryLabel'>Royal fee in %</p>
                      <p className='modal_summaryValue'>{item.NFTRoyalty} %</p>
