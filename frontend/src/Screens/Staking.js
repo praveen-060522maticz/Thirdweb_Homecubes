@@ -678,6 +678,7 @@ function Staking() {
                   }
                   onClick={() => setAtciveTab("rewards")}
                 >
+
                   <img
                     className=""
                     src={
