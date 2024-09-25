@@ -7,6 +7,7 @@ import Development from '../assets/lotties/dev.json'
 import MainWebsite from '../assets/lotties/website.json'
 import CollectorLottie from '../assets/lotties/collection.json'
 import config from '../config/config'
+import LottieAnimation from './LottieAnimar';
 
 function Roadmap(props) {
     console.log("daatatata", props.data);
@@ -196,8 +197,8 @@ function Roadmap(props) {
 
                             {/* row - 1 */}
 
-                            {i == 0 && <div className='col-5 '>
-                                <div className='hc-roadmap__new-col--left d-flex justify-content-end  gap-2 gap-sm-3 gap-md-4 gap-lg-5'>
+                            {i == 0 && <div className='col-5 colpad'>
+                                <div className='hc-roadmap__new-col--left roadmap_flex'>
                                     <p className='roadmap_strokeText'>{i + 1}</p>
                                     <div className=''>
                                         <p className='hc-roadmap__new--themeText text-end' dangerouslySetInnerHTML={{ __html: val.stepTitle ?? val.title }} ></p>
@@ -207,33 +208,39 @@ function Roadmap(props) {
                             </div>
                             }
                             {i == 0 &&
-                                <div className='col-2'>
+                                <div className='col-2 colpad'>
                                     <div className='hc-roadmap__new-col--center'>
                                         <img src={require('../assets/images/threecube.svg').default} />
                                     </div>
                                 </div>
                             }
                             {i == 0 &&
-                                <div className='col-5 '>
+                                <div className='col-5 colpad'>
                                     <div className='hc-roadmap__new-col--right'>
                                         {val.stepImage ?
-                                            <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/projects/steps/${val.stepImage}`} /> :
-                                            <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/cmsimg/${val.img}`} />}
+                                            // <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/projects/steps/${val.stepImage}`} /> :
+                                            // <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/cmsimg/${val.img}`} />
+                                            <LottieAnimation url={`${config.IMG_URL}/projects/steps/${val.stepImage}`} className="img-fluid gif_aligner" /> :
+                                            <LottieAnimation url={`${config.IMG_URL}/cmsimg/${val.img}`} className="img-fluid gif_aligner" />
+                                        }
                                     </div>
                                 </div>
                             }
 
                             {/* row-2  */}
 
-                            {(i != 0) && (i % 2 != 0) && <div className='col-5 hc-roadmap__new-padding--top'>
-                                <div className='hc-roadmap__new-col--left d-flex justify-content-end'>
+                            {(i != 0) && (i % 2 != 0) && <div className='col-5 colpad hc-roadmap__new-padding--top'>
+                                <div className='hc-roadmap__new-col--left roadmap_flex'>
                                     {val.stepImage ?
-                                        <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/projects/steps/${val.stepImage}`} /> :
-                                        <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/cmsimg/${val.img}`} />}
+                                        // <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/projects/steps/${val.stepImage}`} /> :
+                                        // <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/cmsimg/${val.img}`} />
+                                        <LottieAnimation url={`${config.IMG_URL}/projects/steps/${val.stepImage}`} className="img-fluid gif_aligner" /> :
+                                        <LottieAnimation url={`${config.IMG_URL}/cmsimg/${val.img}`} className="img-fluid gif_aligner" />
+                                    }
                                 </div>
                             </div>}
 
-                            {(i != lastIndex) && (i != 0) && (i % 2 != 0) && <div className='col-2 hc-roadmap__new-padding--top'>
+                            {(i != lastIndex) && (i != 0) && (i % 2 != 0) && <div className='col-2 colpad hc-roadmap__new-padding--top'>
                                 <div className='hc-roadmap__new-col--center'>
                                     <img src={require('../assets/images/threecube.svg').default} />
                                 </div>
@@ -243,7 +250,7 @@ function Roadmap(props) {
                                 //  <div className='col-5 hc-roadmap__new-padding--top'>
                                 //     <img className='img-fluid roadmap_lastimg' src={require('../assets/images/roadmaplastleft.svg').default} />
                                 // </div>
-                                <div className='col-2 hc-roadmap__new-padding--top'>
+                                <div className='col-2 colpad hc-roadmap__new-padding--top'>
                                     <div className='hc-roadmap__new-col--center'>
                                         <img src={require('../assets/images/threecube.svg').default} />
                                     </div>
@@ -252,8 +259,8 @@ function Roadmap(props) {
 
 
                             {/* row -3  */}
-                            {(i != 0) && (i % 2 != 0) && <div className='col-5 hc-roadmap__new-padding--top'>
-                                <div className='hc-roadmap__new-col--left d-flex  gap-2 gap-sm-3 gap-md-4 gap-lg-5'>
+                            {(i != 0) && (i % 2 != 0) && <div className='col-5 colpad hc-roadmap__new-padding--top'>
+                                <div className='hc-roadmap__new-col--left d-flex'>
                                     <div className=''>
                                         <p className='hc-roadmap__new--themeText text-start' dangerouslySetInnerHTML={{ __html: val.stepTitle ?? val.title }} ></p>
                                         {val.stepDescription ? <p className='text-start hc-roadmap__new--whiteText'>{val.stepDescription}</p> : <p className='text-start hc-roadmap__new--whiteText' dangerouslySetInnerHTML={{ __html: val.content }} ></p>}
@@ -261,8 +268,8 @@ function Roadmap(props) {
                                     <h1 className='roadmap_strokeText'>{i + 1}</h1>
                                 </div>
                             </div>}
-                            {(i != 0) && (i % 2 === 0) && <div className='col-5 hc-roadmap__new-padding--top'>
-                                <div className='hc-roadmap__new-col--left d-flex justify-content-end  gap-2 gap-sm-3 gap-md-4 gap-lg-5'>
+                            {(i != 0) && (i % 2 === 0) && <div className='col-5 colpad hc-roadmap__new-padding--top'>
+                                <div className='hc-roadmap__new-col--left roadmap_flex'>
                                     <p className='roadmap_strokeText'>{i + 1}</p>
                                     <div className=''>
                                         <p className='hc-roadmap__new--themeText text-end' dangerouslySetInnerHTML={{ __html: val.stepTitle ?? val.title }} ></p>
@@ -271,7 +278,7 @@ function Roadmap(props) {
                                 </div>
                             </div>}
                             {(i != lastIndex) && (i != 0) && (i % 2 === 0) &&
-                                <div className='col-2 hc-roadmap__new-padding--top'>
+                                <div className='col-2 colpad hc-roadmap__new-padding--top'>
                                     <div className='hc-roadmap__new-col--center'>
                                         <img src={require('../assets/images/threecube.svg').default} />
                                     </div>
@@ -282,16 +289,19 @@ function Roadmap(props) {
                             {/* row- 4 */}
 
 
-                            {(lastIndex != 0) && (i == lastIndex) && (i % 2 === 0) && <div className='col-2 hc-roadmap__new-padding--top'>
+                            {(lastIndex != 0) && (i == lastIndex) && (i % 2 === 0) && <div className='col-2 colpad hc-roadmap__new-padding--top'>
                                 <div className='hc-roadmap__new-col--center'>
                                     <img src={require('../assets/images/threecube.svg').default} />
                                 </div>
                             </div>}
-                            {(i != 0) && (i % 2 === 0) && <div className='col-5 hc-roadmap__new-padding--top'>
+                            {(i != 0) && (i % 2 === 0) && <div className='col-5 colpad hc-roadmap__new-padding--top'>
                                 <div className='hc-roadmap__new-col--right'>
                                     {val.stepImage ?
-                                        <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/projects/steps/${val.stepImage}`} /> :
-                                        <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/cmsimg/${val.img}`} />}
+                                        // <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/projects/steps/${val.stepImage}`} /> :
+                                        // <img className='img-fluid gif_aligner' src={`${config.IMG_URL}/cmsimg/${val.img}`} />
+                                        <LottieAnimation url={`${config.IMG_URL}/projects/steps/${val.stepImage}`} className="img-fluid gif_aligner" /> :
+                                        <LottieAnimation url={`${config.IMG_URL}/cmsimg/${val.img}`} className="img-fluid gif_aligner" />
+                                    }
                                 </div>
                             </div>}
                         </>

@@ -15,10 +15,11 @@
 .inner-container__width {
     /* width: 83%; */
     /* width: calc(var(--container-width-inner) + ((100% - var(--container-width-main))/2)*2); */
-    width: 81%;
+    width: 76%;
     margin-left: auto;
     /* margin-right: 4%; */
-    margin-right: calc((100% - var(--container-width-main))/2)
+    margin-right: calc((100% - var(--container-width-main))/2);
+    /* background: red; */
 }
 
 .mp-grid {
@@ -57,9 +58,9 @@
 }
 
 .nft-card {
-    min-width: 18.6vw;
-    width: 18.6vw;
-    max-width: 18.6vw;
+    min-width: 17.5vw;
+    width: 17.5vw;
+    max-width: 17.5vw;
     border-radius: 0.4vw;
     overflow: hidden;
 }
@@ -70,12 +71,12 @@
 }
 
 .nft-card__a {
-    min-width: 18.6vw;
-    width: 18.6vw;
-    max-width: 18.6vw;
-    min-height: 30vh;
-    height: 30vh;
-    max-height: 30vh;
+    min-width: 17.5vw;
+    width: 17.5vw;
+    max-width: 17.5vw;
+    min-height: 12vw;
+    height: 12vw;
+    max-height: 12vw;
 }
 
 .nft-card__a img {
@@ -90,18 +91,51 @@
 
 .nft-card__content {
     background: var(--gray_200);
-    padding: 0.8vw;
+    padding: 0 0.8vw 0.8vw 0.8vw;
+    position: relative;
+    border-top-left-radius: 0.3vw;
+    border-top-right-radius: 0.3vw;
+    z-index: 2;
 }
+
+.nft-card__content:after {
+    background: var(--gradinet_right);
+    border-top-left-radius: 0.6vh;
+    border-top-right-radius: 0.6vh;
+    content: "";
+    height: 1vh;
+    left: 0;
+    position: absolute;
+    top: -1vh;
+    width: 100%;
+    z-index: 1;
+}
+
+.nft-card__content:before {
+    background: var(--bg-color-1);
+    border-top-left-radius: 0.5vh;
+    border-top-right-radius: 0.5vh;
+    content: "";
+    height: 1vh;
+    left: 0;
+    position: absolute;
+    top: -0.5vh;
+    width: 100%;
+    z-index: 2;
+}
+
+
 
 .nft-card__content-title {
     color: var(--white);
     font-weight: 600;
     font-size: 2.7vh;
-    width: 30px;
     white-space: nowrap;
-    width: 17vw;
+    width: 16vw;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 1.35vw;
+    line-height: 1.8vw;
 }
 
 .nft-card__values-wrapper,
@@ -111,7 +145,7 @@
 
 .nft-card__content-values {
     font-weight: 500;
-    font-size: 1.8vh;
+    font-size: 0.8vw;
 }
 
 .nft-card__content-values span {
@@ -134,12 +168,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 4.7vh;
+    height: 4.1vh;
+}
+
+.nft-card__buttons--countdown:hover {
+    border: 0.3vh solid var(--blue_200);
+    background: var(--blue_200);
+    color: var(--black);
+
 }
 
 .nft-card__buttons--countdown span {
     font-family: var(--kanit_font);
-    font-size: 2.1vh;
+    font-size: 2vh;
 }
 
 .nft-card__buttons--gradient {
@@ -153,18 +194,36 @@
     font-size: 1.6vh;
     font-weight: 600;
     outline: none;
-    height: 4.7vh;
+    height: 4.1vh;
+    display: flex;
+
+}
+
+.nft-card__buttons--gradient:hover {
+
+    background-color: var(--gradinet_left);
+    background-image: linear-gradient(to right, var(--gradinet_right), var(--gradinet_left));
+
 
 }
 
 .nft-card__buttons--gradient p {
-    padding: 1vh 2vh;
-    font-size: 1.8vh;
+    padding: 1vh 1vh;
+    /* font-size: 1.4vh; */
+    font-size: 0.8vw;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
 }
 
 
 .nft-card__buttons-gradientCart {
     padding: 1vh 2vh;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nft-card__buttons-gradientCart {
@@ -175,10 +234,2857 @@
     width: 2vh;
 }
 
+.nft-card__noData {
+    font-size: 2vh;
+    text-align: center;
+}
+
+.mp-margin {
+    margin-top: 6vh;
+    margin-bottom: 6vh;
+}
+
+.button-loadMore {
+    border: 0.3vh solid var(--white);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 2.1vh;
+    background: transparent;
+    outline: none;
+    border-radius: 0.3vh;
+    padding: 0.8vh 2vh;
+    border-radius: 0.6vh;
+    transition: all 0.3s;
+}
+
+.button-loadMore:hover {
+    background: var(--white);
+    color: var(--black);
+}
+
+.anim_div.is-banner__lottie div[aria-label="animation"] {
+    min-width: 50vh !important;
+    width: 50vh !important;
+    max-width: 50vh !important;
+    min-height: 50vh !important;
+    height: 50vh !important;
+    max-height: 50vh !important;
+    margin-top: -11vh !important;
+}
+
+
 /* end of mint projects */
+
+
+/* start of mint id */
+
+.hc-mint__banner {
+    min-height: 100vh;
+    height: 100vh;
+    margin-top: 8vh;
+    position: relative;
+}
+
+.hc-mint__banner-image {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.hc-mint__banner:after {
+    background: url('../images/linear-bg.png');
+    background-size: 100% 100%;
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 40vh;
+}
+
+.hc-mint__banner-content {
+    position: absolute;
+    bottom: 3vh;
+    z-index: 2;
+}
+
+.hc-mint__bannerInner-col--left .cus-back-btn button {
+    color: var(--black);
+    font-family: var(--montserrat-font);
+}
+
+.cus-back-btn button {
+    align-items: center;
+    background: #0000 !important;
+    border: none;
+    box-shadow: none !important;
+    display: flex;
+    font-weight: 500;
+    outline: none;
+    font-size: 2.3vh;
+    gap: 1vh;
+}
+
+.hc-mint__banner--wrapper {
+    overflow: hidden;
+    border-radius: 0.5vw;
+    /* height: 180px;
+    max-height: 180px;
+    max-width: 280px;
+    min-height: 180px;
+    min-width: 280px;
+    width: 280px; */
+    min-width: 18vw;
+    width: 18vw;
+    max-width: 18vw;
+    min-height: 12vw;
+    height: 12vw;
+    max-height: 12vw;
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
+}
+
+.hc-mint__banner--wrapper img {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.hc-mint__banner--title {
+    color: var(--white);
+    font-weight: 600;
+    font-family: var(--montserrat-font);
+
+    font-size: 3vh;
+
+}
+
+.hc-mint__banner--desc {
+    color: var(--white);
+    font-family: var(--montserrat-font);
+    font-weight: 500;
+    line-height: 4.2vh;
+    font-size: 1.9vh;
+    margin-top: 2vh;
+}
+
+.hc-mint__card-initialSales {
+    padding: 1vw;
+    border-radius: 0.5vw;
+    border: 0.18vw solid var(--gradinet_right);
+    width: 29vw;
+    background: var(--bg-color-3);
+
+}
+
+.hc-mint__card-initialSales .title {
+    color: var(--white);
+    font-family: var(--montserrat-font);
+    font-weight: 600;
+    font-size: 3.2vh;
+}
+
+.hc-mint__initialSales--border {
+    border: 0.18vw solid var(--gradinet_right);
+    width: 100%;
+    height: 5vh;
+    padding: 0.2vw;
+    border-radius: 0.3vw;
+}
+
+.hc-mint__card-initialSales {
+    color: var(--white);
+}
+
+.hc-mint__card-initialSales p {
+    font-weight: 600;
+    margin-bottom: 0px;
+    font-size: 1.05vw;
+}
+
+.hc-mint__initialSales--themeText {
+    color: var(--gradinet_right);
+    margin-top: 2vh;
+    margin-bottom: 1.8vh !important;
+}
+
+.hc-mint__initialSales--progress {
+    background: var(--gradinet_right);
+    height: 100%;
+    border-radius: 0.3vw;
+    padding-left: 0.3vw;
+    padding-right: 0.3vw;
+    display: flex;
+    align-items: center;
+    font-size: 2.2vh;
+    font-family: var(--kanit_font);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hc-mint__initialSales--border input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--gradinet_right);
+    height: 100%;
+    width: 100%;
+    font-size: 2.4vh;
+    font-family: var(--kanit_font);
+    font-weight: 500;
+}
+
+.hc-mint__button-mint:hover {
+    opacity: 0.8;
+}
+
+.hc-mint__homeWrapper {
+    background-image: unset;
+    background-size: unset;
+    background-repeat: unset;
+    background: var(--black);
+}
+
+.hc-mint__content-title {
+    font-family: var(--montserrat-font);
+    font-weight: 700;
+    text-align: center;
+}
+
+.hc-mint__content-title strong {
+    font-family: var(--montserrat-font);
+    font-weight: 700;
+}
+
+.hc-mint___col--right__content {
+    margin-top: 2vh;
+}
+
+.hc-mint__col-paddingLeft {
+    padding-right: 0.5vw !important;
+}
+
+.hc-mint__col-paddingRight {
+    padding-left: 0.5vw !important;
+}
+
+.hc-mint__col-right--nowrap {
+    white-space: nowrap;
+}
+
+.hc-mint__button-mint {
+    margin-top: 2vh;
+    background-image: url(../images/mintBg.png);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    border-radius: 0.3vw;
+    color: var(--white);
+    font-family: var(--kanit_font);
+    font-size: 1.1vw;
+    font-weight: var(--weight_five);
+    outline: none;
+    padding: 1vh 2vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5vw;
+}
+
+.hc-mint__content-title {
+    font-size: 2vw;
+}
+
+.mint-bottom__content {
+    margin-top: 10vh;
+}
+
+.hc-mint__swiper-wrap {
+    margin-top: 5vh;
+    padding: 0px;
+}
+
+.card-gallery {}
+
+.card-gallery__image--wrapper {
+    min-width: 19.7vw;
+    width: 19.7vw;
+    max-width: 19.7vw;
+    min-height: 25vh;
+    height: 25vh;
+    max-height: 25vh;
+    border-radius: 0.4vw;
+    overflow: hidden;
+}
+
+.card-gallery__image--wrapper a {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+}
+
+.card-gallery__image--wrapper a img {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.card-gallery__title {
+    margin-top: 3vh;
+}
+
+.card-gallery__title p {
+    font-size: 2.4vh;
+    font-weight: 700;
+}
+
+.section-estimateProperty {
+    margin-top: 6vh;
+}
+
+.hc-mint__span-gradient {
+    -webkit-text-fill-color: #0000;
+    background: linear-gradient(78.45deg, #0053b5 10.54%, #16ebc3 90.51%);
+    -webkit-background-clip: text;
+}
+
+.mint-margin__top {
+    margin-top: 10vh;
+}
+
+.hc-mint__content-subtitle {
+    font-family: var(--montserrat-font);
+    font-weight: 700;
+    font-size: 4vh;
+}
+
+.hc-mint__content-subtitle strong {
+    font-family: var(--poppins_font);
+    font-weight: 300;
+    color: var(--blue_200);
+}
+
+.section-roadMap {
+    margin-top: 12vh;
+    margin-bottom: 12vh;
+}
+
+.mint-property__imageWrapper {
+    min-width: 15vw;
+    width: 15vw;
+    max-width: 15vw;
+    min-height: 15vw;
+    height: 15vw;
+    max-height: 15vw;
+    border-radius: 0.3vw;
+    overflow: hidden;
+}
+
+.mint-property__imageWrapper img {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+
+.hc-mint__card-timerWraper {
+    border: 0.13vw solid var(--gradinet_right);
+    color: var(--gradinet_right);
+    display: flex;
+    font-family: var(--kanit_font);
+    font-weight: 600;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: -moz-fit-content;
+    width: fit-content;
+    font-size: 4.3vh;
+    min-width: 18.3vw;
+    padding: 1vh 2vw;
+    margin-top: 3vh;
+    border-radius: 0.2vw;
+    letter-spacing: 0.1vw;
+}
+
+/* end of mint id */
+
+/* start of project */
+
+
+.project_bottom_section {
+    position: absolute;
+    top: 25vh;
+    z-index: 5;
+}
+
+.projects_hr {
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+}
+
+.projects__details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2.5vw;
+    position: relative;
+    z-index: 2;
+}
+
+.projects__details-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.projects__detatils-row--label {
+    font-weight: 500;
+    font-size: 1.8vh;
+}
+
+.projects__detatils-row--value {
+    color: var(--blue_200);
+    font-weight: 500;
+    font-size: 1.8vh;
+}
+
+.projects__list {
+    margin-top: 8vh;
+}
+
+.project__list--searchContainer {
+    align-items: center;
+    background: var(--bg-color-2);
+    border: 1px solid var(--border-color-1);
+    border-radius: 0.6vh;
+    display: flex;
+    justify-content: space-between;
+    max-width: 23vw;
+    padding: 0.6vh 1.4vh;
+    position: relative;
+    gap: 1vw;
+    margin-top: 3vh;
+}
+
+.project__list--search {
+    flex: 1;
+}
+
+.project__list--search input {
+    background-color: initial;
+    border: none;
+    color: var(--white);
+    outline: none;
+    padding: 0.5vh;
+    height: unset;
+    font-size: 1.75vh;
+    width: 100%;
+    font-weight: 550;
+    font-family: var(--montserrat-font);
+}
+
+.project__list--search input::placeholder {
+    color: var(--white);
+    font-weight: 550;
+}
+
+.projects__list--searchCloser {
+    color: var(--white);
+    font-size: 2vh;
+}
+
+.project__list-cards {
+    margin-top: 6vh;
+}
+
+.projectcard_foot-btn--gradient {
+    background-color: var(--gradinet_right);
+    background-image: linear-gradient(to right, var(--gradinet_left), var(--gradinet_right));
+    border: none;
+    border-radius: 0.6vh;
+    color: var(--white);
+    font-family: var(--montserrat-font);
+    font-size: 1.6vh;
+    font-weight: 600;
+    outline: none;
+    padding: 0.8vh;
+    display: flex;
+}
+
+.projectcard_foot-btn--gradient:hover {
+    background-color: var(--gradinet_left);
+    background-image: linear-gradient(to right, var(--gradinet_right), var(--gradinet_left));
+
+}
+
+.hc-card__nft .nftcard_detailwrapper.project-card__details {
+    min-height: 6.7vh;
+}
+
+.project-card__title.nft_name.hc-nft__card-title {
+    margin-bottom: 0px !important;
+}
+
+.project-card__title {
+    width: 10vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.project_bottom_section-empty {
+    min-height: 22vh;
+}
+
+.banner_section.project_banner_section {
+    min-height: 110vh;
+}
+
+.project_section.banner_section {
+    padding-top: 23vh;
+}
+
+
+/* end of project */
+
+/* start of project info */
+
+.rewardscard_swiper {
+    margin-top: 3vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.2vw;
+}
+
+.rewards_card {
+    border: 0.1vw solid var(--border-color-1);
+    background: var(--bg-color-5);
+    border-radius: 0.3vw;
+    padding: 1.4vw 1.4vw 0.4vw 1.4vw;
+}
+
+.rewards_card-title {
+    color: var(--blue_200);
+    font-family: var(--poppins_font);
+    font-weight: 300;
+    font-size: 3vh;
+}
+
+.rc_dateText {
+    font-weight: 500;
+    color: var(--blue_200);
+    margin-top: 1vh;
+    font-size: 1.5vh;
+}
+
+.mp_readmoreBtn {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--blue_200);
+    font-weight: 500;
+    font-size: 1.9vh;
+}
+
+.rc_readmore_aligner {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.marketplace_margin {
+    margin-top: 3vh;
+    margin-bottom: 20vh;
+}
+
+
+
+.hc-mint__banner--desc.projectInfo_banner--desc {
+    margin-bottom: 0vh !important;
+}
+
+.mint-bottom__content {
+    margin-top: 8vh;
+}
+
+.news-update__swipper-wrapper {
+    margin-top: 4vh;
+}
+
+.gallery-card__swiper .card-gallery {
+    min-width: 19vw;
+    width: 19vw;
+    max-width: 19vw;
+    min-height: 30vh;
+    height: 30vh;
+    max-height: 30vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+
+}
+
+.gallery-card__swiper .swiper-wrapper {
+    /* gap: 4vw !important; */
+    padding-top: 0px !important;
+}
+
+.gallery-card__swiper .swiper-slide {
+    margin-right: 0vw !important;
+}
+
+
+.gallery-card__swiper .card-gallery__image--wrapper {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 11.5vw;
+    height: 11.5vw;
+    max-height: 11.5vw;
+    border-radius: 0.5vw;
+    overflow: hidden;
+}
+
+.gallery-card__swiper .card-gallery__title {
+    margin-top: 2vh;
+}
+
+.gallery-card__swiper.gallery-card__swiper .card-gallery__title p {
+    font-size: 2.5vh;
+}
+
+.gallery-card__swiperWrapper .hc-swiper__arrow--right svg,
+.gallery-card__swiperWrapper .hc-swiper__arrow--left svg {
+    font-size: 5vh;
+}
+
+.gallery-card__swiperWrapper .hc-swiper__arrow--right {
+    right: -4%;
+}
+
+.gallery-card__swiperWrapper .hc-swiper__arrow--left {
+    left: -4%;
+}
+
+.new-update-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3vw;
+}
+
+.box {
+    height: 300px;
+    background: red;
+}
+
+.update-white {
+    width: 21.9vw;
+    height: 100%;
+    background: white;
+}
+
+/* .news-update__swipper-wrapper {
+    background: blue;
+} */
+
+.gallery-card__swiper .rewards_card {
+    /* min-width: 87vw;
+    width: 87vw;
+    max-width: 87vw; */
+    /* height: 200px;
+    background: white; */
+}
+
+/* .swiper-button-prev1-news {
+    top: 50%;
+} */
+
+/* end of project info */
+
+/* start of staking */
+.banner_section.banner_section_content {
+    position: relative;
+}
+
+.banner_section.banner_section_content::after {
+    height: 100%;
+    width: 100%;
+    background: var(--black);
+    position: absolute;
+    top: 100vh;
+}
+
+.banner_section.banner_section_content::before {
+    content: "";
+    background: url("../images/bottomlayer.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    width: 100%;
+    height: 20vh;
+    top: 80vh;
+    left: 0;
+    z-index: 1;
+}
+
+.banner_section.banner_section_content .inner-container__width {
+    position: relative;
+    z-index: 2;
+}
+
+
+
+.banner_section.banner_section_content.claim-section {
+    padding-top: 19vh;
+}
+
+.claim-value__wrapper {
+    gap: 2.5vw;
+    margin-top: 3vh;
+}
+
+.value__wrapper-blue {
+    border: 0.27vh solid var(--blue_200);
+    width: fit-content;
+    padding: 0.8vh 2.8vw;
+    border-radius: 0.2vw;
+    display: flex;
+    align-items: center;
+    gap: 0.3vw;
+}
+
+.value__wrapper-blue .title {
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 2.1vh;
+}
+
+.value__wrapper-blue .value {
+    white-space: nowrap;
+    color: var(--blue_200);
+    font-weight: 600;
+    font-size: 2.1vh;
+}
+
+.hh-stake__subtitle {
+    margin-top: 4vh;
+    font-weight: 600;
+    font-size: 2.7vh;
+}
+
+.hh-stake__countdown {
+    text-align: center;
+    color: var(--blue_200);
+    margin-top: 0.5vh;
+}
+
+.hh-stake__countdown span {
+    font-family: var(--kanit_font);
+    font-weight: 500;
+    font-size: 5vh;
+    letter-spacing: 0.05vw;
+}
+
+.stake-tab__wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--bg-color-2);
+    border: 0.2vh solid var(--border-color-1);
+    width: fit-content;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2vh;
+    padding: 0.7vw 0.8vw;
+    border-radius: 0.2vw;
+}
+
+.stacking_tab {
+    display: flex;
+    align-items: center;
+    gap: 0.4vw;
+    padding: 0.5vw 1.3vw;
+    font-weight: 600;
+    font-size: 2.1vh;
+    border-radius: 0.2vw;
+    cursor: pointer;
+
+}
+
+.stacking_tab img {
+    width: 1.2vw;
+}
+
+.stacking_tab.active {
+    background: var(--blue_200);
+    color: var(--black);
+}
+
+.stacking_tab.active img {
+    filter: invert(1);
+}
+
+.stake-actions {
+    margin-top: 4vh;
+    margin-bottom: 5vh;
+    gap: 2vw;
+}
+
+.stake-actions .project__list--searchContainer {
+    min-width: 40vw;
+    width: 40vw;
+    max-width: 40vw;
+
+}
+
+.stake--searchContainer {
+    align-items: center;
+    background: var(--bg-color-2);
+    border: 0.2vh solid var(--border-color-1);
+    border-radius: 0.6vh;
+    display: flex;
+    justify-content: space-between;
+    min-width: 22vw;
+    width: 22vw;
+    max-width: 22vw;
+    padding: 0.6vh 1.4vh;
+    position: relative;
+    gap: 1vw;
+    min-height: 5.5vh;
+    height: 5.5vh;
+    max-height: 5.5vh;
+    font-weight: 500;
+}
+
+
+.stake--searchContainer::placeholder {
+    font-weight: 500;
+}
+
+
+/* start of react-select -2 */
+
+
+
+
+
+.react-select-2__indicator-separator {
+    display: none;
+}
+
+.react-select-2__control {
+    min-width: 18vw !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0.6vh 1.4vh !important;
+    background: var(--bg-color-2) !important;
+    border: 0.2vh solid var(--border-color-1) !important;
+    min-height: 5.5vh !important;
+    height: 5.5vh !important;
+    max-height: 5.5vh !important;
+    border-radius: 0.6vh !important;
+}
+
+.react-select-2__value-container {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.react-select-2__single-value,
+.react-select-2__placeholder {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 1.75vh !important;
+    font-family: var(--montserrat-font) !important;
+    font-weight: 500 !important;
+    color: var(--white) !important;
+}
+
+.react-select-2__input-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 1.75vh !important;
+}
+
+.react-select-2__input-container input {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 1.75vh !important;
+    font-family: var(--montserrat-font) !important;
+    font-weight: 500 !important;
+    color: var(--white) !important;
+}
+
+.react-select-2__indicator {
+    padding: 0 !important;
+}
+
+.react-select-2__indicator svg {
+    height: 3vh !important;
+    width: 3vh !important;
+}
+
+.react-select-2__menu {
+    background: var(--bg-color-2) !important;
+    border: 0.2vh solid var(--border-color-1) !important;
+}
+
+.react-select-2__option {
+    cursor: pointer !important;
+    background: transparent !important;
+    font-size: 1.9vh !important;
+    font-weight: 500 !important;
+    padding: 1.2vh 1.4vh !important;
+}
+
+.react-select-2__option:hover {
+    background: var(--blue_200) !important;
+    color: var(--black) !important;
+}
+
+.react-select-2__option:active {
+    background: var(--blue_300) !important;
+    color: var(--white) !important;
+}
+
+.react-select-2__option--is-selected {
+    background: var(--blue_200) !important;
+    color: var(--black) !important;
+}
+
+/* end of react-select -2  */
+
+/* start of react-select - 3 */
+
+.react-select-3__indicator-separator {
+    display: none;
+}
+
+.react-select-3__control {
+    min-width: 18vw !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0.6vh 1.4vh !important;
+    background: transparent !important;
+    border: 0.27vh solid var(--blue_200) !important;
+    min-height: 5.5vh !important;
+    height: 5.5vh !important;
+    max-height: 5.5vh !important;
+    border-radius: 0.6vh !important;
+}
+
+.react-select-3__value-container {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.react-select-3__single-value {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 2vh !important;
+    font-family: var(--montserrat-font) !important;
+    font-weight: 500 !important;
+    color: var(--white) !important;
+}
+
+.react-select-3__input-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 2vh !important;
+}
+
+.react-select-3__input-container input {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 2vh !important;
+    font-family: var(--montserrat-font) !important;
+    font-weight: 500 !important;
+    color: var(--white) !important;
+}
+
+.react-select-3__indicator {
+    padding: 0 !important;
+}
+
+.react-select-3__indicator svg {
+    height: 3vh !important;
+    width: 3vh !important;
+}
+
+.react-select-3__menu {
+    background: var(--black) !important;
+    border: 0.2vh solid var(--blue_200) !important;
+}
+
+.react-select-3__option {
+    cursor: pointer !important;
+    background: transparent !important;
+    font-size: 1.9vh !important;
+    font-weight: 500 !important;
+    padding: 1.2vh 1.4vh !important;
+}
+
+.react-select-3__option:hover {
+    background: var(--blue_200) !important;
+    color: var(--black) !important;
+}
+
+.react-select-3__option:active {
+    background: var(--blue_300) !important;
+    color: var(--white) !important;
+}
+
+.react-select-3__option--is-selected {
+    background: var(--blue_200) !important;
+    color: var(--black) !important;
+}
+
+.react-select-3__placeholder {
+    font-size: 2vh !important;
+    font-weight: 500 !important;
+    color: var(--white) !important;
+}
+
+/* end of react-select - 3 */
+
+
+.hh-nft__text-sm {
+    font-weight: 500;
+    font-size: 0.8vw;
+    margin-bottom: 1vh;
+}
+
+.stake-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 1.6vw;
+    row-gap: 8vh;
+    margin-bottom: 8vh;
+}
+
+.box1 {
+    height: 300px;
+    background: red;
+}
+
+.white {
+    width: 17.5vw;
+    background: white;
+    height: 100%;
+}
+
+.stake-grid .nft_card.hc-card__nft-height {
+    min-width: 17.5vw;
+    width: 17.5vw;
+    max-width: 17.5vw;
+}
+
+.stake-grid .hc-card__nft-height.nft_card .nftImg {
+    min-height: 35vh;
+    height: 35vh;
+    max-height: 35vh;
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.stake-grid .bodygradientBtn {
+    font-size: 1.75vh;
+    padding: 0.7vh 3vh;
+
+}
+
+.stake-grid .nftcard_btnviolet {
+    background: var(--text-color-4);
+    font-family: var(--montserrat-font);
+    border: none;
+    border-radius: 0.6vh;
+    color: var(--white);
+    font-weight: 700;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    font-size: 1.75vh;
+    padding: 0.7vh 3vh;
+}
+
+.stake-grid .nftcard_btnviolet:hover {
+    opacity: 0.8;
+}
+
+.stake-grid .nftcard_btnblue,
+.stake-grid .nftcard_btnviolet {
+    color: var(--white);
+}
+
+.stake-rewards__selects {
+    margin-top: 4vh;
+}
+
+.hh-col__paddings {
+    padding-left: 2vw !important;
+    padding-right: 2vw !important;
+    margin-bottom: 3vh !important;
+
+}
+
+.stack-button__wrap {
+    margin-top: 5vh;
+}
+
+.stack__button-submit {
+    border: none;
+    outline: none;
+    background-image: linear-gradient(to right, var(--gradinet_left), var(--gradinet_right));
+    padding: 0.7vh 1.5vw;
+    border-radius: 0.5vh;
+    font-size: 1.6vh;
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.stack__button-submit:hover {
+    background-image: linear-gradient(to right, var(--gradinet_right), var(--gradinet_left));
+}
+
+.margin__tb-5vh {
+    margin-top: 4vh;
+    margin-bottom: 5vh;
+}
+
+/* end of staking */
+
+/* start of collection info */
+
+.collection-info__header {
+    gap: 1.4vw;
+    border-bottom: 0.2vh solid var(--border-color-1);
+    width: 75%;
+}
+
+.collection-info__profile-image {
+    min-width: 18vw;
+    width: 18vw;
+    max-width: 18vw;
+    min-height: 13vw;
+    height: 13vw;
+    max-height: 13vw;
+    border-radius: 0.3vw;
+    overflow: hidden;
+}
+
+.collection-info__profile-image img {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.collection-info__profile-name {
+    font-weight: 700;
+    font-size: 2.8vh;
+    margin-top: 3vh;
+    margin-bottom: 3vh !important;
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2vw;
+}
+
+/* .collection__image-card {
+    width: 100%;
+    height: 40px;
+    background: red;
+} */
+
+.collection__image-wrapper {
+    min-width: 17.5vw;
+    width: 17.5vw;
+    max-width: 17.5vw;
+    min-height: 23vh;
+    height: 23vh;
+    max-height: 23vh;
+    border-radius: 0.5vw;
+    overflow: hidden;
+}
+
+.collection-width-fit {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+}
+
+.collection__image-wrapper--name {
+    font-weight: 700;
+    font-size: 2.5vh;
+    margin-top: 3vh;
+}
+
+.collection-info__grid-title {
+    font-weight: 600;
+    font-size: 3vh;
+    margin-bottom: 3vh !important;
+}
+
+/* end of collection info */
+
+/* start of collection info modal */
+
+.hc-collection__modal--body {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+}
+
+.hc-collection__modal-imageWrapper {
+
+    min-height: 50vh;
+    height: 50vh;
+    max-height: 50vh;
+    border-radius: 0.5vw;
+    overflow: hidden;
+}
+
+.hc-collection__imageFit {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+/* end of collection info modal */
+
 
 /* media */
 
-@media screen and (max-width:991px) {}
+@media screen and (max-width:1199px) {
+    .anim_div.is-banner__lottie div[aria-label="animation"] {
+        min-width: 40vh !important;
+        width: 40vh !important;
+        max-width: 40vh !important;
+        min-height: 40vh !important;
+        height: 40vh !important;
+        max-height: 40vh !important;
+        margin-top: 0vh !important;
+    }
 
-@media screen and (max-width:575px) {}
+    .mp_inner--bottom {
+        margin-top: -20vh;
+    }
+
+    .mp_bottom--title {
+        padding-top: 3vh;
+        padding-bottom: 3vh;
+    }
+
+    .inner-container__width {
+        /* width: 83%; */
+        /* width: calc(var(--container-width-inner) + ((100% - var(--container-width-main))/2)*2); */
+        width: 90%;
+        margin-left: auto;
+        /* margin-right: 4%; */
+        margin-right: auto;
+    }
+
+    .mp-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2vw;
+    }
+
+    .mp-grid.mp-grid_list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2vw;
+    }
+
+    .mp-grid .red {
+        height: 300px;
+    }
+
+    .mp-grid .gree {
+        height: 300px;
+    }
+
+    .mp-grid .yello {
+        height: 300px;
+    }
+
+    .mp-grid .blue {
+        height: 300px;
+    }
+
+    .red_inner {
+        min-width: 18.6vw;
+        width: 18.6vw;
+        max-width: 18.6vw;
+        height: 30vh;
+    }
+
+    .nft-card {
+        min-width: 43.6vw;
+        width: 43.6vw;
+        max-width: 43.6vw;
+        border-radius: 0.7vw;
+    }
+
+    .nft-card:hover {
+        transform: translateY(-2vh);
+        transition: all .5s ease;
+    }
+
+    .nft-card__a {
+        min-width: 43.6vw;
+        width: 43.6vw;
+        max-width: 43.6vw;
+        min-height: 19vh;
+        height: 19vh;
+        max-height: 19vh;
+    }
+
+
+    .nft-card__content {
+        padding: 0 1.8vw 1.8vw 1.8vw;
+        border-top-left-radius: 0.3vw;
+        border-top-right-radius: 0.3vw;
+    }
+
+    .nft-card__content:after {
+        border-top-left-radius: 1vw;
+        border-top-right-radius: 1vw;
+        height: 0.6vh;
+        left: 0;
+        top: -0.8vh;
+    }
+
+    .nft-card__content-title {
+        font-size: 3vw;
+        line-height: 4.5vw;
+        width: 39vw;
+    }
+
+    .nft-card__values-wrapper,
+    .nft-card__content-currency {
+        margin-top: 0.6vh;
+    }
+
+    .nft-card__content-values {
+        font-size: 1.3vh;
+    }
+
+
+
+    .nft-card__content-buttons {
+        margin-top: 1.8vh;
+    }
+
+    .nft-card__buttons--countdown {
+        border: 0.2vh solid var(--blue_200);
+        border-radius: .7vw;
+        padding: 0.7vh;
+        height: 4vh;
+    }
+
+    .nft-card__buttons--countdown span {
+        font-size: 1.6vh;
+    }
+
+    .nft-card__buttons--gradient {
+        border-radius: 0.3vh;
+        font-size: 1.2vh;
+        height: 4vh;
+
+    }
+
+    .nft-card__buttons--gradient:hover {
+
+        background-color: var(--gradinet_left);
+        background-image: linear-gradient(to right, var(--gradinet_right), var(--gradinet_left));
+
+
+    }
+
+    .nft-card__buttons--gradient p {
+        padding: 0.5vh;
+        font-size: 1.5vh;
+        display: flex;
+        justify-content: center;
+        flex: 1;
+        text-align: center;
+    }
+
+
+    .nft-card__buttons-gradientCart {
+        padding: 0.5vh 1.5vh;
+    }
+
+    .nft-card__buttons-gradientCart {
+        border-left: 1px solid var(--white);
+    }
+
+    .nft-card__buttons-gradientCart img {
+        width: 1.4vh;
+    }
+
+    .nft-card__noData {
+        font-size: 2vh;
+        text-align: center;
+    }
+
+    .mp-margin {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+    }
+
+    .button-loadMore {
+        border: 0.22vh solid var(--white);
+        font-size: 1.3vh;
+        padding: 0.8vh 2vh;
+        border-radius: 0.4vh;
+    }
+
+    /* start of mint id */
+
+    .hc-min__banner-mobile {
+        min-height: 38vh;
+        height: 38vh;
+        max-height: 38vh;
+        margin-top: 9vh;
+        position: relative;
+
+    }
+
+    .hc-mint__bannerInner-col--right {
+        margin-top: 4vh;
+    }
+
+    .hc-mint__banner {
+        min-height: 30vh;
+        height: 30vh;
+        max-height: 30vh;
+    }
+
+    .hc-mint__banner--wrapper {
+        overflow: hidden;
+        border-radius: 2vw;
+        min-width: 55vw;
+        width: 55vw;
+        max-width: 55vw;
+        min-height: 40vw;
+        height: 40vw;
+        max-height: 40vw;
+        margin-top: 2.5vh;
+        margin-bottom: 2.5vh;
+    }
+
+    .hc-mint__banner-content {
+        bottom: unset;
+        position: relative;
+    }
+
+    .hc-mint__banner-content::after {
+        content: "";
+        background: url('../images/bottomlayer.png') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        width: 100%;
+        height: 20vh;
+        bottom: -0.2vh;
+        left: 0;
+        z-index: 1;
+        opacity: 0.9;
+    }
+
+    .hc-mint__banner {
+        margin-top: 0vh;
+        min-height: unset;
+        height: unset;
+        max-height: unset;
+    }
+
+    .hc-mint__banner:after {
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: linear-gradient(103.58deg, #240533 39.31%, #004448 95.31%);
+    }
+
+    .hc-min__banner-mobile::after {
+        content: "";
+        background: url('../images/bottomlayer.png') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        width: 100%;
+        height: 10vh;
+        bottom: -0.2vh;
+        left: 0;
+        z-index: 1;
+        opacity: 0.9;
+    }
+
+    .hc-min__banner-mobile::before {
+        content: "";
+        background: url('../images/bottomlayer.png') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        width: 100%;
+        height: 10vh;
+        bottom: -10.2vh;
+        left: 0;
+        z-index: 1;
+        transform: rotate(180deg);
+        opacity: 0.7;
+    }
+
+    .hc-mint__bannerInner-col--left {
+        margin-top: -14vh;
+    }
+
+    .hc-mint__card-initialSales {
+        padding: 3vw;
+        border-radius: 2vw;
+        border: 0.25vw solid var(--gradinet_right);
+        width: 90vw;
+        margin-bottom: 1vh;
+    }
+
+    .hc-mint__card-initialSales .title {
+        font-size: 3vh;
+    }
+
+    .hc-mint__card-initialSales p {
+        font-size: 3.3vw;
+    }
+
+    .hc-mint__col-paddingLeft {
+        padding-right: 1vw !important;
+    }
+
+    .hc-mint__col-paddingRight {
+        padding-left: 1vw !important;
+    }
+
+    .hc-mint__initialSales--border {
+        border: 0.3vw solid var(--gradinet_right);
+        height: 5vh;
+        padding: 0.5vw;
+        border-radius: 1vw;
+    }
+
+    .hc-mint__initialSales--progress {
+
+        border-radius: 1vw;
+        padding-left: 1vw;
+        padding-right: 1vw;
+        display: flex;
+        align-items: center;
+        font-size: 3vw;
+    }
+
+    .hc-mint__button-mint {
+        font-size: 1.8vh;
+        border-radius: 1vw;
+    }
+
+    .hc-mint__button-mint .header_wallet {
+        height: 3vh;
+        width: 3vh;
+    }
+
+    .hc-mint__banner--desc {
+        z-index: 2;
+        margin-bottom: 5vh !important;
+    }
+
+    .hc-mint__button-mint {
+        font-size: 2.1vh;
+        border-radius: 1vw;
+        gap: 0.8vw;
+    }
+
+
+
+    .hc-mint__content-title {
+        font-size: 4.2vw;
+        line-height: 6.5vw;
+        display: flex;
+        flex-direction: column;
+        white-space: nowrap;
+    }
+
+    .hc-mint__content-title span {
+        font-size: 5.2vh;
+    }
+
+    .mint-margin__top {
+        margin-top: 7vh;
+    }
+
+    .hc-mint__content-subtitle {
+        font-size: 3.1vh;
+        line-height: 4.8vh;
+    }
+
+    .mint-property__imageWrapper {
+        min-width: 35vh;
+        width: 35vh;
+        max-width: 35vh;
+        min-height: 35vh;
+        height: 35vh;
+        max-height: 35vh;
+    }
+
+    .section-roadMap {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+    }
+
+    /* end of mint id */
+
+    /* start of projects */
+
+    .projects_hr {
+        margin-top: 4vh;
+        margin-bottom: 3vh;
+    }
+
+    .project_bottom_section {
+        top: 20vh;
+    }
+
+    .projects__details {
+        row-gap: 3vh;
+        column-gap: 9vw;
+    }
+
+    .projects__detatils-row--label {
+        font-size: 1.9vh;
+    }
+
+    .projects__detatils-row--value {
+        font-size: 1.5vh;
+    }
+
+    .project__list--searchContainer {
+
+        max-width: 60vw;
+    }
+
+    .project__list-cards .hc-card__nft .projectcard_wrapper_sep {
+        height: 23vh;
+        max-height: 23vh;
+        min-height: 23vh;
+        border-radius: 0.5vh 0.5vh 0 0;
+    }
+
+    .project__list-cards .hc-card__nft .nftcard_detailwrapper.project-card__details {
+        min-height: 6vh;
+    }
+
+    .project__list-cards .hc-card__nft .nftcard_detailwrapper {
+        padding: 1vh 2vh;
+    }
+
+    .project-card__title {
+        width: 22vw;
+        font-size: 2.2vh;
+    }
+
+    .projectcard_foot-btn--gradient {
+        border-radius: 0.4vh;
+        font-size: 1.7vh;
+        padding: 0.4vh 1.2vw;
+    }
+
+    .project_bottom_section-empty {
+        min-height: 77vh;
+    }
+
+    /* end of projects */
+
+
+    /* start of project info */
+
+    .hc-mint__banner--desc.projectInfo_banner--desc {
+        margin-bottom: 0vh !important;
+    }
+
+    .mint-bottom__content {
+        margin-top: 7vh;
+    }
+
+    .gallery-card__swiper .card-gallery {
+        min-width: 45vw;
+        width: 45vw;
+        max-width: 45vw;
+        min-height: 36vw;
+        height: 36vw;
+        max-height: 36vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+    }
+
+    .gallery-card__swiper .swiper-wrapper {
+        /* gap: 4vw !important; */
+    }
+
+    .gallery-card__swiper .swiper-slide {
+        margin-right: 0vw !important;
+    }
+
+    /* .card-gallery {
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+        min-height: 100%;
+        height: 100%;
+        max-height: 100%;
+        background: green;
+    } */
+
+    .gallery-card__swiper .card-gallery__image--wrapper {
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+        min-height: 27vw;
+        height: 27vw;
+        max-height: 27vw;
+        border-radius: 1.3vw;
+        overflow: hidden;
+    }
+
+    .gallery-card__swiper .card-gallery__title {
+        margin-top: 2vh;
+    }
+
+    .gallery-card__swiper.gallery-card__swiper .card-gallery__title p {
+        font-size: 3.5vw;
+    }
+
+    .gallery-card__swiperWrapper .hc-swiper__arrow--right svg,
+    .gallery-card__swiperWrapper .hc-swiper__arrow--left svg {
+        font-size: 3vh;
+    }
+
+    .gallery-card__swiperWrapper .hc-swiper__arrow--right {
+        right: -5%;
+    }
+
+    .gallery-card__swiperWrapper .hc-swiper__arrow--left {
+        left: -5%;
+    }
+
+    .gallery-card__swiper .rewards_card {
+        min-width: 90vw;
+        width: 90vw;
+        max-width: 90vw;
+    }
+
+    .swiper-button-next1-news svg {
+        font-size: 2.5vh;
+    }
+
+    .swiper-button-prev1-news svg {
+        font-size: 2.5vh;
+    }
+
+    .swiper-button-prev1-news.hc-swiper__arrow--left {
+        left: -5%;
+    }
+
+    .gallery-card__swiper .rewards_card {
+        padding: 3vw 3vw 1vw 3vw;
+        border-radius: 2vw;
+    }
+
+    .gallery-card__swiper .rewards_card .hc-mint__banner--desc {
+        margin-bottom: 2vh !important;
+    }
+
+    /* end of project info */
+    /* start of staking */
+
+
+
+    .banner_section.banner_section_content.claim-section {
+        padding-top: 18vh;
+    }
+
+    .claim-value__wrapper {
+        gap: 4.5vw;
+        margin-top: 3vh;
+    }
+
+    .value__wrapper-blue {
+        border: 0.27vh solid var(--blue_200);
+        padding: 0.8vh 2.8vw;
+        border-radius: 0.2vw;
+        gap: 1vw;
+        min-height: 5vh;
+    }
+
+    .value__wrapper-blue .title {
+        font-size: 2vh;
+    }
+
+    .value__wrapper-blue .value {
+        font-size: 2vh;
+    }
+
+    .value__wrapper-image {
+        display: flex;
+        align-items: center;
+        gap: 1.2vw;
+    }
+
+    .value__wrapper-image img {
+        width: 4vw;
+    }
+
+    .hh-stake__subtitle {
+        margin-top: 5vh;
+        font-size: 2.5vh;
+    }
+
+    .hh-stake__countdown {
+        margin-top: 2vh;
+    }
+
+    .hh-stake__countdown span {
+        font-size: 4.5vh;
+    }
+
+    .stake-tab__wrapper {
+        padding: 2.3vw;
+    }
+
+    .stacking_tab {
+        gap: 2vw;
+        padding: 1vw 2vw;
+        font-weight: 600;
+        font-size: 2vh;
+        border-radius: 0.6vw;
+
+    }
+
+    .stacking_tab img {
+        width: 4.5vw;
+    }
+
+
+    .stake-actions {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        gap: 5vw;
+        flex-direction: column;
+        align-items: start !important;
+    }
+
+    .stake-actions .project__list--searchContainer {
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+
+    }
+
+    .stake--searchContainer {
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .react-select-2-wrap {
+        width: 100%;
+    }
+
+
+    .hh-nft__text-sm {
+        font-size: 1.5vh;
+        margin-bottom: 1vh;
+    }
+
+    .stake-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 3vw;
+        row-gap: 5vh;
+        margin-bottom: 8vh;
+    }
+
+    .box1 {
+        height: 300px;
+        background: red;
+    }
+
+    .white {
+        width: 17.5vw;
+        background: white;
+        height: 100%;
+    }
+
+    .stake-grid .nft_card.hc-card__nft-height {
+        min-width: 43.5vw;
+        width: 43.5vw;
+        max-width: 43.5vw;
+    }
+
+    .stake-grid .hc-nft__card-title {
+        margin-bottom: 1vh !important;
+    }
+
+    .stake-grid .hc-card__nft-height.nft_card .nftcard_detailwrapper {
+        border-top-left-radius: 0.6vh;
+        border-top-right-radius: 0.6vh;
+        padding: 1.1vh;
+        margin-top: -1vh;
+    }
+
+    .stake-grid .hc-card__nft-height.nft_card .nftImg {
+        min-height: 28vh;
+        height: 28vh;
+        max-height: 28vh;
+    }
+
+    .stake-grid .bodygradientBtn {
+        font-size: 1.5vh;
+        padding: 1vh 3vh;
+    }
+
+    .stake-grid .nftcard_btnviolet {
+        font-size: 1.5vh;
+        padding: 1vh 3vh;
+    }
+
+    .stake-grid .card_status {
+        font-size: 1.5vh;
+    }
+
+    .stake-grid .nftcard_statuslabel {
+        height: 3.5vh;
+    }
+
+    .stack-button__wrap {
+        margin-top: 4vh;
+    }
+
+    .stack__button-submit {
+
+        padding: 0.7vh 4vw;
+
+    }
+
+    /* end of staking */
+
+    /* start of collection info */
+
+    .collection-info__header {
+        gap: 1.4vw;
+        border-bottom: 0.2vh solid var(--border-color-1);
+        width: 75%;
+    }
+
+    .collection-info__profile-image {
+        min-width: 50vw;
+        width: 50vw;
+        max-width: 50vw;
+        min-height: 40vw;
+        height: 40vw;
+        max-height: 40vw;
+        border-radius: 2vw;
+    }
+
+    .collection-info__profile-name {
+        font-size: 2.8vh;
+        margin-top: 3vh;
+        margin-bottom: 3vh !important;
+    }
+
+    .collection-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2vw;
+        row-gap: 3vh;
+    }
+
+    /* .collection__image-card {
+        width: 100%;
+        height: 40px;
+        background: red;
+    } */
+
+    .collection__image-wrapper {
+        min-width: 42.5vw;
+        width: 42.5vw;
+        max-width: 42.5vw;
+        min-height: 21vh;
+        height: 21vh;
+        max-height: 21vh;
+        border-radius: 1.7vw;
+    }
+
+    .collection__image-wrapper--name {
+        font-size: 2.5vh;
+        margin-top: 2.5vh;
+    }
+
+    .collection-info__grid-title {
+        font-size: 3vh;
+        margin-bottom: 3vh !important;
+    }
+
+    /* end of collection info */
+
+    /* start of collection info modal */
+
+    .hc-collection__modal-imageWrapper {
+
+        min-height: 30vh;
+        height: 30vh;
+        max-height: 30vh;
+        border-radius: 2vw;
+    }
+
+    /* end of collection info modal */
+}
+
+@media screen and (max-width:991px) {
+    .mp-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mp-grid.mp-grid_list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+
+}
+
+@media screen and (max-width:767px) {
+    .mp_inner--bottom {
+        margin-top: -15vh;
+    }
+
+    .mp_bottom--title {
+        padding-top: 3vh;
+        padding-bottom: 3vh;
+    }
+
+    .inner-container__width {
+        /* width: 83%; */
+        /* width: calc(var(--container-width-inner) + ((100% - var(--container-width-main))/2)*2); */
+        width: 90%;
+        margin-left: auto;
+        /* margin-right: 4%; */
+        margin-right: auto;
+    }
+
+    .mp-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5vw 2.2vw;
+    }
+
+    .mp-grid.mp-grid_list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5vw 2.2vw;
+    }
+
+    .mp-grid .red {
+        height: 300px;
+    }
+
+    .mp-grid .gree {
+        height: 300px;
+    }
+
+    .mp-grid .yello {
+        height: 300px;
+    }
+
+    .mp-grid .blue {
+        height: 300px;
+    }
+
+    .red_inner {
+        min-width: 18.6vw;
+        width: 18.6vw;
+        max-width: 18.6vw;
+        height: 30vh;
+    }
+
+    .nft-card {
+        min-width: 43.6vw;
+        width: 43.6vw;
+        max-width: 43.6vw;
+        border-radius: 1vw;
+    }
+
+    .nft-card:hover {
+        transform: translateY(-2vh);
+        transition: all .5s ease;
+    }
+
+    .nft-card__a {
+        min-width: 43.6vw;
+        width: 43.6vw;
+        max-width: 43.6vw;
+        min-height: 12vh;
+        height: 12vh;
+        max-height: 12vh;
+    }
+
+
+    .nft-card__content {
+        padding: 0vw 2.1vw 2.1vw 2.1vw;
+        border-top-left-radius: 0.3vw;
+        border-top-right-radius: 0.3vw;
+    }
+
+    .nft-card__content:after {
+        border-top-left-radius: 1vw;
+        border-top-right-radius: 1vw;
+        height: 0.3vh;
+        left: 0;
+        top: -0.65vh;
+    }
+
+    .nft-card__content-title {
+        font-size: 3.5vw;
+        line-height: 5vw;
+        width: 38vw;
+    }
+
+    .nft-card__values-wrapper,
+    .nft-card__content-currency {
+        margin-top: 0.6vh;
+    }
+
+    .nft-card__content-values {
+        font-size: 2vw;
+    }
+
+
+
+    .nft-card__content-buttons {
+        margin-top: 0.9vh;
+    }
+
+    .nft-card__buttons--countdown {
+        border: 0.2vh solid var(--blue_200);
+        border-radius: .7vw;
+        padding: 0.7vh;
+        height: 2.5vh;
+    }
+
+    .nft-card__buttons--countdown span {
+        font-size: 1.2vh;
+    }
+
+    .nft-card__buttons--gradient {
+        border-radius: 0.3vh;
+        font-size: 1.2vh;
+        height: 2.5vh;
+
+    }
+
+    .nft-card__buttons--gradient:hover {
+        background-color: var(--gradinet_left);
+        background-image: linear-gradient(to right, var(--gradinet_right), var(--gradinet_left));
+    }
+
+    .nft-card__buttons--gradient p {
+        padding: 0.5vh;
+        font-size: 2.1vw;
+        display: flex;
+        justify-content: center;
+        flex: 1;
+        text-align: center;
+    }
+
+
+    .nft-card__buttons-gradientCart {
+        padding: 0.5vh 1vh;
+    }
+
+    .nft-card__buttons-gradientCart {
+        border-left: 1px solid var(--white);
+    }
+
+    .nft-card__buttons-gradientCart img {
+        width: 1.4vh;
+    }
+
+    .nft-card__noData {
+        font-size: 2vh;
+        text-align: center;
+    }
+
+    .mp-margin {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+    }
+
+    .button-loadMore {
+        border: 0.22vh solid var(--white);
+        font-size: 1.3vh;
+        padding: 0.8vh 2vh;
+        border-radius: 0.4vh;
+    }
+
+    .anim_div.is-banner__lottie div[aria-label="animation"] {
+        min-width: 35vh !important;
+        width: 35vh !important;
+        max-width: 35vh !important;
+        min-height: 35vh !important;
+        height: 35vh !important;
+        max-height: 30vh !important;
+        margin-top: 0 !important;
+    }
+
+    /* start of mint id */
+
+    .hc-min__banner-mobile {
+        min-height: 30vh;
+        height: 30vh;
+        max-height: 30vh;
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 9vh;
+        position: relative;
+    }
+
+    .hc-mint__bannerInner-col--right {
+        margin-top: 4vh;
+    }
+
+    .hc-mint__banner {
+        min-height: 30vh;
+        height: 30vh;
+        max-height: 30vh;
+    }
+
+    .hc-mint__banner--wrapper {
+        overflow: hidden;
+        border-radius: 2vw;
+        min-width: 55vw;
+        width: 55vw;
+        max-width: 55vw;
+        min-height: 40vw;
+        height: 40vw;
+        max-height: 40vw;
+        margin-top: 2.5vh;
+        margin-bottom: 2.5vh;
+    }
+
+    .hc-mint__banner-content {
+        bottom: unset;
+        position: relative;
+    }
+
+    .hc-mint__banner-content::after {
+        content: "";
+        background: url('../images/bottomlayer.png') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        width: 100%;
+        height: 20vh;
+        bottom: -0.2vh;
+        left: 0;
+        z-index: 1;
+        opacity: 0.9;
+    }
+
+    .hc-mint__banner {
+        margin-top: 0vh;
+        min-height: unset;
+        height: unset;
+        max-height: unset;
+    }
+
+
+
+    .hc-min__banner-mobile::after {
+        content: "";
+        background: url('../images/bottomlayer.png') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        width: 100%;
+        height: 10vh;
+        bottom: -0.2vh;
+        left: 0;
+        z-index: 1;
+        opacity: 0.9;
+    }
+
+    .hc-min__banner-mobile::before {
+        content: "";
+        background: url('../images/bottomlayer.png') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        width: 100%;
+        height: 10vh;
+        bottom: -10.2vh;
+        left: 0;
+        z-index: 1;
+        transform: rotate(180deg);
+        opacity: 0.7;
+    }
+
+    .hc-mint__bannerInner-col--left {
+        margin-top: -14vh;
+    }
+
+    .hc-mint__card-initialSales {
+        padding: 3vw;
+        border-radius: 2vw;
+        border: 0.25vw solid var(--gradinet_right);
+        width: 90vw;
+        margin-bottom: 1vh;
+    }
+
+    .hc-mint__card-initialSales .title {
+        font-size: 2.5vh;
+    }
+
+    .hc-mint__card-initialSales p {
+        font-size: 3.4vw;
+    }
+
+    .hc-mint__col-paddingLeft {
+        padding-right: 1vw !important;
+    }
+
+    .hc-mint__col-paddingRight {
+        padding-left: 1vw !important;
+    }
+
+    .hc-mint__initialSales--border {
+        border: 0.6vw solid var(--gradinet_right);
+        height: 4vh;
+        padding: 0.5vw;
+        border-radius: 1vw;
+    }
+
+    .hc-mint__initialSales--progress {
+
+        border-radius: 1vw;
+        padding-left: 1vw;
+        padding-right: 1vw;
+        font-size: 4vw;
+    }
+
+    .hc-mint__button-mint {
+        font-size: 4.5vw;
+        border-radius: 1vw;
+    }
+
+    .hc-mint__button-mint .header_wallet {
+        height: 2vh;
+        width: 2vh;
+    }
+
+    .hc-mint__banner--desc {
+        z-index: 2;
+        margin-bottom: 5vh !important;
+    }
+
+
+
+    .hc-mint__content-title {
+        font-size: 5.5vw;
+        line-height: 8.5vw;
+        display: flex;
+        flex-direction: column;
+        white-space: nowrap;
+    }
+
+    .hc-mint__swiper-wrap {
+        margin-top: 3.5vh;
+    }
+
+    .hc-mint__content-title span {
+        font-size: 4.5vh;
+    }
+
+    .mint-margin__top {
+        margin-top: 5vh;
+    }
+
+    .hc-mint__content-subtitle {
+        font-size: 2.5vh;
+        line-height: 4.8vh;
+    }
+
+    .mint-property__imageWrapper {
+        min-width: 50vw;
+        width: 50vw;
+        max-width: 50vw;
+        min-height: 50vw;
+        height: 50vw;
+        max-height: 50vw;
+    }
+
+    .section-roadMap {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+    }
+
+    .hc-mint__card-timerWraper {
+        border: 0.13vw solid var(--gradinet_right);
+        font-size: 4vh;
+        min-width: 70vw;
+        padding: 1vh 2vw;
+        margin-top: 3vh;
+        border-radius: 0.2vw;
+        letter-spacing: 0.1vw;
+    }
+
+    /* end of mint id */
+
+    /* start of projects */
+
+    .projects_hr {
+        margin-top: 4vh;
+        margin-bottom: 3vh;
+    }
+
+    .project_bottom_section {
+        top: 20vh;
+    }
+
+    .projects__details {
+
+        gap: 6vw;
+    }
+
+    .projects__detatils-row--label {
+        font-size: 1.5vh;
+    }
+
+    .projects__detatils-row--value {
+        font-size: 1.5vh;
+    }
+
+    .project__list--searchContainer {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    .project__list-cards .hc-card__nft .projectcard_wrapper_sep {
+        height: 15vh;
+        max-height: 15vh;
+        min-height: 15vh;
+        border-radius: 0.5vh 0.5vh 0 0;
+    }
+
+    .project__list-cards .hc-card__nft .nftcard_detailwrapper.project-card__details {
+        min-height: 4vh;
+    }
+
+    .project__list-cards .hc-card__nft .nftcard_detailwrapper {
+        padding: 0.6vh 1vh;
+    }
+
+    .project-card__title {
+        width: 18vw;
+        font-size: 1.8vh;
+    }
+
+    .projectcard_foot-btn--gradient {
+        border-radius: 0.2vh;
+        font-size: 1.3vh;
+        padding: 0.4vh 1.2vw;
+    }
+
+    .project_bottom_section-empty {
+        min-height: 35vh;
+    }
+
+    /* end of projects */
+
+    /* start of project info */
+
+    .hc-mint__banner--desc.projectInfo_banner--desc {
+        margin-bottom: 0vh !important;
+    }
+
+    .mint-bottom__content {
+        margin-top: 5vh;
+    }
+
+    .gallery-card__swiper .card-gallery {
+        min-width: 45vw;
+        width: 45vw;
+        max-width: 45vw;
+        min-height: 18vh;
+        height: 18vh;
+        max-height: 18vh;
+        padding-left: 2vw;
+        padding-right: 2vw;
+
+    }
+
+    .gallery-card__swiper .swiper-wrapper {
+        /* gap: 4vw !important; */
+    }
+
+    .gallery-card__swiper .swiper-slide {
+        margin-right: 0vw !important;
+    }
+
+    /* .card-gallery {
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+        min-height: 100%;
+        height: 100%;
+        max-height: 100%;
+        background: green;
+    } */
+
+    .gallery-card__swiper .card-gallery__image--wrapper {
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+        min-height: 28vw;
+        height: 28vw;
+        max-height: 28vw;
+        border-radius: 1.3vw;
+        overflow: hidden;
+    }
+
+    .gallery-card__swiper .card-gallery__title {
+        margin-top: 2vh;
+    }
+
+    .gallery-card__swiper.gallery-card__swiper .card-gallery__title p {
+        font-size: 4vw;
+    }
+
+    .gallery-card__swiperWrapper .hc-swiper__arrow--right svg,
+    .gallery-card__swiperWrapper .hc-swiper__arrow--left svg {
+        font-size: 3vh;
+    }
+
+    .gallery-card__swiperWrapper .hc-swiper__arrow--right {
+        right: -5%;
+    }
+
+    .gallery-card__swiperWrapper .hc-swiper__arrow--left {
+        left: -5%;
+    }
+
+    .gallery-card__swiper .rewards_card {
+        min-width: 90vw;
+        width: 90vw;
+        max-width: 90vw;
+    }
+
+    .swiper-button-next1-news svg {
+        font-size: 2.5vh;
+    }
+
+    .swiper-button-prev1-news svg {
+        font-size: 2.5vh;
+    }
+
+    .swiper-button-prev1-news.hc-swiper__arrow--left {
+        left: -5%;
+    }
+
+    .gallery-card__swiper .rewards_card {
+        padding: 3vw 3vw 1vw 3vw;
+        border-radius: 2vw;
+    }
+
+    .gallery-card__swiper .rewards_card .hc-mint__banner--desc {
+        margin-bottom: 2vh !important;
+    }
+
+    /* end of project info */
+
+    /* start of staking */
+
+
+
+    .banner_section.banner_section_content.claim-section {
+        padding-top: 18vh;
+    }
+
+    .claim-value__wrapper {
+        gap: 4.5vw;
+        margin-top: 3vh;
+    }
+
+    .value__wrapper-blue {
+        border: 0.27vh solid var(--blue_200);
+        padding: 0.8vh 2.8vw;
+        border-radius: 0.2vw;
+        gap: 1vw;
+        min-height: 5vh;
+    }
+
+    .value__wrapper-blue .title {
+        font-size: 1.5vh;
+    }
+
+    .value__wrapper-blue .value {
+        font-size: 1.7vh;
+    }
+
+    .value__wrapper-image {
+        display: flex;
+        align-items: center;
+        gap: 1.2vw;
+    }
+
+    .value__wrapper-image img {
+        width: 6vw;
+    }
+
+    .hh-stake__subtitle {
+        margin-top: 4vh;
+        font-size: 1.9vh;
+    }
+
+    .hh-stake__countdown {
+        margin-top: 2vh;
+    }
+
+    .hh-stake__countdown span {
+        font-size: 4.5vh;
+    }
+
+    .stake-tab__wrapper {
+        padding: 2.3vw;
+    }
+
+    .stacking_tab {
+        display: flex;
+        align-items: center;
+        gap: 2vw;
+        padding: 1vw 2vw;
+        font-weight: 600;
+        font-size: 1.8vh;
+        border-radius: 0.6vw;
+        cursor: pointer;
+
+    }
+
+    .stacking_tab img {
+        width: 4.5vw;
+    }
+
+
+    .stake-actions {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        gap: 5vw;
+        flex-direction: column;
+        align-items: start !important;
+    }
+
+    .stake-actions .project__list--searchContainer {
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+
+    }
+
+    .stake--searchContainer {
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .react-select-2-wrap {
+        width: 100%;
+    }
+
+
+    .hh-nft__text-sm {
+        font-size: 1vh;
+        margin-bottom: 0.8vh;
+    }
+
+    .stake-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 3vw;
+        row-gap: 5vh;
+        margin-bottom: 8vh;
+    }
+
+    .box1 {
+        height: 300px;
+        background: red;
+    }
+
+    .white {
+        width: 17.5vw;
+        background: white;
+        height: 100%;
+    }
+
+    .stake-grid .nft_card.hc-card__nft-height {
+        min-width: 43.5vw;
+        width: 43.5vw;
+        max-width: 43.5vw;
+    }
+
+    .stake-grid .hc-nft__card-title {
+        margin-bottom: 0.5vh !important;
+    }
+
+    .stake-grid .hc-card__nft-height.nft_card .nftcard_detailwrapper {
+        border-top-left-radius: 0.6vh;
+        border-top-right-radius: 0.6vh;
+        padding: 1.1vh;
+        margin-top: -1vh;
+    }
+
+    .stake-grid .hc-card__nft-height.nft_card .nftImg {
+        min-height: 20vh;
+        height: 20vh;
+        max-height: 20vh;
+    }
+
+    .stake-grid .bodygradientBtn {
+        font-size: 1.15vh;
+        padding: 0.8vh 3vh;
+    }
+
+    .stake-grid .nftcard_btnviolet {
+        font-size: 1.15vh;
+        padding: 0.8vh 3vh;
+    }
+
+    .stake-grid .card_status {
+        font-size: 1.3vh;
+    }
+
+    .stake-grid .nftcard_statuslabel {
+        height: 2.8vh;
+    }
+
+    .stack-button__wrap {
+        margin-top: 3vh;
+    }
+
+    .stack__button-submit {
+        padding: 0.7vh 4vw;
+    }
+
+    /* end of staking */
+
+    /* start of collection info */
+
+    .collection-info__header {
+        gap: 1.4vw;
+        border-bottom: 0.2vh solid var(--border-color-1);
+        width: 75%;
+    }
+
+    .collection-info__profile-image {
+        min-width: 50vw;
+        width: 50vw;
+        max-width: 50vw;
+        min-height: 40vw;
+        height: 40vw;
+        max-height: 40vw;
+        border-radius: 2vw;
+    }
+
+    .collection-info__profile-name {
+        font-size: 2.8vh;
+        margin-top: 3vh;
+        margin-bottom: 3vh !important;
+    }
+
+    .collection-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2vw;
+        row-gap: 3vh;
+    }
+
+    /* .collection__image-card {
+    width: 100%;
+    height: 40px;
+    background: red;
+} */
+
+    .collection__image-wrapper {
+        min-width: 42.5vw;
+        width: 42.5vw;
+        max-width: 42.5vw;
+        min-height: 15vh;
+        height: 15vh;
+        max-height: 15vh;
+        border-radius: 1.7vw;
+    }
+
+    .collection__image-wrapper--name {
+        font-size: 2vh;
+        margin-top: 2vh;
+    }
+
+    .collection-info__grid-title {
+        font-weight: 600;
+        font-size: 3vh;
+        margin-bottom: 3vh !important;
+    }
+
+    /* end of collection info */
+
+    /* start of collection info modal */
+
+    .hc-collection__modal-imageWrapper {
+
+        min-height: 30vh;
+        height: 30vh;
+        max-height: 30vh;
+        border-radius: 2vw;
+    }
+
+    /* end of collection info modal */
+
+}

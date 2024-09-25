@@ -28,8 +28,15 @@
     --poppins_font: "Poppins", sans-serif;
     --kanit_font: "Kanit", sans-serif;
 
-    --container-width-main: 92%;
+    --container-width-main: 87%;
+    --container-width-sm-main: 90%;
     --container-width-inner: 70%;
+
+    /* --main-title-font: 4.2vh; */
+    --main-title-font: 4vh;
+    --card-title-font: 2.5vh;
+    --card-desc-font: 1.5vh;
+    --modal-text: 1.8vh;
 }
 
 
@@ -43,4 +50,14 @@
 body {
     color: var(--white);
     font-family: var(--montserrat_font);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin-bottom: 0px;
 }

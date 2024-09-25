@@ -18,14 +18,19 @@ import './App.css';
 import '../src/assets/css/Style1.css';
 import '../src/assets/css/App.css'
 import Home from './Screens/Home';
-import Sticky from './Screens/Sticky';
+import Marketplace from './Screens/Marketplace';
+import NFTInfo from './Screens/NFTInfo';
 import Minting from './Screens/Minting';
 import MintProjects from './Screens/MintProjects';
-
-
+import Projects from './Screens/Projects';
+import ProjectInfo from './Screens/ProjectInfo';
+import CollectionInfo from './Screens/CollectionInfo';
+import Profile from './Screens/Profile';
+import Staking from './Screens/Staking';
+import Contact from './Screens/Contact';
+import CollectionNfts from './Screens/CollectionNfts';
 
 /** code start */
-
 
 function App() {
 
@@ -35,12 +40,49 @@ function App() {
             element: <Home />,
         },
         {
-            path: "/sticky",
-            element: <Sticky />,
+            path: "/marketplace",
+            element: <Marketplace />,
+        },
+        {
+            path: "/nftInfo/:Owner/:Id",
+            element: <NFTInfo />,
         },
         {
             path: "/minting",
             element: <MintProjects />,
+        },
+        {
+            path: "/mint/:_id",
+            element: <Minting />,
+        },
+        {
+            path: "/projects",
+            element: <Projects />,
+        },
+        {
+            path: "/projectInfo/:projectTitle",
+            element: <ProjectInfo />,
+        },
+        {
+            path: "/collectionInfo",
+            element: <CollectionInfo />,
+        },
+        {
+            path: "/profile/:customurl",
+            element: <Profile />,
+        },
+        {
+            path: "/staking",
+            element: <Staking />,
+        },
+        {
+
+            path: "/CollectionNfts/:projectTitle",
+            element: <CollectionNfts />,
+        },
+        {
+            path: "/contact",
+            element: <Contact />,
         },
         // Add routes for any additional screens
     ]);
