@@ -57,7 +57,7 @@ function SideTab() {
                 </NavLink>
                 <NavLink className={`sidetab_link ${location == "/"}`} to='/projects'>
                     <div className='singleTab'>
-                        {location == '/projects' ? <img className='sidetab_logo' src={require('../assets/images/project_active.svg').default} /> : <img className='sidetab_logo' src={require('../assets/images/projects.svg').default} />}
+                        {location == '/projects' ? <img className='sidetab_logo' src={require('../assets/images/property_white.svg').default} /> : <img className='sidetab_logo' src={require('../assets/images/property_green.svg').default} />}
                         <p className='sidetab_laebl'>All Properties</p>
                     </div>
                 </NavLink>
