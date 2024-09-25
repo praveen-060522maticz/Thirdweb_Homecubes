@@ -108,7 +108,7 @@ function MintProjects() {
                     <SideTab />
                 </div>
 
-                <div className="banner_section">
+                <div className="banner_section is_banner_section">
                     <div className='px-0 inner-container__width'>
                         <Row className='mx-auto'>
                             <Col lg={6} className="px-0">
@@ -123,7 +123,7 @@ function MintProjects() {
                                     }}
                                 ></p> */}
                                 <div className="home_titled hc-home__title inner_title head_txt"  >
-                                    Initial Sales
+                                    Initial <strong>Sales</strong>
                                 </div>
                                 <p
                                     className="mp_detailbrief hc-home__desc desc_txt"

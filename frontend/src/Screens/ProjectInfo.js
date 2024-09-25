@@ -27,6 +27,8 @@ import { ReadMore } from "../Components/ReadMore";
 import ImgAudVideo from "../Components/ImgAudVideo";
 import propertyImage from '../assets/images/property.png'
 import GalleryCard from "../Components/GalleryCard";
+import swiperRightIcon from '../assets/images/swiperrightarrow.svg'
+import swiperLeftIcon from '../assets/images/swiperleftarrow.svg'
 
 function ProjectInfo() {
   const location = useLocation();
@@ -393,13 +395,15 @@ function ProjectInfo() {
                 {/* <p className="hc-mint__banner--desc  mb-0 text-center w-75 mx-auto ">
                   {projectDetail?.CMS?.filter((val) => val.stepTitle == "Photo Galleries")?.[0]?.stepDescription}
                 </p> */}
-                <div className="hc-mint__swiper-wrap">
+                <div className="hc-mint__swiper-wrap gallery-card__swiperWrapper">
 
                   <button
                     className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                     onClick={() => goPrev()}
                   >
-                    <FaChevronLeft fill="#fff" fontSize={38} className="" />
+                    {/* <FaChevronLeft fill="#fff" fontSize={38} className="" /> */}
+                    <img src={swiperLeftIcon} alt="left" className="img-fluid" />
+
                   </button>
 
 
@@ -408,11 +412,12 @@ function ProjectInfo() {
                     onClick={() => goNext()}
                   >
 
-                    <FaChevronRight fill="#fff" fontSize={38} className="" />
+                    {/* <FaChevronRight fill="#fff" fontSize={38} className="" /> */}
+                    <img src={swiperRightIcon} alt="right" className="img-fluid" />
                   </button>
 
                   <Swiper
-                    className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper gallery-card__swiper"
+                    className="mySwiper bottomnav_colswiper hc-mint__swiper gallery-card__swiper"
                     slidesPerView={4}
                     // spaceBetween={30}
                     navigation={{
@@ -527,7 +532,8 @@ function ProjectInfo() {
                     className="swiper-button-prev1-news border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                     onClick={() => newsGoPrev()}
                   >
-                    <FaChevronLeft fill="#fff" fontSize={38} className="" />
+                    {/* <FaChevronLeft fill="#fff" fontSize={38} className="" /> */}
+                    <img src={swiperLeftIcon} alt="left" className="img-fluid" />
                   </button>
 
 
@@ -536,7 +542,8 @@ function ProjectInfo() {
                     onClick={() => newsGoNext()}
                   >
 
-                    <FaChevronRight fill="#fff" fontSize={38} className="" />
+                    {/* <FaChevronRight fill="#fff" fontSize={38} className="" /> */}
+                    <img src={swiperRightIcon} alt="right" className="img-fluid" />
                   </button>
                   <Swiper
                     className="mySwiper bottomnav_colswiper  hc-mint__swiper gallery-card__swiper "

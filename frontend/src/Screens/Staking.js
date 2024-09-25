@@ -662,7 +662,7 @@ function Staking() {
                   onClick={() => setAtciveTab("staking")}
                 >
                   <img
-                    className="top_reltabimg"
+                    className=""
                     src={
                       require("../assets/images/whitestack.svg")
                         .default
@@ -679,7 +679,7 @@ function Staking() {
                   onClick={() => setAtciveTab("rewards")}
                 >
                   <img
-                    className="top_reltabimg"
+                    className=""
                     src={
                       require("../assets/images/rewards.svg")
                         .default
@@ -833,7 +833,7 @@ function Staking() {
                         <h5 className="hh-stake__subtitle text-center">
                           Total Rewards Received {rewardAmount.toFixed(7)} USDT
                         </h5>
-                        <Row className="select_holder  stake-rewards__selects justify-content-center">
+                        <Row className="mx-auto select_holder  stake-rewards__selects justify-content-center">
                           <Col xs={6} lg={4} className="hh-col__paddings">
                             <Select
                               classNamePrefix="react-select-3"
