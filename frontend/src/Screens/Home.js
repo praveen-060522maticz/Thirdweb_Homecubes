@@ -142,7 +142,7 @@ function Home() {
                                             CMS["Revolution your Home Ownership"]?.content,
                                     }}
                                 ></p>
-                                <Link to="/howitworks">
+                                <Link to="/minting">
                                     <button className="hc-home__button--linear btn_top">
                                         Buy now on initial sales
                                     </button>

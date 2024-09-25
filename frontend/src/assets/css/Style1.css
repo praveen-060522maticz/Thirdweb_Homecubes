@@ -501,7 +501,7 @@ h6 {
 
 .mp_detailbrief.hc-home__desc {
   font-family: var(--montserrat-font);
-  font-weight: 450;
+  font-weight: 500;
   padding: 0 !important;
 }
 
@@ -556,6 +556,7 @@ h6 {
     padding: 0;
   }
 }
+
 
 
 /* footer end */
@@ -1095,7 +1096,7 @@ h6 {
     padding-bottom: 5vh;
   }
   .home_titled {
-    font-size: 2.5vh;
+    font-size: 2.8vh;
     font-weight: 500;
   }
   .home_titled.inner_title {
@@ -1123,12 +1124,16 @@ h6 {
 }
 }
 @media screen and (max-width:575px) {
+    .primary_blueBtn {
+      font-weight: 600;
+    }
   .col_pad {
     padding-left: 0.5vh;
     padding-right: 0.5vh;
   }
   .home_top {
-    margin-top: -3vh;
+    /* margin-top: -3vh; */
+    margin-top: -1.5vh;
 }
 .nftinfo_bots{
   margin-top: -33vh;
@@ -2233,10 +2238,10 @@ input::placeholder {
   font-weight: 600;
 }
 
-.hc-infoInfo__tabs,
+/* .hc-infoInfo__tabs,
 .hc-nftInfo__table {
   border-bottom: 0.2px solid var(--border-color-2);
-}
+} */
 
 .nftInfo_acrdTabs {
   align-items: center;
@@ -2334,7 +2339,7 @@ input::placeholder {
 
 @media screen and (max-width:1199px) {
   .mb_mob_2 {
-    margin-bottom: 2vh;
+    /* margin-bottom: 2vh; */
   }
 }
 
@@ -2361,7 +2366,7 @@ input::placeholder {
   }
 
   .hc-info__name-title {
-    font-size: 3vh;
+    font-size: 2.6vh;
   }
 
   .nftInfo_socials {
@@ -2384,12 +2389,15 @@ input::placeholder {
 }
 
 @media screen and (max-width:575px) {
+  .hc-infoInfo__tabs, .hc-nftInfo__table {
+    border-bottom: 0.2vh solid transparent;
+}
   .hc-info__last-bid {
     width: 40vh;
 }
   .nftInfo_socials {
-    height: 2.5vh;
-    width: 2.5vh;
+    height: 3vh;
+    width: 3vh;
   }
 
   .nftInfo_iconsHolder,
@@ -2485,7 +2493,12 @@ input::placeholder {
   outline: none;
   padding: 1vh 0.5vh;
 }
-
+.modal_input.fixed_width{
+  max-width: 100%;
+}
+.modal_input.min_width{
+  max-width: 9vh;
+}
 .modal_title {
   color: var(--white);
   flex: 1 1;
@@ -2749,19 +2762,22 @@ input::placeholder {
 }
 
 @media (min-width: 992px) {
-
   .modal-lg,
   .modal-xl {
     max-width: 80vh !important;
   }
 }
-
+.checkoutmodal .modal-body{
+   padding: 2.5vh 2.5vh;
+}
 @media (min-width: 576px) {
   .modal-dialog {
     max-width: 50vh;
   }
+  .checkoutmodal  .modal-dialog {
+      max-width: 48vh;
+  } 
 }
-
 /* modal end */
 
 

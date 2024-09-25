@@ -521,7 +521,6 @@ function NFTInfo() {
                 </div>
                 <div className="banner_section nftinfo_section">
                     <div className="inner-container__width">
-
                         <div className="nft_grid">
                             <div>
                                 <div className="nftInfo_topLeft hc-info__left--image">
@@ -831,10 +830,10 @@ function NFTInfo() {
                                         //   </button>
                                         // ))
                                     }
-                                </div></div>
-
+                                </div>
+                            </div>
                             <div>
-                                <div className="d-block d-xl-flex align-items-center gap_2">
+                                <div className="d-flex align-items-center gap_2">
 
                                     <h3 className="marketplae_topdata hc-info__name-title mb_mob_2">
                                         {!isEmpty(InfoDetail)
@@ -847,71 +846,137 @@ function NFTInfo() {
                                             className="nftInfo_socials"
                                             src={require("../assets/images/share.svg").default}
                                         />
-                                        {shareShow ?
+                                        <div className="d-none d-lg-block">
+                                            {shareShow ?
+                                                <div className="shareOptions_holder mt_1">
 
-                                            <div className="shareOptions_holder">
+                                                    <div className="nftinfo_imgsep"></div>
+                                                    <TelegramShareButton
+                                                        title={"Telegram"}
+                                                        url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
 
-                                                <div className="nftinfo_imgsep"></div>
-                                                <TelegramShareButton
-                                                    title={"Telegram"}
-                                                    url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+                                                    >
+                                                        <img
+                                                            className="nftInfo_socials"
+                                                            src={
+                                                                require("../assets/images/whitetelegram.svg").default
+                                                            }
+                                                        />
+                                                    </TelegramShareButton>
 
-                                                >
+                                                    <TwitterShareButton
+                                                        url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+                                                        title="Twitter Share"
+                                                    >
+                                                        <img
+                                                            className="nftInfo_socials"
+                                                            src={require("../assets/images/whitetwitter.svg").default}
+                                                        />
+                                                    </TwitterShareButton>
+
                                                     <img
                                                         className="nftInfo_socials"
-                                                        src={
-                                                            require("../assets/images/whitetelegram.svg").default
-                                                        }
+                                                        src={require("../assets/images/whiteinsta.svg").default}
                                                     />
-                                                </TelegramShareButton>
 
-                                                <TwitterShareButton
-                                                    url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
-                                                    title="Twitter Share"
-                                                >
+
                                                     <img
                                                         className="nftInfo_socials"
-                                                        src={require("../assets/images/whitetwitter.svg").default}
-                                                    />
-                                                </TwitterShareButton>
-
-                                                <img
-                                                    className="nftInfo_socials"
-                                                    src={require("../assets/images/whiteinsta.svg").default}
-                                                />
-
-
-                                                <img
-                                                    className="nftInfo_socials"
-                                                    src={require("../assets/images/whitediscard.svg").default}
-                                                />
-
-                                                <CopyToClipboard
-                                                    onCopy={() => toast.success("Content copied successfully")}
-                                                    text={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
-                                                >
-                                                    <img
-                                                        className="nftInfo_socials"
-                                                        src={require("../assets/images/whitecopy.svg").default}
-                                                    />
-                                                </CopyToClipboard>
-
-                                                <WhatsappShareButton
-                                                    title={'Whatsapp'}
-                                                    url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
-                                                >
-                                                    <img
-                                                        className="nftInfo_socials"
-                                                        src={
-                                                            require("../assets/images/whitewhatsapp.svg").default
-                                                        }
+                                                        src={require("../assets/images/whitediscard.svg").default}
                                                     />
 
-                                                </WhatsappShareButton>
-                                            </div> :
-                                            <></>}
+                                                    <CopyToClipboard
+                                                        onCopy={() => toast.success("Content copied successfully")}
+                                                        text={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+                                                    >
+                                                        <img
+                                                            className="nftInfo_socials"
+                                                            src={require("../assets/images/whitecopy.svg").default}
+                                                        />
+                                                    </CopyToClipboard>
+
+                                                    <WhatsappShareButton
+                                                        title={'Whatsapp'}
+                                                        url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+                                                    >
+                                                        <img
+                                                            className="nftInfo_socials"
+                                                            src={
+                                                                require("../assets/images/whitewhatsapp.svg").default
+                                                            }
+                                                        />
+
+                                                    </WhatsappShareButton>
+                                                </div> :
+                                                <></>}
+                                        </div>
 
                                     </div>
+                                </div>
+
+                                <div className="d-block d-lg-none">
+                                    {shareShow ?
+                                        <div className="shareOptions_holder mt_1">
+
+                                            <div className="nftinfo_imgsep"></div>
+                                            <TelegramShareButton
+                                                title={"Telegram"}
+                                                url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+
+                                            >
+                                                <img
+                                                    className="nftInfo_socials"
+                                                    src={
+                                                        require("../assets/images/whitetelegram.svg").default
+                                                    }
+                                                />
+                                            </TelegramShareButton>
+
+                                            <TwitterShareButton
+                                                url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+                                                title="Twitter Share"
+                                            >
+                                                <img
+                                                    className="nftInfo_socials"
+                                                    src={require("../assets/images/whitetwitter.svg").default}
+                                                />
+                                            </TwitterShareButton>
+
+                                            <img
+                                                className="nftInfo_socials"
+                                                src={require("../assets/images/whiteinsta.svg").default}
+                                            />
+
+
+                                            <img
+                                                className="nftInfo_socials"
+                                                src={require("../assets/images/whitediscard.svg").default}
+                                            />
+
+                                            <CopyToClipboard
+                                                onCopy={() => toast.success("Content copied successfully")}
+                                                text={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+                                            >
+                                                <img
+                                                    className="nftInfo_socials"
+                                                    src={require("../assets/images/whitecopy.svg").default}
+                                                />
+                                            </CopyToClipboard>
+
+                                            <WhatsappShareButton
+                                                title={'Whatsapp'}
+                                                url={`${config.FRONT_URL}/profile/${Tokens[TabName]?.owner?.CustomUrl}`}
+                                            >
+                                                <img
+                                                    className="nftInfo_socials"
+                                                    src={
+                                                        require("../assets/images/whitewhatsapp.svg").default
+                                                    }
+                                                />
+
+                                            </WhatsappShareButton>
+                                        </div> :
+                                        <></>}
                                 </div>
 
                                 {console.log("asgfsefasfs", Tokens[TabName]?.owner?.CustomUrl)}
@@ -1067,92 +1132,92 @@ src={require("../assets/images/clock.svg").default}
                         </div>
 
                         <div className="">
-                        {isEmpty(InfoDetail) && !Tokens_Detail?.isStaked ?
-                                        (
-                                            Tokens[TabName]?.myowner?.WalletAddress ==
-                                                accountAddress ? (
-                                                Tokens[TabName]?.myowner?.PutOnSaleType ==
-                                                    "FixedPrice" ? (
-                                                    <></>
-                                                ) : Tokens[TabName]?.myowner?.PutOnSaleType ==
-                                                    "NotForSale" ||
-                                                    Tokens[TabName]?.myowner?.PutOnSaleType ==
-                                                    "UnlimitedAuction" ||
-                                                    (Tokens[TabName]?.myowner?.PutOnSaleType ==
-                                                        "TimedAuction" &&
-                                                        new Date(
-                                                            Tokens[TabName]?.myowner.EndClockTime
-                                                        ).getTime() < Date.now()) ? (
+                            {isEmpty(InfoDetail) && !Tokens_Detail?.isStaked ?
+                                (
+                                    Tokens[TabName]?.myowner?.WalletAddress ==
+                                        accountAddress ? (
+                                        Tokens[TabName]?.myowner?.PutOnSaleType ==
+                                            "FixedPrice" ? (
+                                            <></>
+                                        ) : Tokens[TabName]?.myowner?.PutOnSaleType ==
+                                            "NotForSale" ||
+                                            Tokens[TabName]?.myowner?.PutOnSaleType ==
+                                            "UnlimitedAuction" ||
+                                            (Tokens[TabName]?.myowner?.PutOnSaleType ==
+                                                "TimedAuction" &&
+                                                new Date(
+                                                    Tokens[TabName]?.myowner.EndClockTime
+                                                ).getTime() < Date.now()) ? (
+                                            <>
+                                                {Tokens[TabName]?.highbid ?
+
+                                                    <div className="hc-info__last-bid">
+                                                        <p className="hc-info__last-bid--title">
+                                                            Last Bid
+                                                        </p>
+                                                        {console.log('Tokens[TabName]?.highbid---->', Tokens[TabName]?.highbid)}
+                                                        <p className="hc-info__last-bid--value mt_1">
+                                                            {Tokens[TabName]?.highbid?.TokenBidAmt} <span>{Tokens[TabName]?.highbid?.CoinName}</span>
+                                                        </p>
+                                                        <div className="d-flex  gap_3 mt_1">
+                                                            <button className="nftinfo_gradeientBtn "
+                                                                onClick={() => {
+                                                                    if (getVal != "") return toast.error(getVal);
+                                                                    setShowAcceptBid(true);
+                                                                    POPUPACTION("dummy", "Accept", Tokens[TabName]?.highbid)
+                                                                }
+                                                                }>
+                                                                Accept
+                                                            </button>
+                                                            <button className="hc-button__gray"
+                                                                onClick={() => { if (getVal != "") return toast.error(getVal); cancelBidBySeller(Tokens[TabName]?.highbid?.TokenBidderAddress); }}
+                                                            >
+                                                                Reject
+                                                            </button>
+                                                        </div>
+
+
+
+                                                    </div> :
                                                     <>
-                                                        {Tokens[TabName]?.highbid ?
-
-                                                            <div className="hc-info__last-bid">
-                                                                <p className="hc-info__last-bid--title">
-                                                                    Last Bid
-                                                                </p>
-                                                                {console.log('Tokens[TabName]?.highbid---->', Tokens[TabName]?.highbid)}
-                                                                <p className="hc-info__last-bid--value mt_1">
-                                                                    {Tokens[TabName]?.highbid?.TokenBidAmt} <span>{Tokens[TabName]?.highbid?.CoinName}</span>
-                                                                </p>
-                                                                <div className="d-flex  gap_3 mt_1">
-                                                                    <button className="nftinfo_gradeientBtn "
-                                                                        onClick={() => {
-                                                                            if (getVal != "") return toast.error(getVal);
-                                                                            setShowAcceptBid(true);
-                                                                            POPUPACTION("dummy", "Accept", Tokens[TabName]?.highbid)
-                                                                        }
-                                                                        }>
-                                                                        Accept
-                                                                    </button>
-                                                                    <button className="hc-button__gray"
-                                                                        onClick={() => { if (getVal != "") return toast.error(getVal); cancelBidBySeller(Tokens[TabName]?.highbid?.TokenBidderAddress); }}
-                                                                    >
-                                                                        Reject
-                                                                    </button>
-                                                                </div>
-
-
-
-                                                            </div> :
-                                                            <>
-
-                                                            </>
-                                                        }
 
                                                     </>
-                                                ) : (
-                                                    Tokens[TabName]?.myowner?.PutOnSaleType ==
-                                                        "TimedAuction" &&
-                                                        new Date(Tokens[TabName]?.myowner?.ClockTime) > Date.now() ? (
-                                                        <></>
-                                                    ) :
-                                                        (new Date(Tokens[TabName]?.myowner?.EndClockTime).getTime() > Date.now()
-                                                            &&
-                                                            <></>
-                                                        )
-                                                )
-                                            ) : (
-                                                Tokens[TabName]?.owner &&
-                                                Tokens[TabName]?.owner?.WalletAddress !=
-                                                accountAddress &&
-                                                (Tokens[TabName]?.owner?.PutOnSaleType ==
-                                                    "FixedPrice" ? (
+                                                }
+
+                                            </>
+                                        ) : (
+                                            Tokens[TabName]?.myowner?.PutOnSaleType ==
+                                                "TimedAuction" &&
+                                                new Date(Tokens[TabName]?.myowner?.ClockTime) > Date.now() ? (
+                                                <></>
+                                            ) :
+                                                (new Date(Tokens[TabName]?.myowner?.EndClockTime).getTime() > Date.now()
+                                                    &&
                                                     <></>
-                                                ) : (
-                                                    Tokens[TabName]?.myBid?.WalletAddress ==
-                                                    accountAddress && (
-                                                        <></>
-                                                    )
-                                                ))
-                                            )
+                                                )
                                         )
-                                        :
-                                        <></>}
-                                        </div>
+                                    ) : (
+                                        Tokens[TabName]?.owner &&
+                                        Tokens[TabName]?.owner?.WalletAddress !=
+                                        accountAddress &&
+                                        (Tokens[TabName]?.owner?.PutOnSaleType ==
+                                            "FixedPrice" ? (
+                                            <></>
+                                        ) : (
+                                            Tokens[TabName]?.myBid?.WalletAddress ==
+                                            accountAddress && (
+                                                <></>
+                                            )
+                                        ))
+                                    )
+                                )
+                                :
+                                <></>}
+                        </div>
 
                     </div>
                 </div>
-                <div className={Tokens[TabName]?.highbid ? "bottom_content nftinfo_bot" : "bottom_content nftinfo_bots" }>
+                <div className={Tokens[TabName]?.highbid ? "bottom_content nftinfo_bot" : "bottom_content nftinfo_bots"}>
                     <div className="inner-container__width">
                         <Row>
                             <Col lg={12} md={12} sm={12} xs={12} className="">
