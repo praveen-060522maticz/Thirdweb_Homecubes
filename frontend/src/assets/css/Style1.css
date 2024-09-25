@@ -167,8 +167,8 @@ h6 {
 }
 .modal-backdrop {
   backdrop-filter: blur(5px) !important;
-  background-color: #3c3c3c9e !important;
-  opacity: 0.9 !important;
+  background-color: #3c3c3c61 !important;
+  opacity: 1 !important;
 }
 .nodata_found {
   font-size: 2vh;
@@ -2125,7 +2125,7 @@ input::placeholder {
   }
 
   .modal-body .duration .react_select__control {
-    width: 36vh !important;
+    width: 100% !important;
   }
 
   .modal-dialog {
@@ -2564,7 +2564,9 @@ input::placeholder {
   /* opacity: .85; */
   padding: 1.5vh;
 }
-
+.calendar_opacity .modal-content {
+  background-color: #000;
+}
 .hc-modal.common_modal .modal_title {
   font-family: var(--montserrat-font);
   font-size: 2vh;
@@ -2924,6 +2926,15 @@ input::placeholder {
     max-width: 48vh;
   }
 }
+@media screen and (max-width: 575px) {
+  .modal_listitem_tabsingle {
+    padding: 0.9vh 3.5vh;
+  }
+  .modal_inputGroup.duration {
+  display: block;
+}
+}
+
 
 /* modal end */
 

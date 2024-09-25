@@ -30,7 +30,7 @@ function Calendar({ show, handleClose, handleOpenList, setDate, validDate, setCl
 
           </div>
 
-          <div className='modal_body mt-3'>
+          <div className='modal_body mt_2'>
 
             <Datetime open={true}
               // onChange={(e) => {
