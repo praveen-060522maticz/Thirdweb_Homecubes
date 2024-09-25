@@ -258,8 +258,11 @@
 }
 
 .button-loadMore:hover {
-    background: var(--white);
-    color: var(--black);
+    /* background: var(--white);
+    color: var(--black); */
+    border: 0.3vh solid #000000;
+    color: var(--white);
+    background: linear-gradient(to right, var(--gradinet_left), var(--gradinet_right));
 }
 
 .anim_div.is-banner__lottie div[aria-label="animation"] {

@@ -666,7 +666,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                   <div  className='mb_2 mb-sm-0'>
                     <p className='modal_summaryLabel'>Minimum Price</p>
                     <div className='modal_inputGroup min_pad mt_1'>
-                      <input type="number" className='modal_input listitem_modalinput cmnInput_scrollerHider' placeholder='' value={FormValue?.NFTPrice} onChange={(e) => { SetFormValue({ ...FormValue, "NFTPrice": e.target.value }) }} />
+                      <input type="number" className='modal_input listitem_modalinput cmnInput_scrollerHider min_width' placeholder='' value={FormValue?.NFTPrice} onChange={(e) => { SetFormValue({ ...FormValue, "NFTPrice": e.target.value }) }} />
                       <Select
                         className="border_select"
                         classNamePrefix={"react_select"}
@@ -733,7 +733,7 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                         : "Minimum Bid"}
                     </p>
                     <div className='modal_inputGroup mt_1'>
-                      <input type="number" className='modal_input listitem_modalinput cmnInput_scrollerHider' placeholder='0' value={FormValue?.NFTPrice} onChange={(e) => { SetFormValue({ ...FormValue, "NFTPrice": String(e.target.value) }) }} />
+                      <input type="number" className='modal_input listitem_modalinput cmnInput_scrollerHider fixed_width' placeholder='0' value={FormValue?.NFTPrice} onChange={(e) => { SetFormValue({ ...FormValue, "NFTPrice": String(e.target.value) }) }} />
                       <Select
                         className="border_select"
                         classNamePrefix={"react_select"}
