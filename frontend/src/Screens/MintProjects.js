@@ -122,7 +122,7 @@ function MintProjects() {
                                             CMS["Revolution your Home Ownership"]?.content,
                                     }}
                                 ></p> */}
-                                <div className="home_titled hc-home__title head_txt"  >
+                                <div className="home_titled hc-home__title inner_title head_txt"  >
                                     Initial Sales
                                 </div>
                                 <p
@@ -149,7 +149,7 @@ function MintProjects() {
                     <div className='mp_inner--bottom'>
                         <div className='px-0 inner-container__width'>
                             <div className="">
-                                <p className='home_titled hc-home__title head_txt mp_bottom--title'>Buy Now on Initial <strong>Sales !</strong></p>
+                                <p className='home_titled hc-home__title inner_title head_txt mp_bottom--title'>Buy Now on Initial <strong>Sales !</strong></p>
                             </div>
 
                             {project?.length != 0 &&

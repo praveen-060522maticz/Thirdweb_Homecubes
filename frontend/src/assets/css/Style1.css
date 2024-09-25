@@ -356,7 +356,10 @@ h6 {
 }
 
 @media screen and (max-width:991px) {
-  .offcanvas-body .hc-auth__button {
+
+  .offcanvas-body .hc-auth__button,
+  .offcanvas-body .header_gradientBtn,
+  .offcanvas-body .droptoggle {
     display: none;
   }
 
@@ -452,7 +455,8 @@ h6 {
 }
 
 .mp_detailbrief.homes {
-  font-size: 1.6vh;
+  /* font-size: 1.8vh; */
+  font-size: 2vh;
 }
 
 .footer_linkwrapper ul {
@@ -638,7 +642,7 @@ h6 {
 .banner_section {
   background: linear-gradient(103.58deg, #240533 39.31%, #004448 95.31%);
   min-height: 100vh;
-  padding-top: 33vh;
+  padding-top: 33.4vh;
   position: relative;
   z-index: 5;
 }
@@ -667,10 +671,34 @@ h6 {
   z-index: -1;
 }
 
+.banner_section.market_sections {
+  padding-top: 24vh;
+}
+
+.banner_section.nftinfo_section {
+  padding-top: 24vh;
+}
+
 .home_titled {
   font-size: var(--main-title-font);
   font-weight: 600;
   margin-bottom: 0;
+}
+
+.home_titled.inner_title {
+  font-size: 4.5vh;
+}
+
+.market_bot {
+  margin-top: -18vh;
+}
+
+.nftinfo_bots {
+  margin-top: -23vh;
+}
+
+.nftinfo_bot {
+  margin-top: -14vh;
 }
 
 .hc-home__title.home_titled strong {
@@ -832,6 +860,7 @@ h6 {
 .hc-home__threecube.home_threecube {
   height: 2.5vh;
   width: 2.5vh;
+  margin-top: 0.7vh;
 }
 
 .home_investorList li {
@@ -1107,6 +1136,11 @@ h6 {
 
   .home_titled {
     font-size: 2.5vh;
+    font-weight: 500;
+  }
+
+  .home_titled.inner_title {
+    font-size: 2.5vh;
   }
 
   .home__channelBtn {
@@ -1140,6 +1174,14 @@ h6 {
 
   .home_top {
     margin-top: -3vh;
+  }
+
+  .nftinfo_bots {
+    margin-top: -33vh;
+  }
+
+  .nftinfo_bot {
+    margin-top: -24vh;
   }
 }
 
@@ -1339,7 +1381,7 @@ h6 {
   min-height: 24vh;
   min-width: 100%;
   width: 100%;
-  border-radius: 0.5vh 0.5vh 0 0;
+  border-radius: 0.8vh 0.8vh 0 0;
 }
 
 .hc-card__nft .projectcard_wrapper_sep img {
@@ -1354,7 +1396,7 @@ h6 {
 
 .hc-card__nft .nftcard_detailwrapper {
   background: var(--bg-color-1);
-  border-radius: 0.5vh;
+  border-radius: 0.6vh;
   padding: 1.5vh 1.8vh;
   position: relative;
   z-index: 3;
@@ -1362,8 +1404,8 @@ h6 {
 
 .hc-card__nft .nftcard_detailwrapper:before {
   background: var(--bg-color-1);
-  border-top-left-radius: 0.5vh;
-  border-top-right-radius: 0.5vh;
+  border-top-left-radius: 0.7vh;
+  border-top-right-radius: 0.7vh;
   content: "";
   height: 1vh;
   left: 0;
@@ -1375,8 +1417,8 @@ h6 {
 
 .hc-card__nft .nftcard_detailwrapper:after {
   background: var(--gradinet_right);
-  border-top-left-radius: 0.6vh;
-  border-top-right-radius: 0.6vh;
+  border-top-left-radius: 0.7vh;
+  border-top-right-radius: 0.7vh;
   content: "";
   height: 1vh;
   left: 0;
@@ -1800,8 +1842,8 @@ input::placeholder {
   height: 3.4vh;
   justify-content: center;
   left: 0;
-  padding-left: 1vh;
-  padding-right: 1vh;
+  padding-left: 2vh;
+  padding-right: 2vh;
   position: absolute;
   top: 0;
   width: -moz-fit-content;
@@ -1821,8 +1863,8 @@ input::placeholder {
   display: flex;
   height: 3.4vh;
   justify-content: center;
-  padding-left: 1vh;
-  padding-right: 1vh;
+  padding-left: 2vh;
+  padding-right: 2vh;
   position: absolute;
   width: -moz-fit-content;
   width: fit-content;
@@ -1841,6 +1883,12 @@ input::placeholder {
 
 .modal-body .react_select__control {
   width: 10vh !important;
+}
+
+.modal-body .pool_select .react_select__control {
+  width: 100% !important;
+  height: 4.2vh !important;
+  min-height: 4.2vh !important;
 }
 
 .modal-body .duration .react_select__control {
@@ -2070,7 +2118,7 @@ input::placeholder {
 .nftcard_ownedby {
   font-family: var(--montserrat-font);
   font-weight: 500;
-  font-size: 2.3vh;
+  font-size: 2.2vh;
 }
 
 .nft_ownerName {
@@ -2102,7 +2150,7 @@ input::placeholder {
 }
 
 .collection_top {
-  margin-top: -30vh;
+  margin-top: -38vh;
 }
 
 .nftInfo_iconsHolder,
@@ -2130,7 +2178,7 @@ input::placeholder {
 }
 
 .hc-info__name-title {
-  font-size: 4vh;
+  font-size: 3.6vh;
 }
 
 .nftInfo_greenBar {
@@ -2308,7 +2356,7 @@ input::placeholder {
   color: var(--white);
   font-family: var(--montserrat-font);
   font-size: 2.3vh;
-  font-weight: 550;
+  font-weight: 600;
   max-width: 20%;
   min-width: 20%;
   white-space: nowrap;
@@ -2386,6 +2434,10 @@ input::placeholder {
 }
 
 @media screen and (max-width:575px) {
+  .hc-info__last-bid {
+    width: 40vh;
+  }
+
   .nftInfo_socials {
     height: 2.5vh;
     width: 2.5vh;
@@ -2424,7 +2476,7 @@ input::placeholder {
 }
 
 .modal-body {
-  padding: 2.5vh 1.5vh;
+  padding: 2.5vh 2vh;
 }
 
 .modal_top {

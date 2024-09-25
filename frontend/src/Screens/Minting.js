@@ -437,7 +437,7 @@ function Minting() {
                     noimg={mintBg}
                 />
 
-                <div className="hc-mint__banner-content  w-100">
+                <div className="hc-mint__banner-content w-100">
                     <div className="inner-container__width">
                         <div className="row mx-auto">
                             <div className="custom_container  container px-0">
@@ -445,7 +445,7 @@ function Minting() {
 
                                     <div className="col-12 hc-mint__banner-col--right px-0">
                                         <div className="row align-items-end mx-auto">
-                                            <div className="col-12    col-xl-6 px-0">
+                                            <div className="col-12 col-xl-6 px-0">
                                                 <div className="hc-mint__bannerInner-col--left">
                                                     <div className="cus-back-btn ">
                                                         <Button className="px-0" onClick={() => navigate(-1)} >
@@ -465,7 +465,7 @@ function Minting() {
                                                 </div>
 
                                             </div>
-                                            {mint == "minted" ? <div className="col-12  col-xl-6 d-flex justify-content-end px-0">
+                                            {mint == "minted" ? <div className="col-12 col-xl-6 d-flex justify-content-end px-0">
                                                 <div className="hc-mint__bannerInner-col--right">
                                                     <div className="hc-mint__card-initialSales">
                                                         <p className="title text-center">Initial Sales</p>
@@ -489,7 +489,7 @@ function Minting() {
                                                                     </p>
                                                                 </div>
                                                             </div>
-                                                            <p className="hc-mint__initialSales--themeText  text-center">
+                                                            <p className="hc-mint__initialSales--themeText text-center">
                                                                 Available {isAvailable}
                                                             </p>
                                                             <div className="row align-items-center mx-0">
@@ -498,7 +498,7 @@ function Minting() {
                                                                         No of NFT's
                                                                     </p>
                                                                 </div>
-                                                                <div className=" col-6 d-flex  px-0 ">
+                                                                <div className="col-6 d-flex px-0">
                                                                     <div className="hc-mint__initialSales--border">
                                                                         <input
                                                                             type="number"
@@ -511,7 +511,7 @@ function Minting() {
                                                                         />
                                                                     </div>
                                                                 </div>
-                                                                <div className=" col-3 d-flex hc-mint__col-paddingRight">
+                                                                <div className="col-3 d-flex hc-mint__col-paddingRight">
                                                                     <p className="label text-center">
                                                                         {(mintCount * parseFloat(project?.NFTPrice)).toFixed(7)} {project?.mintTokenName}
                                                                     </p>
@@ -519,7 +519,7 @@ function Minting() {
                                                             </div>
                                                             <div className="row justify-content-center">
 
-                                                                <div className=" col-6 d-flex justify-content-center">
+                                                                <div className="col-6 d-flex justify-content-center">
                                                                     <button className="  w-100 hc-mint__button-mint" disabled={loading} onClick={() => onMint()} >
                                                                         <img
                                                                             className="header_wallet"
@@ -1075,7 +1075,7 @@ function Minting() {
 
                                     <Row className="mx-auto">
                                         <h3 className="text-center hc-mint__content-title px-0">
-                                            Gallery sdf
+                                            Gallery
                                         </h3>
                                         <div className="hc-mint__swiper-wrap">
 
