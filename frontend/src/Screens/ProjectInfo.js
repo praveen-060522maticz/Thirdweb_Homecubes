@@ -327,7 +327,7 @@ function ProjectInfo() {
                         </div>
                       </div>
                     </div> : <></>} */}
-                      <div className="col-12">
+                      <div className="col-12 px-0">
                         <div>
                           <hr className="projects_hr" />
                           <div className="projects__details ">
@@ -455,7 +455,7 @@ function ProjectInfo() {
                 <h3 className="hc-mint__content-title">
                   Estimated Property Value <span className="hc-mint__span-gradient"> {projectDetail?.propertyValue?.toUpperCase?.() ?? "1M"}$</span>
                 </h3>
-                <div className="row mint-margin__top align-items-center">
+                <div className="row mint-margin__top align-items-center mx-auto">
                   <div className="col-12 col-xl-6 px-0">
                     <div>
                       <h5 className="hc-mint__content-subtitle">
