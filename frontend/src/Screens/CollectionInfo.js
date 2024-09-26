@@ -241,8 +241,8 @@ function CollectionInfo() {
         <div className="banner_section banner_section_content claim-section">
           <div className='px-0 inner-container__width'>
             <div>
-              <div className="cus-back-btn mb-3">
-                <Button className="" onClick={() => navigate(-1)} >
+              <div className="cus-back-btn mb_2">
+                <Button className="px-0" onClick={() => navigate(-1)} >
                   <i className="fa-solid fa-chevron-left"></i>
                   Back
                 </Button>
@@ -292,8 +292,9 @@ function CollectionInfo() {
                   />
                 </div>
               </div>
-              <div className=" mt-4">
+              <div className=" mt_3">
                 <h3 className="collection-info__grid-title">Photos</h3>
+                {collectionData && arrData.length >0 ?
                 <div className="collection-grid">
                   {collectionData &&
                     arrData?.length != 0 &&
@@ -336,7 +337,7 @@ function CollectionInfo() {
                         </div>
                       );
                     })}
-                </div>
+                </div> : <div className="nodata_found ">No Data Found</div> }
               </div>
 
               {/* {Loadmore && <div className='mp-margin d-flex justify-content-center'>
@@ -467,7 +468,7 @@ function CollectionInfo() {
             />
           </div>
 
-          <div className="modal_body mt-3 hc-collection__modal--body">
+          <div className="modal_body mt_2 hc-collection__modal--body">
             <div className="hc-collection__modal-imageWrapper ">
               {videoFileFormats.includes(videoShow.split(".")[1]) ? (
                 <video

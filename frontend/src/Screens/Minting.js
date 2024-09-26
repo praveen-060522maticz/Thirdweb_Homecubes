@@ -1247,6 +1247,7 @@ function Minting() {
                                         <h3 className="text-center hc-mint__content-title fw_600 px-0">
                                             Gallery
                                         </h3>
+                                        {collection.length > 0 ?
                                         <div className="hc-mint__swiper-wrap gallery-card__swiperWrapper">
 
                                             <button
@@ -1304,7 +1305,9 @@ function Minting() {
                                                 ))}
                                             </Swiper>
 
-                                        </div>
+                                        </div> :
+                                        <div className="nodata_found ">No Data Found</div>}
+
                                         {/* <div className="position-relative">
                         <div className="greenarrow_box"></div>
                       </div> */}

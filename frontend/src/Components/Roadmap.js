@@ -187,7 +187,7 @@ function Roadmap(props) {
 
                 }
             </Row> */}
-
+{props.length > 0 ?
             <div className='hc-roadmap__new row'>
                 {props?.data?.length != 0 && props?.data?.map((val, i) => {
                     console.log("lastststindwex", props?.data?.length - 1);
@@ -310,7 +310,9 @@ function Roadmap(props) {
 
                 }
 
-            </div >
+            </div >:
+            <div className="nodata_found ">No Data Found</div>
+}
         </>
     )
 }

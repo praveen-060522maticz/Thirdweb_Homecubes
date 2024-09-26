@@ -395,61 +395,63 @@ function ProjectInfo() {
                 {/* <p className="hc-mint__banner--desc  mb-0 text-center w-75 mx-auto ">
                   {projectDetail?.CMS?.filter((val) => val.stepTitle == "Photo Galleries")?.[0]?.stepDescription}
                 </p> */}
-                <div className="hc-mint__swiper-wrap gallery-card__swiperWrapper">
+                {galleryArr.length > 0 ?
+                  <div className="hc-mint__swiper-wrap gallery-card__swiperWrapper">
 
-                  <button
-                    className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
-                    onClick={() => goPrev()}
-                  >
-                    {/* <FaChevronLeft fill="#fff" fontSize={38} className="" /> */}
-                    <img src={swiperLeftIcon} alt="left" className="img-fluid" />
+                    <button
+                      className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
+                      onClick={() => goPrev()}
+                    >
+                      {/* <FaChevronLeft fill="#fff" fontSize={38} className="" /> */}
+                      <img src={swiperLeftIcon} alt="left" className="img-fluid" />
 
-                  </button>
+                    </button>
 
 
-                  <button
-                    className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
-                    onClick={() => goNext()}
-                  >
+                    <button
+                      className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
+                      onClick={() => goNext()}
+                    >
 
-                    {/* <FaChevronRight fill="#fff" fontSize={38} className="" /> */}
-                    <img src={swiperRightIcon} alt="right" className="img-fluid" />
-                  </button>
+                      {/* <FaChevronRight fill="#fff" fontSize={38} className="" /> */}
+                      <img src={swiperRightIcon} alt="right" className="img-fluid" />
+                    </button>
 
-                  <Swiper
-                    className="mySwiper bottomnav_colswiper hc-mint__swiper gallery-card__swiper"
-                    slidesPerView={4}
-                    // spaceBetween={30}
-                    navigation={{
-                      nextEl: ".swiper-button-next1",
-                      prevEl: ".swiper-button-prev1",
-                    }}
-                    ref={swiperRef}
-                    keyboard={true}
-                    // pagination={{
-                    //   clickable: true,
-                    // }}
-                    breakpoints={{
-                      320: {
-                        slidesPerView: 2,
-                        // spaceBetween: 20,
-                      },
-                      1200: {
-                        slidesPerView: 4,
-                        // spaceBetween: 20,
-                      },
+                    <Swiper
+                      className="mySwiper bottomnav_colswiper hc-mint__swiper gallery-card__swiper"
+                      slidesPerView={4}
+                      // spaceBetween={30}
+                      navigation={{
+                        nextEl: ".swiper-button-next1",
+                        prevEl: ".swiper-button-prev1",
+                      }}
+                      ref={swiperRef}
+                      keyboard={true}
+                      // pagination={{
+                      //   clickable: true,
+                      // }}
+                      breakpoints={{
+                        320: {
+                          slidesPerView: 2,
+                          // spaceBetween: 20,
+                        },
+                        1200: {
+                          slidesPerView: 4,
+                          // spaceBetween: 20,
+                        },
 
-                    }}
-                    modules={[Navigation, Keyboard, Pagination]}
-                  >
-                    {galleryArr && galleryArr.map((i) => (
-                      <SwiperSlide >
-                        <GalleryCard data={i} />
-                        {/* <GallerCardOne data={i} /> */}
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                </div>
+                      }}
+                      modules={[Navigation, Keyboard, Pagination]}
+                    >
+                      {galleryArr && galleryArr.map((i) => (
+                        <SwiperSlide >
+                          <GalleryCard data={i} />
+                          {/* <GallerCardOne data={i} /> */}
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div> :
+                  <div className="nodata_found ">No Data Found</div>}
               </Row>
               <div className="section-estimateProperty">
                 <h3 className="hc-mint__content-title">
@@ -525,59 +527,60 @@ function ProjectInfo() {
 
 
                 {/* for mobile section - start */}
+                {feedArr.length > 0 ?
+                  <div className=" d-xl-none position-relative news-update__swipper-wrapper">
 
-                <div className=" d-xl-none position-relative news-update__swipper-wrapper">
-
-                  <button
-                    className="swiper-button-prev1-news border-0 outline-0 bg-transparent hc-swiper__arrow--left"
-                    onClick={() => newsGoPrev()}
-                  >
-                    {/* <FaChevronLeft fill="#fff" fontSize={38} className="" /> */}
-                    <img src={swiperLeftIcon} alt="left" className="img-fluid" />
-                  </button>
+                    <button
+                      className="swiper-button-prev1-news border-0 outline-0 bg-transparent hc-swiper__arrow--left"
+                      onClick={() => newsGoPrev()}
+                    >
+                      {/* <FaChevronLeft fill="#fff" fontSize={38} className="" /> */}
+                      <img src={swiperLeftIcon} alt="left" className="img-fluid" />
+                    </button>
 
 
-                  <button
-                    className="swiper-button-next1-news border-0 outline-0 bg-transparent hc-swiper__arrow--right"
-                    onClick={() => newsGoNext()}
-                  >
+                    <button
+                      className="swiper-button-next1-news border-0 outline-0 bg-transparent hc-swiper__arrow--right"
+                      onClick={() => newsGoNext()}
+                    >
 
-                    {/* <FaChevronRight fill="#fff" fontSize={38} className="" /> */}
-                    <img src={swiperRightIcon} alt="right" className="img-fluid" />
-                  </button>
-                  <Swiper
-                    className="mySwiper bottomnav_colswiper  hc-mint__swiper gallery-card__swiper "
-                    slidesPerView={1}
-                    // spaceBetween={30}
+                      {/* <FaChevronRight fill="#fff" fontSize={38} className="" /> */}
+                      <img src={swiperRightIcon} alt="right" className="img-fluid" />
+                    </button>
+                    <Swiper
+                      className="mySwiper bottomnav_colswiper  hc-mint__swiper gallery-card__swiper "
+                      slidesPerView={1}
+                      // spaceBetween={30}
 
-                    ref={newsSwiperRef}
-                    keyboard={true}
-                    pagination={false}
-                    breakpoints={{
-                      0: {
-                        slidesPerView: 1,
-                        // spaceBetween: 20,
-                      },
-                    }}
-                    navigation={{
-                      nextEl: ".swiper-button-next1-news",
-                      prevEl: ".swiper-button-prev1-news",
-                    }}
-                    modules={[Navigation, Keyboard, Pagination]}
-                  >
-                    {feedArr.length != 0 && feedArr.map((i) =>
-                      <SwiperSlide>
-                        <RewardsCard data={i} />
-                      </SwiperSlide>
-                    )}
-                  </Swiper>
-                </div>
-
+                      ref={newsSwiperRef}
+                      keyboard={true}
+                      pagination={false}
+                      breakpoints={{
+                        0: {
+                          slidesPerView: 1,
+                          // spaceBetween: 20,
+                        },
+                      }}
+                      navigation={{
+                        nextEl: ".swiper-button-next1-news",
+                        prevEl: ".swiper-button-prev1-news",
+                      }}
+                      modules={[Navigation, Keyboard, Pagination]}
+                    >
+                      {feedArr.length != 0 && feedArr.map((i) =>
+                        <SwiperSlide>
+                          <RewardsCard data={i} />
+                        </SwiperSlide>
+                      )}
+                    </Swiper>
+                  </div> :
+                  <div className="nodata_found ">No Data Found</div>}
                 {/* for mobile section - end */}
 
                 {/* for web section - start */}
-
+            
                 <div className="rewardscard_swiper d-none d-xl-block">
+             
                   <div className="new-update-grid">
                     {/* <div className="box">
                       <div className="update-white"></div>

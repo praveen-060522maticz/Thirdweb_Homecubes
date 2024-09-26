@@ -26,6 +26,7 @@ function SideTab() {
           window.removeEventListener('scroll', handleScroll); // Clean up event listener on unmount
         };
       }, []);
+      
 
     return (
         <>
@@ -55,9 +56,9 @@ function SideTab() {
                         <p className='sidetab_laebl text-center'> Claim Income</p>
                     </div>
                 </NavLink>
-                <NavLink className={`sidetab_link ${location == "/"}`} to='/projects'>
+                <NavLink className={`sidetab_link ${(location == "/projects" || location.includes("/projectInfo/" ) ) ? "active" : ""}`} to='/projects'>
                     <div className='singleTab'>
-                        {location == '/projects' ? <img className='sidetab_logo' src={require('../assets/images/property_white.svg').default} /> : <img className='sidetab_logo' src={require('../assets/images/property_green.svg').default} />}
+                        {(location == '/projects' || location.includes("/projectInfo/" )) ? <img className='sidetab_logo' src={require('../assets/images/property_white.svg').default} /> : <img className='sidetab_logo' src={require('../assets/images/property_green.svg').default} />}
                         <p className='sidetab_laebl'>All Properties</p>
                     </div>
                 </NavLink>

@@ -175,7 +175,7 @@ h6 {
   color: var(--white);
   font-weight: 500;
   text-align: center;
-  height: 30vh;
+  height: 27vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2472,6 +2472,13 @@ input::placeholder {
 }
 .heightsets{
   height: 50vh;
+}
+.fa-circle-play{
+  font-size: 2vh;
+}
+.mp_likeshare img{
+  width: 3.7vh;
+  height: 3.7vh;
 }
 .table>:not(caption)>*>* {
   padding: 0.9vh 3vh !important;
