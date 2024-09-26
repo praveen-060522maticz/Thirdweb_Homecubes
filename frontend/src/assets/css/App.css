@@ -1,5 +1,9 @@
 /* start of  mint projects*/
 
+.is_banner_section.banner_section {
+    padding-top: 34.1vh;
+}
+
 .mp_inner--bottom {
     margin-top: -30vh;
     position: relative;
@@ -10,6 +14,7 @@
     text-align: center;
     padding-top: 5vh;
     padding-bottom: 5vh;
+    font-weight: 700;
 }
 
 .inner-container__width {
@@ -25,7 +30,8 @@
 .mp-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2vw;
+    column-gap: 2vw;
+    row-gap: 3vw;
 }
 
 .mp-grid .red {
@@ -258,8 +264,11 @@
 }
 
 .button-loadMore:hover {
-    background: var(--white);
-    color: var(--black);
+    /* background: var(--white);
+    color: var(--black); */
+    border: 0.3vh solid #000000;
+    color: var(--white);
+    background: linear-gradient(to right, var(--gradinet_left), var(--gradinet_right));
 }
 
 .anim_div.is-banner__lottie div[aria-label="animation"] {
@@ -377,10 +386,10 @@
 }
 
 .hc-mint__card-initialSales {
-    padding: 1vw;
+    padding: 0.5vw 1vw 1vw 1vw;
     border-radius: 0.5vw;
-    border: 0.18vw solid var(--gradinet_right);
-    width: 29vw;
+    border: 0.12vw solid var(--gradinet_right);
+    width: 26vw;
     background: var(--bg-color-3);
 
 }
@@ -393,9 +402,9 @@
 }
 
 .hc-mint__initialSales--border {
-    border: 0.18vw solid var(--gradinet_right);
+    border: 0.13vw solid var(--gradinet_right);
     width: 100%;
-    height: 5vh;
+    height: 4.5vh;
     padding: 0.2vw;
     border-radius: 0.3vw;
 }
@@ -407,13 +416,13 @@
 .hc-mint__card-initialSales p {
     font-weight: 600;
     margin-bottom: 0px;
-    font-size: 1.05vw;
+    font-size: 0.93vw;
 }
 
 .hc-mint__initialSales--themeText {
     color: var(--gradinet_right);
-    margin-top: 2vh;
-    margin-bottom: 1.8vh !important;
+    margin-top: 1vh;
+    margin-bottom: 1vh !important;
 }
 
 .hc-mint__initialSales--progress {
@@ -492,10 +501,10 @@
     border-radius: 0.3vw;
     color: var(--white);
     font-family: var(--kanit_font);
-    font-size: 1.1vw;
+    font-size: 1vw;
     font-weight: var(--weight_five);
     outline: none;
-    padding: 1vh 2vh;
+    padding: 0.8vh 2vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -513,6 +522,10 @@
 .hc-mint__swiper-wrap {
     margin-top: 5vh;
     padding: 0px;
+}
+
+.hc-mint__swiper-buttonWrap {
+    position: relative;
 }
 
 .card-gallery {}
@@ -887,6 +900,18 @@
     left: -4%;
 }
 
+.gallery-card__swiperWrapper .hc-swiper__arrow--right img,
+.gallery-card__swiperWrapper .hc-swiper__arrow--left img {
+    width: 2.8vw;
+    height: 2.8vw;
+}
+
+.gallery-card__swiperWrapper .hc-swiper__arrow--right,
+.gallery-card__swiperWrapper .hc-swiper__arrow--left {
+    top: 30%;
+}
+
+
 .new-update-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1037,11 +1062,12 @@
 
 .stacking_tab.active {
     background: var(--blue_200);
-    color: var(--black);
+    /* color: var(--black); */
+    color: var(--white);
 }
 
 .stacking_tab.active img {
-    filter: invert(1);
+    /* filter: invert(1); */
 }
 
 .stake-actions {
@@ -1480,6 +1506,7 @@
     overflow: hidden;
 }
 
+
 .hc-collection__imageFit {
     min-width: 100%;
     width: 100%;
@@ -1496,6 +1523,10 @@
 /* media */
 
 @media screen and (max-width:1199px) {
+    .is_banner_section.banner_section {
+        padding-top: 18vh;
+    }
+
     .anim_div.is-banner__lottie div[aria-label="animation"] {
         min-width: 40vh !important;
         width: 40vh !important;
@@ -2004,6 +2035,26 @@
         font-size: 3vh;
     }
 
+
+    .gallery-card__swiperWrapper .hc-swiper__arrow--right {
+        right: -4%;
+    }
+
+    .gallery-card__swiperWrapper .hc-swiper__arrow--left {
+        left: -4%;
+    }
+
+    .gallery-card__swiperWrapper .hc-swiper__arrow--right img,
+    .gallery-card__swiperWrapper .hc-swiper__arrow--left img {
+        width: 5vw;
+        height: 5vw;
+    }
+
+    .gallery-card__swiperWrapper .hc-swiper__arrow--right,
+    .gallery-card__swiperWrapper .hc-swiper__arrow--left {
+        top: 30%;
+    }
+
     .gallery-card__swiperWrapper .hc-swiper__arrow--right {
         right: -5%;
     }
@@ -2076,7 +2127,8 @@
     }
 
     .value__wrapper-image img {
-        width: 4vw;
+        /* width: 4vw; */
+        width: 2.8vh;
     }
 
     .hh-stake__subtitle {
@@ -2298,6 +2350,11 @@
 }
 
 @media screen and (max-width:767px) {
+
+    .is_banner_section.banner_section {
+        padding-top: 18vh;
+    }
+
     .mp_inner--bottom {
         margin-top: -15vh;
     }
@@ -2399,8 +2456,6 @@
     .nft-card__content-values {
         font-size: 2vw;
     }
-
-
 
     .nft-card__content-buttons {
         margin-top: 0.9vh;
@@ -2604,7 +2659,6 @@
     }
 
     .hc-mint__initialSales--progress {
-
         border-radius: 1vw;
         padding-left: 1vw;
         padding-right: 1vw;
@@ -2626,18 +2680,28 @@
         margin-bottom: 5vh !important;
     }
 
-
-
     .hc-mint__content-title {
-        font-size: 5.5vw;
-        line-height: 8.5vw;
+        font-size: 5.9vw;
+        line-height: 11.5vw;
         display: flex;
         flex-direction: column;
         white-space: nowrap;
     }
 
+    .hc-mint__content-title.fw_600 {
+        font-weight: 600;
+    }
+
     .hc-mint__swiper-wrap {
-        margin-top: 3.5vh;
+        margin-top: 3vh;
+    }
+
+
+    .hc-mint__swiper-wrap.gallery-card__swiperWrapper .hc-swiper__arrow--left,
+    .hc-mint__swiper-wrap.gallery-card__swiperWrapper .hc-swiper__arrow--right {
+
+        width: 4vw;
+        height: 4vw;
     }
 
     .hc-mint__content-title span {
@@ -2805,11 +2869,22 @@
     }
 
     .gallery-card__swiperWrapper .hc-swiper__arrow--right {
-        right: -5%;
+        right: -4%;
     }
 
     .gallery-card__swiperWrapper .hc-swiper__arrow--left {
-        left: -5%;
+        left: -4%;
+    }
+
+    .gallery-card__swiperWrapper .hc-swiper__arrow--right img,
+    .gallery-card__swiperWrapper .hc-swiper__arrow--left img {
+        width: unset;
+        height: unset;
+    }
+
+    .gallery-card__swiperWrapper .hc-swiper__arrow--right,
+    .gallery-card__swiperWrapper .hc-swiper__arrow--left {
+        top: 30%;
     }
 
     .gallery-card__swiper .rewards_card {
@@ -2856,7 +2931,7 @@
 
     .value__wrapper-blue {
         border: 0.27vh solid var(--blue_200);
-        padding: 0.8vh 2.8vw;
+        padding: 0.8vh 3vw;
         border-radius: 0.2vw;
         gap: 1vw;
         min-height: 5vh;
@@ -2877,7 +2952,8 @@
     }
 
     .value__wrapper-image img {
-        width: 6vw;
+        /* width: 6vw; */
+        width: 2.8vh;
     }
 
     .hh-stake__subtitle {
@@ -2895,16 +2971,18 @@
 
     .stake-tab__wrapper {
         padding: 2.3vw;
+        gap: 2vh;
     }
 
     .stacking_tab {
         display: flex;
         align-items: center;
         gap: 2vw;
-        padding: 1vw 2vw;
+        /* padding: 1vw 2vw; */
+        padding: 1.8vw 2.5vw;
         font-weight: 600;
         font-size: 1.8vh;
-        border-radius: 0.6vw;
+        border-radius: 0.8vw;
         cursor: pointer;
 
     }

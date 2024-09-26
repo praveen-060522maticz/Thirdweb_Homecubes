@@ -662,7 +662,7 @@ function Staking() {
                   onClick={() => setAtciveTab("staking")}
                 >
                   <img
-                    className="top_reltabimg"
+                    className=""
                     src={
                       require("../assets/images/whitestack.svg")
                         .default
@@ -678,8 +678,9 @@ function Staking() {
                   }
                   onClick={() => setAtciveTab("rewards")}
                 >
+
                   <img
-                    className="top_reltabimg"
+                    className=""
                     src={
                       require("../assets/images/rewards.svg")
                         .default
@@ -828,12 +829,12 @@ function Staking() {
               ) : (
                 <>
                   {accountAddress ? (
-                    <Row className="justify-content-center ">
+                    <Row className="justify-content-center mx-auto mb_3">
                       <Col lg={10} className="px-0">
                         <h5 className="hh-stake__subtitle text-center">
                           Total Rewards Received {rewardAmount.toFixed(7)} USDT
                         </h5>
-                        <Row className="select_holder  stake-rewards__selects justify-content-center">
+                        <Row className="mx-auto select_holder  stake-rewards__selects justify-content-center">
                           <Col xs={6} lg={4} className="hh-col__paddings">
                             <Select
                               classNamePrefix="react-select-3"
@@ -890,11 +891,11 @@ function Staking() {
                             Pending Rewards :
                           </h3>
                           <button
-                            className="nftinfo_gradeientBtn web_listitem_btn margin__tb-5vh"
+                            className="nftinfo_gradeientBtn pendingrewards web_listitem_btn margin__tb-5vh"
                             onClick={() => handleOpebWallet()}
                           >
                             <img
-                              className="header_wallet"
+                              className="header_wallet rewardswallet"
                               src={
                                 require("../assets/images/wallet.svg")
                                   .default

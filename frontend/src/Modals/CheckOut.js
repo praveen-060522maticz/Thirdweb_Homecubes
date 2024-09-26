@@ -421,7 +421,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
 
    return (
       <>
-         <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />u
+         <Prompt when={!canReload} message={"Are you sure!!! changes may be lost...!"} />
 
          <Modal
             show={show}
@@ -429,7 +429,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
             backdrop="static"
             keyboard={false}
             centered
-            className='common_modal hc-modal'
+            className='common_modal hc-modal checkoutmodal'
             size='md'
          >
             <Modal.Body>

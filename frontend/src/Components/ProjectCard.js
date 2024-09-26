@@ -10,7 +10,11 @@ function ProjectCard(props) {
   const navigate = useNavigate();
   return (
     <>
-      <div className="nft_card hc-card__nft"  >
+
+
+
+      <div className="nft_card hc-card__nft nftwidth">
+      <div className="whteee">
         <div className="projectcard_wrapper_sep">
           <img className="img-fluid projectcard_img" src={`${config.IMG_URL}/projects/ProjectThumbnail/${ProjectThumbnail}`}
             onClick={() => {
@@ -59,6 +63,7 @@ function ProjectCard(props) {
 
           </div>}
         </div>
+</div>
       </div >
     </>
   );

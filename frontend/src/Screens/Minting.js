@@ -38,6 +38,9 @@ import mintBg from '../assets/images/mintBg3.png'
 import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import propertyImage from '../assets/images/property.png'
 import { parseHtmlString } from "../actions/common";
+import swiperRightIcon from '../assets/images/swiperrightarrow.svg'
+import swiperLeftIcon from '../assets/images/swiperleftarrow.svg'
+
 
 // import { unstable_usePrompt as usePrompt } from 'react-router-dom';
 
@@ -549,7 +552,7 @@ function Minting() {
                                                     </div>
                                                 </div>
                                             </div> : <></>}
-                                            <p className="hc-mint__banner--desc d-xl-none">
+                                            <p className="hc-mint__banner--desc px-0 d-xl-none">
                                                 {project?.projectDescription}
                                             </p>
                                         </div>
@@ -1008,6 +1011,7 @@ function Minting() {
                             )}
 
                             {mint == "minting" ? (
+
                                 <>
 
                                     {/* <Col lg={6} className="position-relative mb-5">
@@ -1077,13 +1081,14 @@ function Minting() {
                                         <h3 className="text-center hc-mint__content-title px-0">
                                             Gallery
                                         </h3>
-                                        <div className="hc-mint__swiper-wrap">
+                                        <div className="hc-mint__swiper-wrap gallery-card__swiperWrapper">
 
                                             <button
                                                 className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                                                 onClick={() => goPrev()}
                                             >
-                                                <FaChevronLeft fill="#fff" fontSize={38} className="" />
+                                                {/* <FaChevronLeft fill="#fff" fontSize={38} className="" /> */}
+                                                <img src={swiperLeftIcon} alt="left" className="img-fluid" />
                                             </button>
 
 
@@ -1092,7 +1097,8 @@ function Minting() {
                                                 onClick={() => goNext()}
                                             >
 
-                                                <FaChevronRight fill="#fff" fontSize={38} className="" />
+                                                {/* <FaChevronRight fill="#fff" fontSize={38} className="" /> */}
+                                                <img src={swiperRightIcon} alt="right" className="img-fluid" />
                                             </button>
                                             <Swiper
                                                 className="mySwiper bottomnav_colswiper hc-mint__swiper gallery-card__swiper"
@@ -1238,7 +1244,7 @@ function Minting() {
 
                                 <>
                                     <Row className="mx-auto">
-                                        <h3 className="text-center hc-mint__content-title px-0">
+                                        <h3 className="text-center hc-mint__content-title fw_600 px-0">
                                             Gallery
                                         </h3>
                                         <div className="hc-mint__swiper-wrap gallery-card__swiperWrapper">
@@ -1247,7 +1253,8 @@ function Minting() {
                                                 className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
                                                 onClick={() => goPrev()}
                                             >
-                                                <FaChevronLeft fill="#fff" className="" />
+                                                {/* <FaChevronLeft fill="#fff" className="" /> */}
+                                                <img src={swiperLeftIcon} alt="left" className="img-fluid" />
                                             </button>
 
 
@@ -1256,10 +1263,14 @@ function Minting() {
                                                 onClick={() => goNext()}
                                             >
 
-                                                <FaChevronRight fill="#fff" className="" />
+                                                {/* <FaChevronRight fill="#fff" className="" /> */}
+                                                <img src={swiperRightIcon} alt="right" className="img-fluid" />
+
                                             </button>
+
+
                                             <Swiper
-                                                className="mySwiper bottomnav_colswiper pt-4 hc-mint__swiper gallery-card__swiper"
+                                                className="mySwiper bottomnav_colswiper  hc-mint__swiper gallery-card__swiper"
                                                 slidesPerView={4}
                                                 // spaceBetween={30}
                                                 // navigation={true}

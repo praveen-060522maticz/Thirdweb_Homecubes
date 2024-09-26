@@ -317,7 +317,7 @@ function Marketplace() {
                                 </button>
                                 <Swiper
                                     className="mySwiper bottomnav_colswiper collection_swiper"
-                                    spaceBetween={30}
+                                    // spaceBetween={30}
                                     navigation={{
                                         nextEl: ".swiper-button-next1",
                                         prevEl: ".swiper-button-prev1",
@@ -329,35 +329,35 @@ function Marketplace() {
                                     breakpoints={{
                                         320: {
                                             slidesPerView: 2,
-                                            spaceBetween: 15,
+                                            // spaceBetween: 15,
                                         },
                                         450: {
                                             slidesPerView: 2,
-                                            spaceBetween: 15,
+                                            // spaceBetween: 15,
                                         },
                                         576: {
                                             slidesPerView: 2,
-                                            spaceBetween: 20,
+                                            // spaceBetween: 20,
                                         },
                                         768: {
-                                            slidesPerView: 3,
-                                            spaceBetween: 20,
+                                            slidesPerView: 2,
+                                            // spaceBetween: 20,
                                         },
                                         992: {
-                                            slidesPerView: 3.5,
-                                            spaceBetween: 20,
+                                            slidesPerView: 3,
+                                            // spaceBetween: 20,
                                         },
                                         1200: {
                                             slidesPerView: 4,
-                                            spaceBetween: 20,
+                                            // spaceBetween: 20,
                                         },
                                         1500: {
-                                            slidesPerView: 4.2,
-                                            spaceBetween: 20,
+                                            slidesPerView: 4,
+                                            // spaceBetween: 20,
                                         },
                                         1900: {
-                                            slidesPerView: 4.2,
-                                            spaceBetween: 20,
+                                            slidesPerView: 4,
+                                            // spaceBetween: 20,
                                         },
                                     }}
                                     modules={[Navigation, Keyboard]}
@@ -407,6 +407,8 @@ function Marketplace() {
                                 xs={12}
                                 className="mb_select_holder mt_1 ms-auto"
                             >
+                                <div className="d-none d-sm-block">
+                                <div className="select_bids">
                                 <Select
                                     // menuIsOpen={true}
                                     className="border_select"
@@ -429,6 +431,8 @@ function Marketplace() {
                                     }}
                                     options={options}
                                 />
+                                </div>
+                                </div>
                             </Col>
                         </Row>
 
@@ -463,6 +467,7 @@ function Marketplace() {
                                         onClick={() => setMobSearch(false)}
                                     />
                                 </div>
+                                <div className="mob_padding">
                                 <div className="mp_accord_holder mb_3">
                                     <Accordion
                                         className="mp_accordion"
@@ -529,7 +534,7 @@ function Marketplace() {
                                                         className={
                                                             priceTab == "USD"
                                                                 ? "mb_pricetab me_2 active"
-                                                                : "mb_pricetab me_2"
+                                                                : "mb_pricetab me_2 active"
                                                         }
                                                         onClick={() => setPriceTab("USDT")}
                                                     >
@@ -569,6 +574,33 @@ function Marketplace() {
                                             </Accordion.Body>
                                         </Accordion.Item>
                                     </Accordion>
+                                </div>
+                                </div>
+                                <div className="d-block d-sm-none mt_4 mb_3">
+                                <div className="select_bids">
+                                <Select
+                                    // menuIsOpen={true}
+                                    className="border_select"
+                                    classNamePrefix={"react_select"}
+                                    placeholder="Select Order"
+                                    styles={stylesgraybg}
+                                    defaultValue={selectedOption}
+                                    onChange={(e) => {
+                                        console.log(e.value, "selectedOption")
+                                        if (e.value == "hightolow") {
+                                            setNftcardData(nftcardData.sort((a, b) => parseFloat(isEmpty(b.NFTPrice) ? 0 : b.NFTPrice) - parseFloat(isEmpty(a.NFTPrice) ? 0 : a.NFTPrice)))
+                                        }
+                                        else if (e.value == "lowtohigh") {
+                                            setNftcardData(nftcardData.sort((a, b) => parseFloat(isEmpty(a.NFTPrice) ? 0 : a.NFTPrice) - parseFloat(isEmpty(b.NFTPrice) ? 0 : b.NFTPrice)))
+                                        }
+                                        else {
+                                            getCollectionTokens(true, "onSale")
+                                        }
+                                        setSelectedOption(e)
+                                    }}
+                                    options={options}
+                                />
+                                </div>
                                 </div>
                             </Col>
 
