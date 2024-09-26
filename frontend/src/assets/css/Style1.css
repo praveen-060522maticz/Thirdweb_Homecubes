@@ -1864,7 +1864,9 @@ input::placeholder {
   font-family: var(--montserrat-font);
   font-weight: 600;
   letter-spacing: unset;
-  width: 35vw;
+  /* width: 35vw; */
+  /* width: 12vw; */
+  width: 22vh;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -2138,6 +2140,9 @@ input::placeholder {
 }
 
 @media screen and (max-width:575px) {
+  .hc-nft__card-title {
+    width: 17vh;
+  }
   .mob_padding{
     padding: 0vh 2vh;
   }
@@ -2477,8 +2482,8 @@ input::placeholder {
   font-size: 2vh;
 }
 .mp_likeshare img{
-  width: 3.7vh;
-  height: 3.7vh;
+  width: 3.6vh;
+  height: 3.6vh;
 }
 .table>:not(caption)>*>* {
   padding: 0.9vh 3vh !important;

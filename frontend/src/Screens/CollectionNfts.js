@@ -149,25 +149,26 @@ function CollectionNfts() {
                                 </p>
                             </div>
                         </div>
-                      
+
                     </div>
                 </div>
-                 <div className="bottom_content collection_top mb_5">
+                <div className="bottom_content collection_top mb_5">
                     <div className="inner-container__width">
-                    {tokens?.length > 0 ? 
-                    <div  className="mp-grid mb_2 ">
-                        {tokens?.length != 0 && tokens?.map((i) =>
-                           
-                                <DataCard data={i} />
-                       
-                        )}
-                        </div> :
+                        {tokens?.length > 0 ?
+                            <div className="mp-grid mb_2 ">
+                                {tokens?.length != 0 && tokens?.map((i) =>
 
-                        <div className="heightsets"> </div> }
+                                    <DataCard data={i} />
+
+                                )}
+                            </div> :
+                            <div className="nodata_found ">No Data Found</div>
+                            // <div className="heightsets"> </div> 
+                        }
                         {Loadmore && <button className="seconday_btn" onClick={() => fetchGallery()} >Loadmore</button>}
 
                     </div>
-                </div> 
+                </div>
             </div>
 
             <div ref={footerRef}>

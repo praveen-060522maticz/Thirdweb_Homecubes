@@ -33,7 +33,7 @@ function ProjectCard(props) {
           className={location.pathname == "/projects" ? "nftcard_detailwrapper project-card__details d-flex align-items-center justify-content-between " : "nftcard_detailwrapper "}
         // className="nftcard_detailwrapper"
         >
-          <p className={location.pathname == "/projects" ? "nft_name hc-nft__card-title project-card__title" : "nft_name hc-nft__card-title "}>{projectTitle}</p>
+          <p className={location.pathname == "/projects" ? "nft_name hc-nft__card-title project-card__title" : "nft_name hc-nft__card-title width_title"}>{projectTitle}</p>
           {location.pathname == "/projects" ?
             <></> :
             <p className="nft_coinname mt-2">
