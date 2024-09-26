@@ -486,7 +486,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
                      }
                   </button>}
                   <button
-                     className='nftinfo_gradeientBtn web_listitem_btn mt_2'
+                     className='nftinfo_gradeientBtn web_listitem_btn w-100 mt_2'
                      disabled={Btn != 'done' && App_Btn == 'init' || App_Btn == 'error' || App_Btn === "process" || App_Btn === "done" ? true : false}
                      onClick={App_Btn == 'start' || App_Btn === "try" ? _Buy : null}
                   // onClick={() => _Buy()}

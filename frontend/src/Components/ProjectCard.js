@@ -11,10 +11,8 @@ function ProjectCard(props) {
   return (
     <>
 
-
-
       <div className="nft_card hc-card__nft nftwidth">
-      <div className="whteee">
+      <div className={location.pathname == '/projects'? "project_cardss" : "whteee"}>
         <div className="projectcard_wrapper_sep">
           <img className="img-fluid projectcard_img" src={`${config.IMG_URL}/projects/ProjectThumbnail/${ProjectThumbnail}`}
             onClick={() => {

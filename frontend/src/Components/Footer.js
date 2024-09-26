@@ -67,10 +67,10 @@ function Footer() {
                     </p>
                     <div className='d-flex align-items-center gap_4'>
                         <NavLink className="sidetab_link" to='/staking'>
-                            <li className='footer_links'>Privacy Policy</li>
+                            <li className='footer_links mb_list'>Privacy Policy</li>
                         </NavLink>
                         <NavLink className="sidetab_link" to='/projects'>
-                            <li className='footer_links'>Terms of Service</li>
+                            <li className='footer_links mb_list'>Terms of Service</li>
                         </NavLink>
                     </div>
                 </div>

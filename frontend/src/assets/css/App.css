@@ -266,9 +266,10 @@
 .button-loadMore:hover {
     /* background: var(--white);
     color: var(--black); */
-    border: 0.3vh solid #000000;
+    border: 0.3vh solid transparent;
     color: var(--white);
     background: linear-gradient(to right, var(--gradinet_left), var(--gradinet_right));
+    border-left: 1px solid #4449e5;
 }
 
 .anim_div.is-banner__lottie div[aria-label="animation"] {
@@ -1559,7 +1560,10 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 2vw;
     }
-
+    .mp-grid.projectmp_grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2vw;
+    }
     .mp-grid.mp-grid_list {
         grid-template-columns: repeat(3, 1fr);
         gap: 2vw;
@@ -1955,7 +1959,7 @@
     }
 
     .project-card__title {
-        width: 22vw;
+        width: 16vw;
         font-size: 2.2vh;
     }
 
@@ -2345,7 +2349,14 @@
     .mp-grid.mp-grid_list {
         grid-template-columns: repeat(3, 1fr);
     }
-
+    .mp-grid.projectmp_grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4vw 2vw;
+    }
+    .project-card__title {
+        width: 22vw;
+        font-size: 2.2vh;
+    }
 
 }
 
