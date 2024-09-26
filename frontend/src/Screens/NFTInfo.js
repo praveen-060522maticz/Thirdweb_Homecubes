@@ -1321,8 +1321,6 @@ src={require("../assets/images/clock.svg").default}
 
                                 <Row>
                                     <Col xs={12}>
-
-
                                         <p className="hc-info__price-title">Price History
                                         </p>
 
@@ -1337,7 +1335,7 @@ src={require("../assets/images/clock.svg").default}
                                                     options={graphData.options}
                                                     series={graphData.series}
                                                     type="bar"
-                                                    height={200}
+                                                    height={260}
                                                 />
                                             </Col>
                                         </Row>

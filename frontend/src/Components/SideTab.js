@@ -37,15 +37,15 @@ function SideTab() {
                         <p className='sidetab_laebl'>Home</p>
                     </div>
                 </NavLink>
-                <NavLink className={`sidetab_link ${(location == '/minting' || location.includes("/mint/")) ? "active" : ""}`} to='/minting'>
+                <NavLink className={`sidetab_link ${(location == '/minting' || location.includes("/mint/" )) ? "active" : ""}`} to='/minting'>
                     <div className='singleTab'>
                         {(location == '/minting' || location.includes("/mint/")) ? <img className='sidetab_logo' src={require('../assets/images/initialsales_active.svg').default} /> : <img className='sidetab_logo' src={require('../assets/images/initialsales.svg').default} />}
                         <p className='sidetab_laebl'>Initial Sales</p>
                     </div>
                 </NavLink>
-                <NavLink className={`sidetab_link ${location == "/marketplace" ? "active" : ""}`} to='/marketplace'>
+                <NavLink className={`sidetab_link ${(location == "/marketplace"  ) ? "active" : ""}`} to='/marketplace'>
                     <div className='singleTab'>
-                        {location == '/marketplace' ? <img className='sidetab_logo' src={require('../assets/images/marketplace_active.svg').default} /> : <img className='sidetab_logo' src={require('../assets/images/marketplace.svg').default} />}
+                        {(location == '/marketplace') ? <img className='sidetab_logo' src={require('../assets/images/marketplace_active.svg').default} /> : <img className='sidetab_logo' src={require('../assets/images/marketplace.svg').default} />}
                         <p className='sidetab_laebl'>Marketplace</p>
                     </div>
                 </NavLink>

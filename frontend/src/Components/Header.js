@@ -24,6 +24,7 @@ import web3utill from 'web3-utils'
 
 
 function Header() {
+    const location = useLocation();
     const [showDropdown, setShowDropdown] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);  // initially closed
     const toggleMenu = () => {
@@ -394,7 +395,10 @@ function Header() {
     return (
         <>
 
-            <div className="homecube_header">
+            <div 
+            className="homecube_header"
+            // className={location.pathname == `/profile/${wallet.accountAddress} ? "homecube_header dd" : "homecube_header" }`}
+            >
 
                 <Navbar key="lg" expand="lg">
                     <Container>
@@ -408,7 +412,7 @@ function Header() {
                             />
                         </Navbar.Brand>
                         <div className="d-block d-lg-none">
-                            <div className="d-flex align-items-center gap-3">
+                            <div className="d-flex align-items-center gap_mobile">
                                 {wallet && wallet?.accountAddress &&
                                     <Dropdown onMouseLeave={() => setShowDropdown(false)}
                                         onMouseOver={() => setShowDropdown(true)}>
@@ -429,7 +433,7 @@ function Header() {
                                                 </span>
                                             </NavLink></DropdownToggle>
                                         <DropdownMenu className="dropmenu px-2" show={showDropdown}>
-                                            <div className="mb-2 d-flex align-items-center justify-content-between">
+                                            <div className="mb_1 d-flex align-items-center justify-content-between">
                                                 <p className="bal mb-0">Balances</p>
                                                 <NavLink
                                                     className="sidetab_link"
@@ -477,7 +481,7 @@ function Header() {
                                     </button>
                                 ) : (
                                     <button
-                                         className="walletbtn"
+                                        className="walletbtn"
                                         onClick={() => {
                                             if (ready && authenticated && !isWalletConnected && connectedwalet) {
                                                 // wallets[0].linked
@@ -527,6 +531,64 @@ function Header() {
                                     <NavLink to="/contact" activeClassName="active" onClick={() => toggleMenu()}> Contact</NavLink>
                                     {wallet && wallet?.accountAddress && (
                                         <NavLink to={`/profile/${wallet.accountAddress}`} activeClassName="active" onClick={() => toggleMenu()}> Profile</NavLink>)}
+
+                                    {wallet && wallet?.accountAddress &&
+                                        <Dropdown onMouseLeave={() => setShowDropdown(false)}
+                                            onMouseOver={() => setShowDropdown(true)}>
+                                            <DropdownToggle className="droptoggle mt-3 mt-lg-0 py-0 px-0">
+                                                <NavLink
+                                                    className="user_hvr_btn primary_blueBtn"
+                                                    to={`/profile/${wallet.accountAddress}`}
+                                                >
+                                                    <span >
+                                                        {payload?.Profile != "" ?
+                                                            <img
+                                                                className='img-fluid prof_img_header'
+                                                                // style={{maxHeight:"100%",maxWidth:"100%"}}
+                                                                src={`${config?.IMG_URL}/user/${payload?.WalletAddress}/profile/${payload?.Profile}`}
+                                                            />
+                                                            :
+                                                            <i class="fa-solid fa-user"></i>}
+                                                    </span>
+                                                </NavLink></DropdownToggle>
+                                            <DropdownMenu className="dropmenu droppadding" show={showDropdown}>
+                                                <div className="mb_1 d-flex align-items-center justify-content-between">
+                                                    <p className="bal mb-0">Balances</p>
+                                                    <NavLink
+                                                        className="sidetab_link"
+                                                        to={`/profile/${wallet.accountAddress}`}
+                                                    >
+                                                        <li
+                                                            className={
+                                                                active == "contact"
+                                                                    ? "active header_link"
+                                                                    : "header_link"
+                                                            }
+                                                            onClick={() => setActive("profile")}
+                                                        >
+                                                            My Profile
+                                                        </li>
+                                                    </NavLink>
+                                                </div>
+                                                {currency?.length != 0 && currency.map((val) => {
+                                                    return (
+                                                        <p className="id id_bal mb_1">{val?.balance} {val?.value}</p>
+                                                    )
+                                                })}
+                                                <p className="metamask mb_1">MetaMask</p>
+                                                <div className="token mb_1 d-flex align-items-center justify-content-between">
+                                                    <span className="metaaddress">{address_showing(wallet?.accountAddress)}</span>
+                                                    <CopyToClipboard
+                                                        onCopy={() => toast.success("Address copied successfully")}
+                                                        text={`${wallet?.accountAddress}`}
+                                                    >
+                                                        <i class="fa-regular fa-copy copymeta"></i>
+
+                                                    </CopyToClipboard>
+                                                </div>
+                                            </DropdownMenu>
+                                        </Dropdown>
+                                    }
                                     {wallet && wallet?.accountAddress && authenticated ? (
                                         <button
                                             className="header_gradientBtn"
@@ -566,64 +628,6 @@ function Header() {
                                             />
                                         </button>
                                     )}
-                                    {wallet && wallet?.accountAddress &&
-                                        <Dropdown onMouseLeave={() => setShowDropdown(false)}
-                                            onMouseOver={() => setShowDropdown(true)}>
-                                            <DropdownToggle className="droptoggle mt-3 mt-lg-0 py-0 px-0">
-                                                <NavLink
-                                                    className="user_hvr_btn primary_blueBtn me-0"
-                                                    to={`/profile/${wallet.accountAddress}`}
-                                                >
-                                                    <span >
-                                                        {payload?.Profile != "" ?
-                                                            <img
-                                                                className='img-fluid prof_img_header'
-                                                                // style={{maxHeight:"100%",maxWidth:"100%"}}
-                                                                src={`${config?.IMG_URL}/user/${payload?.WalletAddress}/profile/${payload?.Profile}`}
-                                                            />
-                                                            :
-                                                            <i class="fa-solid fa-user"></i>}
-                                                    </span>
-                                                </NavLink></DropdownToggle>
-                                            <DropdownMenu className="dropmenu px-3 py-3" show={showDropdown}>
-                                                <div className="mb-2 d-flex align-items-center justify-content-between">
-                                                    <p className="bal mb-0">Balances</p>
-                                                    <NavLink
-                                                        className="sidetab_link"
-                                                        to={`/profile/${wallet.accountAddress}`}
-                                                    >
-                                                        <li
-                                                            className={
-                                                                active == "contact"
-                                                                    ? "active header_link"
-                                                                    : "header_link"
-                                                            }
-                                                            onClick={() => setActive("profile")}
-                                                        >
-                                                            My Profile
-                                                        </li>
-                                                    </NavLink>
-                                                </div>
-                                                {currency?.length != 0 && currency.map((val) => {
-                                                    return (
-                                                        <p className="id mb-1">{val?.balance} {val?.value}</p>
-                                                    )
-                                                })}
-                                                <p className="metamask mb-1">MetaMask</p>
-                                                <div className="token mb-1 d-flex align-items-center justify-content-between">
-                                                    <span>{address_showing(wallet?.accountAddress)}</span>
-                                                    <CopyToClipboard
-                                                        onCopy={() => toast.success("Address copied successfully")}
-                                                        text={`${wallet?.accountAddress}`}
-                                                    >
-                                                        <i class="fa-regular fa-copy"></i>
-
-                                                    </CopyToClipboard>
-                                                </div>
-                                            </DropdownMenu>
-                                        </Dropdown>
-                                    }
-
                                 </Nav>
                             </Offcanvas.Body>
                         </Navbar.Offcanvas>

@@ -187,7 +187,7 @@ function Projects() {
             </div>
 
             <div className='project__list-cards'>
-              <div className='mp-grid'>
+              <div className='mp-grid projectmp_grid'>
                 {Projects.length != 0 && Projects.map((i) =>
                   <ProjectCard data={i} show={true} />
                 )}

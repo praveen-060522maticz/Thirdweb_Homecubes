@@ -218,7 +218,7 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
 
 
             <button
-              className='nftinfo_gradeientBtn web_listitem_btn mt_2'
+              className='nftinfo_gradeientBtn web_listitem_btn w-100 mt_2'
               disabled={Btn == 'error' || Btn === "process" || Btn === "done" ? true : false}
               onClick={Btn == 'start' || Btn === "try" ? FormSubmit : null}
             >

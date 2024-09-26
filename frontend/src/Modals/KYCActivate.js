@@ -185,7 +185,7 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
         backdrop="static"
         keyboard={false}
         centered
-        className='common_modal'
+        className='common_modal kycactivates'
       >
         <Modal.Body>
           <div className='modal_top'>

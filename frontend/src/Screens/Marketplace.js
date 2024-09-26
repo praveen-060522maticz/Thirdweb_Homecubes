@@ -414,6 +414,7 @@ function Marketplace() {
                                     className="border_select"
                                     classNamePrefix={"react_select"}
                                     placeholder="Select Order"
+                                    isSearchable={false}
                                     styles={stylesgraybg}
                                     defaultValue={selectedOption}
                                     onChange={(e) => {
