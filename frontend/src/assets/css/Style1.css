@@ -175,6 +175,11 @@ h6 {
   color: var(--white);
   font-weight: 500;
   text-align: center;
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--montserrat-font);
 }
 
 /* header */
@@ -323,6 +328,7 @@ h6 {
 
 .offcanvas {
   background-color: var(--bggradient_dark);
+  z-index: 99999 !important;
 }
 
 .btn-close {
@@ -364,6 +370,10 @@ h6 {
   border-color: transparent !important;
 }
 
+.modal-body .header_wallet.rewardswallet {
+  height: 3vh;
+  width: 3vh;
+}
 @media screen and (max-width:991px) {
 
   .offcanvas-body .hc-auth__button,
@@ -376,7 +386,10 @@ h6 {
     height: 4vh;
     width: 4vh;
   }
-
+  .header_wallet.rewardswallet{
+    height: 3vh;
+    width: 3vh;
+  }
   .navbar {
     height: 9vh;
   }
@@ -1196,13 +1209,14 @@ h6 {
 @media screen and (max-width:767px) {
   .home-grid {
     grid-template-columns: repeat(1, 1fr);
-    gap: 4vw;
+    gap: 4.5vw;
   }
 }
 
 @media screen and (max-width:575px) {
   .home_titled.inner_title {
-    font-size: 2.9vh;
+    /* font-size: 2.9vh; */
+    font-size: 3vh;
 }
   .primary_blueBtn {
     font-weight: 600;
@@ -1687,7 +1701,7 @@ input::placeholder {
 .form-check-input:checked[type="checkbox"] {
   --bs-form-check-bg-image: url("../images/rectagle.svg");
   background-image: url("../images/rectagle.svg");
-  background-size: 1vh;
+  background-size: 0.94vh;
   box-shadow: none !important;
   cursor: pointer;
   margin-top: 0.2vh;
@@ -1703,7 +1717,7 @@ input::placeholder {
 .mp_statusLabel {
   color: var(--white);
   font-family: var(--montserrat-font);
-  font-size: 1.7vh;
+  font-size: 1.8vh;
   font-weight: 500;
   margin: 0;
 }
@@ -1714,12 +1728,14 @@ input::placeholder {
   border-radius: 5px;
   color: var(--white);
   font-family: var(--montserrat-font);
-  font-size: 1.6vh;
+  font-size: 1.8vh;
   font-weight: 500;
   outline: none;
-  padding: 0.5vh 1.2vh;
+  padding: 0.7vh 1.4vh;
 }
-
+.mb_pricetab.active{
+   background-color: var(--gradinet_right);
+}
 .mb_priceInp,
 .mb_priceInp::placeholder {
   color: var(--white);
@@ -1736,6 +1752,7 @@ input::placeholder {
   border: 1px solid var(--border-color-1);
   border-radius: 5px;
   font-family: var(--montserrat-font);
+  /* font-size: 1.8vh; */
   font-size: 1.8vh;
   font-weight: 600;
   max-width: 100%;
@@ -1750,7 +1767,8 @@ input::placeholder {
   border-radius: 5px;
   color: var(--white);
   font-family: var(--montserrat-font);
-  font-size: 1.6vh;
+  /* font-size: 1.6vh; */
+  font-size: 1.8vh;
   font-weight: 500;
   outline: none;
   padding: 1vh;
@@ -2479,6 +2497,10 @@ input::placeholder {
     min-width: 18vh;
     width: 18vh;
   }
+  .nftinfo_gradeientBtn.pendingrewards  {
+    min-width: 21vh;
+    width: 21vh;
+}
 
   .hc-info__name-title {
     font-size: 2.6vh;
@@ -3368,7 +3390,7 @@ input::placeholder {
 
   .profile_top {
     /* margin-top: -5vh; */
-    margin-top: -10vh;
+    margin-top: -11vh;
   }
 
   .gap_set {
@@ -3401,7 +3423,7 @@ input::placeholder {
   }
 
   .kyc_activated {
-    padding: 1vh 0.6vh;
+    padding: 1vh 0.7vh;
   }
 
   .kyc_activated p {

@@ -552,7 +552,7 @@ function Minting() {
                                                     </div>
                                                 </div>
                                             </div> : <></>}
-                                            <p className="hc-mint__banner--desc d-xl-none">
+                                            <p className="hc-mint__banner--desc px-0 d-xl-none">
                                                 {project?.projectDescription}
                                             </p>
                                         </div>

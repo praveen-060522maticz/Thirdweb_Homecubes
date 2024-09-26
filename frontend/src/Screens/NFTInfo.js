@@ -1221,14 +1221,12 @@ src={require("../assets/images/clock.svg").default}
                 {/* Tokens[TabName]?.myowner?.PutOnSaleType ==
                                                 "FixedPrice" */}
 
-                <div className={
-                    (Tokens[TabName]?.myowner?.WalletAddress ==
+                <div className={(Tokens[TabName]?.myowner?.WalletAddress ==
                         accountAddress && Tokens[TabName]?.highbid) ? "bottom_content nftinfo_bot" :
                         Tokens[TabName]?.myowner?.PutOnSaleType == "FixedPrice" ?
                             "bottom_content nftinfo_bot2" : Tokens["All"]?.owner?.PutOnSaleType ===
                                         "TimedAuction" ? "bottom_content salesend_bot" :
-                            "bottom_content nftinfo_bots"   
-                }>
+                            "bottom_content nftinfo_bots"}>
                     <div className="inner-container__width">
                         <Row>
                             <Col lg={12} md={12} sm={12} xs={12} className="">

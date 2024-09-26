@@ -534,7 +534,7 @@ function Marketplace() {
                                                         className={
                                                             priceTab == "USD"
                                                                 ? "mb_pricetab me_2 active"
-                                                                : "mb_pricetab me_2"
+                                                                : "mb_pricetab me_2 active"
                                                         }
                                                         onClick={() => setPriceTab("USDT")}
                                                     >

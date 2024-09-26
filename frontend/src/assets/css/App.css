@@ -1062,11 +1062,12 @@
 
 .stacking_tab.active {
     background: var(--blue_200);
-    color: var(--black);
+    /* color: var(--black); */
+    color: var(--white);
 }
 
 .stacking_tab.active img {
-    filter: invert(1);
+    /* filter: invert(1); */
 }
 
 .stake-actions {
@@ -2126,7 +2127,8 @@
     }
 
     .value__wrapper-image img {
-        width: 4vw;
+        /* width: 4vw; */
+        width: 2.8vh;
     }
 
     .hh-stake__subtitle {
@@ -2929,7 +2931,7 @@
 
     .value__wrapper-blue {
         border: 0.27vh solid var(--blue_200);
-        padding: 0.8vh 2.8vw;
+        padding: 0.8vh 3vw;
         border-radius: 0.2vw;
         gap: 1vw;
         min-height: 5vh;
@@ -2950,7 +2952,8 @@
     }
 
     .value__wrapper-image img {
-        width: 6vw;
+        /* width: 6vw; */
+        width: 2.8vh;
     }
 
     .hh-stake__subtitle {
@@ -2968,16 +2971,18 @@
 
     .stake-tab__wrapper {
         padding: 2.3vw;
+        gap: 2vh;
     }
 
     .stacking_tab {
         display: flex;
         align-items: center;
         gap: 2vw;
-        padding: 1vw 2vw;
+        /* padding: 1vw 2vw; */
+        padding: 1.8vw 2.5vw;
         font-weight: 600;
         font-size: 1.8vh;
-        border-radius: 0.6vw;
+        border-radius: 0.8vw;
         cursor: pointer;
 
     }

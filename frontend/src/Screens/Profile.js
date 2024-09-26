@@ -740,7 +740,7 @@ function Profile() {
                     </div>}
                 </>
                 :
-                Tokens[value] &&
+                !Tokens[value] &&
                   Tokens[value]?.list?.length > 0 ?
                   <>
                     <div className='stake-grid mb_2'>
@@ -755,7 +755,7 @@ function Profile() {
                       </div>}
                   </>
 
-                  : <p className='nodata_found'>No data found</p>
+                  : <p className='nodata_found'>No Data Found</p>
               }
             </div>
           </div>

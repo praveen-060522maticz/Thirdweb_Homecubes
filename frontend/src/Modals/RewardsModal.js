@@ -96,10 +96,10 @@ function RewardsModal({ show, handleClose, setWallet }) {
               </Col>
               <Col xs={12} className='mob_centerr mb-3 mb-sm-0 margin__tb-5vh'>
                 <button onClick={() => { onWalletClick("MetaMask") }}
-                  className="nftinfo_gradeientBtn web_listitem_btn"
+                  className="nftinfo_gradeientBtn pendingrewards web_listitem_btn"
                 >
                   <img
-                    className="header_wallet"
+                    className="header_wallet rewardswallet"
                     src={
                       require("../assets/images/wallet.svg")
                         .default
