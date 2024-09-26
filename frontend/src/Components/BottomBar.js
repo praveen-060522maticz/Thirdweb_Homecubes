@@ -4,7 +4,7 @@ import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 
 function BottomBar() {
 
-    const location = useLocation();
+    const location = useLocation().pathname;
     return (
         <>
             <div className='bottomBar'>
@@ -18,27 +18,27 @@ function BottomBar() {
                         </NavLink> */}
                         <NavLink to="/minting" className="sidetab_link">
                             <div className='bottombar_single'>
-                                <img className='bottombar_img' src={location.pathname === "/minting"?  require('../assets/images/initial_white.svg').default : require('../assets/images/initial_green.svg').default} />
-                                <p className={location.pathname === "/minting"? "bottombar_label whites mt-1 bottombar_alignlabel" : 'bottombar_label mt-1 bottombar_alignlabel'}>Initial Sales</p>
+                                <img className='bottombar_img' src={(location === "/minting" || location.includes("/mint/" ))?  require('../assets/images/initial_white.svg').default : require('../assets/images/initial_green.svg').default} />
+                                <p className={(location === "/minting" || location.includes("/mint/" ))? "bottombar_label whites mt-1 bottombar_alignlabel" : 'bottombar_label mt-1 bottombar_alignlabel'}>Initial Sales</p>
                             </div>
                         </NavLink>
                         <NavLink to="/marketplace" className="sidetab_link">
                             <div className='bottombar_single'>
-                                <img className='bottombar_img' src={location.pathname === "/marketplace"?  require('../assets/images/marketplace_active.svg').default : require('../assets/images/marketplace_greens.svg').default} />
-                                <p className={location.pathname === "/marketplace"? "bottombar_label whites mt-1 bottombar_alignlabel" : 'bottombar_label mt-1 bottombar_alignlabel'}>Marketplace</p>
+                                <img className='bottombar_img' src={location === "/marketplace"?  require('../assets/images/marketplace_active.svg').default : require('../assets/images/marketplace_greens.svg').default} />
+                                <p className={location === "/marketplace"? "bottombar_label whites mt-1 bottombar_alignlabel" : 'bottombar_label mt-1 bottombar_alignlabel'}>Marketplace</p>
                             </div>
                         </NavLink>
                         <NavLink to="/staking" className="sidetab_link">
                             <div className='bottombar_single'>
-                                <img className='bottombar_img' src={location.pathname === "/staking"?  require('../assets/images/claimincome_active.svg').default : require('../assets/images/claim_green.svg').default}  />
-                                <p className={location.pathname === "/staking"? "bottombar_label whites mt-1 bottombar_alignlabel" : 'bottombar_label mt-1 bottombar_alignlabel'}>Claim Income</p>
+                                <img className='bottombar_img' src={location === "/staking"?  require('../assets/images/claimincome_active.svg').default : require('../assets/images/claim_green.svg').default}  />
+                                <p className={location === "/staking"? "bottombar_label whites mt-1 bottombar_alignlabel" : 'bottombar_label mt-1 bottombar_alignlabel'}>Claim Income</p>
 
                             </div>
                         </NavLink>
                         <NavLink to="/projects" className="sidetab_link">
                             <div className='bottombar_single'>
-                                <img className='bottombar_img' src={location.pathname === "/projects"?  require('../assets/images/property_white.svg').default : require('../assets/images/property_green.svg').default}  />
-                                <p className={location.pathname === "/projects"? "bottombar_label whites mt-1 bottombar_alignlabel" : 'bottombar_label mt-1 bottombar_alignlabel'}>Properties</p>
+                                <img className='bottombar_img' src={(location == '/projects' || location.includes("/projectInfo/" ))?  require('../assets/images/property_white.svg').default : require('../assets/images/property_green.svg').default}  />
+                                <p className={(location == '/projects' || location.includes("/projectInfo/" ))? "bottombar_label whites mt-1 bottombar_alignlabel" : 'bottombar_label mt-1 bottombar_alignlabel'}>Properties</p>
                             </div>
                         </NavLink>
 
