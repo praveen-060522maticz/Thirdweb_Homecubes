@@ -2470,7 +2470,9 @@ input::placeholder {
   min-width: 20%;
   white-space: nowrap;
 }
-
+.heightsets{
+  height: 50vh;
+}
 .table>:not(caption)>*>* {
   padding: 0.9vh 3vh !important;
   /* padding: 0.9vh 4vh !important; */

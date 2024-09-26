@@ -154,13 +154,16 @@ function CollectionNfts() {
                 </div>
                  <div className="bottom_content collection_top mb_5">
                     <div className="inner-container__width">
+                    {tokens?.length > 0 ? 
                     <div  className="mp-grid mb_2 ">
                         {tokens?.length != 0 && tokens?.map((i) =>
                            
                                 <DataCard data={i} />
                        
                         )}
-                        </div>
+                        </div> :
+
+                        <div className="heightsets"> </div> }
                         {Loadmore && <button className="seconday_btn" onClick={() => fetchGallery()} >Loadmore</button>}
 
                     </div>
