@@ -52,7 +52,7 @@ function CollectionInfo() {
 
   console.log("priceCal", priceCal);
   console.log("nftcardData", nftcardData);
-console.log('collectionData---->',collectionData);
+  console.log('collectionData---->', collectionData);
 
   const navigate = useNavigate();
 
@@ -258,7 +258,7 @@ console.log('collectionData---->',collectionData);
                         }/${collectionData?.galleryThumbImage}`}
                     />
                   </div>
-             
+
                 </div>
                 <div className="mp_likeshare ">
                   <img
@@ -268,11 +268,11 @@ console.log('collectionData---->',collectionData);
                 </div>
               </div>
 
-              <div className="bblist"> 
-              <h3 className="collection-info__profile-name">
-                    {collectionData?.galleryTitle}
-                  </h3>
-                  {/* {description ? (
+              <div className="bblist">
+                <h3 className="collection-info__profile-name">
+                  {collectionData?.galleryTitle}
+                </h3>
+                {/* {description ? (
                         <p className="mp_detailbrief hc-home__desc mt_1">
                           {collectionData?.galleryDescription}
                         </p>
@@ -295,66 +295,66 @@ console.log('collectionData---->',collectionData);
                   ) : (
                     <></>
                   )} */}
-                </div>  
+              </div>
 
 
 
-              <div className=" mt_3">
+              <div className=" mt_3 pb_3">
                 <h3 className="collection-info__grid-title">Photos</h3>
-                {collectionData && arrData.length >0 ?
-                <div className="collection-grid">
-                  {collectionData &&
-                    arrData?.length != 0 &&
-                    arrData?.map((val) => {
-                      return (
+                {collectionData && arrData.length > 0 ?
+                  <div className="collection-grid">
+                    {collectionData &&
+                      arrData?.length != 0 &&
+                      arrData?.map((val) => {
+                        return (
 
 
-                        <div className="collection__image-card d-flex flex-column align-items-center">
+                          <div className="collection__image-card d-flex flex-column align-items-center">
 
-                          <div className="collection__image-wrapper" >
-                            {videoFileFormats.includes(val.split(".")[1]) ? (
-                              <div
-                                className="position-relative"
-                                style={{ cursor: "pointer" }}
-                                onClick={() => handleShowVideo(val)}
-                              >
-                                <div className="blur_thumbnailer">
-                                  <div className="playBtn_fitter">
-                                    <i class="fa-regular fa-circle-play" />
+                            <div className="collection__image-wrapper" >
+                              {videoFileFormats.includes(val.split(".")[1]) ? (
+                                <div
+                                  className="position-relative"
+                                  style={{ cursor: "pointer" }}
+                                  onClick={() => handleShowVideo(val)}
+                                >
+                                  <div className="blur_thumbnailer">
+                                    <div className="playBtn_fitter">
+                                      <i class="fa-regular fa-circle-play" />
+                                    </div>
                                   </div>
+                                  <video
+                                    className="img-fluid collectionss_img"
+                                    src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
+                                  />
                                 </div>
-                                <video
-                                  className="img-fluid collectionss_img"
+                              ) : (
+                                <img
+                                  className="collection-width-fit"
+                                  style={{ cursor: "pointer" }}
                                   src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
+                                  onClick={() => handleShowVideo(val)}
                                 />
-                              </div>
-                            ) : (
-                              <img
-                                className="collection-width-fit"
-                                style={{ cursor: "pointer" }}
-                                src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
-                                onClick={() => handleShowVideo(val)}
-                              />
-                            )}
+                              )}
 
+                            </div>
+                            <h3 className="collection__image-wrapper--name  text-center">
+                              Image name
+                            </h3>
                           </div>
-                          <h3 className="collection__image-wrapper--name  text-center">
-                            Image name
-                          </h3>
-                        </div>
-                      );
-                    })}
-                </div> : <div className="nodata_found ">No Data Found</div> }
+                        );
+                      })}
+                  </div> : <div className="nodata_found ">No Data Found</div>}
               </div>
 
               {/* {Loadmore && <div className='mp-margin d-flex justify-content-center'>
                 <button className="button-loadMore" onClick={() => loadData()}>Load More</button>
               </div>} */}
 
-              {Loadmore && 
-              <div className='mp-margin d-flex justify-content-center'>
-                <button className="button-loadMore" onClick={() => loadData()}>Load More</button>
-              </div>}
+              {Loadmore &&
+                <div className='mp-margin d-flex justify-content-center'>
+                  <button className="button-loadMore" onClick={() => loadData()}>Load More</button>
+                </div>}
             </div>
           </div>
         </div>
