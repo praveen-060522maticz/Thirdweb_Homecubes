@@ -1158,16 +1158,7 @@ function Minting() {
                                             </div>
                                         </div>
                                         <div className="row mx-auto mint-margin__top">
-                                            <div className="col-12 col-xl-5 px-0">
-                                                <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title }} >
 
-                                                </h5>
-                                                {/* <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} /> */}
-                                                <p className="hc-mint__banner--desc mb-0">
-                                                    {parseHtmlString(cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content)}
-                                                </p>
-                                            </div>
-                                            <div className="col-2 px-0 d-none d-xl-block"></div>
                                             <div className="col-12 col-xl-5 px-0 ">
                                                 <div>
                                                     <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title }} >
@@ -1178,6 +1169,16 @@ function Minting() {
                                                     </p>
 
                                                 </div>
+                                            </div>
+                                            <div className="col-2 px-0 d-none d-xl-block"></div>
+                                            <div className="col-12 col-xl-5 px-0">
+                                                <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title }} >
+
+                                                </h5>
+                                                {/* <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} /> */}
+                                                <p className="hc-mint__banner--desc mb-0">
+                                                    {parseHtmlString(cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content)}
+                                                </p>
                                             </div>
                                         </div>
                                         {/* <Col lg={6} md={6} xs={12} className="">
@@ -1321,16 +1322,6 @@ function Minting() {
                                         </div>
 
                                         <div className="row mint-margin__top mx-auto">
-                                            <div className="col-12 col-xl-5 px-0">
-                                                <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title }} >
-
-                                                </h5>
-                                                {/* <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} /> */}
-                                                <p className="hc-mint__banner--desc mb-0">
-                                                    {parseHtmlString(cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content)}
-                                                </p>
-                                            </div>
-                                            <div className="col-2 px-0 d-none d-xl-block"></div>
                                             <div className="col-12 col-xl-5 px-0 ">
                                                 <div>
                                                     <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title }} >
@@ -1341,6 +1332,18 @@ function Minting() {
                                                     </p>
 
                                                 </div>
+                                            </div>
+
+                                            <div className="col-2 px-0 d-none d-xl-block"></div>
+
+                                            <div className="col-12 col-xl-5 px-0">
+                                                <h5 className="hc-mint__content-subtitle " dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.title }} >
+
+                                                </h5>
+                                                {/* <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} /> */}
+                                                <p className="hc-mint__banner--desc mb-0">
+                                                    {parseHtmlString(cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content)}
+                                                </p>
                                             </div>
                                         </div>
 

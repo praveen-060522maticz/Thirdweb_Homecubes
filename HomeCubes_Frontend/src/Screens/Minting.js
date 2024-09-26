@@ -930,6 +930,17 @@ function Minting() {
                       <p className="hc-mint__banner--desc mt-3 mb-0">
                         {project?.projectDescription}
                       </p>
+                      
+                      <Col lg={6} md={6} xs={12} className="mt-4">
+                        <Row>
+                          <Col lg={10} md={12} xs={12}>
+                            <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5" dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title }} >
+                            </h5>
+                            <ReadMore descText={cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.content} />
+                          </Col>
+                        </Row>
+                      </Col>
+                      
                       <Col lg={6} md={6} xs={12} className="mt-4">
                         <Row>
                           <Col lg={10} md={12} xs={12}>
@@ -938,15 +949,6 @@ function Minting() {
                             </h5>
                             <ReadMore descText={cmsCon.filter((val) => val?.key == "How to buy from Marketplace ?")?.[0]?.content} />
 
-                          </Col>
-                        </Row>
-                      </Col>
-                      <Col lg={6} md={6} xs={12} className="mt-4">
-                        <Row>
-                          <Col lg={10} md={12} xs={12}>
-                            <h5 className="hc-mint__content-subtitle mt-3 mt-lg-5" dangerouslySetInnerHTML={{ __html: cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.title }} >
-                            </h5>
-                            <ReadMore descText={cmsCon.filter((val) => val?.key == "How to Mint out NFT ?")?.[0]?.content} />
                           </Col>
                         </Row>
                       </Col>
