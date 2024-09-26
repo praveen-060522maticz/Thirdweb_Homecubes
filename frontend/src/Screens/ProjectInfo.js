@@ -578,9 +578,9 @@ function ProjectInfo() {
                 {/* for mobile section - end */}
 
                 {/* for web section - start */}
-            
+
                 <div className="rewardscard_swiper d-none d-xl-block">
-             
+
                   <div className="new-update-grid">
                     {/* <div className="box">
                       <div className="update-white"></div>
@@ -674,12 +674,14 @@ function ProjectInfo() {
                     </SwiperSlide>
                   )}
                 </Swiper> */}
-
-              <div className="mp-grid mp-grid_list marketplace_margin">
-                {tokens?.length != 0 && tokens?.map((i) =>
-                  <DataCard data={i} />
-                )}
-              </div>
+              {tokens?.length > 0 ?
+                <div className="mp-grid mp-grid_list marketplace_margin">
+                  {tokens?.length != 0 && tokens?.map((i) =>
+                    <DataCard data={i} />
+                  )}
+                </div>
+                :
+                <div className="nodata_found ">No Data Found</div>}
 
 
               {/* <div className="greenarrow_boxHolder position-relative">

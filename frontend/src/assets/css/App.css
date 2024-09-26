@@ -784,7 +784,9 @@
 /* end of project */
 
 /* start of project info */
-
+.bblist{
+    border-bottom: 0.2vh solid var(--border-color-1);
+}
 .rewardscard_swiper {
     margin-top: 3vh;
     display: grid;
@@ -1412,7 +1414,7 @@
 
 .collection-info__header {
     gap: 1.4vw;
-    border-bottom: 0.2vh solid var(--border-color-1);
+    /* border-bottom: 0.2vh solid var(--border-color-1); */
     width: 75%;
 }
 
@@ -2273,7 +2275,7 @@
 
     .collection-info__header {
         gap: 1.4vw;
-        border-bottom: 0.2vh solid var(--border-color-1);
+        /* border-bottom: 0.2vh solid var(--border-color-1); */
         width: 75%;
     }
 
@@ -3108,7 +3110,7 @@
 
     .collection-info__header {
         gap: 1.4vw;
-        border-bottom: 0.2vh solid var(--border-color-1);
+        /* border-bottom: 0.2vh solid var(--border-color-1); */
         width: 75%;
     }
 

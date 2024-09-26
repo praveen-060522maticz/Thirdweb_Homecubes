@@ -247,7 +247,7 @@ function CollectionInfo() {
                   Back
                 </Button>
               </div>
-              <div className="d-flex align-items-start collection-info__header">
+              <div className="d-flex align-items-start collection-info__header collectphotos">
                 <div>
                   <div className="collection-info__profile-image">
                     <img
@@ -258,40 +258,47 @@ function CollectionInfo() {
                         }/${collectionData?.galleryThumbImage}`}
                     />
                   </div>
-                  <h3 className="collection-info__profile-name">
+             
+                </div>
+                <div className="mp_likeshare ">
+                  <img
+                    className="img-fluid1"
+                    src={require("../assets/images/share.svg").default}
+                  />
+                </div>
+              </div>
+
+              <div className="bblist"> 
+              <h3 className="collection-info__profile-name">
                     {collectionData?.galleryTitle}
                   </h3>
                   {/* {description ? (
-                        <p className="mp_detailbrief hc-home__desc mt-2">
+                        <p className="mp_detailbrief hc-home__desc mt_1">
                           {collectionData?.galleryDescription}
                         </p>
                       ) : (
-                        <p className="mp_detailbrief hc-home__desc mt-2">
+                        <p className="mp_detailbrief hc-home__desc mt_1">
                           {collectionData?.galleryDescription?.length > 300
                             ? collectionData?.galleryDescription
                               .slice(0, 300)
                               .concat("...")
                             : collectionData?.galleryDescription}{" "}
                         </p>
-                      )} */}
+                      )}
                   {collectionData?.galleryDescription?.length > 300 ? (
                     <button
-                      className="mp_readmoreBtn"
+                      className="mp_readmoreBtn mb_2"
                       onClick={() => setDescription(!description)}
                     >
                       {description ? "Read Less" : "Read More"}
                     </button>
                   ) : (
                     <></>
-                  )}
-                </div>
-                <div className="mp_likeshare ">
-                  <img
-                    className="img-fluid"
-                    src={require("../assets/images/share.svg").default}
-                  />
-                </div>
-              </div>
+                  )} */}
+                </div>  
+
+
+
               <div className=" mt_3">
                 <h3 className="collection-info__grid-title">Photos</h3>
                 {collectionData && arrData.length >0 ?
