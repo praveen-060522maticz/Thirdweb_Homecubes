@@ -17,7 +17,7 @@
     "@walletconnect/modal": "^2.6.2",
     "@web3-react/core": "^6.1.9",
     "aos": "^2.3.4",
-    "apexcharts": "^3.53.0",
+    "apexcharts": "^3.44.0",
     "axios": "^1.7.7",
     "big-integer": "^1.6.52",
     "big.js": "^6.2.2",

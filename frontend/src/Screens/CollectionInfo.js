@@ -52,7 +52,7 @@ function CollectionInfo() {
 
   console.log("priceCal", priceCal);
   console.log("nftcardData", nftcardData);
-
+console.log('collectionData---->',collectionData);
 
   const navigate = useNavigate();
 
@@ -282,7 +282,7 @@ function CollectionInfo() {
                       {description ? "Read Less" : "Read More"}
                     </button>
                   ) : (
-                    <></>
+                    <div className="nodata_found ">No Data Found</div>
                   )}
                 </div>
                 <div className="mp_likeshare ">
@@ -344,9 +344,10 @@ function CollectionInfo() {
                 <button className="button-loadMore" onClick={() => loadData()}>Load More</button>
               </div>} */}
 
+              {Loadmore && 
               <div className='mp-margin d-flex justify-content-center'>
                 <button className="button-loadMore" onClick={() => loadData()}>Load More</button>
-              </div>
+              </div>}
             </div>
           </div>
         </div>

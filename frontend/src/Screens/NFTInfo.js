@@ -165,7 +165,7 @@ function NFTInfo() {
     };
 
     const [graphData, setGraphData] = useState(datas1)
-
+console.log('graphData---->',graphData);
     const dispatch = useDispatch()
     const { Owner, Id } = useParams()
 
@@ -1327,7 +1327,7 @@ src={require("../assets/images/clock.svg").default}
 
                                         <Row >
                                             <Col lg={1} xs={1}>
-                                                <p className="apexchart_label">Average Price (BNB)</p>
+                                                <p className="apexchart_label">Average Price</p>
 
                                             </Col>
                                             <Col lg={11} xs={11}>
