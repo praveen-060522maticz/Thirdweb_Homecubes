@@ -178,7 +178,7 @@ function Staking() {
       { label: "180 days", value: "Season 3", poolId: 3, daysDifference: getDaysOfDesiredMonth(9).days, endDateFormat: getDaysOfDesiredMonth(9).dateFormat, startDate: getDaysOfDesiredMonth(9).startDate, poolDay: getDaysOfDesiredMonth(9).newStartDate },
       { label: "360 days", value: "Season 4", poolId: 4, daysDifference: getDaysOfDesiredMonth(12).days, endDateFormat: getDaysOfDesiredMonth(12).dateFormat, startDate: getDaysOfDesiredMonth(12).startDate, poolDay: getDaysOfDesiredMonth(12).newStartDate }
     ]
-    console.log('getDatsdagetData---->', getData);
+    console.log('getDatsdagetData---->', getData,getData.filter((val) => val.daysDifference));
     const set = getData.filter((val) => val.daysDifference)[0]
     console.log("seifuhseoif", set);
     setRewardDetail(set)
@@ -884,28 +884,29 @@ function Staking() {
                       </Col>
                     </Row>
                   ) : (
-                    <Row className="justify-content-center margin__tb-5vh">
-                      <Col lg={8} className="d-flex justify-content-center">
-                        <div className="staking_nowallet">
-                          <h3 className="hh-stake__subtitle text-center">
-                            Pending Rewards :
-                          </h3>
-                          <button
-                            className="nftinfo_gradeientBtn pendingrewards web_listitem_btn margin__tb-5vh"
-                            onClick={() => handleOpebWallet()}
-                          >
-                            <img
-                              className="header_wallet rewardswallet"
-                              src={
-                                require("../assets/images/wallet.svg")
-                                  .default
-                              }
-                            />{" "}
-                            Connect - wallet
-                          </button>
-                        </div>
-                      </Col>
-                    </Row>
+                    <div className="nodata_found ">No Data Found</div>
+                    // <Row className="justify-content-center margin__tb-5vh">
+                    //   <Col lg={8} className="d-flex justify-content-center">
+                    //     <div className="staking_nowallet">
+                    //       <h3 className="hh-stake__subtitle text-center">
+                    //         Pending Rewards :
+                    //       </h3>
+                    //       <button
+                    //         className="nftinfo_gradeientBtn pendingrewards web_listitem_btn margin__tb-5vh"
+                    //         onClick={() => handleOpebWallet()}
+                    //       >
+                    //         <img
+                    //           className="header_wallet rewardswallet"
+                    //           src={
+                    //             require("../assets/images/wallet.svg")
+                    //               .default
+                    //           }
+                    //         />{" "}
+                    //         Connect - wallet
+                    //       </button>
+                    //     </div>
+                    //   </Col>
+                    // </Row>
                   )}
                 </>
               )}

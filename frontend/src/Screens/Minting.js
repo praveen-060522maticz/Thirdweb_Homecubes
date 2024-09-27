@@ -457,7 +457,7 @@ function Minting() {
                                                         </Button>
                                                     </div>
                                                     <div className="hc-mint__banner--wrapper">
-                                                        <img lazy src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} />
+                                                        <img lazy src={`${config.IMG_URL}/projects/ProjectThumbnail/${project?.ProjectThumbnail}`} />
                                                     </div>
                                                     <p className="hc-mint__banner--title">
                                                         {project?.projectTitle}
@@ -1152,14 +1152,14 @@ function Minting() {
                                                         Property <strong>Description</strong>
                                                     </h5>
                                                     <p className="hc-mint__banner--desc mb-0">
-                                                        {project?.projectDescription}
+                                                        {project?.aboutDescription}
                                                     </p>
                                                 </div>
 
                                             </div>
                                             <div className="col-12 col-xl-6 px-0 d-flex justify-content-center">
                                                 <div className="mint-property__imageWrapper">
-                                                    <img src={propertyImage} className="img-fluid w-75" />
+                                                    <img src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} className="img-fluid w-75" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1248,65 +1248,65 @@ function Minting() {
                                             Gallery
                                         </h3>
                                         {collection.length > 0 ?
-                                        <div className="hc-mint__swiper-wrap gallery-card__swiperWrapper">
+                                            <div className="hc-mint__swiper-wrap gallery-card__swiperWrapper">
 
-                                            <button
-                                                className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
-                                                onClick={() => goPrev()}
-                                            >
-                                                {/* <FaChevronLeft fill="#fff" className="" /> */}
-                                                <img src={swiperLeftIcon} alt="left" className="img-fluid" />
-                                            </button>
-
-
-                                            <button
-                                                className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
-                                                onClick={() => goNext()}
-                                            >
-
-                                                {/* <FaChevronRight fill="#fff" className="" /> */}
-                                                <img src={swiperRightIcon} alt="right" className="img-fluid" />
-
-                                            </button>
+                                                <button
+                                                    className="swiper-button-prev1 border-0 outline-0 bg-transparent hc-swiper__arrow--left"
+                                                    onClick={() => goPrev()}
+                                                >
+                                                    {/* <FaChevronLeft fill="#fff" className="" /> */}
+                                                    <img src={swiperLeftIcon} alt="left" className="img-fluid" />
+                                                </button>
 
 
-                                            <Swiper
-                                                className="mySwiper bottomnav_colswiper  hc-mint__swiper gallery-card__swiper"
-                                                slidesPerView={4}
-                                                // spaceBetween={30}
-                                                // navigation={true}
-                                                keyboard={true}
-                                                ref={swiperRef}
-                                                pagination={{
-                                                    clickable: true,
-                                                }}
-                                                navigation={{
-                                                    nextEl: ".swiper-button-next1",
-                                                    prevEl: ".swiper-button-prev1",
-                                                }}
-                                                breakpoints={{
-                                                    320: {
-                                                        slidesPerView: 2,
-                                                        // spaceBetween: 20,
-                                                    },
-                                                    1200: {
-                                                        slidesPerView: 4,
-                                                        // spaceBetween: 20,
-                                                    },
+                                                <button
+                                                    className="swiper-button-next1 border-0 outline-0 bg-transparent hc-swiper__arrow--right"
+                                                    onClick={() => goNext()}
+                                                >
 
-                                                }}
-                                                modules={[Navigation, Keyboard]}
-                                            >
+                                                    {/* <FaChevronRight fill="#fff" className="" /> */}
+                                                    <img src={swiperRightIcon} alt="right" className="img-fluid" />
 
-                                                {collection.length != 0 && collection.map((i) => (
-                                                    <SwiperSlide>
-                                                        <GalleryCard data={i} />
-                                                    </SwiperSlide>
-                                                ))}
-                                            </Swiper>
+                                                </button>
 
-                                        </div> :
-                                        <div className="nodata_found ">No Data Found</div>}
+
+                                                <Swiper
+                                                    className="mySwiper bottomnav_colswiper  hc-mint__swiper gallery-card__swiper"
+                                                    slidesPerView={4}
+                                                    // spaceBetween={30}
+                                                    // navigation={true}
+                                                    keyboard={true}
+                                                    ref={swiperRef}
+                                                    pagination={{
+                                                        clickable: true,
+                                                    }}
+                                                    navigation={{
+                                                        nextEl: ".swiper-button-next1",
+                                                        prevEl: ".swiper-button-prev1",
+                                                    }}
+                                                    breakpoints={{
+                                                        320: {
+                                                            slidesPerView: 2,
+                                                            // spaceBetween: 20,
+                                                        },
+                                                        1200: {
+                                                            slidesPerView: 4,
+                                                            // spaceBetween: 20,
+                                                        },
+
+                                                    }}
+                                                    modules={[Navigation, Keyboard]}
+                                                >
+
+                                                    {collection.length != 0 && collection.map((i) => (
+                                                        <SwiperSlide>
+                                                            <GalleryCard data={i} />
+                                                        </SwiperSlide>
+                                                    ))}
+                                                </Swiper>
+
+                                            </div> :
+                                            <div className="nodata_found ">No Data Found</div>}
 
                                         {/* <div className="position-relative">
                         <div className="greenarrow_box"></div>
@@ -1323,14 +1323,14 @@ function Minting() {
                                                         Property <strong>Description</strong>
                                                     </h5>
                                                     <p className="hc-mint__banner--desc mb-0">
-                                                        {project?.projectDescription}
+                                                        {project?.aboutDescription}
                                                     </p>
                                                 </div>
 
                                             </div>
                                             <div className="col-12 col-xl-6 px-0 d-flex justify-content-center">
                                                 <div className="mint-property__imageWrapper">
-                                                    <img src={propertyImage} className="img-fluid w-75" />
+                                                    <img src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} className="img-fluid w-75" />
                                                 </div>
                                             </div>
                                         </div>

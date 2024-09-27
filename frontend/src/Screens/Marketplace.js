@@ -543,8 +543,8 @@ function Marketplace() {
                                                     </button>
                                                 </div>
 
-                                                <Row className="justify-content-between mt_3 cols">
-                                                    <Col lg={6} md={6} sm={6} xs={6} className="mb_3 colpad">
+                                                <Row className="justify-content-between mt_3 cols mx-auto" >
+                                                    <Col lg={6} md={6} sm={6} xs={6} className="mb_3 col-pads__right">
                                                         <input
                                                             className="mb_priceInp cmnInput_scrollerHider"
                                                             type="number"
@@ -557,7 +557,7 @@ function Marketplace() {
                                                             }}
                                                         />
                                                     </Col>
-                                                    <Col lg={6} md={6} sm={6} xs={6} className="mb_3 colpad">
+                                                    <Col lg={6} md={6} sm={6} xs={6} className="mb_3 col-pads__left">
                                                         <input
                                                             className="mb_priceInp cmnInput_scrollerHider"
                                                             type="number"

@@ -110,15 +110,16 @@ function App() {
                 rtl={true}
                 closeOnClick={true}
                 closeButton={true}
-                style={
-                    {
-                        zIndex: "999999",
-                        "width": "400px",
-                        "wordBreak": "break-word",
-                        "text-align": "center",
-                        "fontWeight": "500",
-                        marginTop: "70px",
-                    }}
+                style={{
+                    zIndex: "999999",
+                    "width": "400px",
+                    "wordBreak": "break-word",
+                    "text-align": "center",
+                    "fontWeight": "500",
+                    marginTop: "70px",
+                    direction: "ltr"
+                }}
+                bodyStyle={{ direction: "ltr" }}
             />
         </>
 

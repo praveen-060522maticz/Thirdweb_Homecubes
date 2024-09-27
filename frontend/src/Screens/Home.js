@@ -21,6 +21,7 @@ import LazyLoad from 'react-lazyload'
 import LottieAnimation from "../Components/LottieAnimar";
 import { BiLogoTelegram, BiLogoDiscordAlt, BiLogoFacebook, BiLogoGmail, BiLogoYoutube, BiLogoLinkedin, BiLogoInstagram, BiLogoMediumSquare } from "react-icons/bi";
 import { FaXTwitter } from "react-icons/fa6";
+import ImageSkeleton from "../Components/ImageSkeleton";
 
 
 
@@ -150,7 +151,9 @@ function Home() {
                             </Col>
                             <Col lg={6} className="px-0">
                                 {CMS["Revolution your Home Ownership"]?.img &&
-                                    <div className="anim_div first_lottie" >
+                                    // <div className="anim_div first_lottie loader_div_center" >
+                                    <div className="anim_div first_lottie " >
+
 
                                         <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["Revolution your Home Ownership"]?.img}`} className="banner_lottie" />
                                     </div>}

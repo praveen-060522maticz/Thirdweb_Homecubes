@@ -30,7 +30,7 @@ const LottieAnimation = ({ url, className, divClassname }) => {
     const getFormat = url?.split(".")?.splice(-1)?.[0]?.toLowerCase();
 
     return <>
-        <div className={divClassname ? divClassname : ""}>
+        <div className={divClassname ? divClassname : "hc_loader_div"}>
             {url &&
                 (getFormat == "json" ?
                     (lottieData ? (

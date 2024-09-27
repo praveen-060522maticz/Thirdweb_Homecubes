@@ -167,13 +167,13 @@ function ProjectInfo() {
                             : projectDetail?.aboutDescription}
                         </p> */}
                         {
-                          projectDetail?.aboutDescription && description ? (
-                            <p className="hc-mint__banner--desc mt-3 mb-0">{projectDetail?.aboutDescription}</p>
+                          projectDetail?.projectDescription && description ? (
+                            <p className="hc-mint__banner--desc mt-3 mb-0">{projectDetail?.projectDescription}</p>
                           ) : (
                             <p className="hc-mint__banner--desc mt-3 mb-0">
-                              {projectDetail?.aboutDescription?.length > 300
-                                ? projectDetail?.aboutDescription?.slice(0, 300).concat("...")
-                                : projectDetail?.aboutDescription}
+                              {projectDetail?.projectDescription?.length > 300
+                                ? projectDetail?.projectDescription?.slice(0, 300).concat("...")
+                                : projectDetail?.projectDescription}
                             </p>
                           )}
 

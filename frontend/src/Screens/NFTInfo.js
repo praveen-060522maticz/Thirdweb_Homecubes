@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useState, useRef, useMemo } from "react";
 import BottomBar from "../Components/BottomBar";
 import Header from "../Components/Header";
 import SideTab from "../Components/SideTab";
@@ -165,7 +165,7 @@ function NFTInfo() {
     };
 
     const [graphData, setGraphData] = useState(datas1)
-console.log('graphData---->',graphData);
+    console.log('graphData---->', graphData);
     const dispatch = useDispatch()
     const { Owner, Id } = useParams()
 
@@ -186,6 +186,7 @@ console.log('graphData---->',graphData);
     const [Loader, setLoader] = useState(false);
     var [moreprops, setMoreprops] = useState('');
     const [InfoDetail, SetInfoDetail] = useState({});
+    const [graphDataFetched, setGraphDataFetched] = useState(false)
     console.log("Tokens_Detail", Tokens_Detail, TabName);
     const [Tokens, SetTokens] = useState({
         All: {
@@ -508,6 +509,17 @@ console.log('graphData---->',graphData);
     };
 
     const navigate = useNavigate()
+
+    const RenderGraph = () => useMemo(() =>
+        <ReactApexChart
+            options={graphData.options}
+            series={graphData.series}
+            type="bar"
+            height={260}
+        />, [graphData.series]
+    )
+
+
 
     return (
         <>
@@ -1222,10 +1234,10 @@ src={require("../assets/images/clock.svg").default}
                                                 "FixedPrice" */}
 
                 <div className={(Tokens[TabName]?.myowner?.WalletAddress ==
-                        accountAddress && Tokens[TabName]?.highbid) ? "bottom_content nftinfo_bot" :
-                        Tokens[TabName]?.myowner?.PutOnSaleType == "FixedPrice" ?
-                            "bottom_content nftinfo_bot2" : Tokens["All"]?.owner?.PutOnSaleType ===
-                                        "TimedAuction" ? "bottom_content salesend_bot" :
+                    accountAddress && Tokens[TabName]?.highbid) ? "bottom_content nftinfo_bot" :
+                    Tokens[TabName]?.myowner?.PutOnSaleType == "FixedPrice" ?
+                        "bottom_content nftinfo_bot2" : Tokens["All"]?.owner?.PutOnSaleType ===
+                            "TimedAuction" ? "bottom_content salesend_bot" :
                             "bottom_content nftinfo_bots"}>
                     <div className="inner-container__width">
                         <Row>
@@ -1319,27 +1331,32 @@ src={require("../assets/images/clock.svg").default}
 
                                 {/* box */}
 
+
                                 <Row>
                                     <Col xs={12}>
                                         <p className="hc-info__price-title">Price History
                                         </p>
 
+                                        {graph ?
+                                            <Row >
+                                                <Col lg={1} xs={1}>
+                                                    <p className="apexchart_label">Average Price</p>
 
-                                        <Row >
-                                            <Col lg={1} xs={1}>
-                                                <p className="apexchart_label">Average Price</p>
+                                                </Col>
+                                                <Col lg={11} xs={11}>
 
-                                            </Col>
-                                            <Col lg={11} xs={11}>
-                                                <ReactApexChart
-                                                    options={graphData.options}
-                                                    series={graphData.series}
-                                                    type="bar"
-                                                    height={260}
-                                                />
-                                            </Col>
-                                        </Row>
+                                                    <ReactApexChart
+                                                        options={graphData.options}
+                                                        series={graphData.series}
+                                                        type="bar"
+                                                        height={260}
+                                                    />
 
+                                                </Col>
+                                            </Row>
+                                            :
+
+                                            <></>}
 
 
                                         <div className="mt_4 mb_4">

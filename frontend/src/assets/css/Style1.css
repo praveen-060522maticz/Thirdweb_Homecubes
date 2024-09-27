@@ -3697,3 +3697,20 @@ input::placeholder {
     padding-right: 1.5vw;
   }
 }
+
+
+/* start of hariharan css */
+
+.mp_accord_holder{
+  padding: 0.8vh 2.3vh 2.3vh 2.3vh;
+}
+
+.col-pads__right{
+  padding-left: 0px !important;
+  padding-right: 1vh !important;
+}
+.col-pads__left{
+  padding-left: 1vh !important;
+  padding-right: 0px !important;
+}
+/* end of hariharan css */

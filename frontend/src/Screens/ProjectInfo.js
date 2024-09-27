@@ -239,12 +239,12 @@ function ProjectInfo() {
                               </p>
                             )} */}
                           {
-                            projectDetail?.aboutDescription && description ? (
-                              <p className="hc-mint__banner--desc projectInfo_banner--desc mb-0">{projectDetail?.aboutDescription}</p>
+                            projectDetail?.projectDescription && description ? (
+                              <p className="hc-mint__banner--desc projectInfo_banner--desc mb-0">{projectDetail?.projectDescription}</p>
                             ) : (
                               <p className="hc-mint__banner--desc projectInfo_banner--desc  mb-0">
-                                {projectDetail?.aboutDescription?.length &&
-                                  projectDetail?.aboutDescription
+                                {projectDetail?.projectDescription?.length &&
+                                  projectDetail?.projectDescription
                                 }
                               </p>
                             )}
