@@ -610,6 +610,8 @@
     max-height: 15vw;
     border-radius: 0.3vw;
     overflow: hidden;
+    /* box-shadow: 15px 14px 32.1px -10px #FFFFFF33; */
+
 }
 
 .mint-property__imageWrapper img {
@@ -784,9 +786,10 @@
 /* end of project */
 
 /* start of project info */
-.bblist{
+.bblist {
     border-bottom: 0.2vh solid var(--border-color-1);
 }
+
 .rewardscard_swiper {
     margin-top: 3vh;
     display: grid;
@@ -1522,12 +1525,26 @@
 
 /* end of collection info modal */
 
-.anim_div.first_lottie.loader_div_center{
+.anim_div.first_lottie.loader_div_center {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.img-loader-backdrop {
+    backdrop-filter: blur(10px);
+    /* background-color: #7fffd40a; */
+    background-color: rgb(255 255 255 / 10%);
+}
+.nft-profile__image-wrap{
+    min-width: 35vh;
+    width: 35vh;
+    max-width: 35vh;
+    min-height: 35vh;
+    height: 35vh;
+    max-height: 35vh;
 }
 
 
@@ -1570,10 +1587,12 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 2vw;
     }
+
     .mp-grid.projectmp_grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 2vw;
     }
+
     .mp-grid.mp-grid_list {
         grid-template-columns: repeat(3, 1fr);
         gap: 2vw;
@@ -2359,15 +2378,20 @@
     .mp-grid.mp-grid_list {
         grid-template-columns: repeat(3, 1fr);
     }
+
     .mp-grid.projectmp_grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 4vw 2vw;
     }
+
     .project-card__title {
         width: 22vw;
         font-size: 2.2vh;
     }
 
+    .anim_div.first_lottie {
+        min-height: 30vh;
+    }
 }
 
 @media screen and (max-width:767px) {
@@ -3186,4 +3210,15 @@
 
     /* end of collection info modal */
 
+}
+
+@media(max-width:767px){
+    .nft-profile__image-wrap{
+    min-width: 18vh;
+    width: 18vh;
+    max-width: 18vh;
+    min-height: 20vh;
+    height: 20vh;
+    max-height: 20vh;
+}
 }

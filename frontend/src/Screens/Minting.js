@@ -40,6 +40,7 @@ import propertyImage from '../assets/images/property.png'
 import { parseHtmlString } from "../actions/common";
 import swiperRightIcon from '../assets/images/swiperrightarrow.svg'
 import swiperLeftIcon from '../assets/images/swiperleftarrow.svg'
+import ImageWithLoader from "../Components/ImageWithLoader";
 
 
 // import { unstable_usePrompt as usePrompt } from 'react-router-dom';
@@ -457,7 +458,8 @@ function Minting() {
                                                         </Button>
                                                     </div>
                                                     <div className="hc-mint__banner--wrapper">
-                                                        <img lazy src={`${config.IMG_URL}/projects/ProjectThumbnail/${project?.ProjectThumbnail}`} />
+                                                        <ImageWithLoader src={`${config.IMG_URL}/projects/ProjectThumbnail/${project?.ProjectThumbnail}`} />
+                                                        {/* <img lazy src={`${config.IMG_URL}/projects/ProjectThumbnail/${project?.ProjectThumbnail}`} /> */}
                                                     </div>
                                                     <p className="hc-mint__banner--title">
                                                         {project?.projectTitle}
@@ -1159,7 +1161,8 @@ function Minting() {
                                             </div>
                                             <div className="col-12 col-xl-6 px-0 d-flex justify-content-center">
                                                 <div className="mint-property__imageWrapper">
-                                                    <img src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} className="img-fluid w-75" />
+                                                    <ImageWithLoader src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} className="img-fluid w-75" />
+                                                    {/* <img src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} className="img-fluid w-75" /> */}
                                                 </div>
                                             </div>
                                         </div>
@@ -1330,7 +1333,8 @@ function Minting() {
                                             </div>
                                             <div className="col-12 col-xl-6 px-0 d-flex justify-content-center">
                                                 <div className="mint-property__imageWrapper">
-                                                    <img src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} className="img-fluid w-75" />
+                                                    <ImageWithLoader src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} className="img-fluid w-75" />
+                                                    {/* <img src={`${config.IMG_URL}/nft/${tokenDetails.NFTCreator}/Original/${tokenDetails?.NFTOrginalImage}`} className="img-fluid w-75" /> */}
                                                 </div>
                                             </div>
                                         </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { imgFormats, videoFileFormats } from "../actions/common";
+import ImageWithLoader from "./ImageWithLoader";
 
 export default function ImgAudVideo({
   file,
@@ -57,15 +58,21 @@ export default function ImgAudVideo({
   console.log('fileTypefileType---->', fileType);
   return file ? (
     fileType === "image" ? (
-      <img
+    
+      <ImageWithLoader
         src={file}
         alt="img"
         className={classname}
+      />
+      // <img
+      //   src={file}
+      //   alt="img"
+      //   className={classname}
       // onContextMenu="return false;"
       // onError={event => {
       //   event.target.src = origFile
       // }}
-      />
+      // />
     ) : fileType === "video" ? (
       <video
         className={classname}

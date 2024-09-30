@@ -5,7 +5,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 const ImageSkeleton = () => {
     return (
         <SkeletonTheme baseColor="#202020" highlightColor="#444">
-                <Skeleton />
+                <Skeleton count={1} />
         </SkeletonTheme>
     );
 };

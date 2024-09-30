@@ -152,7 +152,7 @@ function Home() {
                             <Col lg={6} className="px-0">
                                 {CMS["Revolution your Home Ownership"]?.img &&
                                     // <div className="anim_div first_lottie loader_div_center" >
-                                    <div className="anim_div first_lottie " >
+                                    <div className="anim_div first_lottie h-100" >
 
 
                                         <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["Revolution your Home Ownership"]?.img}`} className="banner_lottie" />

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Lottie from "react-lottie";
 import axios from "axios";
 import { imgFormats, videoFileFormats } from "../actions/common";
+import ImageWithLoader from "./ImageWithLoader";
+import { Mosaic } from "react-loading-indicators";
 
 const LottieAnimation = ({ url, className, divClassname }) => {
     console.log("urlurlurl", url);
@@ -30,7 +32,7 @@ const LottieAnimation = ({ url, className, divClassname }) => {
     const getFormat = url?.split(".")?.splice(-1)?.[0]?.toLowerCase();
 
     return <>
-        <div className={divClassname ? divClassname : "hc_loader_div"}>
+        <div className={divClassname ? divClassname : "h-100"}>
             {url &&
                 (getFormat == "json" ?
                     (lottieData ? (
@@ -43,14 +45,18 @@ const LottieAnimation = ({ url, className, divClassname }) => {
                         />
                     ) : (
                         // <div>Loading Lottie animation...</div>
-                        <span class="loaderss"></span>
+                        // <span class="loaderss"></span>
+                        <div className="d-flex align-items-center justify-content-center w-100 h-100 ">
+                            <Mosaic color="#16ebc3" size="small" text="" textColor="#091411" />
+                        </div>
                     ))
                     :
                     videoFileFormats.includes(getFormat) ?
                         <video className={className} />
                         :
                         imgFormats.includes(getFormat) ?
-                            <img className={className} src={url} />
+                            // <img className={className} src={url} />
+                            <ImageWithLoader className={className} src={url} />
                             :
                             <></>)
             }

@@ -537,6 +537,7 @@ function NFTInfo() {
                             <div>
                                 <div className="nftInfo_topLeft hc-info__left--image">
                                     {!isEmpty(Tokens_Detail) &&
+                                    <div className="nft-profile__image-wrap" >
                                         <ImgAudVideo
                                             file={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Original/${Tokens_Detail?.NFTOrginalImage}`}
                                             type={
@@ -553,6 +554,7 @@ function NFTInfo() {
                                             origFile={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Original/${Tokens_Detail.OriginalFile}`}
                                             classname={"img-fluid nftInfo_img"}
                                         />
+                                            </div>
                                     }
 
                                     {/* previous */}

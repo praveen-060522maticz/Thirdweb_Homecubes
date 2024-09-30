@@ -553,7 +553,7 @@ function Marketplace() {
                                                             onChange={(e) => {
                                                                 const value = e.target.value
                                                                 // setPriceCal({ ...priceCal, ...{ "Min": priceTab == "BNB" ? value : String(value / BNBUSDT) } })
-                                                                setPriceCal({ ...priceCal, ...{ "Min": value } })
+                                                                setPriceCal({ ...priceCal, ...{ "Min": value } });
                                                             }}
                                                         />
                                                     </Col>

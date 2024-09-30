@@ -24,6 +24,7 @@ import { getGalleryTokens } from "../actions/axioss/nft.axios";
 import { getBNBvalue, isEmpty, videoFileFormats } from "../actions/common";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
+import ImageWithLoader from "../Components/ImageWithLoader";
 
 
 function CollectionInfo() {
@@ -329,12 +330,18 @@ function CollectionInfo() {
                                   />
                                 </div>
                               ) : (
-                                <img
+                                <ImageWithLoader
                                   className="collection-width-fit"
                                   style={{ cursor: "pointer" }}
                                   src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
                                   onClick={() => handleShowVideo(val)}
                                 />
+                                // <img
+                                //   className="collection-width-fit"
+                                //   style={{ cursor: "pointer" }}
+                                //   src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
+                                //   onClick={() => handleShowVideo(val)}
+                                // />
                               )}
 
                             </div>
