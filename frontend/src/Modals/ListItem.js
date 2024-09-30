@@ -750,11 +750,12 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                           )}
                       />
                     </div>
-                    <p  className='modal_summaryLabel mt_1' >{currency?.filter(val => val.label == FormValue?.CoinName)?.[0]?.balance} {FormValue?.CoinName}</p>
+                    {/* <p  className='modal_summaryLabel mt_1' >{currency?.filter(val => val.label == FormValue?.CoinName)?.[0]?.balance} {FormValue?.CoinName}</p> */}
                     <p style={{ color: "red",marginBottom:0 }} >{Error?.CoinName}</p>
                   </div>
                 </div>
               }
+
             </div>
 
             <div>
@@ -791,6 +792,9 @@ function ListItem({ show, handleClose, handleOpenCal, text, owner, types, closeP
                 {Mintbtn == "init" && "Start"}
 
               </button>
+
+              <p className='mt_2 text-center'>* Royalty fee commission will be deducted from the final transaction</p>
+
             </div>
 
 

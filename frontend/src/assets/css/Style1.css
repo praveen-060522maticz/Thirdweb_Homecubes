@@ -865,6 +865,9 @@ h6 {
   }
 }
 @media screen and (max-width:575px) {
+  .footer_links.mb_list {
+    font-size: 1.7vh;
+}
 .flexcut{
   flex-wrap: wrap;
 }
@@ -1053,7 +1056,10 @@ h6 {
   padding-left: 2vh;
   padding-right: 2vh;
 }
-
+.colsspad{
+  padding-left: 1.6vh;
+  padding-right: 1.6vh;
+}
 .home_mailer {
   background-color: #151515;
   border-radius: 0.8vh;
@@ -1250,7 +1256,10 @@ h6 {
     padding-left: 0.5vh;
     padding-right: 0.5vh;
   }
-
+  .colsspad{
+    padding-left: 0.5vh;
+    padding-right: 0.5vh;
+  }
   .home_top {
     /* margin-top: -3vh; */
     margin-top: -1.5vh;
@@ -1851,7 +1860,7 @@ input::placeholder {
   max-width: 100%;
   min-width: 100%;
   width: 100%;
-  height: 38vh;
+  height: 37vh;
   object-fit: cover;
 }
 
@@ -2133,7 +2142,6 @@ input::placeholder {
     max-height: 18vh;
     min-height: 18vh;
   }
-
   .hc-mint__swiper-wrap.swiptop {}
 
   .cols {
@@ -2141,7 +2149,7 @@ input::placeholder {
   }
 
   .hc-card__nft .nftcard_detailwrapper {
-    padding: 1.5vh 1vh;
+    padding: 1.1vh 1vh;
   }
 }
 
@@ -2537,15 +2545,19 @@ input::placeholder {
   }
 
   .nftInfo_topLeft.hc-info__left--image img {
-    height: 20vh;
-    max-height: 20vh;
-    min-height: 20vh
+    height: 21vh;
+    max-height: 21vh;
+    min-height: 21vh
   }
-
+  .nft_grid {
+    gap: 2.8vw;
+}
   .nftInfo_img,
   .nftinfo_gradeientBtn {
-    min-width: 18vh;
-    width: 18vh;
+    /* min-width: 18vh;
+    width: 18vh; */
+    min-width: 21vh;
+    width: 21vh;
   }
   .nftinfo_gradeientBtn.pendingrewards  {
     min-width: 21vh;
@@ -3115,19 +3127,25 @@ input::placeholder {
   font-weight: 600;
   margin: 0;
 }
-
+.ms_2{
+  margin-left: 0.8vh;
+}
 .hc-profile__wrapper-border {
-  border: 0.2px solid var(--gradinet_right);
+  border: 0.3vh solid var(--gradinet_right);
   color: var(--white);
   font-size: 1.6vh;
-  max-width: 20vh;
-  min-width: 20vh;
-  padding-bottom: 0.3vh;
-  padding-top: 0.3vh;
+  padding-bottom: 0.5vh;
+  padding-top: 0.5vh;
   text-align: center;
-  width: 20vh;
+  width: 26vh;
+  max-width: 26vh;
+  min-width: 26vh;
 }
-
+.hc-profile__wrapper-border.refercodes{
+  width: 16vh;
+  max-width: 16vh;
+  min-width: 16vh;
+} 
 .kyc_activated {
   align-items: center;
   border: 0.3vh solid var(--text-color-1);
@@ -3177,7 +3195,8 @@ input::placeholder {
 }
 
 .copyiconimg {
-  width: 2.9vh;
+  /* width: 2.9vh; */
+  width: 3.4vh;
 }
 
 .gap_1 {
@@ -3426,9 +3445,34 @@ input::placeholder {
     gap: 2.5vh 2.4vh;
     margin-top: 2vh;
   }
+  .hc-profile__wrapper-border {
+    max-width: 100%;
+    min-width: auto;
+    width: 100%;
+  }
+  .gap_set {
+    gap: 2vh 1.4vh;
+    margin-top: 2.5vh;
+  }
+  .profile_imgDtls {
+    height: 21vh;
+    width: 33vh;
+  }
+  .profile_dtlswhole {
+    gap: 1.8vh;
+  }
+  .copyiconimg {
+    width: 2.5vh;
+  }
+  .copyiconimg.copy1 {
+    width: 3.9vh;
+  }
 }
 
 @media screen and (max-width:575px) {
+  .stack_nftcounter {
+    padding: 0.8vh 0.8vh;
+  }
   .nft_coinImg {
     height: 2.1vh;
     width: 2.1vh;
@@ -3458,9 +3502,7 @@ input::placeholder {
     margin-top: 2.5vh;
   }
 
-  .profile_dtlswhole {
-    gap: 1vh;
-  }
+ 
 
   .profile_joinDate {
     font-size: 1.7vh;
@@ -3474,13 +3516,7 @@ input::placeholder {
     font-size: 1.7vh;
   }
 
-  .copyiconimg {
-    width: 2.5vh;
-  }
 
-  .copyiconimg.copy1 {
-    width: 3.5vh;
-  }
 
   .kyc_activated {
     padding: 1vh 0.7vh;
@@ -3490,16 +3526,9 @@ input::placeholder {
     font-size: 1.6vh;
   }
 
-  .profile_imgDtls {
-    height: 23vh;
-    width: 23vh;
-  }
 
-  .hc-profile__wrapper-border {
-    max-width: 100%;
-    min-width: auto;
-    width: 100%;
-  }
+
+
 }
 
 /* profile page end */
@@ -3694,10 +3723,15 @@ input::placeholder {
 
 @media screen and (max-width:575px) {
   .whteee{
-    width: 45vw;
+    /* width: 45vw;
     height: 100%;
     padding-left: 1.5vw;
-    padding-right: 1.5vw;
+    padding-right: 1.5vw; */
+
+    width: 45.5vw;
+    height: 100%;
+    padding-left: 1.2vw;
+    padding-right: 1.2vw;
   }
 }
 

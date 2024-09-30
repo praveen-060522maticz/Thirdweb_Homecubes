@@ -1145,7 +1145,7 @@ function Minting() {
 
                                     <div className="section-estimateProperty">
                                         <h3 className="hc-mint__content-title ">
-                                            Estimated Property Value <span className="hc-mint__span-gradient"> {project?.CMS?.filter((val) => val.stepTitle == "PROPERTY VALUE")?.[0]?.stepDescription}</span>
+                                            Estimated Property Value <span className="hc-mint__span-gradient">  {project?.propertyValue?.toUpperCase?.() ?? ""}</span>
                                         </h3>
                                         <div className="row mx-auto mint-margin__top align-items-center">
                                             <div className="col-12 col-xl-6 px-0">

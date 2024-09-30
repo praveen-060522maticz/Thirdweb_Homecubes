@@ -528,7 +528,7 @@ function Header() {
                             <Offcanvas.Body>
                                 <Nav className="ms-auto align-items-center">
                                     <NavLink to="https://homecubes.io/" target="_blank" activeClassName="active" onClick={() => toggleMenu()}> Website</NavLink>
-                                    <NavLink to="/contact" activeClassName="active" onClick={() => toggleMenu()}> Contact</NavLink>
+                                    <NavLink to="https://homecubes.io/contact-us/" target="_blank" activeClassName="active" onClick={() => toggleMenu()}> Contact</NavLink>
                                     {wallet && wallet?.accountAddress && (
                                         <NavLink to={`/profile/${wallet.accountAddress}`} activeClassName="active" onClick={() => toggleMenu()}> Profile</NavLink>)}
 

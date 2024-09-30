@@ -22,9 +22,9 @@ export const isEmpty = value =>
 // Address cut function like 0x123...345
 export const address_showing = (item) => {
   if (item && item.toString().length > 10) {
-    var slice_front = item.slice(0, 9)
-    var slice_end = item.slice(item.length - 9, item.length)
-    return slice_front + '....' + slice_end
+    var slice_front = item.slice(0, 6)
+    var slice_end = item.slice(item.length - 6, item.length)
+    return slice_front + '...' + slice_end
   }
   else return item
 }

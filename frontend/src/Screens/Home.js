@@ -189,11 +189,12 @@ function Home() {
                                             __html: CMS["About Home Cubes"]?.content,
                                         }}
                                     ></p>
-                                    <NavLink to="/howitworks">
+                                    {/* <NavLink to="/howitworks"> */}
+                                    <Link to="https://homecubes.io/about-us/" target="_blank">
                                         <button className="primary_blueBtn ">
                                             About our Team
-                                        </button>
-                                    </NavLink>
+                                        </button></Link>
+                                    {/* </NavLink> */}
                                 </div>
                             </Col>
                         </Row>
@@ -212,10 +213,10 @@ function Home() {
                                         __html: CMS["CountDown to Our Next Launch"]?.content,
                                     }}
                                 ></p>
-
-                                <button className="primary_blueBtn">
-                                    Initial Sales
-                                </button>
+                                <Link to="/minting">
+                                    <button className="primary_blueBtn">
+                                        Initial Sales
+                                    </button></Link>
                             </Col>
                             <Col lg={6}>
 
@@ -267,11 +268,13 @@ function Home() {
                                                 ]?.content,
                                         }}
                                     ></p>
-                                    <NavLink to="/staking" className="sidetab_link">
+                                    {/* <NavLink to="/staking" className="sidetab_link"> */}
+                                    <Link to="/marketplace">
                                         <button className="primary_blueBtn">
-                                            Claim income
-                                        </button>
-                                    </NavLink>
+                                            {/* Claim income */}
+                                            Marketplace
+                                        </button></Link>
+                                    {/* </NavLink> */}
                                 </div>
                             </Col>
                         </Row>
@@ -326,10 +329,10 @@ function Home() {
                                         )
                                     })}
                                 </ul>
-
+                                <Link to="/staking">
                                 <button className="primary_blueBtn">
                                     Claim Income
-                                </button>
+                                </button></Link>
                             </Col>
                             <Col lg={6}>
                                 {console.log("filterImage", investArr?.filter(val => val?.img))}
@@ -352,9 +355,9 @@ function Home() {
                                 Our <strong>Commitment</strong>
                             </h3>
                             <div className="home-grid px-0">
-                            {commmitArr?.length != 0 &&
-                                commmitArr?.map((i) => (
-                                    // <Col lg={4} md={6} sm={12} xs={12} className="col_pad commit_pad mt_3">
+                                {commmitArr?.length != 0 &&
+                                    commmitArr?.map((i) => (
+                                        // <Col lg={4} md={6} sm={12} xs={12} className="col_pad commit_pad mt_3">
                                         <div
                                             className="home_commitemtnCard">
                                             <div className="home_singleCommit">
@@ -373,9 +376,9 @@ function Home() {
                                                 dangerouslySetInnerHTML={{ __html: i.content }}
                                             ></p>
                                         </div>
-                                    // </Col>
-                                ))}
-                                </div>
+                                        // </Col>
+                                    ))}
+                            </div>
                         </Row>
 
                         <Row className="hc-home__roadMap top_bottom mx-auto">

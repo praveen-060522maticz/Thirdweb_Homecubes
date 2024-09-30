@@ -388,7 +388,7 @@ function Profile() {
                       <p className="profile_name" >{userProfile?.DisplayName ? userProfile?.DisplayName : address_showing(userProfile?.WalletAddress)}</p>
                       <CopyToClipboard
                         onCopy={() => toast.success("Address copied successfully")}
-                        text={`${userProfile?.DisplayName ? userProfile?.DisplayName : address_showing(userProfile?.WalletAddress)}`}
+                        text={`${userProfile?.DisplayName ? userProfile?.DisplayName : userProfile?.WalletAddress}`}
                       >
                         <button className='bg-transparent border-0 outline-0'>
                           <img src={copyIcon} className='img-fluid copyiconimg' alt='copy' />
@@ -396,7 +396,7 @@ function Profile() {
                       </CopyToClipboard>
                     </div>
                   </div>
-                  <div className='mt_1 d-block d-sm-none'>
+                  <div className='mt_2 d-block d-md-none'>
                     <div className='profile_topright'>
                       <div className='align-items-end h-100'>
 
@@ -450,10 +450,10 @@ function Profile() {
                     </div>
                   </div>
 
-                  <div className='d-none d-sm-block'>
+                  <div className='d-none d-md-block'>
                     <div className='d-flex flex-wrap align-items-center gap_1 mt_2'>
                       <p className='profile_joinDate mb-0'>Referral Link :</p>
-                      <div className='d-flex align-items-center gap_1 gap_1'>
+                      <div className='d-flex align-items-center gap_1 gap_1 ms_2'>
                         <div className='hc-profile__wrapper-border'>
                           Link Address
                         </div>
@@ -466,7 +466,7 @@ function Profile() {
                     <div className='d-flex flex-wrap align-items-center gap_1  mt_2'>
                       <p className='profile_joinDate mb-0'>Referral Code :</p>
                       <div className='d-flex align-items-center gap_1'>
-                        <div className='hc-profile__wrapper-border'>
+                        <div className='hc-profile__wrapper-border refercodes'>
                           WA098JA
                         </div>
                         <button className='bg-transparent border-0 outline-0'>
@@ -480,7 +480,7 @@ function Profile() {
 
             </div>
 
-            <div className='d-block d-sm-none'>
+            <div className='d-block d-md-none'>
               <div className=''>
                 <p className='profile_joinDate mb_1'>Referral Link :</p>
                 <div className='d-flex align-items-center gap_1'>
@@ -506,12 +506,12 @@ function Profile() {
               </div>
             </div>
 
-            <div className='mb_1 d-none d-sm-block'>
+            <div className='mb_1 d-none d-md-block'>
               <div className='profile_topright'>
                 <div className='d-flex justify-content-end align-items-end h-100'>
                 
                   {userProfile?.KycStatus == "complete" ?
-                    <div className='mb_2 mt_2' onClick={() => handleShowKYC()}>
+                    <div className='mb_2 mt_0' onClick={() => handleShowKYC()}>
                       <div
                         className={userProfile?.KycStatus == "complete" ? "kyc_activated greenkyc text-center" : "kyc_activated text-center"}
                       // className='kyc_activated'
@@ -522,7 +522,7 @@ function Profile() {
                     </div>
                     :
                     userProfile?.KycStatus == "submit" ?
-                      <div className='mb_2 mt_2' onClick={() => handleShowKYC()}>
+                      <div className='mb_2 mt_0' onClick={() => handleShowKYC()}>
                         <div
                           className={userProfile?.KycStatus == "submit" ? "kyc_activated actiate_hint orange text-center" : "kyc_activated actiate_hint text-center"}
                         // className='kyc_activated actiate_hint'
@@ -533,7 +533,7 @@ function Profile() {
                       </div>
                       :
                       userProfile?.KycStatus == "retry" ?
-                        <div className='mb_2 mt_2'>
+                        <div className='mb_2 mt_0'>
 
                           <div className='kyc_activated actiate_hint' onClick={() => handleShowKYC()}>
 

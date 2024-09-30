@@ -608,7 +608,7 @@ function Marketplace() {
 
 
 
-                            <Col xl={9} lg={8} md={8} sm={6} xs={12} className="mt_2 pe-sm-0">
+                            <Col xl={9} lg={8} md={8} sm={6} xs={12} className="mt_2 px-0">
 
                                 <Row className="mx-auto">
                                     {filterData.length != 0 && filterData.map((i) => (
@@ -621,7 +621,7 @@ function Marketplace() {
                                                 md={6}
                                                 sm={12}
                                                 xs={6}
-                                                className="mb_5 col_pad"
+                                                className="mb_5 colsspad"
                                             >
                                                 {console.log("sdffadasdf", i)}
                                                 <DataCard data={i} />

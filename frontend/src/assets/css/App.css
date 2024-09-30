@@ -2452,9 +2452,9 @@
     }
 
     .nft-card {
-        min-width: 43.6vw;
-        width: 43.6vw;
-        max-width: 43.6vw;
+        min-width: 44.5vw;
+        width: 44.5vw;
+        max-width: 44.5vw;
         border-radius: 1vw;
     }
 
@@ -2464,12 +2464,12 @@
     }
 
     .nft-card__a {
-        min-width: 43.6vw;
-        width: 43.6vw;
-        max-width: 43.6vw;
-        min-height: 12vh;
-        height: 12vh;
-        max-height: 12vh;
+        min-width: 44.5vw;
+        width: 44.5vw;
+        max-width: 44.5vw;
+        min-height: 15.5vh;
+        height: 15.5vh;
+        max-height: 15.5vh;
     }
 
 
@@ -2863,9 +2863,9 @@
         min-width: 45vw;
         width: 45vw;
         max-width: 45vw;
-        min-height: 18vh;
-        height: 18vh;
-        max-height: 18vh;
+        min-height: 20vh;
+        height: 20vh;
+        max-height: 20vh;
         padding-left: 2vw;
         padding-right: 2vw;
 
@@ -3214,11 +3214,18 @@
 
 @media(max-width:767px){
     .nft-profile__image-wrap{
-    min-width: 18vh;
+    /* min-width: 18vh;
     width: 18vh;
     max-width: 18vh;
     min-height: 20vh;
     height: 20vh;
-    max-height: 20vh;
+    max-height: 20vh; */
+
+    min-width: 21vh;
+    width: 21vh;
+    max-width: 21vh;
+    min-height: 21vh;
+    height: 21vh;
+    max-height: 21vh;
 }
 }
