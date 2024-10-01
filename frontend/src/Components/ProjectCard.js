@@ -55,7 +55,7 @@ function ProjectCard(props) {
             <p className={location.pathname == "/projects" ? "nft_name hc-nft__card-title project-card__title" : "nft_name hc-nft__card-title width_title"}>{projectTitle}</p>
             {location.pathname == "/projects" ?
               <></> :
-              <p className="nft_coinname mt-2">
+              <p className="nft_coinname mt_1">
                 Floor price : {NFTPrice}{" "}
                 <span className="floor_prize">{mintTokenName}</span>
 

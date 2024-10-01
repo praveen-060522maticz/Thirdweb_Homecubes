@@ -79,7 +79,7 @@ export default function ImgAudVideo({
         loop={true}
         controlsList="nodownload"
         autoPlay={true}
-        controls
+        controls={false}
         poster={thumb}
         muted
         // onContextMenu="return false;"

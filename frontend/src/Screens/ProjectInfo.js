@@ -182,9 +182,9 @@ function ProjectInfo() {
       <div className="hc-min__banner-mobile d-xl-none">
         <ImgAudVideo
           file={`${config.IMG_URL}/projects/ProjectBanner/${projectDetail?.ProjectBanner}`}
-          origFile={mintBg}
+          // origFile={mintBg}
           classname={"hc-mint__banner-image"}
-          noimg={mintBg}
+          // noimg={mintBg}
         />
 
       </div>
@@ -195,9 +195,9 @@ function ProjectInfo() {
         {/* <img src={mintBg} className="hc-mint__banner-image" /> */}
         <ImgAudVideo
           file={`${config.IMG_URL}/projects/ProjectBanner/${projectDetail?.ProjectBanner}`}
-          origFile={mintBg}
+          // origFile={mintBg}
           classname={"hc-mint__banner-image d-none d-xl-block"}
-          noimg={mintBg}
+          // noimg={mintBg}
         />
         <div className="hc-mint__banner-content w-100">
           <div className="inner-container__width">
