@@ -79,7 +79,7 @@ export default function ImgAudVideo({
         loop={true}
         controlsList="nodownload"
         autoPlay={true}
-        controls
+        controls={false}
         playsinline
         poster={thumb}
         muted
