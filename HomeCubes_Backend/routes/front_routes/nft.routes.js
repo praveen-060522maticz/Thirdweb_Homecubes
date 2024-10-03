@@ -28,5 +28,6 @@ routers.route('/stackFunction').post(nftCtrl.stackFunction);
 routers.route('/setPendingTransaction').post(nftCtrl.setPendingTransaction);
 routers.route("/setTokenStatus").post(nftCtrl.setTokenStatus);
 routers.route("/saveTransaction").post(nftCtrl.saveTransaction);
+routers.route("/getProjectByNFTid").get(nftCtrl.getProjectByNFTid);
 
 export default routers

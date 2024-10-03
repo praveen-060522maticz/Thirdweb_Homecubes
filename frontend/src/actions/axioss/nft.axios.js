@@ -379,3 +379,18 @@ export const saveTransaction = async (data) => {
     // console.log("ressspspsp",Resp);
     return Resp
 }
+
+export const getProjectByNFTid = async (data) => {
+    const encData = EncryptData(data)
+    var senddata = {
+        method: 'GET',
+        url: `${config.BACK_URL}/nft/getProjectByNFTid`,
+        params: { data: encData },
+        'headers': {
+            'Authorization': token
+        }
+    }
+    let Resp = await axiosFunc(senddata)
+    // console.log("ressspspsp",Resp);
+    return Resp
+}

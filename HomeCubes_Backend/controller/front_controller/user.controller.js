@@ -125,7 +125,7 @@ export const UserRegister = async (req, res) => {
       });
       console.log("dataaa", FIndAlreadyExits);
       if (FIndAlreadyExits.success === "success") {
-        console.log('FIndAlreadyExits?.msg?.parentAddress---->',FIndAlreadyExits?.msg?.parentAddress);
+        console.log('FIndAlreadyExits?.msg?.parentAddress---->', FIndAlreadyExits?.msg?.parentAddress);
         if ((FIndAlreadyExits?.msg?.parentAddress == FIndAlreadyExits?.msg?.WalletAddress) || FIndAlreadyExits?.msg?.parentAddress == "") {
           const finVal = {
             DBName: userSchema,
@@ -133,7 +133,7 @@ export const UserRegister = async (req, res) => {
             Updata: { $set: { parentAddress } },
             save: { new: true },
           };
-          console.log('finValfinValfinVal---->',finVal);
+          console.log('finValfinValfinVal---->', finVal);
           const Finddata = await MongooseHelper.FindOneAndUpdate(finVal);
         }
 

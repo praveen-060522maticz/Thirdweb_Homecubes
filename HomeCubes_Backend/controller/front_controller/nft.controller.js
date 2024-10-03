@@ -2422,3 +2422,24 @@ export const saveTransaction = async (req, res) => {
     })
   }
 }
+
+
+export const getProjectByNFTid = async (req, res) => {
+  try {
+    const { NFTid } = req?.query;
+    const getData = await Tokens.findOne({ NFTId: NFTid }, { projectId: 1 }).populate("projectId");
+    console.log('getDatagetProjectByNFTid---->', getData, req?.query);
+    return res.json({
+      status: !isEmpty(getData),
+      success: isEmpty(getData) ? "error" : "success",
+      data: getData?.projectId
+    })
+  } catch (e) {
+    console.log('Error on getProjectByNFTid---->', e);
+    return res.json({
+      status: false,
+      success: "error",
+      data: {}
+    })
+  }
+}

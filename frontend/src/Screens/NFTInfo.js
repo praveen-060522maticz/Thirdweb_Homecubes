@@ -18,7 +18,7 @@ import Calendar from "../Modals/Calendar";
 import BreadPath from "../Components/BreadPath";
 import DataCard from "../Components/DataCard";
 import { useDispatch, useSelector } from "react-redux";
-import { BidApprove, Token_Info_Func, getActivitiesByNftId, getGalleryTokens, setPendingTransaction } from "../actions/axioss/nft.axios";
+import { BidApprove, Token_Info_Func, getActivitiesByNftId, getGalleryTokens, getProjectByNFTid, setPendingTransaction } from "../actions/axioss/nft.axios";
 import config from '../config/config'
 import { address_showing, getBNBvalue, isEmpty } from "../actions/common";
 import ImgAudVideo from "../Components/ImgAudVideo";
@@ -88,6 +88,7 @@ function NFTInfo() {
 
     const footerRef = useRef(null);
     const [isFixed, setIsFixed] = useState(true);
+    const [project, setProject] = useState({})
     const handleScroll = () => {
 
         const footerTop = footerRef.current.getBoundingClientRect().top;
@@ -211,12 +212,13 @@ function NFTInfo() {
     useEffect(() => {
         setLoader(true);
         Explore();
-
+        if (Id) getProject()
     }, [accountAddress, state, Owner, Id]);
+
 
     useEffect(() => {
         if (typeof Tokens[TabName] == 'undefined') {
-            Tokens[TabName] = { page: 1, list: [], loader: false };
+            Tokens[TabName] = { pagetProjectByNFTidge: 1, list: [], loader: false };
             SetTokens(Tokens);
             Explore(1, TabName);
         }
@@ -227,6 +229,11 @@ function NFTInfo() {
         getActivity()
     }, [Tokens_Detail])
 
+    const getProject = async () => {
+        const resp = await getProjectByNFTid({ NFTid: Id });
+        console.log('respresprespresprespresp---->', resp);
+        setProject(resp?.data)
+    }
 
 
     const getActivity = async () => {
@@ -537,24 +544,24 @@ function NFTInfo() {
                             <div>
                                 <div className="nftInfo_topLeft hc-info__left--image">
                                     {!isEmpty(Tokens_Detail) &&
-                                    <div className="nft-profile__image-wrap" >
-                                        <ImgAudVideo
-                                            file={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Original/${Tokens_Detail?.NFTOrginalImage}`}
-                                            type={
-                                                Tokens_Detail.CompressedFile
-                                                    ? Tokens_Detail.CompressedFile?.includes(".webp") || Tokens_Detail.CompressedFile?.includes(".png")
-                                                        ? "image"
-                                                        : Tokens_Detail.CompressedFile.includes(".webm")
-                                                            ? "video"
-                                                            : "audio"
-                                                    : Tokens_Detail.CompressedFile
-                                            }
-                                            thumb={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Compressed/${Tokens_Detail.CompressedThumbFile}`}
-                                            from="info"
-                                            origFile={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Original/${Tokens_Detail.OriginalFile}`}
-                                            classname={"img-fluid nftInfo_img"}
-                                        />
-                                            </div>
+                                        <div className="nft-profile__image-wrap" >
+                                            <ImgAudVideo
+                                                file={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Original/${Tokens_Detail?.NFTOrginalImage}`}
+                                                type={
+                                                    Tokens_Detail.CompressedFile
+                                                        ? Tokens_Detail.CompressedFile?.includes(".webp") || Tokens_Detail.CompressedFile?.includes(".png")
+                                                            ? "image"
+                                                            : Tokens_Detail.CompressedFile.includes(".webm")
+                                                                ? "video"
+                                                                : "audio"
+                                                        : Tokens_Detail.CompressedFile
+                                                }
+                                                thumb={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Compressed/${Tokens_Detail.CompressedThumbFile}`}
+                                                from="info"
+                                                origFile={`${config.IMG_URL}/nft/${Tokens_Detail.NFTCreator}/Original/${Tokens_Detail.OriginalFile}`}
+                                                classname={"img-fluid nftInfo_img"}
+                                            />
+                                        </div>
                                     }
 
                                     {/* previous */}
@@ -1364,24 +1371,33 @@ src={require("../assets/images/clock.svg").default}
                                         <div className="mt_4 mb_4">
                                             <h6 className="nftInfo_descTitle mb_2">Description</h6>
 
-                                            {description ? (
-                                                <p className="mp_detailbrief hc-home__desc">{isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription}</p>
-                                            ) : (
+                                            {/* {description ? ( */}
+                                            <p className="mp_detailbrief hc-home__desc">{isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription}</p>
+                                            {/* ) : (
                                                 <p className="mp_detailbrief hc-home__desc">
                                                     {(isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)?.length > 300 ?
                                                         (isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)?.slice(0, 300)?.concat("...") :
                                                         (isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)}
                                                 </p>
-                                            )}
-
-                                            {
+                                            )} */}
+                                            <button
+                                                className="primary_blueBtn mt_2 mb_2"
+                                                onClick={() => navigate(`/CollectionNfts/${project?.projectTitle}`,
+                                                    {
+                                                        state: { projectInfo: JSON.stringify(project) }
+                                                    }
+                                                )}
+                                            >
+                                                Check Out More
+                                            </button>
+                                            {/* {
                                                 (isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)?.length > 300 &&
                                                 <button
                                                     className="primary_blueBtn mt_2 mb_2"
                                                     onClick={() => setDescription(!description)}
                                                 >
                                                     {(isEmpty(InfoDetail) ? Tokens_Detail?.NFTDescription : InfoDetail?.NFTDescription)?.length > 300 ? description ? "Check Out Less" : "Check Out More" : ""}
-                                                </button>}
+                                                </button>} */}
                                         </div>
 
 
