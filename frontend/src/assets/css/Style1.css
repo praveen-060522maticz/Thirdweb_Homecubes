@@ -1855,7 +1855,25 @@ input::placeholder {
 .search_closer {
   font-size: 1.6vh;
 }
-
+.hc-min__banner-mobile video::-webkit-media-controls {
+  display: none !important;
+  opacity: 0; 
+}
+.hc-min__banner-mobile video::-webkit-media-controls-panel {
+  display: none !important;
+  opacity: 1 !important;}
+.hc-min__banner-mobile video::-webkit-media-controls-overlay-play-button {
+  display: none;
+}
+.hc-min__banner-mobile video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+}
+.hc-min__banner-mobile video::slotted::-webkit-media-controls-container{
+  display:none !important;
+  visibility: hidden!important;
+  opacity: 0 !important;
+ -webkit-appearance: none !important;
+}
 .hc-card__nft-height.nft_card .nftImg {
   max-width: 100%;
   min-width: 100%;
