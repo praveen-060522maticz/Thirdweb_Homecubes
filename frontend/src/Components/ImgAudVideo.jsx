@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { imgFormats, videoFileFormats } from "../actions/common";
 import ImageWithLoader from "./ImageWithLoader";
+import ReactPlayer from 'react-player'
+
 
 export default function ImgAudVideo({
   file,
@@ -74,23 +76,29 @@ export default function ImgAudVideo({
       // }}
       // />
     ) : fileType === "video" ? (
-      <video
-        className={classname}
-        loop={true}
-        controlsList="nodownload"
-        autoPlay={true}
-        controls={false}
-        playsinline={true}
-        poster={thumb}
-        muted
-        // onContextMenu="return false;"
-        type="video/*"
-        src={file}
-        onError={event => {
-          event.target.src = origFile
-        }}
-      >
-      </video>
+
+      // <video
+      //   className={classname}
+      //   loop={true}
+      //   controlsList="nodownload"
+      //   autoPlay={true}
+      //   controls={false}
+      //   playsinline={true}
+      //   poster={thumb}
+      //   muted
+      //   // onContextMenu="return false;"
+      //   type="video/*"
+      //   src={file}
+      //   onError={event => {
+      //     event.target.src = origFile
+      //   }}
+      // >
+      // </video>
+    <div className={classname}>
+      
+      <ReactPlayer width="100%" height="100%" controls={false} playing playsinline loop muted url={file} />
+    </div>
+
     ) : fileType === "audio" ? (
       <>
         {" "}
