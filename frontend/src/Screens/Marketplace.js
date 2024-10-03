@@ -407,7 +407,7 @@ function Marketplace() {
                                 xs={12}
                                 className="mb_select_holder mt_1 ms-auto"
                             >
-                                <div className="d-none d-sm-block">
+                                <div className="d-none d-md-block">
                                 <div className="select_bids">
                                 <Select
                                     // menuIsOpen={true}
@@ -438,7 +438,7 @@ function Marketplace() {
                         </Row>
 
                         <Row className="mt_1">
-                            <Col xl={3} lg={4} md={4} sm={6} xs={12} className="mt_2">
+                            <Col xl={3} lg={4} md={4} sm={12} xs={12} className="mt_2">
                                 <div
                                     className={
                                         `mb_3 ${mobSearch
@@ -577,7 +577,7 @@ function Marketplace() {
                                     </Accordion>
                                 </div>
                                 </div>
-                                <div className="d-block d-sm-none mt_4 mb_3">
+                                <div className="d-block d-md-none mt_4 mb_3">
                                 <div className="select_bids">
                                 <Select
                                     // menuIsOpen={true}
@@ -608,18 +608,20 @@ function Marketplace() {
 
 
 
-                            <Col xl={9} lg={8} md={8} sm={6} xs={12} className="mt_2 px-0">
+                            <Col xl={9} lg={8} md={8} sm={12} xs={12} className="mt_2 px-0">
 
                                 <Row className="mx-auto">
+                                    {/* <div className="market-grid"> */}
                                     {filterData.length != 0 && filterData.map((i) => (
                                         <>
                                             {/* {
                         (i?.coinValue > (min? min : 0) && i?.coinValue < (max?max:99999999999999999))  && */}
+                                    
                                             <Col
                                                 xl={4}
                                                 lg={6}
                                                 md={6}
-                                                sm={12}
+                                                sm={6}
                                                 xs={6}
                                                 className="mb_5 colsspad"
                                             >
@@ -630,6 +632,8 @@ function Marketplace() {
                                         </>
                                     ))
                                     }
+                                    
+                                    {/* </div> */}
                                     <div className='mt_2 mb_3 d-flex justify-content-center'>
                                         <button className='button-loadMore mb_3'>Load More</button>
                                     </div>
