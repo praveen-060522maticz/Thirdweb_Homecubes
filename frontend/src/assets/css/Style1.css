@@ -1572,10 +1572,15 @@ h6 {
   max-height: 100%;
   object-fit: cover;
 }
+.hc-min__banner-mobile video{
+  object-fit: cover;
+}
 .hc-mint__swiper-wrap.swiptop {
   margin-top: 1vh;
 }
-
+.hc-min__banner-mobile *:not(.simulator){
+  object-fit: cover;
+}
 .hc-swiper__arrow--right.swiper-button-disabled,
 .hc-swiper__arrow--left.swiper-button-disabled {
   opacity: 0.4;
