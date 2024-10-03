@@ -134,7 +134,6 @@ export const getTokenCount = async (data) => {
 export const collectionFunctions = async (data) => {
     const encData = AppenData(data)
     try {
-        var data = { "test": "testdata" }
         var resp = await axiosFunc({
             "method": "POST",
             'url': `${config.AdminAPI}/collectionFunctions`,

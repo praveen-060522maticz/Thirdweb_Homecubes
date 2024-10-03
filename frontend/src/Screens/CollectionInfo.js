@@ -307,17 +307,18 @@ function CollectionInfo() {
                     {collectionData &&
                       arrData?.length != 0 &&
                       arrData?.map((val) => {
+                        console.log('avavvavavavavavava---->', val);
                         return (
 
 
                           <div className="collection__image-card d-flex flex-column align-items-center">
 
                             <div className="collection__image-wrapper" >
-                              {videoFileFormats.includes(val.split(".")[1]) ? (
+                              {videoFileFormats.includes(val?.img?.split(".")[1]) ? (
                                 <div
                                   className="position-relative"
                                   style={{ cursor: "pointer" }}
-                                  onClick={() => handleShowVideo(val)}
+                                  onClick={() => handleShowVideo(val?.img)}
                                 >
                                   <div className="blur_thumbnailer">
                                     <div className="playBtn_fitter">
@@ -326,27 +327,27 @@ function CollectionInfo() {
                                   </div>
                                   <video
                                     className="img-fluid collectionss_img"
-                                    src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
+                                    src={`${config.IMG_URL}/collection/${collectionData?._id}/${val?.img}`}
                                   />
                                 </div>
                               ) : (
                                 <ImageWithLoader
                                   className="collection-width-fit"
                                   style={{ cursor: "pointer" }}
-                                  src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
-                                  onClick={() => handleShowVideo(val)}
+                                  src={`${config.IMG_URL}/collection/${collectionData?._id}/${val?.img}`}
+                                  onClick={() => handleShowVideo(val?.img)}
                                 />
                                 // <img
                                 //   className="collection-width-fit"
                                 //   style={{ cursor: "pointer" }}
-                                //   src={`${config.IMG_URL}/collection/${collectionData?._id}/${val}`}
-                                //   onClick={() => handleShowVideo(val)}
+                                //   src={`${config.IMG_URL}/collection/${collectionData?._id}/${val?.img}`}
+                                //   onClick={() => handleShowVideo(val?.img)}
                                 // />
                               )}
 
                             </div>
                             <h3 className="collection__image-wrapper--name  text-center">
-                              Image name
+                              {val?.desc}
                             </h3>
                           </div>
                         );

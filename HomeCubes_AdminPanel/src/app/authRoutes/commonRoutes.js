@@ -392,6 +392,16 @@ const Routes = [
         name: '/admin'
     },
     {
+        path: "/AddFileData",
+        component: lazy(() => import('../Gallery/AddFileData.js')),
+        name: '/admin'
+    },
+    {
+        path: "/EditFileData",
+        component: lazy(() => import('../Gallery/AddFileData.js')),
+        name: '/admin'
+    },
+    {
         path: "/GalleryAdd",
         component: lazy(() => import('../Gallery/AddGallery.js')),
         name: '/admin'

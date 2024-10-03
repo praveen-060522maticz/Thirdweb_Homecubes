@@ -21,7 +21,12 @@ const gallery = new Schema({
     },
     galleryImages: {
         type: Array,
-        default: []
+        default: [
+            {
+                img: { type: String, default: "" },
+                desc: { type: String, default: "" }
+            }
+        ]
     },
     deleted: {
         type: Boolean,

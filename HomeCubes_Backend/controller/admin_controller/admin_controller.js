@@ -653,7 +653,9 @@ export const collectionFunctions = async (req, res) => {
     action,
     _id,
     galleryThumbImage,
-    ImageName
+    ImageName,
+    desc,
+    img
   } = req.body
 
 
@@ -778,7 +780,7 @@ export const collectionFunctions = async (req, res) => {
           }
         ])
 
-        const setImagesInDb = await Gallery.updateOne({ _id: ObjectId(_id) }, { $push: { "galleryImages": ImageName } })
+        const setImagesInDb = await Gallery.updateOne({ _id: ObjectId(_id) }, { $push: { "galleryImages": { img: ImageName, desc } } })
       }))
 
       return res.json({
@@ -787,8 +789,35 @@ export const collectionFunctions = async (req, res) => {
       })
     }
 
+
+    if (action == "editImages") {
+      const galleryImages = req?.files?.galleryImages
+      var ref = Date.now()
+      console.log("galleryImages", files);
+
+      const ImageName = galleryImages ? await ImageAddFunc([
+        {
+          path: `public/collection/${_id}/`,
+          files: galleryImages,
+          filename:
+            ref + "43" +
+            "." +
+            galleryImages.name.split(".")[
+            galleryImages.name.split(".").length - 1
+            ],
+        }
+      ]) : img;
+
+      const setImagesInDb = await Gallery.updateOne({ "galleryImages.img": img }, { $set: { "galleryImages.$": { img: ImageName, desc } } })
+
+      return res.json({
+        success: "success",
+        msg: 'successfully uploaded'
+      })
+    }
+
     if (action == "deleteImage") {
-      const setImagesInDb = await Gallery.updateOne({ _id: ObjectId(_id) }, { $pull: { "galleryImages": ImageName } })
+      const setImagesInDb = await Gallery.findOneAndUpdate({ _id: ObjectId(_id) }, { $pull: { galleryImages: { "img": ImageName } } })
       return res.json({
         success: "success",
         msg: 'successfully deleted'
