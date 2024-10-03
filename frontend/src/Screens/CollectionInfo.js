@@ -10,6 +10,7 @@ import {
   Modal,
   Button,
 } from "react-bootstrap";
+import ReactPlayer from 'react-player';
 import SideTab from "../Components/SideTab";
 import ReactSearchBox from "react-search-box";
 import Select from "react-select";
@@ -325,10 +326,12 @@ function CollectionInfo() {
                                       <i class="fa-regular fa-circle-play" />
                                     </div>
                                   </div>
-                                  <video
+                                  {/* <video
                                     className="img-fluid collectionss_img"
                                     src={`${config.IMG_URL}/collection/${collectionData?._id}/${val?.img}`}
-                                  />
+                                  /> */}
+                                        <ReactPlayer width="100%" height="100%" style={{ objectFit:"cover" }} controls={false} playing playsinline loop muted url={`${config.IMG_URL}/collection/${collectionData?._id}/${val?.img}`} />
+
                                 </div>
                               ) : (
                                 <ImageWithLoader
