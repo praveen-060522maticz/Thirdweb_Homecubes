@@ -95,7 +95,6 @@ export default function ImgAudVideo({
       // >
       // </video>
     <div className={classname}>
-      
       <ReactPlayer width="100%" height="100%" style={{ objectFit:"cover" }} controls={false} playing playsinline loop muted url={file} />
     </div>
 
