@@ -80,7 +80,7 @@ export default function ImgAudVideo({
         controlsList="nodownload"
         autoPlay={true}
         controls={false}
-        playsinline
+        playsinline={true}
         poster={thumb}
         muted
         // onContextMenu="return false;"
