@@ -28,7 +28,7 @@ import ImageSkeleton from "../Components/ImageSkeleton";
 function Home() {
 
     useEffect(() => {
-        AOS.init({ mirror: "true" });
+        AOS.init({ mirror: "true",disable: 'mobile', once: true });
         AOS.refresh();
         window.scroll(0, 0);
     }, []);
@@ -152,9 +152,9 @@ function Home() {
                             <Col lg={6} className="px-0">
                                 {CMS["Revolution your Home Ownership"]?.img &&
                                     // <div className="anim_div first_lottie loader_div_center" >
-                                    <div className="anim_div first_lottie h-100" >
-
-
+                                    <div className="anim_div first_lottie h-100" data-aos="fade-up"
+                                    data-aos-offset="150"
+                                    data-aos-duration="800">
                                         <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["Revolution your Home Ownership"]?.img}`} className="banner_lottie" />
                                     </div>}
                             </Col>
@@ -168,7 +168,9 @@ function Home() {
                             <Col lg={6} className="col_pad">
                                 <div className="cloudcubes_holder">
                                     {CMS["About Home Cubes"]?.img &&
-                                        <div className="anim_div text-center text-xl-start">
+                                        <div className="anim_div text-center text-xl-start" data-aos="fade-left"
+                                        data-aos-offset="50"
+                                        data-aos-duration="800">
                                             <LottieAnimation url={`${config.IMG_URL}/cmsimg/${CMS["About Home Cubes"]?.img}`} className="img-fluid wauto"
                                             />
                                         </div>}
@@ -202,7 +204,9 @@ function Home() {
                             <Col lg={6} className="px-0">
                                 <h3
                                     className="home_titled hc-home__title head_txt"
-
+                                    data-aos="fade-up"
+                                    data-aos-offset="100"
+                                    data-aos-duration="800"
                                     dangerouslySetInnerHTML={{ __html: CMS["CountDown to Our Next Launch"]?.title }}
                                 >
 
@@ -245,7 +249,9 @@ function Home() {
                                     />
                                     <h3
                                         className="home_titled hc-home__title head_txt"
-
+                                        data-aos="fade-up"
+                                        data-aos-offset="100"
+                                        data-aos-duration="800"
                                         dangerouslySetInnerHTML={{
                                             __html:
                                                 CMS[
@@ -306,7 +312,9 @@ function Home() {
                                 />
                                 <h3
                                     className="home_titled hc-home__title head_txt"
-
+                                    data-aos="fade-up"
+                                    data-aos-offset="100"
+                                    data-aos-duration="800"
                                 >
                                     Investors <strong>Benefits</strong>
                                 </h3>
@@ -351,7 +359,11 @@ function Home() {
 
                         <Row className="align-items-center top_bottom mx-auto">
                             <h3
-                                className="home_titled hc-home__title text-center  mb_5">
+                                className="home_titled hc-home__title text-center  mb_5"
+                                data-aos="fade-up"
+                                data-aos-offset="50"
+                                data-aos-duration="800"
+                                >
                                 Our <strong>Commitment</strong>
                             </h3>
                             <div className="home-grid px-0">
@@ -359,7 +371,9 @@ function Home() {
                                     commmitArr?.map((i) => (
                                         // <Col lg={4} md={6} sm={12} xs={12} className="col_pad commit_pad mt_3">
                                         <div
-                                            className="home_commitemtnCard">
+                                            className="home_commitemtnCard"  data-aos="fade-up"
+                                            data-aos-offset="100"
+                                            data-aos-duration="800">
                                             <div className="home_singleCommit">
                                                 <img
                                                     className="home_commitCube"
@@ -384,7 +398,9 @@ function Home() {
                         <Row className="hc-home__roadMap top_bottom mx-auto">
                             <h3
                                 className="home_titled hc-home__title text-center head_txt"
-
+                                data-aos="fade-up"
+                                data-aos-offset="100"
+                                data-aos-duration="800"
                             >
                                 <strong>Road</strong> Map
                             </h3>
@@ -406,7 +422,9 @@ function Home() {
                                     >
                                         <h3
                                             className="home_titled text-center mb_1"
-
+                                            data-aos="fade-up"
+                                            data-aos-offset="100"
+                                            data-aos-duration="500"
                                         >
                                             Join Our Link Tree
                                         </h3>
