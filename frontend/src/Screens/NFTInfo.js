@@ -1382,7 +1382,7 @@ src={require("../assets/images/clock.svg").default}
                                             )} */}
                                             <button
                                                 className="primary_blueBtn mt_2 mb_2"
-                                                onClick={() => navigate(`/CollectionNfts/${project?.projectTitle}`,
+                                                onClick={() => navigate(`/projectInfo/${project?.projectTitle}`,
                                                     {
                                                         state: { projectInfo: JSON.stringify(project) }
                                                     }
