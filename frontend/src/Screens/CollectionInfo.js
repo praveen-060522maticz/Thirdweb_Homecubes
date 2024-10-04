@@ -75,7 +75,7 @@ function CollectionInfo() {
 
   const getCollectionTokens = async (fill) => {
     var params = {
-      galleryId: collectionData._id,
+      galleryId: collectionData?._id,
       limit: 4,
       skip: fill ? 0 : nftcardData.length,
       filters: fill ? fill : filters,
