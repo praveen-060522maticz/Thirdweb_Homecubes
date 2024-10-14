@@ -16,10 +16,10 @@ if (localArr.includes(config.env)) {
             tokenAddress: '0x7CAB80ce0E55F46378E493B584eE61aD68878f11'.toLowerCase(),
             singleContract: '0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf'.toLowerCase(),
             multipleContract: '0x641e7A8F7e414eE6F05C8B0528877e680e4693E6'.toLowerCase(),
-            tradeContract: "0xD370f5D497cc4b2344a9936f24E47284693d96D5".toLowerCase(),
+            tradeContract: "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase(),
             adminAddress: "0x025c1667471685c323808647299e5dbf9d6adcc9".toLowerCase(),
-            chainName: "BSC_TESTNET"
-
+            chainName: "BSC_TESTNET",
+            stakeContract: "0x966D215D56b06E3469Df0D9fD80A5cB78f9A1EAA"
         },
         43113: {  // Avalanche_Testnet 
 

@@ -90,7 +90,7 @@ export const editcms = async (req, res) => {
       var isExists = await Cms.findOne({ "title": req.body.title });
       console.log("isexists", isExists)
       if (isExists) {
-      return  res.status(200).json({ "status": false, "msg": "Cms Already Exists" })
+        return res.status(200).json({ "status": false, "msg": "Cms Already Exists" })
       }
       else {
         var cmsadd = new Cms(savedata)
@@ -104,7 +104,7 @@ export const editcms = async (req, res) => {
 
         else {
           console.log("error");
-         return res.send({ message: "error" })
+          return res.send({ message: "error" })
         }
       }
     }
@@ -138,7 +138,7 @@ export const editcms = async (req, res) => {
         return res.status(200).json({ "status": true, "msg": "cms updated successfully" })
       }
       else
-       return res.status(200).json({ "status": false, "msg": "cms updation failed" })
+        return res.status(200).json({ "status": false, "msg": "cms updation failed" })
     } else {
 
       var ref = Date.now();
@@ -162,10 +162,10 @@ export const editcms = async (req, res) => {
       console.log('resp---->', resp);
       if (resp) {
         console.log("resp after cms", resp)
-       return res.status(200).json({ "status": true, "msg": "cms updated successfully" })
+        return res.status(200).json({ "status": true, "msg": "cms updated successfully" })
       }
       else
-       return res.status(200).json({ "status": false, "msg": "cms updation failed" })
+        return res.status(200).json({ "status": false, "msg": "cms updation failed" })
 
 
     }
@@ -183,7 +183,7 @@ export const AddToken = async (req, res) => {
   console.log("add tokn", req.body);
   if (req.body.action == "add") {
     //db.getCollection('currencies').find({"CurrencyDetails.label": "Gow"},{ "CurrencyDetails.$": 1})   ----> this works too
-    var token = await Currency.find({ CurrencyDetails: { $elemMatch: { label: req.body.name } } }, { "CurrencyDetails.$": 1 })
+    var token = await Currency.find({ CurrencyDetails: { $elemMatch: { label: req.body.name } }, ChainId: `${req.body.ChainId}` }, { "CurrencyDetails.$": 1 })
     // var token  = await Currency.find({ChinId : req.body.ChainId})
     console.log("returne token", token)
     if (token && token.length > 0) {

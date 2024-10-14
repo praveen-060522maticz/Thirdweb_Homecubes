@@ -24,13 +24,14 @@ if (EnvName === "local") {
   // var tradeAddress = "0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208".toLowerCase(); // seplia
 
   // var tradeAddress = "0x783FB9DD2C69101cd0E080403279b9fE7E6ac780".toLowerCase(); // seplia openzepline
-  var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase()
+  // var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase()  //removed seplia openzepline
+  var tradeAddress = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase()  //removed seplia openzepline
   // var tradeAddress = "0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac".toLowerCase(); // seplia
   // var tradeAddress = "0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3"; // seplia
   var singleAddress = "0x575cd9E4099A38B536673F557063f9A546870d11"; // seplia
   var multipeAddress = "0x0b6369b506e811df30ab7c0ce0ae00b8690b76be";
   var networkVersion = "0x61"
-  var chainId = 11155111;
+  var chainId = 97;
   var ETHCHAIN = 11155111
   var BNBCHAIN = 97
   var chainlist = [97, 11155111]
@@ -47,7 +48,8 @@ if (EnvName === "local") {
   networkTransUrl = "https://sepolia.etherscan.io/tx/"
   // var stakeAddress = "0x4f9395bdA5E47566903b960895fdc2713890Fd41"
   // var stakeAddress = "0x5eFe07C7A4F632b2c8Cd40aA2f4a70EC71d32348" // openxep
-  var stakeAddress = "0x9605Abafe5f6EE8B9EB671083d4412415e0f54F2"
+  // var stakeAddress = "0x9605Abafe5f6EE8B9EB671083d4412415e0f54F2" // removed openzep sepolia
+  var stakeAddress = "0x966D215D56b06E3469Df0D9fD80A5cB78f9A1EAA" // removed openzep bnb
 }
 
 if (EnvName === "clientStage") {
@@ -62,13 +64,14 @@ if (EnvName === "clientStage") {
   // var tradeAddress = "0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208".toLowerCase(); // seplia
 
   // var tradeAddress = "0x783FB9DD2C69101cd0E080403279b9fE7E6ac780".toLowerCase(); // seplia openzepline
-  var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase()
+  // var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase()
+  var tradeAddress = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase()
   // var tradeAddress = "0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac".toLowerCase(); // seplia
   // var tradeAddress = "0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3"; // seplia
   var singleAddress = "0x575cd9E4099A38B536673F557063f9A546870d11"; // seplia
   var multipeAddress = "0x0b6369b506e811df30ab7c0ce0ae00b8690b76be";
   var networkVersion = "0x61"
-  var chainId = 11155111;
+  var chainId = 97;
   var ETHCHAIN = 11155111
   var BNBCHAIN = 97
   var chainlist = [97, 11155111]
@@ -85,7 +88,8 @@ if (EnvName === "clientStage") {
   networkTransUrl = "https://sepolia.etherscan.io/tx/"
   // var stakeAddress = "0x4f9395bdA5E47566903b960895fdc2713890Fd41"
   // var stakeAddress = "0x5eFe07C7A4F632b2c8Cd40aA2f4a70EC71d32348" // openxep
-  var stakeAddress = "0x9605Abafe5f6EE8B9EB671083d4412415e0f54F2"
+  // var stakeAddress = "0x9605Abafe5f6EE8B9EB671083d4412415e0f54F2"
+  var stakeAddress = "0x966D215D56b06E3469Df0D9fD80A5cB78f9A1EAA" // removed openzep bnb
 }
 
 if (EnvName === "stage") {

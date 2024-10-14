@@ -10,7 +10,7 @@ import { PrivyProvider } from '@privy-io/react-auth';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { base, baseGoerli, mainnet, sepolia, polygon, polygonMumbai } from 'viem/chains';
+import { base, baseGoerli, mainnet, sepolia, polygon, polygonMumbai,bscTestnet } from 'viem/chains';
 
 /** local file import */
 
@@ -96,9 +96,9 @@ function App() {
                     "appearance": { "accentColor": "#6A6FF5", "theme": "#222224", "showWalletLoginFirst": false, "logo": "https://home-cubes-frontend-3.pages.dev/static/media/logo.b931aee24b93273c30989770522e8f9c.svg" },
                     "loginMethods": ["email", "wallet", "google", "apple", "sms"],
                     "embeddedWallets": { "createOnLogin": "users-without-wallets", "requireUserPasswordOnCreate": false },
-                    defaultChain: sepolia,
+                    defaultChain: bscTestnet,
                     // Replace this with a list of your desired supported chains
-                    supportedChains: [mainnet, sepolia, base, baseGoerli, polygon, polygonMumbai],
+                    supportedChains: [mainnet, base, baseGoerli, polygon, polygonMumbai,bscTestnet],
                     "mfa": { "noPromptOnMfaRequired": false }
                 }}>
                 <RouterProvider router={router} />

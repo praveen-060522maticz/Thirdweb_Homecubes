@@ -278,21 +278,25 @@ function Header() {
             var eth =
                 Resp?.msg?.filter((item) => item.ChainId == config.ETHCHAIN) ?? [];
             console.log("aaaaaaasssssssssssssssssssssssssaa", sen, bnb, eth);
-            var bnbdatas = await Promise.all(
-                bnb[0]?.CurrencyDetails ||
-                []?.map(async (data) => {
+            var bnbdatas = config.CHAIN_ID == config.BNBCHAIN ? await Promise.all(
+                (bnb[0]?.CurrencyDetails || [])?.map(async (data) => {
                     // if (data.label == "BNB" || data.label == "ETH")
                     //   var USD = await USDPRICE(data.label);
                     // else var USD = await TOKENPRICE(data.address);
                     const web3p = new Web3(config.RPC_URL)
                     let TokenContract;
-                    try {
+                    if (data?.address == config.DEADADDRESS) {
+                        var getBalance = await web3p.eth.getBalance(connectedwalet.address)
+                    } else {
+                        try {
 
-                        TokenContract = new web3p.eth.Contract(Token, data.address);
-                    } catch (e) {
-                        console.log('Error---->', e);
+                            TokenContract = new web3p.eth.Contract(Token, data.address);
+                        } catch (e) {
+                            console.log('Error---->', e);
+                        }
+                        var getBalance = await TokenContract?.methods?.balanceOf(connectedwalet.address).call();
+                        console.log('getBalance---->', getBalance, parseFloat(getBalance));
                     }
-                    const getBalance = await TokenContract?.methods?.balanceOf(connectedwalet.address)?.call();
                     const getSymbol = await TokenContract?.methods?.symbol(connectedwalet.address)?.call();
                     const convertPrice = await getBNBvalue(`${getSymbol}USDT`)
                     console.log('convertPrice---->', convertPrice);
@@ -300,13 +304,13 @@ function Header() {
                         value: data.value,
                         label: data.label,
                         address: data.address.toLowerCase(),
-                        balance: getBalance ? getBalance : 0,
+                        balance: getBalance ? (parseFloat(getBalance) / 1e18).toFixed(5) : 0,
                         decimal: data.decimal,
                         convertPrice
                     });
                 })
-            );
-            var ethdatas = await Promise.all(
+            ) : [];
+            var ethdatas = config.CHAIN_ID == config.ETHCHAIN ? await Promise.all(
                 eth[0]?.CurrencyDetails?.map(async (data) => {
                     console.log('data---->', data);
                     // if (data.label == "BNB" || data.label == "ETH")
@@ -340,12 +344,12 @@ function Header() {
                         convertPrice: parseFloat(convertPrice)
                     });
                 })
-            );
+            ) : [];
             console.log("currencydats", sen, bnbdatas, ethdatas);
             dispatch({
                 type: "Register_Section",
                 Register_Section: {
-                    currency: config.CHAIN_ID == 97 ? bnbdatas : sen,
+                    currency: sen,
                     //   ethcurrency : ethdatas.length > 0 ? ethdatas : sen
                 },
             });
@@ -372,7 +376,7 @@ function Header() {
             accountDetails.web3 = web3;
             accountDetails.tokenBalance = 0
             console.log("acocococococo", accountDetails);
-            let CONTRACT = new web3p.eth.Contract(TradeAbi, config.TradeContract);
+            // let CONTRACT = new web3p.eth.Contract(TradeAbi, config.TradeContract);
 
             // accountDetails.USDTaddress = CONTRACT.methods?.["staticToken"] ? await CONTRACT.methods?.staticToken()?.call() : config.STATIC_TOKEN
             // console.log("acocococococo", accountDetails);
@@ -395,8 +399,8 @@ function Header() {
     return (
         <>
 
-            <div 
-            className="homecube_header"
+            <div
+                className="homecube_header"
             // className={location.pathname == `/profile/${wallet.accountAddress} ? "homecube_header dd" : "homecube_header" }`}
             >
 

@@ -309,7 +309,7 @@ export function AddProject() {
         var resp = await tokenFunctions.getCurrencyList();
         if (resp?.success) {
             console.log(":", resp?.msg, config);
-            let eth = resp?.msg.filter((item) => item.ChainId == String(config?.ETHCHAIN))
+            let eth = resp?.msg.filter((item) => item.ChainId == String(config?.chainId))
             console.log(":::", eth)
             // setTokenList(resp?.msg[0]?.CurrencyDetails)
             setCurrencyArr(eth[0]?.CurrencyDetails?.filter(val => val.address?.toLowerCase() != config.DEADADDRESS) || [])

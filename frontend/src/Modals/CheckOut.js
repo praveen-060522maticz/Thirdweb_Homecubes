@@ -145,7 +145,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
             currency?.filter((item) => item.label === owner.CoinName)?.pop()
                ?.address
          );
-         console.log("token_address", token_address, config.TradeContract, YouWillGet);
+         console.log("token_address", token_address, config.TradeContract, YouWillGet,network[Network].tradeContract,Network);
          setCanReload(false)
          let cont = await ContractCall.approve_721_1155( //normal
             wallets[0],
@@ -221,6 +221,7 @@ function CheckOut({ show, handleClose, item, owner, file }) {
             accountAddress,
             wallets[0]
          );
+         console.log('TokenBalance---->',TokenBalance);
          // console.log('tokkkeeeenballl',TokenBalance)
          SetTokenBalance(TokenBalance ? TokenBalance : 0);
       })();

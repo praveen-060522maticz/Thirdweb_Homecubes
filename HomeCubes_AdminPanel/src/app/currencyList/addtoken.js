@@ -36,7 +36,7 @@ export function AddToken() {
     "name": "",
     "address": "",
     "decimal": "",
-    "ChainId": config.ETHCHAIN
+    "ChainId": config.chainId
   }
 
   const History = useHistory();
