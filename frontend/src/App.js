@@ -87,6 +87,10 @@ function App() {
         // Add routes for any additional screens
     ]);
 
+    // console.log = () => {}
+    // console.error = () => {}
+    // console.info = () => {}
+
     return (
         <>
             <PrivyProvider
