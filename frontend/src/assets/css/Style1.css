@@ -3106,6 +3106,9 @@ object-fit: cover;
     height: 65vh;
     overflow-y: auto;
   }
+  .paymentmodal .modal-content{
+    height: fit-content;
+  }
 }
 
 @media (min-width: 992px) {
@@ -3319,7 +3322,35 @@ object-fit: cover;
   gap: 2vh;
   justify-content: flex-start;
 }
+.paymentbtnsec{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5vh;
+}
+.paymentbtnsec .bnbbtn{
+  background: #F9AF00;
+  border: 0.4vh solid #000000;
+  width: fit-content;
+  padding: 4% 8%;
+  font-size: 1.8vh;
+  color: #fff;
+  font-weight: 600;
 
+}
+.paymentbtnsec .usdtbtn{
+  background: #27A17C;
+  border: 0.4vh solid #16EBC3;
+  width: fit-content;
+  padding: 4% 8%;
+  font-size: 1.8vh;
+  color: #fff;
+  font-weight: 600;
+
+}
+.paymentbtnsec .bnbbtn .nft_coinImg{
+   
+}
 .profile_coinnameimg {
   align-items: center;
   display: flex;
@@ -3353,12 +3384,12 @@ object-fit: cover;
 .gap_set {
   gap: 6vh;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .vert_line {
   background-color: var(--white);
-  height: 5vh;
+  height: 11vh;
   width: 0.1vh;
 }
 
@@ -3606,7 +3637,7 @@ object-fit: cover;
 
   .profile_top {
     /* margin-top: -5vh; */
-    margin-top: -11vh;
+    margin-top: -5vh;
   }
 
   .gap_set {

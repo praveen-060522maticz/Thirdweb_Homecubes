@@ -23,6 +23,7 @@ import KycComment from '../Modals/KycRejected'
 
 import copyIcon from '../assets/images/copyicon.png'
 import CopyToClipboard from 'react-copy-to-clipboard'
+import Paymentmodal from '../Modals/Paymentmodal'
 
 function Profile() {
 
@@ -33,7 +34,9 @@ function Profile() {
   const { currency } = useSelector(state => state.LoginReducer)
   console.log('currency---->', currency);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [showKYC, setShowKYC] = useState(false)
+  const [showKYC, setShowKYC] = useState(false);
+  const [showPaymentmodal, setShowPaymentmodal] = useState(false);
+  const [paytype,setPaytype]=useState()
   const [showKycCmd, setShowKycCmd] = useState(false)
   const [Tokens, SetTokens] = useState({ 'owned': { 'loader': true, page: 1, list: [] } })
   const [value, SetTabName] = React.useState('owned');
@@ -347,6 +350,10 @@ function Profile() {
     }
 
   }
+  const handlePaymentmodal = (data) => {
+    setShowPaymentmodal(true);
+    setPaytype(data)
+  }
   return (
     <>
       <BottomBar />
@@ -564,6 +571,7 @@ function Profile() {
             <div className='hc-proile__border-top gap_set'>
               <p className='profile_balance'>Total Balance :  $ {(coinBalance * BNBUSDT)?.toFixed(6)}</p>             
               <div className='vert_line vert_line1'></div>
+              <div className='paymentbtnsec'>
               <div className='pro_valuecount'>
                 <div >
                   <div className='profile_coinnameimg'>
@@ -573,14 +581,21 @@ function Profile() {
                   <p className='hc-profile__text-xs'>
                     BNB Smart Coin
                   </p>
+                 
                 </div>
 
                 <div className='vertical_dtl'>
                   <p className='profile_greentTxt'>{currency?.filter(val => val.value == "USDT")?.[0]?.balance}</p>
                   <p className='small_dollar'>$ {BNBUSDT}</p>
                 </div>
+                
               </div>
+              <button type='button' className='usdtbtn' onClick={()=>handlePaymentmodal("usdt")}>  <img className='nft_coinImg' src={require('../assets/images/usdtbtnicon.png')} /> Buy USDT</button>
+              </div>
+              
+              
               <div className='vert_line'></div>
+              <div className='paymentbtnsec'>
               <div className='pro_valuecount'>
                 <div >
                   <div className='profile_coinnameimg'>
@@ -597,6 +612,9 @@ function Profile() {
                   <p className='small_dollar'>$ {BNBUSDT}</p>
                 </div>
               </div>
+              <button type='button' className='bnbbtn' onClick={()=>handlePaymentmodal("bnb")}> <img className='nft_coinImg' src={require('../assets/images/btnbtnicon.png')} /> Buy BNB</button>
+              </div>
+              
             </div>
             </div>
 
@@ -605,6 +623,9 @@ function Profile() {
               <p className='profile_balance'>Total Balance :  $ {(coinBalance * BNBUSDT)?.toFixed(6)}</p>             
           
               <div className='sub_flex'>
+                <div className='paymentbtnsec'>
+
+              
               <div className='pro_valuecount'>
                 <div >
                   <div className='profile_coinnameimg'>
@@ -621,8 +642,12 @@ function Profile() {
                   <p className='small_dollar'>$ {BNBUSDT}</p>
                 </div>
               </div>
-
+              <button type='button' className='usdtbtn' onClick={()=>handlePaymentmodal("usdt")}>  <img className='nft_coinImg' src={require('../assets/images/usdtbtnicon.png')} /> Buy USDT</button>
+              </div>
               <div className='vert_line'></div>
+              <div className='paymentbtnsec'>
+
+          
               <div className='pro_valuecount'>
                 <div >
                   <div className='profile_coinnameimg'>
@@ -638,6 +663,8 @@ function Profile() {
                   <p className='profile_greentTxt'>{coinBalance?.toFixed(6)}</p>
                   <p className='small_dollar'>$ {BNBUSDT}</p>
                 </div>
+              </div>
+              <button type='button' className='bnbbtn' onClick={()=>handlePaymentmodal("bnb")}> <img className='nft_coinImg' src={require('../assets/images/btnbtnicon.png')} /> Buy BNB</button>
               </div>
               </div>
             </div>
@@ -780,10 +807,9 @@ function Profile() {
       {/* kyc comment modal */}
       {showKycCmd && <KycComment show={showKycCmd} userProfile={userProfile} handleClose={handleCloseKycCmd} />}
 
-
-
-
       {/* end of kyc modal */}
+
+      {showPaymentmodal && <Paymentmodal show={showPaymentmodal} type={paytype}  handleClose={()=>setShowPaymentmodal(false)} />}
     </>
   )
 }
