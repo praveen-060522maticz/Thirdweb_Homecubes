@@ -372,7 +372,7 @@ const getrans = async () => {
     }
 }
 // db connection
-console.log('config.MONGOURI---->',config.MONGOURI);
+console.log('config.MONGOURI---->', config.MONGOURI);
 mongoose.connect(config.MONGOURI, (err) => {
     if (err) process.exit(1);
     console.log("Db connected Successfully")
@@ -408,8 +408,8 @@ app.use(async function (req, res, next) {
 
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     var method = req.method
-    console.log("req?.body", req?.query, method);
-
+    console.log("req?.body", req?.query, req?.body, method);
+    // next()
     if (method == "GET" || method == "get") {
 
         if (req.query.data) {
@@ -419,11 +419,12 @@ app.use(async function (req, res, next) {
                 return next()
             } catch (error) {
                 console.log("err on query data ", error);
-                return res.status(403).json({
-                    success: "error",
-                    status: false,
-                    msg: "Decrypt Data unAuthorised"
-                })
+                // return res.status(403).json({
+                //     success: "error",
+                //     status: false,
+                //     msg: "Decrypt Data unAuthorised"
+                // })
+                return next()
             }
 
         }
@@ -441,11 +442,12 @@ app.use(async function (req, res, next) {
 
             } catch (error) {
                 console.log("err on decrypt", error);
-                return res.status(403).json({
-                    success: "error",
-                    status: false,
-                    msg: "Decrypt Data unAuthorised"
-                })
+                // return res.status(403).json({
+                //     success: "error",
+                //     status: false,
+                //     msg: "Decrypt Data unAuthorised"
+                // })
+                return next()
             }
 
         } else if (!isEmpty(req?.body)) {
@@ -457,12 +459,12 @@ app.use(async function (req, res, next) {
                 req.body = data
             } catch (error) {
                 console.log("err on formdaat decrypt", error);
-                return res.json({
-                    success: "error",
-                    status: false,
-                    msg: "Decrypt Data unAuthorised"
-                })
-
+                // return res.json({
+                //     success: "error",
+                //     status: false,
+                //     msg: "Decrypt Data unAuthorised"
+                // })
+                return next()
             }
 
         }

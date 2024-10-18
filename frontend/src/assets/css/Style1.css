@@ -3336,16 +3336,19 @@ object-fit: cover;
   font-size: 1.8vh;
   color: #fff;
   font-weight: 600;
+  white-space: nowrap;
 
 }
 .paymentbtnsec .usdtbtn{
   background: #27A17C;
   border: 0.4vh solid #16EBC3;
   width: fit-content;
-  padding: 4% 8%;
+  padding: 1.5% 2.5%;
+
   font-size: 1.8vh;
   color: #fff;
   font-weight: 600;
+  white-space: nowrap;
 
 }
 .paymentbtnsec .bnbbtn .nft_coinImg{
@@ -3898,3 +3901,14 @@ object-fit: cover;
   padding-right: 0px !important;
 }
 /* end of hariharan css */
+#transakRoot{
+  z-index: 1000000 !important;
+}
+
+@media screen and (max-width:1199px) {
+  #transakModal{
+    height: 80% !important;
+    width: 80% !important;
+  }
+  
+}

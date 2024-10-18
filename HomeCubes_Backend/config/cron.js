@@ -38,7 +38,6 @@ const get_receipt = async (HashValue) => {
 
 
 export const CancelBidByExeFunction = async () => {
-    console.log('ge---->',);
     try {
 
         const getPendingData = await Bids.aggregate([
@@ -56,7 +55,7 @@ export const CancelBidByExeFunction = async () => {
             },
             { $unwind: "$TokenOwner" }
         ])
-        console.log('getPendingData---->', getPendingData);
+        // console.log('getPendingData---->', getPendingData);
 
         if (getPendingData?.length != 0) {
             await Promise.all(getPendingData?.map(async (val) => {
@@ -109,7 +108,6 @@ export const CancelBidByExeFunction = async () => {
 
 export const cancelTimedAuction = async () => {
     try {
-        console.log('Datatatt---->', new Date());
         const getData = await TokenOwners.updateMany({ PutOnSaleType: "TimedAuction", PutOnSale: "true", EndClockTime: { $lt: new Date() } }, { PutOnSaleType: "NotForSale", PutOnSale: "false" })
         // console.log('getDatagetData---->', getData);
     } catch (e) {
@@ -120,7 +118,7 @@ export const cancelTimedAuction = async () => {
 export const TransactionCron = async () => {
     try {
         const getTransaction = await Transactions.find({ transactionStatus: "not started" });
-        console.log('getTransaction---->', getTransaction);
+        // console.log('getTransaction---->', getTransaction);
         if (getTransaction?.length != 0) {
 
             for (let index = 0; index < getTransaction.length; index++) {

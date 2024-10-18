@@ -1994,6 +1994,11 @@ export const gasManagerFunc = async (req, res) => {
     }
   } catch (e) {
     console.log('Errorn gasManagerFunc---->', e);
+    return res.json({
+      success:  "error",
+      data: {},
+      msg: "No gas Fetched"
+    })
   }
 }
 

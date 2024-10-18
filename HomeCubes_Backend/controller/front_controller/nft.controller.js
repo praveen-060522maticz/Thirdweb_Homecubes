@@ -868,7 +868,7 @@ export const info = async (req, res) => {
   RetData.myBid = Owner != MyAdd ? await MongooseHelper.BidInfo(myBid, SendDta) : {};
   RetData.highBid = await MongooseHelper.BidInfo(highBid, SendDta);
   RetData.UnlockContent = [];
-  // console.log('RetDataffawfawf', JSON.stringify(RetData, null, 2))
+  console.log('RetDataffawfawf', JSON.stringify(RetData, null, 2))
   res.json(Encryptdata(RetData));
 };
 
@@ -1844,7 +1844,11 @@ export const getGallery = async (req, res) => {
   try {
     if (action == "getOneProjects") {
       const getData = await gallery.find({ projectId, deleted: false });
-      console.log('getDatagetData', getData);
+      console.log('getDatagetData', {
+        success: getData.length != 0 ? "success" : "error",
+        data: getData,
+        msg: getData.length != 0 ? "success" : "error",
+      });
       return res.json(Encryptdata({
         success: getData.length != 0 ? "success" : "error",
         data: getData,

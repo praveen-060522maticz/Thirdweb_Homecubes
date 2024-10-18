@@ -24,6 +24,7 @@ import KycComment from '../Modals/KycRejected'
 import copyIcon from '../assets/images/copyicon.png'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import Paymentmodal from '../Modals/Paymentmodal'
+import TransakComp from '../Components/TransakComp'
 
 function Profile() {
 
@@ -47,6 +48,7 @@ function Profile() {
   const [Loadmore, setLoadMore] = useState(true)
   const [searchLoad, setSearchLoad] = useState(true)
   const [rewardAmount, setRewardAmount] = useState(0);
+  const [showTransak, setShowTransak] = useState(false)
 
 
   console.log("Tokens", Tokens);
@@ -354,6 +356,15 @@ function Profile() {
     setShowPaymentmodal(true);
     setPaytype(data)
   }
+
+  const handleShowTransak = () => setShowTransak(true)
+
+  const handleHideTransak = () => setShowTransak(false)
+
+  const handleTransakData = (data) => {
+    console.log("datadddd", data)
+  }
+
   return (
     <>
       <BottomBar />
@@ -800,6 +811,9 @@ function Profile() {
         </div>
       </Container> */}
 
+      {/* Transak Paymet Modal */}
+      {showTransak &&  <TransakComp handleHideTransak={handleHideTransak} handleTransakData={handleTransakData} />}
+
 
       {/* kyc modal */}
       {showKYC && <KYCActivate show={showKYC} userProfile={userProfile} getProfileDetails={getProfileDetails} handleClose={handleCloseKYC} />}
@@ -809,7 +823,7 @@ function Profile() {
 
       {/* end of kyc modal */}
 
-      {showPaymentmodal && <Paymentmodal show={showPaymentmodal} type={paytype}  handleClose={()=>setShowPaymentmodal(false)} />}
+      {showPaymentmodal && <Paymentmodal show={showPaymentmodal} type={paytype}  handleClose={()=>setShowPaymentmodal(false)} handleShowTransak={handleShowTransak} />}
     </>
   )
 }

@@ -39,6 +39,8 @@ key.RELAYER_ADDRESS = process.env.RELAYER_ADDRESS
 key.FORWARDER_ADDRESS = process.env.FORWARDER_ADDRESS
 key.RELAYER_URL = process.env.RELAYER_URL
 
+key.TRANSAK_API_KEY = process.env.REACT_APP_TRANSAKAPIKEY
+
 const ip = "200.140.70.125"
 
 if (EnvName === "demo") {

@@ -400,12 +400,12 @@ function CheckOut({ show, handleClose, item, owner, file }) {
          setOnce(false)
          var Nftbalance = await ContractCall.Current_NFT_Balance(owner, item, wallets[0]);
          console.log("ownneerrsnftbuynowbalittemmm", Nftbalance, "  sadsadas", owner, wallets[0]);
-         if (Nftbalance?.toLowerCase() != owner.NFTOwner?.toLowerCase()) {
-            setTimeout(() => {
-               toast.warning("You won't buy at this moment please refresh you data");
-               push("/");
-            }, 1000);
-         }
+         // if (Nftbalance?.toLowerCase() != owner.NFTOwner?.toLowerCase()) {
+         //    setTimeout(() => {
+         //       toast.warning("You won't buy at this moment please refresh you data");
+         //       push("/");
+         //    }, 1000);
+         // }
       }
 
    }

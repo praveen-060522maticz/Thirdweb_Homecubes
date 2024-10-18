@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Row, Col, Form } from "react-bootstrap";
-function Paymentmodal({ show, handleClose,type }) {
+function Paymentmodal({ show, handleClose,type, handleShowTransak }) {
   return (
     <div>
       <Modal size='lg'
@@ -41,7 +41,7 @@ function Paymentmodal({ show, handleClose,type }) {
 
 
             <div className='w-100 text-center mt_3'>
-              <button className='mint_cnctwallet bodygradientBtn ' >Proceed</button>
+              <button className='mint_cnctwallet bodygradientBtn' onClick={() => handleShowTransak()} >Proceed</button>
             </div>
 
           </div>

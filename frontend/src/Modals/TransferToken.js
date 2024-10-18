@@ -123,6 +123,7 @@ function TransferToken({ show, handleClose, item, Tokens_Detail }) {
         Earning: "0",
         projectId: Tokens_Detail?.Current_Owner?.projectId
       };
+      console.log("bvaghsjdio", { newOwner: newOwner, item: item })
       let Resp = await BuyAccept({ newOwner: newOwner, item: item });
       if (cont?.status == "pending") {
         toast.update(id, {
