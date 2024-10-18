@@ -3331,8 +3331,8 @@ object-fit: cover;
 .paymentbtnsec .bnbbtn{
   background: #F9AF00;
   border: 0.4vh solid #000000;
-  width: fit-content;
-  padding: 4% 8%;
+  width: 18vh;
+  padding: 1vh;
   font-size: 1.8vh;
   color: #fff;
   font-weight: 600;
@@ -3342,8 +3342,8 @@ object-fit: cover;
 .paymentbtnsec .usdtbtn{
   background: #27A17C;
   border: 0.4vh solid #16EBC3;
-  width: fit-content;
-  padding: 1.5% 2.5%;
+  width: 18vh;  
+  padding: 1vh;
 
   font-size: 1.8vh;
   color: #fff;
@@ -3351,8 +3351,23 @@ object-fit: cover;
   white-space: nowrap;
 
 }
-.paymentbtnsec .bnbbtn .nft_coinImg{
-   
+.refbtnsec{
+  margin-top: 2vh;
+}
+.refbtnsec .refbtn{
+  background: #27A17C;
+  border: 0.4vh solid #16EBC3;
+  width: 18vh;  
+  padding: 1vh;
+
+  font-size: 1.8vh;
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap; 
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .profile_coinnameimg {
   align-items: center;
@@ -3460,7 +3475,7 @@ object-fit: cover;
 }
 
 .profile_top {
-  margin-top: -8vh;
+  margin-top: -3vh;
 }
 
 .react-select-2__placeholder {
@@ -3540,10 +3555,152 @@ object-fit: cover;
   margin-left: 1vh;
   margin-top: -0.2vh;
 }
+.referral_report .back_btn{
+  text-decoration: none;
+  font-size: 2vh;
+  color: #ffffff;
+}
+.referral_report .banner_section{
+  padding-top: 17vh;
+}
+.referral_report .head_section{
+text-align: center;
+margin-top: 2vh;
+}
+.referral_report .head_section .head_txt{
+  font-size: 4vh;
+  font-weight: 700;
+  text-align: center;
+}
+.referral_report .head_section .daterangesec{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* gap: 2vh; */
+  margin-top: 4vh;
+}
+.referral_report .head_section .daterangesec .gapsec{
+  height: 3vh;
+  width: 3vh;
+}
+.referral_report .head_section .nftinfo_gradeientBtn{
+  width: fit-content;
+  padding: 0.7vh 4vh;
+  font-weight: 600;
+}
+.referral_report .head_section .submit_btnsec{
+display: flex;
+align-items: center;
+justify-content: center;
+margin-top: 4vh;
+}
+.referral_report .head_section .daterangesec input{
+  background: transparent;
+  border: 0.3vh solid #16EBC3;
+  padding: 1vh 4vh;
+  color: #fff;
+  font-size: 2.5vh;
+  font-weight: 600;
+  border-radius: 0.5vh;
+  width: 100%;
+}
+.referral_report .head_section  .react-datepicker-ignore-onclickoutside{
+  background: transparent;
+  border: 0.3vh solid #16EBC3;
+  padding: 1vh 4vh;
+  color: #fff;
+  font-size: 2.5vh;
+  font-weight: 600;
+  border-radius: 0.5vh;
+  outline: 0;
+}
+.referral_report  .tablesec .tablesec_head{
+  font-size: 3vh;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 5vh;
+}
+.referral_report .hc-nftInfo__table table thead tr{
+  border-top: 0.15vh solid #FFFFFFA8;
+  border-bottom: 0.15vh solid #FFFFFFA8;
+}
+.referral_report  .nftInfo_table.hc-nftInfo__table table thead tr th{
+  color: #16EBC3 !important;
 
+}
+.referral_report .nftInfo_table table tbody tr td{
+  font-size: 2.4vh;
+}
+.referral_report  .nftInfo_table table thead tr th{
+  font-size: 2.7vh;
+}
+.referral_report  .daterangesec .react-datepicker{
+  font-size: 2vh;
+  background: #080808f0;
+  border: 0.1vh solid #525252
+
+}
+.referral_report  .daterangesec  .react-datepicker__current-month,.referral_report  .daterangesec   .react-datepicker-time__header,.referral_report  .daterangesec  .react-datepicker-year-header{
+  font-size: 1.9vh;
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+.referral_report  .react-datepicker__header{
+  padding: 0.5vh 0 !important;
+  background: #080808f0;
+}
+.referral_report  .react-datepicker__month{
+  margin: 1vh !important;
+  
+}
+.referral_report  .react-datepicker__day-name, .referral_report  .react-datepicker__day,.referral_report  .react-datepicker__time-name{
+  width: 4vh !important;
+  line-height: 4vh !important;
+  text-align: center !important; 
+  margin: 0.3vh !important;
+  color: #fff !important;
+}
+.referral_report  .react-datepicker__navigation{
+  height: 4vh !important;
+  width: 4vh !important;
+}
+.referral_report  .react-datepicker__navigation-icon{
+  font-size: 3vh !important;
+}
+.referral_report .react-datepicker__day--selected,.referral_report .react-datepicker__day--in-selecting-range, .referral_report .react-datepicker__day--in-range,.referral_report .react-datepicker__month-text--selected,.referral_report .react-datepicker__month-text--in-selecting-range,.referral_report .react-datepicker__month-text--in-range,.referral_report .react-datepicker__quarter-text--selected,.referral_report .react-datepicker__quarter-text--in-selecting-range,.referral_report .react-datepicker__quarter-text--in-range,.referral_report .react-datepicker__year-text--selected,.referral_report .react-datepicker__year-text--in-selecting-range,.referral_report .react-datepicker__year-text--in-range{
+  background: #16EBC3 !important;
+  font-weight: 600 !important;
+}
+.referral_report  .react-datepicker__day:not([aria-disabled=true]):hover, .referral_report  .react-datepicker__month-text:not([aria-disabled=true]):hover,.referral_report  .react-datepicker__quarter-text:not([aria-disabled=true]):hover,.referral_report  .react-datepicker__year-text:not([aria-disabled=true]):hover{
+  background: #16EBC3 !important;
+  font-weight: 600 !important;
+}
+.referral_report  .react-datepicker__day--keyboard-selected,.referral_report  .react-datepicker__month-text--keyboard-selected,.referral_report  .react-datepicker__quarter-text--keyboard-selected,.referral_report  .react-datepicker__year-text--keyboard-selected{
+  background: #16EBC3 !important;
+  font-weight: 600 !important;
+}
+.referral_report .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle{
+  fill: #080808B2;
+  color: #080808B2;
+  stroke: #080808B2;
+}
+.referral_report .daterange_input{
+  position: relative;
+}
+.referral_report .daterange_input .angledown{
+  position: absolute;
+  right: 1vh;
+  top: 2vh; 
+  height: 2vh;
+  width: 3vh;
+
+}
 @media screen and (max-width:1199px) {
   .counterslist {
     gap: 3vh;
+  }
+  .referral_report .head_section .daterangesec{
+    flex-direction: column;
   }
 
 }
@@ -3561,7 +3718,7 @@ object-fit: cover;
     width: fit-content;
   }
   .profile_top {
-    margin-top: -25vh;
+    margin-top: -20vh;
   }
 }
 
@@ -3571,7 +3728,7 @@ object-fit: cover;
     flex-wrap: wrap;
   }
   .profile_top {
-    margin-top: -12vh;
+    margin-top: -4vh;
   }
   .counterslist {
     flex-wrap: wrap;
@@ -3671,7 +3828,9 @@ object-fit: cover;
   .kyc_activated p {
     font-size: 1.6vh;
   }
-
+  .referral_report .head_section .head_txt{
+    font-size: 3vh;
+  }
 
 
 
