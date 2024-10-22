@@ -211,6 +211,7 @@ function Minting() {
 
         const initialMint = await onInitialMint(params)
         console.log("initial min", initialMint);
+        console.log("mudichuvintinga", { arrData: initialMint?.data, stauts: "available" })
 
         if (initialMint.status) {
 
@@ -348,16 +349,18 @@ function Minting() {
                     }, 1000)
                 } else if (Resp.status) {
                     toast.update(id, { render: 'Token Purchased Successfully', type: 'success', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
-                    setTimeout(() => {
-                        navigate("/minting")
-                    }, 1000)
+                    // setTimeout(() => {
+                    //     navigate("/minting")
+                    // }, 1000)
                 }
                 else {
+                    console.log("mudichuvintinga2", { arrData: initialMint?.data, stauts: "available" })
                     setTokenStatus({ arrData: initialMint?.data, stauts: "available" })
                     toast.update(id, { render: 'Token Transaction Failed', type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
                 }
             }
             else {
+                console.log("mudichuvintinga3", { arrData: initialMint?.data, stauts: "available" })
                 setTokenStatus({ arrData: initialMint?.data, status: "available" })
                 toast.update(id, { render: 'Token Transaction Failed', type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
             }

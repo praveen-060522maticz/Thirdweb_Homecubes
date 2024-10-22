@@ -419,12 +419,12 @@ app.use(async function (req, res, next) {
                 return next()
             } catch (error) {
                 console.log("err on query data ", error);
-                // return res.status(403).json({
-                //     success: "error",
-                //     status: false,
-                //     msg: "Decrypt Data unAuthorised"
-                // })
-                return next()
+                return res.status(403).json({
+                    success: "error",
+                    status: false,
+                    msg: "Decrypt Data unAuthorised"
+                })
+                // return next()
             }
 
         }
@@ -442,12 +442,12 @@ app.use(async function (req, res, next) {
 
             } catch (error) {
                 console.log("err on decrypt", error);
-                // return res.status(403).json({
-                //     success: "error",
-                //     status: false,
-                //     msg: "Decrypt Data unAuthorised"
-                // })
-                return next()
+                return res.status(403).json({
+                    success: "error",
+                    status: false,
+                    msg: "Decrypt Data unAuthorised"
+                })
+                // return next()
             }
 
         } else if (!isEmpty(req?.body)) {
@@ -459,12 +459,12 @@ app.use(async function (req, res, next) {
                 req.body = data
             } catch (error) {
                 console.log("err on formdaat decrypt", error);
-                // return res.json({
-                //     success: "error",
-                //     status: false,
-                //     msg: "Decrypt Data unAuthorised"
-                // })
-                return next()
+                return res.json({
+                    success: "error",
+                    status: false,
+                    msg: "Decrypt Data unAuthorised"
+                })
+                // return next()
             }
 
         }

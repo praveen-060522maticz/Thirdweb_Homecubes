@@ -64,7 +64,7 @@ export function ProjectCmsAdd() {
 
         return errors;
     };
-
+    console.log("respresp", formData);
     const handleSubmit = async () => {
         const validate = validation();
         console.log("validate", validate);
@@ -74,7 +74,7 @@ export function ProjectCmsAdd() {
         formData.projectId = location.state._id;
 
         var resp = await createProject(formData);
-        console.log("respresp", resp);
+        console.log("respresp", resp, formData);
         if (resp?.success == "success") {
             toast.success(resp.msg);
             setTimeout(function () {

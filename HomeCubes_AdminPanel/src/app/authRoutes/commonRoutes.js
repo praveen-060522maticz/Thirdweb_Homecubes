@@ -107,7 +107,7 @@ const Routes = [
     //     name: '/admin'
     // },
     {
-        path: "/nftlist",
+        path: " ",
         component: lazy(() => import('../nftlist/nftList.js')),
         name: '/admin'
     },

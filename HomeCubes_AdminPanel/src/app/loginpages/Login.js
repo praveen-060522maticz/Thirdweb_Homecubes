@@ -73,6 +73,7 @@ export default function Login(props) {
       console.log("erore", isEmpty(resp)); // shiuld add toastr here
     } else {
       data.path = "login";
+      console.log("datadata", data)
       var Resp = await adminFunctions.loginAdmin(data);
       console.log("Resppppp", Resp);
       if (Resp.data) {

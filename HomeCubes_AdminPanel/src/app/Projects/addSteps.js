@@ -73,7 +73,7 @@ export function AddProject() {
     formData.projectId = location.state._id;
 
     var resp = await createProject(formData);
-    console.log("respresp", resp);
+    console.log("respresp", formData, resp);
     if (resp?.success == "success") {
       toast.success(resp.msg);
       setTimeout(function () {

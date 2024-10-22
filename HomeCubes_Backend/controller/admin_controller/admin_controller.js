@@ -2018,11 +2018,11 @@ export const gasTokensFunctions = async (req, res) => {
     else if (action == "add") {
 
       const check = await GasTokens.findOne({ contractAddress });
-      if (!isEmpty(check)) return res.json({
-        status: true,
-        msg: "already",
-        data: check
-      })
+      // if (!isEmpty(check)) return res.json({
+      //   status: true,
+      //   msg: "already",
+      //   data: check
+      // })
 
       const Resp = await new GasTokens({
         Name: name,
