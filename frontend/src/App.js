@@ -29,6 +29,7 @@ import Profile from './Screens/Profile';
 import Staking from './Screens/Staking';
 import Contact from './Screens/Contact';
 import CollectionNfts from './Screens/CollectionNfts';
+import ReferralReport from './Screens/ReferralReport';
 
 /** code start */
 
@@ -83,6 +84,10 @@ function App() {
         {
             path: "/contact",
             element: <Contact />,
+        },
+        {
+            path: "/referralreport",
+            element: <ReferralReport />,
         },
         // Add routes for any additional screens
     ]);

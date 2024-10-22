@@ -10,7 +10,7 @@ import Footer from '../Components/Footer'
 import KYCActivate from '../Modals/KYCActivate'
 import NFTCards from '../Components/NFTCards'
 import DataCard from '../Components/DataCard'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Token_MyList_Func, getFessFunc, userRegister } from '../actions/axioss/user.axios'
 import { address_showing, isEmpty } from '../actions/common'
 import { useDispatch, useSelector } from 'react-redux'
@@ -492,6 +492,9 @@ function Profile() {
                         </button>
                       </div>
                     </div>
+                    <div className='refbtnsec'>
+                      <Link to='/referralreport' className='refbtn' type='button'>Referral Report</Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -522,6 +525,9 @@ function Profile() {
                   </button>
                 </div>
               </div>
+              <div className='refbtnsec text-center'>
+                      <Link to ='/referralreport' className='refbtn' type='button'>Referral Report</Link>
+                    </div>
             </div>
 
             <div className='mb_1 d-none d-md-block'>
