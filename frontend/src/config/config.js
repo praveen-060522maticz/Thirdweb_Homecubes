@@ -2,7 +2,7 @@
 // import ERC1155 from '../../src/Abi/erc1155.json'
 // import TRADE from '../../src/Abi/market.json'
 // import profile from '../../assets/images/avatar.png'
-var EnvName = 'clientStage';
+var EnvName = 'demo';
 var key = {};
 key.ONEDAYINSECONDS = 0
 key.env = EnvName
@@ -43,10 +43,16 @@ const ip = "200.140.70.125"
 
 if (EnvName === "demo") {
     key.KEY = process.env.REACT_APP_SECKEY
+    // key.FRONT_URL = 'https://homecube.maticz.in/'
+    // key.BACK_URL = 'https://api-homecubes.maticz.in/v1/front'
+    // key.ADMIN_URL = 'https://api-homecubes.maticz.in/v1/admin'
+    // key.IMG_URL = 'https://api-homecubes.maticz.in'
+
     key.FRONT_URL = 'https://homecube.maticz.in/'
-    key.BACK_URL = 'https://api-homecubes.maticz.in/v1/front'
-    key.ADMIN_URL = 'https://api-homecubes.maticz.in/v1/admin'
-    key.IMG_URL = 'https://api-homecubes.maticz.in'
+    key.BACK_URL = 'https://homecubesbackend.maticz.in//v1/front'
+    key.ADMIN_URL = 'https://homecubesbackend.maticz.in//v1/admin'
+    key.IMG_URL = 'https://homecubesbackend.maticz.in'
+
     key.DEADADDRESS = '0x000000000000000000000000000000000000dEaD'.toLowerCase()
     // key.profile         =    profile
     // key.TradeContract   =   '0xD370f5D497cc4b2344a9936f24E47284693d96D5'.toLowerCase() // bnb
@@ -55,7 +61,8 @@ if (EnvName === "demo") {
     // key.TradeContract = '0xA40F308Ad28b520f1cd0a9A58e3b551F73602246'.toLowerCase() //sepolia
     // key.TradeContract = '0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208'.toLowerCase() //sepolia
     // key.TradeContract = '0x783FB9DD2C69101cd0E080403279b9fE7E6ac780'.toLowerCase() //sepolia
-    key.TradeContract = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase();
+    // key.TradeContract = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase();
+    key.TradeContract = "0xeA7AE9464eF470DBbD43488F0875FD54521576b1".toLowerCase(); // Test removed openzepline bnb
 
     // key.TradeContract = '0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3'.toLowerCase() //sepolia
     key.ERC721 = '0x575cd9E4099A38B536673F557063f9A546870d11'.toLowerCase() // sepolia
@@ -64,10 +71,11 @@ if (EnvName === "demo") {
     key.erc20Address = '0xEb4fFed6B324b5FdC4d72AD3dA75bf1Fb2bB004A'.toLowerCase()
     // key.RPC_URL         =   "https://data-seed-prebsc-2-s1.binance.org:8545/"
     key.chain_Id_List = [97, 11155111]
-    key.BNBCHAIN = 0
+    key.BNBCHAIN = 97
     key.ETHCHAIN = 11155111
-    key.RPC_URL = "https://ethereum-sepolia.publicnode.com"
-    key.CHAIN_ID = 11155111
+    // key.RPC_URL = "https://ethereum-sepolia.publicnode.com"
+    key.RPC_URL  = "https://bsc-testnet-rpc.publicnode.com"
+    key.CHAIN_ID = 97
     key.COIN_NAME = "BNB"
     key.Block_URL = {
         ETH: "https://testnet.snowtrace.io/",
@@ -90,7 +98,9 @@ else if (EnvName === "clientStage") {
 
     // key.TradeContract = '0x783FB9DD2C69101cd0E080403279b9fE7E6ac780'.toLowerCase() //sepolia openzeol
     // key.TradeContract = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase();
-    key.TradeContract = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase(); // removed openzepline bnb
+    // key.TradeContract = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase(); // removed openzepline bnb
+    key.TradeContract = "0xeA7AE9464eF470DBbD43488F0875FD54521576b1".toLowerCase(); // Test removed openzepline bnb
+
     // key.TradeContract = '0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3'.toLowerCase() //sepolia
     key.ERC721 = '0x575cd9E4099A38B536673F557063f9A546870d11'.toLowerCase() // sepolia
     // key.ERC721          =   '0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf'.toLowerCase() //bnb
@@ -111,7 +121,7 @@ else if (EnvName === "clientStage") {
 }
 else if (EnvName === "production") {
     key.KEY = process.env.REACT_APP_SECKEY
-    key.FRONT_URL = 'http://localhost:3000'
+    key.FRONT_URL = 'https://app.homecubes.io/'
     key.BACK_URL = 'https://api.homecubes.io/v1/front'
     key.ADMIN_URL = 'https://api.homecubes.io/v1/admin'
     key.IMG_URL = 'https://api.homecubes.io'
@@ -123,19 +133,21 @@ else if (EnvName === "production") {
     // key.TradeContract = '0x274C7D841002A74c3E4EABEcDB504e3af3f1f05A'.toLowerCase() //sepolia
     // key.TradeContract = '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase() //sepolia
 
-    key.TradeContract = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase();
+    // key.TradeContract = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase();
+
+    key.TradeContract = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase()
 
     key.ERC721 = '0x575cd9E4099A38B536673F557063f9A546870d11'.toLowerCase() // sepolia
     // key.ERC721          =   '0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf'.toLowerCase() //bnb
     key.ERC1155 = '0x4958A36d8d71abd35D5434EF78023B3284D93e63'.toLowerCase()
     key.erc20Address = '0xEb4fFed6B324b5FdC4d72AD3dA75bf1Fb2bB004A'.toLowerCase()
-    // key.RPC_URL         =   "https://data-seed-prebsc-1-s1.binance.org:8545/"
+    key.RPC_URL         =   "https://data-seed-prebsc-1-s1.binance.org:8545/"
     // key.RPC_URL         =   "https://api.avax-test.network/ext/bc/C/rpc"
     key.chain_Id_List = [97, 11155111]
     key.BNBCHAIN = 0
     key.ETHCHAIN = 11155111
-    key.RPC_URL = "https://ethereum-sepolia.publicnode.com"
-    key.CHAIN_ID = 11155111
+    // key.RPC_URL = "https://ethereum-sepolia.publicnode.com"
+    key.CHAIN_ID = 97
     key.COIN_NAME = "BNB"
     key.Block_URL = {
         ETH: "https://testnet.snowtrace.io/",
@@ -255,8 +267,8 @@ else {
     // key.TradeContract = '0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208'.toLowerCase() //sepolia
     // key.TradeContract = '0x783FB9DD2C69101cd0E080403279b9fE7E6ac780'.toLowerCase() //sepolia openzepline
     // key.TradeContract = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase(); // removed openzepline sepolia
-    key.TradeContract = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase(); // removed openzepline bnb
-
+    // key.TradeContract = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase(); // removed openzepline bnb
+    key.TradeContract = "0xeA7AE9464eF470DBbD43488F0875FD54521576b1".toLowerCase(); // Test removed openzepline bnb
 
     // key.TradeContract = '0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac'.toLowerCase() //sepolia
     key.ERC721 = '0x575cd9E4099A38B536673F557063f9A546870d11'.toLowerCase() // sepolia

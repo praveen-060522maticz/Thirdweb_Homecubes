@@ -7,7 +7,7 @@ let Back_Url = "";
 let decimalValues = 1000000000000000000;
 var FRONT_URL = "";
 var ImG = "";
-var EnvName = "clientStage";
+var EnvName = "stage";
 var networkTransUrl = ''
 
 var Front_market_Url = ''
@@ -25,7 +25,8 @@ if (EnvName === "local") {
 
   // var tradeAddress = "0x783FB9DD2C69101cd0E080403279b9fE7E6ac780".toLowerCase(); // seplia openzepline
   // var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase()  //removed seplia openzepline
-  var tradeAddress = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase()  //removed seplia openzepline
+  var tradeAddress = "0xeA7AE9464eF470DBbD43488F0875FD54521576b1".toLowerCase()  //removed seplia openzepline
+
   // var tradeAddress = "0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac".toLowerCase(); // seplia
   // var tradeAddress = "0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3"; // seplia
   var singleAddress = "0x575cd9E4099A38B536673F557063f9A546870d11"; // seplia
@@ -93,17 +94,23 @@ if (EnvName === "clientStage") {
 }
 
 if (EnvName === "stage") {
-  Back_Url = "https://api-homecubes.maticz.in/v1/admin";
+  // Back_Url = "https://api-homecubes.maticz.in/v1/admin";
+  // Front_market_Url = "https://homecube.maticz.in/";
+  // var image_url = "http://localhost:3030/token";
+  // ImG = "https://api-homecubes.maticz.in";
+
+  Back_Url = "https://homecubesbackend.maticz.in/v1/admin";
   Front_market_Url = "https://homecube.maticz.in/";
   var image_url = "http://localhost:3030/token";
-  ImG = "https://api-homecubes.maticz.in";
+  ImG = "https://homecubesbackend.maticz.in";
+
   // var tradeAddress = "0xD370f5D497cc4b2344a9936f24E47284693d96D5"; // bnb
   // var singleAddress = "0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf"; // bnb
   // var tradeAddress = "0x19D4c0f9155C6517580f850D4D097AF0448a1B39"; // seplia old
   // var tradeAddress = "0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208".toLowerCase(); // seplia
   // var tradeAddress = "0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208".toLowerCase(); // seplia
   // var tradeAddress = "0x783FB9DD2C69101cd0E080403279b9fE7E6ac780".toLowerCase(); // seplia op remove
-  var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase(); // seplia openzep removed
+  var tradeAddress = "0xeA7AE9464eF470DBbD43488F0875FD54521576b1".toLowerCase(); // seplia openzep removed
 
 
   // var tradeAddress = "0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac".toLowerCase(); // seplia
@@ -111,7 +118,7 @@ if (EnvName === "stage") {
   var singleAddress = "0x575cd9E4099A38B536673F557063f9A546870d11"; // seplia
   var multipeAddress = "0x0b6369b506e811df30ab7c0ce0ae00b8690b76be";
   var networkVersion = "0x61"
-  var chainId = 11155111;
+  var chainId = 97;
   var ETHCHAIN = 11155111
   var BNBCHAIN = 97
   var chainlist = [97, 11155111]
@@ -123,10 +130,10 @@ if (EnvName === "stage") {
   var ETHprovider = "https://eth-sepolia.g.alchemy.com/v2/demo";
   var BNBprovider = "https://endpoints.omniatech.io/v1/bsc/testnet/public";
   // var Back_Url_Token = "https://naifty.io/v1";
-  var Back_Url_Token = "http://localhost:3030/v1";
+  var Back_Url_Token = "https://homecubesbackend.maticz.in/v1";
   var COIN_NAME = "BNB"
   networkTransUrl = "https://sepolia.etherscan.io/tx/"
-  var stakeAddress = "0x4f9395bdA5E47566903b960895fdc2713890Fd41"
+  var stakeAddress = "0x966D215D56b06E3469Df0D9fD80A5cB78f9A1EAA"
 
 }
 
@@ -181,7 +188,8 @@ if (EnvName === "production") {
   // var tradeAddress = "0x274C7D841002A74c3E4EABEcDB504e3af3f1f05A".toLowerCase(); // seplia
   // var tradeAddress = "0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac".toLowerCase();
   // var tradeAddress = "0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208".toLowerCase(); // seplia
-  var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase()
+  // var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase()
+  key.TradeContract = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase()
 
   var singleAddress = "0x575cd9E4099A38B536673F557063f9A546870d11"; // seplia
   var multipeAddress = "0x0b6369b506e811df30ab7c0ce0ae00b8690b76be";
@@ -201,7 +209,8 @@ if (EnvName === "production") {
   var Back_Url_Token = "https://api.homecubes.io/v1";
   networkTransUrl = "https://sepolia.etherscan.io/tx/"
   var COIN_NAME = "BNB"
-  var stakeAddress = "0x4f9395bdA5E47566903b960895fdc2713890Fd41"
+  // var stakeAddress = "0x4f9395bdA5E47566903b960895fdc2713890Fd41"
+  var stakeAddress = "0x966D215D56b06E3469Df0D9fD80A5cB78f9A1EAA"
 }
 
 key = {

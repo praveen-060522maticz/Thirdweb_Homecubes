@@ -15,26 +15,26 @@ import { error } from 'console';
 import logger from './config/logger.js';
 import web3Utils from 'web3-utils';
 import cron from './config/cron.js';
-const getProvider = () => {
-    const provider = new Web3.providers.WebsocketProvider(config.SOCKET_RPC, {
-        clientConfig: {
-            maxReceivedFrameSize: 10000000000,
-            maxReceivedMessageSize: 10000000000,
-        }
-    })
-    provider.on('connect', () => console.log('WS Connected'))
-    provider.on('error', e => {
-        console.error('WS Error', e)
-        web3.setProvider(getProvider())
-    })
-    provider.on('end', e => {
-        console.error('WS End', e)
-        web3.setProvider(getProvider())
-    })
+// const getProvider = () => {
+//     const provider = new Web3.providers.WebsocketProvider(config.SOCKET_RPC, {
+//         clientConfig: {
+//             maxReceivedFrameSize: 10000000000,
+//             maxReceivedMessageSize: 10000000000,
+//         }
+//     })
+//     provider.on('connect', () => console.log('WS Connected'))
+//     provider.on('error', e => {
+//         console.error('WS Error', e)
+//         web3.setProvider(getProvider())
+//     })
+//     provider.on('end', e => {
+//         console.error('WS End', e)
+//         web3.setProvider(getProvider())
+//     })
 
-    return provider
-}
-const web3 = new Web3(getProvider());
+//     return provider
+// }
+// const web3 = new Web3(getProvider());
 
 // const contract = new web3.eth.Contract(StakeAbi, "0x4f9395bdA5E47566903b960895fdc2713890Fd41");
 // console.log('contract.event---->', contract?.events);
@@ -55,174 +55,174 @@ const web3 = new Web3(getProvider());
 // let walletAddress = "0x3509fa4118410Be80952Ed8d9560Ecf3D90Eb0bB".toLowerCase();
 let walletAddress = "0xfE496e90Ab4B4c1294C86e34e5054016E2734145".toLowerCase();
 
-web3.eth.subscribe('newBlockHeaders', (error, blockHeader) => {
-    if (error) {
-        console.error('Error:', error);
-        return;
-    }
+// web3.eth.subscribe('newBlockHeaders', (error, blockHeader) => {
+//     if (error) {
+//         console.error('Error:', error);
+//         return;
+//     }
 
-    // Get block details
-    web3.eth.getBlock(blockHeader.number, true, (error, block) => {
+//     // Get block details
+//     web3.eth.getBlock(blockHeader.number, true, (error, block) => {
 
-        try {
-            if (error) {
-                console.error('Error:', error);
-                return;
-            }
+//         try {
+//             if (error) {
+//                 console.error('Error:', error);
+//                 return;
+//             }
 
-            // Iterate through transactions in the block
-            block.transactions.forEach(async tx => {
-                // console.log("ahdikahwdihaoiwdhawoid",tx);
-                // Check if the target address is involved in the transaction
-                if (tx.from?.toLowerCase() === walletAddress || tx.to?.toLowerCase() === walletAddress) {
-                    const getData = await web3.eth.getTransactionReceipt(tx?.hash);
-                    console.log('getDatawdawdawda', JSON.stringify(getData, null, 2));
+//             // Iterate through transactions in the block
+//             block.transactions.forEach(async tx => {
+//                 // console.log("ahdikahwdihaoiwdhawoid",tx);
+//                 // Check if the target address is involved in the transaction
+//                 if (tx.from?.toLowerCase() === walletAddress || tx.to?.toLowerCase() === walletAddress) {
+//                     const getData = await web3.eth.getTransactionReceipt(tx?.hash);
+//                     console.log('getDatawdawdawda', JSON.stringify(getData, null, 2));
 
-                    for (const log of getData.logs) {
-                        try {
-                            // console.log('loggggg---->', log, web3Utils.hexToUtf8(log.data).split(""));
-                            const method = extractAlphabets(web3Utils.hexToUtf8(log.data))
-                            console.log('method---->', method);
-                            if (methodsArr.includes(method)) {
-                                if (method == "lazyMinting") {
+//                     for (const log of getData.logs) {
+//                         try {
+//                             // console.log('loggggg---->', log, web3Utils.hexToUtf8(log.data).split(""));
+//                             const method = extractAlphabets(web3Utils.hexToUtf8(log.data))
+//                             console.log('method---->', method);
+//                             if (methodsArr.includes(method)) {
+//                                 if (method == "lazyMinting") {
 
-                                    if (getData.status) {
-                                        var ids = []
-                                        for (let i = 0; i < getData.logs.length - 4; i++) {
-                                            ids.push(web3Utils.hexToNumber(Number(getData.logs[i].topics[3])))
-                                        }
+//                                     if (getData.status) {
+//                                         var ids = []
+//                                         for (let i = 0; i < getData.logs.length - 4; i++) {
+//                                             ids.push(web3Utils.hexToNumber(Number(getData.logs[i].topics[3])))
+//                                         }
 
-                                        let From = web3.eth.abi.decodeParameter("address", log.topics[1]);
-                                        let TimeStamp = web3Utils.hexToNumber(log?.topics?.[2])?.toString()
-                                        var need_data = {
-                                            status: getData.status,
-                                            HashValue: getData.transactionHash,
-                                            Tokenid: ids,
-                                            from: From
-                                        }
+//                                         let From = web3.eth.abi.decodeParameter("address", log.topics[1]);
+//                                         let TimeStamp = web3Utils.hexToNumber(log?.topics?.[2])?.toString()
+//                                         var need_data = {
+//                                             status: getData.status,
+//                                             HashValue: getData.transactionHash,
+//                                             Tokenid: ids,
+//                                             from: From
+//                                         }
 
-                                        setTimeout(async () => {
-                                            var getPending = await pendingTrans.findOne({ From: From?.toLowerCase(), method, status: "pending", TimeStamp });
-                                            console.log('getPending---->', getPending);
-                                            getPending?.params?.[0]?.changedToken?.map((val, i) => {
-                                                val.NFTId = ids[i]
-                                                val.Hash = getData.transactionHash;
-                                                return val
-                                            })
-                                            console.log('getPending?.params?.[0]---->', getPending?.params?.[0]);
-                                            if (getPending?.params?.[0]) {
-                                                const triggerlazmint = await nftCtrl.Buymint({ body: getPending?.params?.[0] }, { json: function (para) { console.log('paraa---->', para); } });
-                                                console.log('triggerlazmint---->', triggerlazmint);
+//                                         setTimeout(async () => {
+//                                             var getPending = await pendingTrans.findOne({ From: From?.toLowerCase(), method, status: "pending", TimeStamp });
+//                                             console.log('getPending---->', getPending);
+//                                             getPending?.params?.[0]?.changedToken?.map((val, i) => {
+//                                                 val.NFTId = ids[i]
+//                                                 val.Hash = getData.transactionHash;
+//                                                 return val
+//                                             })
+//                                             console.log('getPending?.params?.[0]---->', getPending?.params?.[0]);
+//                                             if (getPending?.params?.[0]) {
+//                                                 const triggerlazmint = await nftCtrl.Buymint({ body: getPending?.params?.[0] }, { json: function (para) { console.log('paraa---->', para); } });
+//                                                 console.log('triggerlazmint---->', triggerlazmint);
 
-                                                const changeStatus = await pendingTrans.findOneAndUpdate({ From: From?.toLowerCase(), method, status: "pending", TimeStamp }, { $set: { status: "success" } });
-                                                console.log('changeStatus---->', changeStatus);
-                                            }
-                                        }, 5000)
-                                    }
+//                                                 const changeStatus = await pendingTrans.findOneAndUpdate({ From: From?.toLowerCase(), method, status: "pending", TimeStamp }, { $set: { status: "success" } });
+//                                                 console.log('changeStatus---->', changeStatus);
+//                                             }
+//                                         }, 5000)
+//                                     }
 
-                                    // console.log('mehotdLoggninf=g---->', need_data);
-                                }
-                                const orderMethods = [
-                                    "orderPlace",
-                                    "cancelOrder",
-                                    "nftStack",
-                                    "nftWithdraw",
-                                    "claimReward"
-                                ]
+//                                     // console.log('mehotdLoggninf=g---->', need_data);
+//                                 }
+//                                 const orderMethods = [
+//                                     "orderPlace",
+//                                     "cancelOrder",
+//                                     "nftStack",
+//                                     "nftWithdraw",
+//                                     "claimReward"
+//                                 ]
 
-                                const bidMethods = [
-                                    "bidNFT",
-                                    "editBid",
-                                    "cancelBid",
-                                    "cancelBidBySeller",
-                                ]
+//                                 const bidMethods = [
+//                                     "bidNFT",
+//                                     "editBid",
+//                                     "cancelBid",
+//                                     "cancelBidBySeller",
+//                                 ]
 
-                                const saleMethods = [
-                                    "saleToken",
-                                    "saleWithToken"
-                                ]
-                                console.log('afrawwwfwfw---->', orderMethods.includes(method),);
-                                if (orderMethods.includes(method)) {
-                                    setTimeout(async () => {
-                                        let From = web3.eth.abi.decodeParameter("address", log.topics[1]);
-                                        console.log('From---->', From);
-                                        let TimeStamp = web3Utils.hexToNumber(log?.topics?.[2])?.toString();
-                                        console.log('TimeStamp---->', TimeStamp);
-                                        await handlePendingTrans(From, method, TimeStamp, (method == "nftStack" || method == "nftWithdraw" || method == "claimReward") ? "stackFunction" : "CreateOrder")
-                                    }, 5000)
-                                }
-                                if (bidMethods.includes(method)) {
-                                    setTimeout(async () => {
-                                        let From = web3.eth.abi.decodeParameter("address", log.topics[1]);
-                                        let TimeStamp = web3Utils.hexToNumber(log?.topics?.[2])?.toString();
-                                        await handlePendingTrans(From, method, TimeStamp, "BidAction")
-                                    }, 5000)
-                                }
-                                if (saleMethods.includes(method)) {
-                                    var royalObject = {}
+//                                 const saleMethods = [
+//                                     "saleToken",
+//                                     "saleWithToken"
+//                                 ]
+//                                 console.log('afrawwwfwfw---->', orderMethods.includes(method),);
+//                                 if (orderMethods.includes(method)) {
+//                                     setTimeout(async () => {
+//                                         let From = web3.eth.abi.decodeParameter("address", log.topics[1]);
+//                                         console.log('From---->', From);
+//                                         let TimeStamp = web3Utils.hexToNumber(log?.topics?.[2])?.toString();
+//                                         console.log('TimeStamp---->', TimeStamp);
+//                                         await handlePendingTrans(From, method, TimeStamp, (method == "nftStack" || method == "nftWithdraw" || method == "claimReward") ? "stackFunction" : "CreateOrder")
+//                                     }, 5000)
+//                                 }
+//                                 if (bidMethods.includes(method)) {
+//                                     setTimeout(async () => {
+//                                         let From = web3.eth.abi.decodeParameter("address", log.topics[1]);
+//                                         let TimeStamp = web3Utils.hexToNumber(log?.topics?.[2])?.toString();
+//                                         await handlePendingTrans(From, method, TimeStamp, "BidAction")
+//                                     }, 5000)
+//                                 }
+//                                 if (saleMethods.includes(method)) {
+//                                     var royalObject = {}
 
-                                    var TokenCOunts = await Promise.all(getData.logs[method == "saleToken" ? 0 : 6]?.topics?.map((val, i) => {
-                                        if (i == 1) {
-                                            const address = web3.eth.abi.decodeParameter("address", val);
-                                            console.log("__address", address);
-                                            royalObject[i] = address
-                                        }
-                                        else if (i > 1) {
-                                            console.log("aiwufaiwuf");
-                                            const value = web3Utils.hexToNumberString(val);
-                                            console.log("value__", value);
-                                            royalObject[i] = value
-                                        }
-                                    }))
+//                                     var TokenCOunts = await Promise.all(getData.logs[method == "saleToken" ? 0 : 6]?.topics?.map((val, i) => {
+//                                         if (i == 1) {
+//                                             const address = web3.eth.abi.decodeParameter("address", val);
+//                                             console.log("__address", address);
+//                                             royalObject[i] = address
+//                                         }
+//                                         else if (i > 1) {
+//                                             console.log("aiwufaiwuf");
+//                                             const value = web3Utils.hexToNumberString(val);
+//                                             console.log("value__", value);
+//                                             royalObject[i] = value
+//                                         }
+//                                     }))
 
-                                    let From = web3.eth.abi.decodeParameter("address", log.topics[1]);
-                                    let TimeStamp = web3Utils.hexToNumberString(log?.topics?.[2]);
+//                                     let From = web3.eth.abi.decodeParameter("address", log.topics[1]);
+//                                     let TimeStamp = web3Utils.hexToNumberString(log?.topics?.[2]);
 
-                                    console.log("royalObject", royalObject);
-                                    var need_data = {
-                                        status: getData.status,
-                                        HashValue: getData.transactionHash,
-                                        royaltyInfo: royalObject
-                                    }
-                                    console.log("need_data", need_data, TimeStamp, From);
+//                                     console.log("royalObject", royalObject);
+//                                     var need_data = {
+//                                         status: getData.status,
+//                                         HashValue: getData.transactionHash,
+//                                         royaltyInfo: royalObject
+//                                     }
+//                                     console.log("need_data", need_data, TimeStamp, From);
 
-                                    setTimeout(async () => {
-                                        var getPending = await pendingTrans.findOne({ From: From?.toLowerCase(), method, status: "pending", TimeStamp });
-                                        console.log('getPending---->', getPending);
-                                        if (getPending) {
-                                            getPending.params[0].newOwner.royaltyReceiver = royalObject[1];
-                                            getPending.params[0].newOwner.earnPercentage = web3Utils.fromWei(royalObject[2]);
-                                            getPending.params[0].newOwner.Earning = web3Utils.fromWei(royalObject[3]);
+//                                     setTimeout(async () => {
+//                                         var getPending = await pendingTrans.findOne({ From: From?.toLowerCase(), method, status: "pending", TimeStamp });
+//                                         console.log('getPending---->', getPending);
+//                                         if (getPending) {
+//                                             getPending.params[0].newOwner.royaltyReceiver = royalObject[1];
+//                                             getPending.params[0].newOwner.earnPercentage = web3Utils.fromWei(royalObject[2]);
+//                                             getPending.params[0].newOwner.Earning = web3Utils.fromWei(royalObject[3]);
 
-                                            console.log('getPending?.params?.[0]---->', getPending?.params?.[0]);
-                                            const triggerlazmint = await nftCtrl.BuyAccept({ body: getPending?.params?.[0] }, { json: function (para) { console.log('paraa---->', para); } });
-                                            console.log('triggerlazmint---->', triggerlazmint);
+//                                             console.log('getPending?.params?.[0]---->', getPending?.params?.[0]);
+//                                             const triggerlazmint = await nftCtrl.BuyAccept({ body: getPending?.params?.[0] }, { json: function (para) { console.log('paraa---->', para); } });
+//                                             console.log('triggerlazmint---->', triggerlazmint);
 
-                                            const changeStatus = await pendingTrans.findOneAndUpdate({ From: From?.toLowerCase(), method, status: "pending", TimeStamp }, { $set: { status: "success" } });
-                                            console.log('changeStatus---->', changeStatus);
-                                        }
+//                                             const changeStatus = await pendingTrans.findOneAndUpdate({ From: From?.toLowerCase(), method, status: "pending", TimeStamp }, { $set: { status: "success" } });
+//                                             console.log('changeStatus---->', changeStatus);
+//                                         }
 
-                                    }, 5000)
+//                                     }, 5000)
 
-                                }
+//                                 }
 
-                            }
-                        } catch (e) {
-                            console.log('eeeeeeeeeeeee---->', e);
-                        }
+//                             }
+//                         } catch (e) {
+//                             console.log('eeeeeeeeeeeee---->', e);
+//                         }
 
-                    }
-
-
-                }
-            });
-        } catch (e) {
-            console.log('getBlock---->', e);
-        }
+//                     }
 
 
-    });
-});
+//                 }
+//             });
+//         } catch (e) {
+//             console.log('getBlock---->', e);
+//         }
+
+
+//     });
+// });
 
 // const handlePendingTrans = async (From, method, TimeStamp, func) => {
 //     try {

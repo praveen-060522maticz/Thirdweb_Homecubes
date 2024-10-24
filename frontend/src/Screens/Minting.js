@@ -231,7 +231,8 @@ function Minting() {
                 ],
                 [firstNft?.Randomname, "Coin"],
                 firstNft?.Hash,
-                firstNft?.ContractAddress,);
+                [firstNft?.ContractAddress]
+                );
             const getUSDT = ((mintCount * parseFloat(project?.NFTPrice)) * BNBUSDT).toFixed(7);
 
             console.log("valll", value, web3Utils.toWei(String(getUSDT)), getUSDT);
@@ -251,7 +252,7 @@ function Minting() {
                 ],
                 [firstNft?.Randomname, project?.mintTokenName == "BNB" ? "COIN" : project?.mintTokenName],
                 firstNft?.Hash,
-                firstNft?.ContractAddress,
+                [firstNft?.ContractAddress,"0xb18DC8b2d0B6C6E796c1b3E7038ba54162C6623E"],
                 web3Utils.toWei(value.toString())
             )
 
