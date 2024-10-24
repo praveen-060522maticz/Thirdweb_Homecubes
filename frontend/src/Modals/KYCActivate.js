@@ -145,7 +145,7 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
     if (!Profile?.Nationality) error.Nationality = "Enter Nationality";
     if (!Profile?.kycFile) error.kycFile = "Select kyc file";
     if (!Profile?.Name) error.kycFile = "Enter Name";
-    if (!Profile?.SurName) error.kycFile = "Enter Sure Name";
+    if (!Profile?.SurName) error.kycFile = "Enter Surname";
 
     return error
   }
@@ -226,14 +226,14 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
             <Row className='mt_1'>
               <Col lg={6} xs={12} className='mb_2'>
                 <div className='mt_2'>
-                  <p className='modal_summaryLabel'>Name</p>
+                  <p className='modal_summaryLabel'>First name</p>
                   <input type="text" className='modal_singleinput mt-2' id="Name" disabled={Profile?.KycStatus == "complete"} value={Profile?.Name} onChange={handleChange} placeholder='Parsa' />
                  {Error?.Name&& <p style={{ color: "red", fontSize: 12 }}>{Error?.Name}</p> }
                 </div>
               </Col>
               <Col lg={6} xs={12} className='mb_2'>
                 <div className='mt_2'>
-                  <p className='modal_summaryLabel'>Sure Name</p>
+                  <p className='modal_summaryLabel'>Last name</p>
                   <input type="text" className='modal_singleinput mt-2' id="SurName" disabled={Profile?.KycStatus == "complete"} value={Profile?.SurName} onChange={handleChange} placeholder='Parsa' />
                   {Error?.SurName && <p style={{ color: "red", fontSize: 12 }}>{Error?.SurName}</p> }
                 </div>
@@ -254,7 +254,7 @@ function KYCActivate({ show, handleClose, userProfile, getProfileDetails }) {
               </Col>
               <Col lg={6} xs={12} className='mb_2'>
                 <div className='mt_2'>
-                  <p className='modal_summaryLabel'>Telephone (with pincode)</p>
+                  <p className='modal_summaryLabel'>Telephone (with counrty code)</p>
                   <div className='kyc_phoneInput mt_1'>
                     <PhoneInput
                       placeholder="Enter phone number"

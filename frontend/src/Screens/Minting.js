@@ -193,7 +193,7 @@ function Minting() {
         if (mintCount > isAvailable) return toast.error("Mint count not available");
 
         if (project?.mintTokenName != "BNB") {
-            const checkApprove = await ContractCall.validateApproveforUSDT(mintCount * project?.NFTPrice, false, wallets[0], project?.mintToken)
+            const checkApprove = await ContractCall.validateApproveforUSDT(web3Utils.toWei(String(mintCount * project?.NFTPrice)), false, wallets[0], project?.mintToken)
             if (!checkApprove) return;
         }
         setLoading(true)
@@ -332,6 +332,7 @@ function Minting() {
                     update.percentage = referralFee
                     update.NFTId = NFTIds
                     update.amount = value
+                    update.mintTokenName = project?.mintTokenName
                     update.commissionAmt = ((parseFloat(value) * parseFloat(referralFee) )/ 100).toFixed(10)
                 }
                 console.log("update", update);
@@ -360,9 +361,9 @@ function Minting() {
                     }, 1000)
                 } else if (Resp.status) {
                     toast.update(id, { render: 'Token Purchased Successfully', type: 'success', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
-                    // setTimeout(() => {
-                    //     navigate("/minting")
-                    // }, 1000)
+                    setTimeout(() => {
+                        navigate("/minting")
+                    }, 1000)
                 }
                 else {
                     console.log("mudichuvintinga2", { arrData: initialMint?.data, stauts: "available" })
@@ -525,7 +526,13 @@ function Minting() {
                                                                             max={Number(isAvailable)}
                                                                             value={mintCount}
                                                                             onChange={(e) => {
-                                                                                setMintcount(e.target.value);
+                                                                                const inputValue = e.target.value;
+    
+                                                                                // Check if the value is a whole number or empty
+                                                                                if (/^\d*$/.test(inputValue)) {
+                                                                                //   setValue(inputValue);
+                                                                                  setMintcount(inputValue);
+                                                                                }
                                                                             }}
                                                                         />
                                                                     </div>

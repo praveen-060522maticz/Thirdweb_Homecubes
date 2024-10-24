@@ -6,6 +6,7 @@ const referralReports = Schema({
     referredByAddress: { type: String, default: '' },
     commissionAmt: { type: String, default: '' },
     percentage: { type: String, default: '' },
+    mintTokenName: { type: String, default: '' },
     amount: {type: String, default: ''},
     mintedNft: [{type: String, default: ''}],
 }, { timestamps: true })

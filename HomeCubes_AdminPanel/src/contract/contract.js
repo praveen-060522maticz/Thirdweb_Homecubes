@@ -363,6 +363,58 @@ export default function useContractHook() {
         }
     }
 
+    const getReffaralFees = async (data) => {
+        try {
+            const tokenContract = await contrat_connection(TradeAbi, config.tradeAddress)
+            console.log('tokenContract---->', tokenContract, data);
+            const resp = await tokenContract.methods.referralFees().call();
+            console.log('respadad balance---->', resp);
+            return resp
+        } catch (e) {
+            console.log('Erro on getReffaralFees---->', e);
+            return false
+        }
+
+    }
+
+    const changeRefferalFee = async (data) => {
+        try {
+            const ConnectContract = await contrat_connection(TradeAbi, config.tradeAddress)
+            console.log("ConnectContract", ConnectContract);
+
+            var contractobj = await
+                ConnectContract
+                    .methods
+                    .referralFeeEdit(data)
+            console.log("contractobj", contractobj);
+            var gasprice = await web3.eth.getGasPrice();
+            var gas_estimate = await contractobj.estimateGas({ from: UserAccountAddr })
+            console.log("dfsfgsdfg", gas_estimate, gasprice);
+            var contract_Method_Hash = await
+                ConnectContract
+                    .methods
+                    .referralFeeEdit(data)
+                    .send({
+                        from: UserAccountAddr,
+                        gasLimit: parseInt(gas_estimate),
+                        gasPrice: gasprice,
+                    })
+                    .on('transactionHash', (transactionHash) => {
+                        return transactionHash
+                    })
+
+            const receipt = await get_receipt(contract_Method_Hash.transactionHash ? contract_Method_Hash.transactionHash : contract_Method_Hash);
+            // const receipt = await get_receipt(contract_Method_Hash?.transactionHash ? contract_Method_Hash?.transactionHash : contract_Method_Hash);
+            var need_data = {
+                status: receipt.status,
+                HashValue: receipt.transactionHash,
+            }
+            return need_data
+        } catch (error) {
+            console.log("err on changeReceiver", error);
+        }
+    }
+
     return {
         _signcall,
         createCollection,
@@ -372,7 +424,9 @@ export default function useContractHook() {
         getTokenName,
         AddTokenType,
         getContractBalance,
-        withDrawProfit
+        withDrawProfit,
+        getReffaralFees,
+        changeRefferalFee
     }
 
 }

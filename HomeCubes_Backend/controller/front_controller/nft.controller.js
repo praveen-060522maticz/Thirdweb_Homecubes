@@ -1737,7 +1737,7 @@ export const onInitialMint = async (req, res) => {
 export const Buymint = async (req, res) => {
   console.log("req.body", req.body)
   try {
-    const { changedToken, isWhiteList, NFTOwner, HashValue, NFTPrice, CoinName, referredByAddress, fromAddress, percentage, NFTId, amount, commissionAmt } = req.body
+    const { changedToken, isWhiteList, NFTOwner, HashValue, NFTPrice, CoinName, referredByAddress,mintTokenName, fromAddress, percentage, NFTId, amount, commissionAmt } = req.body
     const updateDB = await Promise.all(changedToken.map(async (val) => {
 
       const reqData = {
@@ -1796,6 +1796,7 @@ export const Buymint = async (req, res) => {
             commissionAmt,
             percentage,
             amount,
+            mintTokenName,
             mintedNft: NFTId,
           }
         }

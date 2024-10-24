@@ -1363,7 +1363,7 @@ h6 {
   color: var(--white);
   font-weight: 500;
   font-size: 1.6vh;
-  margin-top: 0.8vh;
+  margin-top:  0.8vh;
   min-width: 19vh;
   max-width: 19vh;
 }
@@ -1843,7 +1843,12 @@ input::placeholder {
   position: relative;
   /* right: -1vh; */
 }
+.kycactivates .form-check .form-check-input{
+  width: 3vh;
+  height: 3vh;
+  /* margin-left: -2vh !important; */
 
+}
 .form-check .form-check-input {
   float: left;
   /* margin-left: -2.4vh; */
@@ -2581,6 +2586,7 @@ object-fit: cover;
   background-color: initial !important;
   background: #0000 !important;
   margin: 2vh 0vh;
+  line-height: 5vh;
 }
 
 .nftInfo_table.hc-nftInfo__table table thead tr th {
@@ -3629,10 +3635,10 @@ margin-top: 4vh;
 
 }
 .referral_report .nftInfo_table table tbody tr td{
-  font-size: 2.4vh;
+  font-size: 2vh;
 }
 .referral_report  .nftInfo_table table thead tr th{
-  font-size: 2.7vh;
+  font-size: 2.3vh;
 }
 .referral_report  .daterangesec .react-datepicker{
   font-size: 2vh;

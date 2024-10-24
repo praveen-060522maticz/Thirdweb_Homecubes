@@ -85,31 +85,6 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
-                "internalType": "string",
-                "name": "method",
-                "type": "string"
-            },
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "from",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "uint256",
-                "name": "TimeStamp",
-                "type": "uint256"
-            }
-        ],
-        "name": "EventEmitMethod",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
                 "indexed": true,
                 "internalType": "address",
                 "name": "from",
@@ -177,20 +152,7 @@
     },
     {
         "inputs": [],
-        "name": "Joyfun721",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "RelayerAdderss",
+        "name": "Homecubes721",
         "outputs": [
             {
                 "internalType": "address",
@@ -235,21 +197,6 @@
                 "internalType": "address",
                 "name": "_conAddr",
                 "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "feeCollector",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "timeStamp",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "usdtAmount",
-                "type": "uint256"
             }
         ],
         "name": "TransferToken",
@@ -319,6 +266,11 @@
                 "internalType": "uint256",
                 "name": "withoutGasAmt",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "bidTokenAddress",
+                "type": "address"
             }
         ],
         "stateMutability": "view",
@@ -338,19 +290,6 @@
                 "internalType": "bool",
                 "name": "",
                 "type": "bool"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "_tid",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -377,21 +316,6 @@
                 "internalType": "address",
                 "name": "_conAddr",
                 "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "timeStamp",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "feeCollector",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "usdtAmount",
-                "type": "uint256"
             }
         ],
         "name": "acceptBId",
@@ -453,19 +377,9 @@
                 "type": "address"
             },
             {
-                "internalType": "uint256",
-                "name": "timeStamp",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "feeCollector",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "gasAmount",
-                "type": "uint256"
+                "internalType": "string",
+                "name": "tokenName",
+                "type": "string"
             },
             {
                 "internalType": "uint256",
@@ -515,21 +429,6 @@
                 "internalType": "address",
                 "name": "collectionAddress",
                 "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "timeStamp",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "feeCollector",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "usdtAmount",
-                "type": "uint256"
             }
         ],
         "name": "cancelBid",
@@ -566,21 +465,6 @@
                 "internalType": "address",
                 "name": "collectionAddress",
                 "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "timeStamp",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "feeCollector",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "usdtAmount",
-                "type": "uint256"
             }
         ],
         "name": "cancelBidBySeller",
@@ -593,21 +477,6 @@
             {
                 "internalType": "uint256",
                 "name": "tokenId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "timeStamp",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "feeCollector",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "usdtAmount",
                 "type": "uint256"
             }
         ],
@@ -779,19 +648,9 @@
                 "type": "address"
             },
             {
-                "internalType": "uint256",
-                "name": "timeStamp",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "feeCollector",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "gasAmount",
-                "type": "uint256"
+                "internalType": "string",
+                "name": "tokenName",
+                "type": "string"
             },
             {
                 "internalType": "uint256",
@@ -819,19 +678,6 @@
                 "internalType": "address",
                 "name": "",
                 "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "getAdminProfitUSDT",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -937,25 +783,6 @@
     {
         "inputs": [
             {
-                "internalType": "address",
-                "name": "forwarder",
-                "type": "address"
-            }
-        ],
-        "name": "isTrustedForwarder",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
                 "internalType": "string[]",
                 "name": "ipfsmetadata",
                 "type": "string[]"
@@ -976,28 +803,13 @@
                 "type": "bytes"
             },
             {
-                "internalType": "uint256",
-                "name": "timeStamp",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "_collectionAddr",
-                "type": "address"
+                "internalType": "address[]",
+                "name": "_addr",
+                "type": "address[]"
             },
             {
                 "internalType": "uint256",
                 "name": "totalValue",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "feeCollector",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "usdtAmount",
                 "type": "uint256"
             }
         ],
@@ -1037,21 +849,6 @@
                 "internalType": "string",
                 "name": "_status",
                 "type": "string"
-            },
-            {
-                "internalType": "uint256",
-                "name": "timeStamp",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "feeCollector",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "usdtAmount",
-                "type": "uint256"
             }
         ],
         "name": "orderPlace",
@@ -1144,6 +941,32 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_fees",
+                "type": "uint256"
+            }
+        ],
+        "name": "referralFeeEdit",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "referralFees",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "renounceOwnership",
         "outputs": [],
@@ -1166,21 +989,6 @@
                 "internalType": "address",
                 "name": "_conAddr",
                 "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "timeStamp",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "feeCollector",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "usdtAmount",
-                "type": "uint256"
             }
         ],
         "name": "saleToken",
@@ -1209,21 +1017,6 @@
                 "internalType": "address",
                 "name": "_conAddr",
                 "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "timeStamp",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "feeCollector",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "usdtAmount",
-                "type": "uint256"
             }
         ],
         "name": "saleWithToken",
@@ -1247,19 +1040,6 @@
     {
         "inputs": [
             {
-                "internalType": "address",
-                "name": "relayAddress",
-                "type": "address"
-            }
-        ],
-        "name": "setRelayerAddress",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
                 "internalType": "uint256",
                 "name": "_serviceValue",
                 "type": "uint256"
@@ -1271,24 +1051,6 @@
             }
         ],
         "name": "setServiceValue",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "token",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "stakeAdd",
-                "type": "address"
-            }
-        ],
-        "name": "setStaticToken",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -1323,19 +1085,6 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "staticToken",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [
             {
                 "internalType": "address",
@@ -1346,19 +1095,6 @@
         "name": "transferOwnership",
         "outputs": [],
         "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "trustedForwarder",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
         "type": "function"
     },
     {

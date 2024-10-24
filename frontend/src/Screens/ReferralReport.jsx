@@ -74,13 +74,13 @@ function ReferralReport() {
 
   const extractDate = (isoTimes) => {
     let date = new Date(isoTimes);
-    let formattedDate = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
+    let formattedDate = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
     return formattedDate
   }
 
   const extractTime = (isoTimes) => {
     let date = new Date(isoTimes);
-    let formattedTime = String(date.getHours()).padStart(2, '0') + ':' + String(date.getMinutes()).padStart(2, '0') + ':' + String(date.getSeconds()).padStart(2, '0');
+    let formattedTime = String(date.getHours()).padStart(2, '0') + ':' + String(date.getMinutes()).padStart(2, '0');
     return formattedTime
   }
 
@@ -112,9 +112,9 @@ function ReferralReport() {
                   <DatePicker
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
-                    // selectsStart
-                    // startDate={startDate}
-                    // endDate={endDate}
+                  // selectsStart
+                  // startDate={startDate}
+                  // endDate={endDate}
                   />
                   <FaAngleDown className='angledown' />
                 </div>
@@ -126,10 +126,10 @@ function ReferralReport() {
                   <DatePicker
                     selected={endDate}
                     onChange={(date) => setEndDate(date)}
-                    // selectsEnd
-                    // startDate={startDate}
-                    // endDate={endDate}
-                    // minDate={startDate}
+                  // selectsEnd
+                  // startDate={startDate}
+                  // endDate={endDate}
+                  // minDate={startDate}
                   />
                   <FaAngleDown className='angledown' />
                 </div>
@@ -142,7 +142,7 @@ function ReferralReport() {
 
               <div className='submit_btnsec'>
                 <button type='button' className='nftinfo_gradeientBtn' onClick={fetchReferralReport}>Submit</button>
-              </div> 
+              </div>
 
 
 
@@ -193,51 +193,51 @@ function ReferralReport() {
 
             </div> */}
 
-          <div className='tablesec'>
+            <div className='tablesec'>
               <p className='tablesec_head'>Report</p>
               <div className="nftInfo_table nftalltable hc-nftInfo__table">
                 <div className="table-responsive">
                   {
-                    refReports?.length > 0 ? 
+                    refReports?.length > 0 ?
 
-                    <table className="table">
-                    <thead>
-                      <tr>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>TXID</th>
-                        <th>Referred Wallet Address</th>
-                        <th>Commission Amount (USDT)</th>
+                      <table className="table">
+                        <thead>
+                          <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>TXID</th>
+                            <th>Referred Wallet Address</th>
+                            <th>Commission Amount (USDT)</th>
 
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {
-                        refReports.map((item) => {
-                          return (
-                            <tr>
-                              <td>{extractDate(item?.createdAt)}</td>
-                              <td>{extractTime(item?.createdAt)}</td>
-                              <td>
-                                {address_showing(item?.transactionId)}
-                                <CopyToClipboard
-                                  onCopy={() => toast.success("Transaction ID successfully")}
-                                  text={`${item?.transactionId}`}
-                                >
-                                  <i class="fa-regular fa-copy mx-2"></i>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {
+                            refReports.map((item) => {
+                              return (
+                                <tr>
+                                  <td>{extractDate(item?.createdAt)}</td>
+                                  <td>{extractTime(item?.createdAt)}</td>
+                                  <td>
+                                    {address_showing(item?.transactionId)}
+                                    <CopyToClipboard
+                                      onCopy={() => toast.success("Transaction ID copied successfully")}
+                                      text={`${item?.transactionId}`}
+                                    >
+                                      <i class="fa-regular fa-copy mx-2"></i>
 
-                              </CopyToClipboard>
-                                </td>
-                              <td>{address_showing(item?.fromAddress)}</td>
-                              <td>{item?.commissionAmt}</td>
-                            </tr>
-                          )
-                        })
-                      }
-                      </tbody>
-                  </table>
-                  :
-                  <p className='text-center fw-bold'>No Data Found</p>
+                                    </CopyToClipboard>
+                                  </td>
+                                  <td>{item?.fromAddress}</td>
+                                  <td>{item?.commissionAmt}{item?.mintTokenName || ""}</td>
+                                </tr>
+                              )
+                            })
+                          }
+                        </tbody>
+                      </table>
+                      :
+                      <p className='text-center fw-bold'>No Data Found</p>
                   }
                 </div>
               </div>

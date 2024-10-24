@@ -1,16 +1,20 @@
 import React, { useEffect } from 'react'
 import { Transak } from '@transak/transak-sdk';
 import Config from '../config/config'
+import { useSelector } from 'react-redux';
 
-const TransakComp = ({handleHideTransak, handleTransakData,paytype}) => {
+const TransakComp = ({ handleHideTransak, handleTransakData, paytype }) => {
+
+    const { accountAddress } = useSelector(state => state.LoginReducer.AccountDetails);
 
 
-console.log("Config.TRANSAK_API_KEY",Config.TRANSAK_API_KEY); 
+    console.log("Config.TRANSAK_API_KEY", Config.TRANSAK_API_KEY);
     const transakConfig = {
         apiKey: Config.TRANSAK_API_KEY, // (Required)
         environment: Transak.ENVIRONMENTS.STAGING, // (Required)
-        network : "BSC",
-        cryptoCurrencyList:[paytype],
+        network: "BSC",
+        cryptoCurrencyList: [paytype],
+        walletAddress: accountAddress
         // widgetHeight:"70%"
     };
 

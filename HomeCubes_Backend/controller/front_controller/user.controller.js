@@ -332,9 +332,11 @@ export const UserRegister = async (req, res) => {
       save: { new: true },
     };
     const Finddata = await MongooseHelper.FindOneAndUpdate(finVal);
-    res.json({
+    const token = JWT_SIGN(Finddata?.msg?._id);
+    return res.json({
       success: Finddata.success == "success" ? "success" : "error",
       data: Finddata.msg,
+      token: token,
       msg:
         Finddata.success == "success"
           ? `Profile Image Updated Successfully`

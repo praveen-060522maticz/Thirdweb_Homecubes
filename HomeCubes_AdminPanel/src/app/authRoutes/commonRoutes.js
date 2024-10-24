@@ -594,6 +594,11 @@ const Routes = [
         component: lazy(() => import('../gas/gasTokenWithdraw.js')),
         name: '/admin'
     },
+    {
+        path: "/refferalFee",
+        component: lazy(() => import('../referal/Refferal.js')),
+        name: '/admin'
+    },
 ]
 
 

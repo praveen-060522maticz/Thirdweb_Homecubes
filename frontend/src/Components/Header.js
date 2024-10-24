@@ -135,10 +135,11 @@ function Header() {
                     parentAddress: accountDetails?.accountAddress,
                     WalletType: type,
                 };
-
+                let refResp;
                 let Resp = await userRegister(NewMethod);
                 console.log("errr on userRegister", Resp);
                 if (Resp?.success == "success") {
+                    
                     if (Resp?.newUser) {
                         var encRefCode = sessionStorage.getItem("referral")
                         console.log("encRefCode", encRefCode)
@@ -149,23 +150,24 @@ function Header() {
                                 WalletAddress: accountDetails?.accountAddress,
                                 referral: decryptRef
                               };
-                              let resp = await userRegister(reqData)
-                              console.log("respsucccseee", resp)
-                              if (resp?.success != "success") {
-                                toast.error(resp?.msg)
+                              refResp = await userRegister(reqData)
+                              console.log("respsucccseee", refResp)
+                              if (refResp?.success != "success") {
+                                toast.error(refResp?.msg)
                               } else {
-                                toast.success(resp?.msg)
+                                toast.success(refResp?.msg)
                               }
                         } else {
                             setRefModal(true)
                         }
                     }
+                    sessionStorage.removeItem("referral")
                     dispatch({
                         type: "Register_Section",
                         Register_Section: {
                             User: {
-                                payload: Resp.data,
-                                token: Resp.token ? Resp.token : token,
+                                payload: refResp?.data || Resp.data,
+                                token: refResp?.token || Resp.token ? Resp.token : token,
                                 gasFee: getFees || {}
                             },
                         },
@@ -176,7 +178,7 @@ function Header() {
                             walletConnected: true
                         },
                     });
-                    document.cookie = "token" + "=" + Resp?.token + ";" + ";path=/";
+                    document.cookie = "token" + "=" + refResp?.token || Resp.token ? Resp.token : token + ";" + ";path=/";
                     GetNftCookieToken();
                     GetUserCookieToken();
                     toast.update(id, {
