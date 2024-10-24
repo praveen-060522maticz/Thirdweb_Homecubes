@@ -71,7 +71,8 @@ function Minting() {
     );
     const { payload, token, gasFee } = useSelector((state) => state.LoginReducer.User);
     const { accountAddress, web3, web3p, coinBalance, BNBUSDT, USDTaddress } = useSelector(state => state.LoginReducer.AccountDetails);
-    console.log('BNBUSDTgasFee---->', gasFee, BNBUSDT);
+    const referralFee = useSelector(state => state.LoginReducer.ReferralFees)
+    console.log('BNBUSDTgasFee---->', gasFee, BNBUSDT, payload, referralFee, typeof referralFee);
     const completed = 10000;
     const [inprogress, setInprogress] = useState(576);
     const [isAvailable, setIsAvailable] = useState(0);
@@ -211,6 +212,7 @@ function Minting() {
 
         const initialMint = await onInitialMint(params)
         console.log("initial min", initialMint);
+        console.log("mudichuvintinga", { arrData: initialMint?.data, stauts: "available" })
 
         if (initialMint.status) {
 
@@ -252,7 +254,7 @@ function Minting() {
                 ],
                 [firstNft?.Randomname, project?.mintTokenName == "BNB" ? "COIN" : project?.mintTokenName],
                 firstNft?.Hash,
-                [firstNft?.ContractAddress,"0xb18DC8b2d0B6C6E796c1b3E7038ba54162C6623E"],
+                payload?.referredBy ? [firstNft?.ContractAddress, payload?.referredBy] : [firstNft?.ContractAddress],
                 web3Utils.toWei(value.toString())
             )
 
@@ -323,6 +325,15 @@ function Minting() {
                     isWhiteList: false
 
                 }
+                if (payload?.referredBy) {
+                    const NFTIds = initialMint?.data.map(item => item?.NFTId)
+                    update.fromAddress = payload?.WalletAddress
+                    update.referredByAddress = payload?.referredBy
+                    update.percentage = referralFee
+                    update.NFTId = NFTIds
+                    update.amount = value
+                    update.commissionAmt = ((parseFloat(value) * parseFloat(referralFee) )/ 100).toFixed(10)
+                }
                 console.log("update", update);
                 let pendingObj = {
                     From: accountAddress,
@@ -349,16 +360,18 @@ function Minting() {
                     }, 1000)
                 } else if (Resp.status) {
                     toast.update(id, { render: 'Token Purchased Successfully', type: 'success', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
-                    setTimeout(() => {
-                        navigate("/minting")
-                    }, 1000)
+                    // setTimeout(() => {
+                    //     navigate("/minting")
+                    // }, 1000)
                 }
                 else {
+                    console.log("mudichuvintinga2", { arrData: initialMint?.data, stauts: "available" })
                     setTokenStatus({ arrData: initialMint?.data, stauts: "available" })
                     toast.update(id, { render: 'Token Transaction Failed', type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
                 }
             }
             else {
+                console.log("mudichuvintinga3", { arrData: initialMint?.data, stauts: "available" })
                 setTokenStatus({ arrData: initialMint?.data, status: "available" })
                 toast.update(id, { render: 'Token Transaction Failed', type: 'error', isLoading: false, autoClose: 1000, closeButton: true, closeOnClick: true })
             }

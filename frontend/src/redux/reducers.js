@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import Config from '../config/config'
-import { Data_Section, Account_Section, createprofile, ServiceFees_Section, Follow, Network_section, Adminaddress, walletConnect } from "./constants";
+import { Data_Section, Account_Section, createprofile, ServiceFees_Section, Follow, Network_section, Adminaddress, walletConnect, ReferralFees_Section } from "./constants";
 
 const Initial_State = {
   Admin_address: true,
@@ -38,6 +38,7 @@ const Initial_State = {
     sellerFees: '0',
     baseRoyalty: '0'
   },
+  ReferralFees: "",
   follow: true,
   userdata: {}
 }
@@ -60,6 +61,12 @@ function LoginReducer(state = Initial_State, action) {
       return {
         ...state,
         ...action.ServiceFees_Section
+      }
+    case ReferralFees_Section:
+      console.log("action", action)
+      return {
+        ...state,
+        ...action.ReferralFees_Section
       }
     case Network_section:
       return {

@@ -10,9 +10,9 @@ import Footer from '../Components/Footer'
 import KYCActivate from '../Modals/KYCActivate'
 import NFTCards from '../Components/NFTCards'
 import DataCard from '../Components/DataCard'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Token_MyList_Func, getFessFunc, userRegister } from '../actions/axioss/user.axios'
-import { address_showing, isEmpty } from '../actions/common'
+import { EncryptData, address_showing, isEmpty } from '../actions/common'
 import { useDispatch, useSelector } from 'react-redux'
 import config from '../config/config'
 import { searchQueryForMyitems, stackFunction } from '../actions/axioss/nft.axios'
@@ -23,6 +23,8 @@ import KycComment from '../Modals/KycRejected'
 
 import copyIcon from '../assets/images/copyicon.png'
 import CopyToClipboard from 'react-copy-to-clipboard'
+import Paymentmodal from '../Modals/Paymentmodal'
+import TransakComp from '../Components/TransakComp'
 
 function Profile() {
 
@@ -33,7 +35,9 @@ function Profile() {
   const { currency } = useSelector(state => state.LoginReducer)
   console.log('currency---->', currency);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [showKYC, setShowKYC] = useState(false)
+  const [showKYC, setShowKYC] = useState(false);
+  const [showPaymentmodal, setShowPaymentmodal] = useState(false);
+  const [paytype,setPaytype]=useState()
   const [showKycCmd, setShowKycCmd] = useState(false)
   const [Tokens, SetTokens] = useState({ 'owned': { 'loader': true, page: 1, list: [] } })
   const [value, SetTabName] = React.useState('owned');
@@ -44,6 +48,7 @@ function Profile() {
   const [Loadmore, setLoadMore] = useState(true)
   const [searchLoad, setSearchLoad] = useState(true)
   const [rewardAmount, setRewardAmount] = useState(0);
+  const [showTransak, setShowTransak] = useState(false)
 
 
   console.log("Tokens", Tokens);
@@ -60,16 +65,11 @@ function Profile() {
 
   console.log("showKYC", showKYC)
   const { customurl } = useParams()
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
   console.log("optionVal", optionVal);
 
   const [userProfile, setUserProfile] = useState({})
   console.log("userProfile", userProfile);
-
+  const [refCode, setRefCode] = useState("")
   console.log("searchVal", searchVal);
 
 
@@ -97,102 +97,6 @@ function Profile() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const stylesgraybgOne = {
-    option: (styles, { isFocused, isSelected, isHovered }) => ({
-      ...styles,
-      color: "#6C6A81",
-      background: isFocused
-        ? "#F5F6F7"
-        : isSelected
-          ? "#F5F6F7"
-          : isHovered
-            ? "red"
-            : "#F5F6F7",
-
-      zIndex: 1,
-      cursor: "pointer",
-      fontSize: "13px",
-    }),
-
-    option: (styles, { isFocused, isSelected, isHovered }) => {
-      // const color = chroma(data.color);
-
-      return {
-        ...styles,
-        backgroundColor: isHovered
-          ? "#16EBC3"
-          : isSelected
-            ? "#16EBC3"
-            : isFocused
-              ? "#16EBC3"
-              : "#151515",
-        cursor: "pointer",
-        color: isHovered
-          ? "#000"
-          : isSelected
-            ? "#000"
-            : isFocused
-              ? "#000"
-              : "#fff",
-        fontSize: "13px",
-      };
-    },
-    valueContainer: (provided, { isFocused, isSelected, isHovered }) => ({
-      ...provided,
-      height: "40px",
-      width: "40px",
-      backgroundColor: isHovered
-        ? "transperant"
-        : isSelected
-          ? "transperant"
-          : isFocused
-            ? "transperant"
-            : "transperant",
-      // border: "1px solid rgba(34, 34, 34, 0.32)",
-      borderRadius: 5,
-      fontSize: "13px",
-      color: "#fff",
-    }),
-    control: (provided, { isFocused, isSelected, isHovered }) => ({
-      ...provided,
-      height: "40px",
-      width: "230px",
-      borderRadius: 5,
-      backgroundColor: isHovered
-        ? "transperant"
-        : isSelected
-          ? "transperant"
-          : isFocused
-            ? "transperant"
-            : "transperant",
-      backgroundColor: "#080808B2",
-      border: "1px solid #525252",
-      outline: "none",
-      boxShadow: "none",
-      color: "#16EBC3",
-
-    }),
-    indicatorsContainer: (provided, state) => ({
-      ...provided,
-      height: "40px",
-      width: "unset",
-      position: "absolute",
-      right: 0,
-      top: 0,
-      color: "#16EBC3",
-    }),
-    singleValue: (provided, state) => ({
-      ...provided,
-      color: "#fff",
-    }),
-    menuList: (base) => ({
-      ...base,
-      // kill the white space on first and last option
-      padding: 0,
-      border: "1px solid #16EBC3"
-    }),
-  };
 
   useEffect(() => {
     if (typeof Tokens[value] == 'undefined') {
@@ -224,6 +128,7 @@ function Profile() {
     var profileInfo = await userRegister(SendDATA)
     if (profileInfo?.success == 'success' && profileInfo?.data?.WalletAddress) {
       setUserProfile(profileInfo.data)
+      if (profileInfo?.data?.referralCode) setRefCode(profileInfo?.data?.referralCode)
       const getFees = await getFessFunc({ action: "get" });
       dispatch({
         type: "Register_Section",
@@ -347,6 +252,22 @@ function Profile() {
     }
 
   }
+  const handlePaymentmodal = (data) => {
+    setShowPaymentmodal(true);
+    setPaytype(data)
+  }
+
+  const handleShowTransak = () => {
+    setShowTransak(true); 
+    setShowPaymentmodal(false);
+  } 
+
+  const handleHideTransak = () => setShowTransak(false)
+
+  const handleTransakData = (data) => {
+    console.log("datadddd", data)
+  }
+
   return (
     <>
       <BottomBar />
@@ -450,37 +371,86 @@ function Profile() {
                     </div>
                   </div>
 
-                  <div className='d-none d-md-block'>
-                    <div className='d-flex flex-wrap align-items-center gap_1 mt_2'>
-                      <p className='profile_joinDate mb-0'>Referral Link :</p>
-                      <div className='d-flex align-items-center gap_1 gap_1 ms_2'>
-                        <div className='hc-profile__wrapper-border'>
-                          Link Address
+                  {/* <div className='d-none d-md-block'>
+                      <div className='d-flex flex-wrap align-items-center gap_1 mt_2'>
+                        <p className='profile_joinDate mb-0'>Referral Link :</p>
+                        <div className='d-flex align-items-center gap_1 gap_1 ms_2'>
+                          <div className='hc-profile__wrapper-border'>
+                            Link Address
+                          </div>
+                          <button className='bg-transparent border-0 outline-0'>
+                            <img src={copyIcon} className='img-fluid copyiconimg' alt='copy' />
+                          </button>
                         </div>
-                        <button className='bg-transparent border-0 outline-0'>
-                          <img src={copyIcon} className='img-fluid copyiconimg' alt='copy' />
-                        </button>
-                      </div>
 
-                    </div>
-                    <div className='d-flex flex-wrap align-items-center gap_1  mt_2'>
-                      <p className='profile_joinDate mb-0'>Referral Code :</p>
-                      <div className='d-flex align-items-center gap_1'>
-                        <div className='hc-profile__wrapper-border refercodes'>
-                          WA098JA
+                      </div>
+                      <div className='d-flex flex-wrap align-items-center gap_1  mt_2'>
+                        <p className='profile_joinDate mb-0'>Referral Code :</p>
+                        <div className='d-flex align-items-center gap_1'>
+                          <div className='hc-profile__wrapper-border refercodes'>
+                            WA098JA
+                          </div>
+                          <button className='bg-transparent border-0 outline-0'>
+                            <img src={copyIcon} className='img-fluid copyiconimg' alt='copy' />
+                          </button>
                         </div>
-                        <button className='bg-transparent border-0 outline-0'>
-                          <img src={copyIcon} className='img-fluid copyiconimg' alt='copy' />
-                        </button>
+                      </div>
+                      <div className='refbtnsec'>
+                        <Link to='/referralreport' className='refbtn' type='button'>Referral Report</Link>
+                      </div>
+                    </div> */}
+
+                  {userProfile?.KycStatus == "complete" && 
+                    <div className='d-none d-md-block'>
+                      <div className='d-flex flex-wrap align-items-center gap_1 mt_2'>
+                        <p className='profile_joinDate mb-0'>Referral Link :</p>
+                        <div className='d-flex align-items-center gap_1 gap_1 ms_2'>
+                          <div className='hc-profile__wrapper-border'>
+                            Link Address
+                          </div>
+                          {refCode &&
+                            <CopyToClipboard
+                            onCopy={() => toast.success("Link copied successfully")}
+                            text={`${config.FRONT_URL}/${EncryptData(refCode)}`}
+                          >
+                            <button className='bg-transparent border-0 outline-0'>
+                              <img src={copyIcon} className='img-fluid copyiconimg' alt='copy' />
+                            </button>
+                          </CopyToClipboard>
+                          }
+                        </div>
+
+                      </div>
+                      <div className='d-flex flex-wrap align-items-center gap_1  mt_2'>
+                        <p className='profile_joinDate mb-0'>Referral Code :</p>
+                        <div className='d-flex align-items-center gap_1'>
+                          <div className='hc-profile__wrapper-border refercodes'>
+                            {refCode ? refCode : "No Referral"}
+                          </div>
+                          {refCode &&
+                            <CopyToClipboard
+                            onCopy={() => toast.success("Referral Code copied successfully")}
+                            text={refCode}
+                          >
+                            <button className='bg-transparent border-0 outline-0'>
+                              <img src={copyIcon} className='img-fluid copyiconimg' alt='copy' />
+                            </button>
+                          </CopyToClipboard>
+                          }
+                        </div>
+                      </div>
+                      <div className='refbtnsec'>
+                        <Link to='/referralreport' className='refbtn' type='button'>Referral Report</Link>
                       </div>
                     </div>
-                  </div>
+                  }
+                  
                 </div>
               </div>
 
             </div>
 
-            <div className='d-block d-md-none'>
+            {/* <div className='d-block d-md-none'>
               <div className=''>
                 <p className='profile_joinDate mb_1'>Referral Link :</p>
                 <div className='d-flex align-items-center gap_1'>
@@ -504,7 +474,54 @@ function Profile() {
                   </button>
                 </div>
               </div>
+              <div className='refbtnsec text-center'>
+                      <Link to ='/referralreport' className='refbtn' type='button'>Referral Report</Link>
+                    </div>
+            </div> */}
+          {userProfile?.KycStatus == "complete" && 
+            <div className='d-block d-md-none'>
+              <div className=''>
+                <p className='profile_joinDate mb_1'>Referral Link :</p>
+                <div className='d-flex align-items-center gap_1'>
+                  <div className='hc-profile__wrapper-border'>
+                    Link Address
+                  </div>
+                  {refCode &&
+                    <CopyToClipboard
+                    onCopy={() => toast.success("Link copied successfully")}
+                    text={`${config.FRONT_URL}/${EncryptData(refCode)}`}
+                  >
+                    <button className='bg-transparent border-0 outline-0'>
+                      <img src={copyIcon} className='img-fluid copyiconimg copy1' alt='copy' />
+                    </button>
+                  </CopyToClipboard>
+                  }
+                </div>
+
+              </div>
+              <div className='mt_2'>
+                <p className='profile_joinDate mb_1'>Referral Code :</p>
+                <div className='d-flex align-items-center gap_1'>
+                  <div className='hc-profile__wrapper-border'>
+                    {refCode ? refCode : "No Referral"}
+                  </div>
+                  {refCode &&
+                    <CopyToClipboard
+                    onCopy={() => toast.success("Referral Code copied successfully")}
+                    text={refCode}
+                  >
+                    <button className='bg-transparent border-0 outline-0'>
+                      <img src={copyIcon} className='img-fluid copyiconimg copy1' alt='copy' />
+                    </button>
+                  </CopyToClipboard>
+                  }
+                </div>
+              </div>
+              <div className='refbtnsec text-center'>
+                      <Link to ='/referralreport' className='refbtn' type='button'>Referral Report</Link>
+                    </div>
             </div>
+          }
 
             <div className='mb_1 d-none d-md-block'>
               <div className='profile_topright'>
@@ -564,6 +581,7 @@ function Profile() {
             <div className='hc-proile__border-top gap_set'>
               <p className='profile_balance'>Total Balance :  $ {(coinBalance * BNBUSDT)?.toFixed(6)}</p>             
               <div className='vert_line vert_line1'></div>
+              <div className='paymentbtnsec'>
               <div className='pro_valuecount'>
                 <div >
                   <div className='profile_coinnameimg'>
@@ -573,14 +591,21 @@ function Profile() {
                   <p className='hc-profile__text-xs'>
                     BNB Smart Coin
                   </p>
+                 
                 </div>
 
                 <div className='vertical_dtl'>
                   <p className='profile_greentTxt'>{currency?.filter(val => val.value == "USDT")?.[0]?.balance}</p>
                   <p className='small_dollar'>$ {BNBUSDT}</p>
                 </div>
+                
               </div>
+              <button type='button' className='usdtbtn' onClick={()=>handlePaymentmodal("USDT")}>  <img className='nft_coinImg' src={require('../assets/images/usdtbtnicon.png')} /> Buy USDT</button>
+              </div>
+              
+              
               <div className='vert_line'></div>
+              <div className='paymentbtnsec'>
               <div className='pro_valuecount'>
                 <div >
                   <div className='profile_coinnameimg'>
@@ -597,6 +622,9 @@ function Profile() {
                   <p className='small_dollar'>$ {BNBUSDT}</p>
                 </div>
               </div>
+              <button type='button' className='bnbbtn' onClick={()=>handlePaymentmodal("BNB")}> <img className='nft_coinImg' src={require('../assets/images/btnbtnicon.png')} /> Buy BNB</button>
+              </div>
+              
             </div>
             </div>
 
@@ -605,6 +633,9 @@ function Profile() {
               <p className='profile_balance'>Total Balance :  $ {(coinBalance * BNBUSDT)?.toFixed(6)}</p>             
           
               <div className='sub_flex'>
+                <div className='paymentbtnsec'>
+
+              
               <div className='pro_valuecount'>
                 <div >
                   <div className='profile_coinnameimg'>
@@ -621,8 +652,12 @@ function Profile() {
                   <p className='small_dollar'>$ {BNBUSDT}</p>
                 </div>
               </div>
-
+              <button type='button' className='usdtbtn' onClick={()=>handlePaymentmodal("USDT")}>  <img className='nft_coinImg' src={require('../assets/images/usdtbtnicon.png')} /> Buy USDT</button>
+              </div>
               <div className='vert_line'></div>
+              <div className='paymentbtnsec'>
+
+          
               <div className='pro_valuecount'>
                 <div >
                   <div className='profile_coinnameimg'>
@@ -638,6 +673,8 @@ function Profile() {
                   <p className='profile_greentTxt'>{coinBalance?.toFixed(6)}</p>
                   <p className='small_dollar'>$ {BNBUSDT}</p>
                 </div>
+              </div>
+              <button type='button' className='bnbbtn' onClick={()=>handlePaymentmodal("BNB")}> <img className='nft_coinImg' src={require('../assets/images/btnbtnicon.png')} /> Buy BNB</button>
               </div>
               </div>
             </div>
@@ -773,6 +810,9 @@ function Profile() {
         </div>
       </Container> */}
 
+      {/* Transak Paymet Modal */}
+      {showTransak &&  <TransakComp handleHideTransak={handleHideTransak} handleTransakData={handleTransakData} paytype={paytype} />}
+
 
       {/* kyc modal */}
       {showKYC && <KYCActivate show={showKYC} userProfile={userProfile} getProfileDetails={getProfileDetails} handleClose={handleCloseKYC} />}
@@ -780,10 +820,9 @@ function Profile() {
       {/* kyc comment modal */}
       {showKycCmd && <KycComment show={showKycCmd} userProfile={userProfile} handleClose={handleCloseKycCmd} />}
 
-
-
-
       {/* end of kyc modal */}
+
+      {showPaymentmodal && <Paymentmodal show={showPaymentmodal} type={paytype}  handleClose={()=>setShowPaymentmodal(false)} handleShowTransak={handleShowTransak} />}
     </>
   )
 }

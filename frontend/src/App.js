@@ -29,6 +29,8 @@ import Profile from './Screens/Profile';
 import Staking from './Screens/Staking';
 import Contact from './Screens/Contact';
 import CollectionNfts from './Screens/CollectionNfts';
+import ReferralReport from './Screens/ReferralReport';
+import ReferalPage from './Screens/ReferalPage';
 
 /** code start */
 
@@ -38,6 +40,10 @@ function App() {
         {
             path: "/",
             element: <Home />,
+        },
+        {
+            path: "/:referral",
+            element: <ReferalPage />,
         },
         {
             path: "/marketplace",
@@ -84,8 +90,16 @@ function App() {
             path: "/contact",
             element: <Contact />,
         },
+        {
+            path: "/referralreport",
+            element: <ReferralReport />,
+        },
         // Add routes for any additional screens
     ]);
+
+    // console.log = () => {}
+    // console.error = () => {}
+    // console.info = () => {}
 
     return (
         <>

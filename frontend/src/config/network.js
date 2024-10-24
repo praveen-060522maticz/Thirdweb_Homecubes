@@ -17,6 +17,8 @@ if (localArr.includes(config.env)) {
             singleContract: '0x6fbcF768b6E0cf9ED6Cc38ad41EDb939E925deaf'.toLowerCase(),
             multipleContract: '0x641e7A8F7e414eE6F05C8B0528877e680e4693E6'.toLowerCase(),
             tradeContract: "0xeA7AE9464eF470DBbD43488F0875FD54521576b1".toLowerCase(),
+            // tradeContract: "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase(),
+            tradeContract: "0x06634158F0a6fdb7686b67d128d5b8d498349cD9".toLowerCase(),//mohan
             adminAddress: "0x025c1667471685c323808647299e5dbf9d6adcc9".toLowerCase(),
             chainName: "BSC_TESTNET",
             stakeContract: "0x966D215D56b06E3469Df0D9fD80A5cB78f9A1EAA"

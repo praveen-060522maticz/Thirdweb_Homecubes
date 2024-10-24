@@ -3,6 +3,7 @@ import Config from '../config/config'
 import { connectWallet } from '../hooks/useWallet';
 import { Category, Currency, USDPRICE, TOKENPRICE } from '../actions/axioss/cms.axios'
 import CryptoJS from 'crypto-js';
+import { Transak } from '@transak/transak-sdk';
 
 // import CopyToClipboard from "react-copy-to-clipboard";
 

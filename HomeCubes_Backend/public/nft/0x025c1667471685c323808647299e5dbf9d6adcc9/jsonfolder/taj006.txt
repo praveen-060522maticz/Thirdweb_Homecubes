@@ -1,1 +1,1 @@
-{"name":"TAJ006","image":"https://ipfs.io/ipfs/QmTKtj8LNRZbA9d2Hn1iig7RR7LqbvZ8ncoYNKuerSjeFw","description":"","animation_url":"","attributes":[]}
+{"name":"TAJ006","image":"https://ipfs.io/ipfs/QmafsMkGbriej7gSn2UbgHfdahwf72hoMNaWTLHFtLcBX4","description":"","animation_url":"","attributes":[]}

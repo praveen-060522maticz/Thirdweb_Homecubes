@@ -17,7 +17,7 @@ export default function NftTable(props) {
   var location = useLocation();
   const { pathname, state } = location;
   const path = pathname.split("/")[1]
-  console.log("pathname,stae", pathname, state, path)
+  console.log("pathname,staeadad", pathname, state, path)
 
 
   // const Wallet_Details = useSelector((state) => state.wallet_detail)
@@ -136,7 +136,7 @@ export default function NftTable(props) {
       setNftList(resp.data);
     }
   }
-
+console.log("hjbbuiwafiuwab");
 
 
   return (

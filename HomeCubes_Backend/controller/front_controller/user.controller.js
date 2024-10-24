@@ -8,6 +8,7 @@ import config from "../../config/serverConfig";
 import Sociallinks from '../../models/front_models/social.schema'
 import subscribers from '../../models/front_models/subscriber.schema'
 import Contactus from "../../models/admin_models/contactus.schema";
+import ReferralReports from '../../models/front_models/referralReport.schema'
 export const UserRegister = async (req, res) => {
   console.log("Setup is working", req.body);
   var {
@@ -30,7 +31,8 @@ export const UserRegister = async (req, res) => {
     Address,
     parentAddress,
     Name,
-    SurName
+    SurName,
+    referral
   } = req.body;
   if (req.files) {
     var profile = req?.files?.Profile
@@ -125,17 +127,35 @@ export const UserRegister = async (req, res) => {
       });
       console.log("dataaa", FIndAlreadyExits);
       if (FIndAlreadyExits.success === "success") {
-        console.log('FIndAlreadyExits?.msg?.parentAddress---->', FIndAlreadyExits?.msg?.parentAddress);
-        if ((FIndAlreadyExits?.msg?.parentAddress == FIndAlreadyExits?.msg?.WalletAddress) || FIndAlreadyExits?.msg?.parentAddress == "") {
-          const finVal = {
-            DBName: userSchema,
-            FinData: { WalletAddress: WalletAddress },
-            Updata: { $set: { parentAddress } },
-            save: { new: true },
-          };
-          console.log('finValfinValfinVal---->', finVal);
-          const Finddata = await MongooseHelper.FindOneAndUpdate(finVal);
-        }
+
+        // if (referral) {
+        //   if (FIndAlreadyExits?.msg?.referredBy) {
+        //     return res.json({ success: "error", msg: "Referral code already applied" });
+        //   }
+        //   const parentUser = await MongooseHelper.FindOne({
+        //     DBName: userSchema,
+        //     FinData: { referralCode: referral }
+        //   })
+        //   console.log("parentUserpppp", parentUser)
+        //   if (parentUser?.success === "success" && parentUser?.msg?.WalletAddress != WalletAddress) {
+        //     let updateQuery = {
+        //       DBName: userSchema,
+        //       FinData: { WalletAddress: WalletAddress },
+        //       Updata: { $set: { referredBy: parentUser?.msg?.WalletAddress } },
+        //       save: { new: true },
+        //     }
+        //     const updateData = await MongooseHelper.FindOneAndUpdate(updateQuery);
+        //     return res.json({
+        //       success: updateData.success == "success" ? "success" : "error",
+        //       data: updateData.msg,
+        //       msg: updateData.success == "success"
+        //         ? "Referral applied successfully"
+        //         : "Applying Referral failed",
+        //       });
+        //   } else {
+        //     return res.json({ success: "error", msg: "Invalid Referral Code" });
+        //   }
+        // }
 
         const token = JWT_SIGN(FIndAlreadyExits?.msg?._id);
         res.json({
@@ -144,11 +164,44 @@ export const UserRegister = async (req, res) => {
           token: token,
           msg: `Wallet connected successfully`,
           already: true,
+          newUser : false
         });
       } else {
+
+        let getReferralCode = async () => {
+          let code = commonFun.generateReferral();
+          let isRefCodeExist = await MongooseHelper.FindOne({
+            DBName: userSchema,
+            FinData: { referralCode: code }
+          });
+
+          console.log("isRefCodeExist", isRefCodeExist);
+
+          if (isRefCodeExist?.success === "success") {
+            return await getReferralCode();
+          } else {
+            return code;
+          }
+        };
+
         const token = JWT_SIGN(WalletAddress);
+        const refCode = await getReferralCode()
         saveData._id = WalletAddress;
         saveData.CustomUrl = WalletAddress;
+        saveData.referralCode = refCode
+
+        // if (referral) {
+        //   const parentUser = await MongooseHelper.FindOne({
+        //     DBName: userSchema,
+        //     FinData: { referralCode: referral }
+        //   })
+        //   console.log("parentUserrrs", parentUser)
+        //   if (parentUser?.success === "success" && parentUser?.msg?.WalletAddress != WalletAddress) {
+        //     saveData.referredBy = parentUser?.msg?.WalletAddress
+        //   } else {
+        //     return res.json({ success: "error", msg: "Invalid Referral Code" });
+        //   }
+        // }
         console.log("code log else created", saveData);
         const savedata = await MongooseHelper.Save({
           DBName: userSchema,
@@ -160,7 +213,8 @@ export const UserRegister = async (req, res) => {
             success: "success",
             data: savedata.msg,
             token: token,
-            msg: `connected successfully`
+            msg: `connected successfully`,
+            newUser: true
           });
         } else {
           res.json({ success: "error", msg: "Can't Save WalletAddress" });
@@ -322,6 +376,49 @@ export const UserRegister = async (req, res) => {
           ? `Kyc Updated Successfully`
           : "updation failed",
     });
+  } else if (Type == "applyReferral") {
+    if (!WalletAddress) {
+      return res.json({ success: "error", msg: "Wallet Address Required" });
+    }
+    if (!referral) {
+      return res.json({ success: "error", msg: "Referral Code Required" });
+    }
+
+    const isUserExist = await MongooseHelper.FindOne({
+      DBName: userSchema,
+      FinData: { WalletAddress: WalletAddress },
+    });
+
+    if (isUserExist?.success != "success") {
+      return res.json({ success: "error", msg: "User not found" });
+    } else {
+      if (isUserExist?.msg?.referredBy) {
+        return res.json({ success: "error", msg: "Referral code already applied" });
+      }
+
+      const parentUser = await MongooseHelper.FindOne({
+        DBName: userSchema,
+        FinData: { referralCode: referral }
+      })
+      if (parentUser?.success === "success" && parentUser?.msg?.WalletAddress != WalletAddress) {
+        let updateQuery = {
+          DBName: userSchema,
+          FinData: { WalletAddress: WalletAddress },
+          Updata: { $set: { referredBy: parentUser?.msg?.WalletAddress } },
+          save: { new: true },
+        }
+        const updateData = await MongooseHelper.FindOneAndUpdate(updateQuery);
+        return res.json({
+          success: updateData.success == "success" ? "success" : "error",
+          data: updateData.msg,
+          msg: updateData.success == "success"
+            ? "Referral applied successfully"
+            : "Applying Referral failed",
+        });
+      } else {
+        return res.json({ success: "error", msg: "Invalid Referral Code" });
+      }
+    }
   }
 
 };
@@ -419,6 +516,44 @@ export const addcontactus = async (req, res) => {
     }
     else
       res.status(200).json({ "status": true, "data": resp })
+  }
+
+}
+
+export const getReferralReports = async (req, res) => {
+  let { walletAddress, startDate, endDate } = req.query
+
+  if (!walletAddress) {
+    return res.json({ success: "error", msg: "Wallet Address required" });
+  }
+
+  let FinData = {
+    referredByAddress: walletAddress,
+    createdAt: {
+      $gte: new Date(startDate).toISOString(),
+      $lte: new Date(endDate).toISOString(),
+    },
+  }
+  
+
+  let findQuery = {
+    DBName: ReferralReports,
+    FinData: FinData,
+    SelData: {},
+  } 
+
+
+  let reports = await MongooseHelper.Find(findQuery)
+  console.log("ReferralReportsdata", reports)
+
+  if (reports?.success == "success") {
+    if (reports?.msg?.length > 0) {
+      return res.json({ success: "success", data: reports?.msg });
+    } else {
+      return res.json({ success: "error", data: reports?.msg, msg: "No data found" });
+    }
+  } else {
+    return res.json({ success: "error", data: reports?.msg, msg: "Error fetching data" });
   }
 
 }

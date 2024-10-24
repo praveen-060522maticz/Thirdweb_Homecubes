@@ -57,19 +57,19 @@ let walletAddress = "0xfE496e90Ab4B4c1294C86e34e5054016E2734145".toLowerCase();
 
 // web3.eth.subscribe('newBlockHeaders', (error, blockHeader) => {
 //     if (error) {
-//         console.error('Error:', error);
+//         console.error('Error:asas', error);
 //         return;
 //     }
-
+// console.log("hahaahahha",blockHeader.number);
 //     // Get block details
 //     web3.eth.getBlock(blockHeader.number, true, (error, block) => {
 
 //         try {
 //             if (error) {
-//                 console.error('Error:', error);
+//                 console.error('Error:afasds', error);
 //                 return;
 //             }
-
+// console.log("block",block)
 //             // Iterate through transactions in the block
 //             block.transactions.forEach(async tx => {
 //                 // console.log("ahdikahwdihaoiwdhawoid",tx);
@@ -372,7 +372,7 @@ const getrans = async () => {
     }
 }
 // db connection
-console.log('config.MONGOURI---->',config.MONGOURI);
+console.log('config.MONGOURI---->', config.MONGOURI);
 mongoose.connect(config.MONGOURI, (err) => {
     if (err) process.exit(1);
     console.log("Db connected Successfully")
@@ -408,8 +408,8 @@ app.use(async function (req, res, next) {
 
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     var method = req.method
-    console.log("req?.body", req?.query, method);
-
+    console.log("req?.body", req?.query, req?.body, method);
+    // next()
     if (method == "GET" || method == "get") {
 
         if (req.query.data) {
@@ -424,6 +424,7 @@ app.use(async function (req, res, next) {
                     status: false,
                     msg: "Decrypt Data unAuthorised"
                 })
+                // return next()
             }
 
         }
@@ -446,6 +447,7 @@ app.use(async function (req, res, next) {
                     status: false,
                     msg: "Decrypt Data unAuthorised"
                 })
+                // return next()
             }
 
         } else if (!isEmpty(req?.body)) {
@@ -462,7 +464,7 @@ app.use(async function (req, res, next) {
                     status: false,
                     msg: "Decrypt Data unAuthorised"
                 })
-
+                // return next()
             }
 
         }

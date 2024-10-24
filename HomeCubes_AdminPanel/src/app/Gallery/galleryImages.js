@@ -274,7 +274,7 @@ export default function Galleryimages() {
 
   const { UserAccountAddr } = useSelector((state) => state.wallet_detail);
 
-  const [gallery, setGallery] = useState([]);
+  const [gallery, setGallery] = useState({});
   console.log("gallery", gallery);
   useEffect(() => {
     getGallery();
@@ -287,6 +287,7 @@ export default function Galleryimages() {
       action: "getOne",
       _id: state?._id,
     });
+    console.log("getDatagetData",getData);
     setGallery(getData?.data ?? {});
   };
 

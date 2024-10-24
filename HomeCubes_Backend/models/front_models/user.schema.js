@@ -32,6 +32,8 @@ const user  =   Schema({
         Address     :   '',
         CustomUrl  :   ''
     }]},
+    referralCode: { type: String, default: '' },
+    referredBy: { type: String, default: '' }
 
 },{timestamps:true})
 

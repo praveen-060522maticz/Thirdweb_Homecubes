@@ -6,5 +6,6 @@ const routers = Router()
 routers.route('/create').post(userCtrl.UserRegister);
 routers.route('/newsletter').post(userCtrl.Newsletter);
 routers.route('/addcontactus').post(userCtrl.addcontactus);
+routers.route('/getReferralReports').get(userCtrl.getReferralReports);
 
 export default routers

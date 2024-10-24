@@ -25,8 +25,10 @@ if (EnvName === "local") {
 
   // var tradeAddress = "0x783FB9DD2C69101cd0E080403279b9fE7E6ac780".toLowerCase(); // seplia openzepline
   // var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase()  //removed seplia openzepline
-  var tradeAddress = "0xeA7AE9464eF470DBbD43488F0875FD54521576b1".toLowerCase()  //removed seplia openzepline
+  var tradeAddress = "0xeA7AE9464eF470DBbD43488F0875FD54521576b1".toLowerCase()  //removed seplia openzepline praveen
 
+  // var tradeAddress = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase()  //removed seplia openzepline
+  // var tradeAddress = "0x06634158F0a6fdb7686b67d128d5b8d498349cD9".toLowerCase()  // audit bsc testnet
   // var tradeAddress = "0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac".toLowerCase(); // seplia
   // var tradeAddress = "0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3"; // seplia
   var singleAddress = "0x575cd9E4099A38B536673F557063f9A546870d11"; // seplia
@@ -66,7 +68,8 @@ if (EnvName === "clientStage") {
 
   // var tradeAddress = "0x783FB9DD2C69101cd0E080403279b9fE7E6ac780".toLowerCase(); // seplia openzepline
   // var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase()
-  var tradeAddress = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase()
+  // var tradeAddress = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase()
+  var tradeAddress = "0x06634158F0a6fdb7686b67d128d5b8d498349cD9".toLowerCase()  // audit bsc testnet
   // var tradeAddress = "0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac".toLowerCase(); // seplia
   // var tradeAddress = "0xD87ddfE179fE3e2Aea84041118a7E6C7EC975fe3"; // seplia
   var singleAddress = "0x575cd9E4099A38B536673F557063f9A546870d11"; // seplia
@@ -111,6 +114,8 @@ if (EnvName === "stage") {
   // var tradeAddress = "0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208".toLowerCase(); // seplia
   // var tradeAddress = "0x783FB9DD2C69101cd0E080403279b9fE7E6ac780".toLowerCase(); // seplia op remove
   var tradeAddress = "0xeA7AE9464eF470DBbD43488F0875FD54521576b1".toLowerCase(); // seplia openzep removed
+  // var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase(); // seplia openzep removed
+  // var tradeAddress = "0x06634158F0a6fdb7686b67d128d5b8d498349cD9".toLowerCase()  // audit bsc testnet
 
 
   // var tradeAddress = "0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac".toLowerCase(); // seplia
@@ -152,7 +157,8 @@ if (EnvName === "demo") {
   // var tradeAddress = "0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208".toLowerCase(); // seplia
 
   // var tradeAddress = "0x783FB9DD2C69101cd0E080403279b9fE7E6ac780".toLowerCase(); // seplia 
-  var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase(); // seplia openzep removed
+  // var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase(); // seplia openzep removed
+  var tradeAddress = "0x06634158F0a6fdb7686b67d128d5b8d498349cD9".toLowerCase()  // audit bsc testnet
   var singleAddress = "0x575cd9E4099A38B536673F557063f9A546870d11"; // seplia
   var multipeAddress = "0x0b6369b506e811df30ab7c0ce0ae00b8690b76be";
   var networkVersion = "0x61"
@@ -189,7 +195,8 @@ if (EnvName === "production") {
   // var tradeAddress = "0x3F71bbA2674E355C975EaD8e9d7cCb73FC1296ac".toLowerCase();
   // var tradeAddress = "0xc3d37F7F03B39e2Ba9208b21C5E441d1Df014208".toLowerCase(); // seplia
   // var tradeAddress = "0xDe6d921983D19DB4db96a01753b4637C9Fd99Edc".toLowerCase()
-  key.TradeContract = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase()
+  // key.TradeContract = "0xEcbb872F7bC77D4539097Dbc44EF122a21931BC7".toLowerCase()
+  var tradeAddress = "0x06634158F0a6fdb7686b67d128d5b8d498349cD9".toLowerCase()  // audit bsc testnet
 
   var singleAddress = "0x575cd9E4099A38B536673F557063f9A546870d11"; // seplia
   var multipeAddress = "0x0b6369b506e811df30ab7c0ce0ae00b8690b76be";

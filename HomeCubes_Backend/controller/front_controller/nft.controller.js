@@ -9,6 +9,7 @@ import stakeSchema from '../../models/front_models/stake.schema';
 import RewardSchema from '../../models/admin_models/reward.schema';
 import PendingTrans from '../../models/front_models/pendingTransactions.schema';
 import Transactions from '../../models/front_models/transactions.schema';
+import ReferralReports from '../../models/front_models/referralReport.schema'
 import mongoose from 'mongoose'
 
 import axios from 'axios'
@@ -868,7 +869,7 @@ export const info = async (req, res) => {
   RetData.myBid = Owner != MyAdd ? await MongooseHelper.BidInfo(myBid, SendDta) : {};
   RetData.highBid = await MongooseHelper.BidInfo(highBid, SendDta);
   RetData.UnlockContent = [];
-  // console.log('RetDataffawfawf', JSON.stringify(RetData, null, 2))
+  console.log('RetDataffawfawf', JSON.stringify(RetData, null, 2))
   res.json(Encryptdata(RetData));
 };
 
@@ -1736,7 +1737,7 @@ export const onInitialMint = async (req, res) => {
 export const Buymint = async (req, res) => {
   console.log("req.body", req.body)
   try {
-    const { changedToken, isWhiteList, NFTOwner, HashValue, NFTPrice, CoinName } = req.body
+    const { changedToken, isWhiteList, NFTOwner, HashValue, NFTPrice, CoinName, referredByAddress, fromAddress, percentage, NFTId, amount, commissionAmt } = req.body
     const updateDB = await Promise.all(changedToken.map(async (val) => {
 
       const reqData = {
@@ -1784,6 +1785,24 @@ export const Buymint = async (req, res) => {
       const setTokens = await Tokens.findOneAndUpdate({ _id: val._id }, { $set: tokenUpdata }, { new: true })
       return setTokens
     }))
+
+    if (referredByAddress) {
+        const newData = {
+          DBName: ReferralReports,
+          Data: {
+            transactionId: HashValue,
+            fromAddress,
+            referredByAddress,
+            commissionAmt,
+            percentage,
+            amount,
+            mintedNft: NFTId,
+          }
+        }
+
+        const saveData = await MongooseHelper.Save(newData)
+        console.log("referralsaveData", saveData)
+      }
 
     if (isWhiteList) {
       const checkUser = await userSchema.find({ WalletAddress: NFTOwner });
@@ -1844,7 +1863,11 @@ export const getGallery = async (req, res) => {
   try {
     if (action == "getOneProjects") {
       const getData = await gallery.find({ projectId, deleted: false });
-      console.log('getDatagetData', getData);
+      console.log('getDatagetData', {
+        success: getData.length != 0 ? "success" : "error",
+        data: getData,
+        msg: getData.length != 0 ? "success" : "error",
+      });
       return res.json(Encryptdata({
         success: getData.length != 0 ? "success" : "error",
         data: getData,

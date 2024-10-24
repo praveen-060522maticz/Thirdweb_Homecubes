@@ -100,22 +100,22 @@ export default function ProjectList(props) {
         </div>
       ), //checked={true}
     },
-    {
-      key: "",
-      text: "NFTS",
-      className: "nft_custom_th",
-      cell: (record) => {
-        return (
-          <div>
-            <Link to={{ pathname: "/nftlist", state: { record } }}>
-              <button className="btn mb-2 allbtn" type="button">
-                NFT List
-              </button>
-            </Link>
-          </div>
-        );
-      },
-    },
+    // {
+    //   key: "",
+    //   text: "NFTS",
+    //   className: "nft_custom_th",
+    //   cell: (record) => {
+    //     return (
+    //       <div>
+    //         <Link to={{ pathname: "/nftlist", state: { record } }}>
+    //           <button className="btn mb-2 allbtn" type="button">
+    //             NFT List
+    //           </button>
+    //         </Link>
+    //       </div>
+    //     );
+    //   },
+    // },
     {
       key: "",
       text: "CMS",

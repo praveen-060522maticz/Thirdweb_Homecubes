@@ -1994,6 +1994,11 @@ export const gasManagerFunc = async (req, res) => {
     }
   } catch (e) {
     console.log('Errorn gasManagerFunc---->', e);
+    return res.json({
+      success:  "error",
+      data: {},
+      msg: "No gas Fetched"
+    })
   }
 }
 
@@ -2013,11 +2018,11 @@ export const gasTokensFunctions = async (req, res) => {
     else if (action == "add") {
 
       const check = await GasTokens.findOne({ contractAddress });
-      if (!isEmpty(check)) return res.json({
-        status: true,
-        msg: "already",
-        data: check
-      })
+      // if (!isEmpty(check)) return res.json({
+      //   status: true,
+      //   msg: "already",
+      //   data: check
+      // })
 
       const Resp = await new GasTokens({
         Name: name,
