@@ -71,7 +71,8 @@ function Minting() {
     );
     const { payload, token, gasFee } = useSelector((state) => state.LoginReducer.User);
     const { accountAddress, web3, web3p, coinBalance, BNBUSDT, USDTaddress } = useSelector(state => state.LoginReducer.AccountDetails);
-    console.log('BNBUSDTgasFee---->', gasFee, BNBUSDT);
+    const referralFee = useSelector(state => state.LoginReducer.ReferralFees)
+    console.log('BNBUSDTgasFee---->', gasFee, BNBUSDT, payload, referralFee, typeof referralFee);
     const completed = 10000;
     const [inprogress, setInprogress] = useState(576);
     const [isAvailable, setIsAvailable] = useState(0);
@@ -252,7 +253,7 @@ function Minting() {
                 ],
                 [firstNft?.Randomname, project?.mintTokenName == "BNB" ? "COIN" : project?.mintTokenName],
                 firstNft?.Hash,
-                firstNft?.ContractAddress,
+                payload?.referredBy ? [firstNft?.ContractAddress, payload?.referredBy] : [firstNft?.ContractAddress],
                 web3Utils.toWei(value.toString())
             )
 
@@ -322,6 +323,15 @@ function Minting() {
                     CoinName: project?.mintTokenName,
                     isWhiteList: false
 
+                }
+                if (payload?.referredBy) {
+                    const NFTIds = initialMint?.data.map(item => item?.NFTId)
+                    update.fromAddress = payload?.WalletAddress
+                    update.referredByAddress = payload?.referredBy
+                    update.percentage = referralFee
+                    update.NFTId = NFTIds
+                    update.amount = value
+                    update.commissionAmt = ((parseFloat(value) * parseFloat(referralFee) )/ 100).toFixed(10)
                 }
                 console.log("update", update);
                 let pendingObj = {

@@ -9,6 +9,7 @@ import stakeSchema from '../../models/front_models/stake.schema';
 import RewardSchema from '../../models/admin_models/reward.schema';
 import PendingTrans from '../../models/front_models/pendingTransactions.schema';
 import Transactions from '../../models/front_models/transactions.schema';
+import ReferralReports from '../../models/front_models/referralReport.schema'
 import mongoose from 'mongoose'
 
 import axios from 'axios'
@@ -1736,7 +1737,7 @@ export const onInitialMint = async (req, res) => {
 export const Buymint = async (req, res) => {
   console.log("req.body", req.body)
   try {
-    const { changedToken, isWhiteList, NFTOwner, HashValue, NFTPrice, CoinName } = req.body
+    const { changedToken, isWhiteList, NFTOwner, HashValue, NFTPrice, CoinName, referredByAddress, fromAddress, percentage, NFTId, amount, commissionAmt } = req.body
     const updateDB = await Promise.all(changedToken.map(async (val) => {
 
       const reqData = {
@@ -1784,6 +1785,24 @@ export const Buymint = async (req, res) => {
       const setTokens = await Tokens.findOneAndUpdate({ _id: val._id }, { $set: tokenUpdata }, { new: true })
       return setTokens
     }))
+
+    if (referredByAddress) {
+        const newData = {
+          DBName: ReferralReports,
+          Data: {
+            transactionId: HashValue,
+            fromAddress,
+            referredByAddress,
+            commissionAmt,
+            percentage,
+            amount,
+            mintedNft: NFTId,
+          }
+        }
+
+        const saveData = await MongooseHelper.Save(newData)
+        console.log("referralsaveData", saveData)
+      }
 
     if (isWhiteList) {
       const checkUser = await userSchema.find({ WalletAddress: NFTOwner });

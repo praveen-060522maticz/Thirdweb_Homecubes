@@ -352,3 +352,21 @@ export const getServiceFees = async () => {
     }
   }
 }
+
+export const getReferralFees = async () => {
+  let rpcObj = new Web3(Config.RPC_URL)
+  let fees = {}
+  if (rpcObj) {
+    try {
+      let marketObj = new rpcObj.eth.Contract(
+        marketAbi,
+        Config.TradeContract
+      );
+      let referralFees = await marketObj.methods.referralFees().call()
+      console.log("referralFeesss", referralFees)
+      return referralFees
+    } catch (error) {
+      console.log("referral fees catch blok", error)
+    }
+  }
+}

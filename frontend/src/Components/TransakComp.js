@@ -2,15 +2,15 @@ import React, { useEffect } from 'react'
 import { Transak } from '@transak/transak-sdk';
 import Config from '../config/config'
 
-const TransakComp = ({handleHideTransak, handleTransakData}) => {
+const TransakComp = ({handleHideTransak, handleTransakData,paytype}) => {
 
 
-
+console.log("Config.TRANSAK_API_KEY",Config.TRANSAK_API_KEY); 
     const transakConfig = {
         apiKey: Config.TRANSAK_API_KEY, // (Required)
         environment: Transak.ENVIRONMENTS.STAGING, // (Required)
         network : "BSC",
-        cryptoCurrencyList:["USDT"],
+        cryptoCurrencyList:[paytype],
         // widgetHeight:"70%"
     };
 

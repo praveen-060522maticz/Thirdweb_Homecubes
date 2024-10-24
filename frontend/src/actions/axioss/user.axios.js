@@ -287,3 +287,16 @@ export const getFessFunc = async (data) => {
     }
     catch (err) { console.log("err in gettok owner", err) }
 }
+
+export const getReferralReports = async (data) => {
+    try {
+        var resp = await axiosFunc({
+            'method': 'GET',
+            'url': `${config.BACK_URL}/user/getReferralReports`,
+            'params': data
+        })
+        console.log("getReferralReports resp", resp)
+        return resp
+    }
+    catch (err) { console.log("err in gettok owner", err) }
+}

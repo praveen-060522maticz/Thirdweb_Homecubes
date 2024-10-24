@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { Col, Container, Row, Offcanvas, Navbar, Nav, Dropdown, DropdownToggle, DropdownMenu } from "react-bootstrap";
 import wallety from "../assets/lotties/wallet.json";
 import Lottie from "lottie-react";
-import { NavLink, useLocation, useNavigate, Link } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, Link, useParams } from "react-router-dom";
 import ConnectWallet from "../Modals/ConnectWallet";
 import { useDispatch, useSelector } from "react-redux";
 import { GetNftCookieToken } from "../actions/axioss/nft.axios";
 import { GetUserCookieToken, getFessFunc, userRegister } from "../actions/axioss/user.axios";
-import { connectWallet, getServiceFees } from "../hooks/useWallet";
+import { connectWallet, getReferralFees, getServiceFees } from "../hooks/useWallet";
 import { toast } from "react-toastify";
-import { address_showing, getBNBvalue, isEmpty, sleep } from "../actions/common";
+import { Decryptdata, address_showing, getBNBvalue, isEmpty, sleep } from "../actions/common";
 import { Currency, TOKENPRICE, USDPRICE } from "../actions/axioss/cms.axios";
 import config from "../config/config";
 import CopyToClipboard from "react-copy-to-clipboard";
@@ -19,11 +19,14 @@ import Web3 from "web3";
 import TradeAbi from '../Abi/trade.json';
 import Token from '../Abi/token.json';
 import web3utill from 'web3-utils'
+import Referralmodal from "../Modals/Referralmodal";
 
 
 
 
 function Header() {
+    const { referral } = useParams()
+    console.log("referral", referral)
     const location = useLocation();
     const [showDropdown, setShowDropdown] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);  // initially closed
@@ -64,6 +67,7 @@ function Header() {
     const navigate = useNavigate();
 
     const [reconnect, setReconnect] = useState(true);
+    const [refModal, setRefModal] = useState(false);
     const { login, logout, connectOrCreateWallet, authenticated } = usePrivy();
     const { wallets, ready, } = useWallets();
     const connectedwalet = wallets[0];
@@ -79,6 +83,9 @@ function Header() {
 
         //   setReconnect(false);
         // }
+        if (referral) {
+            sessionStorage.setItem("referral", referral)
+        }
         getInitialSeviceFee();
     }, []);
 
@@ -132,6 +139,27 @@ function Header() {
                 let Resp = await userRegister(NewMethod);
                 console.log("errr on userRegister", Resp);
                 if (Resp?.success == "success") {
+                    if (Resp?.newUser) {
+                        var encRefCode = sessionStorage.getItem("referral")
+                        console.log("encRefCode", encRefCode)
+                        if (encRefCode) {
+                            const decryptRef = Decryptdata(encRefCode)
+                            var reqData = {
+                                Type: "applyReferral",
+                                WalletAddress: accountDetails?.accountAddress,
+                                referral: decryptRef
+                              };
+                              let resp = await userRegister(reqData)
+                              console.log("respsucccseee", resp)
+                              if (resp?.success != "success") {
+                                toast.error(resp?.msg)
+                              } else {
+                                toast.success(resp?.msg)
+                              }
+                        } else {
+                            setRefModal(true)
+                        }
+                    }
                     dispatch({
                         type: "Register_Section",
                         Register_Section: {
@@ -185,7 +213,7 @@ function Header() {
                         toast.update(id, {
                             render: Resp.msg,
                             type: Resp.success,
-                            autoClose: 100000,
+                            autoClose: 1000,
                             isLoading: false,
                             closeButton: true,
                             closeOnClick: true,
@@ -259,6 +287,18 @@ function Header() {
                 type: "ServiceFees",
                 ServiceFees_Section: {
                     ServiceFees: fees,
+                },
+            });
+        }
+
+        let refFees = await getReferralFees()
+        if (refFees) {
+            const fee = web3utill.fromWei(String(refFees))
+            console.log("refFeess", fee);
+            dispatch({
+                type: "ReferralFees",
+                ReferralFees_Section: {
+                    ReferralFees: fee
                 },
             });
         }
@@ -642,6 +682,7 @@ function Header() {
 
 
             <ConnectWallet show={showWallet} handleCloseWallet={handleCloseWallet} />
+            {refModal &&   <Referralmodal show={refModal} handleClose={()=>setRefModal(false)}/>}
             {/* end of offcanvas */}
         </>
     );

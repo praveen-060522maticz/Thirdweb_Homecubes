@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Row, Col, Form } from "react-bootstrap";
-function Paymentmodal({ show, handleClose,type, handleShowTransak }) {
+function Paymentmodal({ show, handleClose,type, handleShowTransak, }) {
   return (
     <div>
       <Modal size='lg'

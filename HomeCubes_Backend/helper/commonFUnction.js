@@ -416,3 +416,11 @@ export const sleep = async (sec) => await new Promise(res => setTimeout(() => re
 //     console.log('Erro on createReqObj---->',e);
 //   }
 // }
+
+export const generateReferral = () => {
+  const code = Math.floor(Math.random() * 1000000)
+  .toString()
+  .padStart(6, "0");
+  console.log("generateReferral", code)
+  return code
+}

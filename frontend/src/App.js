@@ -30,6 +30,7 @@ import Staking from './Screens/Staking';
 import Contact from './Screens/Contact';
 import CollectionNfts from './Screens/CollectionNfts';
 import ReferralReport from './Screens/ReferralReport';
+import ReferalPage from './Screens/ReferalPage';
 
 /** code start */
 
@@ -39,6 +40,10 @@ function App() {
         {
             path: "/",
             element: <Home />,
+        },
+        {
+            path: "/:referral",
+            element: <ReferalPage />,
         },
         {
             path: "/marketplace",

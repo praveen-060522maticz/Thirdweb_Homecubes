@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Row, Col, Form } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { userRegister } from "../actions/axioss/user.axios";
 function Referralmodal({ show, handleClose, }) {
+  const accountDetails = useSelector((state) => state.LoginReducer.AccountDetails);
+  const [referralCode, setReferralCode] = useState("")
+
+  const handleSubmit = async () => {
+    if (!referralCode) return toast.error("Referral Code Required")
+    try {
+      var reqData = {
+        Type: "applyReferral",
+        WalletAddress: accountDetails?.accountAddress,
+        referral: referralCode
+      };
+      let resp = await userRegister(reqData)
+      console.log("respreferral", resp)
+      if (resp?.success != "success") {
+        toast.error(resp?.msg)
+      } else {
+        toast.success(resp?.msg)
+        handleClose()
+      }
+    } catch (error) {
+      console.log("Error apply referral", error)
+    }
+  }
   return (
     <div>
       <Modal size='md'
@@ -24,7 +50,12 @@ function Referralmodal({ show, handleClose, }) {
 
           <div className='modal_body mt_2'>
 
-            <input type="text" placeholder="Enter Referral Code" className='modal_singleinput' />
+            <input 
+            type="text" 
+            placeholder="Enter Referral Code" 
+            className='modal_singleinput' 
+            value={referralCode} 
+            onChange={(e) => setReferralCode(e.target.value)} />
 
 
  
@@ -32,7 +63,7 @@ function Referralmodal({ show, handleClose, }) {
 
 
             <div className='w-100 text-center mt_3'>
-              <button className='mint_cnctwallet bodygradientBtn'  >Submit</button>
+              <button className='mint_cnctwallet bodygradientBtn' onClick={handleSubmit}  >Submit</button>
             </div>
 
           </div>
